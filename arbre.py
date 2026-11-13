@@ -10,6 +10,7 @@ Dépendances : pip install requests networkx
 Usage : python arbre_gauche.py
 """
 
+import os
 import csv
 import re
 import requests
@@ -177,6 +178,10 @@ def construire_graphe():
 
 
 def exporter(g):
+    os.makedirs("data", exist_ok=True)
+    os.chdir("data")
+    nx.write_gexf(g, "arbre_gauche.gexf")
+
     # Noms lisibles pour les nœuds sans libellé (Wikidata renvoie parfois le Q-id)
     nx.write_gexf(g, "arbre_gauche.gexf")
 

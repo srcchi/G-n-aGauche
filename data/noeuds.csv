@@ -6,18 +6,18 @@ Q62079328,Debout !,,,social-démocrate,écosocialisme
 Q115950346,section locale du PCF à Poissy,,,communiste,communisme
 Q111210969,Parti national-syndicaliste français,,,syndicaliste révolutionnaire,national-syndicalisme
 Q135875318,Treger Disuj,,,anarchiste,anarchisme
-Q3091718,Fédération des travailleurs socialistes de France,1879,1902,social-démocrate,marxisme | socialisme
+Q3091718,Fédération des travailleurs socialistes de France,1879,1902,social-démocrate,socialisme | marxisme
 Q928279,Comité révolutionnaire central,1881,1898,social-démocrate,socialisme
-Q2032009,Possibilisme,1882,,social-démocrate,socialisme
 Q2451197,Parti ouvrier français,1882,1902,social-démocrate | communiste,socialisme | communisme
+Q2032009,Possibilisme,1882,,social-démocrate,socialisme
 Q51297076,Comité central socialiste révolutionnaire,1889,1914,social-démocrate,socialisme
 Q2705289,Parti ouvrier socialiste révolutionnaire,1890,1905,social-démocrate,socialisme
 Q2838043,Alliance communiste révolutionnaire,1896,1902,social-démocrate,socialisme
-Q2379359,Parti socialiste français,1902,1905,social-démocrate,socialisme | socialisme démocratique
+Q2379359,Parti socialiste français,1902,1905,social-démocrate,socialisme démocratique | socialisme
 Q3176156,Parti socialiste de France,1902,1905,social-démocrate,socialisme
 Q1332068,Section française de l'Internationale ouvrière,1905,1969,social-démocrate,socialisme
 Q135902867,Parti ouvrier,1914,,social-démocrate,socialisme
-Q192821,Parti communiste français,1920,,stalinien | léniniste | social-démocrate | communiste,marxisme | léninisme | socialisme démocratique | eurocommunisme | stalinisme | antistalinisme
+Q192821,Parti communiste français,1920,,stalinien | léniniste | social-démocrate | communiste,marxisme | léninisme | eurocommunisme | antistalinisme | stalinisme | socialisme démocratique
 Q55595356,Action populaire nationale d'Alsace,1928,1935,communiste,anticommunisme
 Q3366181,Parti alsacien ouvrier et paysan,1929,1939,communiste,communisme
 Q534291,Parti d'unité prolétarienne,1930,1937,social-démocrate,socialisme
@@ -27,13 +27,13 @@ Q538664,Parti ouvrier internationaliste,1936,1944,trotskyste,trotskisme
 Q3366769,Parti socialiste ouvrier et paysan,1938,1940,social-démocrate,socialisme
 Q870667,Lutte ouvrière,1939,,trotskyste | communiste,trotskisme | communisme
 Q1086907,Rassemblement national populaire,1941,1944,social-démocrate,néo-socialisme
-Q1393793,Parti communiste internationaliste,1944,1968,trotskyste | communiste,trotskisme | communisme
+Q1393793,Parti communiste internationaliste,1944,1968,trotskyste | communiste,communisme | trotskisme
 Q2164587,Union démocratique et socialiste de la Résistance,1945,1964,social-démocrate,socialisme
-Q2390678,Parti socialiste démocratique,1945,1954,social-démocrate | communiste,anticommunisme | socialisme démocratique
+Q2390678,Parti socialiste démocratique,1945,1954,social-démocrate | communiste,socialisme démocratique | anticommunisme
 Q20965620,Parti socialiste unitaire,1948,1954,social-démocrate,socialisme
 Q1828329,Organisation communiste internationaliste,1952,,trotskyste,trotskisme
-Q3550048,Union calédonienne,1953,,social-démocrate,socialisme mélanésien
 Q3091492,Fédération communiste libertaire,1953,1957,anarchiste | communiste,communisme libertaire
+Q3550048,Union calédonienne,1953,,social-démocrate,socialisme mélanésien
 Q3377986,Phalange française,1955,1958,,contre-révolution
 Q3366765,Parti socialiste guyanais,1956,,social-démocrate,socialisme démocratique
 Q2088895,Parti communiste martiniquais,1957,,communiste,communisme
@@ -46,8 +46,8 @@ Q2406201,Convention des institutions républicaines,1964,1971,social-démocrate,
 Q3326535,Mouvement communiste français marxiste-léniniste,1966,,maoïste,maoïsme
 Q3366229,Parti communiste marxiste-léniniste de France,1967,1988,maoïste,maoïsme
 Q3099339,Gauche prolétarienne,1968,1973,maoïste,maoïsme
-Q2838199,Alliance marxiste révolutionnaire,1969,1974,trotskyste | communiste,trotskisme | communisme
 Q3117408,Union des communistes de France marxiste-léniniste,1969,1985,maoïste,maoïsme
+Q2838199,Alliance marxiste révolutionnaire,1969,1974,trotskyste | communiste,trotskisme | communisme
 Q3088574,Front rouge,1970,1974,maoïste,maoïsme
 Q3142484,Parti communiste breton,1971,1980,communiste,communisme
 Q6748471,Lutte occitane,1971,1975,social-démocrate,socialisme révolutionnaire
@@ -63,7 +63,7 @@ Q3366206,Parti communiste des ouvriers de France,1979,,communiste,communisme
 Q3366231,Parti communiste pour l'indépendance et le socialisme,1984,,léniniste,marxisme-léninisme
 Q3326810,Mouvement pour un parti des travailleurs,1985,,trotskyste,trotskisme
 Q2840414,Alternative rouge et verte,1989,1998,social-démocrate,écosocialisme
-Q628594,Parti des travailleurs,1991,2008,trotskyste | communiste,communisme | trotskisme
+Q628594,Parti des travailleurs,1991,2008,trotskyste | communiste,trotskisme | communisme
 Q3366640,Parti progressiste démocratique guadeloupéen,1991,,social-démocrate,socialisme démocratique
 Q3099352,Gauche révolutionnaire,1992,,trotskyste,trotskisme
 Q3091641,Walwari,1992,,social-démocrate,socialisme
@@ -81,8 +81,8 @@ Q22981822,Révolution permanente,2011,,trotskyste,trotskisme
 Q3326782,Pour La Réunion,2012,,social-démocrate,socialisme démocratique | post-marxisme
 Q104187739,Bloc rouge (Unification des maoïstes),2013,2016,maoïste,maoïsme
 Q15985232,Ensemble !,2013,,social-démocrate,socialisme | écosocialisme
-Q2989703,Parti révolutionnaire Communistes,2015,,léniniste | communiste,communisme | marxisme-léninisme
-Q24939885,Parti des travailleurs,2015,,trotskyste | communiste,trotskisme | communisme
+Q2989703,Parti révolutionnaire Communistes,2015,,léniniste | communiste,marxisme-léninisme | communisme
+Q24939885,Parti des travailleurs,2015,,trotskyste | communiste,communisme | trotskisme
 Q2638999,Parti ouvrier indépendant,2015,,trotskyste | communiste,communisme | trotskisme
 Q30741057,Rézistan's Égalité 974,2016,,social-démocrate,socialisme démocratique
 Q104186796,Parti communiste maoïste,2016,,léniniste | maoïste | communiste,communisme | marxisme-léninisme-maoïsme
@@ -95,8 +95,8 @@ Q115965423,Nouveau Parti anticapitaliste – Révolutionnaires,2022,,communiste,
 Q11914923,Q11914923,,,,
 Q75126973,Q75126973,,,,
 Q137353779,Q137353779,,,,
-Q290503,Étoile nord-africaine,,,,
 Q137369019,National Union of North African Muslims,,,,
+Q290503,Étoile nord-africaine,,,,
 Q170972,Parti socialiste,,,,
 Q22674451,Mouvement pour la démocratie en Europe : Diem 25,,,,
 Q9003283,Herriko Alderdi Sozialista,,,,
@@ -130,8 +130,8 @@ Q686372,Démocratie libérale,,,,
 Q3366676,Parti républicain,,,,
 Q109023546,En commun,,,,
 Q135755468,La Convention,,,,
-Q29348702,Front de gauche,,,,
 Q1495924,Gauche unitaire,,,,
+Q29348702,Front de gauche,,,,
 Q1125061,Eusko Alkartasuna,,,,
 Q43093,Parti nationaliste basque,,,,
 Q3068323,Femu a Corsica,,,,
@@ -220,8 +220,8 @@ Q3366472,Parti humaniste,,,,
 Q3492245,Internationale humaniste,,,,
 Q111187255,Parti lorrain,,,,
 Q3366546,Parti nationaliste,,,,
-Q3091725,Fédération des étudiants nationalistes,,,,
 Q3178006,Jeune Nation,,,,
+Q3091725,Fédération des étudiants nationalistes,,,,
 Q1539236,Parti occitan,,,,
 Q5291,Parti pirate,,,,
 Q170,Parti pirate international,,,,
