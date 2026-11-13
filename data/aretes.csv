@@ -20,9 +20,9 @@ Q104187610,Q104187739,appartenance,membre de
 Q922707,Q753711,appartenance,membre de
 Q922707,Q3153050,appartenance,membre de
 Q3326849,Q113500977,scission,scission de
+Q1045425,Q1377231,appartenance,membre de
 Q1045425,Q115965423,scission,suivi par
 Q1045425,Q125771262,filiation,suivi par
-Q1045425,Q1377231,appartenance,membre de
 Q22981822,Q1045425,appartenance,membre de
 Q104187739,Q104186796,filiation,remplacé par
 Q15985232,Q29348702,appartenance,membre de
@@ -148,8 +148,8 @@ Q58366009,Q220945,appartenance,membre de
 Q2054444,Q3326782,scission,scission de
 Q111187258,Q111187242,appartenance,membre de
 Q3142671,Q65143318,scission,scission de
-Q1052584,Q173152,filiation,suivi par
 Q1052584,Q208242,appartenance,membre de
+Q1052584,Q173152,filiation,suivi par
 Q1904825,Q1052584,filiation,précédé par
 Q109932430,Q130269264,appartenance,membre de
 Q3456455,Q202649,appartenance,membre de

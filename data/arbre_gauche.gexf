@@ -82,7 +82,7 @@
         <attvalues>
           <attvalue for="0" value="1879" />
           <attvalue for="1" value="1902" />
-          <attvalue for="2" value="socialisme | marxisme" />
+          <attvalue for="2" value="marxisme | socialisme" />
           <attvalue for="3" value="social-démocrate" />
           <attvalue for="4" value="social-démocrate" />
         </attvalues>
@@ -96,21 +96,21 @@
           <attvalue for="4" value="social-démocrate" />
         </attvalues>
       </node>
-      <node id="Q2451197" label="Parti ouvrier français">
-        <attvalues>
-          <attvalue for="0" value="1882" />
-          <attvalue for="1" value="1902" />
-          <attvalue for="2" value="socialisme | communisme" />
-          <attvalue for="3" value="social-démocrate | communiste" />
-          <attvalue for="4" value="social-démocrate" />
-        </attvalues>
-      </node>
       <node id="Q2032009" label="Possibilisme">
         <attvalues>
           <attvalue for="0" value="1882" />
           <attvalue for="1" value="0" />
           <attvalue for="2" value="socialisme" />
           <attvalue for="3" value="social-démocrate" />
+          <attvalue for="4" value="social-démocrate" />
+        </attvalues>
+      </node>
+      <node id="Q2451197" label="Parti ouvrier français">
+        <attvalues>
+          <attvalue for="0" value="1882" />
+          <attvalue for="1" value="1902" />
+          <attvalue for="2" value="communisme | socialisme" />
+          <attvalue for="3" value="social-démocrate | communiste" />
           <attvalue for="4" value="social-démocrate" />
         </attvalues>
       </node>
@@ -145,7 +145,7 @@
         <attvalues>
           <attvalue for="0" value="1902" />
           <attvalue for="1" value="1905" />
-          <attvalue for="2" value="socialisme démocratique | socialisme" />
+          <attvalue for="2" value="socialisme | socialisme démocratique" />
           <attvalue for="3" value="social-démocrate" />
           <attvalue for="4" value="social-démocrate" />
         </attvalues>
@@ -181,7 +181,7 @@
         <attvalues>
           <attvalue for="0" value="1920" />
           <attvalue for="1" value="0" />
-          <attvalue for="2" value="marxisme | léninisme | eurocommunisme | antistalinisme | stalinisme | socialisme démocratique" />
+          <attvalue for="2" value="stalinisme | léninisme | socialisme démocratique | eurocommunisme | marxisme | antistalinisme" />
           <attvalue for="3" value="stalinien | léniniste | social-démocrate | communiste" />
           <attvalue for="4" value="stalinien" />
         </attvalues>
@@ -289,7 +289,7 @@
         <attvalues>
           <attvalue for="0" value="1945" />
           <attvalue for="1" value="1954" />
-          <attvalue for="2" value="socialisme démocratique | anticommunisme" />
+          <attvalue for="2" value="anticommunisme | socialisme démocratique" />
           <attvalue for="3" value="social-démocrate | communiste" />
           <attvalue for="4" value="social-démocrate" />
         </attvalues>
@@ -451,7 +451,7 @@
         <attvalues>
           <attvalue for="0" value="1969" />
           <attvalue for="1" value="1974" />
-          <attvalue for="2" value="trotskisme | communisme" />
+          <attvalue for="2" value="communisme | trotskisme" />
           <attvalue for="3" value="trotskyste | communiste" />
           <attvalue for="4" value="trotskyste" />
         </attvalues>
@@ -519,15 +519,6 @@
           <attvalue for="4" value="social-démocrate" />
         </attvalues>
       </node>
-      <node id="Q1618280" label="Organisation communiste marxiste-léniniste – Voie prolétarienne">
-        <attvalues>
-          <attvalue for="0" value="1976" />
-          <attvalue for="1" value="0" />
-          <attvalue for="2" value="communisme | maoïsme" />
-          <attvalue for="3" value="maoïste | communiste" />
-          <attvalue for="4" value="maoïste" />
-        </attvalues>
-      </node>
       <node id="Q3240649" label="Ligue ouvrière révolutionnaire">
         <attvalues>
           <attvalue for="0" value="1976" />
@@ -535,6 +526,15 @@
           <attvalue for="2" value="trotskisme" />
           <attvalue for="3" value="trotskyste" />
           <attvalue for="4" value="trotskyste" />
+        </attvalues>
+      </node>
+      <node id="Q1618280" label="Organisation communiste marxiste-léniniste – Voie prolétarienne">
+        <attvalues>
+          <attvalue for="0" value="1976" />
+          <attvalue for="1" value="0" />
+          <attvalue for="2" value="maoïsme | communisme" />
+          <attvalue for="3" value="maoïste | communiste" />
+          <attvalue for="4" value="maoïste" />
         </attvalues>
       </node>
       <node id="Q2985649" label="Comités communistes pour l'autogestion">
@@ -595,7 +595,7 @@
         <attvalues>
           <attvalue for="0" value="1991" />
           <attvalue for="1" value="2008" />
-          <attvalue for="2" value="trotskisme | communisme" />
+          <attvalue for="2" value="communisme | trotskisme" />
           <attvalue for="3" value="trotskyste | communiste" />
           <attvalue for="4" value="trotskyste" />
         </attvalues>
@@ -685,7 +685,7 @@
         <attvalues>
           <attvalue for="0" value="2008" />
           <attvalue for="1" value="0" />
-          <attvalue for="2" value="socialisme démocratique | écosocialisme" />
+          <attvalue for="2" value="écosocialisme | socialisme démocratique" />
           <attvalue for="3" value="social-démocrate" />
           <attvalue for="4" value="social-démocrate" />
         </attvalues>
@@ -757,7 +757,7 @@
         <attvalues>
           <attvalue for="0" value="2015" />
           <attvalue for="1" value="0" />
-          <attvalue for="2" value="marxisme-léninisme | communisme" />
+          <attvalue for="2" value="communisme | marxisme-léninisme" />
           <attvalue for="3" value="léniniste | communiste" />
           <attvalue for="4" value="léniniste" />
         </attvalues>
@@ -766,7 +766,7 @@
         <attvalues>
           <attvalue for="0" value="2015" />
           <attvalue for="1" value="0" />
-          <attvalue for="2" value="communisme | trotskisme" />
+          <attvalue for="2" value="trotskisme | communisme" />
           <attvalue for="3" value="trotskyste | communiste" />
           <attvalue for="4" value="trotskyste" />
         </attvalues>
@@ -879,15 +879,6 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q137369019" label="National Union of North African Muslims">
-        <attvalues>
-          <attvalue for="0" value="0" />
-          <attvalue for="1" value="0" />
-          <attvalue for="2" value="" />
-          <attvalue for="3" value="" />
-          <attvalue for="4" value="" />
-        </attvalues>
-      </node>
       <node id="Q290503" label="Étoile nord-africaine">
         <attvalues>
           <attvalue for="0" value="0" />
@@ -897,7 +888,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q170972" label="Parti socialiste">
+      <node id="Q137369019" label="National Union of North African Muslims">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -907,6 +898,15 @@
         </attvalues>
       </node>
       <node id="Q22674451" label="Mouvement pour la démocratie en Europe : Diem 25">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="0" />
+          <attvalue for="2" value="" />
+          <attvalue for="3" value="" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="Q170972" label="Parti socialiste">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -1194,7 +1194,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q1495924" label="Gauche unitaire">
+      <node id="Q29348702" label="Front de gauche">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -1203,7 +1203,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q29348702" label="Front de gauche">
+      <node id="Q1495924" label="Gauche unitaire">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -1554,7 +1554,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q173152" label="Union pour un mouvement populaire">
+      <node id="Q128064" label="Internationale démocrate centriste">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -1563,7 +1563,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q128064" label="Internationale démocrate centriste">
+      <node id="Q173152" label="Union pour un mouvement populaire">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -2004,7 +2004,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q3178006" label="Jeune Nation">
+      <node id="Q3091725" label="Fédération des étudiants nationalistes">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -2013,7 +2013,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q3091725" label="Fédération des étudiants nationalistes">
+      <node id="Q3178006" label="Jeune Nation">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -2085,7 +2085,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q3141290" label="Parti républicain, radical et radical-socialiste">
+      <node id="Q25079" label="Parti de l'Alliance des libéraux et des démocrates pour l'Europe">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -2094,7 +2094,7 @@
           <attvalue for="4" value="" />
         </attvalues>
       </node>
-      <node id="Q25079" label="Parti de l'Alliance des libéraux et des démocrates pour l'Europe">
+      <node id="Q3141290" label="Parti républicain, radical et radical-socialiste">
         <attvalues>
           <attvalue for="0" value="0" />
           <attvalue for="1" value="0" />
@@ -2606,19 +2606,19 @@
           <attvalue for="5" value="scission de" />
         </attvalues>
       </edge>
-      <edge source="Q1045425" target="Q115965423" id="21" type="scission">
-        <attvalues>
-          <attvalue for="5" value="suivi par" />
-        </attvalues>
-      </edge>
-      <edge source="Q1045425" target="Q125771262" id="22" type="filiation">
-        <attvalues>
-          <attvalue for="5" value="suivi par" />
-        </attvalues>
-      </edge>
-      <edge source="Q1045425" target="Q1377231" id="23" type="appartenance">
+      <edge source="Q1045425" target="Q1377231" id="21" type="appartenance">
         <attvalues>
           <attvalue for="5" value="membre de" />
+        </attvalues>
+      </edge>
+      <edge source="Q1045425" target="Q115965423" id="22" type="scission">
+        <attvalues>
+          <attvalue for="5" value="suivi par" />
+        </attvalues>
+      </edge>
+      <edge source="Q1045425" target="Q125771262" id="23" type="filiation">
+        <attvalues>
+          <attvalue for="5" value="suivi par" />
         </attvalues>
       </edge>
       <edge source="Q22981822" target="Q1045425" id="24" type="appartenance">
@@ -3246,14 +3246,14 @@
           <attvalue for="5" value="scission de" />
         </attvalues>
       </edge>
-      <edge source="Q1052584" target="Q173152" id="149" type="filiation">
-        <attvalues>
-          <attvalue for="5" value="suivi par" />
-        </attvalues>
-      </edge>
-      <edge source="Q1052584" target="Q208242" id="150" type="appartenance">
+      <edge source="Q1052584" target="Q208242" id="149" type="appartenance">
         <attvalues>
           <attvalue for="5" value="membre de" />
+        </attvalues>
+      </edge>
+      <edge source="Q1052584" target="Q173152" id="150" type="filiation">
+        <attvalues>
+          <attvalue for="5" value="suivi par" />
         </attvalues>
       </edge>
       <edge source="Q1904825" target="Q1052584" id="151" type="filiation">
