@@ -1,0 +1,37 @@
+id,name,sigle,start,end,predecessor_id,color_key
+Q188592,Internationale ouvrière,IO,1889,1923,,socialiste
+Q163931,Internationale communiste,IC,1919,1943,,communiste
+Q698677,Union des partis socialistes pour l'action internationale,UPSAI,1921,1923,,socialiste
+Q703593,Internationale ouvrière socialiste,IOS,1923,1940,,socialiste
+Q1423578,Centre marxiste révolutionnaire international,CMRI,1932,1940,,autre
+Q206682,Quatrième Internationale,QI,1938,,,trotskyste
+Q1984016,Quatrième Internationale (lambertiste),QI,1938,,,trotskyste
+Q27396,Fédération mondiale de la jeunesse démocratique,,1945,,,autre
+Q183533,Kominform,,1947,1956,,autre
+Q159454,Internationale socialiste,IS,1951,,,socialiste
+Q125963179,Internationale communiste libertaire,,1954,1958,,anarchiste
+Q2634710,Quatrième Internationale - Secrétariat unifié,,1963,,Q206682,trotskyste
+Q133795,Internationale des fédérations anarchistes,,1968,,,anarchiste
+Q158073,Comité pour une Internationale ouvrière,CIO,1974,,,trotskyste
+Q25079,Parti de l'Alliance des libéraux et des démocrates pour l'Europe,,1976,,,autre
+Q639383,Alliance libre européenne,ALE,1981,,,régionaliste
+Q2455815,Courant Révolution Permanente – Quatrième Internationale,,1989,,,trotskyste
+Q2915940,Forum de São Paulo,,1990,,,autre
+Q3055019,Entente internationale des travailleurs et des peuples,,1991,,,autre
+Q220945,Parti socialiste européen,PSE,1992,,,socialiste
+Q622227,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte),,1994,,,communiste
+Q753711,Groupe de la Gauche au Parlement européen,,1995,,,gauche radicale
+Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),,1996,2011,,communiste
+Q2440449,Rencontre internationale des partis communistes et ouvriers,,1998,,,communiste
+Q1377231,Gauche anticapitaliste européenne,,2000,,,gauche radicale
+Q649752,Solidarité internationale libertaire,,2001,,,anarchiste
+Q1631185,Internationale communiste révolutionnaire,,2004,,,communiste
+Q202649,Parti de la gauche européenne,PGE,2004,,,gauche radicale
+Q950179,Parti vert européen,PVE,2004,,,écologiste
+Q7248622,Alliance progressiste,,2013,,,autre
+Q139565740,Comité ouvrier international contre la guerre et l’exploitation pour l’Internationale ouvrière,,2016,,,trotskyste
+Q123785828,Action Communiste Européenne,,2023,,,communiste
+Q130219314,Alliance de la gauche européenne pour les peuples et la planète,,2024,,,gauche radicale
+Q2838098,Alliance européenne des mouvements critiques envers l'Union européenne,,,,,autre
+Q3240310,Ligue communiste internationale (quatrième internationaliste),,,,,trotskyste
+Q1073391,Union communiste internationaliste,UCI,,,,trotskyste

@@ -1,0 +1,282 @@
+source,source_nom,cible,cible_nom,relation,ensembles
+Q1052584,Rassemblement pour la République,Q173152,Union pour un mouvement populaire,filiation,exclu -> exclu
+Q1052584,Rassemblement pour la République,Q208242,Parti populaire européen,appartenance,exclu -> internationale
+Q1054196,Centre des démocrates sociaux,Q3076886,Force démocrate,filiation,exclu -> exclu
+Q107877569,Front national,Q205150,Rassemblement national,filiation,exclu -> exclu
+Q108288459,Volt France,Q55229798,Volt Europa,appartenance,exclu -> exclu
+Q108866690,Le Sillon catholique de Paris,Q2177298,Ligue de la Jeune République,filiation,exclu -> graphe
+Q109932430,Reconquête,Q130269264,Europe of Sovereign Nations,appartenance,exclu -> internationale
+Q110837,Parti de gauche (Suède),Q1787940,Parti communiste de Suède (1967),scission,etranger -> etranger
+Q111187255,Parti lorrain,Q111187242,Pays Unis,appartenance,exclu -> exclu
+Q111187258,Prouvènço Nacioun,Q111187242,Pays Unis,appartenance,exclu -> exclu
+Q1125061,Eusko Alkartasuna,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q1125638,Confédération générale du travail,Q3366212,"Parti communiste (France, 1919)",scission,exclu -> graphe
+Q1145020,Union démocratique bretonne,Q26828307,Oui la Bretagne,appartenance,graphe -> exclu
+Q1145020,Union démocratique bretonne,Q3058074,Régions et peuples solidaires,appartenance,graphe -> exclu
+Q11509405,Ligue communiste révolutionnaire du Japon (Quatrième Internationale),Q252141,Nouvelle Gauche (Japon),appartenance,etranger -> etranger
+Q11509405,Ligue communiste révolutionnaire du Japon (Quatrième Internationale),Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
+Q11663822,Ligue communiste révolutionnaire (Japon),Q11509405,Ligue communiste révolutionnaire du Japon (Quatrième Internationale),filiation,etranger -> etranger
+Q11684178,Gauche socialiste (Argentine),Q15300191,Unité internationale des travailleurs - Quatrième Internationale,appartenance,etranger -> graphe
+Q11684178,Gauche socialiste (Argentine),Q5915760,Infobae,appartenance,etranger -> exclu
+Q11684178,Gauche socialiste (Argentine),Q598744,Front de gauche et des travailleurs,appartenance,etranger -> etranger
+Q116846180,Mouvement populaire calédonien,Q208242,Parti populaire européen,appartenance,exclu -> internationale
+Q11696853,Socialist Organisation of National Liberation,Q3324180,Independentists of the Catalan Countries,filiation,graphe -> etranger
+Q12962,Debout la France,Q110627877,L'Avenir français,scission,exclu -> exclu
+Q12962,Debout la France,Q1345559,Conservateurs et réformistes européens,appartenance,exclu -> internationale
+Q130517388,Identité-Libertés,Q1577483,Parti des conservateurs et réformistes européens,appartenance,exclu -> internationale
+Q131451896,Parti communiste révolutionnaire (Canada),Q1631185,Internationale communiste révolutionnaire,appartenance,etranger -> internationale
+Q1321802,Mouvement républicain et citoyen,Q3412220,Pôle républicain,appartenance,graphe -> exclu
+Q1332068,Section française de l'Internationale ouvrière,Q2364065,Bloc démocratique sénégalais,scission,graphe -> exclu
+Q1332068,Section française de l'Internationale ouvrière,Q3088581,Front républicain (1956),appartenance,graphe -> exclu
+Q1332068,Section française de l'Internationale ouvrière,Q3366783,Parti sénégalais d'action socialiste,scission,graphe -> etranger
+Q1332068,Section française de l'Internationale ouvrière,Q3540067,Troisième Force (Quatrième République),appartenance,graphe -> exclu
+Q1332539,Parti ouvrier d'unité socialiste,Q1984016,Quatrième Internationale (lambertiste),appartenance,etranger -> internationale
+Q1351963,Cap21,Q105728238,Cap Écologie,filiation,exclu -> graphe
+Q1353232,Parti socialiste d'Amérique,Q581177,Parti socialiste des travailleurs (États-Unis),scission,etranger -> etranger
+Q13573560,Parti révolutionnaire socialiste des ouvriers,Q113625816,Alliance du travail et de la liberté,appartenance,etranger -> exclu
+Q13573560,Parti révolutionnaire socialiste des ouvriers,Q1196823,Tendance socialiste internationale,appartenance,etranger -> internationale
+Q13573560,Parti révolutionnaire socialiste des ouvriers,Q19922447,Congrès démocratique des peuples,appartenance,etranger -> etranger
+Q137353779,Q137353779,Q137369019,National Union of North African Muslims,filiation,exclu -> graphe
+Q1399996,Fédération ouvrière régionale argentine,Q55078537,Confédération internationale du travail,appartenance,etranger -> graphe
+Q1418625,Partitu di a Nazione Corsa,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q1542710,Parti radical (France),Q427965,Parti radical de gauche,scission,graphe -> exclu
+Q1542710,Parti radical (France),Q45149423,Mouvement radical,filiation,graphe -> exclu
+Q1549074,Parti socialiste (Irlande),Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
+Q1549074,Parti socialiste (Irlande),Q158073,Comité pour une Internationale ouvrière,appartenance,etranger -> internationale
+Q1549074,Parti socialiste (Irlande),Q16000050,Solidarity (parti politique irlandais),appartenance,etranger -> etranger
+Q1549074,Parti socialiste (Irlande),Q21218940,Solidarité – Le peuple avant le profit,appartenance,etranger -> etranger
+Q1568745,Unser Land,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q16000050,Solidarity (parti politique irlandais),Q21218940,Solidarité – Le peuple avant le profit,appartenance,etranger -> etranger
+Q16644519,Université ouvrière de Paris,Q192821,Parti communiste français,appartenance,exclu -> graphe
+Q16682004,Union libérale républicaine,Q179456,Fédération républicaine,filiation,exclu -> exclu
+Q170972,Parti socialiste (France),Q3366315,Parti de la démocratie socialiste (France),scission,graphe -> exclu
+Q170972,Parti socialiste (France),Q383499,François Rebsamen,scission,graphe -> exclu
+Q173152,Union pour un mouvement populaire,Q20012759,Les Républicains,filiation,exclu -> exclu
+Q173152,Union pour un mouvement populaire,Q208242,Parti populaire européen,appartenance,exclu -> internationale
+Q173152,Union pour un mouvement populaire,Q693622,Parti chrétien-démocrate,scission,exclu -> exclu
+Q17355363,Lutte ouvrière (Belgique),Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
+Q1787940,Parti communiste de Suède (1967),Q965481,Parti communiste (Suède),scission,etranger -> etranger
+Q179456,Fédération républicaine,Q1820941,Parti républicain de la liberté,filiation,exclu -> exclu
+Q179885,Club des jacobins,Q2980126,Club de 1789,scission,graphe -> exclu
+Q179885,Club des jacobins,Q509825,club des Feuillants,scission,graphe -> exclu
+Q1809637,Gauche critique,Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
+Q1809637,Gauche critique,Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
+Q1820941,Parti républicain de la liberté,Q761433,Centre national des indépendants et paysans,filiation,exclu -> exclu
+Q1904825,Union des démocrates pour la République,Q1052584,Rassemblement pour la République,filiation,exclu -> exclu
+Q192821,Parti communiste français,Q2118395,Parti communiste algérien,scission,graphe -> etranger
+Q1951193,Mouvement pour le socialisme (Argentine),Q8034747,Mouvement socialiste des travailleurs,scission,etranger -> etranger
+Q19521949,Courant révolutionnaire des travailleurs,Q2455815,Courant Révolution Permanente – Quatrième Internationale,appartenance,etranger -> internationale
+Q20012759,Les Républicains,Q127038760,Union des droites pour la République,scission,exclu -> exclu
+Q20012759,Les Républicains,Q128064,Internationale démocrate centriste,appartenance,exclu -> internationale
+Q20012759,Les Républicains,Q208242,Parti populaire européen,appartenance,exclu -> internationale
+Q20012759,Les Républicains,Q43807777,"Agir, la droite constructive",filiation,exclu -> exclu
+Q2034798,Parti communiste des travailleurs (Italie),Q2393813,Comité de coordination pour la refondation de la Quatrième Internationale,appartenance,etranger -> internationale
+Q2037506,Centre démocrate (France),Q15985231,Objectif socialiste,scission,exclu -> graphe
+Q205150,Rassemblement national,Q1377195,Alliance européenne pour la liberté,appartenance,exclu -> internationale
+Q205150,Rassemblement national,Q18907386,Patriotes.eu,appartenance,exclu -> internationale
+Q205150,Rassemblement national,Q3419877,Rassemblement Bleu Marine,appartenance,exclu -> exclu
+Q2053544,"L'Alliance républicaine, écologiste et sociale",Q82892,Union des démocrates et indépendants,filiation,exclu -> exclu
+Q2054807,Parti socialiste révolutionnaire (Portugal),Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
+Q2054807,Parti socialiste révolutionnaire (Portugal),Q884840,Bloc de gauche,filiation,etranger -> etranger
+Q2118395,Parti communiste algérien,Q163931,Internationale communiste,appartenance,etranger -> internationale
+Q2118395,Parti communiste algérien,Q3366281,Parti de l'avant-garde socialiste,filiation,etranger -> etranger
+Q21218940,Solidarité – Le peuple avant le profit,Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
+Q212884,Front populaire de libération de la Palestine,Q818618,Front démocratique pour la libération de la Palestine,scission,etranger -> etranger
+Q2164587,Union démocratique et socialiste de la Résistance,Q2132031,Rassemblement du peuple français,scission,graphe -> exclu
+Q2164587,Union démocratique et socialiste de la Résistance,Q3088581,Front républicain (1956),appartenance,graphe -> exclu
+Q2177973,Parti communiste du Bangladesh,Q2440449,Rencontre internationale des partis communistes et ouvriers,appartenance,etranger -> internationale
+Q22252055,Mouvement révolutionnaire des travailleurs,Q2455815,Courant Révolution Permanente – Quatrième Internationale,appartenance,etranger -> internationale
+Q2300622,républicains indépendants,Q3366676,Parti républicain,filiation,exclu -> exclu
+Q234277,Parti communiste d'Inde (marxiste),Q1897136,Parti communiste d'Inde (marxiste-léniniste),scission,etranger -> etranger
+Q234277,Parti communiste d'Inde (marxiste),Q5062659,Centre des communistes indiens,scission,etranger -> etranger
+Q2344776,Alliance démocratique,Q761433,Centre national des indépendants et paysans,filiation,exclu -> exclu
+Q2358124,Parti communiste de l'Argentine,Q2983913,Parti communiste révolutionnaire d'Argentine,scission,etranger -> etranger
+Q2372604,Groupe Octobre,Q1393793,Parti communiste internationaliste,filiation,exclu -> graphe
+Q2453869,Parti socialiste des travailleurs unifié,Q22252055,Mouvement révolutionnaire des travailleurs,scission,etranger -> etranger
+Q2453869,Parti socialiste des travailleurs unifié,Q599328,Ligue internationale des travailleurs - Quatrième Internationale,appartenance,etranger -> internationale
+Q251300,Parti breton,Q111187242,Pays Unis,appartenance,exclu -> exclu
+Q2519605,Gauche communiste d'Espagne,Q1569985,Opposition de gauche,appartenance,etranger -> etranger
+Q2597196,Parti communiste brésilien,Q2440449,Rencontre internationale des partis communistes et ouvriers,appartenance,etranger -> internationale
+Q2638999,Parti ouvrier indépendant,Q511952,Politis,appartenance,graphe -> exclu
+Q2639023,Ligue savoisienne,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q2712402,Parti communiste des Philippines-1930,Q636521,Parti communiste des Philippines (1968),scission,etranger -> etranger
+Q2715954,Parti communiste d'Inde (marxiste-léniniste) Guerre populaire,Q2702574,Comité de coordination des partis et organisations maoïstes d'Asie du Sud,appartenance,etranger -> graphe
+Q2715954,Parti communiste d'Inde (marxiste-léniniste) Guerre populaire,Q2941659,Parti communiste d'Inde (maoïste),filiation,etranger -> etranger
+Q2716578,Lanka Sama Samaja Party,Q2724491,Alliance de la liberté du peuple uni,appartenance,etranger -> exclu
+Q2746868,Abertzaleen Batasuna,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q27867942,Parti animaliste,Q22079847,Animal Politics EU,appartenance,exclu -> exclu
+Q27978402,La France insoumise,Q63978533,République souveraine,scission,graphe -> exclu
+Q28137035,Parti de la Résistance,Q3366274,Parti de l'Ordre,filiation,exclu -> exclu
+Q286683,SolidaritéS,Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
+Q290503,Étoile nord-africaine,Q137353779,Q137353779,filiation,exclu -> exclu
+Q290503,Étoile nord-africaine,Q3366385,Parti du peuple algérien,filiation,exclu -> exclu
+Q2947157,Ceux de la Résistance,Q2164587,Union démocratique et socialiste de la Résistance,filiation,exclu -> graphe
+Q2973337,Circolo Operaio Comunista,Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
+Q2983913,Parti communiste révolutionnaire d'Argentine,Q119499537,Force de la patrie,appartenance,etranger -> exclu
+Q2983913,Parti communiste révolutionnaire d'Argentine,Q2915940,Forum de São Paulo,appartenance,etranger -> internationale
+Q2983913,Parti communiste révolutionnaire d'Argentine,Q64590596,Front de tous,appartenance,etranger -> etranger
+Q3058074,Régions et peuples solidaires,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q3068323,Femu a Corsica,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q30728539,Comités Jeanne,Q19834410,Alliance pour la Paix et la Liberté,appartenance,exclu -> internationale
+Q3075469,Fondation Jean-Jaurès,Q170972,Parti socialiste (France),appartenance,exclu -> graphe
+Q3076886,Force démocrate,Q827415,Union pour la démocratie française,filiation,exclu -> exclu
+Q3082926,Frankiz Breizh,Q3058074,Régions et peuples solidaires,appartenance,graphe -> exclu
+Q3086449,Parti pour l'organisation d'une Bretagne libre,Q161499,Union fédéraliste des communautés européennes,appartenance,exclu -> internationale
+Q3088504,Front national,Q368067,Alliance européenne des mouvements nationaux,appartenance,exclu -> internationale
+Q3088519,Front national des combattants,Q110607053,Cercle du Panthéon,filiation,exclu -> exclu
+Q3088519,Front national des combattants,Q54769213,Front national pour l'Algérie française,filiation,exclu -> exclu
+Q3107400,Union du peuple alsacien,Q1568745,Unser Land,filiation,exclu -> exclu
+Q3107400,Union du peuple alsacien,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q3118726,Parti ouvrier socialiste internationaliste,Q206682,Quatrième Internationale,appartenance,etranger -> internationale
+Q3133199,Ligue communiste révolutionnaire (Espagne),Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
+Q3133199,Ligue communiste révolutionnaire (Espagne),Q3325616,Anticapitalistas,filiation,etranger -> etranger
+Q3135956,Parti des travailleurs (Uruguay),Q2393813,Comité de coordination pour la refondation de la Quatrième Internationale,appartenance,etranger -> internationale
+Q31400965,Génération.s,Q22674451,Mouvement pour la démocratie en Europe : Diem 25,appartenance,graphe -> exclu
+Q3141290,"Parti républicain, radical et radical-socialiste",Q427965,Parti radical de gauche,filiation,graphe -> exclu
+Q3142484,Parti communiste breton,Q175284,Armée républicaine irlandaise,appartenance,graphe -> exclu
+Q3142484,Parti communiste breton,Q26683,Organisation de libération de la Palestine,appartenance,graphe -> exclu
+Q3142484,Parti communiste breton,Q42814,Euskadi ta Askatasuna,appartenance,graphe -> exclu
+Q314946,Ligue socialiste révolutionnaire,Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
+Q3178006,Jeune Nation,Q3366546,Parti nationaliste,filiation,exclu -> exclu
+Q3181825,"Parti communiste révolutionnaire, États-Unis",Q1969683,Mouvement révolutionnaire internationaliste,appartenance,etranger -> internationale
+Q3219588,Laurent de Boissieu,Q135755468,La Convention,appartenance,exclu -> graphe
+Q3226266,Le Rassemblement,Q208242,Parti populaire européen,appartenance,exclu -> internationale
+Q3227199,Le Sillon,Q2177298,Ligue de la Jeune République,filiation,exclu -> graphe
+Q324107,Parti communiste d'Allemagne/Marxistes-léninistes,Q589468,Hoxhaïsme,appartenance,etranger -> graphe
+Q3265141,Lucha de clase,Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
+Q3298265,Parti communiste du Pakistan,Q2177973,Parti communiste du Bangladesh,scission,etranger -> etranger
+Q3314191,Militant tendency,Q158073,Comité pour une Internationale ouvrière,appartenance,etranger -> internationale
+Q3314191,Militant tendency,Q1755592,Entrisme,appartenance,etranger -> exclu
+Q3314191,Militant tendency,Q3365196,The Communist,filiation,etranger -> etranger
+Q3314191,Militant tendency,Q367894,Parti socialiste (Angleterre et pays de Galles),filiation,etranger -> etranger
+Q3314191,Militant tendency,Q9630,Parti travailliste (Royaume-Uni),appartenance,etranger -> etranger
+Q3314191,Militant tendency,"fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)","Alternative socialiste (Angleterre, Écosse et pays de Galles)",filiation,etranger -> etranger
+Q3325616,Anticapitalistas,Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
+Q3325616,Anticapitalistas,Q16059622,Podemos (parti espagnol),appartenance,etranger -> etranger
+Q3325616,Anticapitalistas,Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
+Q3326591,Mouvement de libération nationale (1944),Q2164587,Union démocratique et socialiste de la Résistance,filiation,exclu -> graphe
+Q3326781,Mouvement pour l'organisation de la Bretagne,Q1145020,Union démocratique bretonne,scission,exclu -> graphe
+Q3356023,Organisation des travailleurs révolutionnaires,Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
+Q3366315,Parti de la démocratie socialiste (France),Q3326823,Mouvement réformateur (France),appartenance,exclu -> exclu
+Q3366315,Parti de la démocratie socialiste (France),Q3366713,Parti social-démocrate (France),filiation,exclu -> graphe
+Q3366472,Parti humaniste,Q3492245,Internationale humaniste,appartenance,exclu -> internationale
+Q3366506,Parti libéral démocrate,Q71978544,Objectif France,filiation,exclu -> exclu
+Q3366546,Parti nationaliste,Q3091725,Fédération des étudiants nationalistes,filiation,exclu -> exclu
+Q3366551,Les Nationalistes,Q136416303,ISL Paladins,appartenance,exclu -> exclu
+Q3366551,Les Nationalistes,Q19834410,Alliance pour la Paix et la Liberté,appartenance,exclu -> internationale
+Q3366676,Parti républicain,Q686372,Démocratie libérale,filiation,exclu -> exclu
+Q3366713,Parti social-démocrate (France),Q3076886,Force démocrate,filiation,graphe -> exclu
+Q3366746,Parti socialiste des travailleurs (Algérie),Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
+Q3366765,Parti socialiste guyanais,Q106899676,Guyane rassemblement,scission,graphe -> exclu
+Q3385657,Pierre Juquin,Q2840414,Alternative rouge et verte,filiation,exclu -> graphe
+Q344583,Parti des travailleurs (Turquie),Q19341987,Parti patriote (Turquie),filiation,etranger -> etranger
+Q3492423,"Souveraineté, identité et libertés",Q3419877,Rassemblement Bleu Marine,appartenance,exclu -> exclu
+Q3511647,Sınıf Mücadelesi,Q1073391,Union communiste internationaliste,appartenance,exclu -> internationale
+Q3518826,Territoires en mouvement,Q30041450,577 Les indépendants,filiation,exclu -> exclu
+Q3545406,Le Peuple avant le profit,Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
+Q3545406,Le Peuple avant le profit,Q21218940,Solidarité – Le peuple avant le profit,appartenance,etranger -> etranger
+Q3550026,Union africaine des travailleurs communistes internationalistes,Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
+Q3550123,Union des combattants communistes,Q2975893,Parti communiste d'Iran,filiation,etranger -> etranger
+Q3550666,Unir (association politique),Q1495924,Gauche unitaire,scission,exclu -> graphe
+Q3550666,Unir (association politique),Q2996386,Convergences et alternative,filiation,exclu -> graphe
+Q356944,Parti de l'égalité socialiste (États-Unis),Q972773,Comité international de la Quatrième Internationale,appartenance,etranger -> internationale
+Q3569927,Workers' Fight,Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
+Q367894,Parti socialiste (Angleterre et pays de Galles),Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
+Q368621,Homosexualités et socialisme,Q170972,Parti socialiste (France),appartenance,exclu -> graphe
+Q383499,François Rebsamen,Q135755468,La Convention,appartenance,exclu -> graphe
+Q3896697,Parti communiste d'Italie (marxiste-léniniste),Q3896781,Parti marxiste-léniniste italien,scission,etranger -> etranger
+Q3896697,Parti communiste d'Italie (marxiste-léniniste),Q780997,Parti de la refondation communiste,filiation,etranger -> etranger
+Q4051005,Parti révolutionnaire des travailleurs (Royaume-Uni),Q972773,Comité international de la Quatrième Internationale,appartenance,etranger -> internationale
+Q405492,Parti socialiste des travailleurs (Royaume-Uni),Q1196823,Tendance socialiste internationale,appartenance,etranger -> internationale
+Q405492,Parti socialiste des travailleurs (Royaume-Uni),Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
+Q405492,Parti socialiste des travailleurs (Royaume-Uni),Q980923,Coalition syndicaliste et socialiste,appartenance,etranger -> etranger
+Q41330182,Les Patriotes,Q1165759,Europe de la liberté et de la démocratie directe,appartenance,exclu -> exclu
+Q426963,Parti communiste du Népal (marxiste-léniniste unifié),Q53700514,Parti communiste du Népal (2018),scission,etranger -> etranger
+Q427965,Parti radical de gauche,Q135755468,La Convention,appartenance,exclu -> graphe
+Q427965,Parti radical de gauche,Q1651405,Alliance radicale européenne,appartenance,exclu -> internationale
+Q427965,Parti radical de gauche,Q3366425,Parti démocrate français,scission,exclu -> exclu
+Q427965,Parti radical de gauche,Q55597872,Les Radicaux de gauche,scission,exclu -> graphe
+Q43093,Parti nationaliste basque,Q111187242,Pays Unis,appartenance,exclu -> exclu
+Q43093,Parti nationaliste basque,Q1125061,Eusko Alkartasuna,scission,exclu -> exclu
+Q43093,Parti nationaliste basque,Q734792,Parti démocrate européen,appartenance,exclu -> internationale
+Q4382630,Parti des travailleurs du Bangladesh,Q2440449,Rencontre internationale des partis communistes et ouvriers,appartenance,etranger -> internationale
+Q4382630,Parti des travailleurs du Bangladesh,Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),appartenance,etranger -> internationale
+Q442612,Union populaire républicaine,Q2697626,Parti démocrate populaire,filiation,exclu -> exclu
+Q45149423,Mouvement radical,Q427965,Parti radical de gauche,scission,exclu -> exclu
+Q461886,Parti communiste italien,Q3896697,Parti communiste d'Italie (marxiste-léniniste),scission,etranger -> etranger
+Q499632,Parti marxiste-léniniste d'Allemagne,Q6049830,Coordination internationale des partis et organisations révolutionnaires,appartenance,etranger -> internationale
+Q499632,Parti marxiste-léniniste d'Allemagne,Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),appartenance,etranger -> internationale
+Q503614,Parti travailliste (Irlande),Q1549074,Parti socialiste (Irlande),scission,etranger -> etranger
+Q506537,Parti communiste du Népal (centre maoïste),Q136716194,Parti communiste népalais,filiation,etranger -> etranger
+Q506537,Parti communiste du Népal (centre maoïste),Q2702574,Comité de coordination des partis et organisations maoïstes d'Asie du Sud,appartenance,etranger -> graphe
+Q506537,Parti communiste du Népal (centre maoïste),Q53700514,Parti communiste du Népal (2018),scission,etranger -> etranger
+Q51480667,Ligue Nationale de la Démocratie,Q2697626,Parti démocrate populaire,filiation,exclu -> exclu
+Q522505,Bloc ouvrier et paysan,Q11885155,Opposition communiste internationale,appartenance,etranger -> internationale
+Q5291,Parti pirate,Q15081858,Parti pirate européen,appartenance,exclu -> internationale
+Q5291,Parti pirate,Q170,Parti pirate international,appartenance,exclu -> internationale
+Q53700514,Parti communiste du Népal (2018),Q2440449,Rencontre internationale des partis communistes et ouvriers,appartenance,etranger -> internationale
+Q587370,Mouvement démocrate (France),Q18744486,Front démocrate,scission,exclu -> graphe
+Q587370,Mouvement démocrate (France),Q734792,Parti démocrate européen,appartenance,exclu -> internationale
+Q5975788,Ligue ouvrière révolutionnaire pour la Quatrième Internationale,Q2455815,Courant Révolution Permanente – Quatrième Internationale,appartenance,etranger -> internationale
+Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),Q1969683,Mouvement révolutionnaire internationaliste,appartenance,etranger -> internationale
+Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),Q20635401,Bataillon international de libération,appartenance,etranger -> graphe
+Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),Q24042122,Mouvement révolutionnaire uni des peuples,appartenance,etranger -> etranger
+Q6050518,Kurtuluş Hareketi,Q13573560,Parti révolutionnaire socialiste des ouvriers,scission,exclu -> etranger
+Q605468,Parti communiste de Pologne (1918-1938),Q163931,Internationale communiste,appartenance,etranger -> internationale
+Q605468,Parti communiste de Pologne (1918-1938),Q687409,Parti ouvrier polonais,filiation,etranger -> etranger
+Q6083578,Parti révolutionnaire ouvrier et paysan de Turquie,Q771163,Parti communiste de Turquie/marxiste-léniniste,scission,etranger -> etranger
+Q613786,Les Écologistes – Europe Écologie Les Verts,Q691715,"International Lesbian, Gay, Bisexual, Trans and Intersex Association",appartenance,graphe -> exclu
+Q627196,Parti des travailleurs (Algérie),Q3055019,Entente internationale des travailleurs et des peuples,appartenance,etranger -> internationale
+Q627196,Parti des travailleurs (Algérie),Q73316831,Forces du pacte de l'Alternative démocratique,appartenance,etranger -> exclu
+Q63456377,Dissidence française,Q105616754,Mouvement national-démocrate,filiation,exclu -> exclu
+Q636521,Parti communiste des Philippines (1968),Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),appartenance,etranger -> internationale
+Q636521,Parti communiste des Philippines (1968),Q6972194,Démocratie nationale (Philippines),appartenance,etranger -> exclu
+Q657089,Parti des travailleurs (Brésil),Q2453869,Parti socialiste des travailleurs unifié,scission,etranger -> etranger
+Q660769,Ouest-France,Q135755468,La Convention,appartenance,exclu -> graphe
+Q668699,Parti ouvrier d'unification marxiste,Q1423578,Centre marxiste révolutionnaire international,appartenance,etranger -> internationale
+Q668699,Parti ouvrier d'unification marxiste,Q246708,Front populaire (Espagne),appartenance,etranger -> etranger
+Q668699,Parti ouvrier d'unification marxiste,Q8962888,Front des gauches de Catalogne,appartenance,etranger -> etranger
+Q682473,Centre communiste maoïste,Q2941659,Parti communiste d'Inde (maoïste),filiation,etranger -> etranger
+Q686372,Démocratie libérale,Q3412217,Pôle républicain indépendant et libéral,scission,exclu -> exclu
+Q693622,Parti chrétien-démocrate,Q1377279,Parti politique chrétien européen,appartenance,exclu -> internationale
+Q705067,Croix-de-feu,Q3366725,Parti social français,filiation,exclu -> exclu
+Q7223378,Union pour la nouvelle République,Q1904825,Union des démocrates pour la République,filiation,exclu -> exclu
+Q7287108,Rally the Centrists,Q762083,Alliance centriste,filiation,exclu -> exclu
+Q75126973,Q75126973,Q11914923,Q11914923,filiation,exclu -> exclu
+Q7551517,Alternative socialiste (Australie),Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
+Q7551801,Parti des travailleurs socialistes,Q2455815,Courant Révolution Permanente – Quatrième Internationale,appartenance,etranger -> internationale
+Q7551801,Parti des travailleurs socialistes,Q598744,Front de gauche et des travailleurs,appartenance,etranger -> etranger
+Q771163,Parti communiste de Turquie/marxiste-léniniste,Q1969683,Mouvement révolutionnaire internationaliste,appartenance,etranger -> internationale
+Q771163,Parti communiste de Turquie/marxiste-léniniste,Q20635401,Bataillon international de libération,appartenance,etranger -> graphe
+Q771163,Parti communiste de Turquie/marxiste-léniniste,Q24042122,Mouvement révolutionnaire uni des peuples,appartenance,etranger -> etranger
+Q771163,Parti communiste de Turquie/marxiste-léniniste,Q461,Internet Archive,appartenance,etranger -> exclu
+Q771163,Parti communiste de Turquie/marxiste-léniniste,Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),scission,etranger -> etranger
+Q771163,Parti communiste de Turquie/marxiste-léniniste,Q6049830,Coordination internationale des partis et organisations révolutionnaires,appartenance,etranger -> internationale
+Q771163,Parti communiste de Turquie/marxiste-léniniste,Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),appartenance,etranger -> internationale
+Q780997,Parti de la refondation communiste,Q1809637,Gauche critique,scission,etranger -> etranger
+Q8034724,Parti ouvrier (Argentine),Q2393813,Comité de coordination pour la refondation de la Quatrième Internationale,appartenance,etranger -> internationale
+Q8034724,Parti ouvrier (Argentine),Q598744,Front de gauche et des travailleurs,appartenance,etranger -> etranger
+Q8034747,Mouvement socialiste des travailleurs,Q11684178,Gauche socialiste (Argentine),scission,etranger -> etranger
+Q8034747,Mouvement socialiste des travailleurs,Q598744,Front de gauche et des travailleurs,appartenance,etranger -> etranger
+Q818618,Front démocratique pour la libération de la Palestine,Q26683,Organisation de libération de la Palestine,appartenance,etranger -> exclu
+Q818618,Front démocratique pour la libération de la Palestine,Q4830622,Axe de la résistance,appartenance,etranger -> exclu
+Q827415,Union pour la démocratie française,Q208242,Parti populaire européen,appartenance,exclu -> internationale
+Q827415,Union pour la démocratie française,Q587370,Mouvement démocrate (France),filiation,exclu -> exclu
+Q827415,Union pour la démocratie française,Q853418,Les Centristes,filiation,exclu -> exclu
+Q82892,Union des démocrates et indépendants,Q25079,Parti de l'Alliance des libéraux et des démocrates pour l'Europe,appartenance,exclu -> internationale
+Q82892,Union des démocrates et indépendants,Q734792,Parti démocrate européen,appartenance,exclu -> internationale
+Q862627,Ligue communiste révolutionnaire,Q3550666,Unir (association politique),filiation,graphe -> exclu
+Q870654,Mouvement pour la France,Q852329,Mouvement pour l'Europe des libertés et de la démocratie,appartenance,exclu -> internationale
+Q9003283,Herriko Alderdi Sozialista,Q3755622,Euskal Herriko Alderdi Sozialista,filiation,exclu -> exclu
+Q922179,Unitat Catalana,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q922707,Parti de gauche (France),Q12461,Le Monde,appartenance,graphe -> exclu
+Q922707,Parti de gauche (France),Q3153050,Inter-LGBT,appartenance,graphe -> exclu
+Q924501,Sabaudia-MRS,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
+Q965481,Parti communiste (Suède),Q21704717,Séminaire communiste international,appartenance,etranger -> internationale
+Q967759,Social-démocratie du royaume de Pologne et de Lituanie,Q605468,Parti communiste de Pologne (1918-1938),filiation,etranger -> etranger
+Q97015296,Démocrates et progressistes,Q109929254,Ensemble pour la République (France),appartenance,graphe -> exclu
+Q97015296,Démocrates et progressistes,Q23731823,Renaissance (parti),appartenance,graphe -> exclu
+Q97015296,Démocrates et progressistes,Q64590185,Renew Europe,appartenance,graphe -> exclu
+fr:Ligue communiste révolutionnaire (Bangladesh),Ligue communiste révolutionnaire (Bangladesh),Q4382630,Parti des travailleurs du Bangladesh,filiation,graphe -> etranger
+fr:Parti Majdur,Parti Majdur,Q4382630,Parti des travailleurs du Bangladesh,filiation,exclu -> etranger
+fr:Parti communiste internationaliste du Japon,Parti communiste internationaliste du Japon,Q11509405,Ligue communiste révolutionnaire du Japon (Quatrième Internationale),filiation,graphe -> etranger

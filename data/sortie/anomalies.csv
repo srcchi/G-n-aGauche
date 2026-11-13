@@ -1,0 +1,12 @@
+source,target,relation,source_date,target_date,probable_cause,source_nom,target_nom,sources
+Q1495924,Q192821,filiation,2009,1920,"type de relation erroné : la cible existait déjà (adhésion, ralliement ou passage de militants plutôt que filiation ?)",Gauche unitaire,Parti communiste français,wikipedia
+Q3240649,Q862627,filiation,1976,1974,"date erronée : écart de 2 an(s), une des deux dates est probablement fausse",Ligue ouvrière révolutionnaire,Ligue communiste révolutionnaire,wikipedia
+Q3562502,Q862627,filiation,1997,1974,"type de relation erroné : la cible existait déjà (adhésion, ralliement ou passage de militants plutôt que filiation ?)",Voix des travailleurs,Ligue communiste révolutionnaire,wikipedia
+Q534291,Q1332068,filiation,1930,1905,"type de relation erroné : la cible existait déjà (adhésion, ralliement ou passage de militants plutôt que filiation ?)",Parti d'unité prolétarienne,Section française de l'Internationale ouvrière,wikipedia
+Q862627,Q170972,scission,1974,1969,"type de relation erroné : la cible existait déjà (adhésion, ralliement ou passage de militants plutôt que filiation ?)",Ligue communiste révolutionnaire,Parti socialiste (France),wikipedia
+Q862627,Q1828329,scission,1974,1952,"type de relation erroné : la cible existait déjà (adhésion, ralliement ou passage de militants plutôt que filiation ?)",Ligue communiste révolutionnaire,Organisation communiste internationaliste,wikipedia
+Q158073,Q1631185,scission,1974,2004,"lien entre deux Internationales de type scission, non représenté",Comité pour une Internationale ouvrière,Internationale communiste révolutionnaire,wikipedia
+Q206682,Q972773,scission,1938,1953,"lien entre deux Internationales de type scission, non représenté",Quatrième Internationale,Comité international de la Quatrième Internationale,correction
+Q2634710,Q599328,scission,1963,,"lien entre deux Internationales de type scission, non représenté",Quatrième Internationale - Secrétariat unifié,Ligue internationale des travailleurs - Quatrième Internationale,correction
+Q599328,Q2455815,scission,,1989,"lien entre deux Internationales de type scission, non représenté",Ligue internationale des travailleurs - Quatrième Internationale,Courant Révolution Permanente – Quatrième Internationale,correction
+Q972773,Q1984016,scission,1953,1938,"lien entre deux Internationales de type scission, non représenté",Comité international de la Quatrième Internationale,Quatrième Internationale (lambertiste),correction

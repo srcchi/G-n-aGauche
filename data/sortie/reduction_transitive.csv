@@ -1,0 +1,4 @@
+source,source_nom,cible,cible_nom,chemin_conserve
+Q2705289,Parti ouvrier socialiste révolutionnaire,Q1332068,Section française de l'Internationale ouvrière,Parti ouvrier socialiste révolutionnaire -> Parti socialiste français (1902) -> Section française de l'Internationale ouvrière
+Q3091718,Fédération des travailleurs socialistes de France,Q2379359,Parti socialiste français (1902),Fédération des travailleurs socialistes de France -> Parti ouvrier socialiste révolutionnaire -> Parti socialiste français (1902)
+Q628594,"Parti des travailleurs (France, 1991)",Q24939885,"Parti des travailleurs (France, 2015)","Parti des travailleurs (France, 1991) -> Parti ouvrier indépendant -> Parti des travailleurs (France, 2015)"

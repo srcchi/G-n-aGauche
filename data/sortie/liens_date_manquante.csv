@@ -1,0 +1,11 @@
+source,source_nom,cible,cible_nom,relation,extremite_sans_date
+Q1321802,Mouvement républicain et citoyen,Q138828808,Gauche républicaine et sociale,scission,cible
+Q1332068,Section française de l'Internationale ouvrière,Q3366757,Parti socialiste français (1919),scission,cible
+Q2451197,Parti ouvrier français,Q3487413,Socialistes indépendants,scission,cible
+Q2540732,Union des groupes et clubs socialistes,Q170972,Parti socialiste (France),filiation,source
+Q27978402,La France insoumise,Q62079328,Debout (parti politique),scission,cible
+Q2996664,Coordination nationale de la gauche républicaine,Q3272709,MARS - Gauche républicaine,filiation,source
+Q3092110,Fédération pour une gauche alternative,Q2840414,Alternative rouge et verte,filiation,source
+Q3326581,Mouvement de la gauche progressiste,Q922707,Parti de gauche (France),filiation,source
+Q3366757,Parti socialiste français (1919),Q3550479,Union socialiste républicaine,filiation,source
+Q3487413,Socialistes indépendants,Q2379359,Parti socialiste français (1902),filiation,source

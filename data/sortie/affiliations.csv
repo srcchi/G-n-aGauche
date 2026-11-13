@@ -1,0 +1,63 @@
+party_id,international_id,start,end,date_certainty,source,party_nom,international_nom
+Q1045425,Q1377231,2009,2022,unknown,wikidata | wikipedia,Nouveau Parti anticapitaliste,Gauche anticapitaliste européenne
+Q1145020,Q639383,1981,,unknown,wikidata | wikipedia,Union démocratique bretonne,Alliance libre européenne
+Q125771262,Q2634710,2022,,unknown,correction,Nouveau Parti anticapitaliste – L'Anticapitaliste,Quatrième Internationale - Secrétariat unifié
+Q1332068,Q159454,1951,1969,unknown,wikipedia,Section française de l'Internationale ouvrière,Internationale socialiste
+Q1332068,Q188592,1905,1923,unknown,wikipedia,Section française de l'Internationale ouvrière,Internationale ouvrière
+Q1332068,Q698677,1921,1923,unknown,wikipedia,Section française de l'Internationale ouvrière,Union des partis socialistes pour l'action internationale
+Q1332068,Q703593,1923,1940,unknown,wikidata | wikipedia,Section française de l'Internationale ouvrière,Internationale ouvrière socialiste
+Q1393793,Q206682,1944,1968,unknown,wikipedia,Parti communiste internationaliste,Quatrième Internationale
+Q141861456,Q2455815,2018,,unknown,wikipedia,Le Poing Levé,Courant Révolution Permanente – Quatrième Internationale
+Q1495924,Q202649,2009,2015,unknown,wikidata | wikipedia,Gauche unitaire,Parti de la gauche européenne
+Q1539236,Q639383,1987,,unknown,wikidata,Parti occitan,Alliance libre européenne
+Q1542710,Q25079,1976,,unknown,wikidata,Parti radical (France),Parti de l'Alliance des libéraux et des démocrates pour l'Europe
+Q1618280,Q622519,1996,2011,unknown,wikipedia,Voix prolétarienne,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale)
+Q1628816,Q27396,1945,,unknown,wikipedia,Mouvement jeunes communistes de France,Fédération mondiale de la jeunesse démocratique
+Q17008204,Q3240310,,,unknown,wikipedia,Ligue trotskyste de France,Ligue communiste internationale (quatrième internationaliste)
+Q170972,Q159454,1969,,unknown,wikidata | wikipedia,Parti socialiste (France),Internationale socialiste
+Q170972,Q220945,1992,,unknown,wikidata | wikipedia,Parti socialiste (France),Parti socialiste européen
+Q170972,Q7248622,2013,,unknown,wikidata | wikipedia,Parti socialiste (France),Alliance progressiste
+Q192821,Q183533,1947,1956,unknown,wikidata,Parti communiste français,Kominform
+Q192821,Q202649,2004,,unknown,wikidata | wikipedia,Parti communiste français,Parti de la gauche européenne
+Q192821,Q2440449,1998,,unknown,wikipedia,Parti communiste français,Rencontre internationale des partis communistes et ouvriers
+Q2054444,Q753711,1995,,unknown,wikipedia,Parti communiste réunionnais,Groupe de la Gauche au Parlement européen
+Q22981822,Q2455815,2011,,unknown,wikipedia,Révolution permanente (parti politique),Courant Révolution Permanente – Quatrième Internationale
+Q24939885,Q139565740,2016,,unknown,wikidata,"Parti des travailleurs (France, 2015)",Comité ouvrier international contre la guerre et l’exploitation pour l’Internationale ouvrière
+Q2575147,Q2440449,1998,,unknown,wikipedia,Parti communiste guadeloupéen,Rencontre internationale des partis communistes et ouvriers
+Q2638999,Q1984016,2015,,unknown,wikipedia,Parti ouvrier indépendant,Quatrième Internationale (lambertiste)
+Q2638999,Q3055019,2015,,unknown,wikipedia,Parti ouvrier indépendant,Entente internationale des travailleurs et des peuples
+Q27978402,Q130219314,2024,,unknown,wikidata | wikipedia,La France insoumise,Alliance de la gauche européenne pour les peuples et la planète
+Q2984984,Q1073391,1965,,unknown,wikipedia,Combat ouvrier,Union communiste internationaliste
+Q3082926,Q639383,1984,2008,unknown,wikidata | wikipedia,Frankiz Breizh,Alliance libre européenne
+Q3091443,Q133795,1968,,unknown,wikipedia,Fédération anarchiste (francophone),Internationale des fédérations anarchistes
+Q3091492,Q125963179,1954,1957,unknown,wikipedia,Fédération communiste libertaire (1953-1957),Internationale communiste libertaire
+Q3091561,Q159454,1951,,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Internationale socialiste
+Q3091561,Q220945,1992,,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Parti socialiste européen
+Q3091561,Q7248622,2013,,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Alliance progressiste
+Q3099352,Q158073,1992,,unknown,wikidata,Gauche révolutionnaire,Comité pour une Internationale ouvrière
+Q3117914,Q2634710,1972,,unknown,wikipedia,Groupe révolution socialiste,Quatrième Internationale - Secrétariat unifié
+Q3230452,Q2838098,1998,2015,unknown,wikipedia,Les Alternatifs,Alliance européenne des mouvements critiques envers l'Union européenne
+Q3355979,Q649752,2001,,unknown,wikipedia,Organisation communiste libertaire,Solidarité internationale libertaire
+Q3356082,Q133795,1968,1976,unknown,wikipedia,Organisation révolutionnaire anarchiste,Internationale des fédérations anarchistes
+Q3366206,Q622227,1994,,unknown,wikipedia,Parti communiste des ouvriers de France,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)
+Q3366212,Q163931,1919,1921,unknown,wikipedia,"Parti communiste (France, 1919)",Internationale communiste
+Q3366231,Q2915940,1990,,unknown,wikipedia,Parti communiste pour l'indépendance et le socialisme,Forum de São Paulo
+Q3366726,Q159454,1981,,unknown,wikipedia,Les Progressistes,Internationale socialiste
+Q3366726,Q220945,1992,,unknown,wikidata | wikipedia,Les Progressistes,Parti socialiste européen
+Q3366769,Q1423578,1938,1940,unknown,wikidata | wikipedia,Parti socialiste ouvrier et paysan,Centre marxiste révolutionnaire international
+Q3456455,Q202649,2009,,unknown,wikidata,République et socialisme,Parti de la gauche européenne
+Q3550479,Q703593,1935,1940,unknown,wikipedia,Union socialiste républicaine,Internationale ouvrière socialiste
+Q538664,Q206682,1938,1944,unknown,wikipedia,Parti ouvrier internationaliste,Quatrième Internationale
+Q58329311,Q202649,2018,,unknown,wikidata | wikipedia,Gauche républicaine et socialiste,Parti de la gauche européenne
+Q58366009,Q220945,2018,,unknown,wikidata | wikipedia,Place publique (parti politique),Parti socialiste européen
+Q613786,Q950179,2010,,unknown,wikidata,Les Écologistes – Europe Écologie Les Verts,Parti vert européen
+Q628594,Q3055019,1991,2008,unknown,wikipedia,"Parti des travailleurs (France, 1991)",Entente internationale des travailleurs et des peuples
+Q63483685,Q123785828,2023,,unknown,wikidata,Parti communiste révolutionnaire de France,Action Communiste Européenne
+Q7205536,Q159454,1972,,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Internationale socialiste
+Q7205536,Q220945,1992,,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Parti socialiste européen
+Q7205536,Q7248622,2013,,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Alliance progressiste
+Q862627,Q1377231,2000,2009,unknown,wikidata | wikipedia,Ligue communiste révolutionnaire,Gauche anticapitaliste européenne
+Q862627,Q2634710,1974,2009,unknown,wikipedia,Ligue communiste révolutionnaire,Quatrième Internationale - Secrétariat unifié
+Q870667,Q1073391,1939,,unknown,wikipedia,Lutte ouvrière,Union communiste internationaliste
+Q922707,Q753711,2008,,unknown,wikidata | wikipedia,Parti de gauche (France),Groupe de la Gauche au Parlement européen
+fr:Parti communiste révolutionnaire (2024),Q1631185,2024,,unknown,correction,Parti communiste révolutionnaire,Internationale communiste révolutionnaire
