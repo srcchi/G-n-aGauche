@@ -40,10 +40,12 @@ Courants : motifs cherchés dans le nom, les courants saisis à la main, les id�
 Wikipédia) et les catégories Wikipédia. Plusieurs courants possibles ; la colonne
 courants_sources indique d'où vient chacun.
 
-Famille : celle du premier courant trouvé, en lisant d'abord le courant saisi à la main, puis le
-nom, puis les autres sources. Ordre de priorité des courants : trotskyste, maoïste,
-anarcho-syndicaliste, communiste libertaire, anarchiste, luxemburgiste / conseilliste,
-communiste, écosocialiste, écologiste, radical, social-démocrate.
+Famille : donnée par un courant saisi à la main s'il y en a un ; sinon par un courant reconnu
+dans le nom (sauf « communiste » ou « socialiste » génériques quand un courant plus précis est
+trouvé ailleurs : la LCR et l'OCI sont trotskystes malgré leur nom) ; sinon par le premier courant trouvé dans l'ordre de priorité suivant, quelle que
+soit sa source : trotskyste, maoïste, anarcho-syndicaliste, communiste libertaire, anarchiste,
+luxemburgiste / conseilliste, communiste, écosocialiste, écologiste, radical, social-démocrate.
+L'écosocialisme (PG, LFI...) est rangé dans la famille socialiste, pas dans l'écologie politique.
 Familles : socialistes, radicaux, écologistes, communistes, trotskystes, maoïstes, anarchistes et
 libertaires, outre-mer. Une organisation d'outre-mer (nom ou catégories : Guadeloupe, Martinique,
 Guyane, La Réunion, Mayotte, Nouvelle-Calédonie, Polynésie...) va dans la voie outre-mer et garde

@@ -75,7 +75,7 @@ COURANTS = [
     ("anarchiste", r"anarch|libertaire", "anarchistes et libertaires"),
     ("luxemburgiste / conseilliste", r"luxemburg|conseillis", "communistes"),
     ("communiste", r"communis|léninis|stalinis|bolch", "communistes"),
-    ("écosocialiste", r"écosocialis", "écologistes"),
+    ("écosocialiste", r"écosocialis", "socialistes"),   # PG, LFI : gauche socialiste, pas écologie politique
     ("écologiste", r"écolog|\bverts?\b", "écologistes"),
     ("radical", r"\bradica", "radicaux"),
     ("social-démocrate", r"social-d[ée]mocr|socialis", "socialistes"),
@@ -227,6 +227,7 @@ def main():
     for q, d in noeuds.items():
         w = wd.get(q, {})
         d["pays"], d["pos_wd"], d["types"] = w.get("pays", []), w.get("pos", []), w.get("types", [])
+        d["journaux"] = w.get("journaux", [])
         if w.get("debut"):
             d["dates_f"].insert(0, (w["debut"], "wikidata"))
         if w.get("fin"):
@@ -251,6 +252,8 @@ def main():
         if annee(r.get("dissolution")):
             d["dates_d"].insert(0, (annee(r["dissolution"]), "correction"))
         d["courants_manuels"] = [c.strip() for c in r.get("courants", "").split("|") if c.strip()]
+        if r.get("journaux"):
+            d["journaux"] = [j.strip() for j in r["journaux"].split("|") if j.strip()]
 
     # Dates retenues : la première source (correction > Wikidata > Wikipédia), les autres notées
     for q, d in noeuds.items():
@@ -443,7 +446,12 @@ def main():
         if db[0] < da[0] or (db[0] == da[0] and da[1] and db[1] and db[1] < da[1]):
             anomalies.append(ligne_anomalie(a, b, t, cause_inversion(a, b)))
             continue
-        e["meme_annee"] = db[0] == da[0] and not (da[1] and db[1] and db[1] > da[1])
+        if db[0] == da[0] and not (da[1] and db[1] and db[1] > da[1]):
+            # Même année, mois inconnus : le lien aurait une longueur nulle sur l'axe du temps
+            anomalies.append(ligne_anomalie(a, b, t, "date erronée ou trop imprécise : source et "
+                                            "cible fondées la même année (mois inconnus), le sens "
+                                            "du temps ne peut pas être vérifié"))
+            continue
         valides.append((a, b, t, e))
 
     # ================= 4. Réduction transitive des filiations =================
@@ -520,16 +528,48 @@ def main():
         textes += [(x, s) for x, s in d["ideologies"]]
         textes += [(c, "wikipedia:catégorie") for c in d["categories"].split(" | ") if c]
         trouves = defaultdict(set)
-        famille = None
-        # Un courant saisi à la main décide de la famille ; sinon le nom, puis le reste.
-        ordre = sorted(textes, key=lambda x: {"correction": 0, "nom": 1}.get(x[1], 2))
-        for texte, src in ordre:
+        for texte, src in textes:
             for nom, rx, fam in COURANTS:
                 if re.search(rx, texte, re.I):
                     trouves[nom].add(src)
-                    if famille is None and fam:
-                        famille = fam
+        # Famille : un courant saisi à la main l'emporte ; sinon un courant présent dans le nom ;
+        # sinon le premier courant dans l'ordre de priorité de COURANTS (trotskyste d'abord...),
+        # quelle que soit sa source. L'ordre d'écriture des idéologies dans la source ne compte pas.
+        # Un courant générique du nom (« communiste », « socialiste ») ne l'emporte pas sur un
+        # courant précis trouvé ailleurs : la LCR ou l'OCI sont trotskystes malgré leur nom.
+        # Seule une spécialisation du même courant compte : « communiste » cède devant
+        # trotskyste, maoïste, libertaire... ; « socialiste » devant trotskyste ou écosocialiste.
+        precis_de = {"communiste": {"trotskyste", "maoïste", "luxemburgiste / conseilliste",
+                                    "communiste libertaire", "anarchiste", "anarcho-syndicaliste"},
+                     "social-démocrate": {"trotskyste", "écosocialiste"}}
+        famille, principal, restreint = None, "", None
+        # Ordre d'examen : priorité de COURANTS, sauf entre les deux courants génériques,
+        # départagés par le nombre de sources qui les citent (la SFIO est citée « socialiste »
+        # par plus de sources que « communiste »).
+        ordre_courants = list(COURANTS)
+        if len(trouves.get("social-démocrate", ())) > len(trouves.get("communiste", ())):
+            com = next(c for c in ordre_courants if c[0] == "communiste")
+            ordre_courants.remove(com)
+            ordre_courants.insert(ordre_courants.index(
+                next(c for c in ordre_courants if c[0] == "social-démocrate")) + 1, com)
+        for niveau in ({"correction"}, {"nom"}, None):
+            for nom, _, fam in ordre_courants:
+                if not fam or nom not in trouves:
+                    continue
+                if niveau is not None and not trouves[nom] & niveau:
+                    continue
+                if niveau is None and restreint is not None and nom not in restreint:
+                    continue
+                if niveau == {"nom"} and set(trouves) & precis_de.get(nom, set()):
+                    restreint = precis_de[nom]     # le nom est générique : on cherche plus précis
+                    continue
+                famille, principal = fam, nom
+                break
+            if famille:
+                break
         d["courants"] = trouves
+        d["courant_principal"] = principal     # donne la couleur, même en outre-mer
+        d["famille_courant"] = famille or "non classé"
         tout = " ".join([d["label"], d["categories"]] + d.get("cats_article", []))
         d["outre_mer"] = bool(RX_OUTREMER.search(tout))
         d["famille"] = "outre-mer" if d["outre_mer"] else (famille or "non classé")
@@ -592,8 +632,8 @@ def main():
     lignes_inter = []
     for q in sorted(inter_utiles, key=lambda q: (noeuds[q]["fondation"] or 9999, lab(q))):
         d = noeuds[q]
-        base = re.sub(r" \([^)]*\)$", "", d["label"])
-        lignes_inter.append([q, d["label"], SIGLES_INTER.get(base, ""), d["fondation"] or "",
+        # Nom exact seulement : « Quatrième Internationale (lambertiste) » n'est pas la QI
+        lignes_inter.append([q, d["label"], SIGLES_INTER.get(d["label"], ""), d["fondation"] or "",
                              d["dissolution"] or "", " | ".join(pred[q]), cle_couleur(d["label"])])
 
     lignes_affil = []
@@ -633,13 +673,14 @@ def main():
                             d["dissolution_mois"] or "", d["dissolution_source"],
                             d["fin_deduite"], d["fin_deduite_source"], "oui" if d["actif"] else "",
                             d["famille"], "oui" if d["outre_mer"] else "", ct, cs,
-                            douteux_de(q),
-                            " | ".join(sorted(d["sources"]))])
+                            d["courant_principal"], d["famille_courant"], douteux_de(q),
+                            " | ".join(sorted(d["sources"])), " | ".join(d.get("journaux", []))])
     ecrire("organisations.csv",
            ["id", "label", "nom_court", "fondation", "fondation_mois", "fondation_source",
             "fondation_autres_sources", "dissolution", "dissolution_mois", "dissolution_source",
             "fin_deduite", "fin_deduite_source", "actif", "famille", "outre_mer", "courants",
-            "courants_sources", "perimetre_douteux", "sources"], lignes_orgs)
+            "courants_sources", "courant_principal", "famille_courant", "perimetre_douteux",
+            "sources", "journaux"], lignes_orgs)
 
     lignes_liens = []
     for a, b, rel, e in sorted(liens, key=lambda x: (noeuds[x[1]]["fondation"], lab(x[0]))):
@@ -668,13 +709,18 @@ def main():
 
     lignes_exclu = []
     for q in sorted(noeuds, key=lambda q: (raison.get(q, ""), lab(q))):
+        d = noeuds[q]
+        dates = [d["fondation"] or "", d["fondation_mois"] or "", d["dissolution"] or "",
+                 d["dissolution_mois"] or "", d["fin_deduite"], "oui" if d["actif"] else ""]
         if classe[q] in ("exclu", "etranger"):
             lignes_exclu.append([q, lab(q), raison[q], "oui" if q in voie_externe else "",
-                                 " | ".join(noeuds[q]["pays"])])
+                                 " | ".join(d["pays"])] + dates)
         elif q in inter_sans_membre:
-            lignes_exclu.append([q, lab(q), "Internationale sans membre dans le graphe", "", ""])
-    ecrire("perimetre_exclu.csv", ["id", "label", "raison", "voie_externe", "pays_wikidata"],
-           lignes_exclu)
+            lignes_exclu.append([q, lab(q), "Internationale sans membre dans le graphe", "", ""]
+                                + dates)
+    ecrire("perimetre_exclu.csv", ["id", "label", "raison", "voie_externe", "pays_wikidata",
+                                   "fondation", "fondation_mois", "dissolution", "dissolution_mois",
+                                   "fin_deduite", "actif"], lignes_exclu)
     ecrire("liens_hors_perimetre.csv", ["source", "source_nom", "cible", "cible_nom", "relation",
                                         "ensembles"], hors)
     ecrire("internationales.csv", ["id", "name", "sigle", "start", "end", "predecessor_id",
@@ -735,7 +781,8 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Appartenances à une organisation française : coalition, fédération (appartenances_nationales.csv) | {len(nationales)} |
 
 Liens par relation : {", ".join(f"{r} ({n})" for r, n in rels.most_common())}.
-Dont {sum(1 for r in lignes_liens if r[5])} entre deux organisations fondées la même année (mois inconnu) : colonne meme_annee.
+Les liens entre deux organisations fondées la même année (mois inconnus) sont dans anomalies.csv :
+leur longueur sur l'axe du temps serait nulle (règle R1).
 
 Causes probables des anomalies : {", ".join(f"{c} ({n})" for c, n in causes.most_common())}.
 
@@ -796,10 +843,12 @@ Courants : motifs cherchés dans le nom, les courants saisis à la main, les id�
 Wikipédia) et les catégories Wikipédia. Plusieurs courants possibles ; la colonne
 courants_sources indique d'où vient chacun.
 
-Famille : celle du premier courant trouvé, en lisant d'abord le courant saisi à la main, puis le
-nom, puis les autres sources. Ordre de priorité des courants : trotskyste, maoïste,
-anarcho-syndicaliste, communiste libertaire, anarchiste, luxemburgiste / conseilliste,
-communiste, écosocialiste, écologiste, radical, social-démocrate.
+Famille : donnée par un courant saisi à la main s'il y en a un ; sinon par un courant reconnu
+dans le nom (sauf « communiste » ou « socialiste » génériques quand un courant plus précis est
+trouvé ailleurs : la LCR et l'OCI sont trotskystes malgré leur nom) ; sinon par le premier courant trouvé dans l'ordre de priorité suivant, quelle que
+soit sa source : trotskyste, maoïste, anarcho-syndicaliste, communiste libertaire, anarchiste,
+luxemburgiste / conseilliste, communiste, écosocialiste, écologiste, radical, social-démocrate.
+L'écosocialisme (PG, LFI...) est rangé dans la famille socialiste, pas dans l'écologie politique.
 Familles : socialistes, radicaux, écologistes, communistes, trotskystes, maoïstes, anarchistes et
 libertaires, outre-mer. Une organisation d'outre-mer (nom ou catégories : Guadeloupe, Martinique,
 Guyane, La Réunion, Mayotte, Nouvelle-Calédonie, Polynésie...) va dans la voie outre-mer et garde

@@ -5,14 +5,12 @@ Q928279,Q51297076,scission,1889,,,,wikipedia,wikipedia:scission_vers,Comité ré
 Q3091718,Q2705289,scission,1890,,,,wikipedia,wikipedia:scission_de | wikipedia:scission_vers,Fédération des travailleurs socialistes de France,Parti ouvrier socialiste révolutionnaire
 Q2705289,Q2838043,scission,1896,,,,wikipedia,wikipedia:scission_de | wikipedia:scission_vers,Parti ouvrier socialiste révolutionnaire,Alliance communiste révolutionnaire
 Q928279,Q3366778,renommage,1898,,,,wikidata | wikipedia,remplace | wikipedia:succ,Comité révolutionnaire central,Parti socialiste révolutionnaire (France)
-Q3141290,Q1542710,filiation,1901,,oui,,wikidata,remplace,"Parti républicain, radical et radical-socialiste",Parti radical (France)
 Q2838043,Q3176156,fusion,1902,,,,wikipedia,wikipedia:pred | wikipedia:succ,Alliance communiste révolutionnaire,Parti socialiste de France (guesdiste)
 Q2451197,Q3176156,fusion,1902,,,,wikipedia,wikipedia:pred | wikipedia:succ,Parti ouvrier français,Parti socialiste de France (guesdiste)
 Q2705289,Q2379359,scission,1902,,,,wikipedia,wikipedia:scission_de | wikipedia:scission_vers,Parti ouvrier socialiste révolutionnaire,Parti socialiste français (1902)
 Q3366778,Q3176156,fusion,1902,,,,wikipedia,wikipedia:pred | wikipedia:succ,Parti socialiste révolutionnaire (France),Parti socialiste de France (guesdiste)
 Q3176156,Q1332068,renommage,1905,,,,wikipedia,wikipedia:pred | wikipedia:succ,Parti socialiste de France (guesdiste),Section française de l'Internationale ouvrière
 Q2379359,Q1332068,scission,1905,,,oui,wikipedia,wikipedia:pred | wikipedia:scission_de | wikipedia:scission_vers | wikipedia:succ,Parti socialiste français (1902),Section française de l'Internationale ouvrière
-Q18213920,Q18202477,renommage,1910,,oui,,wikipedia,wikipedia:succ,Alliance communiste-anarchiste,Fédération communiste anarchiste
 Q2379359,Q2095948,fusion,1911,,,,wikipedia,wikipedia:pred | wikipedia:succ,Parti socialiste français (1902),Parti républicain-socialiste
 Q130218773,Q2095948,fusion,1911,,,,wikidata,remplace,Parti socialiste indépendant,Parti républicain-socialiste
 Q1332068,Q135902867,scission,1914,,,,wikipedia,wikipedia:scission_vers,Section française de l'Internationale ouvrière,Parti ouvrier (1914)
@@ -78,7 +76,6 @@ Q192821,Q580377,scission,1991,,,,wikipedia,wikipedia:scission_de,Parti communist
 Q2575147,Q3366640,scission,1991,,,,wikidata | wikipedia,scission de | wikipedia:scission_de | wikipedia:scission_vers,Parti communiste guadeloupéen,Parti progressiste démocratique guadeloupéen
 Q3550095,Q628594,fusion,1991,11,,,wikipedia,wikipedia:pred,Union des anarcho-syndicalistes,"Parti des travailleurs (France, 1991)"
 Q3550207,Q16010672,renommage,1991,,,,wikipedia,wikipedia:pred | wikipedia:succ,Union des travailleurs communistes libertaires,Alternative libertaire (France)
-Q1321802,Q1951112,scission,1993,5,oui,oui,wikipedia,wikipedia:pred | wikipedia:scission_de | wikipedia:scission_vers | wikipedia:succ,Mouvement républicain et citoyen,Mouvement des citoyens (France)
 Q170972,Q1951112,scission,1993,5,,,wikipedia,wikipedia:scission_de | wikipedia:scission_vers,Parti socialiste (France),Mouvement des citoyens (France)
 Q870667,Q3562502,scission,1997,,,,wikipedia,wikipedia:scission_de | wikipedia:scission_vers,Lutte ouvrière,Voix des travailleurs
 Q2840414,Q3230452,fusion,1998,3,,,wikipedia,wikipedia:pred | wikipedia:succ,Alternative rouge et verte,Les Alternatifs
@@ -112,8 +109,8 @@ Q584558,Q18744486,scission,2014,6,,,wikipedia,wikipedia:scission_de,La Gauche mo
 Q170972,Q18571605,scission,2014,11,,,wikipedia,wikipedia:scission_de,Parti socialiste (France),La Force du 13
 Q116456156,Q2989703,renommage,2015,,,,wikidata,remplace,Communistes,Parti révolutionnaire Communistes
 Q18744486,Q21055512,renommage,2015,,,,wikipedia,wikipedia:affiliation | wikipedia:succ,Front démocrate,Union des démocrates et des écologistes
+Q628594,Q24939885,filiation,2015,11,,,wikipedia,wikipedia:succ,"Parti des travailleurs (France, 1991)","Parti des travailleurs (France, 2015)"
 Q628594,Q2638999,filiation,2015,,,,wikipedia,wikipedia:pred | wikipedia:succ,"Parti des travailleurs (France, 1991)",Parti ouvrier indépendant
-Q2638999,Q24939885,scission,2015,11,oui,,wikipedia,wikipedia:scission_de | wikipedia:scission_vers,Parti ouvrier indépendant,"Parti des travailleurs (France, 2015)"
 Q104187739,Q104186796,fusion,2016,,,,wikidata,remplacé par,Bloc rouge (Unification des maoïstes),Parti communiste maoïste
 Q29348702,Q30741057,renommage,2016,6,,,wikipedia,wikipedia:pred,Front de gauche (France),Rézistan's Égalité 974
 Q104187610,Q104186796,fusion,2016,,,,wikidata,remplace,Parti communiste maoïste de France,Parti communiste maoïste

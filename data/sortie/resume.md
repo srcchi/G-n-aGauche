@@ -14,7 +14,7 @@
 
 Raisons d'exclusion : hors de France (152), ni positionnement de gauche ni courant reconnu (117), pas une organisation politique (journal, librairie, think tank...) (47), Internationale sans membre dans le graphe (27), positionnement : extrême droite (19), positionnement : centrisme (11), positionnement : droite (6), positionnement : centre droit (5), personne, pas organisation (4), positionnement : centrisme centre droit (3), positionnement : centre droit centrisme (2), positionnement : centre gauche centre droit centrisme (2), positionnement : droite centre droit (2), positionnement : centre gauche Centre gauche | Centrisme (1), positionnement : centre gauche centrisme Centrisme | centre gauche (1), positionnement : centrisme Centrisme politique en France | centre gauche | centre droit (1), positionnement : droite extrême droite (1), positionnement : droite extrême droite extrême droite politique (1).
 
-Familles : socialistes (67), radicaux (3), écologistes (22), communistes (40), trotskystes (13), maoïstes (15), anarchistes et libertaires (25), outre-mer (24), non classé (30).
+Familles : socialistes (68), radicaux (3), écologistes (14), communistes (25), trotskystes (30), maoïstes (17), anarchistes et libertaires (28), outre-mer (24), non classé (30).
 
 Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à trancher à la main :
 - aucun courant reconnu (29) : Bataillon international de libération, Cartel des gauches, Club des jacobins, Comité de suivi contre les violences sexistes et sexuelles de La France insoumise, Confédération internationale du travail, En commun, Front de gauche (France), Front de libération de la Bretagne, Front de libération nationale corse, Front populaire (France), Front universitaire antifasciste, Gauche révolutionnaire (1935-1938), Groupe régionaliste breton, Jeune Garde antifasciste, La Gauche moderne, Le Discord insoumis, Ligue de la Jeune République, Maintenant le peuple, Mouvement du 11 mai, National Union of North African Muslims, Nouveau Front populaire, Nouvelle Donne (parti politique), Parti autonomiste breton, Parti occitan, Parti ouvrier et paysan, Péyi-A, Rassemblement des gauches républicaines, Union des clubs pour le renouveau de la gauche, Éducation Démocratie Dignité
@@ -32,17 +32,18 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Paires réciproques fusionnées (aretes_reciproques.csv) | 10 |
 | Après fusion des réciproques | 572, dont 276 de lignée |
 | Hors périmètre : une extrémité exclue ou étrangère (liens_hors_perimetre.csv) | 281 |
-| Anomalies R1 et lignée parti / Internationale (anomalies.csv) | 11 |
+| Anomalies R1 et lignée parti / Internationale (anomalies.csv) | 15 |
 | Extrémité sans date, non dessinables (liens_date_manquante.csv) | 10 |
-| Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 3 |
-| **Liens du graphe (liens.csv)** | **138** |
+| Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 2 |
+| **Liens du graphe (liens.csv)** | **135** |
 | Affiliations à une Internationale (affiliations.csv) | 62 |
 | Appartenances à une organisation française : coalition, fédération (appartenances_nationales.csv) | 66 |
 
-Liens par relation : scission (69), fusion (36), renommage (30), filiation (3).
-Dont 4 entre deux organisations fondées la même année (mois inconnu) : colonne meme_annee.
+Liens par relation : scission (67), fusion (36), renommage (29), filiation (3).
+Les liens entre deux organisations fondées la même année (mois inconnus) sont dans anomalies.csv :
+leur longueur sur l'axe du temps serait nulle (règle R1).
 
-Causes probables des anomalies : type de relation erroné (5), lien entre deux Internationales de type scission, non représenté (5), date erronée (1).
+Causes probables des anomalies : type de relation erroné (5), lien entre deux Internationales de type scission, non représenté (5), date erronée ou trop imprécise (4), date erronée (1).
 
 Dates : 59 fondations et 26 dissolutions avec un mois (lu dans l'infobox, seulement s'il accompagne l'année retenue).
 13 organisations ont une autre année de fondation dans une autre source (colonne fondation_autres_sources).
