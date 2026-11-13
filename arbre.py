@@ -1,73 +1,95 @@
 """
-Arbre généalogique des partis de gauche et d'extrême gauche en France.
+Arbre généalogique des organisations de gauche et d'extrême gauche en France : collecte Wikidata.
 
-1. Interroge Wikidata (SPARQL) : partis (nœuds) et liens (arêtes)
-2. Normalise tous les liens dans le sens ancêtre -> descendant
-3. Construit un graphe NetworkX
-4. Exporte en GEXF (Gephi), DOT (Graphviz) et CSV
+1. Organisations françaises de gauche (point de départ) : partis, mais aussi organisations
+   politiques, organisations de jeunesse, tendances..., dont le pays (P17) ou le siège (P159)
+   est en France, avec une idéologie, un positionnement ou un nom de gauche.
+2. Leurs liens : précédé par, suivi par, remplace, remplacé par, scission de, membre de,
+   dans les deux sens (ex. une scission d'un parti français est trouvée aussi).
+3. Remontée des ancêtres, dans n'importe quel pays, sur PROFONDEUR générations : une
+   organisation française issue d'une organisation étrangère (ou d'une Internationale issue
+   d'une autre) garde sa lignée.
+4. Normalise tous les liens dans le sens ancêtre -> descendant et écrit data/noeuds.csv et
+   data/aretes.csv. Le tri gauche / France / Internationales est fait ensuite par nettoyage.py.
 
-Dépendances : pip install requests networkx
-Usage : python arbre_gauche.py
+Dépendances : pip install requests   (networkx facultatif : export Gephi data/arbre_gauche.gexf)
+Usage : python arbre.py
 """
 
-import os
 import csv
+import os
 import re
+import time
+
 import requests
-import networkx as nx
 
 ENDPOINT = "https://query.wikidata.org/sparql"
 HEADERS = {
-    "User-Agent": "arbre-gauche-fr/0.1 (https://github.com/srcchi/G-n-aGauche) python-requests",
+    "User-Agent": "arbre-gauche-fr/0.2 (https://github.com/srcchi/G-n-aGauche) python-requests",
     "Accept": "application/sparql-results+json",
 }
+DATA = "data"
+PROFONDEUR = 3      # générations d'ancêtres remontées au-delà des organisations de départ
+LOT = 150           # identifiants par requête
 
-QUERY_NODES = """
-SELECT ?parti ?partiLabel
-       (MIN(?debut) AS ?fondation)
-       (MIN(?fin) AS ?dissolution)
+# Types de départ (et leurs sous-classes) : parti, organisation politique, organisation de jeunesse
+TYPES = ["Q7278", "Q7210356", "Q1572070"]
+RX_GAUCHE = re.compile(
+    r"trotsk|marxis|léninis|stalinis|maoïs|anarch|communis|socialis|syndicalis|révolution|"
+    r"luxemburg|conseillis|libertaire|anticapital|autogestion|antifascis|écosocialis|"
+    r"altermondialis|gauche|left|ouvri|prolétar|internationalis", re.I)
+
+QUERY_DEPART = """
+SELECT ?org ?orgLabel
        (GROUP_CONCAT(DISTINCT ?ideoLabel; separator=" | ") AS ?ideologies)
+       (GROUP_CONCAT(DISTINCT ?posLabel; separator=" | ") AS ?positions)
 WHERE {
-  ?parti wdt:P31 wd:Q7278 ;
-         wdt:P17 wd:Q142 ;
-         wdt:P1142 ?ideo .
-  ?ideo rdfs:label ?ideoLabel .
-  FILTER(LANG(?ideoLabel) = "fr")
-  FILTER(REGEX(?ideoLabel, "trotsk|marxis|léninis|stalinis|maoïs|anarch|communis|socialis|syndicalis|révolution|luxemburg|conseil", "i"))
-  OPTIONAL { ?parti wdt:P571 ?debut. }
-  OPTIONAL { ?parti wdt:P576 ?fin. }
+  { ?org wdt:P17 wd:Q142 . } UNION { ?org wdt:P159/wdt:P17 wd:Q142 . }
+  ?org wdt:P31/wdt:P279* wd:%s .
+  OPTIONAL { ?org wdt:P1142 ?ideo . ?ideo rdfs:label ?ideoLabel . FILTER(LANG(?ideoLabel) = "fr") }
+  OPTIONAL { ?org wdt:P1387 ?pos . ?pos rdfs:label ?posLabel . FILTER(LANG(?posLabel) = "fr") }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
 }
-GROUP BY ?parti ?partiLabel
-ORDER BY ?fondation
+GROUP BY ?org ?orgLabel
 """
 
-QUERY_EDGES = """
-SELECT ?source ?sourceLabel ?relation ?cible ?cibleLabel WHERE {
-  ?source wdt:P31 wd:Q7278 ;
-          wdt:P17 wd:Q142 .
-  {
-    ?source wdt:P155 ?cible . BIND("précédé par" AS ?relation)
-  } UNION {
-    ?source wdt:P156 ?cible . BIND("suivi par" AS ?relation)
-  } UNION {
-    ?source wdt:P1365 ?cible . BIND("remplace" AS ?relation)
-  } UNION {
-    ?source wdt:P1366 ?cible . BIND("remplacé par" AS ?relation)
-  } UNION {
-    ?source wdt:P807 ?cible . BIND("scission de" AS ?relation)
-  } UNION {
-    ?source wdt:P463 ?cible . BIND("membre de" AS ?relation)
-  }
+# Liens partant des organisations données (?s dans VALUES)
+QUERY_LIENS_SORTANTS = """
+SELECT ?s ?rel ?c WHERE {
+  VALUES ?s { %s }
+  { ?s wdt:P155 ?c . BIND("précédé par" AS ?rel) } UNION
+  { ?s wdt:P156 ?c . BIND("suivi par" AS ?rel) } UNION
+  { ?s wdt:P1365 ?c . BIND("remplace" AS ?rel) } UNION
+  { ?s wdt:P1366 ?c . BIND("remplacé par" AS ?rel) } UNION
+  { ?s wdt:P807 ?c . BIND("scission de" AS ?rel) } UNION
+  { ?s wdt:P463 ?c . BIND("membre de" AS ?rel) }
+}
+"""
+# Liens arrivant sur les organisations données (?c dans VALUES) : leurs descendants
+QUERY_LIENS_ENTRANTS = """
+SELECT ?s ?rel ?c WHERE {
+  VALUES ?c { %s }
+  { ?s wdt:P155 ?c . BIND("précédé par" AS ?rel) } UNION
+  { ?s wdt:P1365 ?c . BIND("remplace" AS ?rel) } UNION
+  { ?s wdt:P807 ?c . BIND("scission de" AS ?rel) }
+}
+"""
+# Détails de chaque organisation
+QUERY_DETAILS = """
+SELECT ?org ?orgLabel (MIN(?debut) AS ?fondation) (MIN(?fin) AS ?dissolution)
+       (GROUP_CONCAT(DISTINCT ?ideoLabel; separator=" | ") AS ?ideologies)
+WHERE {
+  VALUES ?org { %s }
+  OPTIONAL { ?org wdt:P571 ?debut. }
+  OPTIONAL { ?org wdt:P576 ?fin. }
+  OPTIONAL { ?org wdt:P1142 ?ideo . ?ideo rdfs:label ?ideoLabel . FILTER(LANG(?ideoLabel) = "fr") }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
 }
-ORDER BY ?sourceLabel
-LIMIT 5000
+GROUP BY ?org ?orgLabel
 """
 
 # Pour chaque relation : (sens, type d'arête)
-# "inverse" : la cible est l'ancêtre, donc cible -> source
-# "direct"  : la source est l'ancêtre, donc source -> cible
+# "inverse" : la cible est l'ancêtre ; "direct" : la source est l'ancêtre
 RELATIONS = {
     "précédé par": ("inverse", "filiation"),
     "suivi par": ("direct", "filiation"),
@@ -77,8 +99,6 @@ RELATIONS = {
     "membre de": ("direct", "appartenance"),
 }
 
-# Courants : mots-clés cherchés dans les libellés d'idéologie.
-# Un parti peut en avoir plusieurs (attribut multiple, comme conseillé).
 COURANTS = {
     "trotskyste": r"trotsk",
     "stalinien": r"stalinis",
@@ -91,24 +111,20 @@ COURANTS = {
     "syndicaliste révolutionnaire": r"syndicalis",
 }
 
-COULEURS = {
-    "trotskyste": "#c0392b",
-    "stalinien": "#7f1d1d",
-    "léniniste": "#e67e22",
-    "maoïste": "#f1c40f",
-    "anarchiste": "#111111",
-    "luxemburgiste": "#8e44ad",
-    "social-démocrate": "#e84393",
-    "communiste": "#d35400",
-    "syndicaliste révolutionnaire": "#27ae60",
-}
-
 
 def sparql(query):
-    r = requests.get(ENDPOINT, params={"query": query, "format": "json"},
-                     headers=HEADERS, timeout=90)
-    r.raise_for_status()
-    return r.json()["results"]["bindings"]
+    for essai in range(5):
+        r = requests.post(ENDPOINT, data={"query": query, "format": "json"},
+                          headers=HEADERS, timeout=180)
+        if r.status_code in (429, 500, 502, 503, 504):
+            attente = min(int(r.headers.get("Retry-After", 10 * (essai + 1)) or 10), 60)
+            print(f"  {r.status_code}, pause de {attente}s...")
+            time.sleep(attente)
+            continue
+        r.raise_for_status()
+        time.sleep(1)    # politesse envers le service
+        return r.json()["results"]["bindings"]
+    raise RuntimeError("Wikidata ne répond pas, réessaie plus tard.")
 
 
 def qid(uri):
@@ -125,105 +141,112 @@ def annee(date_str):
 
 
 def courants_de(ideologies):
-    trouves = [c for c, rx in COURANTS.items()
-               if re.search(rx, ideologies, re.I)]
-    return trouves
+    return [c for c, rx in COURANTS.items() if re.search(rx, ideologies, re.I)]
 
 
-def construire_graphe():
-    g = nx.DiGraph()
+def par_lots(ids):
+    ids = sorted(ids)
+    for i in range(0, len(ids), LOT):
+        yield " ".join(f"wd:{q}" for q in ids[i:i + LOT])
 
-    print("Récupération des partis...")
-    for row in sparql(QUERY_NODES):
-        ideo = val(row, "ideologies")
-        courants = courants_de(ideo)
-        g.add_node(
-            qid(val(row, "parti")),
-            label=val(row, "partiLabel"),
-            fondation=annee(val(row, "fondation")) or 0,
-            dissolution=annee(val(row, "dissolution")) or 0,
-            ideologies=ideo,
-            courants=" | ".join(courants),
-            principal=courants[0] if courants else "",
-        )
-    nb_noeuds_ideo = g.number_of_nodes()
 
-    print("Récupération des liens...")
-    for row in sparql(QUERY_EDGES):
-        rel = val(row, "relation")
-        if rel not in RELATIONS:
-            continue
+def collecter():
+    # ---------- 1. Organisations de départ ----------
+    depart = set()
+    for t in TYPES:
+        print(f"Organisations françaises de type {t}...")
+        for row in sparql(QUERY_DEPART % t):
+            texte = " ".join((val(row, "orgLabel"), val(row, "ideologies"), val(row, "positions")))
+            if RX_GAUCHE.search(texte) and not re.search(r"droite|right", val(row, "positions"), re.I):
+                depart.add(qid(val(row, "org")))
+    print(f"{len(depart)} organisations françaises de gauche au départ.")
+
+    # ---------- 2. Liens des organisations de départ, dans les deux sens ----------
+    liens = set()
+
+    def ajouter(rows):
+        nouveaux = set()
+        for row in rows:
+            rel = val(row, "rel")
+            s, c = qid(val(row, "s")), qid(val(row, "c"))
+            if not re.fullmatch(r"Q\d+", s) or not re.fullmatch(r"Q\d+", c) or s == c:
+                continue
+            liens.add((s, rel, c))
+            nouveaux |= {s, c}
+        return nouveaux
+
+    print("Liens des organisations de départ...")
+    connus = set(depart)
+    for lot in par_lots(depart):
+        connus |= ajouter(sparql(QUERY_LIENS_SORTANTS % lot))
+        connus |= ajouter(sparql(QUERY_LIENS_ENTRANTS % lot))
+
+    # ---------- 3. Remontée des ancêtres, tous pays ----------
+    a_remonter = connus - depart
+    for g in range(1, PROFONDEUR + 1):
+        if not a_remonter:
+            break
+        print(f"Ancêtres, génération {g} : {len(a_remonter)} organisations à examiner...")
+        trouves = set()
+        for lot in par_lots(a_remonter):
+            rows = [r for r in sparql(QUERY_LIENS_SORTANTS % lot)
+                    if val(r, "rel") in ("précédé par", "remplace", "scission de", "membre de")]
+            trouves |= ajouter(rows)
+        a_remonter = trouves - connus
+        connus |= trouves
+    print(f"{len(connus)} organisations au total, {len(liens)} liens bruts.")
+
+    # ---------- 4. Détails ----------
+    print("Détails (libellés, dates, idéologies)...")
+    noeuds = {}
+    for lot in par_lots(connus):
+        for row in sparql(QUERY_DETAILS % lot):
+            q = qid(val(row, "org"))
+            ideo = val(row, "ideologies")
+            noeuds[q] = dict(label=val(row, "orgLabel"), fondation=annee(val(row, "fondation")),
+                             dissolution=annee(val(row, "dissolution")), ideologies=ideo,
+                             courants=" | ".join(courants_de(ideo)))
+
+    # ---------- 5. Arêtes ancêtre -> descendant ----------
+    aretes = {}
+    for s, rel, c in liens:
         sens, type_arete = RELATIONS[rel]
-        s, c = qid(val(row, "source")), qid(val(row, "cible"))
         ancetre, descendant = (c, s) if sens == "inverse" else (s, c)
-
-        # Nœuds absents de la requête 1 (pas d'idéologie renseignée)
-        for n, lab in ((s, val(row, "sourceLabel")), (c, val(row, "cibleLabel"))):
-            if n not in g:
-                g.add_node(n, label=lab, fondation=0, dissolution=0,
-                           ideologies="", courants="", principal="")
-
-        # DiGraph dédoublonne déjà (ancêtre, descendant) ; on garde le type
-        # le plus informatif si une arête existe déjà.
-        if g.has_edge(ancetre, descendant):
-            if g[ancetre][descendant]["type"] == "filiation" and type_arete == "scission":
-                g[ancetre][descendant]["type"] = "scission"
-        else:
-            g.add_edge(ancetre, descendant, type=type_arete, relation=rel)
-
-    print(f"{nb_noeuds_ideo} partis avec idéologie, "
-          f"{g.number_of_nodes() - nb_noeuds_ideo} ajoutés via les liens, "
-          f"{g.number_of_edges()} arêtes.")
-    return g
+        cle = (ancetre, descendant)
+        if cle not in aretes or (aretes[cle][0] == "filiation" and type_arete == "scission"):
+            aretes[cle] = (type_arete, rel)
+    return noeuds, aretes, depart
 
 
-def exporter(g):
-    os.makedirs("data", exist_ok=True)
-    os.chdir("data")
-    nx.write_gexf(g, "arbre_gauche.gexf")
-
-    # Noms lisibles pour les nœuds sans libellé (Wikidata renvoie parfois le Q-id)
-    nx.write_gexf(g, "arbre_gauche.gexf")
-
-    with open("noeuds.csv", "w", newline="", encoding="utf-8") as f:
+def exporter(noeuds, aretes):
+    os.makedirs(DATA, exist_ok=True)
+    with open(os.path.join(DATA, "noeuds.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["id", "label", "fondation", "dissolution",
-                    "courants", "ideologies_wikidata"])
-        for n, d in g.nodes(data=True):
-            w.writerow([n, d["label"], d["fondation"] or "",
-                        d["dissolution"] or "", d["courants"], d["ideologies"]])
-
-    with open("aretes.csv", "w", newline="", encoding="utf-8") as f:
+        w.writerow(["id", "label", "fondation", "dissolution", "courants", "ideologies_wikidata"])
+        for q, d in sorted(noeuds.items(), key=lambda x: (x[1]["fondation"] or 9999, x[0])):
+            w.writerow([q, d["label"], d["fondation"] or "", d["dissolution"] or "",
+                        d["courants"], d["ideologies"]])
+    with open(os.path.join(DATA, "aretes.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["ancetre", "descendant", "type", "relation_wikidata"])
-        for a, b, d in g.edges(data=True):
-            w.writerow([a, b, d["type"], d["relation"]])
-
-    # DOT : on n'affiche que les composantes connexes de plus d'un nœud
-    connexes = [c for c in nx.weakly_connected_components(g) if len(c) > 1]
-    gardes = set().union(*connexes) if connexes else set()
-    with open("arbre_gauche.dot", "w", encoding="utf-8") as f:
-        f.write('digraph G {\n  rankdir=LR;\n  node [shape=box, style="filled,rounded", '
-                'fontname="Helvetica", fontcolor="white"];\n')
-        for n in gardes:
-            d = g.nodes[n]
-            couleur = COULEURS.get(d["principal"], "#7f8c8d")
-            lab = d["label"].replace('"', "'")
-            if d["fondation"]:
-                lab += f"\\n({d['fondation']}"
-                lab += f"-{d['dissolution']})" if d["dissolution"] else "-)"
-            f.write(f'  "{n}" [label="{lab}", fillcolor="{couleur}"];\n')
-        for a, b, d in g.edges(data=True):
-            if a in gardes and b in gardes:
-                style = {"scission": 'color="red", style="dashed"',
-                         "appartenance": 'color="gray", style="dotted"'}.get(d["type"], "")
-                f.write(f'  "{a}" -> "{b}" [{style}];\n')
-        f.write("}\n")
-
-    print("Fichiers écrits : arbre_gauche.gexf, arbre_gauche.dot, noeuds.csv, aretes.csv")
-    print("Rendu : dot -Tsvg arbre_gauche.dot -o arbre_gauche.svg")
+        for (a, b), (t, rel) in sorted(aretes.items()):
+            w.writerow([a, b, t, rel])
+    try:
+        import networkx as nx
+    except ImportError:
+        print("networkx absent : pas d'export Gephi (data/arbre_gauche.gexf), ce n'est pas nécessaire.")
+        return
+    g = nx.DiGraph()
+    for q, d in noeuds.items():
+        g.add_node(q, label=d["label"], fondation=d["fondation"] or 0,
+                   dissolution=d["dissolution"] or 0, courants=d["courants"])
+    for (a, b), (t, rel) in aretes.items():
+        g.add_edge(a, b, type=t, relation=rel)
+    nx.write_gexf(g, os.path.join(DATA, "arbre_gauche.gexf"))
 
 
 if __name__ == "__main__":
-    graphe = construire_graphe()
-    exporter(graphe)
+    noeuds, aretes, depart = collecter()
+    exporter(noeuds, aretes)
+    print(f"Fichiers écrits : data/noeuds.csv ({len(noeuds)} organisations), "
+          f"data/aretes.csv ({len(aretes)} liens).")

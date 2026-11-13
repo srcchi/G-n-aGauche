@@ -1,10 +1,14 @@
 membre,membre_nom,organisation,organisation_nom,sources
 Q104187610,Parti communiste maoïste de France,Q104187739,Bloc rouge (Unification des maoïstes),wikidata
+Q104245345,Jeunesse communiste marxiste-léniniste,Q104245000,Rassemblement organisé des communistes - marxistes-léninistes,wikidata
 Q1045425,Nouveau Parti anticapitaliste,Q126487286,Nouveau Front populaire,wikipedia
 Q109023546,En commun,Q135755468,La Convention,wikidata | wikipedia
 Q111225168,Gauche démocratique et sociale,Q111799189,Nouvelle Union populaire écologique et sociale,wikipedia
 Q111225168,Gauche démocratique et sociale,Q126487286,Nouveau Front populaire,wikipedia
 Q111225168,Gauche démocratique et sociale,Q862627,Ligue communiste révolutionnaire,wikipedia
+Q111606200,Organisation communiste - Futur rouge,Q104187739,Bloc rouge (Unification des maoïstes),wikidata
+Q111610435,Ligue de la jeunesse révolutionnaire,Q104186177,Front-Uni,wikidata
+Q111628426,Front révolutionnaire antifasciste/anticapitaliste et populaire,Q104187739,Bloc rouge (Unification des maoïstes),wikidata
 Q1145020,Union démocratique bretonne,Q126487286,Nouveau Front populaire,wikipedia
 Q125619283,Gauche écosocialiste,Q111799189,Nouvelle Union populaire écologique et sociale,wikipedia
 Q125619283,Gauche écosocialiste,Q126487286,Nouveau Front populaire,wikipedia
@@ -18,6 +22,7 @@ Q1332068,Section française de l'Internationale ouvrière,Q2940552,Cartel des ga
 Q1495924,Gauche unitaire,Q29348702,Front de gauche (France),wikipedia
 Q15985232,Ensemble (parti français),Q29348702,Front de gauche (France),wikidata
 Q16010672,Alternative libertaire (France),Q176339,Plateformisme,wikipedia
+Q1694377,Pôle de renaissance communiste en France,Q16215381,Initiative des partis communistes et ouvriers,wikidata
 Q170972,Parti socialiste (France),Q111212038,Union de la gauche socialiste et démocrate,wikipedia
 Q170972,Parti socialiste (France),Q111799189,Nouvelle Union populaire écologique et sociale,wikipedia
 Q170972,Parti socialiste (France),Q126487286,Nouveau Front populaire,wikipedia
@@ -40,15 +45,20 @@ Q2996386,Convergences et alternative,Q29348702,Front de gauche (France),wikipedi
 Q3091641,Walwari,Q111799189,Nouvelle Union populaire écologique et sociale,wikipedia
 Q3091641,Walwari,Q126487286,Nouveau Front populaire,wikipedia
 Q3099321,Gauche anticapitaliste (France),Q29348702,Front de gauche (France),wikipedia
+Q3117878,Groupe libertaire Jules Durand,Q3091443,Fédération anarchiste (francophone),wikidata
+Q3117878,Groupe libertaire Jules Durand,Q3550094,Union des anarchistes,wikidata
 Q31400965,Génération.s,Q108331267,Pôle écologiste,wikipedia
 Q31400965,Génération.s,Q111799189,Nouvelle Union populaire écologique et sociale,wikipedia
 Q31400965,Génération.s,Q126487286,Nouveau Front populaire,wikipedia
+Q31400965,Génération.s,Q22674451,Mouvement pour la démocratie en Europe : Diem 25,wikidata
 Q3142484,Parti communiste breton,Q2587029,Front de libération de la Bretagne,wikipedia
+Q3142484,Parti communiste breton,Q42814,Euskadi ta Askatasuna,wikipedia
 Q3230452,Les Alternatifs,Q29348702,Front de gauche (France),wikipedia
 Q3326782,Pour La Réunion,Q111799189,Nouvelle Union populaire écologique et sociale,wikipedia
 Q3326782,Pour La Réunion,Q126487286,Nouveau Front populaire,wikipedia
 Q3326849,Mouvement des progressistes,Q108331267,Pôle écologiste,wikipedia
 Q3326849,Mouvement des progressistes,Q126487286,Nouveau Front populaire,wikipedia
+Q3345059,Nouveau Parti socialiste (France),Q170972,Parti socialiste (France),wikidata
 Q3366206,Parti communiste des ouvriers de France,Q29348702,Front de gauche (France),wikipedia
 Q3366726,Les Progressistes,Q170972,Parti socialiste (France),wikipedia
 Q3456455,République et socialisme,Q126487286,Nouveau Front populaire,wikidata

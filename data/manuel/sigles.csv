@@ -135,7 +135,7 @@ Q137369019,,National Union of North African Muslims
 Q126487286,NFP,Nouveau Front populaire
 Q1045425,NPA,Nouveau Parti anticapitaliste
 Q125771262,,Nouveau Parti anticapitaliste – L'Anticapitaliste
-Q115965423,,Nouveau Parti anticapitaliste – Révolutionnaires
+Q115965423,NPA-R,Nouveau Parti anticapitaliste – Révolutionnaires
 Q3345059,,Nouveau Parti socialiste
 Q15629523,,Nouvelle Donne
 Q111799189,NUPES,Nouvelle Union populaire écologique et sociale
@@ -170,7 +170,7 @@ Q3366231,,Parti communiste pour l'indépendance et le socialisme
 Q2054444,PCR,Parti communiste réunionnais
 fr:Parti communiste révolutionnaire (2024),PCR,Parti communiste révolutionnaire
 Q3366237,PCR,Parti communiste révolutionnaire (marxiste-léniniste)
-Q63483685,,Parti communiste révolutionnaire de France
+Q63483685,PCRF,Parti communiste révolutionnaire de France
 Q3366241,PCRT,Parti communiste révolutionnaire trotskiste
 Q534291,PUP,Parti d'unité prolétarienne
 Q922707,PG,Parti de gauche
@@ -228,7 +228,7 @@ Q22981822,RP,Révolution permanente
 Q30741057,,Rézistan's Égalité 974
 Q1332068,SFIO,Section française de l'Internationale ouvrière
 Q3487404,,Socialisme et démocratie
-Q1631419,,Socialisme ou barbarie
+Q1631419,SoB,Socialisme ou barbarie
 Q11696853,,Socialist Organisation of National Liberation
 Q3487413,,Socialistes indépendants
 Q473128,,Terra Lliure
@@ -263,3 +263,210 @@ Q20653619,,Zone à défendre
 Q115950346,,section locale du PCF à Poissy
 Q2838275,,Écologie au centre
 Q113500977,,Éducation Démocratie Dignité
+Q107490623,,2022 ou jamais
+Q115922089,,Action anti-transphobe
+Q104186211,,Action révolutionnaire LGBTI
+Q2826062,,Affiche rouge
+Q50867068,,Alliance des Républicains de Gauche et des Radicaux Indépendants
+Q111630714,,Alliance des jeunes pour la révolution
+Q93219875,,Alliance des jeunes pour le socialisme
+Q111630485,,Alliance des jeunes révolutionnaires
+Q117814948,,Alliance libre des anarchistes de la région du Midi
+Q87070507,,Allons enfants
+Q2840413,,Alternative démocratie socialisme
+Q104210461,,Alternative révolutionnaire socialiste - Combat
+Q104209540,,Arme Révolutionnaire Marxiste
+Q333954,,Armée rouge japonaise
+Q2048118,,Armée révolutionnaire bretonne
+Q182711,,Association des écrivains et artistes révolutionnaires
+Q209546,,Batasuna
+Q55435516,,Bloc républicain de gauche
+Q118130804,,Bloc révolutionnaire insurrectionnel et féministe
+Q2925332,,Brigades internationales
+Q2934626,,Camarades
+Q2937151,,Cap sur l'avenir
+Q3782309,,Catalan Workers' Left
+Q2946461,,Cercle communiste démocratique
+Q829721,,Club des cordeliers
+Q2981072,,Coalition des Gauches
+Q138791715,,Collectif Golem
+Q104290787,,Collectif militant communiste
+Q116459769,,Collectif national unitaire des communistes
+Q104297911,,Comité communiste des Bouches-du-Rhône
+Q2985265,,Comité communiste internationaliste
+Q111630537,,Comité de liaison des jeunes pour la révolution
+Q117476256,,Comité féminin populaire
+Q2985607,,Comité liquidant ou détournant les ordinateurs
+Q104290768,,Comité national pour l'unification du mouvement communiste en France
+Q124422241,,Comité pour la construction du Parti ouvrier révolutionnaire
+Q117476286,,Comités populaires d'entraide et de solidarité
+Q2985658,,Comités syndicalistes révolutionnaires
+Q104290792,,Communistes en lutte
+Q5176302,,Conseil pour le maintien des occupations
+Q2996633,,Coordination autonome des révoltés en lutte ouverte contre la société
+Q116456380,,Coordination communiste pour la continuité révolutionnaire et la renaissance léniniste du PCF
+Q111422279,,Coordination des libertaires de l'Ain
+Q116458474,,Coordination des militants communistes du PCF pour sa continuité révolutionnaire et sa renaissance léniniste
+Q2996652,,Coordination des sans-abris
+Q111518957,,Coordination féministe
+Q109019177,,Core in Fronte
+Q3041979,,Dynamik unitaire Sud
+Q16632068,,Enbata
+Q3752213,,Endavant
+Q42814,,Euskadi ta Askatasuna
+Q61857570,,Fièr-e-s et révolutionnaires
+Q3592454,,Fraction L'Étincelle
+Q3080280,,Fraction nationaliste armée révolutionnaire
+Q5501792,,French India Socialist Party
+Q111219345,,Front communiste révolutionnaire
+Q1723564,,Front de libération nationale kanak et socialiste
+Q16387745,,Front national arménien
+Q3088527,,Front national ouvrier paysan
+Q104186411,,Front prolétaire
+Q116005505,,Front révolutionnaire antifasciste de Provence
+Q111628426,,Front révolutionnaire antifasciste/anticapitaliste et populaire
+Q22249490,,Front révolutionnaire national
+Q104186177,,Front-Uni
+Q111782119,,Fédération de la gauche républicaine
+Q3091620,,Fédération des comités de coordination indépendantistes
+Q3091642,,Fédération des gauches
+Q16637578,,Fédération des jeunesses communistes de France
+Q116059218,,Fédération libertaire unitaire ouverte
+Q116459649,,Fédération nationale des associations pour la renaissance communiste
+Q3092109,,Fédération pour une alternative sociale et écologique
+Q126899229,,Fédération progressiste
+Q3092163,,Fédération socialiste calédonienne
+Q111630205,,Féministes révolutionnaires
+Q106508149,,Gauche constitutionnelle
+Q2299260,,Gauche indépendante
+Q3099354,,Gauche sociale et radicale
+Q33770496,,Groupe Gauche démocratique
+Q33769773,,Groupe Gauche démocratique
+Q33731745,,Groupe Gauche républicaine démocratique
+Q33732325,,Groupe Républicain socialiste
+Q33731262,,Groupe Républicain socialiste et socialiste français
+Q60327384,,Groupe Union Socialiste
+Q33762583,,Groupe Union des gauches
+Q111440554,,Groupe activiste trans
+Q136907445,,Groupe antifasciste Lyon et environs
+Q2053255,,Groupe communiste et apparentés
+Q2724226,,"Groupe communiste, républicain, citoyen et écologiste"
+Q32860010,,Groupe de l'Extrême-Gauche
+Q36214467,,Groupe de la Fédération de la gauche démocrate et socialiste
+Q3099340,,Groupe de la Gauche démocratique
+Q3099348,,Groupe de la Gauche radicale
+Q2320765,,Groupe de la Gauche républicaine
+Q45892674,,Groupe des Indépendants de gauche
+Q2657162,,Groupe des Indépendants de gauche
+Q33770699,,Groupe des Républicains de gauche
+Q33528256,,Groupe des Républicains radicaux-socialistes
+Q36377550,,Groupe du Parti républicain radical et radical socialiste
+Q36217209,,Groupe du Parti socialiste et des radicaux de gauche
+Q26212895,,Groupe démocratique socialiste de la Communauté
+Q17002659,,Groupe féministe socialiste
+Q3117878,,Groupe libertaire Jules Durand
+Q123783299,,Groupe maoïste révolutionnaire
+Q32860104,,Groupe ouvrier
+Q3117906,,Groupe pour la construction du Parti ouvrier révolutionnaire
+Q3118096,,Groupes d'action révolutionnaires internationalistes
+Q1153753,,Génération écologie
+Q1474268,,Hébertistes
+Q1092496,,Indulgents
+Q3150848,,Informations et correspondances ouvrières
+Q104290794,,Jeunes communistes marxistes-léninistes d'Albi
+Q111610386,,Jeunes pour la renaissance communiste en France
+Q3178104,,Jeunes radicaux de gauche
+Q104186094,,Jeunes révolutionnaires
+Q111630824,,Jeunesse Révolution
+Q104245345,,Jeunesse communiste marxiste-léniniste
+Q104297876,,Jeunesses communistes marxistes-léninistes de Pau
+Q104414383,,Juives et Juifs révolutionnaires
+Q134620119,,"La Commune, groupe révolutionnaire socialiste"
+Q112117108,,La France Républicaine et Solidaire
+Q125745761,,La Panthère des Batignolles
+Q87407983,,"La gauche conflanaise, Conflans pour tous"
+Q104212739,,Les Nouveaux Démocrates
+Q104290793,,Les amis de Karl Marx
+Q109735215,,Libéraux
+Q111610435,,Ligue de la jeunesse révolutionnaire
+Q140274637,,Ligues anarchistes
+Q87411008,,Liste de gauche - conflans ste honorine 2001
+Q6733696,,Mahe Socialist Party
+Q6778654,,Marxist–Leninist Communist Organisation of Réunion
+Q281349,,Montagne
+Q3326697,,Mouvement jeune révolution
+Q3087287,,Mouvement ouvrier social-national breton
+Q104186336,,Mouvement populaire des femmes
+Q22674451,,Mouvement pour la démocratie en Europe : Diem 25
+Q115922319,,Mouvement révolutionnaire de la jeunesse
+Q1452622,,Mouvement social révolutionnaire
+Q3326836,,Mouvement socialiste calédonien
+Q115965582,,NPA Jeunes
+Q115965646,,NPA Jeunesses anticapitalistes
+Q116005340,,Nouveau communisme en France
+Q3345132,,Nouvel élan pour Mayotte
+Q3327506,,Nouvelle Action royaliste
+Q21290708,,Nouvelle Gauche socialiste
+Q3345677,,Noyaux armés pour l'autonomie populaire
+Q111648344,,Organisation anarchiste
+Q111606200,,Organisation communiste - Futur rouge
+Q93448453,,Orléans Solidaire Écologique
+Q136100759,,Parti communiste français. Cellule de Valton et Cie
+Q3366460,,Parti frontiste
+Q37873793,,Parti national-socialiste français
+Q3366562,,Parti ouvrier et paysan français
+Q928493,,Parti radical-socialiste Camille Pelletan
+Q3366702,,Parti républicain syndicaliste
+Q3366735,,Parti socialiste calédonien
+Q3366743,,Parti socialiste de Nouvelle-Calédonie
+Q283184,,Parti travailliste
+Q20927529,,Parti écologiste
+Q110394551,,Plateforme communiste libertaire
+Q137794555,,Post-Soviet Left
+Q3407344,,Prolétaire ligne rouge
+Q15985404,,Q15985404
+Q112898155,,RED Jeunes
+Q3419905,,Rassemblement démocratique océanien
+Q104245000,,Rassemblement organisé des communistes - marxistes-léninistes
+Q115977909,,Reconstruction communiste
+Q51844819,,Révolution écologique pour le vivant
+Q3477547,,Section universitaire du Parti socialiste
+Q109658282,,Socialist Movement
+Q109658655,,Socialist Youth Coordinator
+Q960260,,Société des républicaines révolutionnaires
+Q2740895,,Sortu
+Q55599992,,Tendance CLAIRE
+Q139493171,,Territoires44
+Q3550075,,Union de la gauche
+Q3550094,,Union des anarchistes
+Q19276426,,Union des démocrates musulmans français
+Q111628305,,Union des jeunes révolutionnaires
+Q3550193,,Union des républicains radicaux
+Q9091758,,Union nationale espagnole
+Q982380,,Union progressiste
+Q111600906,,Union prolétarienne marxiste-léniniste
+Q3550671,,Unir et Construire dans le Renouveau
+Q111600632,,Unité communiste
+Q3561478,,Vive la révolution
+Q3561492,,Vive le communisme
+Q2906741,,bloc des gauches
+Q122859911,,fédération de Loir-et-Cher du Parti socialiste
+Q105104850,,fédération des Français à l’étranger du Parti socialiste
+Q105079499,,fédération des Hauts-de-Seine du Parti socialiste
+Q123785860,,fédération des Yvelines du Parti socialiste
+Q131784007,,fédération du Doubs du Parti socialiste
+Q2450519,,groupe Gauche démocrate et républicaine
+Q46610404,,"groupe Socialiste, radical et citoyen"
+Q46612837,,"groupe Socialiste, républicain et citoyen"
+Q46613924,,"groupe Socialiste, écologiste et républicain"
+Q50910195,,groupe communiste républicain citoyen et écologiste
+Q1822853,,groupe socialiste (Sénat)
+Q53516488,,groupe socialiste et républicain
+Q131672928,,groupe socialiste révolutionnaire
+Q2236823,,groupe socialiste à l'Assemblée nationale
+Q133250601,,"groupe socialiste, écologiste et radical au conseil régional d'Île-de-France"
+Q84366602,,lutte ouvriere faire entendre le camp des travailleurs
+Q820122,,montagnards
+Q125731201,,prolétaires pour le communisme
+Q3576675,,À gauche en Guyane
+Q131957441,,Égalités

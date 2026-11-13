@@ -223,6 +223,14 @@ def main():
             d["ideologies"] += [(x, source) for x in r.get(col_ideo, "").split(" | ") if x]
     stats["noeuds_fusionnes"] = len(noeuds)
 
+    # Organisations absentes du cache (nouvelle collecte) : on va chercher pays, types, dates.
+    # Seul accès réseau de ce script, et seulement pour les identifiants manquants.
+    manquants = [q for q in noeuds if re.fullmatch(r"Q\d+", q) and q not in wd]
+    if manquants:
+        print(f"{len(manquants)} organisations absentes du cache Wikidata : téléchargement...")
+        from fusion import wikidata
+        wd = wikidata([q for q in noeuds if re.fullmatch(r"Q\d+", q)])
+
     # Compléments du cache Wikidata : pays, positionnement, types, dates (prioritaires)
     for q, d in noeuds.items():
         w = wd.get(q, {})
@@ -611,11 +619,14 @@ def main():
     pred = defaultdict(list)
     for a, b, t in inter_lignee:
         da, db = debut(a), debut(b)
-        if t == "filiation" and (not da or not db or da <= db):
+        # Filiation ou scission entre Internationales : succession, affichée dans la clé
+        # (ex. CIO -> Tendance marxiste internationale, devenue Internationale communiste révolutionnaire)
+        if t in ("filiation", "scission") and (not da or not db or da <= db):
             pred[b].append(a)
         else:
             anomalies.append(ligne_anomalie(a, b, t, "lien entre deux Internationales "
-                                            + ("de sens contraire au temps" if t == "filiation"
+                                            + ("de sens contraire au temps"
+                                               if t in ("filiation", "scission")
                                                else f"de type {t}, non représenté")))
     # Les prédécesseurs des Internationales utilisées sont gardés aussi
     pile = list(inter_utiles)

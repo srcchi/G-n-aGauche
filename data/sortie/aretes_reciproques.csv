@@ -1,11 +1,15 @@
 source,source_nom,cible,cible_nom,relation,raison
+Q537395,Mouvement européen Allemagne,Q1006424,Réseau fédéral pour l'engagement citoyen,appartenance,appartenance : le membre pointe vers l'organisation parente
+Q104186211,Action révolutionnaire LGBTI,Q115922089,Action anti-transphobe,filiation,dates égales ou manquantes : sens le plus attesté
 Q1045425,Nouveau Parti anticapitaliste,Q22981822,Révolution permanente (parti politique),scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q170972,Parti socialiste (France),Q111225168,Gauche démocratique et sociale,scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q122614151,Mouvement socialiste guadeloupéen,Q7205536,Fédération guadeloupéenne du Parti socialiste,scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q1321802,Mouvement républicain et citoyen,Q1951112,Mouvement des citoyens (France),scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q2379359,Parti socialiste français (1902),Q1332068,Section française de l'Internationale ouvrière,scission,lignée : l'organisation la plus ancienne est l'ancêtre
+Q1774359,Alliance climatique Allemagne,Q1439265,Green Budget Germany,appartenance,appartenance : le membre pointe vers l'organisation parente
 Q192821,Parti communiste français,Q2118395,Parti communiste algérien,scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q2989703,Parti révolutionnaire Communistes,Q63483685,Parti communiste révolutionnaire de France,scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q426963,Parti communiste du Népal (marxiste-léniniste unifié),Q53700514,Parti communiste du Népal (2018),scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q506537,Parti communiste du Népal (centre maoïste),Q53700514,Parti communiste du Népal (2018),scission,lignée : l'organisation la plus ancienne est l'ancêtre
+Q6119666,Jacobin,Q60574856,International progressif,appartenance,appartenance : le membre pointe vers l'organisation parente
 Q65153446,Union anarchiste,Q65153369,Fédération communiste libertaire (1934-1936),scission,lignée : l'organisation la plus ancienne est l'ancêtre
