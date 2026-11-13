@@ -12,10 +12,17 @@ Usage : python arbre_orgs.py
         python arbre_orgs.py --tout              (toutes les organisations, même disparues sans descendance)
         python arbre_orgs.py --sans-internationales   (n'affiche pas les Internationales)
         python arbre_orgs.py --depuis 1900       (ne garde que les organisations fondées après)
+        python arbre_orgs.py --min-taille 20000  (seulement les « grandes » organisations : article
+                                                  Wikipédia d'au moins 20 000 caractères ; la lignée
+                                                  passe par les petites sans les dessiner)
+        python arbre_orgs.py --sans-zones        (pas de bandes de couleur par famille politique)
+        python arbre_orgs.py --sans-durees       (pas de barres de durée de vie)
 Dépendance : Graphviz (commande dot)
 """
 
 import csv
+import datetime
+import json
 import os
 import re
 import subprocess
@@ -45,12 +52,68 @@ COURANTS = [
 ]
 INCONNU = ("autre / inconnu", "#d5d8dc", "black")
 
+# Zones de fond : chaque courant appartient à une grande famille, dessinée comme une bande colorée.
+# Ordre du dictionnaire = ordre des bandes, de haut en bas.
+FAMILLE = {
+    "anarchiste": "anarchisme", "anarcho-syndicaliste": "anarchisme",
+    "communiste libertaire": "anarchisme",
+    "trotskyste": "communisme", "maoïste": "communisme", "communiste": "communisme",
+    "luxemburgiste / conseilliste": "communisme",
+    "social-démocrate": "social-démocratie", "radical / républicain": "social-démocratie",
+    "écosocialiste": "écologie", "écologiste": "écologie",
+}
+ZONES = {   # famille : (couleur de fond, titre)
+    "anarchisme": ("#ececec", "Anarchisme"),
+    "communisme": ("#fde8e6", "Communisme"),
+    "social-démocratie": ("#fdeaf3", "Social-démocratie"),
+    "écologie": ("#e6f6ec", "Écologie"),
+    "autre": ("#f5f6f7", "Autre / inconnu"),
+}
+ANNEE_COURANTE = datetime.date.today().year
+
 STYLE_ARETE = {
     "filiation": 'color="#555555"',
     "scission": 'color="#c0392b", style="dashed", penwidth=1.2',
     "passage": 'color="#2471a3", style="dotted", penwidth=1.8',
     "appartenance": 'color="#7f7f7f", style="dotted", penwidth=1.3, arrowhead=none, constraint=false',
+    # Lignée qui passe par des organisations non dessinées (option --min-taille)
+    "indirect": 'color="#aaaaaa", style="dashed", penwidth=1.0',
 }
+
+
+def tailles_articles():
+    """Longueur de l'article Wikipédia de chaque organisation (même identifiant que fusion.py)."""
+    chemin = os.path.join(DATA, "cache_wikitext.json")
+    if not os.path.exists(chemin):
+        return {}
+    with open(chemin, encoding="utf-8") as f:
+        cache = json.load(f)
+    return {(d["qid"] or f"fr:{t}"): len(d["text"]) for t, d in cache.items()}
+
+
+def contracter(aretes, grands):
+    """Ne garde que les organisations de `grands`. Une lignée qui passe par des organisations
+    retirées devient une arête « indirect » entre les grandes organisations qu'elle relie."""
+    enfants = defaultdict(list)
+    for a, b, t in aretes:
+        if t in LIGNEE:
+            enfants[a].append((b, t))
+    res = {(a, b): t for a, b, t in aretes if a in grands and b in grands}
+    for a in grands:
+        # Parcours des descendants à travers les organisations retirées uniquement
+        vus, pile = set(), [b for b, _ in enfants[a] if b not in grands]
+        while pile:
+            x = pile.pop()
+            if x in vus:
+                continue
+            vus.add(x)
+            for y, _ in enfants[x]:
+                if y in grands:
+                    if y != a:
+                        res.setdefault((a, y), "indirect")
+                elif y not in vus:
+                    pile.append(y)
+    return [(a, b, t) for (a, b), t in res.items()]
 
 
 def lire(nom):
@@ -71,9 +134,13 @@ def courant(d):
     return INCONNU
 
 
+def nom_court(d):
+    return re.sub(r" \((parti politique|organisation politique|France|parti français)\)$", "",
+                  d["label"]).replace('"', "'")
+
+
 def etiquette(d):
-    lab = re.sub(r" \((parti politique|organisation politique|France|parti français)\)$", "",
-                 d["label"]).replace('"', "'")
+    lab = nom_court(d)
     if len(lab) > 32:  # coupe les noms longs sur deux lignes
         coupe = lab.rfind(" ", 0, len(lab) // 2 + 8)
         lab = lab[:coupe] + "\\n" + lab[coupe + 1:] if coupe > 0 else lab
@@ -100,6 +167,7 @@ def main():
               if t != "appartenance" or noeuds[b]["internationale"]]
 
     # ---------- Organisations vivantes + tous leurs ancêtres ----------
+    gardes = set(noeuds)
     if "--tout" not in sys.argv:
         parents = defaultdict(set)
         for a, b, t in aretes:
@@ -121,8 +189,29 @@ def main():
         gardes |= avec_ancetres(inter)
         aretes = [(a, b, t) for a, b, t in aretes if a in gardes and b in gardes]
 
+    # ---------- Seulement les « grandes » organisations ----------
+    min_taille = 0
+    if "--min-taille" in sys.argv:
+        min_taille = int(sys.argv[sys.argv.index("--min-taille") + 1])
+    if min_taille:
+        tailles = tailles_articles()
+        # Grande = article assez long, ou ajoutée / corrigée à la main
+        grands = {q for q, d in noeuds.items()
+                  if tailles.get(q, 0) >= min_taille or "correction" in d["sources"]}
+        lignee = contracter([e for e in aretes if e[2] != "appartenance"], grands)
+        membres = {x for a, b, _ in lignee for x in (a, b)}
+        # Internationales : gardées seulement si une grande organisation dessinée en est membre
+        inter = [(a, b, t) for a, b, t in aretes
+                 if t == "appartenance" and a in membres and (b in grands or b in membres)]
+        aretes = lignee + inter
+        # Une grande organisation est dessinée même si toute sa parenté est petite
+        seules = {q for q in grands & gardes if not noeuds[q]["internationale"]}
+    else:
+        seules = set()
+
     # Seules les organisations reliées par au moins une arête sont dessinées
-    dans = {x for a, b, _ in aretes for x in (a, b)}
+    # (et, avec --min-taille, les grandes organisations isolées)
+    dans = {x for a, b, _ in aretes for x in (a, b)} | seules
     annees = {q: int(noeuds[q]["fondation"]) for q in dans if noeuds[q]["fondation"]}
 
     # Organisations sans date : placées juste après leur ancêtre, ou juste avant leur descendant
@@ -135,14 +224,43 @@ def main():
     sans_date = dans - set(annees)
     dans = {q for q in dans if q in annees and annees[q] >= depuis}
     aretes = [(a, b, t) for a, b, t in aretes if a in dans and b in dans]
-    dans = {x for a, b, _ in aretes for x in (a, b)}
+    dans = {x for a, b, _ in aretes for x in (a, b)} | (seules & dans)
 
-    # Colonnes de la frise : seulement les périodes qui contiennent des organisations
-    colonne = {q: annees[q] // PAS * PAS for q in dans}
-    colonnes = sorted(set(colonne.values()))
+    col = lambda annee: annee // PAS * PAS
+    colonne = {q: col(annees[q]) for q in dans}
+
+    # ---------- Durée de vie de chaque organisation ----------
+    # Fin = dissolution ; sinon aujourd'hui si elle existe encore ; sinon la fondation de son
+    # premier successeur (fusion, changement de nom) ; sinon pas de barre.
+    avec_durees = "--sans-durees" not in sys.argv
+    succ = defaultdict(list)
+    for a, b, t in aretes:
+        if t == "filiation":
+            succ[a].append(annees[b])
+    fin = {}
+    for q in dans:
+        d = noeuds[q]
+        if d["dissolution"]:
+            f = int(d["dissolution"])
+        elif d["vivant"]:
+            f = ANNEE_COURANTE
+        else:
+            f = min(succ[q], default=annees[q])
+        fin[q] = max(f, annees[q])
+
+    # Colonnes de la frise : les périodes qui contiennent une fondation (et une fin de barre)
+    colonnes = set(colonne.values())
+    if avec_durees:
+        colonnes |= {col(f) for f in fin.values()}
+    colonnes = sorted(colonnes)
+    # Points de la barre de vie : un par colonne traversée après la fondation
+    vie = {q: [c for c in colonnes if colonne[q] < c <= col(fin[q])] if avec_durees else []
+           for q in dans}
     par_colonne = defaultdict(list)
     for q in dans:
         par_colonne[colonne[q]].append(q)
+        for c in vie[q]:
+            par_colonne[c].append(f"{q}@{c}")
 
     legende = {}
     lignes = [
@@ -158,9 +276,22 @@ def main():
         lignes.append("  " + " -> ".join(f'"an{c}"' for c in colonnes) + ' [style=invis, weight=100];')
     lignes.append('  node [shape=box, style="filled,rounded", fontsize=10, penwidth=0];')
 
-    for c in colonnes:
-        membres = sorted(par_colonne[c], key=lambda q: annees[q])
-        for q in membres:
+    # ---------- Nœuds, regroupés par famille politique (zones de fond) ----------
+    avec_zones = "--sans-zones" not in sys.argv
+    par_famille = defaultdict(list)
+    for q in dans:
+        par_famille[FAMILLE.get(courant(noeuds[q])[0], "autre")].append(q)
+    barres = []
+    for i, (fam, (fond_zone, titre)) in enumerate(ZONES.items()):
+        if not par_famille[fam]:
+            continue
+        retrait = "  "
+        if avec_zones:
+            lignes.append(f'  subgraph cluster_zone{i} {{ label="{titre}"; labeljust=l; '
+                          f'fontname="Helvetica-Bold"; fontsize=22; fontcolor="#00000055"; '
+                          f'style="filled,rounded"; fillcolor="{fond_zone}"; color="{fond_zone}";')
+            retrait = "    "
+        for q in sorted(par_famille[fam], key=lambda q: annees[q]):
             d = noeuds[q]
             nom_c, fond, police = courant(d)
             legende[nom_c] = (fond, police)
@@ -169,15 +300,41 @@ def main():
                 bord = ', peripheries=2, penwidth=1.5, color="#333333"'
             elif d["etranger"]:
                 bord = ', penwidth=2, color="#000000", style="filled,rounded,dashed"'
-            lignes.append(f'  "{q}" [label="{etiquette(d)}", fillcolor="{fond}", '
+            lignes.append(f'{retrait}"{q}" [label="{etiquette(d)}", fillcolor="{fond}", '
                           f'fontcolor="{police}"{bord}, tooltip="{nom_c}"];')
+            # Barre de vie : points invisibles reliés par un trait épais de la couleur du courant.
+            # Le dernier point d'une organisation encore existante porte son nom.
+            for c in vie[q]:
+                if c == vie[q][-1] and fin[q] == ANNEE_COURANTE:
+                    lignes.append(f'{retrait}"{q}@{c}" [label="{nom_court(d)}", fillcolor="{fond}", '
+                                  f'fontcolor="{police}", fontsize=9, tooltip="{nom_c}"];')
+                else:
+                    lignes.append(f'{retrait}"{q}@{c}" [shape=point, width=0.02, label="", '
+                                  f'color="{fond}", fillcolor="{fond}"];')
+            points = [q] + [f"{q}@{c}" for c in vie[q]]
+            for p1, p2 in zip(points, points[1:]):
+                barres.append(f'  "{p1}" -> "{p2}" [color="{fond}aa", penwidth=6, '
+                              f'arrowhead=none, weight=20, tooltip="{nom_court(d)}"];')
+        if avec_zones:
+            lignes.append("  }")
+
+    for c in colonnes:
+        membres = par_colonne[c]
         lignes.append("  { rank=same; " + f'"an{c}"; ' + " ".join(f'"{q}";' for q in membres) + " }")
+    lignes += barres
 
     for a, b, t in sorted(aretes):
         style = STYLE_ARETE[t]
         if colonne[b] < colonne[a] and "constraint" not in style:
             style += ", constraint=false"  # date incohérente : on ne contraint pas la mise en page
-        lignes.append(f'  "{a}" -> "{b}" [{style}];')
+        # Une scission ou une filiation part de la barre de vie de l'ancêtre, à la date de
+        # fondation du descendant (le dernier point avant cette date).
+        source = a
+        if t != "appartenance":
+            avant = [c for c in vie[a] if c < colonne[b]]
+            if avant:
+                source = f"{a}@{avant[-1]}"
+        lignes.append(f'  "{source}" -> "{b}" [{style}];')
 
     # Légende, dans l'ordre de COURANTS
     lignes.append('  subgraph cluster_legende { label="Légende"; fontname="Helvetica"; '
@@ -192,9 +349,16 @@ def main():
                   'fontcolor="#000000", peripheries=2, penwidth=1.5, color="#333333"];')
     lignes.append('    node [shape=plaintext, style="", fontcolor="#333333"];')
     for t, texte in (("filiation", "filiation / fusion"), ("scission", "scission"),
-                     ("passage", "passage de militants"), ("appartenance", "membre de")):
+                     ("passage", "passage de militants"), ("appartenance", "membre de"),
+                     ("indirect", "lignée via des organisations\\nnon dessinées")):
+        if t == "indirect" and not min_taille:
+            continue
         lignes.append(f'    "leg_{t}_a" [label="{texte}"]; "leg_{t}_b" [label=""];')
         lignes.append(f'    "leg_{t}_a" -> "leg_{t}_b" [{STYLE_ARETE[t]}];')
+    if avec_durees:
+        lignes.append('    "leg_vie_a" [label="durée de vie\\n(jusqu\'à aujourd\'hui : nom répété)"]; '
+                      '"leg_vie_b" [label=""];')
+        lignes.append('    "leg_vie_a" -> "leg_vie_b" [color="#888888aa", penwidth=6, arrowhead=none];')
     lignes.append("  }")
     lignes.append("}")
 

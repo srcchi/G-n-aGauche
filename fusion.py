@@ -105,6 +105,24 @@ def annee(s):
     return int(m.group(1)) if m else None
 
 
+def categories_articles():
+    """Catégories propres à chaque article (lues dans le wikitext en cache), par identifiant.
+    Plus complètes que celles d'infobox.py, qui ne garde que les catégories explorées."""
+    chemin = os.path.join(DATA, "cache_wikitext.json")
+    if not os.path.exists(chemin):
+        return {}
+    with open(chemin, encoding="utf-8") as f:
+        cache = json.load(f)
+    return {(d["qid"] or f"fr:{t}"): RX_CATEGORIE.findall(d["text"]) for t, d in cache.items()}
+
+
+RX_CATEGORIE = re.compile(r"\[\[\s*Cat[ée]gor(?:ie|y)\s*:\s*([^\]|]+)")
+# Catégorie d'article qui signale une organisation disparue, ex. « Organisme disparu en 1980 »,
+# « Ancien parti politique communiste en France », « Organisation dissoute en France... »
+RX_CAT_DISPARU = re.compile(r"^Ancien|disparue?s?\b|dissoute?s?\b", re.I)
+RX_CAT_ANNEE = re.compile(r"(?:disparue?s?|dissoute?s?) en (\d{4})", re.I)
+
+
 def wikidata(qids):
     """Pays, positionnement et dates de chaque QID, avec cache."""
     cache = {}
@@ -275,9 +293,15 @@ def main():
         fa, fb = gardes[a]["fondation"], gardes[b]["fondation"]
         if e["type"] == "filiation" and not (fa and fb and fb < fa):
             a_successeur.add(a)
+    cats_articles = categories_articles()
     for q, d in gardes.items():
+        cats_mortes = [c for c in cats_articles.get(q, []) if RX_CAT_DISPARU.search(c)]
+        if not d["dissolution"]:
+            d["dissolution"] = next((int(m.group(1)) for c in cats_mortes
+                                     if (m := RX_CAT_ANNEE.search(c))), None)
         d["vivant"] = (not d["dissolution"] and q not in a_successeur
                        and not set(d["types"]) & ANCIEN
+                       and not cats_mortes
                        and not re.search(r"Catégorie:Ancien", d["categories"]))
         if forcer.get(q) in ("vivant", "disparu"):
             d["vivant"] = forcer[q] == "vivant"

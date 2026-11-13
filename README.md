@@ -29,6 +29,9 @@ Après une correction manuelle, seules les deux dernières étapes sont à relan
   Par défaut, l'arbre part des organisations françaises encore existantes et remonte leurs ancêtres.
 - `arbre_orgs.py --sans-internationales` : masque les Internationales.
 - `arbre_orgs.py --depuis 1900` : seulement les organisations fondées après cette année.
+- `arbre_orgs.py --min-taille 20000` : seulement les « grandes » organisations, celles dont l'article
+  Wikipédia fait au moins ce nombre de caractères (plus celles ajoutées dans les corrections).
+  Une lignée qui passe par des petites organisations est résumée par un lien gris en tirets.
 
 ## Caches
 
