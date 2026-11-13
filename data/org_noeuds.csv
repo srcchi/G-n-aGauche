@@ -36,13 +36,13 @@ Q192821,Parti communiste français,1920,,communiste | léniniste | social-démoc
 Q65153446,Union anarchiste,1920,1939,anarchiste | communiste,Anarchisme | Anarcho-communisme,extrême gauche,,,,,wikipedia
 Q698677,Union des partis socialistes pour l'action internationale,1921,1923,,,,,,oui,,wikipedia
 Q703593,Internationale ouvrière socialiste,1923,1940,,,,,,oui,,wikidata | wikipedia
-Q3366737,Parti socialiste communiste,1923,,,,,,,,,wikipedia
+Q3366737,Parti socialiste communiste,1923,1930,,,,,,,,wikipedia
 Q2940552,Cartel des gauches,1924,,,,,,oui,,,wikipedia
 Q16682000,Union fédérale des étudiants,1926,1938,communiste,,,,,,,wikipedia
 Q2890957,Bataille socialiste,1927,1939,,,,,,,,wikipedia
 Q55595356,Action populaire nationale d'Alsace,1928,1935,communiste,anticommunisme,,,,,,wikidata
 Q3366181,Parti alsacien ouvrier et paysan,1929,1939,communiste,communisme,,,,,,wikidata
-Q3366567,Parti ouvrier et paysan,1929,,,,,,,,,wikipedia
+Q3366567,Parti ouvrier et paysan,1929,1930,,,,,,,,wikipedia
 Q18215132,Ligue communiste (1930),1930,1936,communiste | trotskyste,trotskisme,,,,,,wikidata | wikipedia
 Q11885155,Opposition communiste internationale,1930,1939,,,,,,oui,,wikipedia
 Q534291,Parti d'unité prolétarienne,1930,1937,social-démocrate,socialisme,,,,,,wikidata | wikipedia
@@ -53,7 +53,7 @@ Q65153369,Fédération communiste libertaire (1934-1936),1934,1936,anarchiste | 
 Q137369019,National Union of North African Muslims,1934,1937,,,patriotisme | gauche,,,,,wikidata
 Q1422284,Front populaire (France),1935,1938,,,gauche,,,,,wikipedia
 Q3099346,Gauche révolutionnaire (1935-1938),1935,1938,,,,,,,,wikipedia
-Q3178202,Jeunesses socialistes révolutionnaires,1935,,trotskyste,,extrême gauche,,,,,wikipedia
+Q3178202,Jeunesses socialistes révolutionnaires,1935,1936,trotskyste,,extrême gauche,,,,,wikipedia
 Q3550479,Union socialiste républicaine,1935,1940,social-démocrate,Antifascisme | Néo-socialisme | Pacifisme | Planisme | Républicanisme | Social-démocratie | Socialisme démocratique,Centre gauche,,,,,wikipedia
 Q2118395,Parti communiste algérien,1936,1964,communiste | léniniste,Communisme | Marxisme-léninisme,Extrême gauche,oui,,,,wikipedia
 Q538664,Parti ouvrier internationaliste,1936,1944,communiste | trotskyste,Trotskisme | trotskisme,Extrême gauche,,,,,wikidata | wikipedia
@@ -97,10 +97,10 @@ Q688738,Parti socialiste autonome (France),1958,1960,social-démocrate,Anticolon
 Q2054444,Parti communiste réunionnais,1959,,communiste,Communisme | Post-marxisme | Régionalisme (politique),Gauche en France | Laurent de Boissieu,,oui,,Témoignages,wikidata | wikipedia
 Q862828,Parti socialiste unifié (France),1960,1989,social-démocrate,socialisme démocratique,,,,,,wikidata | wikipedia
 Q1196823,Tendance socialiste internationale,1960,,,,,,oui,oui,,wikipedia
-Q3088588,Front universitaire antifasciste,1961,,,,extrême gauche,,oui,,,wikipedia
+Q3088588,Front universitaire antifasciste,1961,,,,extrême gauche,,,,,wikipedia
 Q128064,Internationale démocrate centriste,1961,,,,,,oui,oui,,wikidata
-Q3366241,Parti communiste révolutionnaire trotskiste,1962,,trotskyste,trotskisme,extrême gauche,,oui,,,wikidata
-Q2587029,Front de libération de la Bretagne,1963,,,,extrême gauche,,oui,,,wikipedia
+Q3366241,Parti communiste révolutionnaire trotskiste,1962,,trotskyste,trotskisme,extrême gauche,,,,,wikidata
+Q2587029,Front de libération de la Bretagne,1963,,,,extrême gauche,,,,,wikipedia
 Q3400792,Pouvoir ouvrier,1963,1969,luxemburgiste,conseillisme,,,,,,wikidata
 Q2634710,Quatrième Internationale - Secrétariat unifié,1963,,,,,,oui,oui,,wikipedia
 Q2406201,Convention des institutions républicaines,1964,1971,social-démocrate,Républicanisme en France au XXe siècle | Social-démocratie | marxisme | socialisme démocratique,Gauche (politique),,,,,wikidata | wikipedia
@@ -112,14 +112,14 @@ Q11509405,Ligue communiste révolutionnaire du Japon (Quatrième Internationale)
 Q15985231,Objectif socialiste,1965,1975,social-démocrate,Autogestion | Catholicisme social | Fédéralisme | Gauche chrétienne | Humanisme | Pacifisme | Progressisme | Socialisme | Socialisme scientifique | Tiers-mondisme | Écologie politique,Centre gauche | Gauche (politique) | Gauche radicale,,,,,wikipedia
 Q2945177,"Centre d'études, de recherches et d'éducation socialiste",1966,1993,social-démocrate,,,,,,,wikipedia
 Q3178133,Jeunesse communiste révolutionnaire,1966,1968,trotskyste,,,,,,,wikipedia
-Q3326535,Mouvement communiste français marxiste-léniniste,1966,,maoïste,maoïsme,extrême gauche,,,,,wikidata | wikipedia
+Q3326535,Mouvement communiste français marxiste-léniniste,1966,1967,maoïste,maoïsme,extrême gauche,,,,,wikidata | wikipedia
 Q2915458,Union des clubs pour le renouveau de la gauche,1966,,,,,,,,,wikipedia
 Q3550161,Union des jeunesses communistes marxistes-léninistes,1966,1968,maoïste,,extrême gauche,,,,,wikipedia
 Q3356082,Organisation révolutionnaire anarchiste,1967,1976,anarchiste | communiste,communiste libertaire,extrême gauche,,,,,wikipedia
 Q3366229,Parti communiste marxiste-léniniste de France,1967,1988,communiste | maoïste,maoïsme,extrême gauche,,,,,wikidata | wikipedia
 Q3099339,Gauche prolétarienne,1968,1973,maoïste,maoïsme,extrême gauche,,,,La Cause du peuple,wikidata | wikipedia
 Q133795,Internationale des fédérations anarchistes,1968,,,,,,oui,oui,,wikipedia
-Q86734710,Mouvement du 11 mai,1968,,,,extrême-gauche,,oui,,,wikipedia
+Q86734710,Mouvement du 11 mai,1968,,,,extrême-gauche,,,,,wikipedia
 Q2838199,Alliance marxiste révolutionnaire,1969,1974,communiste | trotskyste,communisme | trotskisme,extrême gauche,,,,,wikidata | wikipedia
 Q3091437,Fédération anarchiste-communiste d'Occitanie,1969,1975,anarchiste | communiste,Communisme libertaire,,,,,,wikipedia
 Q3240150,Ligne rouge (organisation politique),1969,1970,léniniste | maoïste,Marxisme-léninismeMaoïsme,Extrême gauche,,,,,wikipedia
@@ -129,7 +129,7 @@ Q170972,Parti socialiste (France),1969,,social-démocrate,20 Minutes | Anticapit
 Q3117408,Union des communistes de France marxiste-léniniste,1969,1985,communiste | maoïste,maoïsme,extrême gauche,,,,,wikidata | wikipedia
 Q3088574,Front rouge (organisation politique),1970,1974,maoïste,maoïsme,extrême gauche,,,,,wikidata | wikipedia
 Q3366315,Parti de la démocratie socialiste (France),1970,1973,social-démocrate,Social-démocratie | Social-libéralisme,Centrisme | centre gauche,,,,,wikidata | wikipedia
-Q97367255,Gauche ouvrière et paysanne,1971,,communiste | maoïste,Maoïsme,,,,,,wikipedia
+Q97367255,Gauche ouvrière et paysanne,1971,1976,communiste | maoïste,Maoïsme,,,,,,wikipedia
 Q6748471,Lutte occitane,1971,1975,social-démocrate,socialisme révolutionnaire,gauche,,,,,wikidata
 Q123136121,Organisation communiste libertaire (1971-1976),1971,1976,anarchiste | communiste | luxemburgiste,Communisme libertaire | conseillisme | luxemburgisme | spontanéisme,,,,,,wikipedia
 Q3142484,Parti communiste breton,1971,1980,communiste | léniniste | maoïste | social-démocrate,Anti-impérialisme | Autogestion | Marxisme-léninisme | Nationalisme breton | Socialisme révolutionnaire | communisme,Extrême gauche,,,,,wikidata | wikipedia
@@ -147,7 +147,7 @@ Q3550460,Union progressiste en Mélanésie,1974,,social-démocrate | trotskyste,
 Q3088580,Front socialiste autogestionnaire breton,1975,1979,social-démocrate,socialisme,,,,,,wikidata
 Q3366347,Parti de libération kanak,1975,,social-démocrate,Nationalisme Kanak | Nationalisme kanak | Socialisme scientifique,Gauche (politique),,oui,,,wikipedia
 Q3240649,Ligue ouvrière révolutionnaire,1976,1987,communiste | trotskyste,Trotskisme | trotskisme,Extrême gauche en France,,,,,wikidata | wikipedia
-Q3326547,Mouvement d'action syndicale,1976,,communiste,,,,oui,,,wikipedia
+Q3326547,Mouvement d'action syndicale,1976,1980,communiste,,,,,,,wikipedia
 Q123248148,Organisation Combat anarchiste,1976,1979,anarchiste,,extrême gauche,,,,,wikipedia
 Q3355973,Organisation communiste des travailleurs,1976,1979,communiste | léniniste,marxisme-léninisme,,,,,,wikipedia
 Q3355979,Organisation communiste libertaire,1976,,anarchiste | communiste,Communisme libertaire,Extreme gauche en France,,oui,,Courant alternatif,wikipedia
@@ -181,7 +181,7 @@ Q3055019,Entente internationale des travailleurs et des peuples,1991,,trotskyste
 Q580377,Initiative démocratique de gauche,1991,,communiste | social-démocrate,Communisme | Progressisme | Réformisme | Social-démocratie | Socialisme démocratique,Gauche (politique),,oui,,,wikipedia
 Q628594,"Parti des travailleurs (France, 1991)",1991,2008,anarchiste | communiste | social-démocrate | syndicaliste révolutionnaire | trotskyste,Anarcho-syndicalisme | Communisme | Euroscepticisme | Internationalisme | Socialisme | Trotskisme | communisme | trotskisme,Extrême gauche,,,,,wikidata | wikipedia
 Q3366640,Parti progressiste démocratique guadeloupéen,1991,,communiste | social-démocrate,Autonomisme | Europhilie | Post-marxisme | Régionalisme (politique) | Social-démocratie | Socialisme démocratique | socialisme démocratique,Centre gauche | Europe Elects | Gauche en France,,oui,,,wikidata | wikipedia
-Q2838084,Alliance des syndicalistes anarchistes,1992,,anarchiste,,,,,,,wikipedia
+Q2838084,Alliance des syndicalistes anarchistes,1992,1996,anarchiste,,,,,,,wikipedia
 Q3099352,Gauche révolutionnaire,1992,,trotskyste,trotskisme,gauche,,oui,,,wikidata
 Q220945,Parti socialiste européen,1992,,,,centre gauche,oui,oui,oui,,wikidata | wikipedia
 Q21704717,Séminaire communiste international,1992,2014,,,,,,oui,,wikipedia
@@ -196,7 +196,7 @@ Q2996341,Convention pour une alternative progressiste,1994,2009,communiste | soc
 Q753711,Groupe de la Gauche au Parlement européen,1995,,,,gauche,,oui,,,wikidata | wikipedia
 Q111607481,Noyaux autonomes pour le communisme,1995,,,,extrême gauche,,,,,wikidata
 Q15300191,Unité internationale des travailleurs - Quatrième Internationale,1995,,,,extrême gauche,,oui,,,wikipedia
-Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),1996,,,,,,oui,oui,,wikipedia
+Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),1996,2011,,,,,,oui,,wikipedia
 Q3326493,Mouvement Utopia,1996,,social-démocrate,,,,oui,,,wikipedia
 Q3562502,Voix des travailleurs,1997,2000,communiste | trotskyste,Communisme | Trotskisme,Extrême gauche,,,,,wikipedia
 Q30752017,Ciné-Archives,1998,,communiste,,,,oui,,,wikipedia
@@ -303,7 +303,7 @@ Q2996664,Coordination nationale de la gauche républicaine,,,,,,,,,,wikipedia
 Q2998024,Corse social-démocrate,,,social-démocrate,Social-démocratie,Centre gauche,,oui,,,wikipedia
 Q62079328,Debout (parti politique),,,social-démocrate,écosocialisme,gauche radicale,,oui,,,wikidata | wikipedia
 Q3092073,Fédération nationale des élus socialistes et républicains,,,social-démocrate,,,,oui,,,wikipedia
-Q3092110,Fédération pour une gauche alternative,,,,,,,,,,wikipedia
+Q3092110,Fédération pour une gauche alternative,,1988,,,,,,,,wikipedia
 Q1495917,Gauche plurielle,,,,,,,oui,,,wikipedia
 Q138828808,Gauche républicaine et sociale,,,,,,,oui,,,wikidata
 Q3099336,La Gauche populaire,,,social-démocrate,,,,oui,,,wikipedia
@@ -311,18 +311,18 @@ Q3240310,Ligue communiste internationale (quatrième internationaliste),,,trotsk
 fr:Ligue communiste révolutionnaire (Bangladesh),Ligue communiste révolutionnaire (Bangladesh),,,,,,,,,,wikipedia
 Q599328,Ligue internationale des travailleurs - Quatrième Internationale,,,,,,,oui,oui,,wikipedia
 Q17008204,Ligue trotskyste de France,,,communiste | léniniste | trotskyste,Anti-impérialisme | Antifascisme | Antiracisme | Communisme | Léninisme | Marxisme | Trotskisme | trotskisme,Extrême gauche,,oui,,,wikidata | wikipedia
-Q3326581,Mouvement de la gauche progressiste,,,,,,,,,,wikipedia
+Q3326581,Mouvement de la gauche progressiste,,2008,,,,,,,,wikipedia
 Q3326656,Mouvement démocratie alsacienne,,,social-démocrate,,,,oui,,,wikipedia
 fr:Parti communiste internationaliste du Japon,Parti communiste internationaliste du Japon,,,,,,,,,,wikipedia
 Q111210969,Parti national-syndicaliste français,,,syndicaliste révolutionnaire,national-syndicalisme,,,oui,,,wikidata
-Q3366757,Parti socialiste français (1919),,,,,,,,,,wikipedia
+Q3366757,Parti socialiste français (1919),,1935,,,,,,,,wikipedia
 Q3406970,Programme commun de la gauche,,,,,,,oui,,,wikipedia
 Q3487413,Socialistes indépendants,,,,,,,,,,wikipedia
 Q135875318,Treger Disuj,,,anarchiste,anarchisme,,,oui,,,wikidata
 Q1073391,Union communiste internationaliste,,,,,,,oui,oui,Lutte de classe,wikipedia
 Q111212038,Union de la gauche socialiste et démocrate,,,,,,,oui,,,wikipedia
 Q2540732,Union des groupes et clubs socialistes,,,,,,,,,,wikipedia
-Q97168360,Union française de l'information,,,communiste,,,,oui,,,wikipedia
+Q97168360,Union française de l'information,,,communiste,,,,,,,wikipedia
 Q3550394,Union nationale pour l'indépendance,,,social-démocrate,socialisme mélanésien,,,oui,,,wikidata
 Q20653619,Zone à défendre,,,,,Extrême gauche,,oui,,,wikipedia
 Q115950346,section locale du PCF à Poissy,,,communiste,communisme,,,oui,,,wikidata
