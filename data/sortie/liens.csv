@@ -17,6 +17,7 @@ Q1332068,Q135902867,scission,1914,,,,wikipedia,wikipedia:scission_vers,Section f
 Q3366212,Q65153446,renommage,1920,11,,,wikipedia,wikipedia:succ,"Parti communiste (France, 1919)",Union anarchiste
 Q1332068,Q192821,scission,1920,,,,wikipedia,wikipedia:scission_de | wikipedia:scission_vers,Section française de l'Internationale ouvrière,Parti communiste français
 Q192821,Q3366737,scission,1923,,,,wikipedia,wikipedia:scission_vers,Parti communiste français,Parti socialiste communiste
+Q3117913,Q3086466,renommage,1927,,,,wikidata,remplacé par,Groupe régionaliste breton,Parti autonomiste breton
 Q192821,Q3366567,scission,1929,,,,wikipedia,wikipedia:scission_vers,Parti communiste français,Parti ouvrier et paysan
 Q3366567,Q534291,fusion,1930,,,,wikipedia,wikipedia:pred,Parti ouvrier et paysan,Parti d'unité prolétarienne
 Q3366737,Q534291,fusion,1930,,,,wikipedia,wikipedia:pred,Parti socialiste communiste,Parti d'unité prolétarienne
@@ -47,7 +48,7 @@ Q2406201,Q170972,fusion,1969,,,,wikipedia,wikipedia:pred | wikipedia:succ,Conven
 Q3178133,Q3240305,fusion,1969,4,,,wikipedia,wikipedia:pred | wikipedia:succ,Jeunesse communiste révolutionnaire,Ligue communiste (1969)
 Q15985231,Q170972,fusion,1969,,,,wikipedia,wikipedia:pred | wikipedia:succ,Objectif socialiste,Parti socialiste (France)
 Q1393793,Q3240305,fusion,1969,4,,,wikipedia,wikipedia:pred | wikipedia:succ,Parti communiste internationaliste,Ligue communiste (1969)
-Q1332068,Q170972,fusion,1969,,,,wikidata | wikipedia,suivi par | wikipedia:pred | wikipedia:succ,Section française de l'Internationale ouvrière,Parti socialiste (France)
+Q1332068,Q170972,fusion,1969,,,,wikidata | wikipedia,précédé par | wikipedia:pred | wikipedia:succ,Section française de l'Internationale ouvrière,Parti socialiste (France)
 Q2915458,Q170972,fusion,1969,,,,wikipedia,wikipedia:pred,Union des clubs pour le renouveau de la gauche,Parti socialiste (France)
 Q3240305,Q3458343,scission,1971,,,,wikipedia,wikipedia:scission_de,Ligue communiste (1969),Révolution !
 Q125846976,Q123136121,fusion,1971,7,,,wikipedia,wikipedia:pred,Mouvement communiste libertaire,Organisation communiste libertaire (1971-1976)
@@ -59,13 +60,13 @@ Q3240305,Q862627,renommage,1974,,,,wikidata | wikipedia,remplace | wikipedia:pre
 Q3366229,Q3366237,scission,1974,,,,wikipedia,wikipedia:scission_de,Parti communiste marxiste-léniniste de France,Parti communiste révolutionnaire (marxiste-léniniste)
 Q97367255,Q3355973,fusion,1976,12,,,wikipedia,wikipedia:pred | wikipedia:succ,Gauche ouvrière et paysanne,Organisation communiste des travailleurs
 Q1828329,Q3240649,scission,1976,,,,wikidata | wikipedia,scission de | wikipedia:scission_de | wikipedia:scission_vers,Organisation communiste internationaliste,Ligue ouvrière révolutionnaire
-Q3356082,Q3355979,filiation,1976,,,,wikidata | wikipedia,remplacé par | wikipedia:pred | wikipedia:succ,Organisation révolutionnaire anarchiste,Organisation communiste libertaire
+Q3356082,Q3355979,filiation,1976,,,,wikidata | wikipedia,remplace | wikipedia:pred | wikipedia:succ,Organisation révolutionnaire anarchiste,Organisation communiste libertaire
 Q60847144,Q1138646,renommage,1976,,,,wikidata,remplace,Partitu corsu per u sucialisimu,Front de libération nationale corse
 Q3458343,Q3355973,fusion,1976,12,,,wikidata | wikipedia,suivi par | wikipedia:pred | wikipedia:succ,Révolution !,Organisation communiste des travailleurs
 Q123248148,Q3550207,renommage,1978,3,,,wikipedia,wikipedia:succ,Organisation Combat anarchiste,Union des travailleurs communistes libertaires
 Q3356082,Q3550207,scission,1978,3,,,wikipedia,wikipedia:pred | wikipedia:scission_de | wikipedia:succ,Organisation révolutionnaire anarchiste,Union des travailleurs communistes libertaires
 Q3091443,Q3550094,scission,1979,,,,wikidata,scission de,Fédération anarchiste (francophone),Union des anarchistes
-Q93219875,Q111630485,renommage,1981,,,,wikidata,remplacé par,Alliance des jeunes pour le socialisme,Alliance des jeunes révolutionnaires
+Q93219875,Q111630485,renommage,1981,,,,wikidata,remplace,Alliance des jeunes pour le socialisme,Alliance des jeunes révolutionnaires
 Q1828329,Q3366218,renommage,1981,,,,wikipedia,wikipedia:pred | wikipedia:succ,Organisation communiste internationaliste,Parti communiste internationaliste (lambertiste)
 Q2088895,Q3366231,scission,1984,5,,,wikipedia,wikipedia:scission_de,Parti communiste martiniquais,Parti communiste pour l'indépendance et le socialisme
 Q1145020,Q3082926,scission,1984,,,,wikipedia,wikipedia:scission_vers,Union démocratique bretonne,Frankiz Breizh
@@ -91,13 +92,13 @@ Q870667,Q104210461,scission,2001,,,,wikidata,scission de,Lutte ouvrière,Alterna
 Q116459769,Q116459649,fusion,2002,,,,wikidata,remplace,Collectif national unitaire des communistes,Fédération nationale des associations pour la renaissance communiste
 Q116458474,Q116459649,fusion,2002,,,,wikidata,remplace,Coordination des militants communistes du PCF pour sa continuité révolutionnaire et sa renaissance léniniste,Fédération nationale des associations pour la renaissance communiste
 Q3091443,Q2996657,scission,2002,6,,,wikipedia,wikipedia:scission_de,Fédération anarchiste (francophone),Coordination des groupes anarchistes
-Q116456366,Q116456095,filiation,2003,,,,wikidata,remplacé par,Coordination communiste pour la reconstruction d'un parti communiste révolutionnaire,Union des révolutionnaires-communistes de France
+Q116456366,Q116456095,filiation,2003,,,,wikidata,remplace,Coordination communiste pour la reconstruction d'un parti communiste révolutionnaire,Union des révolutionnaires-communistes de France
 Q1321802,Q3326813,scission,2003,,,,wikipedia,wikipedia:scission_de | wikipedia:scission_vers,Mouvement républicain et citoyen,Mouvement pour une alternative républicaine et sociale
 Q111607481,Q111606973,renommage,2003,,,,wikidata,remplacé par,Noyaux autonomes pour le communisme,Parti communiste de France (marxiste-léniniste-maoïste)
 Q116456366,Q1694377,fusion,2004,1,,,wikidata,remplace,Coordination communiste pour la reconstruction d'un parti communiste révolutionnaire,Pôle de renaissance communiste en France
-Q116459649,Q1694377,fusion,2004,1,,,wikidata,remplace,Fédération nationale des associations pour la renaissance communiste,Pôle de renaissance communiste en France
+Q116459649,Q1694377,fusion,2004,1,,,wikidata,remplacé par,Fédération nationale des associations pour la renaissance communiste,Pôle de renaissance communiste en France
 Q192821,Q1694377,scission,2004,1,,,wikidata | wikipedia,remplace | wikipedia:scission_de | wikipedia:scission_vers,Parti communiste français,Pôle de renaissance communiste en France
-Q124422241,Q3117906,renommage,2006,,,,wikidata,remplace,Comité pour la construction du Parti ouvrier révolutionnaire,Groupe pour la construction du Parti ouvrier révolutionnaire
+Q124422241,Q3117906,renommage,2006,,,,wikidata,remplacé par,Comité pour la construction du Parti ouvrier révolutionnaire,Groupe pour la construction du Parti ouvrier révolutionnaire
 Q3326813,Q3272709,renommage,2007,3,,,wikipedia,wikipedia:pred | wikipedia:succ,Mouvement pour une alternative républicaine et sociale,MARS - Gauche républicaine
 Q170972,Q584558,scission,2007,,,,wikipedia,wikipedia:scission_vers,Parti socialiste (France),La Gauche moderne
 Q104210461,Q104209540,scission,2008,,,,wikidata,scission de,Alternative révolutionnaire socialiste - Combat,Arme Révolutionnaire Marxiste
@@ -125,9 +126,9 @@ Q2996657,Q111648344,scission,2015,,,,wikidata,scission de,Coordination des group
 Q18744486,Q21055512,renommage,2015,,,,wikipedia,wikipedia:affiliation | wikipedia:succ,Front démocrate,Union des démocrates et des écologistes
 Q628594,Q24939885,filiation,2015,11,,,wikipedia,wikipedia:succ,"Parti des travailleurs (France, 1991)","Parti des travailleurs (France, 2015)"
 Q628594,Q2638999,filiation,2015,,,,wikipedia,wikipedia:pred | wikipedia:succ,"Parti des travailleurs (France, 1991)",Parti ouvrier indépendant
-Q104187739,Q104186796,fusion,2016,,,,wikidata,remplace,Bloc rouge (Unification des maoïstes),Parti communiste maoïste
+Q104187739,Q104186796,fusion,2016,,,,wikidata,remplacé par,Bloc rouge (Unification des maoïstes),Parti communiste maoïste
 Q29348702,Q30741057,renommage,2016,6,,,wikipedia,wikipedia:pred,Front de gauche (France),Rézistan's Égalité 974
-Q104187610,Q104186796,fusion,2016,,,,wikidata,remplace,Parti communiste maoïste de France,Parti communiste maoïste
+Q104187610,Q104186796,fusion,2016,,,,wikidata,remplacé par,Parti communiste maoïste de France,Parti communiste maoïste
 Q2989703,Q63483685,scission,2016,,,oui,wikidata,remplace | scission de,Parti révolutionnaire Communistes,Parti communiste révolutionnaire de France
 Q3366765,Q107366687,scission,2016,,,,wikipedia,wikipedia:scission_vers,Parti socialiste guyanais,Nouvelle force de Guyane
 Q1618280,Q111600906,scission,2016,,,,wikidata,scission de,Voix prolétarienne,Union prolétarienne marxiste-léniniste
@@ -141,13 +142,15 @@ Q3366765,Q100989633,scission,2018,,,,wikipedia,wikipedia:scission_vers,Parti soc
 Q16010672,Q64524428,fusion,2019,6,,,wikidata | wikipedia,remplacé par | wikipedia:pred | wikipedia:succ,Alternative libertaire (France),Union communiste libertaire (francophone)
 Q2996657,Q64524428,fusion,2019,6,,,wikipedia,wikipedia:pred | wikipedia:succ,Coordination des groupes anarchistes,Union communiste libertaire (francophone)
 Q3142671,Q65143318,scission,2019,,,,wikidata,scission de,Mouvement indépendantiste martiniquais,Péyi-A
+Q21055512,Q86998495,scission,2020,,,,wikidata,scission de,Union des démocrates et des écologistes,Liberté Écologie Fraternité
 Q104186094,Q111610435,scission,2021,,,,wikidata,scission de,Jeunes révolutionnaires,Ligue de la jeunesse révolutionnaire
 Q64524428,Q110394551,scission,2021,,,,wikidata,scission de,Union communiste libertaire (francophone),Plateforme communiste libertaire
 Q3550228,Q112898155,scission,2021,,,,wikidata,scission de,Union des étudiants communistes,RED Jeunes
+Q2838275,Q105728238,renommage,2021,,,,wikidata,précédé par,Écologie au centre,Cap Écologie
 Q104186094,Q123783299,scission,2022,,,,wikidata,scission de,Jeunes révolutionnaires,Groupe maoïste révolutionnaire
 Q3326849,Q113500977,scission,2022,,,,wikidata,scission de,Mouvement des progressistes,Éducation Démocratie Dignité
 Q1045425,Q115965423,scission,2022,,,,wikidata,scission de,Nouveau Parti anticapitaliste,Nouveau Parti anticapitaliste – Révolutionnaires
-Q1045425,Q125771262,renommage,2022,,,,wikidata,suivi par,Nouveau Parti anticapitaliste,Nouveau Parti anticapitaliste – L'Anticapitaliste
+Q1045425,Q125771262,renommage,2022,,,,wikidata,précédé par,Nouveau Parti anticapitaliste,Nouveau Parti anticapitaliste – L'Anticapitaliste
 Q170972,Q135755468,scission,2023,2,,,wikidata | wikipedia,scission de | wikipedia:scission_de | wikipedia:scission_vers,Parti socialiste (France),La Convention
 Q15985232,Q127413320,fusion,2024,5,,,wikipedia,wikipedia:pred,Ensemble (parti français),L'Après
 Q111225168,Q127413320,fusion,2024,5,,,wikipedia,wikipedia:pred | wikipedia:succ,Gauche démocratique et sociale,L'Après

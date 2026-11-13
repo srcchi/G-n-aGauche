@@ -37,7 +37,19 @@ TYPES = ["Q7278", "Q7210356", "Q1572070"]
 RX_GAUCHE = re.compile(
     r"trotsk|marxis|léninis|stalinis|maoïs|anarch|communis|socialis|syndicalis|révolution|"
     r"luxemburg|conseillis|libertaire|anticapital|autogestion|antifascis|écosocialis|"
-    r"altermondialis|gauche|left|ouvri|prolétar|internationalis", re.I)
+    r"altermondialis|gauche|left|ouvri|prolétar|internationalis|"
+    r"écolog|vert|régionalis|autonomis|indépendantis|occitan|breton|basque|corse|kanak", re.I)
+
+# Organisations françaises qui ont au moins un lien de lignée, quelle que soit leur idéologie
+# (comme l'ancienne version de ce script) : le tri gauche / droite est fait par nettoyage.py.
+QUERY_LIGNEE_FR = """
+SELECT DISTINCT ?org WHERE {
+  { ?org wdt:P17 wd:Q142 . } UNION { ?org wdt:P159/wdt:P17 wd:Q142 . }
+  ?org wdt:P31/wdt:P279* wd:%s .
+  { ?org wdt:P155 [] } UNION { ?org wdt:P156 [] } UNION { ?org wdt:P1365 [] } UNION
+  { ?org wdt:P1366 [] } UNION { ?org wdt:P807 [] }
+}
+"""
 
 QUERY_DEPART = """
 SELECT ?org ?orgLabel
@@ -159,7 +171,12 @@ def collecter():
             texte = " ".join((val(row, "orgLabel"), val(row, "ideologies"), val(row, "positions")))
             if RX_GAUCHE.search(texte) and not re.search(r"droite|right", val(row, "positions"), re.I):
                 depart.add(qid(val(row, "org")))
-    print(f"{len(depart)} organisations françaises de gauche au départ.")
+    n_gauche = len(depart)
+    for t in TYPES:
+        for row in sparql(QUERY_LIGNEE_FR % t):
+            depart.add(qid(val(row, "org")))
+    print(f"{len(depart)} organisations françaises au départ ({n_gauche} de gauche, "
+          f"{len(depart) - n_gauche} autres ayant un lien de lignée).")
 
     # ---------- 2. Liens des organisations de départ, dans les deux sens ----------
     liens = set()

@@ -3,12 +3,37 @@ Q537395,Mouvement européen Allemagne,Q1006424,Réseau fédéral pour l'engageme
 Q104186211,Action révolutionnaire LGBTI,Q115922089,Action anti-transphobe,filiation,dates égales ou manquantes : sens le plus attesté
 Q1045425,Nouveau Parti anticapitaliste,Q22981822,Révolution permanente (parti politique),scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q170972,Parti socialiste (France),Q111225168,Gauche démocratique et sociale,scission,lignée : l'organisation la plus ancienne est l'ancêtre
+Q6048595,"International Association of Scientific, Technical, and Medical Publishers",Q115787221,CHORUS,appartenance,appartenance : le membre pointe vers l'organisation parente
+Q6048595,"International Association of Scientific, Technical, and Medical Publishers",Q115787224,International Federation of Reproduction Rights Organisations,appartenance,appartenance : le membre pointe vers l'organisation parente
 Q122614151,Mouvement socialiste guadeloupéen,Q7205536,Fédération guadeloupéenne du Parti socialiste,scission,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12652,Moselle,Q155144,Alsace-Lorraine,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12652,Moselle,Q2114827,Gau Westmark,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12652,Moselle,Q2900529,district de Lorraine,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12652,Moselle,Q895978,CdZ-Gebiet Lothringen,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12717,Bas-Rhin,Q155144,Alsace-Lorraine,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12717,Bas-Rhin,Q17623840,CdZ-Gebiet Elsass,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12717,Bas-Rhin,Q2150573,district de Basse-Alsace,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12717,Bas-Rhin,Q3099311,Gau Baden-Elsass,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12722,Haut-Rhin,Q155144,Alsace-Lorraine,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12722,Haut-Rhin,Q17623840,CdZ-Gebiet Elsass,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12722,Haut-Rhin,Q1999970,district de Haute-Alsace,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q12722,Haut-Rhin,Q3099311,Gau Baden-Elsass,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q235,Monaco,Q12898672,Alpes-Maritimes,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q706553,comté de Nice,Q12898672,Alpes-Maritimes,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
 Q1321802,Mouvement républicain et citoyen,Q1951112,Mouvement des citoyens (France),scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q2379359,Parti socialiste français (1902),Q1332068,Section française de l'Internationale ouvrière,scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q1774359,Alliance climatique Allemagne,Q1439265,Green Budget Germany,appartenance,appartenance : le membre pointe vers l'organisation parente
+Q158835,principauté de Liège,Q3456469,République liégeoise,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q6048595,"International Association of Scientific, Technical, and Medical Publishers",Q1667519,Union internationale des éditeurs,appartenance,appartenance : le membre pointe vers l'organisation parente
+Q1764511,G7,Q37143,G8,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
 Q192821,Parti communiste français,Q2118395,Parti communiste algérien,scission,lignée : l'organisation la plus ancienne est l'ancêtre
+Q821542,DataCite,Q19861084,ORCID,appartenance,appartenance : le membre pointe vers l'organisation parente
+Q21009145,Groupe Union pour la démocratie française,Q36438150,Groupe Union pour la démocratie française et du centre,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q2388816,groupe Union centriste,Q51239482,Groupe Union centriste-Union pour la démocratie française,filiation,dates égales ou manquantes : sens le plus attesté
 Q2989703,Parti révolutionnaire Communistes,Q63483685,Parti communiste révolutionnaire de France,scission,lignée : l'organisation la plus ancienne est l'ancêtre
+Q322763,comté de Dabo,Q95977667,province d'Alsace,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q70972,royaume de France,Q3456417,République de Saint-Malo,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
+Q457242,protectorat espagnol au Maroc,Q37102,République du Rif,filiation,lignée : l'organisation la plus ancienne est l'ancêtre
 Q426963,Parti communiste du Népal (marxiste-léniniste unifié),Q53700514,Parti communiste du Népal (2018),scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q506537,Parti communiste du Népal (centre maoïste),Q53700514,Parti communiste du Népal (2018),scission,lignée : l'organisation la plus ancienne est l'ancêtre
 Q6119666,Jacobin,Q60574856,International progressif,appartenance,appartenance : le membre pointe vers l'organisation parente
