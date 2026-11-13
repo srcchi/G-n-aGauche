@@ -1,6 +1,7 @@
 id,label,raison,voie_externe,pays_wikidata,fondation,fondation_mois,dissolution,dissolution_mois,fin_deduite,actif
 Q369760,Agence pour l'énergie nucléaire,Internationale sans membre dans le graphe,,,1958,,,,,oui
 Q42262,Agence spatiale européenne,Internationale sans membre dans le graphe,,,1975,,,,,oui
+Q368067,Alliance européenne des mouvements nationaux,Internationale sans membre dans le graphe,,,2009,,2019,,,
 Q1377195,Alliance européenne pour la liberté,Internationale sans membre dans le graphe,,,2010,,2017,,,
 Q60175,Alliance mondiale des démocrates,Internationale sans membre dans le graphe,,,2005,,2012,,,
 Q496967,Alliance of Small Island States,Internationale sans membre dans le graphe,,,1990,,,,,oui
@@ -78,8 +79,6 @@ Q862603,Union de la démocratie internationale,Internationale sans membre dans l
 Q458,Union européenne,Internationale sans membre dans le graphe,,,1993,,,,,oui
 Q30926304,Union internationale du télégraphe,Internationale sans membre dans le graphe,,,1865,,1908,,,
 Q7988404,Western Union,Internationale sans membre dans le graphe,,,1948,,1954,,,
-Q41984,Agence internationale de l'énergie atomique,hors de France,,Q40,1957,,,,,oui
-Q823428,Alliance internationale pour le souvenir de l'Holocauste,hors de France,,Q183,1998,,,,,oui
 Q2838234,Alliance pour la liberté des travailleurs,hors de France,,Q145,1966,,2015,,,
 Q160277,Alternative socialiste (Allemagne),hors de France,,Q183,1994,,,,,oui
 "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)","Alternative socialiste (Angleterre, Écosse et pays de Galles)",hors de France,,,,,,,,oui
@@ -88,18 +87,14 @@ Q3544318,Antarsya,hors de France,,Q41,2009,3,,,,oui
 Q3325616,Anticapitalistas,hors de France,,Q29,2009,,,,,oui
 Q115730512,Arman Group,hors de France,,Q794,1978,,,,,oui
 Q4807493,Association continentale américaine des travailleurs,hors de France,,Q414,,,,,,oui
-Q827525,Association internationale de développement,hors de France,,Q30,1960,,,,,oui
-Q191384,Banque internationale pour la reconstruction et le développement,hors de France,,Q30,1944,,,,,oui
 Q189150,Black Panther Party,hors de France,,Q30,1966,,1982,,,
 Q884840,Bloc de gauche,hors de France,,Q45,1999,,,,,oui
 Q522505,Bloc ouvrier et paysan,hors de France,,Q29,1930,,1936,,,
 Q682473,Centre communiste maoïste,hors de France,,Q668,1975,,2004,,,
 Q5062659,Centre des communistes indiens,hors de France,,Q668,1974,,1977,,,
 Q2973337,Circolo Operaio Comunista,hors de France,,,,,,,,oui
-Q910619,Club breton,hors de France,oui,Q70972,1789,,,,,oui
 Q980923,Coalition syndicaliste et socialiste,hors de France,,Q145,2010,,,,,oui
 Q16627908,Comité d'action révolutionnaire nord-africain,hors de France,,Q262,1938,,,,,oui
-Q2761462,Commission internationale de coopération intellectuelle,hors de France,,Q39,1922,,1946,,,
 Q19922447,Congrès démocratique des peuples,hors de France,,Q43,2011,,,,,oui
 Q19521949,Courant révolutionnaire des travailleurs,hors de France,,Q29,2005,,,,,oui
 Q15980802,Democratic Socialist Arab Ba'ath Party,hors de France,,Q858,1970,,,,,oui
@@ -112,7 +107,6 @@ Q818618,Front démocratique pour la libération de la Palestine,hors de France,,
 Q246708,Front populaire (Espagne),hors de France,,Q178038,1936,,1939,,,
 Q212884,Front populaire de libération de la Palestine,hors de France,,Q219060,1967,,,,,oui
 Q108504836,Fédération des organisations syndicalistes révolutionnaires du Brésil,hors de France,,Q155,2013,,,,,oui
-Q1608722,Fédération internationale des auberges de jeunesse,hors de France,,Q145,1932,,,,,oui
 Q1399996,Fédération ouvrière régionale argentine,hors de France,,Q414,1901,,,,,oui
 Q11506706,Fédération trotskyste japonaise,hors de France,,Q17,1957,,1957,,,
 Q2655651,Gauche anticapitaliste (Belgique),hors de France,,Q31,1971,,,,,oui
@@ -151,13 +145,10 @@ Q139679907,Nationaal-Socialistische Jeugd Vlaanderen,hors de France,,Q31,1941,,,
 Q3328040,National Front of Catalonia,hors de France,,Q29,1940,,1990,,,
 Q252141,Nouvelle Gauche (Japon),hors de France,,Q17,,,,,,oui
 Q1569985,Opposition de gauche,hors de France,,Q15180,1923,,1927,,,
-Q162656,Organisation Internationale de Protection Civile,hors de France,,Q39,1972,,,,,oui
 Q4671756,Organisation communiste d'Espagne – Drapeau rouge,hors de France,,Q29,1968,,1989,,,
 Q636947,Organisation des moudjahiddines du peuple iranien,hors de France,,Q794,1965,,,,,oui
 Q3356023,Organisation des travailleurs révolutionnaires,hors de France,,Q790,,,,,,oui
 Q12189962,Organisation des travailleurs tunisiens,hors de France,,Q948,,,,,,oui
-Q233611,Organisation hydrographique internationale,hors de France,,Q235,1921,,,,,oui
-Q201054,Organisation maritime internationale,hors de France,,Q145,1948,,,,,oui
 Q3136634,Organisation révolutionnaire des travailleurs,hors de France,,Q29,1969,,1979,,,
 Q3356088,Organisation socialiste des travailleurs (Sénégal),hors de France,,Q1041,1973,,1991,,,
 Q965481,Parti communiste (Suède),hors de France,,Q34,1970,,,,,oui
@@ -247,12 +238,10 @@ Q3376100,Perspectives tunisiennes,hors de France,,Q948,1963,,1978,,,
 Q4348010,Peykar,hors de France,,Q794,1978,,1983,,,
 Q6745159,Platform for the Unity of Action,hors de France,oui,Q29,1995,,2000,,,
 Q16059622,Podemos (parti espagnol),hors de France,,Q29,2014,,,,,oui
-Q23020118,Républicains modérés,hors de France,,Q58326 | Q71092,1848,,1870,,,
 Q3320325,Segi,hors de France,,Q29,2001,,2002,,,
 Q916900,Servir le Peuple (Norvège),hors de France,,Q20,1998,,2018,,,
 Q967759,Social-démocratie du royaume de Pologne et de Lituanie,hors de France,,Q34266,1893,,1918,,,
 Q6747255,Socialist Party of National Liberation - Provisional,hors de France,,,1974,,1979,,,
-Q656801,Société financière internationale,hors de France,,Q30,1956,,,,,oui
 Q16000050,Solidarity (parti politique irlandais),hors de France,,Q27,2014,,,,,oui
 Q21218940,Solidarité – Le peuple avant le profit,hors de France,,Q27,2015,,,,,oui
 Q286683,SolidaritéS,hors de France,,Q39,1992,,,,,oui
@@ -262,22 +251,44 @@ Q3550026,Union africaine des travailleurs communistes internationalistes,hors de
 Q3550123,Union des combattants communistes,hors de France,,Q794,1978,,1983,,,
 Q4004869,Union des communistes italiens (marxistes-léninistes),hors de France,,Q38,1968,10,1978,,,
 Q5255553,Union démocratique socialiste arabe,hors de France,,Q858,1980,,,,,oui
-Q376150,Union internationale des télécommunications,hors de France,,Q39,1865,,,,,oui
 Q131602012,Union syndicaliste libertaire,hors de France,,Q41,2003,,,,,oui
 Q3569927,Workers' Fight,hors de France,,Q145,,,,,,oui
+Q54769213,Front national pour l'Algérie française,idéologie hors périmètre : Algérie française,,Q142,1960,,1960,,,
+Q3366726,Les Progressistes,idéologie hors périmètre : Anti-indépendantis,,Q142,1981,,,,,oui
+Q1754053,Front Algérie française,idéologie hors périmètre : anti-indépendantis,,Q142,1960,,1960,,,
+Q3088504,Front national,idéologie hors périmètre : anti-indépendantis,,Q142,1984,,,,,oui
+Q138332469,Audace Lyon,idéologie hors périmètre : fascis,,Q142,,,,,,oui
+Q53089663,Bastion social,idéologie hors périmètre : fascis,,Q142,2017,,2019,,,
+Q52382965,Génération identitaire,idéologie hors périmètre : fascis,,Q142,2012,,2021,,,
+Q3326746,Mouvement nationaliste révolutionnaire,idéologie hors périmètre : fascis,,Q142,1979,,1985,,,
+Q1452622,Mouvement social révolutionnaire,idéologie hors périmètre : fascis,,Q142,1940,,1944,,,
+Q3083781,Occident,idéologie hors périmètre : fascis,,Q142,1964,,1968,,,
+Q3366546,Parti nationaliste,idéologie hors périmètre : fascis,,Q142,1958,,1959,,,
+Q1086907,Rassemblement national populaire,idéologie hors périmètre : fascis,,Q142,1941,,1944,,,
+Q13359544,Troisième Voie,idéologie hors périmètre : fascis,,Q142,1985,,2013,,,
+Q109735215,Libéraux,idéologie hors périmètre : monarchi,,Q142,1817,,1824,,,
+Q15985404,Q15985404,idéologie hors périmètre : monarchi,,,1936,,,,,oui
+Q509825,club des Feuillants,idéologie hors périmètre : monarchi,,Q142,1791,,,,,oui
+Q69323,monarchie constitutionnelle française,idéologie hors périmètre : monarchi,,Q142,1791,,1792,,,
+Q58202,monarchie de Juillet,idéologie hors périmètre : monarchi,,Q142,1830,,1848,,,
+Q37873793,Parti national-socialiste français,idéologie hors périmètre : national-socialis,,Q142,1940,,1941,,,
+Q49629,Action française,idéologie hors périmètre : nationalisme intégral,,Q70802,1899,,,,,oui
+Q28137035,Parti de la Résistance,idéologie hors périmètre : orléanis,,Q142,1832,,1848,,,
+Q2946013,Centre royaliste d'Action française,idéologie hors périmètre : royalis,,Q142,1998,,,,,oui
+Q106906187,L'Action française,idéologie hors périmètre : royalis,,Q142,2018,,,,,oui
+Q3327506,Nouvelle Action royaliste,idéologie hors périmètre : royalis,,Q142,1978,,,,,oui
+Q3087287,Mouvement ouvrier social-national breton,idéologie hors périmètre : social-national,,Q142,1941,,1941,,,
+Q2102414,Parti social-national,idéologie hors périmètre : social-national,,Q142,1933,4,1936,,,
 Q2746868,Abertzaleen Batasuna,ni positionnement de gauche ni courant reconnu,,Q142,1988,,2022,,,
 Q318161,Accords d'Helsinki,ni positionnement de gauche ni courant reconnu,,,1975,,,,,oui
 Q114867307,Achaemenid Period,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q422349,Action Allemagne Aide,ni positionnement de gauche ni courant reconnu,,Q183,2001,,,,,oui
 Q422569,Action Alliance Against AIDS,ni positionnement de gauche ni courant reconnu,,Q183,,,,,,oui
-Q49629,Action française,ni positionnement de gauche ni courant reconnu,,Q70802,1899,,,,,oui
 Q48746650,Actions antifascistes en France,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q119360125,Administration générale de l'Assistance publique à Paris,ni positionnement de gauche ni courant reconnu,,Q142,1849,,,,,oui
 Q19951601,Administration savoyarde du Pays de Vaud,ni positionnement de gauche ni courant reconnu,,Q2312639,1261,,1536,,,
 Q50828855,African Continental Free Trade Area,ni positionnement de gauche ni courant reconnu,,Q963 | Q965 | Q967 | Q970 | Q971 | Q974 | Q977 | Q983 | Q986 | Q1000 | Q1005 | Q1006 | Q1007 | Q1008 | Q1009 | Q1011 | Q1013 | Q1014 | Q79 | Q114 | Q115 | Q117 | Q258 | Q262 | Q657 | Q916 | Q924 | Q929 | Q945 | Q948 | Q953 | Q954 | Q958 | Q962 | Q1016 | Q1019 | Q1025 | Q1027 | Q1028 | Q1029 | Q1030 | Q1032 | Q1033 | Q1036 | Q1037 | Q1039 | Q1041 | Q1042 | Q1044 | Q1045 | Q1049 | Q1050 | Q40362,2018,,,,,oui
 Q2826590,Agence de coopération culturelle et technique,ni positionnement de gauche ni courant reconnu,,,1970,,2006,,,
-Q25532384,Agence européenne pour l'énergie nucléaire,ni positionnement de gauche ni courant reconnu,,,,,1972,,,
-Q1043527,Agence multilatérale de garantie des investissements,ni positionnement de gauche ni courant reconnu,,Q30,1988,,,,,oui
+Q41984,Agence internationale de l'énergie atomique,ni positionnement de gauche ni courant reconnu,,Q40,1957,,,,,oui
 Q2826686,Agence nationale pour la cohésion sociale et l'égalité des chances,ni positionnement de gauche ni courant reconnu,,Q142,2006,,2015,,,
 Q12217003,Aintab Sanjak,ni positionnement de gauche ni courant reconnu,,Q12560,1549,,,,,oui
 Q16515998,Aitzina!,ni positionnement de gauche ni courant reconnu,,,2013,,2020,,,
@@ -312,16 +323,18 @@ Q780457,Assemblée nationale législative de 1791,ni positionnement de gauche ni
 Q2867087,Assemblée nationale sous la Quatrième République,ni positionnement de gauche ni courant reconnu,,Q142,1946,,1958,,,
 Q939743,Assemblée parlementaire du Conseil de l'Europe,ni positionnement de gauche ni courant reconnu,,,1949,,,,,oui
 Q2867205,Assistance publique – Hôpitaux de Paris,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
+Q827525,Association internationale de développement,ni positionnement de gauche ni courant reconnu,,Q30,1960,,,,,oui
 Q514098,Association libre des syndicats allemands,ni positionnement de gauche ni courant reconnu,,Q183,1897,,,,,
 Q4809891,Association of learned and professional society publishers,ni positionnement de gauche ni courant reconnu,,Q145,1972,,,,,oui
-Q138332469,Audace Lyon,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q769112,Autorité européenne des marchés financiers,ni positionnement de gauche ni courant reconnu,,Q142,2011,,,,,oui
+Q464194,Autorité internationale de la Ruhr,ni positionnement de gauche ni courant reconnu,,,1949,,1952,,,
 Q660702,Autriche antérieure,ni positionnement de gauche ni courant reconnu,,Q12548,1278,,1805,,,
 Q4830622,Axe de la résistance,ni positionnement de gauche ni courant reconnu,,,1982,,,,,oui
 Q2876659,B17 Nantes,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q129162058,Baillie d'outre-Siagne,ni positionnement de gauche ni courant reconnu,,Q12548,,,,,,oui
 Q892839,Bande à Bonnot,ni positionnement de gauche ni courant reconnu,,Q142,1911,,1912,,,
 Q340195,Banque africaine de développement,ni positionnement de gauche ni courant reconnu,,Q1008,1963,,,,,oui
+Q191384,Banque internationale pour la reconstruction et le développement,ni positionnement de gauche ni courant reconnu,,Q30,1944,,,,,oui
 Q2196143,Baronnie de Bréda,ni positionnement de gauche ni courant reconnu,,Q55,,,,,,oui
 Q2886278,Bas-Empire romain,ni positionnement de gauche ni courant reconnu,,Q12544,,,,,,oui
 Q12717,Bas-Rhin,ni positionnement de gauche ni courant reconnu,,Q142,1790,,,,,oui
@@ -339,7 +352,6 @@ Q1351963,Cap21,ni positionnement de gauche ni courant reconnu,,Q142,1996,,,,,oui
 Q17623840,CdZ-Gebiet Elsass,ni positionnement de gauche ni courant reconnu,,Q1206012,1940,,1945,,,
 Q895978,CdZ-Gebiet Lothringen,ni positionnement de gauche ni courant reconnu,,Q1206012,1940,,1945,,,
 Q199955,Cent-Jours,ni positionnement de gauche ni courant reconnu,,Q71084,,,,,,oui
-Q2946013,Centre royaliste d'Action française,ni positionnement de gauche ni courant reconnu,,Q142,1998,,,,,oui
 Q115922204,Cercle Maximilien Robespierre,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q320283,Chambre des députés,ni positionnement de gauche ni courant reconnu,,Q142,1814,,1942,,,
 Q58910280,Chambre des députés,ni positionnement de gauche ni courant reconnu,,Q70802,1875,,1940,,,
@@ -365,6 +377,8 @@ Q133288177,Comité féminin,ni positionnement de gauche ni courant reconnu,,Q142
 Q1205859,Comité national allemand du travail international de jeunesse,ni positionnement de gauche ni courant reconnu,,Q183,1953,,,,,oui
 Q2367720,Commandement en chef français civil et militaire,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q17625061,Commissariat général à l'égalité des territoires,ni positionnement de gauche ni courant reconnu,,Q142,2014,,2019,,,
+Q2761462,Commission internationale de coopération intellectuelle,ni positionnement de gauche ni courant reconnu,,Q39,1922,,1946,,,
+Q1666432,Commission internationale de la navigation aérienne,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q5152967,Committee for the Coordination of Statistical Activities,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q780092,Committee of European Securities Regulators,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q7785,Commonwealth,ni positionnement de gauche ni courant reconnu,,Q16 | Q145 | Q408 | Q664 | Q668 | Q124653007,1931,,,,,oui
@@ -375,8 +389,8 @@ Q1122980,Comtat Venaissin,ni positionnement de gauche ni courant reconnu,,Q17017
 Q154741,Confédération du Rhin,ni positionnement de gauche ni courant reconnu,,,1806,,1813,,,
 Q151624,Confédération germanique,ni positionnement de gauche ni courant reconnu,,,1815,,1866,,,
 Q1125638,Confédération générale du travail,ni positionnement de gauche ni courant reconnu,,Q142,1895,,,,,oui
+Q55078537,Confédération internationale du travail,ni positionnement de gauche ni courant reconnu,,,2018,,,,,oui
 Q2993746,Conseil de défense de l'Empire,ni positionnement de gauche ni courant reconnu,,,1940,,1941,,,
-Q8908,Conseil de l'Europe,ni positionnement de gauche ni courant reconnu,,Q142,1949,,,,,oui
 Q1654951,Conseil de planification des TI,ni positionnement de gauche ni courant reconnu,,Q183,,,,,,oui
 Q37470,Conseil de sécurité des Nations unies,ni positionnement de gauche ni courant reconnu,,,1945,,,,,oui
 Q131720477,Conseil du CERN,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
@@ -406,8 +420,6 @@ Q107124778,Décanat du Professeur Alain Desrayaud,ni positionnement de gauche ni
 Q107124759,Décanat du Professeur Laurent Gamet,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q184646,Décapole,ni positionnement de gauche ni courant reconnu,,Q70972,1354,,1679,,,
 Q125362513,Défense collective,ni positionnement de gauche ni courant reconnu,,Q142,2016,,,,,oui
-Q3043395,Délégation aux Affaires stratégiques,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q3043437,Délégation interministérielle à l'aménagement du territoire et à l'attractivité régionale,ni positionnement de gauche ni courant reconnu,,Q142,1963,,2009,,,
 Q6972194,Démocratie nationale (Philippines),ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q3044770,Département des recherches archéologiques subaquatiques et sous-marines,ni positionnement de gauche ni courant reconnu,,Q142,1996,,,,,oui
 Q3045937,EIROforum,ni positionnement de gauche ni courant reconnu,,Q183,,,,,,oui
@@ -449,7 +461,6 @@ Q7804,Fonds monétaire international,ni positionnement de gauche ni courant reco
 Q119499537,Force de la patrie,ni positionnement de gauche ni courant reconnu,,Q414,2023,,,,,oui
 Q73316831,Forces du pacte de l'Alternative démocratique,ni positionnement de gauche ni courant reconnu,,Q262,2019,,,,,oui
 Q1439219,Forum Menschenrechte,ni positionnement de gauche ni courant reconnu,,Q183,1994,,,,,oui
-Q7886981,Forum régional de l'ASEAN,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q142,France,ni positionnement de gauche ni courant reconnu,,Q142,1792,,,,,oui
 Q152582,France libre,ni positionnement de gauche ni courant reconnu,,,1940,,1943,,,
 Q468902,Francie médiane,ni positionnement de gauche ni courant reconnu,,,843,,855,,,
@@ -459,9 +470,8 @@ Q51780070,Frantiq,ni positionnement de gauche ni courant reconnu,,Q142,1984,,,,,
 Q165269,Frise orientale,ni positionnement de gauche ni courant reconnu,,Q183,,,,,,oui
 Q107877569,Front national,ni positionnement de gauche ni courant reconnu,,Q142,1972,,,,,oui
 Q3088581,Front républicain (1956),ni positionnement de gauche ni courant reconnu,,Q142,1956,,1957,,,
+Q1608722,Fédération internationale des auberges de jeunesse,ni positionnement de gauche ni courant reconnu,,Q145,1932,,,,,oui
 Q179456,Fédération républicaine,ni positionnement de gauche ni courant reconnu,,Q142,1903,,1940,,,
-Q10287157,G6,ni positionnement de gauche ni courant reconnu,,,1975,,1976,,,
-Q37143,G8,ni positionnement de gauche ni courant reconnu,,,1997,,2014,,,
 Q3099311,Gau Baden-Elsass,ni positionnement de gauche ni courant reconnu,,Q7318 | Q41304 | Q1206012,1925,,1945,,,
 Q2114827,Gau Westmark,ni positionnement de gauche ni courant reconnu,,Q1206012,1925,,1945,,,
 Q38060,Gaule,ni positionnement de gauche ni courant reconnu,,Q31 | Q32 | Q38 | Q39 | Q55 | Q142 | Q183,,,,,,oui
@@ -502,21 +512,15 @@ Q47171780,Groupe Démocrate populaire,ni positionnement de gauche ni courant rec
 Q3345028,Groupe Nouveau Centre,ni positionnement de gauche ni courant reconnu,,Q142,2007,,2012,,,
 Q2372604,Groupe Octobre,ni positionnement de gauche ni courant reconnu,,Q142,1932,,,,,oui
 Q35415418,Groupe Rassemblement pour la République,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q51239847,Groupe Union centriste et républicaine,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
-Q51239482,Groupe Union centriste-Union pour la démocratie française,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q3550126,Groupe Union des démocrates et indépendants,ni positionnement de gauche ni courant reconnu,,Q142,2012,,2017,,,
-Q51239901,Groupe Union des démocrates et indépendants-Union centriste,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q33768451,Groupe Union démocratique,ni positionnement de gauche ni courant reconnu,,Q142,1902,,1910,,,
 Q51078616,Groupe Union démocratique pour la V° République,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q21009145,Groupe Union pour la démocratie française,ni positionnement de gauche ni courant reconnu,,Q142,1978,,2007,,,
 Q36438150,Groupe Union pour la démocratie française et du centre,ni positionnement de gauche ni courant reconnu,,Q142,1993,,1997,,,
 Q51078586,Groupe Union pour la nouvelle République-UDT,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q3117589,Groupe Union pour un mouvement populaire,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q16682011,Groupe Union progressiste,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q166079,Groupe Union républicaine,ni positionnement de gauche ni courant reconnu,,Q142,1871,,1885,,,
 Q47170389,Groupe de l'Entente républicaine démocratique,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q3550049,Groupe de l'Union centriste des démocrates de progrès,ni positionnement de gauche ni courant reconnu,,Q142,1968,,1983,,,
-Q51188280,Groupe de l'Union des Républicains et des Indépendants,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q51078659,Groupe de l'Union des démocrates pour la République,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q51078558,Groupe de l'Union pour la nouvelle République,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q2012835,Groupe de l'Union républicaine démocratique,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
@@ -524,8 +528,6 @@ Q47170586,Groupe de la Fédération républicaine,ni positionnement de gauche ni
 Q50855610,Groupe de la Fédération républicaine de France,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q51479244,Groupe des Démocrates,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q51479574,Groupe des Démocrates populaires,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q51188516,Groupe des Républicains et des Indépendants,ni positionnement de gauche ni courant reconnu,,,1993,,2002,,,
-Q51239065,Groupe des Républicains populaires et du Centre démocratique,ni positionnement de gauche ni courant reconnu,,,,,1968,,,
 Q5611262,Groupe pour l'observation de la Terre,ni positionnement de gauche ni courant reconnu,,Q39,2003,,,,,oui
 Q133459689,Génération Espoir Dignité Résistance,ni positionnement de gauche ni courant reconnu,,Q142,2024,,,,,oui
 Q1098820,Gênes,ni positionnement de gauche ni courant reconnu,,Q142,1805,,1814,,,
@@ -545,7 +547,6 @@ Q139020,Institut international de statistique,ni positionnement de gauche ni cou
 Q3152418,Institut national de police scientifique,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q3152430,Institut national des hautes études de la sécurité et de la justice,ni positionnement de gauche ni courant reconnu,,Q142,2009,,2020,,,
 Q21684727,Institut national des hautes études de sécurité,ni positionnement de gauche ni courant reconnu,,Q142,2004,,2009,,,
-Q3153043,Inter-Agency Space Debris Coordination Committee,ni positionnement de gauche ni courant reconnu,,,1993,,,,,oui
 Q124460707,International Alliance of Research Library Associations,ni positionnement de gauche ni courant reconnu,,,2016,,,,,oui
 Q6048595,"International Association of Scientific, Technical, and Medical Publishers",ni positionnement de gauche ni courant reconnu,,Q55,1994,,,,,oui
 Q6049327,International Coalition of Library Consortia,ni positionnement de gauche ni courant reconnu,,,1996,,,,,oui
@@ -617,29 +618,20 @@ Q100249920,Office international de la vigne et du vin,ni positionnement de gauch
 Q1417993,Oikocredit,ni positionnement de gauche ni courant reconnu,,,1975,,,,,oui
 Q3353202,Open Source Development Labs,ni positionnement de gauche ni courant reconnu,,Q30,2000,,,,,oui
 Q1051984,OpenDemocracy.net,ni positionnement de gauche ni courant reconnu,,Q145,2001,,,,,oui
-Q101069148,Organisation ITER,ni positionnement de gauche ni courant reconnu,,,2007,,,,,oui
 Q388001,Organisation commune africaine et malgache,ni positionnement de gauche ni courant reconnu,,,1965,,,,,oui
 Q26683,Organisation de libération de la Palestine,ni positionnement de gauche ni courant reconnu,,Q219060,1964,,,,,oui
-Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture",ni positionnement de gauche ni courant reconnu,,Q142,1945,,,,,oui
-Q294278,"Organisation des États d’Afrique, des Caraïbes et du Pacifique",ni positionnement de gauche ni courant reconnu,,,1975,,,,,oui
-Q277252,Organisation du traité de l'Asie du Sud-Est,ni positionnement de gauche ni courant reconnu,,Q869,1954,,1977,,,
 Q3057312,Organisation européenne de coopération économique,ni positionnement de gauche ni courant reconnu,,,1948,,1961,,,
+Q201054,Organisation maritime internationale,ni positionnement de gauche ni courant reconnu,,Q145,1948,,,,,oui
 Q177773,Organisation mondiale de la propriété intellectuelle,ni positionnement de gauche ni courant reconnu,,Q39,1967,,,,,oui
-Q605326,Organisation mondiale des douanes,ni positionnement de gauche ni courant reconnu,,Q31,1953,,,,,oui
-Q842490,Organisation pour l'interdiction des armes chimiques,ni positionnement de gauche ni courant reconnu,,Q55,1997,,,,,oui
-Q81299,Organisation pour la sécurité et la coopération en Europe,ni positionnement de gauche ni courant reconnu,,Q40,1975,,,,,oui
 Q26828307,Oui la Bretagne,ni positionnement de gauche ni courant reconnu,,,,,,,,
 Q3934822,Pachalik de Damas,ni positionnement de gauche ni courant reconnu,,Q12560,1517,,1865,,,
 fr:Parti Majdur,Parti Majdur,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q7260861,Parti Purba Banglar Sarbahara,ni positionnement de gauche ni courant reconnu,,Q902,,,,,,oui
-Q3366274,Parti de l'Ordre,ni positionnement de gauche ni courant reconnu,,Q142,1848,,1852,,,
-Q28137035,Parti de la Résistance,ni positionnement de gauche ni courant reconnu,,Q142,1832,,1848,,,
 Q3366385,Parti du peuple algérien,ni positionnement de gauche ni courant reconnu,,Q262,1937,,1939,,,
 Q3366425,Parti démocrate français,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q3366676,Parti républicain,ni positionnement de gauche ni courant reconnu,,Q142,1977,,1997,,,
 Q1820941,Parti républicain de la liberté,ni positionnement de gauche ni courant reconnu,,Q142,1945,,1951,,,
 Q3366725,Parti social français,ni positionnement de gauche ni courant reconnu,,Q142,1936,,1940,,,
-Q2102414,Parti social-national,ni positionnement de gauche ni courant reconnu,,Q142,1933,4,1936,,,
 Q111187242,Pays Unis,ni positionnement de gauche ni courant reconnu,,Q142,2022,,,,,oui
 Q116142837,People's Mohajerin Organization of Iran,ni positionnement de gauche ni courant reconnu,,Q794,1974,,,,,oui
 Q117225313,People's Mojahedin Movement of Iran,ni positionnement de gauche ni courant reconnu,,Q794,1976,,,,,oui
@@ -703,7 +695,6 @@ Q33242,Royaume de Provence,ni positionnement de gauche ni courant reconnu,,,855,
 Q854415,Royaume lombard,ni positionnement de gauche ni courant reconnu,,,568,,774,,,
 Q1048918,Royaume suève,ni positionnement de gauche ni courant reconnu,,,409,,585,,,
 Q2940142,Royaume wisigoth de Tolède,ni positionnement de gauche ni courant reconnu,,Q29,549,,711,,,
-Q2239200,Républicains sociaux,ni positionnement de gauche ni courant reconnu,,Q142,1954,,1958,,,
 Q188553,République batave,ni positionnement de gauche ni courant reconnu,,Q188553,1795,,1806,,,
 Q2313140,République bouillonnaise,ni positionnement de gauche ni courant reconnu,,Q31,1794,,1795,,,
 Q690821,République de Bade,ni positionnement de gauche ni courant reconnu,,Q1206012,1918,,1933,,,
@@ -738,9 +729,9 @@ Q2358039,Seconde Restauration,ni positionnement de gauche ni courant reconnu,,Q1
 Q16683505,Seizième législature de la Troisième République française,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q3491990,Service central de la police technique et scientifique,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q108616480,Service de la navigation aérienne,ni positionnement de gauche ni courant reconnu,,Q142,1950,,1961,,,
-Q104601946,Service national de police scientifique,ni positionnement de gauche ni courant reconnu,,Q142,2021,,,,,oui
 Q3480490,Service technique de la navigation aérienne,ni positionnement de gauche ni courant reconnu,,Q142,1961,,2005,,,
 Q105077092,Shibboleth Consortium,ni positionnement de gauche ni courant reconnu,,,2013,,,,,oui
+Q656801,Société financière internationale,ni positionnement de gauche ni courant reconnu,,Q30,1956,,,,,oui
 Q48758020,State of the Prince Primate,ni positionnement de gauche ni courant reconnu,,Q154741,1806,,1810,,,
 Q2527360,Stura,ni positionnement de gauche ni courant reconnu,,Q142,1802,,1814,,,
 Q58894659,Support transgenre Strasbourg,ni positionnement de gauche ni courant reconnu,,Q142,2002,,,,,oui
@@ -768,13 +759,12 @@ Q118546513,Union des gaullistes de progrès,ni positionnement de gauche ni coura
 Q28493459,Union des jeunes filles de France,ni positionnement de gauche ni courant reconnu,,Q142,1936,,1974,,,
 Q370862,Union du Maghreb arabe,ni positionnement de gauche ni courant reconnu,,,1989,,,,,oui
 Q2680115,Union démocratique du travail,ni positionnement de gauche ni courant reconnu,,Q142,1959,,1966,,,
-Q1377612,Union européenne des paiements,ni positionnement de gauche ni courant reconnu,,,1950,,,,,oui
 Q97168360,Union française de l'information,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,
 Q16682000,Union fédérale des étudiants,ni positionnement de gauche ni courant reconnu,,Q142,1926,,1938,,,
+Q376150,Union internationale des télécommunications,ni positionnement de gauche ni courant reconnu,,Q39,1865,,,,,oui
 Q16682004,Union libérale républicaine,ni positionnement de gauche ni courant reconnu,,Q142,1889,,1903,,,
 Q442612,Union populaire républicaine,ni positionnement de gauche ni courant reconnu,,Q142,1919,,1946,,,
 Q17495,Union postale universelle,ni positionnement de gauche ni courant reconnu,,Q39,1874,,,,,oui
-Q192177,Union pour la Méditerranée,ni positionnement de gauche ni courant reconnu,,Q29,2008,,,,,oui
 Q3550421,Union pour la défense de la République,ni positionnement de gauche ni courant reconnu,,Q142,1968,,1971,,,
 Q7223378,Union pour la nouvelle République,ni positionnement de gauche ni courant reconnu,,Q142,1958,,1967,,,
 Q3550666,Unir (association politique),ni positionnement de gauche ni courant reconnu,,,,,2009,,,
@@ -800,20 +790,19 @@ Q3574793,Zaouia d'Illigh,ni positionnement de gauche ni courant reconnu,,,1600,,
 Q1225399,Zaouïa Dila'iya,ni positionnement de gauche ni courant reconnu,,Q1028,,,,,,oui
 Q190808,Zentralstelle für Recht und Schutz der Kriegsdienstverweigerer aus Gewissensgründen,ni positionnement de gauche ni courant reconnu,,Q183,1957,,2014,,,
 Q206810,Ziviler Friedensdienst,ni positionnement de gauche ni courant reconnu,,Q183,1996,,,,,oui
+Q3497642,Zone internationale de Tanger,ni positionnement de gauche ni courant reconnu,,Q29 | Q30 | Q31 | Q34 | Q38 | Q45 | Q55 | Q142 | Q145 | Q1028,1924,,1956,,,
 Q110007868,Zouaves Paris,ni positionnement de gauche ni courant reconnu,,Q142,2018,,2022,,,
 Q2820602,abbaye de Hohenbourg,ni positionnement de gauche ni courant reconnu,,Q142,601,,,,,oui
 Q54818777,abbaye impériale de Wissembourg,ni positionnement de gauche ni courant reconnu,,Q12548,974,,1789,,,
 Q118398,arXiv,ni positionnement de gauche ni courant reconnu,,Q30,1991,,,,,oui
 Q1614383,baronnie de Fleckenstein,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q4899891,beylicat de Tunis,ni positionnement de gauche ni courant reconnu,,,1705,,1881,,,
-Q2928385,bureau des finances,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q12490507,califat Rachidun,ni positionnement de gauche ni courant reconnu,,,632,,661,,,
 Q199688,califat almohade,ni positionnement de gauche ni courant reconnu,,,1121,,1269,,,
 Q171740,califat de Cordoue,ni positionnement de gauche ni courant reconnu,,Q29 | Q38 | Q39 | Q45 | Q142 | Q228 | Q262 | Q1028 | Q1410,929,,1031,,,
 Q2945536,centre des hautes études du ministère de l'Intérieur,ni positionnement de gauche ni courant reconnu,,Q142,2010,,,,,oui
 Q110304901,centre national de la recherche archéologique subaquatique,ni positionnement de gauche ni courant reconnu,,Q142,1980,,1996,,,
 Q115682002,coalition pour l'évaluation de la recherche,ni positionnement de gauche ni courant reconnu,,,2022,,,,,oui
-Q605883,communauté des États sahélo-sahariens,ni positionnement de gauche ni courant reconnu,,,1998,,,,,oui
 Q2991084,comté d'Anjou,ni positionnement de gauche ni courant reconnu,,Q142,930,,1360,,,
 Q642314,comté de Bourgogne,ni positionnement de gauche ni courant reconnu,,Q12548,982,,1678,,,
 Q2532161,comté de Bruxelles,ni positionnement de gauche ni courant reconnu,,Q660393,900,,1183,,,
@@ -1004,16 +993,11 @@ Q693669,grand-duché d'Oldenbourg,ni positionnement de gauche ni courant reconnu
 Q186320,grand-duché de Bade,ni positionnement de gauche ni courant reconnu,,Q183 | Q151624 | Q1206012,1806,,1918,,,
 Q3113477,grand-gouvernement de Lorraine-et-Barrois,ni positionnement de gauche ni courant reconnu,,Q142,1766,,1790,,,
 Q51298971,groupe Démocratie libérale et indépendants,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
-Q63536974,groupe Ensemble Île-de-France au conseil régional d'Île-de-France,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q36435376,groupe Les Républicains (Assemblée nationale),ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q33959094,groupe Les Républicains (Sénat),ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q137266675,groupe Les Républicains Libres et Indépendants,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
-Q2388816,groupe Union centriste,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q51298781,groupe Union pour la majorité présidentielle,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q1984090,groupe Union pour un mouvement populaire,ni positionnement de gauche ni courant reconnu,,Q142,,,,,,oui
 Q1046625,groupe de Casablanca,ni positionnement de gauche ni courant reconnu,,,1961,,1963,,,
 Q20679611,groupe de Monrovia,ni positionnement de gauche ni courant reconnu,,,1961,,1963,,,
-Q64681810,groupe des Républicains – Val-de-Marne autrement au conseil départemental du Val-de-Marne,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q61658497,infrastructure nationale allemande pour les données de recherche,ni positionnement de gauche ni courant reconnu,,Q183,2020,,,,,oui
 Q155024,ligue de Smalkalde,ni positionnement de gauche ni courant reconnu,,Q12548,1531,,,,,oui
 Q707801,limes de Germanie,ni positionnement de gauche ni courant reconnu,,Q55 | Q183,9,,,,,oui
@@ -1022,8 +1006,6 @@ Q1614009,maison de Ribeaupierre,ni positionnement de gauche ni courant reconnu,,
 Q772861,marquisat d’Anvers,ni positionnement de gauche ni courant reconnu,,Q12548,,,,,,oui
 Q384535,mission conjointe des Nations unies et de l'Union africaine au Darfour,ni positionnement de gauche ni courant reconnu,,,2007,,2020,,,
 Q650224,mission de l'Union africaine au Soudan,ni positionnement de gauche ni courant reconnu,,Q1049,,,2007,,,
-Q69323,monarchie constitutionnelle française,ni positionnement de gauche ni courant reconnu,,Q142,1791,,1792,,,
-Q58202,monarchie de Juillet,ni positionnement de gauche ni courant reconnu,,Q142,1830,,1848,,,
 Q4145971,moutassarifat de Jérusalem,ni positionnement de gauche ni courant reconnu,,Q12560,1872,,1917,,,
 Q3326429,moutassarifat du Mont-Liban,ni positionnement de gauche ni courant reconnu,,Q12560,1861,,1918,,,
 Q16931679,overthrow of the Roman monarchy,ni positionnement de gauche ni courant reconnu,,Q201038,,,,,,oui
@@ -1116,6 +1098,74 @@ Q1337854,émirat de Cordoue,ni positionnement de gauche ni courant reconnu,,,756
 Q428995,époque hellénistique,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q5990386,époque prophétique,ni positionnement de gauche ni courant reconnu,,,,,,,,oui
 Q207304,états généraux,ni positionnement de gauche ni courant reconnu,,Q70972,,,,,,oui
+Q119360125,Administration générale de l'Assistance publique à Paris,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1849,,,,,oui
+Q25532384,Agence européenne pour l'énergie nucléaire,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,1972,,,
+Q826700,Agence internationale de l'énergie,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1974,,,,,oui
+Q1043527,Agence multilatérale de garantie des investissements,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q30,1988,,,,,oui
+Q823428,Alliance internationale pour le souvenir de l'Holocauste,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q183,1998,,,,,oui
+Q910619,Club breton,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q70972,1789,,,,,oui
+Q2981072,Coalition des Gauches,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1989,,1994,,,
+Q8908,Conseil de l'Europe,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1949,,,,,oui
+Q55469706,Direction générale des relations internationales et de la stratégie,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2015,,,,,oui
+Q3043395,Délégation aux Affaires stratégiques,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q3043437,Délégation interministérielle à l'aménagement du territoire et à l'attractivité régionale,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1963,,2009,,,
+Q7886981,Forum régional de l'ASEAN,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,,,,oui
+Q3091642,Fédération des gauches,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1914,,,,,oui
+Q10287157,G6,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1975,,1976,,,
+Q37143,G8,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1997,,2014,,,
+Q106508149,Gauche constitutionnelle,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1870,,,,,oui
+Q3777325,Groupe Arc-en-ciel,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1984,,1989,,,
+Q51239847,Groupe Union centriste et républicaine,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,,,,oui
+Q51239482,Groupe Union centriste-Union pour la démocratie française,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q51239901,Groupe Union des démocrates et indépendants-Union centriste,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,,,,oui
+Q3117589,Groupe Union pour un mouvement populaire,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q7284646,Groupe arc-en-ciel,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1989,,1994,,,
+Q2053255,Groupe communiste et apparentés,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1973,,1989,,,
+Q2724226,"Groupe communiste, républicain, citoyen et écologiste","pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q3550049,Groupe de l'Union centriste des démocrates de progrès,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1968,,1983,,,
+Q51188280,Groupe de l'Union des Républicains et des Indépendants,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,,,,oui
+Q3099340,Groupe de la Gauche démocratique,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q2320765,Groupe de la Gauche républicaine,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q51188516,Groupe des Républicains et des Indépendants,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1993,,2002,,,
+Q51239065,Groupe des Républicains populaires et du Centre démocratique,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,1968,,,
+Q26212895,Groupe démocratique socialiste de la Communauté,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q2375582,Groupe écologiste,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q3153043,Inter-Agency Space Debris Coordination Committee,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1993,,,,,oui
+Q134620119,"La Commune, groupe révolutionnaire socialiste","pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1888,,,,,oui
+Q281349,Montagne,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1849,,1852,,,
+Q101069148,Organisation ITER,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,2007,,,,,oui
+Q162656,Organisation Internationale de Protection Civile,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q39,1972,,,,,oui
+Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture","pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1945,,,,,oui
+Q294278,"Organisation des États d’Afrique, des Caraïbes et du Pacifique","pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1975,,,,,oui
+Q277252,Organisation du traité de l'Asie du Sud-Est,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q869,1954,,1977,,,
+Q233611,Organisation hydrographique internationale,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q235,1921,,,,,oui
+Q134102,Organisation internationale de la francophonie,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1970,,,,,oui
+Q1317185,Organisation internationale de la vigne et du vin,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2001,,,,,oui
+Q605326,Organisation mondiale des douanes,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q31,1953,,,,,oui
+Q842490,Organisation pour l'interdiction des armes chimiques,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q55,1997,,,,,oui
+Q81299,Organisation pour la sécurité et la coopération en Europe,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q40,1975,,,,,oui
+Q3366274,Parti de l'Ordre,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1848,,1852,,,
+Q64590185,Renew Europe,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,2019,,,,,oui
+Q23020118,Républicains modérés,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q58326 | Q71092,1848,,1870,,,
+Q2239200,Républicains sociaux,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1954,,1958,,,
+Q104601946,Service national de police scientifique,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2021,,,,,oui
+Q1377612,Union européenne des paiements,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1950,,,,,oui
+Q192177,Union pour la Méditerranée,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q29,2008,,,,,oui
+Q2928385,bureau des finances,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q605883,communauté des États sahélo-sahariens,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1998,,,,,oui
+Q63536974,groupe Ensemble Île-de-France au conseil régional d'Île-de-France,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,,,,oui
+Q33959094,groupe Les Républicains (Sénat),"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q137266675,groupe Les Républicains Libres et Indépendants,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q2388816,groupe Union centriste,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q50910195,groupe communiste républicain citoyen et écologiste,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q64681810,groupe des Républicains – Val-de-Marne autrement au conseil départemental du Val-de-Marne,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,,,,oui
+Q1822853,groupe socialiste (Sénat),"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1959,,,,,oui
+Q53516488,groupe socialiste et républicain,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2015,,,,,oui
+Q131672928,groupe socialiste révolutionnaire,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q133250601,"groupe socialiste, écologiste et radical au conseil régional d'Île-de-France","pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q94699094,groupe Écologie démocratie solidarité,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2020,,,,,oui
+Q112078449,groupe Écologie et Solidarité à l'Assemblée des Français de l'étranger,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
+Q820122,montagnards,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1793,,1795,,,
 Q138306884,33 rue des Vignoles,"pas une organisation politique (journal, librairie, think tank...)",,Q142,1970,,,,,oui
 Q16010013,Action antifasciste Paris-Banlieue,"pas une organisation politique (journal, librairie, think tank...)",,Q142,2008,,,,,oui
 Q1205152,Alliance allemande pour la protection de la nature,"pas une organisation politique (journal, librairie, think tank...)",,Q183,1950,,,,,oui
@@ -1240,7 +1290,6 @@ Q1054196,Centre des démocrates sociaux,positionnement : centre droit,,Q142,1976
 Q686372,Démocratie libérale,positionnement : centre droit,,Q142,1997,,2002,,,
 Q3366506,Parti libéral démocrate,positionnement : centre droit,,Q142,2008,,2018,,,
 Q1092773,Thermidorien,positionnement : centre droit,,Q142,1794,,1799,,,
-Q509825,club des Feuillants,positionnement : centre droit,,Q142,1791,,,,,oui
 Q109929254,Ensemble pour la République (France),positionnement : centre droit centrisme,,Q142,2021,,,,,oui
 Q587370,Mouvement démocrate (France),positionnement : centre droit centrisme,,Q142,2007,,,,,oui
 Q427965,Parti radical de gauche,positionnement : centre gauche Centre gauche | Centrisme,,Q142,1972,,,,,oui
@@ -1256,7 +1305,6 @@ Q2053544,"L'Alliance républicaine, écologiste et sociale",positionnement : cen
 Q45149423,Mouvement radical,positionnement : centrisme,,Q142,2017,,,,,oui
 Q2697626,Parti démocrate populaire,positionnement : centrisme,,Q142,1924,,1940,,,
 Q43093,Parti nationaliste basque,positionnement : centrisme,,Q29 | Q142,1895,,,,,oui
-Q64590185,Renew Europe,positionnement : centrisme,,,2019,,,,,oui
 Q251300,Parti breton,positionnement : centrisme Centrisme politique en France | centre gauche | centre droit,,Q142,2002,,,,,oui
 Q135035384,La France humaniste,positionnement : centrisme centre droit,,Q142,2025,,,,,oui
 Q853418,Les Centristes,positionnement : centrisme centre droit,,Q142,2007,,,,,oui
@@ -1273,25 +1321,17 @@ Q30041450,577 Les indépendants,positionnement : droite centre droit,,Q142,2016,
 Q173152,Union pour un mouvement populaire,positionnement : droite centre droit,,Q142,2002,,2015,,,
 Q12962,Debout la France,positionnement : droite extrême droite extrême droite politique,,Q142,1999,,,,,oui
 Q107467470,Asla,positionnement : extrême droite,,Q142,2021,,,,,oui
-Q53089663,Bastion social,positionnement : extrême droite,,Q142,2017,,2019,,,
 Q110607053,Cercle du Panthéon,positionnement : extrême droite,,Q142,1959,,1972,,,
 Q101003153,Collectif Némésis,positionnement : extrême droite,,Q142,2019,,,,,oui
 Q63456377,Dissidence française,positionnement : extrême droite,,Q142,2011,,2020,,,
 Q3088519,Front national des combattants,positionnement : extrême droite,,Q142,1957,,1961,,,
-Q54769213,Front national pour l'Algérie française,positionnement : extrême droite,,Q142,1960,,1960,,,
 Q3091725,Fédération des étudiants nationalistes,positionnement : extrême droite,,Q142,1960,,1967,,,
-Q52382965,Génération identitaire,positionnement : extrême droite,,Q142,2012,,2021,,,
-Q106906187,L'Action française,positionnement : extrême droite,,Q142,2018,,,,,oui
 Q123766218,La Citadelle,positionnement : extrême droite,,Q142,2013,,,,,oui
 Q126934263,Les Remparts,positionnement : extrême droite,,Q142,2021,,2024,,,
 Q105616754,Mouvement national-démocrate,positionnement : extrême droite,,Q142,2020,,,,,oui
-Q3326746,Mouvement nationaliste révolutionnaire,positionnement : extrême droite,,Q142,1979,,1985,,,
-Q3083781,Occident,positionnement : extrême droite,,Q142,1964,,1968,,,
 Q693622,Parti chrétien-démocrate,positionnement : extrême droite,,Q142,2001,,,,,oui
-Q3366546,Parti nationaliste,positionnement : extrême droite,,Q142,1958,,1959,,,
 Q3419877,Rassemblement Bleu Marine,positionnement : extrême droite,,Q142,2012,,,,,oui
 Q205150,Rassemblement national,positionnement : extrême droite,,Q142,1972,,,,,oui
-Q13359544,Troisième Voie,positionnement : extrême droite,,Q142,1985,,2013,,,
 Q127038760,Union des droites pour la République,positionnement : extrême droite,,Q142,2012,,,,,oui
 Q1367039,Euronat,positionnement : extrême droite anticommunisme national-conservatisme opposition à l'immigration euroscepticisme populisme de droite ultranationalisme,,,2005,,2010,,,
 Q3117938,Groupe union défense,positionnement : ultradroite,,Q142,1968,,2024,,,

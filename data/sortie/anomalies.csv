@@ -1,9 +1,5 @@
 source,target,relation,source_date,target_date,probable_cause,source_nom,target_nom,sources
 Q16215381,Q123785828,filiation,2013,2023,type de relation erroné : lien de lignée entre une organisation et une Internationale (affiliation ?),Initiative des partis communistes et ouvriers,Action Communiste Européenne,wikidata
-Q2053255,Q5413380,filiation,1973,1989,type de relation erroné : lien de lignée entre une organisation et une Internationale (affiliation ?),Groupe communiste et apparentés,Gauche unitaire européenne,wikidata
-Q2981072,Q5413387,filiation,1989,1994,type de relation erroné : lien de lignée entre une organisation et une Internationale (affiliation ?),Coalition des Gauches,Gauche unitaire européenne,wikidata
-Q3777325,Q3777459,filiation,1984,1989,type de relation erroné : lien de lignée entre une organisation et une Internationale (affiliation ?),Groupe Arc-en-ciel,Groupe des Verts au Parlement européen,wikidata
-Q7284646,Q1651405,filiation,1989,1994,type de relation erroné : lien de lignée entre une organisation et une Internationale (affiliation ?),Groupe arc-en-ciel,Alliance radicale européenne,wikidata
 Q1321802,Q1951112,scission,1993,1993,"date erronée ou trop imprécise : source et cible fondées la même année (mois inconnus), le sens du temps ne peut pas être vérifié",Mouvement républicain et citoyen,Mouvement des citoyens (France),wikipedia
 Q1495924,Q192821,filiation,2009,1920,"type de relation erroné : la cible existait déjà (adhésion, ralliement ou passage de militants plutôt que filiation ?)",Gauche unitaire,Parti communiste français,wikipedia
 Q16637578,Q1628816,filiation,1920,1920,"date erronée ou trop imprécise : source et cible fondées la même année (mois inconnus), le sens du temps ne peut pas être vérifié",Fédération des jeunesses communistes de France,Mouvement jeunes communistes de France,wikidata

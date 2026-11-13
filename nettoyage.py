@@ -99,6 +99,25 @@ RX_PAYS_NOM = re.compile(rf"\((?:[^)]*\b)?(?:{PAYS})\b[^)]*\)")
 RX_LANGUE_NOM = re.compile(r"^(The|Partito|Partido|Circolo|Militant)\b|\b(Party|League|Tendency|"
                            r"Comunista|Operaio|Socialist|Workers|Independentists|of the)\b")
 
+# Idéologies hors périmètre, qui l'emportent sur un positionnement « gauche » (Wikidata en a d'erronés)
+# (?<!anti) : « antifascisme » ou « antimonarchisme » ne doivent pas exclure
+RX_IDEO_DROITE = re.compile(r"(?<!anti)(?<!anti-)(?:royalis|monarchi|bonapartis|légitimis|orléanis|"
+                            r"fascis|national-socialis|social-national|collaborationnis|pétainis)|"
+                            r"anti-?indépendantis|algérie française|nationalisme intégral", re.I)
+# Le nom seul suffit à classer à gauche, sans « internationale » (Agence internationale de l'énergie)
+RX_NOM_GAUCHE_STRICT = re.compile(r"gauche|sociali|communis|ouvri|travailleu|révolution|anarch|"
+                                  r"libertaire|trotsk|maoï|marxis|léninis|prolétar|syndical|insoumis|"
+                                  r"front populaire|spartak|bolch", re.I)
+# Types Wikidata d'organismes qui ne sont pas des organisations politiques
+NON_POLITIQUE_PLUS = {
+    "Q245065",     # organisation intergouvernementale
+    "Q327333",     # agence gouvernementale
+    "Q3754526",    # direction d'administration centrale
+    "Q18087867",   # service de l'État
+    "Q848197",     # groupe parlementaire
+    "Q779079",     # groupe politique du Parlement européen
+}
+
 MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre",
         "octobre", "novembre", "décembre"]
 RX_MOIS = re.compile(r"\b(" + "|".join(MOIS) + r")\s+(?:\d{1,2}\s+)?(1[89]\d\d|20\d\d)\b", re.I)
@@ -278,6 +297,10 @@ def main():
         return bool(set(d["types"]) & TYPES_INTERNATIONALE or RX_INTER.search(d["label"]))
 
     def de_gauche(d):
+        ideo_nom = " ".join(x for x, _ in d["ideologies"]) + " " + d["label"]
+        m = RX_IDEO_DROITE.search(ideo_nom)
+        if m:   # royalisme, Algérie française... l'emporte sur un positionnement « gauche » douteux
+            return f"idéologie hors périmètre : {m.group(0)}"
         positions = " ".join(d["pos_wd"]) + " " + d["positionnement"]
         # « centre gauche » seul compte comme gauche ; avec « centre droit » ou « centrisme »
         # (ex. Renaissance, Alliance démocratique), non.
@@ -289,8 +312,11 @@ def main():
         if RX_GAUCHE.search(positions):
             return None
         ideo = " ".join(x for x, _ in d["ideologies"])
+        # Le régionalisme compte (Parti occitan, UPC...) mais l'organisation est signalée
+        # « à vérifier » si c'est son seul signe (voir douteux_de) ; l'extrême droite régionaliste
+        # est déjà écartée par RX_IDEO_DROITE.
         if any(re.search(rx, ideo + " " + d["label"], re.I) for _, rx, _ in COURANTS) \
-                or RX_NOM_GAUCHE.search(d["label"]):
+                or RX_NOM_GAUCHE_STRICT.search(d["label"]):
             return None
         return "ni positionnement de gauche ni courant reconnu"
 
@@ -315,6 +341,9 @@ def main():
             classe[q], raison[q] = "exclu", "personne, pas organisation"
         elif est_internationale(d):
             classe[q] = "internationale"
+        elif set(d["types"]) & NON_POLITIQUE_PLUS:
+            classe[q], raison[q] = "exclu", "pas une organisation politique (institution, organisme " \
+                                            "intergouvernemental, groupe parlementaire)"
         elif set(d["types"]) & NON_POLITIQUE and not set(d["types"]) & POLITIQUE:
             classe[q], raison[q] = "exclu", "pas une organisation politique (journal, librairie, think tank...)"
         elif (r := de_gauche(d)):
@@ -671,6 +700,8 @@ def main():
             return "radicaux : gauche ou centre ?"
         if len(d["pays"]) > 1:
             return "plusieurs pays dans Wikidata"
+        if d["famille"] == "non classé" and "régionaliste / autonomiste" in d["courants"]:
+            return "régionaliste sans courant de gauche reconnu : à vérifier"
         if d["famille"] == "non classé":
             return "aucun courant reconnu"
         return ""

@@ -1,5 +1,5 @@
 source,source_nom,cible,cible_nom,relation,ensembles
-Q100249920,Office international de la vigne et du vin,Q1317185,Organisation internationale de la vigne et du vin,filiation,exclu -> graphe
+Q100249920,Office international de la vigne et du vin,Q1317185,Organisation internationale de la vigne et du vin,filiation,exclu -> exclu
 Q100272879,souveraineté de Dombes,Q70972,royaume de France,filiation,exclu -> exclu
 Q1005163,Bund der Deutschen Katholischen Jugend,Q1134670,Corporate Accountability – Netzwerk für Unternehmensverantwortung,appartenance,exclu -> exclu
 Q1005163,Bund der Deutschen Katholischen Jugend,Q1205753,Deutsches Jugendherbergswerk,appartenance,exclu -> exclu
@@ -19,32 +19,32 @@ Q1018761,diocèse d'Égypte,Q12490507,califat Rachidun,filiation,exclu -> exclu
 Q1028,Maroc,Q1043527,Agence multilatérale de garantie des investissements,appartenance,exclu -> exclu
 Q1028,Maroc,Q1065,Organisation des Nations unies,appartenance,exclu -> internationale
 Q1028,Maroc,Q1137381,Fonds arabe pour le développement économique et social,appartenance,exclu -> exclu
-Q1028,Maroc,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> graphe
-Q1028,Maroc,Q162656,Organisation Internationale de Protection Civile,appartenance,exclu -> etranger
+Q1028,Maroc,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> exclu
+Q1028,Maroc,Q162656,Organisation Internationale de Protection Civile,appartenance,exclu -> exclu
 Q1028,Maroc,Q170424,Organisation météorologique mondiale,appartenance,exclu -> internationale
 Q1028,Maroc,Q17495,Union postale universelle,appartenance,exclu -> exclu
 Q1028,Maroc,Q186444,traité sur la non-prolifération des armes nucléaires,appartenance,exclu -> exclu
-Q1028,Maroc,Q191384,Banque internationale pour la reconstruction et le développement,appartenance,exclu -> etranger
-Q1028,Maroc,Q233611,Organisation hydrographique internationale,appartenance,exclu -> etranger
+Q1028,Maroc,Q191384,Banque internationale pour la reconstruction et le développement,appartenance,exclu -> exclu
+Q1028,Maroc,Q233611,Organisation hydrographique internationale,appartenance,exclu -> exclu
 Q1028,Maroc,Q28227,Maghreb,appartenance,exclu -> exclu
 Q1028,Maroc,Q340195,Banque africaine de développement,appartenance,exclu -> exclu
 Q1028,Maroc,Q370862,Union du Maghreb arabe,appartenance,exclu -> exclu
-Q1028,Maroc,Q376150,Union internationale des télécommunications,appartenance,exclu -> etranger
-Q1028,Maroc,Q41984,Agence internationale de l'énergie atomique,appartenance,exclu -> etranger
+Q1028,Maroc,Q376150,Union internationale des télécommunications,appartenance,exclu -> exclu
+Q1028,Maroc,Q41984,Agence internationale de l'énergie atomique,appartenance,exclu -> exclu
 Q1028,Maroc,Q47543,Organisation de la Coopération Islamique,appartenance,exclu -> internationale
 Q1028,Maroc,Q4783148,Banque arabe pour le développement économique en Afrique,appartenance,exclu -> internationale
 Q1028,Maroc,Q50828855,African Continental Free Trade Area,appartenance,exclu -> exclu
 Q1028,Maroc,Q5611262,Groupe pour l'observation de la Terre,appartenance,exclu -> exclu
 Q1028,Maroc,Q605326,Organisation mondiale des douanes,appartenance,exclu -> exclu
 Q1028,Maroc,Q624307,Fonds monétaire arabe,appartenance,exclu -> exclu
-Q1028,Maroc,Q656801,Société financière internationale,appartenance,exclu -> etranger
+Q1028,Maroc,Q656801,Société financière internationale,appartenance,exclu -> exclu
 Q1028,Maroc,Q663492,Eurocontrol,appartenance,exclu -> internationale
 Q1028,Maroc,Q7159,Union africaine,appartenance,exclu -> internationale
 Q1028,Maroc,Q7172,Ligue arabe,appartenance,exclu -> internationale
 Q1028,Maroc,Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture",appartenance,exclu -> exclu
 Q1028,Maroc,Q7817,Organisation mondiale de la santé,appartenance,exclu -> internationale
 Q1028,Maroc,Q7825,Organisation mondiale du commerce,appartenance,exclu -> internationale
-Q1028,Maroc,Q827525,Association internationale de développement,appartenance,exclu -> etranger
+Q1028,Maroc,Q827525,Association internationale de développement,appartenance,exclu -> exclu
 Q1028,Maroc,Q842490,Organisation pour l'interdiction des armes chimiques,appartenance,exclu -> exclu
 Q1028,Maroc,Q8475,Interpol,appartenance,exclu -> internationale
 Q1028,Maroc,Q899770,Centre international pour le règlement des différends relatifs aux investissements,appartenance,exclu -> internationale
@@ -143,7 +143,7 @@ Q1205164,Association allemande d'aide sociale paritaire,Q422349,Action Allemagne
 Q1205164,Association allemande d'aide sociale paritaire,Q627651,Arbeitsgemeinschaft für Kinder- und Jugendhilfe,appartenance,exclu -> exclu
 Q1205164,Association allemande d'aide sociale paritaire,Q64846035,Arbeitsgemeinschaft Schuldnerberatung der Verbände,appartenance,exclu -> exclu
 Q1205753,Deutsches Jugendherbergswerk,Q1205164,Association allemande d'aide sociale paritaire,appartenance,exclu -> exclu
-Q1205753,Deutsches Jugendherbergswerk,Q1608722,Fédération internationale des auberges de jeunesse,appartenance,exclu -> etranger
+Q1205753,Deutsches Jugendherbergswerk,Q1608722,Fédération internationale des auberges de jeunesse,appartenance,exclu -> exclu
 Q1205753,Deutsches Jugendherbergswerk,Q18589501,Bundesarbeitsgemeinschaft Jugendschutz,appartenance,exclu -> exclu
 Q1205753,Deutsches Jugendherbergswerk,Q537395,Mouvement européen Allemagne,appartenance,exclu -> exclu
 Q1205753,Deutsches Jugendherbergswerk,Q627651,Arbeitsgemeinschaft für Kinder- und Jugendhilfe,appartenance,exclu -> exclu
@@ -212,7 +212,7 @@ Q1332539,Parti ouvrier d'unité socialiste,Q1984016,Quatrième Internationale (l
 Q133264736,Les Jeunes UDR,Q595109,Les Jeunes Républicains,scission,exclu -> exclu
 Q1337854,émirat de Cordoue,Q171740,califat de Cordoue,filiation,exclu -> exclu
 Q133825198,Q133825198,Q19966963,Fédération européenne des partis verts,filiation,exclu -> internationale
-Q134102,Organisation internationale de la francophonie,Q62073537,Open Education Global,appartenance,graphe -> exclu
+Q134102,Organisation internationale de la francophonie,Q62073537,Open Education Global,appartenance,exclu -> exclu
 Q1347840,gouvernement Édouard Balladur,Q391597,gouvernement Alain Juppé I,filiation,exclu -> exclu
 Q1351963,Cap21,Q105728238,Cap Écologie,filiation,exclu -> graphe
 Q1353232,Parti socialiste d'Amérique,Q581177,Parti socialiste des travailleurs (États-Unis),scission,etranger -> etranger
@@ -230,19 +230,19 @@ Q16838229,Foundation for European Progressive Studies,Q1376486,Jeunes socialiste
 Q1376486,Jeunes socialistes européens,Q7248622,Alliance progressiste,appartenance,internationale -> internationale
 Q1376486,Jeunes socialistes européens,Q935345,European Youth Forum,appartenance,internationale -> internationale
 Q139020,Institut international de statistique,Q57587699,Conseil international des sciences,appartenance,exclu -> internationale
-Q1399996,Fédération ouvrière régionale argentine,Q55078537,Confédération internationale du travail,appartenance,etranger -> graphe
+Q1399996,Fédération ouvrière régionale argentine,Q55078537,Confédération internationale du travail,appartenance,etranger -> exclu
 Q142,France,Q1043527,Agence multilatérale de garantie des investissements,appartenance,exclu -> exclu
 Q142,France,Q1065,Organisation des Nations unies,appartenance,exclu -> internationale
 Q142,France,Q1072120,Régime de contrôle de la technologie des missiles,appartenance,exclu -> internationale
 Q142,France,Q131720477,Conseil du CERN,appartenance,exclu -> exclu
 Q142,France,Q1331152,Partenariat pour un gouvernement ouvert,appartenance,exclu -> internationale
-Q142,France,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> graphe
+Q142,France,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> exclu
 Q142,France,Q1377612,Union européenne des paiements,appartenance,exclu -> exclu
 Q142,France,Q141720,Commandement européen du transport aérien,appartenance,exclu -> internationale
 Q142,France,Q1480793,Groupe des fournisseurs nucléaires,appartenance,exclu -> internationale
 Q142,France,Q151991,Observatoire européen austral,appartenance,exclu -> internationale
 Q142,France,Q161549,Communauté européenne du charbon et de l'acier,appartenance,exclu -> exclu
-Q142,France,Q162656,Organisation Internationale de Protection Civile,appartenance,exclu -> etranger
+Q142,France,Q162656,Organisation Internationale de Protection Civile,appartenance,exclu -> exclu
 Q142,France,Q170424,Organisation météorologique mondiale,appartenance,exclu -> internationale
 Q142,France,Q17495,Union postale universelle,appartenance,exclu -> exclu
 Q142,France,Q1764511,G7,appartenance,exclu -> internationale
@@ -250,16 +250,16 @@ Q142,France,Q182814,traité sur l'Antarctique,appartenance,exclu -> exclu
 Q142,France,Q186444,traité sur la non-prolifération des armes nucléaires,appartenance,exclu -> exclu
 Q142,France,Q188822,Banque asiatique de développement,appartenance,exclu -> exclu
 Q142,France,Q189062,liste des États dotés de l'arme nucléaire,appartenance,exclu -> exclu
-Q142,France,Q191384,Banque internationale pour la reconstruction et le développement,appartenance,exclu -> etranger
+Q142,France,Q191384,Banque internationale pour la reconstruction et le développement,appartenance,exclu -> exclu
 Q142,France,Q1928989,traité Ciel ouvert,appartenance,exclu -> exclu
 Q142,France,Q1969730,espace Schengen,appartenance,exclu -> exclu
 Q142,France,Q19771,Groupe des 20,appartenance,exclu -> internationale
-Q142,France,Q233611,Organisation hydrographique internationale,appartenance,exclu -> etranger
+Q142,France,Q233611,Organisation hydrographique internationale,appartenance,exclu -> exclu
 Q142,France,Q277252,Organisation du traité de l'Asie du Sud-Est,appartenance,exclu -> exclu
 Q142,France,Q340195,Banque africaine de développement,appartenance,exclu -> exclu
 Q142,France,Q37143,G8,appartenance,exclu -> exclu
 Q142,France,Q37470,Conseil de sécurité des Nations unies,appartenance,exclu -> exclu
-Q142,France,Q376150,Union internationale des télécommunications,appartenance,exclu -> etranger
+Q142,France,Q376150,Union internationale des télécommunications,appartenance,exclu -> exclu
 Q142,France,Q38130,Société des Nations,appartenance,exclu -> internationale
 Q142,France,Q3866537,Movement Coordination Centre Europe,appartenance,exclu -> internationale
 Q142,France,Q41550,Organisation de coopération et de développement économiques,appartenance,exclu -> internationale
@@ -271,7 +271,7 @@ Q142,France,Q521227,Organisation conjointe de coopération en matière d'armemen
 Q142,France,Q52847,Communauté économique européenne,appartenance,exclu -> internationale
 Q142,France,Q5611262,Groupe pour l'observation de la Terre,appartenance,exclu -> exclu
 Q142,France,Q605326,Organisation mondiale des douanes,appartenance,exclu -> exclu
-Q142,France,Q656801,Société financière internationale,appartenance,exclu -> etranger
+Q142,France,Q656801,Société financière internationale,appartenance,exclu -> exclu
 Q142,France,Q663492,Eurocontrol,appartenance,exclu -> internationale
 Q142,France,Q7184,Organisation du Traité de l'Atlantique Nord,appartenance,exclu -> internationale
 Q142,France,Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture",appartenance,exclu -> exclu
@@ -279,9 +279,9 @@ Q142,France,Q7817,Organisation mondiale de la santé,appartenance,exclu -> inter
 Q142,France,Q7825,Organisation mondiale du commerce,appartenance,exclu -> internationale
 Q142,France,Q782942,Groupe Australie,appartenance,exclu -> internationale
 Q142,France,Q81299,Organisation pour la sécurité et la coopération en Europe,appartenance,exclu -> exclu
-Q142,France,Q823428,Alliance internationale pour le souvenir de l'Holocauste,appartenance,exclu -> etranger
-Q142,France,Q826700,Agence internationale de l'énergie,appartenance,exclu -> graphe
-Q142,France,Q827525,Association internationale de développement,appartenance,exclu -> etranger
+Q142,France,Q823428,Alliance internationale pour le souvenir de l'Holocauste,appartenance,exclu -> exclu
+Q142,France,Q826700,Agence internationale de l'énergie,appartenance,exclu -> exclu
+Q142,France,Q827525,Association internationale de développement,appartenance,exclu -> exclu
 Q142,France,Q842490,Organisation pour l'interdiction des armes chimiques,appartenance,exclu -> exclu
 Q142,France,Q8475,Interpol,appartenance,exclu -> internationale
 Q142,France,Q8908,Conseil de l'Europe,appartenance,exclu -> exclu
@@ -300,7 +300,7 @@ Q146246,royaume des Francs,Q468902,Francie médiane,filiation,exclu -> exclu
 Q14627691,cour domaniale de Munster,Q97941965,ville impériale de Turckheim,filiation,exclu -> exclu
 Q14627691,cour domaniale de Munster,Q97946582,ville impériale de Munster,filiation,exclu -> exclu
 Q1463941,États généraux de 1789,Q876424,Assemblée nationale constituante,filiation,exclu -> exclu
-Q41984,Agence internationale de l'énergie atomique,Q1480793,Groupe des fournisseurs nucléaires,appartenance,etranger -> internationale
+Q41984,Agence internationale de l'énergie atomique,Q1480793,Groupe des fournisseurs nucléaires,appartenance,exclu -> internationale
 Q1493892,Vilayet d'Alep,Q7075820,Territoires ennemis occupés,filiation,exclu -> exclu
 Q15081858,Parti pirate européen,Q170,Parti pirate international,appartenance,internationale -> internationale
 Q15081858,Parti pirate européen,Q751935,Groupe des Verts/Alliance libre européenne,appartenance,internationale -> internationale
@@ -355,7 +355,7 @@ Q165269,Frise orientale,Q212278,Royaume de Hollande,filiation,exclu -> exclu
 Q16595757,République de Gênes,Q165154,royaume de Sardaigne,filiation,exclu -> exclu
 Q166079,Groupe Union républicaine,Q33762583,Groupe Union des gauches,filiation,exclu -> graphe
 Q16644519,Université ouvrière de Paris,Q192821,Parti communiste français,appartenance,exclu -> graphe
-Q1666432,Commission internationale de la navigation aérienne,Q125761,Organisation de l'aviation civile internationale,filiation,graphe -> exclu
+Q1666432,Commission internationale de la navigation aérienne,Q125761,Organisation de l'aviation civile internationale,filiation,exclu -> exclu
 Q1667519,Union internationale des éditeurs,Q115787224,International Federation of Reproduction Rights Organisations,appartenance,exclu -> exclu
 Q16682004,Union libérale républicaine,Q179456,Fédération républicaine,filiation,exclu -> exclu
 Q16682011,Groupe Union progressiste,Q33768451,Groupe Union démocratique,filiation,exclu -> exclu
@@ -468,6 +468,8 @@ Q2044828,gouvernement Charles Floquet,Q3086877,gouvernement Pierre Tirard II,fil
 Q205150,Rassemblement national,Q1377195,Alliance européenne pour la liberté,appartenance,exclu -> internationale
 Q205150,Rassemblement national,Q18907386,Patriotes.eu,appartenance,exclu -> internationale
 Q205150,Rassemblement national,Q3419877,Rassemblement Bleu Marine,appartenance,exclu -> exclu
+Q2053255,Groupe communiste et apparentés,Q2981072,Coalition des Gauches,filiation,exclu -> exclu
+Q2053255,Groupe communiste et apparentés,Q5413380,Gauche unitaire européenne,filiation,exclu -> internationale
 Q2053544,"L'Alliance républicaine, écologiste et sociale",Q82892,Union des démocrates et indépendants,filiation,exclu -> exclu
 Q2054807,Parti socialiste révolutionnaire (Portugal),Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
 Q2054807,Parti socialiste révolutionnaire (Portugal),Q884840,Bloc de gauche,filiation,etranger -> etranger
@@ -527,9 +529,10 @@ Q6269138,Joint Committee for Traceability in Laboratory Medicine,Q229478,Bureau 
 Q2295939,duché de Vasconie,Q61901679,comté de Pampelune,scission,exclu -> exclu
 Q2299068,Rassemblement démocratique,Q36214467,Groupe de la Fédération de la gauche démocrate et socialiste,filiation,exclu -> graphe
 Q2300622,républicains indépendants,Q3366676,Parti républicain,filiation,exclu -> exclu
-Q23020118,Républicains modérés,Q166079,Groupe Union républicaine,filiation,etranger -> exclu
-Q23020118,Républicains modérés,Q3318180,Républicains modérés,filiation,etranger -> exclu
+Q23020118,Républicains modérés,Q166079,Groupe Union républicaine,filiation,exclu -> exclu
+Q23020118,Républicains modérés,Q3318180,Républicains modérés,filiation,exclu -> exclu
 Q2313140,République bouillonnaise,Q142,France,filiation,exclu -> exclu
+Q2320765,Groupe de la Gauche républicaine,Q33762583,Groupe Union des gauches,filiation,exclu -> graphe
 Q2329524,Entente démocratique,Q2299068,Rassemblement démocratique,filiation,exclu -> exclu
 Q234277,Parti communiste d'Inde (marxiste),Q1897136,Parti communiste d'Inde (marxiste-léniniste),scission,etranger -> etranger
 Q234277,Parti communiste d'Inde (marxiste),Q5062659,Centre des communistes indiens,scission,etranger -> etranger
@@ -538,14 +541,14 @@ Q2348944,Stiftung Entwicklung und Frieden,Q1663590,Initiative pour une société
 Q2348944,Stiftung Entwicklung und Frieden,Q19903103,VENRO - Association of German Development and Humanitarian Aid NGOS,appartenance,exclu -> exclu
 Q235,Monaco,Q1065,Organisation des Nations unies,appartenance,exclu -> internationale
 Q235,Monaco,Q12898672,Alpes-Maritimes,filiation,exclu -> exclu
-Q235,Monaco,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> graphe
-Q235,Monaco,Q162656,Organisation Internationale de Protection Civile,appartenance,exclu -> etranger
+Q235,Monaco,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> exclu
+Q235,Monaco,Q162656,Organisation Internationale de Protection Civile,appartenance,exclu -> exclu
 Q235,Monaco,Q170424,Organisation météorologique mondiale,appartenance,exclu -> internationale
 Q235,Monaco,Q17495,Union postale universelle,appartenance,exclu -> exclu
 Q235,Monaco,Q186444,traité sur la non-prolifération des armes nucléaires,appartenance,exclu -> exclu
-Q235,Monaco,Q233611,Organisation hydrographique internationale,appartenance,exclu -> etranger
+Q235,Monaco,Q233611,Organisation hydrographique internationale,appartenance,exclu -> exclu
 Q235,Monaco,Q3559284,villes libres de Menton et Roquebrune,filiation,exclu -> exclu
-Q235,Monaco,Q376150,Union internationale des télécommunications,appartenance,exclu -> etranger
+Q235,Monaco,Q376150,Union internationale des télécommunications,appartenance,exclu -> exclu
 Q235,Monaco,Q45177,Programme d’exemption de visa,appartenance,exclu -> exclu
 Q235,Monaco,Q663492,Eurocontrol,appartenance,exclu -> internationale
 Q235,Monaco,Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture",appartenance,exclu -> exclu
@@ -619,9 +622,10 @@ Q2715954,Parti communiste d'Inde (marxiste-léniniste) Guerre populaire,Q2941659
 Q2716578,Lanka Sama Samaja Party,Q2724491,Alliance de la liberté du peuple uni,appartenance,etranger -> exclu
 Q2718814,gouvernement Reynaud,Q3112368,gouvernement Pétain,filiation,exclu -> exclu
 Q2719360,duché de Luxembourg,Q58296,Première République française,filiation,exclu -> exclu
+Q2724226,"Groupe communiste, républicain, citoyen et écologiste",Q50910195,groupe communiste républicain citoyen et écologiste,filiation,exclu -> exclu
 Q2746868,Abertzaleen Batasuna,Q639383,Alliance libre européenne,appartenance,exclu -> internationale
 Q2748435,Herri Batasuna,Q209546,Batasuna,filiation,etranger -> graphe
-Q2761462,Commission internationale de coopération intellectuelle,Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture",filiation,etranger -> exclu
+Q2761462,Commission internationale de coopération intellectuelle,Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture",filiation,exclu -> exclu
 Q2774993,gouvernement Louis Buffet,Q3112177,gouvernement Jules Dufaure III,filiation,exclu -> exclu
 Q2783565,gouvernement Laurent Fabius,Q3112150,gouvernement Jacques Chirac II,filiation,exclu -> exclu
 Q2784785,royaume des Gépides,Q28411,Khaganat avar,filiation,exclu -> exclu
@@ -632,7 +636,7 @@ Q28137035,Parti de la Résistance,Q3366274,Parti de l'Ordre,filiation,exclu -> e
 Q2820602,abbaye de Hohenbourg,Q54810258,ville impériale d'Obernai,filiation,exclu -> exclu
 Q2820602,abbaye de Hohenbourg,Q54810282,ville impériale de Rosheim,filiation,exclu -> exclu
 Q282428,sultanat mamelouk d'Égypte,Q3934822,Pachalik de Damas,filiation,exclu -> exclu
-Q2826590,Agence de coopération culturelle et technique,Q134102,Organisation internationale de la francophonie,filiation,exclu -> graphe
+Q2826590,Agence de coopération culturelle et technique,Q134102,Organisation internationale de la francophonie,filiation,exclu -> exclu
 Q2826686,Agence nationale pour la cohésion sociale et l'égalité des chances,Q17625061,Commissariat général à l'égalité des territoires,filiation,exclu -> exclu
 Q2830434,Alalia,Q212399,Aléria,filiation,exclu -> exclu
 Q283330,comté de Buren,Q188553,République batave,filiation,exclu -> exclu
@@ -656,6 +660,7 @@ Q2945536,centre des hautes études du ministère de l'Intérieur,Q101089320,Inst
 Q2946013,Centre royaliste d'Action française,Q106906187,L'Action française,scission,exclu -> exclu
 Q2947157,Ceux de la Résistance,Q2164587,Union démocratique et socialiste de la Résistance,filiation,exclu -> graphe
 Q2973337,Circolo Operaio Comunista,Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
+Q2981072,Coalition des Gauches,Q5413387,Gauche unitaire européenne,filiation,exclu -> internationale
 Q2983913,Parti communiste révolutionnaire d'Argentine,Q119499537,Force de la patrie,appartenance,etranger -> exclu
 Q2983913,Parti communiste révolutionnaire d'Argentine,Q2915940,Forum de São Paulo,appartenance,etranger -> internationale
 Q2983913,Parti communiste révolutionnaire d'Argentine,Q64590596,Front de tous,appartenance,etranger -> etranger
@@ -673,7 +678,7 @@ Q3029492,direction des services de la navigation aérienne,Q3055255,Entreprise c
 Q3029492,direction des services de la navigation aérienne,Q643141,Civil Air Navigation Services Organisation,appartenance,exclu -> exclu
 Q3029492,direction des services de la navigation aérienne,Q65095580,FABEC,appartenance,exclu -> exclu
 Q30339129,gouvernement Édouard Philippe II,Q96872687,gouvernement Jean Castex,filiation,exclu -> exclu
-Q3043395,Délégation aux Affaires stratégiques,Q55469706,Direction générale des relations internationales et de la stratégie,filiation,exclu -> graphe
+Q3043395,Délégation aux Affaires stratégiques,Q55469706,Direction générale des relations internationales et de la stratégie,filiation,exclu -> exclu
 Q3043437,Délégation interministérielle à l'aménagement du territoire et à l'attractivité régionale,Q17625061,Commissariat général à l'égalité des territoires,filiation,exclu -> exclu
 Q3043596,Aleppo Eyalet,Q1493892,Vilayet d'Alep,filiation,exclu -> exclu
 Q3043596,Aleppo Eyalet,Q3736239,Eyalet d'Adana,filiation,exclu -> exclu
@@ -685,10 +690,11 @@ Q3076765,Syrie ottomane,Q7075820,Territoires ennemis occupés,filiation,exclu ->
 Q3076886,Force démocrate,Q827415,Union pour la démocratie française,filiation,exclu -> exclu
 Q3083781,Occident,Q3117938,Groupe union défense,filiation,exclu -> exclu
 Q3086877,gouvernement Pierre Tirard II,Q21427344,gouvernement Charles de Freycinet IV,filiation,exclu -> exclu
+Q3088504,Front national,Q368067,Alliance européenne des mouvements nationaux,appartenance,exclu -> internationale
 Q3088519,Front national des combattants,Q110607053,Cercle du Panthéon,filiation,exclu -> exclu
 Q3088519,Front national des combattants,Q54769213,Front national pour l'Algérie française,filiation,exclu -> exclu
 Q3091726,Fédération des étudiants révolutionnaires,Q93219875,Alliance des jeunes pour le socialisme,filiation,exclu -> graphe
-Q30926304,Union internationale du télégraphe,Q376150,Union internationale des télécommunications,filiation,internationale -> etranger
+Q30926304,Union internationale du télégraphe,Q376150,Union internationale des télécommunications,filiation,internationale -> exclu
 Q309460,comté de Hainaut,Q58296,Première République française,filiation,exclu -> exclu
 Q3105,Vosges,Q12717,Bas-Rhin,filiation,exclu -> exclu
 Q3105,Vosges,Q155144,Alsace-Lorraine,filiation,exclu -> exclu
@@ -835,6 +841,9 @@ Q3366506,Parti libéral démocrate,Q71978544,Objectif France,filiation,exclu -> 
 Q3366546,Parti nationaliste,Q3091725,Fédération des étudiants nationalistes,filiation,exclu -> exclu
 Q3366676,Parti républicain,Q686372,Démocratie libérale,filiation,exclu -> exclu
 Q3366713,Parti social-démocrate (France),Q3076886,Force démocrate,filiation,graphe -> exclu
+Q3366726,Les Progressistes,Q159454,Internationale socialiste,appartenance,exclu -> internationale
+Q3366726,Les Progressistes,Q170972,Parti socialiste (France),appartenance,exclu -> graphe
+Q3366726,Les Progressistes,Q220945,Parti socialiste européen,appartenance,exclu -> internationale
 Q3366746,Parti socialiste des travailleurs (Algérie),Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
 Q3366765,Parti socialiste guyanais,Q106899676,Guyane rassemblement,scission,graphe -> exclu
 Q33728280,quatorzième législature de la Troisième République française,Q16683508,Quinzième législature de la Troisième République française,filiation,exclu -> exclu
@@ -861,7 +870,7 @@ Q3477856,seigneurie de Riquewihr,Q95977667,province d'Alsace,filiation,exclu -> 
 Q3480490,Service technique de la navigation aérienne,Q3029492,direction des services de la navigation aérienne,filiation,exclu -> exclu
 Q349179,gouvernement Pierre Mauroy I,Q497182,gouvernement Pierre Mauroy II,filiation,exclu -> exclu
 Q3491990,Service central de la police technique et scientifique,Q104601946,Service national de police scientifique,filiation,exclu -> exclu
-Q3497642,Zone internationale de Tanger,Q1028,Maroc,filiation,graphe -> exclu
+Q3497642,Zone internationale de Tanger,Q1028,Maroc,filiation,exclu -> exclu
 Q3511647,Sınıf Mücadelesi,Q1073391,Union communiste internationaliste,appartenance,exclu -> internationale
 Q3518826,Territoires en mouvement,Q30041450,577 Les indépendants,filiation,exclu -> exclu
 Q35415418,Groupe Rassemblement pour la République,Q1984090,groupe Union pour un mouvement populaire,filiation,exclu -> exclu
@@ -885,8 +894,9 @@ Q368621,Homosexualités et socialisme,Q3153050,Inter-LGBT,appartenance,exclu -> 
 Q3736239,Eyalet d'Adana,Q1493892,Vilayet d'Alep,filiation,exclu -> exclu
 Q3751896,ETA politico-militaire,Q93451279,ETA-pm (Huitième assemblée),filiation,exclu -> exclu
 Q3755547,royaume d'Italie,Q583038,royaume des Ostrogoths,filiation,exclu -> exclu
-Q376150,Union internationale des télécommunications,Q102440976,Q102440976,appartenance,etranger -> exclu
-Q376150,Union internationale des télécommunications,Q140274247,International Household Survey Network,appartenance,etranger -> exclu
+Q376150,Union internationale des télécommunications,Q102440976,Q102440976,appartenance,exclu -> exclu
+Q376150,Union internationale des télécommunications,Q140274247,International Household Survey Network,appartenance,exclu -> exclu
+Q3777325,Groupe Arc-en-ciel,Q3777459,Groupe des Verts au Parlement européen,filiation,exclu -> internationale
 Q38060,Gaule,Q146246,royaume des Francs,filiation,exclu -> exclu
 Q3808910,Eyalet de Dulkadir,Q1493892,Vilayet d'Alep,filiation,exclu -> exclu
 Q3828224,Eyalet de Bagdad,Q1585311,Vilayet de Bagdad,filiation,exclu -> exclu
@@ -916,8 +926,8 @@ Q139020,Institut international de statistique,Q41550,Organisation de coopératio
 Q19861084,ORCID,Q41550,Organisation de coopération et de développement économiques,appartenance,exclu -> internationale
 Q2994760,Consortium universitaire de publications numériques Couperin,Q41550,Organisation de coopération et de développement économiques,appartenance,exclu -> internationale
 Q4809891,Association of learned and professional society publishers,Q41550,Organisation de coopération et de développement économiques,appartenance,exclu -> internationale
-Q41984,Agence internationale de l'énergie atomique,Q5275956,Digital Preservation Coalition,appartenance,etranger -> exclu
-Q41984,Agence internationale de l'énergie atomique,Q6048595,"International Association of Scientific, Technical, and Medical Publishers",appartenance,etranger -> exclu
+Q41984,Agence internationale de l'énergie atomique,Q5275956,Digital Preservation Coalition,appartenance,exclu -> exclu
+Q41984,Agence internationale de l'énergie atomique,Q6048595,"International Association of Scientific, Technical, and Medical Publishers",appartenance,exclu -> exclu
 Q420444,gouvernement Alain Juppé II,Q179300,gouvernement Lionel Jospin,filiation,exclu -> exclu
 Q125499293,Nuage européen pour la science ouverte,Q42262,Agence spatiale européenne,appartenance,exclu -> internationale
 Q126379,Consultative Committee for Space Data Systems,Q42262,Agence spatiale européenne,appartenance,exclu -> internationale
@@ -971,7 +981,7 @@ Q458,Union européenne,Q8932,Espace économique européen,appartenance,internati
 Q922129,Quartet pour le Moyen-Orient,Q458,Union européenne,appartenance,exclu -> internationale
 Q461886,Parti communiste italien,Q3896697,Parti communiste d'Italie (marxiste-léniniste),scission,etranger -> etranger
 Q46370,Francie occidentale,Q70972,royaume de France,filiation,exclu -> exclu
-Q464194,Autorité internationale de la Ruhr,Q161549,Communauté européenne du charbon et de l'acier,filiation,graphe -> exclu
+Q464194,Autorité internationale de la Ruhr,Q161549,Communauté européenne du charbon et de l'acier,filiation,exclu -> exclu
 Q468902,Francie médiane,Q12548,Saint-Empire romain germanique,filiation,exclu -> exclu
 Q469837,comté de Hanau-Lichtenberg,Q95977667,province d'Alsace,filiation,exclu -> exclu
 Q47170389,Groupe de l'Entente républicaine démocratique,Q2012835,Groupe de l'Union républicaine démocratique,filiation,exclu -> exclu
@@ -1110,7 +1120,7 @@ Q627646,Arbeitsgemeinschaft für Entwicklungshilfe,Q422569,Action Alliance Again
 Q627646,Arbeitsgemeinschaft für Entwicklungshilfe,Q48756367,Q48756367,appartenance,exclu -> exclu
 Q63021609,royaume de Basse-Navarre,Q70972,royaume de France,filiation,exclu -> exclu
 Q63456377,Dissidence française,Q105616754,Mouvement national-démocrate,filiation,exclu -> exclu
-Q63536974,groupe Ensemble Île-de-France au conseil régional d'Île-de-France,Q133250601,"groupe socialiste, écologiste et radical au conseil régional d'Île-de-France",filiation,exclu -> graphe
+Q63536974,groupe Ensemble Île-de-France au conseil régional d'Île-de-France,Q133250601,"groupe socialiste, écologiste et radical au conseil régional d'Île-de-France",filiation,exclu -> exclu
 Q636521,Parti communiste des Philippines (1968),Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),appartenance,etranger -> internationale
 Q636521,Parti communiste des Philippines (1968),Q6972194,Démocratie nationale (Philippines),appartenance,etranger -> exclu
 Q636947,Organisation des moudjahiddines du peuple iranien,Q115729683,Nabard Group,scission,etranger -> etranger
@@ -1145,23 +1155,23 @@ Q684430,République rauracienne,Q142,France,filiation,exclu -> exclu
 Q684430,République rauracienne,Q691265,Mont-Terrible,filiation,exclu -> exclu
 Q686,Vanuatu,Q1043527,Agence multilatérale de garantie des investissements,appartenance,exclu -> exclu
 Q686,Vanuatu,Q1065,Organisation des Nations unies,appartenance,exclu -> internationale
-Q686,Vanuatu,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> graphe
+Q686,Vanuatu,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> exclu
 Q686,Vanuatu,Q170424,Organisation météorologique mondiale,appartenance,exclu -> internationale
 Q686,Vanuatu,Q17495,Union postale universelle,appartenance,exclu -> exclu
 Q686,Vanuatu,Q186444,traité sur la non-prolifération des armes nucléaires,appartenance,exclu -> exclu
 Q686,Vanuatu,Q188822,Banque asiatique de développement,appartenance,exclu -> exclu
-Q686,Vanuatu,Q191384,Banque internationale pour la reconstruction et le développement,appartenance,exclu -> etranger
-Q686,Vanuatu,Q233611,Organisation hydrographique internationale,appartenance,exclu -> etranger
+Q686,Vanuatu,Q191384,Banque internationale pour la reconstruction et le développement,appartenance,exclu -> exclu
+Q686,Vanuatu,Q233611,Organisation hydrographique internationale,appartenance,exclu -> exclu
 Q686,Vanuatu,Q294278,"Organisation des États d’Afrique, des Caraïbes et du Pacifique",appartenance,exclu -> exclu
-Q686,Vanuatu,Q376150,Union internationale des télécommunications,appartenance,exclu -> etranger
+Q686,Vanuatu,Q376150,Union internationale des télécommunications,appartenance,exclu -> exclu
 Q686,Vanuatu,Q496967,Alliance of Small Island States,appartenance,exclu -> internationale
 Q686,Vanuatu,Q605326,Organisation mondiale des douanes,appartenance,exclu -> exclu
-Q686,Vanuatu,Q656801,Société financière internationale,appartenance,exclu -> etranger
+Q686,Vanuatu,Q656801,Société financière internationale,appartenance,exclu -> exclu
 Q686,Vanuatu,Q7785,Commonwealth,appartenance,exclu -> exclu
 Q686,Vanuatu,Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture",appartenance,exclu -> exclu
 Q686,Vanuatu,Q7817,Organisation mondiale de la santé,appartenance,exclu -> internationale
 Q686,Vanuatu,Q7825,Organisation mondiale du commerce,appartenance,exclu -> internationale
-Q686,Vanuatu,Q827525,Association internationale de développement,appartenance,exclu -> etranger
+Q686,Vanuatu,Q827525,Association internationale de développement,appartenance,exclu -> exclu
 Q686,Vanuatu,Q842490,Organisation pour l'interdiction des armes chimiques,appartenance,exclu -> exclu
 Q686,Vanuatu,Q8475,Interpol,appartenance,exclu -> internationale
 Q686372,Démocratie libérale,Q3412217,Pôle républicain indépendant et libéral,scission,exclu -> exclu
@@ -1208,6 +1218,7 @@ Q7184,Organisation du Traité de l'Atlantique Nord,Q141720,Commandement europée
 Q719544,gouvernement Jean-Pierre Raffarin III,Q497289,gouvernement Dominique de Villepin,filiation,exclu -> exclu
 Q7223378,Union pour la nouvelle République,Q1904825,Union des démocrates pour la République,filiation,exclu -> exclu
 Q7245108,Émirat du Mont-Liban,Q3326429,moutassarifat du Mont-Liban,filiation,exclu -> exclu
+Q7284646,Groupe arc-en-ciel,Q1651405,Alliance radicale européenne,filiation,exclu -> internationale
 Q7287108,Rally the Centrists,Q762083,Alliance centriste,filiation,exclu -> exclu
 Q730456,gouvernement François Fillon II,Q599965,gouvernement François Fillon III,filiation,exclu -> exclu
 Q734792,Parti démocrate européen,Q60175,Alliance mondiale des démocrates,appartenance,internationale -> internationale
@@ -1253,7 +1264,7 @@ Q8034747,Mouvement socialiste des travailleurs,Q11684178,Gauche socialiste (Arge
 Q8034747,Mouvement socialiste des travailleurs,Q598744,Front de gauche et des travailleurs,appartenance,etranger -> etranger
 Q818618,Front démocratique pour la libération de la Palestine,Q26683,Organisation de libération de la Palestine,appartenance,etranger -> exclu
 Q818618,Front démocratique pour la libération de la Palestine,Q4830622,Axe de la résistance,appartenance,etranger -> exclu
-Q820122,montagnards,Q1092773,Thermidorien,filiation,graphe -> exclu
+Q820122,montagnards,Q1092773,Thermidorien,filiation,exclu -> exclu
 Q821542,DataCite,Q11713409,International DOI Foundation,appartenance,exclu -> exclu
 Q821542,DataCite,Q19861084,ORCID,appartenance,exclu -> exclu
 Q821542,DataCite,Q25338539,Research Data Alliance,appartenance,exclu -> internationale
@@ -1288,7 +1299,7 @@ Q9003283,Herriko Alderdi Sozialista,Q3755622,Euskal Herriko Alderdi Sozialista,f
 Q90664931,présidence de Vincent Auriol,Q65128364,présidence de René Coty,filiation,exclu -> exclu
 Q907234,protectorat français au Maroc,Q1028,Maroc,filiation,exclu -> exclu
 Q907234,protectorat français au Maroc,Q3111909,Gouvernement Bekkaï I,filiation,exclu -> exclu
-Q910619,Club breton,Q179885,Club des jacobins,filiation,etranger -> graphe
+Q910619,Club breton,Q179885,Club des jacobins,filiation,exclu -> graphe
 Q922707,Parti de gauche (France),Q12461,Le Monde,appartenance,graphe -> exclu
 Q922707,Parti de gauche (France),Q3153050,Inter-LGBT,appartenance,graphe -> exclu
 Q932005,Territoires héréditaires des Habsbourg,Q95977667,province d'Alsace,filiation,exclu -> exclu
@@ -1299,21 +1310,21 @@ Q948,Tunisie,Q1043527,Agence multilatérale de garantie des investissements,appa
 Q948,Tunisie,Q1065,Organisation des Nations unies,appartenance,exclu -> internationale
 Q948,Tunisie,Q1137381,Fonds arabe pour le développement économique et social,appartenance,exclu -> exclu
 Q948,Tunisie,Q125761,Organisation de l'aviation civile internationale,appartenance,exclu -> exclu
-Q948,Tunisie,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> graphe
-Q948,Tunisie,Q162656,Organisation Internationale de Protection Civile,appartenance,exclu -> etranger
+Q948,Tunisie,Q134102,Organisation internationale de la francophonie,appartenance,exclu -> exclu
+Q948,Tunisie,Q162656,Organisation Internationale de Protection Civile,appartenance,exclu -> exclu
 Q948,Tunisie,Q170424,Organisation météorologique mondiale,appartenance,exclu -> internationale
 Q948,Tunisie,Q17495,Union postale universelle,appartenance,exclu -> exclu
 Q948,Tunisie,Q177773,Organisation mondiale de la propriété intellectuelle,appartenance,exclu -> exclu
 Q948,Tunisie,Q186444,traité sur la non-prolifération des armes nucléaires,appartenance,exclu -> exclu
-Q948,Tunisie,Q191384,Banque internationale pour la reconstruction et le développement,appartenance,exclu -> etranger
+Q948,Tunisie,Q191384,Banque internationale pour la reconstruction et le développement,appartenance,exclu -> exclu
 Q948,Tunisie,Q192177,Union pour la Méditerranée,appartenance,exclu -> exclu
-Q948,Tunisie,Q201054,Organisation maritime internationale,appartenance,exclu -> etranger
-Q948,Tunisie,Q233611,Organisation hydrographique internationale,appartenance,exclu -> etranger
+Q948,Tunisie,Q201054,Organisation maritime internationale,appartenance,exclu -> exclu
+Q948,Tunisie,Q233611,Organisation hydrographique internationale,appartenance,exclu -> exclu
 Q948,Tunisie,Q340195,Banque africaine de développement,appartenance,exclu -> exclu
 Q948,Tunisie,Q370862,Union du Maghreb arabe,appartenance,exclu -> exclu
-Q948,Tunisie,Q376150,Union internationale des télécommunications,appartenance,exclu -> etranger
+Q948,Tunisie,Q376150,Union internationale des télécommunications,appartenance,exclu -> exclu
 Q948,Tunisie,Q384535,mission conjointe des Nations unies et de l'Union africaine au Darfour,appartenance,exclu -> exclu
-Q948,Tunisie,Q41984,Agence internationale de l'énergie atomique,appartenance,exclu -> etranger
+Q948,Tunisie,Q41984,Agence internationale de l'énergie atomique,appartenance,exclu -> exclu
 Q948,Tunisie,Q47543,Organisation de la Coopération Islamique,appartenance,exclu -> internationale
 Q948,Tunisie,Q4783148,Banque arabe pour le développement économique en Afrique,appartenance,exclu -> internationale
 Q948,Tunisie,Q50828855,African Continental Free Trade Area,appartenance,exclu -> exclu
@@ -1322,14 +1333,14 @@ Q948,Tunisie,Q605326,Organisation mondiale des douanes,appartenance,exclu -> exc
 Q948,Tunisie,Q605883,communauté des États sahélo-sahariens,appartenance,exclu -> exclu
 Q948,Tunisie,Q61923,ONU Tourisme,appartenance,exclu -> exclu
 Q948,Tunisie,Q624307,Fonds monétaire arabe,appartenance,exclu -> exclu
-Q948,Tunisie,Q656801,Société financière internationale,appartenance,exclu -> etranger
+Q948,Tunisie,Q656801,Société financière internationale,appartenance,exclu -> exclu
 Q948,Tunisie,Q7159,Union africaine,appartenance,exclu -> internationale
 Q948,Tunisie,Q7172,Ligue arabe,appartenance,exclu -> internationale
 Q948,Tunisie,Q7804,Fonds monétaire international,appartenance,exclu -> exclu
 Q948,Tunisie,Q7809,"Organisation des Nations unies pour l'éducation, la science et la culture",appartenance,exclu -> exclu
 Q948,Tunisie,Q7817,Organisation mondiale de la santé,appartenance,exclu -> internationale
 Q948,Tunisie,Q7825,Organisation mondiale du commerce,appartenance,exclu -> internationale
-Q948,Tunisie,Q827525,Association internationale de développement,appartenance,exclu -> etranger
+Q948,Tunisie,Q827525,Association internationale de développement,appartenance,exclu -> exclu
 Q948,Tunisie,Q842490,Organisation pour l'interdiction des armes chimiques,appartenance,exclu -> exclu
 Q948,Tunisie,Q8475,Interpol,appartenance,exclu -> internationale
 Q948,Tunisie,Q899770,Centre international pour le règlement des différends relatifs aux investissements,appartenance,exclu -> internationale
