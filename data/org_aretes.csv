@@ -1,0 +1,306 @@
+ancetre,descendant,type,sources
+Q104187610,Q104186796,filiation,wikidata
+Q104187610,Q104187739,appartenance,wikidata
+Q104187739,Q104186796,filiation,wikidata
+Q1045425,Q115965423,scission,wikidata
+Q1045425,Q125771262,filiation,wikidata
+Q1045425,Q126487286,appartenance,wikipedia
+Q1045425,Q1377231,appartenance,wikidata | wikipedia
+Q1045425,Q22981822,scission,wikipedia
+Q1045425,Q2996386,scission,wikipedia
+Q1045425,Q3099321,scission,wikipedia
+Q109023546,Q135755468,appartenance,wikidata | wikipedia
+Q111225168,Q111799189,appartenance,wikipedia
+Q111225168,Q126487286,appartenance,wikipedia
+Q111225168,Q127413320,filiation,wikipedia
+Q111225168,Q170972,appartenance,wikipedia
+Q111225168,Q862627,appartenance,wikipedia
+Q111607481,Q111606973,filiation,wikidata
+Q1145020,Q126487286,appartenance,wikipedia
+Q1145020,Q3082926,scission,wikipedia
+Q1145020,Q639383,appartenance,wikidata | wikipedia
+Q11509405,Q2634710,appartenance,wikipedia
+Q115922370,Q104187610,filiation,wikidata
+Q116456156,Q2989703,filiation,wikidata
+Q116456366,Q116456095,filiation,wikidata
+Q11696853,Q3324180,filiation,wikidata
+Q122614151,Q7205536,filiation,wikipedia
+Q123248148,Q3550207,filiation,wikipedia
+Q125619283,Q111799189,appartenance,wikipedia
+Q125619283,Q126487286,appartenance,wikipedia
+Q125619283,Q27978402,appartenance,wikipedia
+Q125771262,Q2634710,appartenance,correction
+Q125846976,Q123136121,filiation,wikipedia
+Q127272169,Q126487286,appartenance,wikipedia
+Q127413320,Q126487286,appartenance,wikipedia
+Q130218773,Q2095948,filiation,wikidata
+Q131451896,Q1631185,appartenance,wikipedia
+Q1321802,Q126487286,appartenance,wikipedia
+Q1321802,Q138828808,scission,wikidata
+Q1321802,Q1951112,scission,wikipedia
+Q1321802,Q3326813,scission,wikipedia
+Q1321802,Q58329311,filiation,wikipedia
+Q1332068,Q135902867,scission,wikipedia
+Q1332068,Q1422284,appartenance,wikipedia
+Q1332068,Q159454,appartenance,wikipedia
+Q1332068,Q170972,filiation,wikidata | wikipedia
+Q1332068,Q18578174,scission,wikipedia
+Q1332068,Q188592,appartenance,wikipedia
+Q1332068,Q192821,scission,wikipedia
+Q1332068,Q2019158,appartenance,wikipedia
+Q1332068,Q2379359,scission,wikipedia
+Q1332068,Q2390678,scission,wikipedia
+Q1332068,Q2425455,scission,wikipedia
+Q1332068,Q2722985,scission,wikipedia
+Q1332068,Q2940552,appartenance,wikipedia
+Q1332068,Q3366757,scission,wikipedia
+Q1332068,Q3366765,scission,wikipedia
+Q1332068,Q3366769,scission,wikipedia
+Q1332068,Q3366783,scission,wikipedia
+Q1332068,Q538664,scission,wikipedia
+Q1332068,Q688738,scission,wikipedia
+Q1332068,Q698677,appartenance,wikipedia
+Q1332068,Q703593,appartenance,wikidata | wikipedia
+Q1393793,Q1828329,scission,wikipedia
+Q1393793,Q206682,appartenance,wikipedia
+Q1393793,Q3240305,filiation,wikipedia
+Q141861456,Q2455815,appartenance,wikipedia
+Q1495924,Q15985232,scission,wikidata | wikipedia
+Q1495924,Q192821,filiation,wikipedia
+Q1495924,Q202649,appartenance,wikidata | wikipedia
+Q1495924,Q29348702,appartenance,wikipedia
+Q1542710,Q427965,scission,wikipedia
+Q158073,Q1631185,scission,wikipedia
+Q15985231,Q170972,filiation,wikipedia
+Q15985232,Q125619283,scission,wikipedia
+Q15985232,Q127413320,filiation,wikipedia
+Q15985232,Q29348702,appartenance,wikidata
+Q16010672,Q64524428,filiation,wikipedia
+Q1618280,Q622519,appartenance,wikipedia
+Q1628816,Q27396,appartenance,wikipedia
+Q17008204,Q3240310,appartenance,wikipedia
+Q170972,Q111212038,appartenance,wikipedia
+Q170972,Q111225168,scission,wikipedia
+Q170972,Q111799189,appartenance,wikipedia
+Q170972,Q126487286,appartenance,wikipedia
+Q170972,Q135755468,scission,wikidata | wikipedia
+Q170972,Q1495917,appartenance,wikipedia
+Q170972,Q15629523,scission,wikipedia
+Q170972,Q159454,appartenance,wikidata | wikipedia
+Q170972,Q18571605,scission,wikipedia
+Q170972,Q1951112,scission,wikipedia
+Q170972,Q220945,appartenance,wikidata | wikipedia
+Q170972,Q31400965,scission,wikidata | wikipedia
+Q170972,Q3366315,scission,wikipedia
+Q170972,Q3406970,appartenance,wikipedia
+Q170972,Q58329311,scission,wikipedia
+Q170972,Q584558,scission,wikipedia
+Q170972,Q922707,scission,wikipedia
+Q18213920,Q18202477,filiation,wikipedia
+Q1828329,Q3240649,scission,wikidata | wikipedia
+Q1828329,Q3366218,filiation,wikipedia
+Q18578174,Q2722985,filiation,wikipedia
+Q192821,Q111799189,appartenance,wikipedia
+Q192821,Q116456156,scission,wikidata
+Q192821,Q126487286,appartenance,wikipedia
+Q192821,Q1422284,appartenance,wikipedia
+Q192821,Q1694377,scission,wikipedia
+Q192821,Q202649,appartenance,wikidata | wikipedia
+Q192821,Q2118395,scission,wikipedia
+Q192821,Q2440449,appartenance,wikipedia
+Q192821,Q2982800,appartenance,wikidata
+Q192821,Q3326849,scission,wikipedia
+Q192821,Q3366567,scission,wikipedia
+Q192821,Q3366737,scission,wikipedia
+Q192821,Q580377,scission,wikipedia
+Q192821,Q862828,scission,wikipedia
+Q192821,Q944000,scission,wikidata
+Q1951112,Q1321802,filiation,wikipedia
+Q1951112,Q135755468,appartenance,wikipedia
+Q2054444,Q3326782,scission,wikidata | wikipedia
+Q2054444,Q753711,appartenance,wikipedia
+Q206682,Q2634710,filiation,correction
+Q206682,Q972773,scission,correction
+Q2088895,Q3366231,scission,wikipedia
+Q2095948,Q1422284,appartenance,wikipedia
+Q2095948,Q3550479,filiation,wikipedia
+Q2118395,Q163931,appartenance,wikipedia
+Q2118395,Q192821,appartenance,wikipedia
+Q2164587,Q2271578,appartenance,wikipedia
+Q2164587,Q2406201,filiation,wikipedia
+Q2219002,Q1045425,filiation,wikipedia
+Q22252055,Q2455815,appartenance,wikipedia
+Q22981822,Q1045425,appartenance,wikidata
+Q22981822,Q2455815,appartenance,wikipedia
+Q2379359,Q1332068,filiation,wikipedia
+Q2379359,Q2095948,filiation,wikipedia
+Q2406201,Q170972,filiation,wikipedia
+Q2425455,Q3550479,filiation,wikipedia
+Q2451197,Q3176156,filiation,wikipedia
+Q2451197,Q3487413,scission,wikipedia
+Q2453869,Q22252055,scission,wikipedia
+Q2453869,Q599328,appartenance,wikipedia
+Q24939885,Q139565740,appartenance,wikidata
+Q2540732,Q170972,filiation,wikipedia
+Q2575147,Q2440449,appartenance,wikipedia
+Q2575147,Q3366640,scission,wikidata | wikipedia
+Q2634710,Q599328,scission,correction
+Q2638999,Q126487286,appartenance,wikipedia
+Q2638999,Q1984016,appartenance,wikipedia
+Q2638999,Q24939885,scission,wikipedia
+Q2638999,Q27978402,appartenance,wikipedia
+Q2638999,Q3055019,appartenance,wikipedia
+Q2705289,Q1332068,filiation,wikipedia
+Q2705289,Q2379359,scission,wikipedia
+Q2705289,Q2838043,scission,wikipedia
+Q27978402,Q111799189,appartenance,wikipedia
+Q27978402,Q126487286,appartenance,wikipedia
+Q27978402,Q127413320,scission,wikidata | wikipedia
+Q27978402,Q130219314,appartenance,wikidata | wikipedia
+Q27978402,Q56641256,appartenance,wikipedia
+Q27978402,Q62079328,scission,wikipedia
+Q2838043,Q3176156,filiation,wikipedia
+Q2838043,Q3366778,appartenance,wikipedia
+Q2840414,Q3230452,filiation,wikipedia
+Q2890957,Q3099346,scission,wikipedia
+Q2915458,Q170972,filiation,wikipedia
+Q29348702,Q30741057,filiation,wikipedia
+Q2973337,Q1073391,appartenance,wikipedia
+Q2984984,Q1073391,appartenance,wikipedia
+Q2989703,Q63483685,scission,wikidata
+Q2996341,Q3230452,filiation,wikipedia
+Q2996386,Q15985232,filiation,wikipedia
+Q2996386,Q29348702,appartenance,wikipedia
+Q2996657,Q64524428,filiation,wikipedia
+Q2996664,Q3272709,filiation,wikipedia
+Q3082926,Q639383,appartenance,wikidata | wikipedia
+Q3088574,Q3366237,filiation,wikipedia
+Q3091443,Q133795,appartenance,wikipedia
+Q3091443,Q2996657,scission,wikipedia
+Q3091443,Q3356082,scission,wikipedia
+Q3091492,Q125963179,appartenance,wikipedia
+Q3091561,Q159454,appartenance,wikipedia
+Q3091561,Q220945,appartenance,wikipedia
+Q3091641,Q111799189,appartenance,wikipedia
+Q3091641,Q126487286,appartenance,wikipedia
+Q3091718,Q2379359,filiation,wikipedia
+Q3091718,Q2451197,scission,wikipedia
+Q3091718,Q2705289,scission,wikipedia
+Q3091718,Q928279,scission,wikipedia
+Q3092110,Q2840414,filiation,wikipedia
+Q3099321,Q15985232,filiation,wikipedia
+Q3099321,Q29348702,appartenance,wikipedia
+Q3099346,Q3366769,filiation,wikipedia
+Q3099352,Q158073,appartenance,wikidata
+Q3117914,Q2634710,appartenance,wikipedia
+Q31400965,Q108331267,appartenance,wikipedia
+Q31400965,Q111799189,appartenance,wikipedia
+Q31400965,Q126487286,appartenance,wikipedia
+Q3141290,Q1542710,filiation,wikidata
+Q3141290,Q427965,filiation,wikidata
+Q3142484,Q2587029,appartenance,wikipedia
+Q3176156,Q1332068,filiation,wikipedia
+Q3178133,Q3240305,filiation,wikipedia
+Q3230452,Q15985232,filiation,wikipedia
+Q3230452,Q29348702,appartenance,wikipedia
+Q3240305,Q3458343,scission,wikipedia
+Q3240305,Q862627,filiation,wikidata | wikipedia
+Q3240649,Q862627,filiation,wikipedia
+Q3272709,Q922707,filiation,wikipedia
+Q3314191,Q158073,appartenance,wikipedia
+Q3314191,Q3365196,filiation,wikipedia
+Q3314191,"fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)",filiation,wikipedia
+Q3326535,Q3366229,filiation,wikidata
+Q3326581,Q922707,filiation,wikipedia
+Q3326782,Q111799189,appartenance,wikipedia
+Q3326782,Q126487286,appartenance,wikipedia
+Q3326810,Q628594,filiation,wikipedia
+Q3326813,Q3272709,filiation,wikipedia
+Q3326849,Q108331267,appartenance,wikipedia
+Q3326849,Q113500977,scission,wikidata
+Q3326849,Q126487286,appartenance,wikipedia
+Q3355979,Q649752,appartenance,wikipedia
+Q3356082,Q123136121,filiation,wikipedia
+Q3356082,Q133795,appartenance,wikipedia
+Q3356082,Q3355979,filiation,wikipedia
+Q3356082,Q3550207,scission,wikipedia
+Q3366206,Q29348702,appartenance,wikipedia
+Q3366206,Q622227,appartenance,wikipedia
+Q3366212,Q163931,appartenance,wikipedia
+Q3366212,Q65153446,filiation,wikipedia
+Q3366218,Q3326810,filiation,wikipedia
+Q3366229,Q3366237,scission,wikipedia
+Q3366567,Q534291,filiation,wikipedia
+Q3366726,Q159454,appartenance,wikipedia
+Q3366726,Q170972,appartenance,wikipedia
+Q3366726,Q220945,appartenance,wikidata | wikipedia
+Q3366737,Q534291,filiation,wikipedia
+Q3366757,Q3550479,filiation,wikipedia
+Q3366765,Q100989633,scission,wikipedia
+Q3366765,Q107366687,scission,wikipedia
+Q3366769,Q1423578,appartenance,wikidata | wikipedia
+Q3366769,Q870667,scission,wikipedia
+Q3366778,Q3176156,filiation,wikipedia
+Q3456455,Q126487286,appartenance,wikidata
+Q3456455,Q202649,appartenance,wikidata
+Q3456455,Q29348702,appartenance,wikidata
+Q3458343,Q3355973,filiation,wikipedia
+Q3487413,Q2379359,filiation,wikipedia
+Q3550095,Q628594,filiation,wikipedia
+Q3550207,Q16010672,filiation,wikipedia
+Q3550479,Q1422284,appartenance,wikipedia
+Q3550479,Q703593,appartenance,wikipedia
+Q3562502,Q862627,filiation,wikipedia
+Q427965,Q135755468,appartenance,wikipedia
+Q427965,Q55597872,scission,wikidata
+Q4382630,Q2440449,appartenance,wikipedia
+Q4382630,Q622519,appartenance,wikipedia
+Q534291,Q1332068,filiation,wikipedia
+Q53559885,Q126487286,appartenance,wikipedia
+Q53559885,Q27978402,appartenance,wikipedia
+Q538664,Q1393793,filiation,wikipedia
+Q538664,Q206682,appartenance,wikipedia
+Q58329311,Q126487286,appartenance,wikipedia
+Q58329311,Q202649,appartenance,wikidata | wikipedia
+Q58366009,Q220945,appartenance,wikidata | wikipedia
+Q584558,Q18744486,scission,wikipedia
+Q5975788,Q2455815,appartenance,wikipedia
+Q599328,Q2455815,scission,correction
+Q613786,Q950179,appartenance,wikidata
+Q628594,Q24939885,filiation,wikipedia
+Q628594,Q2638999,filiation,wikipedia
+Q628594,Q3055019,appartenance,wikipedia
+Q63483685,Q123785828,appartenance,wikidata
+Q63483685,Q16215381,appartenance,wikidata
+Q63483685,Q2989703,filiation,wikidata
+Q65153369,Q65153446,filiation,wikipedia
+Q65153446,Q65153369,scission,wikipedia
+Q688738,Q862828,filiation,wikipedia
+Q7205536,Q111799189,appartenance,wikipedia
+Q7205536,Q122614151,scission,wikipedia
+Q7205536,Q126487286,appartenance,wikipedia
+Q7205536,Q159454,appartenance,wikipedia
+Q7205536,Q220945,appartenance,wikipedia
+Q743390,Q613786,filiation,wikidata
+Q862627,Q1045425,filiation,wikidata | wikipedia
+Q862627,Q1377231,appartenance,wikidata | wikipedia
+Q862627,Q170972,scission,wikipedia
+Q862627,Q1828329,scission,wikipedia
+Q862627,Q2634710,appartenance,wikipedia
+Q862627,Q3099357,scission,wikipedia
+Q862828,Q2840414,filiation,wikipedia
+Q862828,Q97367255,scission,wikipedia
+Q870667,Q1073391,appartenance,wikipedia
+Q870667,Q3562502,scission,wikipedia
+Q922707,Q111799189,appartenance,wikipedia
+Q922707,Q126487286,appartenance,wikipedia
+Q922707,Q27978402,appartenance,wikipedia
+Q922707,Q29348702,appartenance,wikipedia
+Q922707,Q753711,appartenance,wikidata | wikipedia
+Q928279,Q3366778,filiation,wikidata | wikipedia
+Q928279,Q51297076,scission,wikipedia
+Q97015296,Q23731823,appartenance,wikipedia
+Q972773,Q1984016,scission,correction
+Q97367255,Q3355973,filiation,wikipedia
+fr:Ligue communiste révolutionnaire (Bangladesh),Q4382630,filiation,wikipedia
+fr:Parti communiste internationaliste du Japon,Q11509405,filiation,wikipedia
