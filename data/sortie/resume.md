@@ -50,4 +50,4 @@ Dates : 59 fondations et 26 dissolutions avec un mois (lu dans l'infobox, seulem
 Affiliations : toutes en date_certainty = unknown (les sources ne donnent pas la période d'adhésion).
 Période recopiée : durée de vie du parti, bornée par celle de l'Internationale.
 
-Sigles : 264 lignes ajoutées à data/manuel/sigles.csv, dont 65 préremplies.
+Sigles (data/manuel/sigles.csv) : 264 organisations, dont 65 avec un sigle ; 0 ajoutées à cette exécution.

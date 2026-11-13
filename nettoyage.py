@@ -561,7 +561,10 @@ def main():
         with open(chemin_sigles, "a", newline="", encoding="utf-8") as f:
             csv.writer(f).writerows(nouveaux)
     stats["sigles_ajoutes"] = len(nouveaux)
-    stats["sigles_preremplis"] = sum(1 for n in nouveaux if n[1])
+    with open(chemin_sigles, encoding="utf-8") as f:
+        tous = list(csv.DictReader(f))
+    stats["sigles_total"] = len(tous)
+    stats["sigles_remplis"] = sum(1 for r in tous if r["sigle"].strip())
 
     # ================= Internationales et affiliations =================
     inter_utiles = {b for _, b, _ in affil_brutes}
@@ -742,7 +745,7 @@ Dates : {sum(1 for q in datees if noeuds[q]['fondation_mois'])} fondations et {s
 Affiliations : toutes en date_certainty = unknown (les sources ne donnent pas la période d'adhésion).
 Période recopiée : durée de vie du parti, bornée par celle de l'Internationale.
 
-Sigles : {stats['sigles_ajoutes']} lignes ajoutées à data/manuel/sigles.csv, dont {stats['sigles_preremplis']} préremplies.
+Sigles (data/manuel/sigles.csv) : {stats['sigles_total']} organisations, dont {stats['sigles_remplis']} avec un sigle ; {stats['sigles_ajoutes']} ajoutées à cette exécution.
 """
     with open(os.path.join(SORTIE, "resume.md"), "w", encoding="utf-8") as f:
         f.write(res)
