@@ -42,21 +42,25 @@ CATEGORIES = [
 ]
 
 # Préfixes de nom de modèle considérés comme une infobox de parti
-INFOBOX_PREFIXES = ("infobox parti", "infobox organisation politique")
+INFOBOX_PREFIXES = ("infobox parti", "infobox organisation")
 
 # Paramètres de l'infobox -> rôle. Clés normalisées (minuscules, sans accents, espaces simples).
 # Les noms viennent de ma mémoire du modèle : la fin du script affiche les paramètres
 # réellement rencontrés, pour que tu puisses corriger cette table.
 CHAMPS = {
     "predecesseur": "pred", "precede par": "pred", "fusion de": "pred", "issu de": "pred",
+    "precedent": "pred",
     "successeur": "succ", "suivi par": "succ", "fusionne dans": "succ", "devenu": "succ",
+    "suivant": "succ",
     "scission de": "scission_de",
     "scission": "scission_vers", "scissions": "scission_vers", "scission vers": "scission_vers",
+    "scission dans": "scission_vers",
     "international": "international", "internationale": "international",
-    "affiliation internationale": "international",
+    "affiliation internationale": "international", "affi internationale": "international",
     "ideologie": "ideologie", "ideologies": "ideologie",
     "fondation": "fondation", "creation": "fondation",
     "disparition": "disparition", "dissolution": "disparition",
+    "positionnement": "positionnement",
 }
 
 COURANTS = {
@@ -199,7 +203,7 @@ def lire_infobox(texte, compteur_modeles, compteur_params):
             champs = defaultdict(list)
             for p in tpl.params:
                 cle = normaliser(p.name)
-                compteur_params[cle] += 1
+                compteur_params[(nom, cle)] += 1
                 role = CHAMPS.get(cle)
                 if role and str(p.value).strip():
                     champs[role].append(p.value)
@@ -279,7 +283,7 @@ def main():
         i = ident[titre]
         if i not in noeuds:
             noeuds[i] = dict(label=titre, fondation="", dissolution="", courants="",
-                             ideologies="", categories="")
+                             ideologies="", positionnement="", categories="")
         return i
 
     for titre, (qid, champs) in infos.items():
@@ -291,6 +295,10 @@ def main():
         for v in champs.get("ideologie", []):
             ideo += liens(v) or [mwparserfromhell.parse(str(v)).strip_code().strip()]
         d["ideologies"] = " | ".join(x for x in ideo if x)
+        pos = []
+        for v in champs.get("positionnement", []):
+            pos += liens(v) or [mwparserfromhell.parse(str(v)).strip_code().strip()]
+        d["positionnement"] = " | ".join(x for x in pos if x)
         cats = " | ".join(sorted(pages[titre]))
         d["categories"] = cats
         d["courants"] = " | ".join(courants_de(d["ideologies"] + " " + cats))
@@ -320,10 +328,12 @@ def main():
     with open(os.path.join(DATA, "wp_noeuds.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["id", "label", "fondation", "dissolution", "courants",
-                    "ideologies_wikipedia", "categories_wikipedia"])
+                    "ideologies_wikipedia", "positionnement_wikipedia",
+                    "categories_wikipedia"])
         for i, d in noeuds.items():
             w.writerow([i, d["label"], d["fondation"], d["dissolution"],
-                        d["courants"], d["ideologies"], d["categories"]])
+                        d["courants"], d["ideologies"], d["positionnement"],
+                        d["categories"]])
 
     with open(os.path.join(DATA, "wp_aretes.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
@@ -343,9 +353,12 @@ def main():
     for nom, n in modeles.most_common(10):
         print(f"  {n:4d}  {nom}")
     print("\nParamètres d'infobox de parti les plus fréquents (pour ajuster CHAMPS) :")
-    for cle, n in params.most_common(40):
+    bruit = re.compile(r"(option|valeur) \d+$|logo|couleurs|site web|siege|adherents")
+    for (modele, cle), n in params.most_common(200):
+        if bruit.match(cle):
+            continue
         marque = "" if cle in CHAMPS else "   <- non utilisé"
-        print(f"  {n:4d}  {cle}{marque}")
+        print(f"  {n:4d}  {modele} : {cle}{marque}")
 
 
 if __name__ == "__main__":
