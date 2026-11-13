@@ -182,12 +182,6 @@ digraph G {
     "Q3366737@1930" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q538664" [label="Parti ouvrier internationaliste\n1936–1944", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
     "Q538664@1940" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
-    "Q206682" [label="Quatrième Internationale\n1938–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
-    "Q206682@1940" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
-    "Q206682@1945" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
-    "Q206682@1950" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
-    "Q206682@1955" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
-    "Q206682@1960" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q1984016" [label="Quatrième Internationale\n(lambertiste)\n1938–\n« La Vérité »", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
     "Q1984016@1940" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q1984016@1945" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
@@ -207,6 +201,12 @@ digraph G {
     "Q1984016@2015" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q1984016@2020" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q1984016@2025" [label="Quatrième Internationale (lambertiste)", fillcolor="#ff6b5e", fontcolor="black", fontsize=9, tooltip="trotskyste"];
+    "Q206682" [label="Quatrième Internationale\n1938–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
+    "Q206682@1940" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
+    "Q206682@1945" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
+    "Q206682@1950" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
+    "Q206682@1955" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
+    "Q206682@1960" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q870667" [label="Lutte ouvrière\n1939–\n« Lutte de classe »", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
     "Q870667@1940" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q870667@1945" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
@@ -429,6 +429,14 @@ digraph G {
     "Q115922370" [label="Organisation pour la reconstruction du\nParti communiste de France\n1990–2000\n« Le Drapeau rouge »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
     "Q115922370@1995" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q115922370@2000" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q580377" [label="Initiative démocratique\nde gauche\n1991–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+    "Q580377@1995" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q580377@2000" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q580377@2005" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q580377@2010" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q580377@2015" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q580377@2020" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q580377@2025" [label="Initiative démocratique de gauche", fillcolor="#d62828", fontcolor="white", fontsize=9, tooltip="communiste"];
     "Q3055019" [label="Entente internationale des\ntravailleurs et des peuples\n1991–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
     "Q3055019@1995" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q3055019@2000" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
@@ -449,14 +457,6 @@ digraph G {
     "Q628594@1995" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q628594@2000" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q628594@2005" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
-    "Q580377" [label="Initiative démocratique\nde gauche\n1991–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-    "Q580377@1995" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q580377@2000" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q580377@2005" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q580377@2010" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q580377@2015" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q580377@2020" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q580377@2025" [label="Initiative démocratique de gauche", fillcolor="#d62828", fontcolor="white", fontsize=9, tooltip="communiste"];
     "Q3365196" [label="The Communist\n1992–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
     "Q3365196@1995" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q3365196@2000" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
@@ -473,6 +473,10 @@ digraph G {
     "Q3099352@2015" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q3099352@2020" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q3099352@2025" [label="Gauche révolutionnaire", fillcolor="#ff6b5e", fontcolor="black", fontsize=9, tooltip="trotskyste"];
+    "Q2996341" [label="Convention pour une\nalternative progressiste\n1994–2009", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+    "Q2996341@1995" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q2996341@2000" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q2996341@2005" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q622227" [label="Conférence internationale des partis et\norganisations marxistes-léninistes (Unité et lutte)\n1994–", fillcolor="#7b0d0d", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="maoïste"];
     "Q622227@1995" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
     "Q622227@2000" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
@@ -481,10 +485,6 @@ digraph G {
     "Q622227@2015" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
     "Q622227@2020" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
     "Q622227@2025" [label="Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)", fillcolor="#7b0d0d", fontcolor="white", fontsize=9, tooltip="maoïste"];
-    "Q2996341" [label="Convention pour une\nalternative progressiste\n1994–2009", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-    "Q2996341@1995" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q2996341@2000" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q2996341@2005" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q599328" [label="Ligue internationale des travailleurs -\nQuatrième Internationale\n?–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
     "Q599328@1995" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q599328@2000" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
@@ -527,14 +527,14 @@ digraph G {
     "Q5975788@2015" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q5975788@2020" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q5975788@2025" [label="Ligue ouvrière révolutionnaire pour la Quatrième Internationale", fillcolor="#ff6b5e", fontcolor="black", fontsize=9, tooltip="trotskyste"];
-    "Q116456156" [label="Communistes\n2000–2015", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-    "Q116456156@2005" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q116456156@2010" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
-    "Q116456156@2015" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q104187610" [label="Parti communiste maoïste\nde France\n2000–2016\n« Le Drapeau rouge »", fillcolor="#7b0d0d", fontcolor="white", tooltip="maoïste"];
     "Q104187610@2005" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
     "Q104187610@2010" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
     "Q104187610@2015" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
+    "Q116456156" [label="Communistes\n2000–2015", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+    "Q116456156@2005" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q116456156@2010" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
+    "Q116456156@2015" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q111606973" [label="Parti communiste de France\n(marxiste-léniniste-maoïste)\n2003–", fillcolor="#7b0d0d", fontcolor="white", tooltip="maoïste"];
     "Q111606973@2005" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
     "Q111606973@2010" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
@@ -566,15 +566,15 @@ digraph G {
     "Q22981822@2025" [label="Révolution permanente", fillcolor="#ff6b5e", fontcolor="black", fontsize=9, tooltip="trotskyste"];
     "Q104187739" [label="Bloc rouge (Unification\ndes maoïstes)\n2013–2016\n« Le Drapeau rouge »", fillcolor="#7b0d0d", fontcolor="white", tooltip="maoïste"];
     "Q104187739@2015" [shape=point, width=0.02, label="", color="#7b0d0d", fillcolor="#7b0d0d"];
+    "Q24939885" [label="Parti des travailleurs\n(France, 2015)\n2015–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
+    "Q24939885@2020" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
+    "Q24939885@2025" [label="Parti des travailleurs (France, 2015)", fillcolor="#ff6b5e", fontcolor="black", fontsize=9, tooltip="trotskyste"];
     "Q2638999" [label="Parti ouvrier indépendant\n2015–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
     "Q2638999@2020" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
     "Q2638999@2025" [label="Parti ouvrier indépendant", fillcolor="#ff6b5e", fontcolor="black", fontsize=9, tooltip="trotskyste"];
     "Q2989703" [label="Parti révolutionnaire\nCommunistes\n2015–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
     "Q2989703@2020" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q2989703@2025" [label="Parti révolutionnaire Communistes", fillcolor="#d62828", fontcolor="white", fontsize=9, tooltip="communiste"];
-    "Q24939885" [label="Parti des travailleurs\n(France, 2015)\n2015–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
-    "Q24939885@2020" [shape=point, width=0.02, label="", color="#ff6b5e", fillcolor="#ff6b5e"];
-    "Q24939885@2025" [label="Parti des travailleurs (France, 2015)", fillcolor="#ff6b5e", fontcolor="black", fontsize=9, tooltip="trotskyste"];
     "Q63483685" [label="Parti communiste\nrévolutionnaire de France\n2016–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
     "Q63483685@2020" [shape=point, width=0.02, label="", color="#d62828", fillcolor="#d62828"];
     "Q63483685@2025" [label="Parti communiste révolutionnaire de France", fillcolor="#d62828", fontcolor="white", fontsize=9, tooltip="communiste"];
@@ -588,10 +588,10 @@ digraph G {
     "Q115965423@2025" [label="Nouveau Parti anticapitaliste – Révolutionnaires", fillcolor="#d62828", fontcolor="white", fontsize=9, tooltip="communiste"];
     "Q123785828" [label="Action Communiste Européenne\n2023–", fillcolor="#d62828", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="communiste"];
     "Q123785828@2025" [label="Action Communiste Européenne", fillcolor="#d62828", fontcolor="white", fontsize=9, tooltip="communiste"];
-    "Q131451896" [label="Parti communiste\nrévolutionnaire (Canada)\n2024–\n« Révolution communiste »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-    "Q131451896@2025" [label="Parti communiste révolutionnaire (Canada)", fillcolor="#d62828", fontcolor="white", fontsize=9, tooltip="communiste"];
     "fr:Parti communiste révolutionnaire (2024)" [label="Parti communiste révolutionnaire\n2024–\n« Révolution »", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
     "fr:Parti communiste révolutionnaire (2024)@2025" [label="Parti communiste révolutionnaire", fillcolor="#ff6b5e", fontcolor="black", fontsize=9, tooltip="trotskyste"];
+    "Q131451896" [label="Parti communiste\nrévolutionnaire (Canada)\n2024–\n« Révolution communiste »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+    "Q131451896@2025" [label="Parti communiste révolutionnaire (Canada)", fillcolor="#d62828", fontcolor="white", fontsize=9, tooltip="communiste"];
   }
   subgraph cluster_zone2 { label="Social-démocratie"; labeljust=l; fontname="Helvetica-Bold"; fontsize=22; fontcolor="#00000055"; style="filled,rounded"; fillcolor="#fdeaf3"; color="#fdeaf3";
     "Q3091718" [label="Fédération des travailleurs\nsocialistes de France\n1879–1902", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
@@ -698,22 +698,6 @@ digraph G {
     "Q2164587@1950" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q2164587@1955" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q2164587@1960" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561" [label="Fédération de la Guyane du\nParti socialiste\n1951–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-    "Q3091561@1955" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@1960" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@1965" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@1970" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@1980" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@1985" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@1990" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@2005" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3091561@2025" [label="Fédération de la Guyane du Parti socialiste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q159454" [label="Internationale socialiste\n1951–", fillcolor="#e84393", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="social-démocrate"];
     "Q159454@1955" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q159454@1960" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
@@ -730,6 +714,22 @@ digraph G {
     "Q159454@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q159454@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q159454@2025" [label="Internationale socialiste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
+    "Q3091561" [label="Fédération de la Guyane du\nParti socialiste\n1951–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+    "Q3091561@1955" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@1960" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@1965" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@1970" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@1980" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@1985" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@1990" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@2005" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3091561@2025" [label="Fédération de la Guyane du Parti socialiste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q3366765" [label="Parti socialiste guyanais\n1956–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q3366765@1960" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q3366765@1965" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
@@ -768,6 +768,9 @@ digraph G {
     "Q862828@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q862828@1980" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q862828@1985" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q2406201" [label="Convention des institutions\nrépublicaines\n1964–1971", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
+    "Q2406201@1965" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
+    "Q2406201@1970" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
     "Q1145020" [label="Union démocratique bretonne\n1964–\n« Le Peuple breton »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q1145020@1965" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q1145020@1970" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
@@ -782,9 +785,9 @@ digraph G {
     "Q1145020@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q1145020@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q1145020@2025" [label="Union démocratique bretonne", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
-    "Q2406201" [label="Convention des institutions\nrépublicaines\n1964–1971", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
-    "Q2406201@1965" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
-    "Q2406201@1970" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
+    "Q15985231" [label="Objectif socialiste\n1965–1975", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+    "Q15985231@1970" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q15985231@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)" [label="Alternative socialiste (Angleterre,\nÉcosse et pays de Galles)\n?–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1970" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
@@ -798,9 +801,6 @@ digraph G {
     "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2025" [label="Alternative socialiste (Angleterre, Écosse et pays de Galles)", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
-    "Q15985231" [label="Objectif socialiste\n1965–1975", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-    "Q15985231@1970" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q15985231@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q2540732" [label="Union des groupes et clubs\nsocialistes\n?–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q170972" [label="Parti socialiste\n1969–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q170972@1970" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
@@ -815,30 +815,6 @@ digraph G {
     "Q170972@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q170972@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q170972@2025" [label="Parti socialiste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
-    "Q7205536" [label="Fédération guadeloupéenne du\nParti socialiste\n1972–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-    "Q7205536@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@1980" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@1985" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@1990" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@2005" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q7205536@2025" [label="Fédération guadeloupéenne du Parti socialiste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
-    "Q3117914" [label="Groupe révolution socialiste\n1972–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-    "Q3117914@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@1980" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@1985" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@1990" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@2005" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3117914@2025" [label="Groupe révolution socialiste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q122614151" [label="Mouvement socialiste\nguadeloupéen\n1972–1975", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q122614151@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q427965" [label="Parti radical de gauche\n1972–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
@@ -853,6 +829,30 @@ digraph G {
     "Q427965@2015" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
     "Q427965@2020" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
     "Q427965@2025" [label="Parti radical de gauche", fillcolor="#f5b7d2", fontcolor="black", fontsize=9, tooltip="radical / républicain"];
+    "Q3117914" [label="Groupe révolution socialiste\n1972–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+    "Q3117914@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@1980" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@1985" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@1990" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@2005" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3117914@2025" [label="Groupe révolution socialiste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
+    "Q7205536" [label="Fédération guadeloupéenne du\nParti socialiste\n1972–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+    "Q7205536@1975" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@1980" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@1985" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@1990" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@2005" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q7205536@2025" [label="Fédération guadeloupéenne du Parti socialiste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q3366726" [label="Les Progressistes\n1981–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q3366726@1985" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q3366726@1990" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
@@ -880,12 +880,9 @@ digraph G {
     "Q220945@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q220945@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q220945@2025" [label="Parti socialiste européen", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
-    "Q1321802" [label="Mouvement républicain et citoyen\n1993–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
-    "Q1321802@1995" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
-    "Q1321802@2000" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
-    "Q1321802@2005" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
-    "Q1321802@2010" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
-    "Q1321802@2015" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
+    "Q1951112" [label="Mouvement des citoyens\n1993–2002", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+    "Q1951112@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q1951112@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q2453869" [label="Parti socialiste des\ntravailleurs unifié\n1993–", fillcolor="#e84393", fontcolor="white", penwidth=2, color="#000000", style="filled,rounded,dashed", tooltip="social-démocrate"];
     "Q2453869@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q2453869@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
@@ -894,9 +891,12 @@ digraph G {
     "Q2453869@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q2453869@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q2453869@2025" [label="Parti socialiste des travailleurs unifié", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
-    "Q1951112" [label="Mouvement des citoyens\n1993–2002", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-    "Q1951112@1995" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q1951112@2000" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q1321802" [label="Mouvement républicain et citoyen\n1993–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
+    "Q1321802@1995" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
+    "Q1321802@2000" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
+    "Q1321802@2005" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
+    "Q1321802@2010" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
+    "Q1321802@2015" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
     "Q138828808" [label="Gauche républicaine et sociale\n?–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
     "Q138828808@1995" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
     "Q138828808@2000" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
@@ -916,16 +916,16 @@ digraph G {
     "Q922707@2025" [label="Parti de gauche", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q2996386" [label="Convergences et alternative\n2009–2014", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q2996386@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3456455" [label="République et socialisme\n2009–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-    "Q3456455@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3456455@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3456455@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q3456455@2025" [label="République et socialisme", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q3326849" [label="Mouvement des progressistes\n2009–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q3326849@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q3326849@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q3326849@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q3326849@2025" [label="Mouvement des progressistes", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
+    "Q3456455" [label="République et socialisme\n2009–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+    "Q3456455@2010" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3456455@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3456455@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q3456455@2025" [label="République et socialisme", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q3099321" [label="Gauche anticapitaliste\n2011–2015", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q3099321@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q3326782" [label="Pour La Réunion\n2012–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
@@ -939,12 +939,12 @@ digraph G {
     "Q18571605@2015" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q18571605@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q18571605@2025" [label="La Force du 13", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
-    "Q30741057" [label="Rézistan's Égalité 974\n2016–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-    "Q30741057@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q30741057@2025" [label="Rézistan's Égalité 974", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q27978402" [label="La France insoumise\n2016–\n« Le Journal de l'insoumission »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q27978402@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q27978402@2025" [label="La France insoumise", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
+    "Q30741057" [label="Rézistan's Égalité 974\n2016–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+    "Q30741057@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q30741057@2025" [label="Rézistan's Égalité 974", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q111225168" [label="Gauche démocratique et sociale\n2017–2025\n« Démocratie et Socialisme »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q111225168@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q111225168@2025" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
@@ -954,12 +954,12 @@ digraph G {
     "Q62079328" [label="Debout\n?–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q62079328@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
     "Q62079328@2025" [label="Debout", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
-    "Q58366009" [label="Place publique\n2018–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-    "Q58366009@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
-    "Q58366009@2025" [label="Place publique", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q58329311" [label="Gauche républicaine et\nsocialiste\n2018–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
     "Q58329311@2020" [shape=point, width=0.02, label="", color="#f5b7d2", fillcolor="#f5b7d2"];
     "Q58329311@2025" [label="Gauche républicaine et socialiste", fillcolor="#f5b7d2", fontcolor="black", fontsize=9, tooltip="radical / républicain"];
+    "Q58366009" [label="Place publique\n2018–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+    "Q58366009@2020" [shape=point, width=0.02, label="", color="#e84393", fillcolor="#e84393"];
+    "Q58366009@2025" [label="Place publique", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q125771262" [label="Nouveau Parti anticapitaliste –\nL'Anticapitaliste\n2022–\n« L'Anticapitaliste »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
     "Q125771262@2025" [label="Nouveau Parti anticapitaliste – L'Anticapitaliste", fillcolor="#e84393", fontcolor="white", fontsize=9, tooltip="social-démocrate"];
     "Q135755468" [label="La Convention\n2023–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
@@ -1082,35 +1082,35 @@ digraph G {
     "Q130219314@2025" [label="Alliance de la gauche européenne pour les peuples et la planète", fillcolor="#d5d8dc", fontcolor="black", fontsize=9, tooltip="autre / inconnu"];
   }
   { rank=same; "an1875"; "Q3091718"; }
-  { rank=same; "an1880"; "Q3091718@1880"; "Q3487413"; "Q2451197"; "Q928279"; }
-  { rank=same; "an1885"; "Q3091718@1885"; "Q3487413@1885"; "Q188592"; "Q2451197@1885"; "Q928279@1885"; }
-  { rank=same; "an1890"; "Q3091718@1890"; "Q3487413@1890"; "Q188592@1890"; "Q2705289"; "Q2451197@1890"; "Q928279@1890"; }
-  { rank=same; "an1895"; "Q3366778"; "Q3091718@1895"; "Q3487413@1895"; "Q188592@1895"; "Q2705289@1895"; "Q2451197@1895"; "Q928279@1895"; "Q2838043"; }
-  { rank=same; "an1900"; "Q3366778@1900"; "Q3091718@1900"; "Q3487413@1900"; "Q1542710"; "Q2379359"; "Q3176156"; "Q188592@1900"; "Q2705289@1900"; "Q3141290"; "Q2451197@1900"; "Q2838043@1900"; }
-  { rank=same; "an1905"; "Q1542710@1905"; "Q2379359@1905"; "Q3176156@1905"; "Q188592@1905"; "Q2705289@1905"; "Q3141290@1905"; "Q1332068"; }
-  { rank=same; "an1910"; "Q1542710@1910"; "Q135902867"; "Q188592@1910"; "Q3141290@1910"; "Q1332068@1910"; }
-  { rank=same; "an1920"; "Q1628816"; "Q703593"; "Q192821"; "Q1542710@1920"; "Q135902867@1920"; "Q188592@1920"; "Q698677"; "Q3141290@1920"; "Q3366737"; "Q1332068@1920"; }
-  { rank=same; "an1925"; "Q1628816@1925"; "Q703593@1925"; "Q192821@1925"; "Q1542710@1925"; "Q135902867@1925"; "Q2890957"; "Q3141290@1925"; "Q3366737@1925"; "Q3366567"; "Q1332068@1925"; }
-  { rank=same; "an1930"; "Q1628816@1930"; "Q703593@1930"; "Q534291"; "Q192821@1930"; "Q1542710@1930"; "Q135902867@1930"; "Q2890957@1930"; "Q3141290@1930"; "Q3366737@1930"; "Q3366567@1930"; "Q1423578"; "Q1332068@1930"; }
-  { rank=same; "an1935"; "Q3099346"; "Q1628816@1935"; "Q703593@1935"; "Q534291@1935"; "Q192821@1935"; "Q1542710@1935"; "Q538664"; "Q135902867@1935"; "Q2890957@1935"; "Q206682"; "Q3141290@1935"; "Q1984016"; "Q870667"; "Q3366769"; "Q1423578@1935"; "Q1332068@1935"; }
-  { rank=same; "an1940"; "Q1628816@1940"; "Q1393793"; "Q703593@1940"; "Q192821@1940"; "Q1542710@1940"; "Q538664@1940"; "Q135902867@1940"; "Q206682@1940"; "Q3141290@1940"; "Q1984016@1940"; "Q870667@1940"; "Q3366769@1940"; "Q1423578@1940"; "Q1332068@1940"; }
-  { rank=same; "an1945"; "Q1628816@1945"; "Q2164587"; "Q1393793@1945"; "Q192821@1945"; "Q1542710@1945"; "Q135902867@1945"; "Q206682@1945"; "Q3141290@1945"; "Q1984016@1945"; "Q870667@1945"; "Q27396"; "Q3091443"; "Q1332068@1945"; }
-  { rank=same; "an1950"; "Q3091561"; "Q1628816@1950"; "Q2164587@1950"; "Q1393793@1950"; "Q972773"; "Q192821@1950"; "Q1542710@1950"; "Q135902867@1950"; "Q206682@1950"; "Q3141290@1950"; "Q1828329"; "Q1984016@1950"; "Q870667@1950"; "Q159454"; "Q27396@1950"; "Q3091443@1950"; "Q1332068@1950"; }
-  { rank=same; "an1955"; "Q944000"; "Q3091561@1955"; "Q1628816@1955"; "Q2164587@1955"; "Q1393793@1955"; "Q972773@1955"; "Q192821@1955"; "Q3366765"; "Q1542710@1955"; "Q135902867@1955"; "Q206682@1955"; "Q2575147"; "Q3141290@1955"; "Q688738"; "Q1828329@1955"; "Q1984016@1955"; "Q870667@1955"; "Q159454@1955"; "Q27396@1955"; "Q2088895"; "Q3091443@1955"; "Q2054444"; "Q1332068@1955"; }
-  { rank=same; "an1960"; "Q944000@1960"; "Q3091561@1960"; "Q1628816@1960"; "Q2164587@1960"; "Q2634710"; "Q1393793@1960"; "Q972773@1960"; "Q192821@1960"; "Q3366765@1960"; "Q1542710@1960"; "Q135902867@1960"; "Q206682@1960"; "Q2575147@1960"; "Q3314191"; "Q3141290@1960"; "Q862828"; "Q688738@1960"; "Q1828329@1960"; "Q1984016@1960"; "Q870667@1960"; "Q159454@1960"; "Q27396@1960"; "Q2088895@1960"; "Q1145020"; "Q3091443@1960"; "Q2054444@1960"; "Q1332068@1960"; "Q2406201"; }
-  { rank=same; "an1965"; "Q944000@1965"; "Q3091561@1965"; "Q1628816@1965"; "Q2634710@1965"; "Q2984984"; "Q1393793@1965"; "Q972773@1965"; "Q192821@1965"; "Q3178133"; "Q133795"; "Q3366765@1965"; "Q2915458"; "Q1542710@1965"; "Q135902867@1965"; "Q1073391"; "Q170972"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)"; "Q15985231"; "Q2973337"; "Q2575147@1965"; "Q3356082"; "Q3314191@1965"; "Q3141290@1965"; "Q2540732"; "Q862828@1965"; "Q1828329@1965"; "Q1984016@1965"; "Q870667@1965"; "Q159454@1965"; "Q3240305"; "Q27396@1965"; "Q2088895@1965"; "Q1145020@1965"; "Q3091443@1965"; "Q2054444@1965"; "Q1332068@1965"; "Q2406201@1965"; }
-  { rank=same; "an1970"; "Q944000@1970"; "Q3091561@1970"; "Q1628816@1970"; "Q2634710@1970"; "Q2984984@1970"; "Q7205536"; "Q972773@1970"; "Q192821@1970"; "Q3117914"; "Q133795@1970"; "Q3366765@1970"; "Q1542710@1970"; "Q135902867@1970"; "Q1073391@1970"; "Q170972@1970"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1970"; "Q862627"; "Q15985231@1970"; "Q2973337@1970"; "Q2575147@1970"; "Q3356082@1970"; "Q3314191@1970"; "Q3550095"; "Q158073"; "Q122614151"; "Q3141290@1970"; "Q862828@1970"; "Q1828329@1970"; "Q1984016@1970"; "Q870667@1970"; "Q159454@1970"; "Q3240305@1970"; "Q427965"; "Q27396@1970"; "Q2088895@1970"; "Q1145020@1970"; "Q3091443@1970"; "Q2054444@1970"; "Q2406201@1970"; }
-  { rank=same; "an1975"; "Q123248148"; "Q944000@1975"; "Q3091561@1975"; "Q1628816@1975"; "Q2634710@1975"; "Q2984984@1975"; "Q7205536@1975"; "Q972773@1975"; "Q1618280"; "Q192821@1975"; "Q3117914@1975"; "Q133795@1975"; "Q3355979"; "Q3366765@1975"; "Q1542710@1975"; "Q3366206"; "Q135902867@1975"; "Q3240649"; "Q1073391@1975"; "Q170972@1975"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1975"; "Q3550207"; "Q862627@1975"; "Q15985231@1975"; "Q2973337@1975"; "Q2575147@1975"; "Q3356082@1975"; "Q3314191@1975"; "Q3550095@1975"; "Q158073@1975"; "Q2219002"; "Q122614151@1975"; "Q862828@1975"; "Q1828329@1975"; "Q1984016@1975"; "Q870667@1975"; "Q159454@1975"; "Q427965@1975"; "Q27396@1975"; "Q2088895@1975"; "Q1145020@1975"; "Q3091443@1975"; "Q2054444@1975"; }
-  { rank=same; "an1980"; "Q944000@1980"; "Q3091561@1980"; "Q1628816@1980"; "Q2634710@1980"; "Q2984984@1980"; "Q7205536@1980"; "Q972773@1980"; "Q3366218"; "Q639383"; "Q1618280@1980"; "Q192821@1980"; "Q3117914@1980"; "Q133795@1980"; "Q3355979@1980"; "Q3366765@1980"; "Q1542710@1980"; "Q3366206@1980"; "Q135902867@1980"; "Q3240649@1980"; "Q1073391@1980"; "Q170972@1980"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1980"; "Q3366726"; "Q3550207@1980"; "Q862627@1980"; "Q2973337@1980"; "Q2575147@1980"; "Q3366231"; "Q3314191@1980"; "Q3550095@1980"; "Q158073@1980"; "Q2219002@1980"; "Q862828@1980"; "Q1828329@1980"; "Q1984016@1980"; "Q870667@1980"; "Q159454@1980"; "Q427965@1980"; "Q27396@1980"; "Q2088895@1980"; "Q1145020@1980"; "Q743390"; "Q3091443@1980"; "Q2054444@1980"; }
-  { rank=same; "an1985"; "Q944000@1985"; "Q3091561@1985"; "Q1628816@1985"; "Q2634710@1985"; "Q2984984@1985"; "Q7205536@1985"; "Q972773@1985"; "Q3366218@1985"; "Q639383@1985"; "Q1618280@1985"; "Q192821@1985"; "Q3099357"; "Q3117914@1985"; "Q133795@1985"; "Q3355979@1985"; "Q3366765@1985"; "Q1542710@1985"; "Q3366206@1985"; "Q2455815"; "Q135902867@1985"; "Q3240649@1985"; "Q1073391@1985"; "Q170972@1985"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1985"; "Q3366726@1985"; "Q3550207@1985"; "Q862627@1985"; "Q2973337@1985"; "Q3092110"; "Q2575147@1985"; "Q3366231@1985"; "Q3314191@1985"; "Q3550095@1985"; "Q2840414"; "Q158073@1985"; "Q2219002@1985"; "Q3326810"; "Q862828@1985"; "Q1984016@1985"; "Q870667@1985"; "Q159454@1985"; "Q427965@1985"; "Q27396@1985"; "Q2088895@1985"; "Q1145020@1985"; "Q743390@1985"; "Q3091443@1985"; "Q2054444@1985"; }
-  { rank=same; "an1990"; "Q944000@1990"; "Q3091561@1990"; "Q1628816@1990"; "Q1321802"; "Q2634710@1990"; "Q2984984@1990"; "Q7205536@1990"; "Q220945"; "Q972773@1990"; "Q639383@1990"; "Q1618280@1990"; "Q192821@1990"; "Q3055019"; "Q622227"; "Q3365196"; "Q3099357@1990"; "Q3117914@1990"; "Q133795@1990"; "Q3355979@1990"; "Q3366765@1990"; "Q1542710@1990"; "Q3366206@1990"; "Q2455815@1990"; "Q135902867@1990"; "Q3366640"; "Q2453869"; "Q2996341"; "Q1073391@1990"; "Q3099352"; "Q170972@1990"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1990"; "Q3366726@1990"; "Q138828808"; "Q599328"; "Q3550207@1990"; "Q862627@1990"; "Q2973337@1990"; "Q2575147@1990"; "Q3366231@1990"; "Q3314191@1990"; "Q628594"; "Q1951112"; "Q580377"; "Q3550095@1990"; "Q2840414@1990"; "Q158073@1990"; "Q2219002@1990"; "Q115922370"; "Q3326810@1990"; "Q1984016@1990"; "Q870667@1990"; "Q159454@1990"; "Q427965@1990"; "Q16010672"; "Q27396@1990"; "Q2088895@1990"; "Q1145020@1990"; "Q743390@1990"; "Q3091443@1990"; "Q2054444@1990"; }
-  { rank=same; "an1995"; "Q944000@1995"; "Q3091561@1995"; "Q1628816@1995"; "Q1321802@1995"; "Q2634710@1995"; "Q2984984@1995"; "Q7205536@1995"; "Q220945@1995"; "Q972773@1995"; "Q639383@1995"; "Q1618280@1995"; "Q192821@1995"; "Q3055019@1995"; "Q622227@1995"; "Q3365196@1995"; "Q3099357@1995"; "Q3117914@1995"; "Q133795@1995"; "Q3355979@1995"; "Q3366765@1995"; "Q1542710@1995"; "Q3366206@1995"; "Q2455815@1995"; "Q135902867@1995"; "Q3366640@1995"; "Q22252055"; "Q3562502"; "Q2453869@1995"; "Q2440449"; "Q2996341@1995"; "Q1073391@1995"; "Q3099352@1995"; "Q170972@1995"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1995"; "Q3366726@1995"; "Q5975788"; "Q138828808@1995"; "Q599328@1995"; "Q862627@1995"; "Q2973337@1995"; "Q2575147@1995"; "Q622519"; "Q3366231@1995"; "Q628594@1995"; "Q1951112@1995"; "Q580377@1995"; "Q2840414@1995"; "Q158073@1995"; "Q2219002@1995"; "Q115922370@1995"; "Q1984016@1995"; "Q870667@1995"; "Q3230452"; "Q159454@1995"; "Q427965@1995"; "Q111607481"; "Q16010672@1995"; "Q27396@1995"; "Q2088895@1995"; "Q1145020@1995"; "Q743390@1995"; "Q3091443@1995"; "Q2054444@1995"; }
-  { rank=same; "an2000"; "Q944000@2000"; "Q3091561@2000"; "Q1628816@2000"; "Q1321802@2000"; "Q2634710@2000"; "Q2984984@2000"; "Q3326813"; "Q202649"; "Q7205536@2000"; "Q220945@2000"; "Q972773@2000"; "Q639383@2000"; "Q1618280@2000"; "Q192821@2000"; "Q3055019@2000"; "Q622227@2000"; "Q3365196@2000"; "Q3099357@2000"; "Q3117914@2000"; "Q116456156"; "Q1377231"; "Q133795@2000"; "Q3355979@2000"; "Q3366765@2000"; "Q1542710@2000"; "Q3366206@2000"; "Q2455815@2000"; "Q135902867@2000"; "Q3366640@2000"; "Q22252055@2000"; "Q3562502@2000"; "Q2453869@2000"; "Q2440449@2000"; "Q2996341@2000"; "Q1073391@2000"; "Q3099352@2000"; "Q170972@2000"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2000"; "Q3366726@2000"; "Q5975788@2000"; "Q138828808@2000"; "Q599328@2000"; "Q862627@2000"; "Q2973337@2000"; "Q2575147@2000"; "Q622519@2000"; "Q3366231@2000"; "Q950179"; "Q628594@2000"; "Q1951112@2000"; "Q580377@2000"; "Q111606973"; "Q158073@2000"; "Q2219002@2000"; "Q115922370@2000"; "Q104187610"; "Q1984016@2000"; "Q870667@2000"; "Q3230452@2000"; "Q649752"; "Q159454@2000"; "Q427965@2000"; "Q111607481@2000"; "Q16010672@2000"; "Q27396@2000"; "Q2088895@2000"; "Q1145020@2000"; "Q2996657"; "Q743390@2000"; "Q3091443@2000"; "Q2054444@2000"; "Q1631185"; "Q1694377"; }
-  { rank=same; "an2005"; "Q944000@2005"; "Q3091561@2005"; "Q1628816@2005"; "Q1321802@2005"; "Q2634710@2005"; "Q2984984@2005"; "Q3326813@2005"; "Q202649@2005"; "Q7205536@2005"; "Q220945@2005"; "Q972773@2005"; "Q639383@2005"; "Q29348702"; "Q1618280@2005"; "Q192821@2005"; "Q3055019@2005"; "Q622227@2005"; "Q3365196@2005"; "Q3099357@2005"; "Q3117914@2005"; "Q116456156@2005"; "Q1377231@2005"; "Q133795@2005"; "Q3355979@2005"; "Q2996386"; "Q3366765@2005"; "Q3456455"; "Q1542710@2005"; "Q3366206@2005"; "Q2455815@2005"; "Q135902867@2005"; "Q3366640@2005"; "Q22252055@2005"; "Q2453869@2005"; "Q2440449@2005"; "Q3326849"; "Q2996341@2005"; "Q1073391@2005"; "Q3099352@2005"; "Q170972@2005"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2005"; "Q3366726@2005"; "Q5975788@2005"; "Q138828808@2005"; "Q599328@2005"; "Q862627@2005"; "Q2973337@2005"; "Q2575147@2005"; "Q622519@2005"; "Q3366231@2005"; "Q950179@2005"; "Q628594@2005"; "Q580377@2005"; "Q111606973@2005"; "Q158073@2005"; "Q2219002@2005"; "Q2996664"; "Q1495924"; "Q104187610@2005"; "Q922707"; "Q3326581"; "Q1984016@2005"; "Q870667@2005"; "Q3230452@2005"; "Q649752@2005"; "Q159454@2005"; "Q427965@2005"; "Q16010672@2005"; "Q27396@2005"; "Q2088895@2005"; "Q1145020@2005"; "Q1045425"; "Q2996657@2005"; "Q3272709"; "Q743390@2005"; "Q3091443@2005"; "Q2054444@2005"; "Q1631185@2005"; "Q1694377@2005"; }
-  { rank=same; "an2010"; "Q944000@2010"; "Q3091561@2010"; "Q1628816@2010"; "Q1321802@2010"; "Q22981822"; "Q2634710@2010"; "Q2984984@2010"; "Q202649@2010"; "Q7205536@2010"; "Q220945@2010"; "Q972773@2010"; "Q639383@2010"; "Q29348702@2010"; "Q1618280@2010"; "Q192821@2010"; "Q3055019@2010"; "Q622227@2010"; "Q3365196@2010"; "Q3099357@2010"; "Q3117914@2010"; "Q116456156@2010"; "Q1377231@2010"; "Q133795@2010"; "Q3355979@2010"; "Q2996386@2010"; "Q3366765@2010"; "Q3456455@2010"; "Q15985232"; "Q1542710@2010"; "Q3366206@2010"; "Q2455815@2010"; "Q135902867@2010"; "Q3366640@2010"; "Q22252055@2010"; "Q2453869@2010"; "Q2440449@2010"; "Q3326849@2010"; "Q1073391@2010"; "Q3099352@2010"; "Q170972@2010"; "Q3099321"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2010"; "Q3366726@2010"; "Q5975788@2010"; "Q138828808@2010"; "Q104187739"; "Q599328@2010"; "Q2973337@2010"; "Q2575147@2010"; "Q622519@2010"; "Q3366231@2010"; "Q950179@2010"; "Q580377@2010"; "Q111606973@2010"; "Q3326782"; "Q158073@2010"; "Q1495924@2010"; "Q613786"; "Q104187610@2010"; "Q922707@2010"; "Q1984016@2010"; "Q870667@2010"; "Q3230452@2010"; "Q649752@2010"; "Q15629523"; "Q159454@2010"; "Q427965@2010"; "Q16010672@2010"; "Q18571605"; "Q27396@2010"; "Q2088895@2010"; "Q1145020@2010"; "Q1045425@2010"; "Q2996657@2010"; "Q743390@2010"; "Q3091443@2010"; "Q2054444@2010"; "Q1631185@2010"; "Q1694377@2010"; }
-  { rank=same; "an2015"; "Q944000@2015"; "Q3091561@2015"; "Q1628816@2015"; "Q1321802@2015"; "Q22981822@2015"; "Q2634710@2015"; "Q2984984@2015"; "Q202649@2015"; "Q7205536@2015"; "Q63483685"; "Q220945@2015"; "Q972773@2015"; "Q639383@2015"; "Q29348702@2015"; "Q1618280@2015"; "Q192821@2015"; "Q3055019@2015"; "Q622227@2015"; "Q3365196@2015"; "Q111225168"; "Q3099357@2015"; "Q3117914@2015"; "Q116456156@2015"; "Q1377231@2015"; "Q133795@2015"; "Q3355979@2015"; "Q3366765@2015"; "Q3456455@2015"; "Q15985232@2015"; "Q1542710@2015"; "Q100989633"; "Q3366206@2015"; "Q2455815@2015"; "Q135902867@2015"; "Q3366640@2015"; "Q22252055@2015"; "Q2453869@2015"; "Q2440449@2015"; "Q3326849@2015"; "Q1073391@2015"; "Q2638999"; "Q141861456"; "Q3099352@2015"; "Q170972@2015"; "Q31400965"; "Q3099321@2015"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2015"; "Q3366726@2015"; "Q5975788@2015"; "Q138828808@2015"; "Q104187739@2015"; "Q599328@2015"; "Q2973337@2015"; "Q107366687"; "Q2575147@2015"; "Q3366231@2015"; "Q58366009"; "Q950179@2015"; "Q580377@2015"; "Q64524428"; "Q2989703"; "Q111606973@2015"; "Q3326782@2015"; "Q158073@2015"; "Q24939885"; "Q1495924@2015"; "Q613786@2015"; "Q104187610@2015"; "Q922707@2015"; "Q139565740"; "Q62079328"; "Q30741057"; "Q58329311"; "Q1984016@2015"; "Q870667@2015"; "Q3230452@2015"; "Q125619283"; "Q649752@2015"; "Q15629523@2015"; "Q159454@2015"; "Q427965@2015"; "Q104186796"; "Q55597872"; "Q27978402"; "Q16010672@2015"; "Q18571605@2015"; "Q27396@2015"; "Q2088895@2015"; "Q1145020@2015"; "Q1045425@2015"; "Q2996657@2015"; "Q3091443@2015"; "Q2054444@2015"; "Q1631185@2015"; "Q1694377@2015"; }
-  { rank=same; "an2020"; "Q944000@2020"; "Q3091561@2020"; "Q1628816@2020"; "Q22981822@2020"; "Q2634710@2020"; "Q2984984@2020"; "Q202649@2020"; "Q7205536@2020"; "Q63483685@2020"; "Q220945@2020"; "Q972773@2020"; "Q639383@2020"; "Q1618280@2020"; "Q192821@2020"; "Q3055019@2020"; "Q622227@2020"; "Q3365196@2020"; "Q111225168@2020"; "Q3099357@2020"; "Q135755468"; "Q3117914@2020"; "Q1377231@2020"; "Q133795@2020"; "Q3355979@2020"; "Q3366765@2020"; "Q115965423"; "Q3456455@2020"; "Q15985232@2020"; "Q1542710@2020"; "Q100989633@2020"; "Q3366206@2020"; "Q2455815@2020"; "Q123785828"; "Q135902867@2020"; "Q3366640@2020"; "Q131451896"; "Q22252055@2020"; "Q2453869@2020"; "Q2440449@2020"; "Q3326849@2020"; "Q1073391@2020"; "Q2638999@2020"; "Q141861456@2020"; "Q3099352@2020"; "Q170972@2020"; "Q31400965@2020"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2020"; "fr:Parti communiste révolutionnaire (2024)"; "Q125771262"; "Q3366726@2020"; "Q5975788@2020"; "Q138828808@2020"; "Q599328@2020"; "Q2973337@2020"; "Q107366687@2020"; "Q2575147@2020"; "Q3366231@2020"; "Q58366009@2020"; "Q950179@2020"; "Q580377@2020"; "Q64524428@2020"; "Q2989703@2020"; "Q111606973@2020"; "Q3326782@2020"; "Q158073@2020"; "Q24939885@2020"; "Q130219314"; "Q113500977"; "Q613786@2020"; "Q922707@2020"; "Q127413320"; "Q139565740@2020"; "Q62079328@2020"; "Q30741057@2020"; "Q58329311@2020"; "Q1984016@2020"; "Q870667@2020"; "Q125619283@2020"; "Q649752@2020"; "Q15629523@2020"; "Q159454@2020"; "Q427965@2020"; "Q104186796@2020"; "Q55597872@2020"; "Q27978402@2020"; "Q18571605@2020"; "Q27396@2020"; "Q2088895@2020"; "Q1145020@2020"; "Q1045425@2020"; "Q3091443@2020"; "Q2054444@2020"; "Q1631185@2020"; "Q1694377@2020"; }
-  { rank=same; "an2025"; "Q944000@2025"; "Q3091561@2025"; "Q1628816@2025"; "Q22981822@2025"; "Q2634710@2025"; "Q2984984@2025"; "Q202649@2025"; "Q7205536@2025"; "Q63483685@2025"; "Q220945@2025"; "Q972773@2025"; "Q639383@2025"; "Q1618280@2025"; "Q192821@2025"; "Q3055019@2025"; "Q622227@2025"; "Q3365196@2025"; "Q111225168@2025"; "Q3099357@2025"; "Q135755468@2025"; "Q3117914@2025"; "Q1377231@2025"; "Q133795@2025"; "Q3355979@2025"; "Q3366765@2025"; "Q115965423@2025"; "Q3456455@2025"; "Q1542710@2025"; "Q100989633@2025"; "Q3366206@2025"; "Q2455815@2025"; "Q123785828@2025"; "Q135902867@2025"; "Q3366640@2025"; "Q131451896@2025"; "Q22252055@2025"; "Q2453869@2025"; "Q2440449@2025"; "Q3326849@2025"; "Q1073391@2025"; "Q2638999@2025"; "Q141861456@2025"; "Q3099352@2025"; "Q170972@2025"; "Q31400965@2025"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2025"; "fr:Parti communiste révolutionnaire (2024)@2025"; "Q125771262@2025"; "Q3366726@2025"; "Q5975788@2025"; "Q138828808@2025"; "Q599328@2025"; "Q2973337@2025"; "Q107366687@2025"; "Q2575147@2025"; "Q3366231@2025"; "Q58366009@2025"; "Q950179@2025"; "Q580377@2025"; "Q64524428@2025"; "Q2989703@2025"; "Q111606973@2025"; "Q3326782@2025"; "Q158073@2025"; "Q24939885@2025"; "Q130219314@2025"; "Q113500977@2025"; "Q613786@2025"; "Q922707@2025"; "Q127413320@2025"; "Q139565740@2025"; "Q62079328@2025"; "Q30741057@2025"; "Q58329311@2025"; "Q1984016@2025"; "Q870667@2025"; "Q125619283@2025"; "Q649752@2025"; "Q15629523@2025"; "Q159454@2025"; "Q427965@2025"; "Q104186796@2025"; "Q55597872@2025"; "Q27978402@2025"; "Q18571605@2025"; "Q27396@2025"; "Q2088895@2025"; "Q1145020@2025"; "Q3091443@2025"; "Q2054444@2025"; "Q1631185@2025"; "Q1694377@2025"; }
+  { rank=same; "an1880"; "Q928279"; "Q2451197"; "Q3091718@1880"; "Q3487413"; }
+  { rank=same; "an1885"; "Q928279@1885"; "Q2451197@1885"; "Q188592"; "Q3091718@1885"; "Q3487413@1885"; }
+  { rank=same; "an1890"; "Q928279@1890"; "Q2705289"; "Q2451197@1890"; "Q188592@1890"; "Q3091718@1890"; "Q3487413@1890"; }
+  { rank=same; "an1895"; "Q928279@1895"; "Q2705289@1895"; "Q2451197@1895"; "Q188592@1895"; "Q3091718@1895"; "Q2838043"; "Q3366778"; "Q3487413@1895"; }
+  { rank=same; "an1900"; "Q2705289@1900"; "Q2451197@1900"; "Q188592@1900"; "Q1542710"; "Q3091718@1900"; "Q2838043@1900"; "Q3141290"; "Q2379359"; "Q3366778@1900"; "Q3176156"; "Q3487413@1900"; }
+  { rank=same; "an1905"; "Q2705289@1905"; "Q188592@1905"; "Q1542710@1905"; "Q3141290@1905"; "Q2379359@1905"; "Q1332068"; "Q3176156@1905"; }
+  { rank=same; "an1910"; "Q188592@1910"; "Q1542710@1910"; "Q3141290@1910"; "Q135902867"; "Q1332068@1910"; }
+  { rank=same; "an1920"; "Q1628816"; "Q698677"; "Q188592@1920"; "Q1542710@1920"; "Q703593"; "Q192821"; "Q3141290@1920"; "Q3366737"; "Q135902867@1920"; "Q1332068@1920"; }
+  { rank=same; "an1925"; "Q1628816@1925"; "Q1542710@1925"; "Q703593@1925"; "Q192821@1925"; "Q3366567"; "Q2890957"; "Q3141290@1925"; "Q3366737@1925"; "Q135902867@1925"; "Q1332068@1925"; }
+  { rank=same; "an1930"; "Q1628816@1930"; "Q1542710@1930"; "Q534291"; "Q703593@1930"; "Q192821@1930"; "Q3366567@1930"; "Q2890957@1930"; "Q1423578"; "Q3141290@1930"; "Q3366737@1930"; "Q135902867@1930"; "Q1332068@1930"; }
+  { rank=same; "an1935"; "Q1984016"; "Q1628816@1935"; "Q870667"; "Q1542710@1935"; "Q534291@1935"; "Q703593@1935"; "Q206682"; "Q192821@1935"; "Q538664"; "Q3366769"; "Q2890957@1935"; "Q1423578@1935"; "Q3099346"; "Q3141290@1935"; "Q135902867@1935"; "Q1332068@1935"; }
+  { rank=same; "an1940"; "Q1984016@1940"; "Q1628816@1940"; "Q1393793"; "Q870667@1940"; "Q1542710@1940"; "Q703593@1940"; "Q206682@1940"; "Q192821@1940"; "Q538664@1940"; "Q3366769@1940"; "Q1423578@1940"; "Q3141290@1940"; "Q135902867@1940"; "Q1332068@1940"; }
+  { rank=same; "an1945"; "Q1984016@1945"; "Q1628816@1945"; "Q2164587"; "Q1393793@1945"; "Q870667@1945"; "Q1542710@1945"; "Q206682@1945"; "Q3091443"; "Q27396"; "Q192821@1945"; "Q3141290@1945"; "Q135902867@1945"; "Q1332068@1945"; }
+  { rank=same; "an1950"; "Q1984016@1950"; "Q1628816@1950"; "Q2164587@1950"; "Q159454"; "Q1393793@1950"; "Q870667@1950"; "Q972773"; "Q1542710@1950"; "Q1828329"; "Q206682@1950"; "Q3091443@1950"; "Q27396@1950"; "Q192821@1950"; "Q3091561"; "Q3141290@1950"; "Q135902867@1950"; "Q1332068@1950"; }
+  { rank=same; "an1955"; "Q1984016@1955"; "Q1628816@1955"; "Q2164587@1955"; "Q944000"; "Q159454@1955"; "Q3366765"; "Q1393793@1955"; "Q870667@1955"; "Q972773@1955"; "Q1542710@1955"; "Q2054444"; "Q1828329@1955"; "Q688738"; "Q206682@1955"; "Q3091443@1955"; "Q27396@1955"; "Q192821@1955"; "Q3091561@1955"; "Q2575147"; "Q3141290@1955"; "Q2088895"; "Q135902867@1955"; "Q1332068@1955"; }
+  { rank=same; "an1960"; "Q1984016@1960"; "Q1628816@1960"; "Q2164587@1960"; "Q2406201"; "Q944000@1960"; "Q159454@1960"; "Q3366765@1960"; "Q1393793@1960"; "Q870667@1960"; "Q972773@1960"; "Q1542710@1960"; "Q2054444@1960"; "Q1828329@1960"; "Q688738@1960"; "Q206682@1960"; "Q3091443@1960"; "Q27396@1960"; "Q192821@1960"; "Q862828"; "Q3091561@1960"; "Q2575147@1960"; "Q3141290@1960"; "Q2088895@1960"; "Q2634710"; "Q3314191"; "Q135902867@1960"; "Q1332068@1960"; "Q1145020"; }
+  { rank=same; "an1965"; "Q1984016@1965"; "Q1628816@1965"; "Q15985231"; "Q2406201@1965"; "Q944000@1965"; "Q159454@1965"; "Q3356082"; "Q3366765@1965"; "Q1393793@1965"; "Q133795"; "Q3178133"; "Q870667@1965"; "Q972773@1965"; "Q1542710@1965"; "Q2054444@1965"; "Q1828329@1965"; "Q3240305"; "Q1073391"; "Q2984984"; "Q3091443@1965"; "Q27396@1965"; "Q2973337"; "Q192821@1965"; "Q862828@1965"; "Q3091561@1965"; "Q170972"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)"; "Q2575147@1965"; "Q3141290@1965"; "Q2540732"; "Q2088895@1965"; "Q2634710@1965"; "Q3314191@1965"; "Q135902867@1965"; "Q1332068@1965"; "Q2915458"; "Q1145020@1965"; }
+  { rank=same; "an1970"; "Q1984016@1970"; "Q1628816@1970"; "Q15985231@1970"; "Q2406201@1970"; "Q944000@1970"; "Q159454@1970"; "Q3356082@1970"; "Q3366765@1970"; "Q133795@1970"; "Q870667@1970"; "Q122614151"; "Q972773@1970"; "Q1542710@1970"; "Q2054444@1970"; "Q427965"; "Q1828329@1970"; "Q3240305@1970"; "Q1073391@1970"; "Q3117914"; "Q3550095"; "Q2984984@1970"; "Q3091443@1970"; "Q27396@1970"; "Q2973337@1970"; "Q192821@1970"; "Q862828@1970"; "Q3091561@1970"; "Q170972@1970"; "Q862627"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1970"; "Q2575147@1970"; "Q158073"; "Q3141290@1970"; "Q2088895@1970"; "Q2634710@1970"; "Q3314191@1970"; "Q135902867@1970"; "Q7205536"; "Q1145020@1970"; }
+  { rank=same; "an1975"; "Q1984016@1975"; "Q1628816@1975"; "Q15985231@1975"; "Q944000@1975"; "Q3550207"; "Q159454@1975"; "Q3356082@1975"; "Q3366765@1975"; "Q123248148"; "Q133795@1975"; "Q1618280"; "Q870667@1975"; "Q122614151@1975"; "Q972773@1975"; "Q3240649"; "Q1542710@1975"; "Q2054444@1975"; "Q3355979"; "Q427965@1975"; "Q1828329@1975"; "Q1073391@1975"; "Q3117914@1975"; "Q3550095@1975"; "Q2984984@1975"; "Q3091443@1975"; "Q27396@1975"; "Q2973337@1975"; "Q192821@1975"; "Q862828@1975"; "Q3091561@1975"; "Q170972@1975"; "Q862627@1975"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1975"; "Q2575147@1975"; "Q158073@1975"; "Q2088895@1975"; "Q2634710@1975"; "Q3314191@1975"; "Q135902867@1975"; "Q7205536@1975"; "Q1145020@1975"; "Q3366206"; "Q2219002"; }
+  { rank=same; "an1980"; "Q1984016@1980"; "Q1628816@1980"; "Q944000@1980"; "Q3550207@1980"; "Q159454@1980"; "Q3366765@1980"; "Q133795@1980"; "Q1618280@1980"; "Q870667@1980"; "Q3366231"; "Q639383"; "Q972773@1980"; "Q3240649@1980"; "Q1542710@1980"; "Q2054444@1980"; "Q3355979@1980"; "Q427965@1980"; "Q1828329@1980"; "Q1073391@1980"; "Q3117914@1980"; "Q3550095@1980"; "Q2984984@1980"; "Q3091443@1980"; "Q3366218"; "Q27396@1980"; "Q2973337@1980"; "Q192821@1980"; "Q862828@1980"; "Q3091561@1980"; "Q170972@1980"; "Q862627@1980"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1980"; "Q2575147@1980"; "Q158073@1980"; "Q3366726"; "Q2088895@1980"; "Q2634710@1980"; "Q3314191@1980"; "Q135902867@1980"; "Q7205536@1980"; "Q1145020@1980"; "Q3366206@1980"; "Q2219002@1980"; "Q743390"; }
+  { rank=same; "an1985"; "Q1984016@1985"; "Q3326810"; "Q1628816@1985"; "Q944000@1985"; "Q3550207@1985"; "Q159454@1985"; "Q2455815"; "Q3366765@1985"; "Q133795@1985"; "Q1618280@1985"; "Q870667@1985"; "Q3366231@1985"; "Q639383@1985"; "Q972773@1985"; "Q3240649@1985"; "Q1542710@1985"; "Q2054444@1985"; "Q3355979@1985"; "Q427965@1985"; "Q2840414"; "Q1073391@1985"; "Q3117914@1985"; "Q3550095@1985"; "Q2984984@1985"; "Q3091443@1985"; "Q3099357"; "Q3366218@1985"; "Q27396@1985"; "Q2973337@1985"; "Q192821@1985"; "Q862828@1985"; "Q3091561@1985"; "Q3092110"; "Q170972@1985"; "Q862627@1985"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1985"; "Q2575147@1985"; "Q158073@1985"; "Q3366726@1985"; "Q2088895@1985"; "Q2634710@1985"; "Q3314191@1985"; "Q135902867@1985"; "Q7205536@1985"; "Q1145020@1985"; "Q3366206@1985"; "Q2219002@1985"; "Q743390@1985"; }
+  { rank=same; "an1990"; "Q1984016@1990"; "Q1951112"; "Q3326810@1990"; "Q1628816@1990"; "Q2996341"; "Q944000@1990"; "Q3550207@1990"; "Q159454@1990"; "Q2455815@1990"; "Q3366765@1990"; "Q2453869"; "Q133795@1990"; "Q1618280@1990"; "Q870667@1990"; "Q580377"; "Q3366231@1990"; "Q1321802"; "Q639383@1990"; "Q972773@1990"; "Q1542710@1990"; "Q2054444@1990"; "Q3355979@1990"; "Q427965@1990"; "Q3055019"; "Q2840414@1990"; "Q1073391@1990"; "Q3117914@1990"; "Q3365196"; "Q3550095@1990"; "Q2984984@1990"; "Q3091443@1990"; "Q3099357@1990"; "Q220945"; "Q27396@1990"; "Q2973337@1990"; "Q16010672"; "Q115922370"; "Q192821@1990"; "Q3091561@1990"; "Q622227"; "Q170972@1990"; "Q862627@1990"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1990"; "Q138828808"; "Q2575147@1990"; "Q599328"; "Q158073@1990"; "Q3366726@1990"; "Q2088895@1990"; "Q2634710@1990"; "Q3314191@1990"; "Q135902867@1990"; "Q7205536@1990"; "Q3366640"; "Q3099352"; "Q1145020@1990"; "Q3366206@1990"; "Q2219002@1990"; "Q628594"; "Q743390@1990"; }
+  { rank=same; "an1995"; "Q1984016@1995"; "Q1951112@1995"; "Q1628816@1995"; "Q2996341@1995"; "Q944000@1995"; "Q159454@1995"; "Q2455815@1995"; "Q3366765@1995"; "Q2453869@1995"; "Q22252055"; "Q133795@1995"; "Q1618280@1995"; "Q870667@1995"; "Q580377@1995"; "Q3366231@1995"; "Q1321802@1995"; "Q5975788"; "Q111607481"; "Q639383@1995"; "Q972773@1995"; "Q622519"; "Q2440449"; "Q1542710@1995"; "Q2054444@1995"; "Q3562502"; "Q3355979@1995"; "Q427965@1995"; "Q3055019@1995"; "Q2840414@1995"; "Q1073391@1995"; "Q3117914@1995"; "Q3365196@1995"; "Q2984984@1995"; "Q3091443@1995"; "Q3099357@1995"; "Q220945@1995"; "Q27396@1995"; "Q2973337@1995"; "Q16010672@1995"; "Q115922370@1995"; "Q192821@1995"; "Q3091561@1995"; "Q622227@1995"; "Q170972@1995"; "Q862627@1995"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1995"; "Q138828808@1995"; "Q2575147@1995"; "Q3230452"; "Q599328@1995"; "Q158073@1995"; "Q3366726@1995"; "Q2088895@1995"; "Q2634710@1995"; "Q135902867@1995"; "Q7205536@1995"; "Q3366640@1995"; "Q3099352@1995"; "Q1145020@1995"; "Q3366206@1995"; "Q2219002@1995"; "Q628594@1995"; "Q743390@1995"; }
+  { rank=same; "an2000"; "Q1984016@2000"; "Q1951112@2000"; "Q1628816@2000"; "Q3326813"; "Q2996341@2000"; "Q944000@2000"; "Q1631185"; "Q950179"; "Q159454@2000"; "Q2455815@2000"; "Q3366765@2000"; "Q2453869@2000"; "Q104187610"; "Q22252055@2000"; "Q116456156"; "Q133795@2000"; "Q1618280@2000"; "Q870667@2000"; "Q580377@2000"; "Q3366231@2000"; "Q1321802@2000"; "Q5975788@2000"; "Q111607481@2000"; "Q639383@2000"; "Q972773@2000"; "Q622519@2000"; "Q2440449@2000"; "Q1542710@2000"; "Q2054444@2000"; "Q3562502@2000"; "Q3355979@2000"; "Q427965@2000"; "Q202649"; "Q649752"; "Q1377231"; "Q3055019@2000"; "Q1073391@2000"; "Q3117914@2000"; "Q3365196@2000"; "Q111606973"; "Q2984984@2000"; "Q3091443@2000"; "Q3099357@2000"; "Q220945@2000"; "Q27396@2000"; "Q2973337@2000"; "Q16010672@2000"; "Q115922370@2000"; "Q192821@2000"; "Q3091561@2000"; "Q622227@2000"; "Q170972@2000"; "Q862627@2000"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2000"; "Q138828808@2000"; "Q2575147@2000"; "Q3230452@2000"; "Q599328@2000"; "Q1694377"; "Q158073@2000"; "Q3366726@2000"; "Q2088895@2000"; "Q2634710@2000"; "Q135902867@2000"; "Q7205536@2000"; "Q3366640@2000"; "Q3099352@2000"; "Q2996657"; "Q1145020@2000"; "Q3366206@2000"; "Q2219002@2000"; "Q628594@2000"; "Q743390@2000"; }
+  { rank=same; "an2005"; "Q1984016@2005"; "Q1628816@2005"; "Q3326813@2005"; "Q2996341@2005"; "Q944000@2005"; "Q3272709"; "Q1631185@2005"; "Q950179@2005"; "Q159454@2005"; "Q2455815@2005"; "Q3366765@2005"; "Q2453869@2005"; "Q104187610@2005"; "Q22252055@2005"; "Q116456156@2005"; "Q133795@2005"; "Q1618280@2005"; "Q870667@2005"; "Q580377@2005"; "Q3366231@2005"; "Q922707"; "Q1321802@2005"; "Q1495924"; "Q5975788@2005"; "Q639383@2005"; "Q972773@2005"; "Q622519@2005"; "Q2996664"; "Q2440449@2005"; "Q3326581"; "Q1542710@2005"; "Q29348702"; "Q2054444@2005"; "Q3355979@2005"; "Q427965@2005"; "Q2996386"; "Q202649@2005"; "Q649752@2005"; "Q1377231@2005"; "Q3055019@2005"; "Q3326849"; "Q3456455"; "Q1073391@2005"; "Q3117914@2005"; "Q3365196@2005"; "Q111606973@2005"; "Q2984984@2005"; "Q3091443@2005"; "Q3099357@2005"; "Q220945@2005"; "Q27396@2005"; "Q2973337@2005"; "Q16010672@2005"; "Q192821@2005"; "Q1045425"; "Q3091561@2005"; "Q622227@2005"; "Q170972@2005"; "Q862627@2005"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2005"; "Q138828808@2005"; "Q2575147@2005"; "Q3230452@2005"; "Q599328@2005"; "Q1694377@2005"; "Q158073@2005"; "Q3366726@2005"; "Q2088895@2005"; "Q2634710@2005"; "Q135902867@2005"; "Q7205536@2005"; "Q3366640@2005"; "Q3099352@2005"; "Q2996657@2005"; "Q1145020@2005"; "Q3366206@2005"; "Q2219002@2005"; "Q628594@2005"; "Q743390@2005"; }
+  { rank=same; "an2010"; "Q104187739"; "Q1984016@2010"; "Q1628816@2010"; "Q944000@2010"; "Q1631185@2010"; "Q950179@2010"; "Q159454@2010"; "Q2455815@2010"; "Q3366765@2010"; "Q2453869@2010"; "Q104187610@2010"; "Q22252055@2010"; "Q116456156@2010"; "Q133795@2010"; "Q1618280@2010"; "Q870667@2010"; "Q580377@2010"; "Q3366231@2010"; "Q922707@2010"; "Q1321802@2010"; "Q1495924@2010"; "Q5975788@2010"; "Q639383@2010"; "Q972773@2010"; "Q622519@2010"; "Q2440449@2010"; "Q1542710@2010"; "Q29348702@2010"; "Q2054444@2010"; "Q3355979@2010"; "Q427965@2010"; "Q2996386@2010"; "Q202649@2010"; "Q649752@2010"; "Q1377231@2010"; "Q3055019@2010"; "Q3326849@2010"; "Q3456455@2010"; "Q1073391@2010"; "Q3117914@2010"; "Q3365196@2010"; "Q111606973@2010"; "Q2984984@2010"; "Q3091443@2010"; "Q3099357@2010"; "Q220945@2010"; "Q27396@2010"; "Q2973337@2010"; "Q16010672@2010"; "Q15985232"; "Q192821@2010"; "Q3326782"; "Q1045425@2010"; "Q3091561@2010"; "Q622227@2010"; "Q18571605"; "Q170972@2010"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2010"; "Q138828808@2010"; "Q2575147@2010"; "Q3230452@2010"; "Q599328@2010"; "Q1694377@2010"; "Q613786"; "Q158073@2010"; "Q3366726@2010"; "Q2088895@2010"; "Q2634710@2010"; "Q15629523"; "Q135902867@2010"; "Q7205536@2010"; "Q3366640@2010"; "Q3099352@2010"; "Q2996657@2010"; "Q1145020@2010"; "Q3366206@2010"; "Q22981822"; "Q743390@2010"; "Q3099321"; }
+  { rank=same; "an2015"; "Q104187739@2015"; "Q1984016@2015"; "Q63483685"; "Q27978402"; "Q1628816@2015"; "Q104186796"; "Q944000@2015"; "Q1631185@2015"; "Q950179@2015"; "Q159454@2015"; "Q2455815@2015"; "Q3366765@2015"; "Q2453869@2015"; "Q58329311"; "Q104187610@2015"; "Q22252055@2015"; "Q116456156@2015"; "Q133795@2015"; "Q1618280@2015"; "Q870667@2015"; "Q580377@2015"; "Q3366231@2015"; "Q922707@2015"; "Q1321802@2015"; "Q1495924@2015"; "Q5975788@2015"; "Q639383@2015"; "Q972773@2015"; "Q2440449@2015"; "Q1542710@2015"; "Q29348702@2015"; "Q125619283"; "Q2054444@2015"; "Q64524428"; "Q24939885"; "Q3355979@2015"; "Q427965@2015"; "Q202649@2015"; "Q649752@2015"; "Q1377231@2015"; "Q3055019@2015"; "Q100989633"; "Q3326849@2015"; "Q107366687"; "Q3456455@2015"; "Q1073391@2015"; "Q2638999"; "Q3117914@2015"; "Q2989703"; "Q3365196@2015"; "Q111606973@2015"; "Q2984984@2015"; "Q3091443@2015"; "Q3099357@2015"; "Q58366009"; "Q220945@2015"; "Q27396@2015"; "Q2973337@2015"; "Q30741057"; "Q55597872"; "Q16010672@2015"; "Q15985232@2015"; "Q192821@2015"; "Q3326782@2015"; "Q1045425@2015"; "Q3091561@2015"; "Q622227@2015"; "Q18571605@2015"; "Q170972@2015"; "Q111225168"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2015"; "Q138828808@2015"; "Q2575147@2015"; "Q3230452@2015"; "Q599328@2015"; "Q1694377@2015"; "Q613786@2015"; "Q31400965"; "Q158073@2015"; "Q3366726@2015"; "Q141861456"; "Q2088895@2015"; "Q2634710@2015"; "Q15629523@2015"; "Q135902867@2015"; "Q139565740"; "Q7205536@2015"; "Q3366640@2015"; "Q3099352@2015"; "Q2996657@2015"; "Q1145020@2015"; "Q3366206@2015"; "Q22981822@2015"; "Q62079328"; "Q3099321@2015"; }
+  { rank=same; "an2020"; "Q1984016@2020"; "Q63483685@2020"; "Q27978402@2020"; "Q1628816@2020"; "Q127413320"; "Q135755468"; "Q104186796@2020"; "Q944000@2020"; "Q1631185@2020"; "Q950179@2020"; "Q159454@2020"; "Q2455815@2020"; "Q3366765@2020"; "Q2453869@2020"; "Q113500977"; "Q123785828"; "Q58329311@2020"; "Q22252055@2020"; "Q133795@2020"; "Q1618280@2020"; "Q870667@2020"; "Q580377@2020"; "Q3366231@2020"; "Q922707@2020"; "Q5975788@2020"; "Q639383@2020"; "Q972773@2020"; "Q2440449@2020"; "Q1542710@2020"; "Q125619283@2020"; "Q2054444@2020"; "Q64524428@2020"; "Q24939885@2020"; "Q3355979@2020"; "Q427965@2020"; "Q202649@2020"; "Q649752@2020"; "Q1377231@2020"; "Q3055019@2020"; "Q100989633@2020"; "Q3326849@2020"; "Q107366687@2020"; "Q3456455@2020"; "fr:Parti communiste révolutionnaire (2024)"; "Q1073391@2020"; "Q2638999@2020"; "Q3117914@2020"; "Q2989703@2020"; "Q3365196@2020"; "Q111606973@2020"; "Q2984984@2020"; "Q3091443@2020"; "Q3099357@2020"; "Q58366009@2020"; "Q220945@2020"; "Q131451896"; "Q125771262"; "Q27396@2020"; "Q2973337@2020"; "Q30741057@2020"; "Q55597872@2020"; "Q15985232@2020"; "Q130219314"; "Q192821@2020"; "Q3326782@2020"; "Q1045425@2020"; "Q3091561@2020"; "Q622227@2020"; "Q18571605@2020"; "Q170972@2020"; "Q111225168@2020"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2020"; "Q138828808@2020"; "Q2575147@2020"; "Q599328@2020"; "Q1694377@2020"; "Q613786@2020"; "Q31400965@2020"; "Q158073@2020"; "Q115965423"; "Q3366726@2020"; "Q141861456@2020"; "Q2088895@2020"; "Q2634710@2020"; "Q15629523@2020"; "Q135902867@2020"; "Q139565740@2020"; "Q7205536@2020"; "Q3366640@2020"; "Q3099352@2020"; "Q1145020@2020"; "Q3366206@2020"; "Q22981822@2020"; "Q62079328@2020"; }
+  { rank=same; "an2025"; "Q1984016@2025"; "Q63483685@2025"; "Q27978402@2025"; "Q1628816@2025"; "Q127413320@2025"; "Q135755468@2025"; "Q104186796@2025"; "Q944000@2025"; "Q1631185@2025"; "Q950179@2025"; "Q159454@2025"; "Q2455815@2025"; "Q3366765@2025"; "Q2453869@2025"; "Q113500977@2025"; "Q123785828@2025"; "Q58329311@2025"; "Q22252055@2025"; "Q133795@2025"; "Q1618280@2025"; "Q870667@2025"; "Q580377@2025"; "Q3366231@2025"; "Q922707@2025"; "Q5975788@2025"; "Q639383@2025"; "Q972773@2025"; "Q2440449@2025"; "Q1542710@2025"; "Q125619283@2025"; "Q2054444@2025"; "Q64524428@2025"; "Q24939885@2025"; "Q3355979@2025"; "Q427965@2025"; "Q202649@2025"; "Q649752@2025"; "Q1377231@2025"; "Q3055019@2025"; "Q100989633@2025"; "Q3326849@2025"; "Q107366687@2025"; "Q3456455@2025"; "fr:Parti communiste révolutionnaire (2024)@2025"; "Q1073391@2025"; "Q2638999@2025"; "Q3117914@2025"; "Q2989703@2025"; "Q3365196@2025"; "Q111606973@2025"; "Q2984984@2025"; "Q3091443@2025"; "Q3099357@2025"; "Q58366009@2025"; "Q220945@2025"; "Q131451896@2025"; "Q125771262@2025"; "Q27396@2025"; "Q2973337@2025"; "Q30741057@2025"; "Q55597872@2025"; "Q130219314@2025"; "Q192821@2025"; "Q3326782@2025"; "Q3091561@2025"; "Q622227@2025"; "Q18571605@2025"; "Q170972@2025"; "Q111225168@2025"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2025"; "Q138828808@2025"; "Q2575147@2025"; "Q599328@2025"; "Q1694377@2025"; "Q613786@2025"; "Q31400965@2025"; "Q158073@2025"; "Q115965423@2025"; "Q3366726@2025"; "Q141861456@2025"; "Q2088895@2025"; "Q2634710@2025"; "Q15629523@2025"; "Q135902867@2025"; "Q139565740@2025"; "Q7205536@2025"; "Q3366640@2025"; "Q3099352@2025"; "Q1145020@2025"; "Q3366206@2025"; "Q22981822@2025"; "Q62079328@2025"; }
   "Q3091443" -> "Q3091443@1950" [color="#111111aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération anarchiste (francophone)"];
   "Q3091443@1950" -> "Q3091443@1955" [color="#111111aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération anarchiste (francophone)"];
   "Q3091443@1955" -> "Q3091443@1960" [color="#111111aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération anarchiste (francophone)"];
@@ -1236,11 +1236,6 @@ digraph G {
   "Q3366737" -> "Q3366737@1925" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste communiste"];
   "Q3366737@1925" -> "Q3366737@1930" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste communiste"];
   "Q538664" -> "Q538664@1940" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti ouvrier internationaliste"];
-  "Q206682" -> "Q206682@1940" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
-  "Q206682@1940" -> "Q206682@1945" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
-  "Q206682@1945" -> "Q206682@1950" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
-  "Q206682@1950" -> "Q206682@1955" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
-  "Q206682@1955" -> "Q206682@1960" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
   "Q1984016" -> "Q1984016@1940" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale (lambertiste)"];
   "Q1984016@1940" -> "Q1984016@1945" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale (lambertiste)"];
   "Q1984016@1945" -> "Q1984016@1950" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale (lambertiste)"];
@@ -1259,6 +1254,11 @@ digraph G {
   "Q1984016@2010" -> "Q1984016@2015" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale (lambertiste)"];
   "Q1984016@2015" -> "Q1984016@2020" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale (lambertiste)"];
   "Q1984016@2020" -> "Q1984016@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale (lambertiste)"];
+  "Q206682" -> "Q206682@1940" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
+  "Q206682@1940" -> "Q206682@1945" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
+  "Q206682@1945" -> "Q206682@1950" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
+  "Q206682@1950" -> "Q206682@1955" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
+  "Q206682@1955" -> "Q206682@1960" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Quatrième Internationale"];
   "Q870667" -> "Q870667@1940" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Lutte ouvrière"];
   "Q870667@1940" -> "Q870667@1945" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Lutte ouvrière"];
   "Q870667@1945" -> "Q870667@1950" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Lutte ouvrière"];
@@ -1457,6 +1457,13 @@ digraph G {
   "Q2455815@2020" -> "Q2455815@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Courant Révolution Permanente – Quatrième Internationale"];
   "Q115922370" -> "Q115922370@1995" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Organisation pour la reconstruction du Parti communiste de France"];
   "Q115922370@1995" -> "Q115922370@2000" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Organisation pour la reconstruction du Parti communiste de France"];
+  "Q580377" -> "Q580377@1995" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
+  "Q580377@1995" -> "Q580377@2000" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
+  "Q580377@2000" -> "Q580377@2005" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
+  "Q580377@2005" -> "Q580377@2010" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
+  "Q580377@2010" -> "Q580377@2015" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
+  "Q580377@2015" -> "Q580377@2020" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
+  "Q580377@2020" -> "Q580377@2025" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
   "Q3055019" -> "Q3055019@1995" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Entente internationale des travailleurs et des peuples"];
   "Q3055019@1995" -> "Q3055019@2000" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Entente internationale des travailleurs et des peuples"];
   "Q3055019@2000" -> "Q3055019@2005" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Entente internationale des travailleurs et des peuples"];
@@ -1474,13 +1481,6 @@ digraph G {
   "Q628594" -> "Q628594@1995" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti des travailleurs (France, 1991)"];
   "Q628594@1995" -> "Q628594@2000" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti des travailleurs (France, 1991)"];
   "Q628594@2000" -> "Q628594@2005" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti des travailleurs (France, 1991)"];
-  "Q580377" -> "Q580377@1995" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
-  "Q580377@1995" -> "Q580377@2000" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
-  "Q580377@2000" -> "Q580377@2005" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
-  "Q580377@2005" -> "Q580377@2010" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
-  "Q580377@2010" -> "Q580377@2015" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
-  "Q580377@2015" -> "Q580377@2020" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
-  "Q580377@2020" -> "Q580377@2025" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Initiative démocratique de gauche"];
   "Q3365196" -> "Q3365196@1995" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="The Communist"];
   "Q3365196@1995" -> "Q3365196@2000" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="The Communist"];
   "Q3365196@2000" -> "Q3365196@2005" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="The Communist"];
@@ -1495,6 +1495,9 @@ digraph G {
   "Q3099352@2010" -> "Q3099352@2015" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche révolutionnaire"];
   "Q3099352@2015" -> "Q3099352@2020" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche révolutionnaire"];
   "Q3099352@2020" -> "Q3099352@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche révolutionnaire"];
+  "Q2996341" -> "Q2996341@1995" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention pour une alternative progressiste"];
+  "Q2996341@1995" -> "Q2996341@2000" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention pour une alternative progressiste"];
+  "Q2996341@2000" -> "Q2996341@2005" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention pour une alternative progressiste"];
   "Q622227" -> "Q622227@1995" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)"];
   "Q622227@1995" -> "Q622227@2000" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)"];
   "Q622227@2000" -> "Q622227@2005" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)"];
@@ -1502,9 +1505,6 @@ digraph G {
   "Q622227@2010" -> "Q622227@2015" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)"];
   "Q622227@2015" -> "Q622227@2020" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)"];
   "Q622227@2020" -> "Q622227@2025" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)"];
-  "Q2996341" -> "Q2996341@1995" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention pour une alternative progressiste"];
-  "Q2996341@1995" -> "Q2996341@2000" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention pour une alternative progressiste"];
-  "Q2996341@2000" -> "Q2996341@2005" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention pour une alternative progressiste"];
   "Q599328" -> "Q599328@1995" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Ligue internationale des travailleurs - Quatrième Internationale"];
   "Q599328@1995" -> "Q599328@2000" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Ligue internationale des travailleurs - Quatrième Internationale"];
   "Q599328@2000" -> "Q599328@2005" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Ligue internationale des travailleurs - Quatrième Internationale"];
@@ -1539,12 +1539,12 @@ digraph G {
   "Q5975788@2010" -> "Q5975788@2015" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Ligue ouvrière révolutionnaire pour la Quatrième Internationale"];
   "Q5975788@2015" -> "Q5975788@2020" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Ligue ouvrière révolutionnaire pour la Quatrième Internationale"];
   "Q5975788@2020" -> "Q5975788@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Ligue ouvrière révolutionnaire pour la Quatrième Internationale"];
-  "Q116456156" -> "Q116456156@2005" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Communistes"];
-  "Q116456156@2005" -> "Q116456156@2010" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Communistes"];
-  "Q116456156@2010" -> "Q116456156@2015" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Communistes"];
   "Q104187610" -> "Q104187610@2005" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste maoïste de France"];
   "Q104187610@2005" -> "Q104187610@2010" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste maoïste de France"];
   "Q104187610@2010" -> "Q104187610@2015" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste maoïste de France"];
+  "Q116456156" -> "Q116456156@2005" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Communistes"];
+  "Q116456156@2005" -> "Q116456156@2010" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Communistes"];
+  "Q116456156@2010" -> "Q116456156@2015" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Communistes"];
   "Q111606973" -> "Q111606973@2005" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste de France (marxiste-léniniste-maoïste)"];
   "Q111606973@2005" -> "Q111606973@2010" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste de France (marxiste-léniniste-maoïste)"];
   "Q111606973@2010" -> "Q111606973@2015" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste de France (marxiste-léniniste-maoïste)"];
@@ -1569,12 +1569,12 @@ digraph G {
   "Q22981822@2015" -> "Q22981822@2020" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Révolution permanente"];
   "Q22981822@2020" -> "Q22981822@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Révolution permanente"];
   "Q104187739" -> "Q104187739@2015" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Bloc rouge (Unification des maoïstes)"];
+  "Q24939885" -> "Q24939885@2020" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti des travailleurs (France, 2015)"];
+  "Q24939885@2020" -> "Q24939885@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti des travailleurs (France, 2015)"];
   "Q2638999" -> "Q2638999@2020" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti ouvrier indépendant"];
   "Q2638999@2020" -> "Q2638999@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti ouvrier indépendant"];
   "Q2989703" -> "Q2989703@2020" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti révolutionnaire Communistes"];
   "Q2989703@2020" -> "Q2989703@2025" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti révolutionnaire Communistes"];
-  "Q24939885" -> "Q24939885@2020" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti des travailleurs (France, 2015)"];
-  "Q24939885@2020" -> "Q24939885@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti des travailleurs (France, 2015)"];
   "Q63483685" -> "Q63483685@2020" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste révolutionnaire de France"];
   "Q63483685@2020" -> "Q63483685@2025" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste révolutionnaire de France"];
   "Q104186796" -> "Q104186796@2020" [color="#7b0d0daa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste maoïste"];
@@ -1583,8 +1583,8 @@ digraph G {
   "Q141861456@2020" -> "Q141861456@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Le Poing Levé"];
   "Q115965423" -> "Q115965423@2025" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Nouveau Parti anticapitaliste – Révolutionnaires"];
   "Q123785828" -> "Q123785828@2025" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Action Communiste Européenne"];
-  "Q131451896" -> "Q131451896@2025" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste révolutionnaire (Canada)"];
   "fr:Parti communiste révolutionnaire (2024)" -> "fr:Parti communiste révolutionnaire (2024)@2025" [color="#ff6b5eaa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste révolutionnaire"];
+  "Q131451896" -> "Q131451896@2025" [color="#d62828aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti communiste révolutionnaire (Canada)"];
   "Q3091718" -> "Q3091718@1880" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération des travailleurs socialistes de France"];
   "Q3091718@1880" -> "Q3091718@1885" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération des travailleurs socialistes de France"];
   "Q3091718@1885" -> "Q3091718@1890" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération des travailleurs socialistes de France"];
@@ -1673,21 +1673,6 @@ digraph G {
   "Q2164587" -> "Q2164587@1950" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique et socialiste de la Résistance"];
   "Q2164587@1950" -> "Q2164587@1955" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique et socialiste de la Résistance"];
   "Q2164587@1955" -> "Q2164587@1960" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique et socialiste de la Résistance"];
-  "Q3091561" -> "Q3091561@1955" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1955" -> "Q3091561@1960" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1960" -> "Q3091561@1965" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1965" -> "Q3091561@1970" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1970" -> "Q3091561@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1975" -> "Q3091561@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1980" -> "Q3091561@1985" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1985" -> "Q3091561@1990" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1990" -> "Q3091561@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@1995" -> "Q3091561@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@2000" -> "Q3091561@2005" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@2005" -> "Q3091561@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@2010" -> "Q3091561@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@2015" -> "Q3091561@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
-  "Q3091561@2020" -> "Q3091561@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
   "Q159454" -> "Q159454@1955" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Internationale socialiste"];
   "Q159454@1955" -> "Q159454@1960" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Internationale socialiste"];
   "Q159454@1960" -> "Q159454@1965" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Internationale socialiste"];
@@ -1703,6 +1688,21 @@ digraph G {
   "Q159454@2010" -> "Q159454@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Internationale socialiste"];
   "Q159454@2015" -> "Q159454@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Internationale socialiste"];
   "Q159454@2020" -> "Q159454@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Internationale socialiste"];
+  "Q3091561" -> "Q3091561@1955" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1955" -> "Q3091561@1960" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1960" -> "Q3091561@1965" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1965" -> "Q3091561@1970" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1970" -> "Q3091561@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1975" -> "Q3091561@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1980" -> "Q3091561@1985" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1985" -> "Q3091561@1990" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1990" -> "Q3091561@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@1995" -> "Q3091561@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@2000" -> "Q3091561@2005" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@2005" -> "Q3091561@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@2010" -> "Q3091561@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@2015" -> "Q3091561@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
+  "Q3091561@2020" -> "Q3091561@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération de la Guyane du Parti socialiste"];
   "Q3366765" -> "Q3366765@1960" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste guyanais"];
   "Q3366765@1960" -> "Q3366765@1965" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste guyanais"];
   "Q3366765@1965" -> "Q3366765@1970" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste guyanais"];
@@ -1737,6 +1737,8 @@ digraph G {
   "Q862828@1970" -> "Q862828@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste unifié"];
   "Q862828@1975" -> "Q862828@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste unifié"];
   "Q862828@1980" -> "Q862828@1985" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste unifié"];
+  "Q2406201" -> "Q2406201@1965" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention des institutions républicaines"];
+  "Q2406201@1965" -> "Q2406201@1970" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention des institutions républicaines"];
   "Q1145020" -> "Q1145020@1965" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique bretonne"];
   "Q1145020@1965" -> "Q1145020@1970" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique bretonne"];
   "Q1145020@1970" -> "Q1145020@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique bretonne"];
@@ -1750,8 +1752,8 @@ digraph G {
   "Q1145020@2010" -> "Q1145020@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique bretonne"];
   "Q1145020@2015" -> "Q1145020@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique bretonne"];
   "Q1145020@2020" -> "Q1145020@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Union démocratique bretonne"];
-  "Q2406201" -> "Q2406201@1965" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention des institutions républicaines"];
-  "Q2406201@1965" -> "Q2406201@1970" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convention des institutions républicaines"];
+  "Q15985231" -> "Q15985231@1970" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Objectif socialiste"];
+  "Q15985231@1970" -> "Q15985231@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Objectif socialiste"];
   "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)" -> "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1970" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Alternative socialiste (Angleterre, Écosse et pays de Galles)"];
   "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1970" -> "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Alternative socialiste (Angleterre, Écosse et pays de Galles)"];
   "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1975" -> "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Alternative socialiste (Angleterre, Écosse et pays de Galles)"];
@@ -1764,8 +1766,6 @@ digraph G {
   "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2010" -> "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Alternative socialiste (Angleterre, Écosse et pays de Galles)"];
   "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2015" -> "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Alternative socialiste (Angleterre, Écosse et pays de Galles)"];
   "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2020" -> "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Alternative socialiste (Angleterre, Écosse et pays de Galles)"];
-  "Q15985231" -> "Q15985231@1970" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Objectif socialiste"];
-  "Q15985231@1970" -> "Q15985231@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Objectif socialiste"];
   "Q170972" -> "Q170972@1970" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste"];
   "Q170972@1970" -> "Q170972@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste"];
   "Q170972@1975" -> "Q170972@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste"];
@@ -1778,28 +1778,6 @@ digraph G {
   "Q170972@2010" -> "Q170972@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste"];
   "Q170972@2015" -> "Q170972@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste"];
   "Q170972@2020" -> "Q170972@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste"];
-  "Q7205536" -> "Q7205536@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@1975" -> "Q7205536@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@1980" -> "Q7205536@1985" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@1985" -> "Q7205536@1990" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@1990" -> "Q7205536@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@1995" -> "Q7205536@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@2000" -> "Q7205536@2005" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@2005" -> "Q7205536@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@2010" -> "Q7205536@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@2015" -> "Q7205536@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q7205536@2020" -> "Q7205536@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
-  "Q3117914" -> "Q3117914@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@1975" -> "Q3117914@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@1980" -> "Q3117914@1985" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@1985" -> "Q3117914@1990" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@1990" -> "Q3117914@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@1995" -> "Q3117914@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@2000" -> "Q3117914@2005" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@2005" -> "Q3117914@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@2010" -> "Q3117914@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@2015" -> "Q3117914@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
-  "Q3117914@2020" -> "Q3117914@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
   "Q122614151" -> "Q122614151@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement socialiste guadeloupéen"];
   "Q427965" -> "Q427965@1975" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti radical de gauche"];
   "Q427965@1975" -> "Q427965@1980" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti radical de gauche"];
@@ -1812,6 +1790,28 @@ digraph G {
   "Q427965@2010" -> "Q427965@2015" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti radical de gauche"];
   "Q427965@2015" -> "Q427965@2020" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti radical de gauche"];
   "Q427965@2020" -> "Q427965@2025" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti radical de gauche"];
+  "Q3117914" -> "Q3117914@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@1975" -> "Q3117914@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@1980" -> "Q3117914@1985" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@1985" -> "Q3117914@1990" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@1990" -> "Q3117914@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@1995" -> "Q3117914@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@2000" -> "Q3117914@2005" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@2005" -> "Q3117914@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@2010" -> "Q3117914@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@2015" -> "Q3117914@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q3117914@2020" -> "Q3117914@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Groupe révolution socialiste"];
+  "Q7205536" -> "Q7205536@1975" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@1975" -> "Q7205536@1980" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@1980" -> "Q7205536@1985" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@1985" -> "Q7205536@1990" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@1990" -> "Q7205536@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@1995" -> "Q7205536@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@2000" -> "Q7205536@2005" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@2005" -> "Q7205536@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@2010" -> "Q7205536@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@2015" -> "Q7205536@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
+  "Q7205536@2020" -> "Q7205536@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Fédération guadeloupéenne du Parti socialiste"];
   "Q3366726" -> "Q3366726@1985" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Les Progressistes"];
   "Q3366726@1985" -> "Q3366726@1990" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Les Progressistes"];
   "Q3366726@1990" -> "Q3366726@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Les Progressistes"];
@@ -1836,11 +1836,8 @@ digraph G {
   "Q220945@2010" -> "Q220945@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste européen"];
   "Q220945@2015" -> "Q220945@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste européen"];
   "Q220945@2020" -> "Q220945@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste européen"];
-  "Q1321802" -> "Q1321802@1995" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
-  "Q1321802@1995" -> "Q1321802@2000" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
-  "Q1321802@2000" -> "Q1321802@2005" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
-  "Q1321802@2005" -> "Q1321802@2010" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
-  "Q1321802@2010" -> "Q1321802@2015" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
+  "Q1951112" -> "Q1951112@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement des citoyens"];
+  "Q1951112@1995" -> "Q1951112@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement des citoyens"];
   "Q2453869" -> "Q2453869@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste des travailleurs unifié"];
   "Q2453869@1995" -> "Q2453869@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste des travailleurs unifié"];
   "Q2453869@2000" -> "Q2453869@2005" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste des travailleurs unifié"];
@@ -1848,8 +1845,11 @@ digraph G {
   "Q2453869@2010" -> "Q2453869@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste des travailleurs unifié"];
   "Q2453869@2015" -> "Q2453869@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste des travailleurs unifié"];
   "Q2453869@2020" -> "Q2453869@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti socialiste des travailleurs unifié"];
-  "Q1951112" -> "Q1951112@1995" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement des citoyens"];
-  "Q1951112@1995" -> "Q1951112@2000" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement des citoyens"];
+  "Q1321802" -> "Q1321802@1995" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
+  "Q1321802@1995" -> "Q1321802@2000" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
+  "Q1321802@2000" -> "Q1321802@2005" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
+  "Q1321802@2005" -> "Q1321802@2010" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
+  "Q1321802@2010" -> "Q1321802@2015" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement républicain et citoyen"];
   "Q138828808" -> "Q138828808@1995" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche républicaine et sociale"];
   "Q138828808@1995" -> "Q138828808@2000" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche républicaine et sociale"];
   "Q138828808@2000" -> "Q138828808@2005" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche républicaine et sociale"];
@@ -1863,14 +1863,14 @@ digraph G {
   "Q922707@2015" -> "Q922707@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti de gauche"];
   "Q922707@2020" -> "Q922707@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Parti de gauche"];
   "Q2996386" -> "Q2996386@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Convergences et alternative"];
-  "Q3456455" -> "Q3456455@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="République et socialisme"];
-  "Q3456455@2010" -> "Q3456455@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="République et socialisme"];
-  "Q3456455@2015" -> "Q3456455@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="République et socialisme"];
-  "Q3456455@2020" -> "Q3456455@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="République et socialisme"];
   "Q3326849" -> "Q3326849@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement des progressistes"];
   "Q3326849@2010" -> "Q3326849@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement des progressistes"];
   "Q3326849@2015" -> "Q3326849@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement des progressistes"];
   "Q3326849@2020" -> "Q3326849@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Mouvement des progressistes"];
+  "Q3456455" -> "Q3456455@2010" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="République et socialisme"];
+  "Q3456455@2010" -> "Q3456455@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="République et socialisme"];
+  "Q3456455@2015" -> "Q3456455@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="République et socialisme"];
+  "Q3456455@2020" -> "Q3456455@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="République et socialisme"];
   "Q3099321" -> "Q3099321@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche anticapitaliste"];
   "Q3326782" -> "Q3326782@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Pour La Réunion"];
   "Q3326782@2015" -> "Q3326782@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Pour La Réunion"];
@@ -1880,20 +1880,20 @@ digraph G {
   "Q18571605" -> "Q18571605@2015" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="La Force du 13"];
   "Q18571605@2015" -> "Q18571605@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="La Force du 13"];
   "Q18571605@2020" -> "Q18571605@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="La Force du 13"];
-  "Q30741057" -> "Q30741057@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Rézistan's Égalité 974"];
-  "Q30741057@2020" -> "Q30741057@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Rézistan's Égalité 974"];
   "Q27978402" -> "Q27978402@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="La France insoumise"];
   "Q27978402@2020" -> "Q27978402@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="La France insoumise"];
+  "Q30741057" -> "Q30741057@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Rézistan's Égalité 974"];
+  "Q30741057@2020" -> "Q30741057@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Rézistan's Égalité 974"];
   "Q111225168" -> "Q111225168@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche démocratique et sociale"];
   "Q111225168@2020" -> "Q111225168@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche démocratique et sociale"];
   "Q31400965" -> "Q31400965@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Génération.s"];
   "Q31400965@2020" -> "Q31400965@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Génération.s"];
   "Q62079328" -> "Q62079328@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Debout"];
   "Q62079328@2020" -> "Q62079328@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Debout"];
-  "Q58366009" -> "Q58366009@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Place publique"];
-  "Q58366009@2020" -> "Q58366009@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Place publique"];
   "Q58329311" -> "Q58329311@2020" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche républicaine et socialiste"];
   "Q58329311@2020" -> "Q58329311@2025" [color="#f5b7d2aa", penwidth=6, arrowhead=none, weight=20, tooltip="Gauche républicaine et socialiste"];
+  "Q58366009" -> "Q58366009@2020" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Place publique"];
+  "Q58366009@2020" -> "Q58366009@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Place publique"];
   "Q125771262" -> "Q125771262@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="Nouveau Parti anticapitaliste – L'Anticapitaliste"];
   "Q135755468" -> "Q135755468@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="La Convention"];
   "Q127413320" -> "Q127413320@2025" [color="#e84393aa", penwidth=6, arrowhead=none, weight=20, tooltip="L'Après"];
