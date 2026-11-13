@@ -19,14 +19,29 @@ Les étapes 3 à 5 n'utilisent que Python et les caches (aucun réseau, aucune d
 |---|---|---|---|
 | 1 | `arbre.py` | Wikidata (SPARQL) | `data/noeuds.csv`, `data/aretes.csv` |
 | 2 | `infobox.py` | Infobox de Wikipédia FR | `data/wp_noeuds.csv`, `data/wp_aretes.csv`, `data/wp_valeurs_sans_lien.csv` |
-| 3 | `nettoyage.py` | Les deux + corrections manuelles + caches | `data/sortie/*.csv`, `criteres.md`, `resume.md`, `data/manuel/sigles.csv` |
-| 4 | `rendu.py` | Sortie de `nettoyage.py` | `arbre.svg`, `data/sortie/arbre.svg`, `arbre.html`, `arbre_<famille>.svg` |
-| 5 | `verifier.py` | Les SVG produits | contrôle des règles R1–R3 ; échoue s'il y a une erreur |
+| 3 | `enrichissement.py` | Textes Wikipédia, pages liées, Wikidata | `data/manuel/actifs.csv`, `data/sortie/liens_candidats.csv`, `liste_recherche.csv` |
+| 4 | `nettoyage.py` | Sources + fichiers de `data/manuel/` + caches | `data/sortie/*.csv` (dont `elagues.csv`), `criteres.md`, `resume.md`, `data/manuel/types.csv` |
+| 5 | `rendu.py` | Sortie de `nettoyage.py` | `arbre.svg`, `data/sortie/arbre.svg`, `arbre.html`, `arbre_<famille>.svg`, `arbre_apercu.svg`, `vue_internationales.svg/.html` |
+| 6 | `verifier.py` | Les SVG produits | contrôle des règles R1 à R6 ; échoue s'il y a une erreur |
 
 ```bash
 python arbre.py && python infobox.py          # retéléchargement (rare)
+python enrichissement.py                      # liens candidats à valider (réseau, mis en cache)
 python nettoyage.py && python rendu.py && python verifier.py
 ```
+
+### Fichiers à remplir à la main (`data/manuel/`, jamais écrasés)
+
+| Fichier | Rôle |
+|---|---|
+| `actifs.csv` | `valide = oui` / `non` : organisations qui existent aujourd'hui |
+| `types.csv` | type de chaque organisation (parti, coalition, satellite…) |
+| `aretes_manuelles.csv` | liens ajoutés à la main, source obligatoire |
+| `affiliations_dates.csv` | dates d'adhésion aux Internationales, source obligatoire |
+| `sigles.csv` | sigle et nom court affichés dans les étiquettes |
+
+Et dans `data/sortie/liens_candidats.csv`, `decision = oui` sur les liens proposés à garder.
+L'arbre ne montre que les organisations en lignée directe d'une organisation active (règle R5).
 
 `data/sortie/criteres.md` explique comment chaque organisation est rangée (graphe, étrangère,
 Internationale, exclue) et dans quelle famille ; `data/sortie/resume.md` donne les chiffres.

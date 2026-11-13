@@ -1,55 +1,55 @@
-id,label,famille,courants,sources,garde
-Q56310808,Action pour la renaissance de la Corse,à classer,régionaliste / autonomiste,wikidata,
-Q104186211,Action révolutionnaire LGBTI,maoïstes,communiste | maoïste,wikidata,oui
-Q117814948,Alliance libre des anarchistes de la région du Midi,anarchistes et libertaires,anarchiste,wikidata,
-Q55435516,Bloc républicain de gauche,radicaux,radical,wikidata,
-Q104290787,Collectif militant communiste,communistes,communiste,wikidata,
-Q104297911,Comité communiste des Bouches-du-Rhône,communistes,communiste,wikidata,
-Q2985265,Comité communiste internationaliste,communistes,communiste,wikidata,
-Q111630537,Comité de liaison des jeunes pour la révolution,trotskystes,trotskyste,wikidata,
-Q104290792,Communistes en lutte,communistes,communiste,wikidata,
-Q111518957,Coordination féministe,à classer,,wikidata,
-Q2996664,Coordination nationale de la gauche républicaine,à classer,,wikipedia,oui
-Q2998024,Corse social-démocrate,socialistes,régionaliste / autonomiste | social-démocrate,wikidata | wikipedia,
-Q62079328,Debout (parti politique),socialistes,social-démocrate | écosocialiste,wikidata | wikipedia,oui
-Q111219345,Front communiste révolutionnaire,communistes,communiste,wikidata,
-Q3088527,Front national ouvrier paysan,à classer,,wikidata,
-Q22249490,Front révolutionnaire national,à classer,,wikidata,
-Q104186177,Front-Uni,maoïstes,communiste | maoïste,wikidata,
-Q3092073,Fédération nationale des élus socialistes et républicains,socialistes,social-démocrate,wikipedia,
-Q3092110,Fédération pour une gauche alternative,à classer,,wikidata | wikipedia,oui
-Q138828808,Gauche républicaine et sociale,socialistes,social-démocrate,wikidata,oui
-Q589468,Hoxhaïsme,maoïstes,maoïste,wikipedia,
-Q104290794,Jeunes communistes marxistes-léninistes d'Albi,maoïstes,communiste | maoïste,wikidata,
-Q111610386,Jeunes pour la renaissance communiste en France,communistes,communiste,wikidata,
-Q104297876,Jeunesses communistes marxistes-léninistes de Pau,maoïstes,communiste | maoïste,wikidata,
-Q3099336,La Gauche populaire,socialistes,social-démocrate,wikipedia,
-Q87407983,"La gauche conflanaise, Conflans pour tous",à classer,,wikidata,
-Q104290793,Les amis de Karl Marx,communistes,communiste,wikidata,
-fr:Ligue communiste révolutionnaire (Bangladesh),Ligue communiste révolutionnaire (Bangladesh),communistes,communiste,wikipedia,
-Q17008204,Ligue trotskyste de France,trotskystes,communiste | trotskyste,wikidata | wikipedia,
-Q140274637,Ligues anarchistes,anarchistes et libertaires,anarchiste,wikidata,
-Q87411008,Liste de gauche - conflans ste honorine 2001,à classer,,wikidata,
-Q6733696,Mahe Socialist Party,socialistes,social-démocrate,wikidata,
-Q3326581,Mouvement de la gauche progressiste,à classer,,wikidata | wikipedia,oui
-Q115965582,NPA Jeunes,communistes,communiste,wikidata,oui
-Q93448453,Orléans Solidaire Écologique,écologistes,social-démocrate | écologiste,wikidata,
-fr:Parti communiste internationaliste du Japon,Parti communiste internationaliste du Japon,communistes,communiste,wikipedia,
-Q135426300,Parti d'action corse,à classer,régionaliste / autonomiste,wikidata,
-Q111210969,Parti national-syndicaliste français,anarchistes et libertaires,anarcho-syndicaliste,wikidata,
-Q3366562,Parti ouvrier et paysan français,à classer,,wikidata,
-Q928493,Parti radical-socialiste Camille Pelletan,radicaux,radical | social-démocrate,wikidata,
-Q3366757,Parti socialiste français (1919),socialistes,social-démocrate,wikidata | wikipedia,
-Q176339,Plateformisme,anarchistes et libertaires,communiste libertaire,wikipedia,
-Q3477547,Section universitaire du Parti socialiste,socialistes,social-démocrate,wikidata,
-Q109658282,Socialist Movement,socialistes,communiste | social-démocrate,wikidata,
-Q3487413,Socialistes indépendants,socialistes,social-démocrate,wikipedia,oui
-Q135875318,Treger Disuj,anarchistes et libertaires,anarchiste,wikidata,
-Q2540732,Union des groupes et clubs socialistes,socialistes,social-démocrate,wikipedia,oui
-Q3550394,Union nationale pour l'indépendance,outre-mer,social-démocrate,wikidata,
-Q3561492,Vive le communisme,maoïstes,communiste | maoïste,wikidata,
-Q20653619,Zone à défendre,à classer,,wikipedia,
-Q122859911,fédération de Loir-et-Cher du Parti socialiste,socialistes,social-démocrate,wikidata,
-Q84366602,lutte ouvriere faire entendre le camp des travailleurs,à classer,,wikidata,
-Q125731201,prolétaires pour le communisme,communistes,communiste,wikidata,
-Q16684301,Écologie Solidarité,écologistes,écologiste,wikidata,
+id,label,famille,courants,sources,garde,statut_fin
+Q56310808,Action pour la renaissance de la Corse,à classer,régionaliste / autonomiste,wikidata,,fin_connue
+Q104186211,Action révolutionnaire LGBTI,maoïstes,communiste | maoïste,wikidata,,fin_inconnue
+Q117814948,Alliance libre des anarchistes de la région du Midi,anarchistes et libertaires,anarchiste,wikidata,,fin_inconnue
+Q55435516,Bloc républicain de gauche,radicaux,radical,wikidata,,fin_inconnue
+Q104290787,Collectif militant communiste,communistes,communiste,wikidata,,fin_inconnue
+Q104297911,Comité communiste des Bouches-du-Rhône,communistes,communiste,wikidata,,fin_inconnue
+Q2985265,Comité communiste internationaliste,communistes,communiste,wikidata,,fin_inconnue
+Q111630537,Comité de liaison des jeunes pour la révolution,trotskystes,trotskyste,wikidata,,fin_inconnue
+Q104290792,Communistes en lutte,communistes,communiste,wikidata,,fin_inconnue
+Q111518957,Coordination féministe,à classer,,wikidata,,fin_inconnue
+Q2996664,Coordination nationale de la gauche républicaine,à classer,,wikipedia,oui,fin_connue
+Q2998024,Corse social-démocrate,socialistes,régionaliste / autonomiste | social-démocrate,wikidata | wikipedia,,fin_inconnue
+Q62079328,Debout (parti politique),socialistes,social-démocrate | écosocialiste,wikidata | wikipedia,,fin_inconnue
+Q111219345,Front communiste révolutionnaire,communistes,communiste,wikidata,,fin_inconnue
+Q3088527,Front national ouvrier paysan,à classer,,wikidata,,fin_connue
+Q22249490,Front révolutionnaire national,à classer,,wikidata,,fin_connue
+Q104186177,Front-Uni,maoïstes,communiste | maoïste,wikidata,,fin_inconnue
+Q3092073,Fédération nationale des élus socialistes et républicains,socialistes,social-démocrate,wikipedia,,fin_inconnue
+Q3092110,Fédération pour une gauche alternative,à classer,,wikidata | wikipedia,oui,fin_connue
+Q138828808,Gauche républicaine et sociale,socialistes,social-démocrate,wikidata,,fin_inconnue
+Q589468,Hoxhaïsme,maoïstes,maoïste,wikipedia,,fin_inconnue
+Q104290794,Jeunes communistes marxistes-léninistes d'Albi,maoïstes,communiste | maoïste,wikidata,,fin_inconnue
+Q111610386,Jeunes pour la renaissance communiste en France,communistes,communiste,wikidata,,fin_inconnue
+Q104297876,Jeunesses communistes marxistes-léninistes de Pau,maoïstes,communiste | maoïste,wikidata,,fin_inconnue
+Q3099336,La Gauche populaire,socialistes,social-démocrate,wikipedia,,fin_inconnue
+Q87407983,"La gauche conflanaise, Conflans pour tous",à classer,,wikidata,,fin_inconnue
+Q104290793,Les amis de Karl Marx,communistes,communiste,wikidata,,fin_inconnue
+fr:Ligue communiste révolutionnaire (Bangladesh),Ligue communiste révolutionnaire (Bangladesh),communistes,communiste,wikipedia,,fin_inconnue
+Q17008204,Ligue trotskyste de France,trotskystes,communiste | trotskyste,wikidata | wikipedia,,fin_inconnue
+Q140274637,Ligues anarchistes,anarchistes et libertaires,anarchiste,wikidata,,fin_inconnue
+Q87411008,Liste de gauche - conflans ste honorine 2001,à classer,,wikidata,,fin_inconnue
+Q6733696,Mahe Socialist Party,socialistes,social-démocrate,wikidata,,fin_inconnue
+Q3326581,Mouvement de la gauche progressiste,à classer,,wikidata | wikipedia,oui,fin_connue
+Q115965582,NPA Jeunes,communistes,communiste,wikidata,,fin_inconnue
+Q93448453,Orléans Solidaire Écologique,écologistes,social-démocrate | écologiste,wikidata,,fin_inconnue
+fr:Parti communiste internationaliste du Japon,Parti communiste internationaliste du Japon,communistes,communiste,wikipedia,,fin_inconnue
+Q135426300,Parti d'action corse,à classer,régionaliste / autonomiste,wikidata,,fin_connue
+Q111210969,Parti national-syndicaliste français,anarchistes et libertaires,anarcho-syndicaliste,wikidata,,fin_inconnue
+Q3366562,Parti ouvrier et paysan français,à classer,,wikidata,,fin_connue
+Q928493,Parti radical-socialiste Camille Pelletan,radicaux,radical | social-démocrate,wikidata,,fin_inconnue
+Q3366757,Parti socialiste français (1919),socialistes,social-démocrate,wikidata | wikipedia,,fin_connue
+Q176339,Plateformisme,anarchistes et libertaires,communiste libertaire,wikipedia,,fin_inconnue
+Q3477547,Section universitaire du Parti socialiste,socialistes,social-démocrate,wikidata,,fin_inconnue
+Q109658282,Socialist Movement,socialistes,communiste | social-démocrate,wikidata,,fin_inconnue
+Q3487413,Socialistes indépendants,socialistes,social-démocrate,wikipedia,oui,fin_connue
+Q135875318,Treger Disuj,anarchistes et libertaires,anarchiste,wikidata,,fin_inconnue
+Q2540732,Union des groupes et clubs socialistes,socialistes,social-démocrate,wikipedia,oui,fin_connue
+Q3550394,Union nationale pour l'indépendance,outre-mer,social-démocrate,wikidata,,fin_inconnue
+Q3561492,Vive le communisme,maoïstes,communiste | maoïste,wikidata,,fin_connue
+Q20653619,Zone à défendre,à classer,,wikipedia,,fin_inconnue
+Q122859911,fédération de Loir-et-Cher du Parti socialiste,socialistes,social-démocrate,wikidata,,fin_inconnue
+Q84366602,lutte ouvriere faire entendre le camp des travailleurs,à classer,,wikidata,,fin_inconnue
+Q125731201,prolétaires pour le communisme,communistes,communiste,wikidata,,fin_inconnue
+Q16684301,Écologie Solidarité,écologistes,écologiste,wikidata,,fin_inconnue

@@ -1081,8 +1081,8 @@ def main():
         d = noeuds[q]
         ct, _ = courants_txt(d)
         lignes_sd.append([q, d["label"], d["famille"], ct, " | ".join(sorted(d["sources"])),
-                          "oui" if q in garde else ""])
-    ecrire("sans_date.csv", ["id", "label", "famille", "courants", "sources", "garde"], lignes_sd)
+                          "oui" if q in garde else "", d.get("statut_fin", "")])
+    ecrire("sans_date.csv", ["id", "label", "famille", "courants", "sources", "garde", "statut_fin"], lignes_sd)
 
     lignes_exclu = []
     for q in sorted(noeuds, key=lambda q: (raison.get(q, ""), lab(q))):
