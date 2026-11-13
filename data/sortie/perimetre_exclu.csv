@@ -30,6 +30,7 @@ Q5412231,European Anti Poverty Network,Internationale sans membre dans le graphe
 Q1376533,European Digital Rights,Internationale sans membre dans le graphe,,,2002,,,,,oui
 Q935345,European Youth Forum,Internationale sans membre dans le graphe,,,1996,,,,,oui
 Q1334284,Fédération internationale des associations et institutions de bibliothèques,Internationale sans membre dans le graphe,,,1927,,,,,oui
+Q27396,Fédération mondiale de la jeunesse démocratique,Internationale sans membre dans le graphe,,,1945,,,,,oui
 Q1764511,G7,Internationale sans membre dans le graphe,,,1975,,,,,oui
 Q782942,Groupe Australie,Internationale sans membre dans le graphe,,,1985,,,,,oui
 Q19771,Groupe des 20,Internationale sans membre dans le graphe,,,1999,,,,,oui
@@ -42,6 +43,7 @@ Q128064,Internationale démocrate centriste,Internationale sans membre dans le g
 Q212712,Internationale libérale,Internationale sans membre dans le graphe,,,1947,,,,,oui
 Q8034785,Internationale ouvrière pour la reconstruction de la Quatrième Internationale,Internationale sans membre dans le graphe,,,1990,,,,,oui
 Q8475,Interpol,Internationale sans membre dans le graphe,,,1923,,,,,oui
+Q1376486,Jeunes socialistes européens,Internationale sans membre dans le graphe,,,1992,,,,,oui
 Q707083,Jeunesse ouvrière chrétienne,Internationale sans membre dans le graphe,,,1925,,,,,oui
 Q384069,Les Verts mondiaux,Internationale sans membre dans le graphe,,,2001,,,,,oui
 Q7172,Ligue arabe,Internationale sans membre dans le graphe,,,1945,,,,,oui
@@ -86,7 +88,9 @@ Q7551517,Alternative socialiste (Australie),hors de France,,Q408,1995,,,,,oui
 Q3544318,Antarsya,hors de France,,Q41,2009,3,,,,oui
 Q3325616,Anticapitalistas,hors de France,,Q29,2009,,,,,oui
 Q115730512,Arman Group,hors de France,,Q794,1978,,,,,oui
+Q333954,Armée rouge japonaise,hors de France,,,1971,,2001,,,
 Q4807493,Association continentale américaine des travailleurs,hors de France,,Q414,,,,,,oui
+Q20635401,Bataillon international de libération,hors de France,,,2015,,,,,oui
 Q189150,Black Panther Party,hors de France,,Q30,1966,,1982,,,
 Q884840,Bloc de gauche,hors de France,,Q45,1999,,,,,oui
 Q522505,Bloc ouvrier et paysan,hors de France,,Q29,1930,,1936,,,
@@ -118,6 +122,7 @@ Q3117881,Groupe marxiste internationaliste,hors de France,,Q31,,,1984,,,
 Q141127568,Groupement marxiste-léniniste tunisien,hors de France,,Q948,1969,,1974,,,
 Q2748435,Herri Batasuna,hors de France,oui,Q29,1978,,2001,,,
 Q3324180,Independentists of the Catalan Countries,hors de France,oui,,1979,,1985,,,
+Q16215381,Initiative des partis communistes et ouvriers,hors de France,,,2013,10,2023,9,,
 Q3178135,Jeunesse communiste ibérique,hors de France,,Q29,1931,,1939,,,
 Q2716578,Lanka Sama Samaja Party,hors de France,,Q854,1935,12,,,,oui
 Q3545406,Le Peuple avant le profit,hors de France,,Q27 | Q145,2005,10,,,,oui
@@ -255,7 +260,7 @@ Q131602012,Union syndicaliste libertaire,hors de France,,Q41,2003,,,,,oui
 Q3569927,Workers' Fight,hors de France,,Q145,,,,,,oui
 Q54769213,Front national pour l'Algérie française,idéologie hors périmètre : Algérie française,,Q142,1960,,1960,,,
 Q3366726,Les Progressistes,idéologie hors périmètre : Anti-indépendantis,,Q142,1981,,,,,oui
-Q1754053,Front Algérie française,idéologie hors périmètre : anti-indépendantis,,Q142,1960,,1960,,,
+Q1754053,Front Algérie française,idéologie hors périmètre : anti-indépendantis,,Q142,1960,6,1960,12,,
 Q3088504,Front national,idéologie hors périmètre : anti-indépendantis,,Q142,1984,,,,,oui
 Q138332469,Audace Lyon,idéologie hors périmètre : fascis,,Q142,,,,,,oui
 Q53089663,Bastion social,idéologie hors périmètre : fascis,,Q142,2017,,2019,,,
@@ -264,7 +269,7 @@ Q3326746,Mouvement nationaliste révolutionnaire,idéologie hors périmètre : f
 Q1452622,Mouvement social révolutionnaire,idéologie hors périmètre : fascis,,Q142,1940,,1944,,,
 Q3083781,Occident,idéologie hors périmètre : fascis,,Q142,1964,,1968,,,
 Q3366546,Parti nationaliste,idéologie hors périmètre : fascis,,Q142,1958,,1959,,,
-Q1086907,Rassemblement national populaire,idéologie hors périmètre : fascis,,Q142,1941,,1944,,,
+Q1086907,Rassemblement national populaire,idéologie hors périmètre : fascis,,Q142,1941,2,1944,8,,
 Q13359544,Troisième Voie,idéologie hors périmètre : fascis,,Q142,1985,,2013,,,
 Q109735215,Libéraux,idéologie hors périmètre : monarchi,,Q142,1817,,1824,,,
 Q15985404,Q15985404,idéologie hors périmètre : monarchi,,,1936,,,,,oui
@@ -1100,7 +1105,7 @@ Q5990386,époque prophétique,ni positionnement de gauche ni courant reconnu,,,,
 Q207304,états généraux,ni positionnement de gauche ni courant reconnu,,Q70972,,,,,,oui
 Q119360125,Administration générale de l'Assistance publique à Paris,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1849,,,,,oui
 Q25532384,Agence européenne pour l'énergie nucléaire,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,1972,,,
-Q826700,Agence internationale de l'énergie,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1974,,,,,oui
+Q826700,Agence internationale de l'énergie,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1974,11,,,,oui
 Q1043527,Agence multilatérale de garantie des investissements,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q30,1988,,,,,oui
 Q823428,Alliance internationale pour le souvenir de l'Holocauste,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q183,1998,,,,,oui
 Q910619,Club breton,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q70972,1789,,,,,oui
@@ -1110,7 +1115,7 @@ Q55469706,Direction générale des relations internationales et de la stratégie
 Q3043395,Délégation aux Affaires stratégiques,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
 Q3043437,Délégation interministérielle à l'aménagement du territoire et à l'attractivité régionale,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1963,,2009,,,
 Q7886981,Forum régional de l'ASEAN,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,,,,,,oui
-Q3091642,Fédération des gauches,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1914,,,,,oui
+Q3091642,Fédération des gauches,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1914,,,,,
 Q10287157,G6,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1975,,1976,,,
 Q37143,G8,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1997,,2014,,,
 Q106508149,Gauche constitutionnelle,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1870,,,,,oui
@@ -1139,7 +1144,7 @@ Q7809,"Organisation des Nations unies pour l'éducation, la science et la cultur
 Q294278,"Organisation des États d’Afrique, des Caraïbes et du Pacifique","pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,,1975,,,,,oui
 Q277252,Organisation du traité de l'Asie du Sud-Est,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q869,1954,,1977,,,
 Q233611,Organisation hydrographique internationale,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q235,1921,,,,,oui
-Q134102,Organisation internationale de la francophonie,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1970,,,,,oui
+Q134102,Organisation internationale de la francophonie,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1970,3,,,,oui
 Q1317185,Organisation internationale de la vigne et du vin,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2001,,,,,oui
 Q605326,Organisation mondiale des douanes,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q31,1953,,,,,oui
 Q842490,Organisation pour l'interdiction des armes chimiques,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q55,1997,,,,,oui
@@ -1163,7 +1168,7 @@ Q1822853,groupe socialiste (Sénat),"pas une organisation politique (institution
 Q53516488,groupe socialiste et républicain,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2015,,,,,oui
 Q131672928,groupe socialiste révolutionnaire,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
 Q133250601,"groupe socialiste, écologiste et radical au conseil régional d'Île-de-France","pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
-Q94699094,groupe Écologie démocratie solidarité,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2020,,,,,oui
+Q94699094,groupe Écologie démocratie solidarité,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,2020,5,,,,oui
 Q112078449,groupe Écologie et Solidarité à l'Assemblée des Français de l'étranger,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,,,,,,oui
 Q820122,montagnards,"pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire)",,Q142,1793,,1795,,,
 Q138306884,33 rue des Vignoles,"pas une organisation politique (journal, librairie, think tank...)",,Q142,1970,,,,,oui

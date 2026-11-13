@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Fichiers de verrou LibreOffice et journaux d'exécution
+.~lock.*#
+*.log

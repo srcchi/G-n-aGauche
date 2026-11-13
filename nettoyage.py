@@ -17,6 +17,7 @@ import csv
 import json
 import os
 import re
+import unicodedata
 from collections import Counter, defaultdict, deque
 
 from fusion import (ANCIEN, FRANCE, HUMAIN, NON_POLITIQUE, POLITIQUE, RX_CAT_DISPARU,
@@ -28,7 +29,11 @@ DATA = "data"
 SORTIE = os.path.join(DATA, "sortie")
 MANUEL = os.path.join(DATA, "manuel")
 LIGNEE = ("filiation", "scission", "passage")
-ORDRE_TYPES = ["appartenance", "filiation", "scission", "passage"]
+ORDRE_TYPES = ["appartenance", "emanation", "filiation", "scission", "passage"]
+# Types des liens saisis à la main ou validés (phase 0) -> types internes
+TYPE_LIEN_MANUEL = {"filiation": "filiation", "renommage": "filiation", "fusion": "filiation",
+                    "scission": "scission", "passage_militants": "passage", "passage": "passage",
+                    "emanation": "emanation"}
 
 # ---------- Internationales et fédérations européennes (par le nom, en plus des types Wikidata) ----------
 RX_INTER = re.compile(
@@ -211,11 +216,187 @@ def mois_infobox(texte, champs, an):
     return None
 
 
+# ---------- Types d'organisation (étape 6) ----------
+TYPES = ["parti_ou_organisation", "coalition", "satellite", "groupe_arme", "syndicat",
+         "club_ou_cercle", "media", "etrangere", "international_ou_federation_europeenne"]
+# Liste explicite des coalitions (demandée) ; comparaison sans accents ni casse
+COALITIONS = ["Front populaire", "Front populaire (France)", "Nouvelle Union populaire écologique et sociale",
+              "Nouveau Front populaire", "Gauche plurielle", "Front de gauche", "Front de gauche (France)",
+              "Cartel des gauches", "Programme commun", "Programme commun de la gauche",
+              "Union de la gauche", "Bloc des gauches", "bloc des gauches",
+              "Fédération de la gauche démocrate et socialiste"]
+# (type, motif) lus dans les libellés des types Wikidata (P31), dans l'ordre de priorité
+TYPE_PAR_LIBELLE = [
+    ("coalition", r"coalition|alliance électorale|cartel électoral|union électorale|front électoral"),
+    ("groupe_arme", r"groupe armé|organisation armée|terroris|guérilla|milice|paramilitaire"),
+    ("satellite", r"jeunesse|organisation étudiante|syndicat étudiant|association étudiante|"
+                  r"organisation de femmes|organisation féministe"),
+    ("syndicat", r"syndicat|confédération syndicale|centrale syndicale"),
+    ("club_ou_cercle", r"\bclub|cercle|société de pensée|think tank|laboratoire d'idées|groupe de réflexion"),
+    ("media", r"journal|périodique|revue|presse|média|maison d'édition"),
+    ("satellite", r"\bcollectif|association"),
+]
+TYPE_PAR_INFOBOX = [
+    ("parti_ou_organisation", r"parti politique|parti"),
+    ("coalition", r"coalition|alliance"),
+    ("groupe_arme", r"groupe armé|organisation armée|terroris"),
+    ("syndicat", r"syndicat"),
+    ("media", r"presse|périodique|média|journal"),
+]
+TYPE_PAR_CATEGORIE = [
+    ("coalition", r"coalition|alliance électorale|union électorale"),
+    ("groupe_arme", r"organisation armée|groupe armé|faction armée|lutte armée|terroris"),
+    ("satellite", r"organisation de jeunesse|mouvement de jeunesse|syndicat étudiant|"
+                  r"organisation étudiante|association étudiante|jeunesse politique|organisation de femmes"),
+    ("syndicat", r"\bsyndicat"),
+    ("club_ou_cercle", r"club politique|société de pensée|club révolutionnaire"),
+    ("media", r"\bpresse|périodique|\brevue|\bjournal"),
+]
+RX_SEMBLE_INTER = re.compile(r"Internationale|Confédération internationale|Quatrième Internationale")
+CACHE_TYPES = os.path.join(SORTIE, "cache_types.json")
+
+
+def libelles_types(ids):
+    """Libellé français des types Wikidata (P31), avec cache (data/sortie/cache_types.json)."""
+    cache = lire_json(os.path.join("sortie", "cache_types.json"))
+    manquants = sorted(i for i in ids if i not in cache)
+    import requests
+    for k in range(0, len(manquants), 200):
+        lot = manquants[k:k + 200]
+        print(f"  libellés des types Wikidata {k + len(lot)}/{len(manquants)}")
+        q = ("SELECT ?t ?l WHERE { VALUES ?t { %s } OPTIONAL { ?t rdfs:label ?l . "
+             "FILTER(LANG(?l) = 'fr') } }" % " ".join(f"wd:{i}" for i in lot))
+        r = requests.post("https://query.wikidata.org/sparql", data={"query": q, "format": "json"},
+                          headers={"User-Agent": "G-n-aGauche/0.3 (https://github.com/srcchi/G-n-aGauche) "
+                                                 "python-requests",
+                                   "Accept": "application/sparql-results+json"}, timeout=120)
+        r.raise_for_status()
+        for i in lot:
+            cache.setdefault(i, "")
+        for b in r.json()["results"]["bindings"]:
+            cache[b["t"]["value"].rsplit("/", 1)[-1]] = b.get("l", {}).get("value", "")
+        with open(CACHE_TYPES, "w", encoding="utf-8") as f:
+            json.dump(cache, f, ensure_ascii=False)
+    return cache
+
+
+def classer_types(noeuds, classe, wikitext, stats, aretes=None):
+    """Type de chaque organisation : types.csv (saisi à la main) d'abord, sinon préremplissage
+    par la liste des coalitions, les types Wikidata, le modèle d'infobox et les catégories.
+    Jamais par des mots du nom seuls."""
+    a_classer = [q for q in noeuds if classe[q] in ("graphe", "internationale", "etranger")]
+    saisis = {r["id"]: r for r in lire(os.path.join("manuel", "types.csv"))}
+    libs = libelles_types({t for q in a_classer for t in noeuds[q]["types"]})
+    coalitions = {normaliser(c) for c in COALITIONS}
+    n_lignee = Counter()
+    for (a, b), e in (aretes or {}).items():
+        if e["type"] in ("filiation", "scission", "passage"):
+            n_lignee[a] += 1
+            n_lignee[b] += 1
+    types_org, lignes = {}, []
+    for q in a_classer:
+        d = noeuds[q]
+        if classe[q] == "internationale":
+            t, pourquoi = "international_ou_federation_europeenne", "type Wikidata ou nom d'Internationale"
+        elif classe[q] == "etranger":
+            t, pourquoi = "etrangere", "hors de France (voir perimetre_exclu.csv)"
+        elif normaliser(d["label"]) in coalitions:
+            t, pourquoi = "coalition", "liste explicite des coalitions"
+        else:
+            t = pourquoi = None
+            libelles = [libs.get(x, "") for x in d["types"]]
+            texte = wikitext.get(q, "")
+            m_inf = re.search(r"\{\{\s*Infobox\s+([^\n|}]+)", texte, re.I)
+            infobox = m_inf.group(1).strip().lower() if m_inf else ""
+            cats = " | ".join(d.get("cats_article", [])) + " | " + d["categories"]
+            # Jeunesse, étudiants, sections locales, groupes parlementaires : avant « parti politique »,
+            # car ces organisations ont souvent aussi le type « organisation politique ».
+            l_sat = next((l for l in libelles if re.search(
+                r"jeunesse|étudiant|section locale|fédération départementale|\bcellule", l, re.I)), None)
+            l_grp = next((l for l in libelles if re.search(r"groupe parlementaire|groupe politique", l, re.I)),
+                         None)
+            if l_sat:
+                t, pourquoi = "satellite", f"type Wikidata : {l_sat}"
+            elif l_grp:
+                t, pourquoi = "coalition", f"type Wikidata : {l_grp} (groupe d'élus, pas une organisation)"
+            elif any(re.search(r"parti politique|organisation politique|mouvement politique", l, re.I)
+                     for l in libelles):
+                t, pourquoi = "parti_ou_organisation", "type Wikidata : " + ", ".join(l for l in libelles if l)
+            elif re.search(r"parti", infobox):
+                t, pourquoi = "parti_ou_organisation", f"infobox « {m_inf.group(1).strip()} »"
+            if t is None:
+                for typ, rx in TYPE_PAR_LIBELLE:
+                    l = next((l for l in libelles if re.search(rx, l, re.I)), None)
+                    if l:
+                        t, pourquoi = typ, f"type Wikidata : {l}"
+                        break
+            if t is None and infobox:
+                for typ, rx in TYPE_PAR_INFOBOX:
+                    if re.search(rx, infobox, re.I):
+                        t, pourquoi = typ, f"infobox « {m_inf.group(1).strip()} »"
+                        break
+            if t is None:
+                for typ, rx in TYPE_PAR_CATEGORIE:
+                    m = re.search(rf"[^|]*(?:{rx})[^|]*", cats, re.I)
+                    if m:
+                        t, pourquoi = typ, f"catégorie : {m.group(0).strip()}"
+                        break
+            if t is None:
+                t, pourquoi = "parti_ou_organisation", "aucun indice contraire"
+        drapeaux = []
+        if classe[q] == "graphe" and RX_SEMBLE_INTER.search(d["label"]) and "Section française" not in d["label"]:
+            drapeaux.append("ressemble à une Internationale : à vérifier")
+        if RX_DOUTEUX.search(d["label"]):
+            drapeaux.append("périmètre discutable (radicaux) : à trancher")
+        if t in ("satellite", "coalition") and n_lignee.get(q):
+            # Ex. la JCR (1966) : organisation de jeunesse, mais ancêtre de la Ligue communiste
+            drapeaux.append(f"a {n_lignee[q]} lien(s) de lignée : la retirer coupe la généalogie, à vérifier")
+        auto = (t, pourquoi + (" ; " + " ; ".join(drapeaux) if drapeaux else ""))
+        s = saisis.get(q)
+        if s and s.get("type", "").strip() in TYPES:
+            types_org[q] = s["type"].strip()       # saisie à la main : prioritaire
+            stats["types_saisis"] += 1
+        else:
+            types_org[q] = auto[0]
+        lignes.append([q, d["label"], auto[0], auto[1], ""])
+    stats.update({f"type_{t}": n for t, n in Counter(types_org.values()).items()})
+    return types_org, lignes
+
+
+def ecrire_manuel_types(lignes, stats):
+    """data/manuel/types.csv : créé une fois ; ensuite, seules les nouvelles organisations sont ajoutées."""
+    chemin = os.path.join(MANUEL, "types.csv")
+    existants = set()
+    if os.path.exists(chemin):
+        with open(chemin, encoding="utf-8") as f:
+            existants = {r["id"] for r in csv.DictReader(f)}
+    nouvelles = [l for l in sorted(lignes, key=lambda l: (l[2] != "parti_ou_organisation", l[2], l[1]))
+                 if l[0] not in existants]
+    os.makedirs(MANUEL, exist_ok=True)
+    if not existants:
+        ecrire("types.csv", ["id", "name", "type", "reason", "valide"], nouvelles, dossier=MANUEL)
+    elif nouvelles:
+        with open(chemin, "a", newline="", encoding="utf-8") as f:
+            csv.writer(f).writerows(nouvelles)
+    stats["types_ajoutes"] = len(nouvelles)
+
+
+def normaliser(s):
+    s = unicodedata.normalize("NFD", str(s).lower())
+    return re.sub(r"\s+", " ", "".join(c for c in s if unicodedata.category(c) != "Mn")).strip()
+
+
 def main():
     os.makedirs(SORTIE, exist_ok=True)
     stats = Counter()
     wd = lire_json("cache_wikidata_orgs.json")
     wikitext = {(d["qid"] or f"fr:{t}"): d["text"] for t, d in lire_json("cache_wikitext.json").items()}
+    # Articles téléchargés en phase 0 (enrichissement.py) : titre français donné par Wikidata
+    enrich = lire_json(os.path.join("sortie", "cache_enrichissement.json"))
+    for q, e in enrich.get("entites", {}).items():
+        t = e.get("liens", {}).get("fr")
+        if t and not wikitext.get(q) and enrich.get("wikitext", {}).get(f"fr:{t}"):
+            wikitext[q] = enrich["wikitext"][f"fr:{t}"]
 
     # ================= 1. Fusion des nœuds =================
     noeuds = {}
@@ -379,6 +560,33 @@ def main():
             aretes[cle] = dict(type=r["type"], sources={"correction"}, relations={"correction"})
             noeuds.setdefault(r["ancetre"], None)
             noeuds.setdefault(r["descendant"], None)
+    # Liens validés à la main : candidats de la phase 0 (decision = oui) et liens manuels sourcés.
+    # Rien n'est accepté sans décision explicite.
+    for r in lire("sortie/liens_candidats.csv"):
+        if r.get("decision", "").strip().lower() != "oui":
+            continue
+        if r["sens"] == "cible → org":
+            a, b = r["cible"], r["org"]
+        elif r["sens"] == "org → cible":
+            a, b = r["org"], r["cible"]
+        else:
+            stats["candidats_sens_a_verifier"] += 1
+            continue
+        t = TYPE_LIEN_MANUEL.get(r["type_propose"], "filiation")
+        aretes[(a, b)] = dict(type=t, sources={f"candidat validé ({r['signal']})"},
+                              relations={r["type_propose"]})
+        stats["candidats_valides"] += 1
+    for r in lire("manuel/aretes_manuelles.csv"):
+        a, b, src = r.get("ancetre", "").strip(), r.get("descendant", "").strip(), r.get("source", "").strip()
+        if not a or not b or not src or not r.get("type", "").strip():
+            stats["manuels_incomplets"] += 1      # source obligatoire
+            continue
+        t = TYPE_LIEN_MANUEL.get(r["type"].strip(), "filiation")
+        aretes[(a, b)] = dict(type=t, sources={"manuel"}, relations={r["type"].strip()},
+                              date=r.get("date_evenement", "").strip(), source_manuelle=src)
+        for x in (a, b):
+            noeuds.setdefault(x, None)
+        stats["manuels_ajoutes"] += 1
     # Extrémités inconnues (ne devrait pas arriver)
     for k in [k for k in aretes if not noeuds.get(k[0]) or not noeuds.get(k[1])]:
         stats["aretes_extremite_inconnue"] += 1
@@ -422,9 +630,23 @@ def main():
     ecrire("aretes_reciproques.csv", ["source", "source_nom", "cible", "cible_nom", "relation",
                                       "raison"], reciproques)
 
+    # ================= 6. Types : data/manuel/types.csv =================
+    # Une coalition, un satellite, un groupe armé... n'est jamais une boîte de la généalogie.
+    # Le type saisi dans types.csv l'emporte toujours sur le préremplissage.
+    types_org, lignes_types = classer_types(noeuds, classe, wikitext, stats, aretes)
+    for q, t in types_org.items():
+        if t == "international_ou_federation_europeenne":
+            classe[q] = "internationale"
+        elif t == "parti_ou_organisation" and classe[q] == "internationale":
+            classe[q] = "graphe"        # corrigé à la main dans types.csv
+        elif t not in ("parti_ou_organisation", "etrangere") and classe[q] == "graphe":
+            classe[q] = t
+    ecrire_manuel_types(lignes_types, stats)
+
     # ================= Tri des arêtes selon les ensembles =================
     lignee, anomalies, hors, affil_brutes, nationales, inter_lignee, date_manquante = \
         [], [], [], [], [], [], []
+    emanations = defaultdict(set)     # parent -> organisations liées (satellites)
 
     def ligne_anomalie(a, b, t, cause):
         return [a, b, t, noeuds[a]["fondation"] or "", noeuds[b]["fondation"] or "", cause,
@@ -432,13 +654,22 @@ def main():
 
     for (a, b), e in sorted(aretes.items()):
         t, ca, cb = e["type"], classe[a], classe[b]
+        if t == "emanation" or (t != "appartenance" and "satellite" in (ca, cb)
+                                and "graphe" in (ca, cb)):
+            # Satellite : rattaché à son parent, montré dans l'infobulle, jamais une boîte
+            parent, sat = (a, b) if ca == "graphe" else (b, a)
+            if classe[parent] == "graphe":
+                emanations[parent].add(sat)
+            else:
+                hors.append([a, lab(a), b, lab(b), t, f"{ca} -> {cb}"])
+            continue
         if t == "appartenance":
             if ca == "internationale" and cb != "internationale":
                 a, b, ca, cb = b, a, cb, ca      # « X a pour membre Y » écrit à l'envers
                 stats["appartenances_retournees"] += 1
             if ca == "graphe" and cb == "internationale":
                 affil_brutes.append((a, b, e))
-            elif ca == "graphe" and cb == "graphe":
+            elif ca == "graphe" and cb in ("graphe", "coalition"):
                 nationales.append([a, lab(a), b, lab(b), " | ".join(sorted(e["sources"]))])
             else:
                 hors.append([a, lab(a), b, lab(b), t, f"{ca} -> {cb}"])
@@ -544,19 +775,38 @@ def main():
 
     # ================= Fin de vie et activité =================
     successeur = {a for a, b, rel, _ in liens if rel in ("filiation", "fusion", "renommage")}
+    # Validation à la main (data/manuel/actifs.csv, colonne valide) : seule « oui » rend active.
+    # Tant qu'aucune ligne n'est validée : mode provisoire = drapeau automatique, sauf les
+    # organisations sans aucun indice d'activité récente.
+    saisie_actifs = {r["id"]: r for r in lire(os.path.join("manuel", "actifs.csv"))}
+    valides = {q for q, r in saisie_actifs.items() if r.get("valide", "").strip().lower() == "oui"}
+    refuses = {q for q, r in saisie_actifs.items() if r.get("valide", "").strip().lower() == "non"}
+    provisoire = not valides
+    stats["actifs_valides"], stats["actifs_refuses"] = len(valides), len(refuses)
     for q, d in noeuds.items():
         cats_mortes = [c for c in d.get("cats_article", []) if RX_CAT_DISPARU.search(c)]
-        d["actif"] = (not d["dissolution"] and q not in successeur
-                      and not set(d["types"]) & ANCIEN and not cats_mortes
-                      and not re.search(r"Catégorie:Ancien", d["categories"]))
+        d["actif_auto"] = (not d["dissolution"] and q not in successeur
+                           and not set(d["types"]) & ANCIEN and not cats_mortes
+                           and not re.search(r"Catégorie:Ancien", d["categories"]))
         if forcer.get(q) in ("vivant", "disparu"):
-            d["actif"] = forcer[q] == "vivant"
+            d["actif_auto"] = forcer[q] == "vivant"
+        if q in valides:
+            d["statut_fin"] = "actif_valide"
+        elif (provisoire and d["actif_auto"] and q not in refuses
+              and "AUCUN indice" not in saisie_actifs.get(q, {}).get("evidence", "")):
+            d["statut_fin"] = "actif_provisoire"
+        else:
+            d["statut_fin"] = ""
+        d["actif"] = bool(d["statut_fin"])
         d["fin_deduite"], d["fin_deduite_source"] = "", ""
         if not d["dissolution"] and not d["actif"]:
             succ = [noeuds[b]["fondation"] for a, b, rel, _ in liens
                     if a == q and rel in ("filiation", "fusion", "renommage")]
             if succ:
                 d["fin_deduite"], d["fin_deduite_source"] = min(succ), "fondation du successeur"
+        if not d["statut_fin"]:
+            d["statut_fin"] = ("fin_connue" if d["dissolution"] else
+                               "fin_deduite" if d["fin_deduite"] else "fin_inconnue")
 
     # ================= 8. Familles et courants =================
     for q, d in noeuds.items():
@@ -606,10 +856,10 @@ def main():
                 break
         d["courants"] = trouves
         d["courant_principal"] = principal     # donne la couleur, même en outre-mer
-        d["famille_courant"] = famille or "non classé"
+        d["famille_courant"] = famille or "à classer"
         tout = " ".join([d["label"], d["categories"]] + d.get("cats_article", []))
         d["outre_mer"] = bool(RX_OUTREMER.search(tout))
-        d["famille"] = "outre-mer" if d["outre_mer"] else (famille or "non classé")
+        d["famille"] = "outre-mer" if d["outre_mer"] else (famille or "à classer")
 
     # ================= 9. Sigles =================
     def sigle_de(d):
@@ -676,17 +926,87 @@ def main():
         lignes_inter.append([q, d["label"], SIGLES_INTER.get(d["label"], ""), d["fondation"] or "",
                              d["dissolution"] or "", " | ".join(pred[q]), cle_couleur(d["label"])])
 
-    lignes_affil = []
+    # Dates d'adhésion saisies à la main (data/manuel/affiliations_dates.csv, source obligatoire)
+    dates_saisies = {(r["party_id"], r["international_id"]): r
+                     for r in lire(os.path.join("manuel", "affiliations_dates.csv"))
+                     if r.get("source", "").strip() and (r.get("start", "").strip() or r.get("end", "").strip())}
+    lignes_affil, a_dater = [], []
     for a, b, e in affil_brutes:
         da, di = noeuds[a], noeuds[b]
-        # Période inconnue : durée de vie du parti, bornée par celle de l'Internationale
+        s = dates_saisies.get((a, b))
+        if s:
+            lignes_affil.append([a, b, s["start"].strip(), s["end"].strip(), "known",
+                                 f"manuel : {s['source'].strip()}", lab(a), lab(b)])
+            continue
+        # Période inconnue : recouvrement de la vie du parti et de celle de l'Internationale
         fin_a = da["dissolution"] or da["fin_deduite"] or None
         debut_ = max(x for x in (da["fondation"], di["fondation"], 0) if x is not None) or ""
         fins = [x for x in (fin_a, di["dissolution"]) if x]
         fin_ = min(fins) if fins else ""
         lignes_affil.append([a, b, debut_, fin_, "unknown", " | ".join(sorted(e["sources"])),
                              lab(a), lab(b)])
+        a_dater.append([a, b, "", "", "", lab(a), lab(b), debut_, fin_])
     inter_sans_membre = {q for q in noeuds if classe[q] == "internationale"} - inter_utiles
+
+    # ================= 8. Élagage strict (R5) =================
+    # Gardées : les organisations actives ayant au moins un lien de lignée, et tous leurs ancêtres
+    # (chemins orientés de filiation, renommage, fusion, scission ; les émanations et les passages
+    # de militants ne comptent pas). Tout le reste va dans elagues.csv avec une cause.
+    parents_r5, voisins_r5 = defaultdict(set), defaultdict(set)
+    for a, b, rel, _ in liens:
+        if rel in ("filiation", "renommage", "fusion", "scission"):
+            parents_r5[b].add(a)
+            voisins_r5[a].add(b)
+            voisins_r5[b].add(a)
+    for a, _, b, _, t, _ in date_manquante:      # un ancêtre sans date reste un ancêtre
+        if t in ("filiation", "scission"):
+            parents_r5[b].add(a)
+            voisins_r5[a].add(b)
+            voisins_r5[b].add(a)
+    actives = {q for q in graphe if noeuds[q]["actif"]}
+    garde, pile = set(), [q for q in actives if voisins_r5[q]]
+    while pile:
+        x = pile.pop()
+        if x not in garde:
+            garde.add(x)
+            pile.extend(parents_r5[x])
+    composante, vus = {}, set()
+    for q in graphe:
+        if q in vus:
+            continue
+        comp, pile = set(), [q]
+        while pile:
+            x = pile.pop()
+            if x not in comp:
+                comp.add(x)
+                pile.extend(voisins_r5[x])
+        vus |= comp
+        a_active = bool(comp & actives)
+        for x in comp:
+            composante[x] = a_active
+    lignes_elag, actives_sans_lien = [], []
+    for q in sorted(noeuds, key=lab):
+        d = noeuds[q]
+        statut = d.get("statut_fin", "")
+        if classe[q] == "graphe" and q not in garde:
+            if not voisins_r5[q]:
+                cause = "isolee"
+                if d["actif"]:
+                    actives_sans_lien.append(q)
+            elif not composante[q]:
+                cause = "arbre_sans_organisation_active"
+            else:
+                cause = "non_ancetre_d_une_active"
+            lignes_elag.append([q, lab(q), cause, statut, d.get("famille", ""), ""])
+        elif classe[q] in TYPES and classe[q] not in ("parti_ou_organisation",
+                                                       "international_ou_federation_europeenne"):
+            parent = next((p for p, sats in emanations.items() if q in sats), None)
+            lignes_elag.append([q, lab(q), classe[q], statut, d.get("famille", ""),
+                                f"organisation liée à {lab(parent)}" if parent else ""])
+        elif classe[q] == "etranger":
+            lignes_elag.append([q, lab(q), "etrangere", statut, "", raison.get(q, "")])
+    stats["gardes"] = len(garde)
+    stats.update({f"elague_{c}": n for c, n in Counter(l[2] for l in lignes_elag).items()})
 
     # ================= Écriture =================
     def courants_txt(d):
@@ -700,9 +1020,9 @@ def main():
             return "radicaux : gauche ou centre ?"
         if len(d["pays"]) > 1:
             return "plusieurs pays dans Wikidata"
-        if d["famille"] == "non classé" and "régionaliste / autonomiste" in d["courants"]:
+        if d["famille"] == "à classer" and "régionaliste / autonomiste" in d["courants"]:
             return "régionaliste sans courant de gauche reconnu : à vérifier"
-        if d["famille"] == "non classé":
+        if d["famille"] == "à classer":
             return "aucun courant reconnu"
         return ""
 
@@ -716,13 +1036,27 @@ def main():
                             d["fin_deduite"], d["fin_deduite_source"], "oui" if d["actif"] else "",
                             d["famille"], "oui" if d["outre_mer"] else "", ct, cs,
                             d["courant_principal"], d["famille_courant"], douteux_de(q),
-                            " | ".join(sorted(d["sources"])), " | ".join(d.get("journaux", []))])
+                            " | ".join(sorted(d["sources"])), " | ".join(d.get("journaux", [])),
+                            d["statut_fin"], "oui" if d["actif_auto"] else "",
+                            "oui" if q in garde else "",
+                            " | ".join(sorted(lab(s) for s in emanations.get(q, ())))])
     ecrire("organisations.csv",
            ["id", "label", "nom_court", "fondation", "fondation_mois", "fondation_source",
             "fondation_autres_sources", "dissolution", "dissolution_mois", "dissolution_source",
             "fin_deduite", "fin_deduite_source", "actif", "famille", "outre_mer", "courants",
             "courants_sources", "courant_principal", "famille_courant", "perimetre_douteux",
-            "sources", "journaux"], lignes_orgs)
+            "sources", "journaux", "statut_fin", "actif_auto", "garde", "organisations_liees"],
+           lignes_orgs)
+    ecrire("elagues.csv", ["id", "label", "cause", "statut_fin", "famille", "detail"], lignes_elag)
+    ecrire("affiliations_a_dater.csv", ["party_id", "international_id", "start", "end", "source",
+                                        "party_nom", "international_nom", "recouvrement_debut",
+                                        "recouvrement_fin"], a_dater)
+    # Fichier à compléter à la main : créé une fois, jamais écrasé (lu au prochain passage)
+    chemin_ad = os.path.join(MANUEL, "affiliations_dates.csv")
+    if not os.path.exists(chemin_ad):
+        ecrire("affiliations_dates.csv", ["party_id", "international_id", "start", "end", "source",
+                                          "party_nom", "international_nom"],
+               [l[:7] for l in a_dater], dossier=MANUEL)
 
     lignes_liens = []
     for a, b, rel, e in sorted(liens, key=lambda x: (noeuds[x[1]]["fondation"], lab(x[0]))):
@@ -746,8 +1080,9 @@ def main():
     for q in sorted(sans_date, key=lab):
         d = noeuds[q]
         ct, _ = courants_txt(d)
-        lignes_sd.append([q, d["label"], d["famille"], ct, " | ".join(sorted(d["sources"]))])
-    ecrire("sans_date.csv", ["id", "label", "famille", "courants", "sources"], lignes_sd)
+        lignes_sd.append([q, d["label"], d["famille"], ct, " | ".join(sorted(d["sources"])),
+                          "oui" if q in garde else ""])
+    ecrire("sans_date.csv", ["id", "label", "famille", "courants", "sources", "garde"], lignes_sd)
 
     lignes_exclu = []
     for q in sorted(noeuds, key=lambda q: (raison.get(q, ""), lab(q))):
@@ -799,7 +1134,7 @@ def main():
 
 Raisons d'exclusion : {", ".join(f"{r} ({n})" for r, n in raisons.most_common())}.
 
-Familles : {", ".join(f"{f} ({familles[f]})" for f in FAMILLES + ["non classé"] if familles[f])}.
+Familles : {", ".join(f"{f} ({familles[f]})" for f in FAMILLES + ["à classer"] if familles[f])}.
 
 Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à trancher à la main :
 {douteux_txt or "aucun"}
@@ -835,6 +1170,36 @@ Affiliations : toutes en date_certainty = unknown (les sources ne donnent pas la
 Période recopiée : durée de vie du parti, bornée par celle de l'Internationale.
 
 Sigles (data/manuel/sigles.csv) : {stats['sigles_total']} organisations, dont {stats['sigles_remplis']} avec un sigle ; {stats['sigles_ajoutes']} ajoutées à cette exécution.
+
+## Liens validés à la main
+- Candidats de la phase 0 acceptés (decision = oui) : {stats['candidats_valides']}
+  (dont {stats['candidats_sens_a_verifier']} ignorés car leur sens est « à vérifier »).
+- Liens manuels (data/manuel/aretes_manuelles.csv) : {stats['manuels_ajoutes']} ajoutés,
+  {stats['manuels_incomplets']} ignorés (source, type ou extrémité manquant).
+
+## Types (data/manuel/types.csv)
+{", ".join(f"{t} {stats['type_' + t]}" for t in TYPES if stats['type_' + t])}.
+{stats['types_saisis']} types saisis à la main, {stats['types_ajoutes']} lignes ajoutées au fichier.
+Coalitions et satellites ne sont jamais des boîtes ; un satellite rattaché à un parent apparaît
+dans la colonne organisations_liees de ce parent.
+
+## Organisations actives
+{"**Mode provisoire** : aucune ligne de data/manuel/actifs.csv n'a valide = oui. Une organisation "
+ "compte comme active si le drapeau automatique le dit et qu'il existe au moins un indice "
+ "d'activité récente. Dès qu'une ligne est validée, seules les lignes validées comptent."
+ if provisoire else f"{stats['actifs_valides']} organisations validées actives, {stats['actifs_refuses']} refusées."}
+- Actives retenues : {len(actives)}.
+
+## Élagage strict (R5)
+- **Gardées : {len(garde)} organisations** (actives ayant un lien de lignée, et leurs ancêtres),
+  dont {len(garde & sans_date)} sans date.
+- Élaguées (data/sortie/elagues.csv), par cause : {", ".join(f"{c} {n}" for c, n in Counter(l[2] for l in lignes_elag).most_common())}.
+- **Actives élaguées faute de lien ({len(actives_sans_lien)})**, à relier à la main puis relancer :
+  {", ".join(sorted(lab(q) for q in actives_sans_lien))}.
+
+## Affiliations
+- {len(a_dater)} affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
+  à compléter dans data/manuel/affiliations_dates.csv (source obligatoire).
 """
     with open(os.path.join(SORTIE, "resume.md"), "w", encoding="utf-8") as f:
         f.write(res)
@@ -894,7 +1259,7 @@ L'écosocialisme (PG, LFI...) est rangé dans la famille socialiste, pas dans l'
 Familles : socialistes, radicaux, écologistes, communistes, trotskystes, maoïstes, anarchistes et
 libertaires, outre-mer. Une organisation d'outre-mer (nom ou catégories : Guadeloupe, Martinique,
 Guyane, La Réunion, Mayotte, Nouvelle-Calédonie, Polynésie...) va dans la voie outre-mer et garde
-ses courants. Sans courant reconnu : « non classé ».
+ses courants. Sans courant reconnu : « à classer » (petite voie, jamais un fourre-tout).
 
 ## Liens
 
@@ -911,6 +1276,46 @@ ses courants. Sans courant reconnu : « non classé ».
   passage. Date de l'événement : fondation de la cible.
 - « Membre de » vers une Internationale : affiliations.csv. Vers une organisation française
   (coalition, fédération) : appartenances_nationales.csv.
+- Liens ajoutés à la main : candidats de la phase 0 marqués decision = oui (sens « cible → org »
+  ou « org → cible » ; un sens « à vérifier » est ignoré), et lignes de
+  data/manuel/aretes_manuelles.csv qui ont une source. Aucun candidat n'est accepté seul.
+
+## Types (data/manuel/types.csv)
+
+Types : parti_ou_organisation (seul type dessiné), coalition, satellite (jeunesse, groupe
+étudiant, section locale, collectif, association), groupe_arme, syndicat, club_ou_cercle, media,
+etrangere, international_ou_federation_europeenne.
+
+Préremplissage, dans cet ordre, jamais par des mots du nom seuls :
+1. liste explicite des coalitions (Front populaire, NUPES, Nouveau Front populaire, Gauche
+   plurielle, Front de gauche, Cartel des gauches, Programme commun, Union de la gauche, FGDS...) ;
+2. types Wikidata (P31) : jeunesse, étudiants, section locale -> satellite ; groupe parlementaire
+   -> coalition (groupe d'élus) ; parti ou organisation politique -> parti ; puis coalition,
+   groupe armé, syndicat, club, média, association ou collectif ;
+3. modèle d'infobox Wikipédia ; 4. catégories de l'article ; 5. sinon parti_ou_organisation.
+
+Signalés « à vérifier » dans la colonne reason : ce qui ressemble à une Internationale, les deux
+partis radicaux, et toute coalition ou tout satellite qui a des liens de lignée (le retirer
+couperait la généalogie, ex. la JCR de 1966, ancêtre de la Ligue communiste).
+Le type saisi dans types.csv l'emporte toujours sur le préremplissage. Un satellite rattaché à son
+parent (lien d'émanation) figure dans la colonne organisations_liees du parent.
+
+## Organisations actives
+
+Seules les lignes de data/manuel/actifs.csv marquées valide = oui sont actives (« non » : jamais).
+Tant qu'aucune ligne n'est validée, mode provisoire : drapeau automatique (pas de date de fin,
+pas de successeur, pas de catégorie « Ancien… »), sauf les organisations sans aucun indice
+d'activité récente. Colonne statut_fin : actif_valide, actif_provisoire, fin_connue,
+fin_deduite (fondation du successeur), fin_inconnue.
+
+## Élagage strict (R5)
+
+Gardées (colonne garde) : les organisations actives qui ont au moins un lien de lignée, et tous
+leurs ancêtres par des chemins orientés de filiation, renommage, fusion ou scission (les
+émanations et les passages de militants ne comptent pas ; un ancêtre sans date compte).
+Toutes les autres sont dans elagues.csv, avec une cause : isolee (aucun lien de lignée),
+arbre_sans_organisation_active, non_ancetre_d_une_active, coalition, satellite, groupe_arme,
+syndicat, club_ou_cercle, media, etrangere.
 """
 
 if __name__ == "__main__":

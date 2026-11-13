@@ -73,6 +73,7 @@ Q110837,Parti de gauche (Suède),Q1787940,Parti communiste de Suède (1967),scis
 Q111169764,Jerusalem sanjak,Q4145971,moutassarifat de Jérusalem,filiation,exclu -> exclu
 Q111187255,Parti lorrain,Q111187242,Pays Unis,appartenance,graphe -> exclu
 Q111187258,Prouvènço Nacioun,Q111187242,Pays Unis,appartenance,graphe -> exclu
+Q111799189,Nouvelle Union populaire écologique et sociale,Q126487286,Nouveau Front populaire,filiation,coalition -> coalition
 Q112042684,gouvernement Élisabeth Borne,Q112894205,remaniement du gouvernement Élisabeth Borne du 4 juillet 2022,filiation,exclu -> exclu
 Q112042684,gouvernement Élisabeth Borne,Q124218594,gouvernement Gabriel Attal,filiation,exclu -> exclu
 Q1122980,Comtat Venaissin,Q58296,Première République française,filiation,exclu -> exclu
@@ -231,6 +232,7 @@ Q1376486,Jeunes socialistes européens,Q7248622,Alliance progressiste,appartenan
 Q1376486,Jeunes socialistes européens,Q935345,European Youth Forum,appartenance,internationale -> internationale
 Q139020,Institut international de statistique,Q57587699,Conseil international des sciences,appartenance,exclu -> internationale
 Q1399996,Fédération ouvrière régionale argentine,Q55078537,Confédération internationale du travail,appartenance,etranger -> exclu
+Q141861456,Le Poing Levé,Q2455815,Courant Révolution Permanente – Quatrième Internationale,appartenance,satellite -> internationale
 Q142,France,Q1043527,Agence multilatérale de garantie des investissements,appartenance,exclu -> exclu
 Q142,France,Q1065,Organisation des Nations unies,appartenance,exclu -> internationale
 Q142,France,Q1072120,Régime de contrôle de la technologie des missiles,appartenance,exclu -> internationale
@@ -349,11 +351,14 @@ Q16120426,Sanjak de Tripoli,Q7075820,Territoires ennemis occupés,filiation,excl
 Q1614009,maison de Ribeaupierre,Q97940833,ville impériale de Kaysersberg,filiation,exclu -> exclu
 Q1614383,baronnie de Fleckenstein,Q95977667,province d'Alsace,filiation,exclu -> exclu
 Q161549,Communauté européenne du charbon et de l'acier,Q458,Union européenne,filiation,exclu -> internationale
+Q16215381,Initiative des partis communistes et ouvriers,Q123785828,Action Communiste Européenne,filiation,etranger -> internationale
+Q1628816,Mouvement jeunes communistes de France,Q27396,Fédération mondiale de la jeunesse démocratique,appartenance,satellite -> internationale
 Q1639794,gouvernement Jean-Pierre Raffarin II,Q719544,gouvernement Jean-Pierre Raffarin III,filiation,exclu -> exclu
 Q165154,royaume de Sardaigne,Q302454,République subalpine,filiation,exclu -> exclu
 Q165269,Frise orientale,Q212278,Royaume de Hollande,filiation,exclu -> exclu
 Q16595757,République de Gênes,Q165154,royaume de Sardaigne,filiation,exclu -> exclu
-Q166079,Groupe Union républicaine,Q33762583,Groupe Union des gauches,filiation,exclu -> graphe
+Q166079,Groupe Union républicaine,Q33762583,Groupe Union des gauches,filiation,exclu -> coalition
+Q16637578,Fédération des jeunesses communistes de France,Q1628816,Mouvement jeunes communistes de France,filiation,satellite -> satellite
 Q16644519,Université ouvrière de Paris,Q192821,Parti communiste français,appartenance,exclu -> graphe
 Q1666432,Commission internationale de la navigation aérienne,Q125761,Organisation de l'aviation civile internationale,filiation,exclu -> exclu
 Q1667519,Union internationale des éditeurs,Q115787224,International Federation of Reproduction Rights Organisations,appartenance,exclu -> exclu
@@ -364,6 +369,7 @@ Q16683508,Quinzième législature de la Troisième République française,Q16683
 Q16838229,Foundation for European Progressive Studies,Q3964314,Solidar,appartenance,exclu -> exclu
 Q16838229,Foundation for European Progressive Studies,Q7248622,Alliance progressiste,appartenance,exclu -> internationale
 Q16931679,overthrow of the Roman monarchy,Q17167,République romaine,filiation,exclu -> exclu
+Q1694377,Pôle de renaissance communiste en France,Q16215381,Initiative des partis communistes et ouvriers,appartenance,graphe -> etranger
 Q170072,Provinces-Unies,Q188553,République batave,filiation,exclu -> exclu
 Q17015016,Principauté épiscopale de Verdun,Q182783,Trois-Évêchés,filiation,exclu -> exclu
 Q170361,Territoire du Bassin de la Sarre,Q2114827,Gau Westmark,filiation,exclu -> exclu
@@ -434,6 +440,7 @@ Q190644,Comité central des catholiques allemands,Q1736390,Katholische Sozialwis
 Q190644,Comité central des catholiques allemands,Q537395,Mouvement européen Allemagne,appartenance,exclu -> exclu
 Q190644,Comité central des catholiques allemands,Q866247,Misereor,appartenance,exclu -> exclu
 Q192821,Parti communiste français,Q2118395,Parti communiste algérien,scission,graphe -> etranger
+Q192821,Parti communiste français,Q2982800,Collectif des centres de documentation en histoire ouvrière et sociale,appartenance,graphe -> satellite
 Q1939128,Missionsärztliches Institut Würzburg,Q19903103,VENRO - Association of German Development and Humanitarian Aid NGOS,appartenance,exclu -> exclu
 Q1951193,Mouvement pour le socialisme (Argentine),Q8034747,Mouvement socialiste des travailleurs,scission,etranger -> etranger
 Q19521949,Courant révolutionnaire des travailleurs,Q2455815,Courant Révolution Permanente – Quatrième Internationale,appartenance,etranger -> internationale
@@ -516,6 +523,9 @@ Q2211955,gouvernement Jules Méline,Q3112113,gouvernement Henri Brisson II,filia
 Q2212125,gouvernement Gaëtan de Rochebouët,Q3112180,gouvernement Jules Dufaure V,filiation,exclu -> exclu
 Q22252055,Mouvement révolutionnaire des travailleurs,Q2455815,Courant Révolution Permanente – Quatrième Internationale,appartenance,etranger -> internationale
 Q2225398,seigneurie d'Oberbronn,Q95977667,province d'Alsace,filiation,exclu -> exclu
+Q2236823,groupe socialiste à l'Assemblée nationale,Q36214467,Groupe de la Fédération de la gauche démocrate et socialiste,filiation,coalition -> coalition
+Q2236823,groupe socialiste à l'Assemblée nationale,Q36217209,Groupe du Parti socialiste et des radicaux de gauche,filiation,coalition -> coalition
+Q2236823,groupe socialiste à l'Assemblée nationale,Q46610404,"groupe Socialiste, radical et citoyen",filiation,coalition -> coalition
 Q2239200,Républicains sociaux,Q7223378,Union pour la nouvelle République,filiation,exclu -> exclu
 Q2242207,gouvernement Charles Duclerc,Q2448325,gouvernement Armand Fallières,filiation,exclu -> exclu
 Q2261321,Ramazanides,Q3736239,Eyalet d'Adana,filiation,exclu -> exclu
@@ -527,12 +537,12 @@ Q2277,Empire romain,Q42834,Empire romain d'Occident,filiation,exclu -> exclu
 Q18283219,Comité commun pour les guides en métrologie,Q229478,Bureau international des poids et mesures,appartenance,exclu -> internationale
 Q6269138,Joint Committee for Traceability in Laboratory Medicine,Q229478,Bureau international des poids et mesures,appartenance,exclu -> internationale
 Q2295939,duché de Vasconie,Q61901679,comté de Pampelune,scission,exclu -> exclu
-Q2299068,Rassemblement démocratique,Q36214467,Groupe de la Fédération de la gauche démocrate et socialiste,filiation,exclu -> graphe
+Q2299068,Rassemblement démocratique,Q36214467,Groupe de la Fédération de la gauche démocrate et socialiste,filiation,exclu -> coalition
 Q2300622,républicains indépendants,Q3366676,Parti républicain,filiation,exclu -> exclu
 Q23020118,Républicains modérés,Q166079,Groupe Union républicaine,filiation,exclu -> exclu
 Q23020118,Républicains modérés,Q3318180,Républicains modérés,filiation,exclu -> exclu
 Q2313140,République bouillonnaise,Q142,France,filiation,exclu -> exclu
-Q2320765,Groupe de la Gauche républicaine,Q33762583,Groupe Union des gauches,filiation,exclu -> graphe
+Q2320765,Groupe de la Gauche républicaine,Q33762583,Groupe Union des gauches,filiation,exclu -> coalition
 Q2329524,Entente démocratique,Q2299068,Rassemblement démocratique,filiation,exclu -> exclu
 Q234277,Parti communiste d'Inde (marxiste),Q1897136,Parti communiste d'Inde (marxiste-léniniste),scission,etranger -> etranger
 Q234277,Parti communiste d'Inde (marxiste),Q5062659,Centre des communistes indiens,scission,etranger -> etranger
@@ -653,6 +663,7 @@ Q290305,gouvernement Painlevé I,Q3112068,gouvernement Georges Clemenceau II,fil
 Q290503,Étoile nord-africaine,Q137353779,Q137353779,filiation,exclu -> exclu
 Q290503,Étoile nord-africaine,Q3366385,Parti du peuple algérien,filiation,exclu -> exclu
 Q2912866,gouvernement Pierre Waldeck-Rousseau,Q1829373,gouvernement Émile Combes,filiation,exclu -> exclu
+Q29348702,Front de gauche (France),Q30741057,Rézistan's Égalité 974,filiation,coalition -> graphe
 Q2940142,Royaume wisigoth de Tolède,Q6159007,wilaya d'Al-Andalus,filiation,exclu -> exclu
 Q2940142,Royaume wisigoth de Tolède,Q663258,Marche d'Espagne,filiation,exclu -> exclu
 Q2940142,Royaume wisigoth de Tolède,Q8575586,Califat omeyyade,filiation,exclu -> exclu
@@ -696,6 +707,7 @@ Q3088519,Front national des combattants,Q54769213,Front national pour l'Algérie
 Q3091726,Fédération des étudiants révolutionnaires,Q93219875,Alliance des jeunes pour le socialisme,filiation,exclu -> graphe
 Q30926304,Union internationale du télégraphe,Q376150,Union internationale des télécommunications,filiation,internationale -> exclu
 Q309460,comté de Hainaut,Q58296,Première République française,filiation,exclu -> exclu
+Q3099348,Groupe de la Gauche radicale,Q36377550,Groupe du Parti républicain radical et radical socialiste,filiation,coalition -> coalition
 Q3105,Vosges,Q12717,Bas-Rhin,filiation,exclu -> exclu
 Q3105,Vosges,Q155144,Alsace-Lorraine,filiation,exclu -> exclu
 Q3105,Vosges,Q2150573,district de Basse-Alsace,filiation,exclu -> exclu
@@ -784,7 +796,9 @@ Q3133199,Ligue communiste révolutionnaire (Espagne),Q3325616,Anticapitalistas,f
 Q3135956,Parti des travailleurs (Uruguay),Q2393813,Comité de coordination pour la refondation de la Quatrième Internationale,appartenance,etranger -> internationale
 Q3141290,"Parti républicain, radical et radical-socialiste",Q427965,Parti radical de gauche,filiation,graphe -> exclu
 Q3142484,Parti communiste breton,Q175284,Armée républicaine irlandaise,appartenance,graphe -> exclu
+Q3142484,Parti communiste breton,Q2587029,Front de libération de la Bretagne,appartenance,graphe -> groupe_arme
 Q3142484,Parti communiste breton,Q26683,Organisation de libération de la Palestine,appartenance,graphe -> exclu
+Q3142484,Parti communiste breton,Q42814,Euskadi ta Askatasuna,appartenance,graphe -> groupe_arme
 Q314946,Ligue socialiste révolutionnaire,Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
 Q3152160,Institut des hautes études de la sécurité intérieure,Q21684727,Institut national des hautes études de sécurité,filiation,exclu -> exclu
 Q3152418,Institut national de police scientifique,Q104601946,Service national de police scientifique,filiation,exclu -> exclu
@@ -810,6 +824,7 @@ Q3271735,Royaume d'Arles,Q642314,comté de Bourgogne,filiation,exclu -> exclu
 Q328001,diocèse de Toul,Q182783,Trois-Évêchés,filiation,exclu -> exclu
 Q328001,diocèse de Toul,Q872895,diocèse de Nancy-Toul,filiation,exclu -> exclu
 Q328001,diocèse de Toul,Q875293,diocèse de Saint-Dié,scission,exclu -> exclu
+Q32860104,Groupe ouvrier,Q60327384,Groupe Union Socialiste,filiation,coalition -> coalition
 Q3294806,Marquisat de Franchimont,Q158835,principauté de Liège,filiation,exclu -> exclu
 Q3298265,Parti communiste du Pakistan,Q2177973,Parti communiste du Bangladesh,scission,etranger -> etranger
 Q3307686,royaume wisigoth de Toulouse,Q5919137,Empire de Théodoric le Grand,filiation,exclu -> exclu
@@ -852,7 +867,10 @@ Q33758518,Troisième législature du Corps législatif,Q33759105,Quatrième lég
 Q33759105,Quatrième législature du Corps législatif,Q2867086,Assemblée nationale,filiation,exclu -> exclu
 Q3376100,Perspectives tunisiennes,Q12189962,Organisation des travailleurs tunisiens,filiation,etranger -> etranger
 Q3376100,Perspectives tunisiennes,Q141127568,Groupement marxiste-léniniste tunisien,filiation,etranger -> etranger
-Q33768451,Groupe Union démocratique,Q33769773,Groupe Gauche démocratique,filiation,exclu -> graphe
+Q33768451,Groupe Union démocratique,Q33769773,Groupe Gauche démocratique,filiation,exclu -> coalition
+Q33769773,Groupe Gauche démocratique,Q33770496,Groupe Gauche démocratique,filiation,coalition -> coalition
+Q33769773,Groupe Gauche démocratique,Q33770699,Groupe des Républicains de gauche,filiation,coalition -> coalition
+Q33770699,Groupe des Républicains de gauche,Q50867068,Alliance des Républicains de Gauche et des Radicaux Indépendants,filiation,coalition -> coalition
 Q3385657,Pierre Juquin,Q2840414,Alternative rouge et verte,filiation,exclu -> graphe
 Q340195,Banque africaine de développement,Q140274247,International Household Survey Network,appartenance,exclu -> exclu
 Q340195,Banque africaine de développement,Q5152967,Committee for the Coordination of Statistical Activities,appartenance,exclu -> exclu
@@ -887,6 +905,7 @@ Q3559284,villes libres de Menton et Roquebrune,Q142,France,filiation,exclu -> ex
 Q356944,Parti de l'égalité socialiste (États-Unis),Q972773,Comité international de la Quatrième Internationale,appartenance,etranger -> internationale
 Q3569927,Workers' Fight,Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
 Q3574793,Zaouia d'Illigh,Q131429368,Alawi Sultanate,filiation,exclu -> exclu
+Q36214467,Groupe de la Fédération de la gauche démocrate et socialiste,Q36217209,Groupe du Parti socialiste et des radicaux de gauche,filiation,coalition -> coalition
 Q366971,Préhistoire de la péninsule Ibérique,Q1203967,Iberia,filiation,exclu -> exclu
 Q367894,Parti socialiste (Angleterre et pays de Galles),Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
 Q368621,Homosexualités et socialisme,Q170972,Parti socialiste (France),appartenance,exclu -> graphe
@@ -941,7 +960,7 @@ Q427965,Parti radical de gauche,Q135755468,La Convention,appartenance,exclu -> g
 Q427965,Parti radical de gauche,Q1651405,Alliance radicale européenne,appartenance,exclu -> internationale
 Q427965,Parti radical de gauche,Q3366425,Parti démocrate français,scission,exclu -> exclu
 Q427965,Parti radical de gauche,Q55597872,Les Radicaux de gauche,scission,exclu -> graphe
-Q42814,Euskadi ta Askatasuna,Q3752287,Comandos Autónomos Anticapitalistas,filiation,graphe -> exclu
+Q42814,Euskadi ta Askatasuna,Q3752287,Comandos Autónomos Anticapitalistas,filiation,groupe_arme -> exclu
 Q42834,Empire romain d'Occident,Q1247508,Domaine gallo-romain,filiation,exclu -> exclu
 Q42834,Empire romain d'Occident,Q12544,Empire byzantin,filiation,exclu -> exclu
 Q42834,Empire romain d'Occident,Q146246,royaume des Francs,filiation,exclu -> exclu
@@ -982,6 +1001,9 @@ Q922129,Quartet pour le Moyen-Orient,Q458,Union européenne,appartenance,exclu -
 Q461886,Parti communiste italien,Q3896697,Parti communiste d'Italie (marxiste-léniniste),scission,etranger -> etranger
 Q46370,Francie occidentale,Q70972,royaume de France,filiation,exclu -> exclu
 Q464194,Autorité internationale de la Ruhr,Q161549,Communauté européenne du charbon et de l'acier,filiation,exclu -> exclu
+Q46610404,"groupe Socialiste, radical et citoyen",Q46612837,"groupe Socialiste, républicain et citoyen",filiation,coalition -> coalition
+Q46612837,"groupe Socialiste, républicain et citoyen",Q46613924,"groupe Socialiste, écologiste et républicain",filiation,coalition -> coalition
+Q46613924,"groupe Socialiste, écologiste et républicain",Q2236823,groupe socialiste à l'Assemblée nationale,filiation,coalition -> coalition
 Q468902,Francie médiane,Q12548,Saint-Empire romain germanique,filiation,exclu -> exclu
 Q469837,comté de Hanau-Lichtenberg,Q95977667,province d'Alsace,filiation,exclu -> exclu
 Q47170389,Groupe de l'Entente républicaine démocratique,Q2012835,Groupe de l'Union républicaine démocratique,filiation,exclu -> exclu
@@ -1049,6 +1071,7 @@ Q54818777,abbaye impériale de Wissembourg,Q97943978,ville impériale de Wissemb
 Q55599224,Présidence de Paul Deschanel,Q97293320,Présidence d'Alexandre Millerand,filiation,exclu -> exclu
 Q55599225,présidence de Paul Doumer,Q30740604,présidence d'Albert Lebrun,filiation,exclu -> exclu
 Q55633633,République soviétique de Saxonie,Q41304,république de Weimar,filiation,exclu -> exclu
+Q557045,Europe Écologie,Q613786,Les Écologistes – Europe Écologie Les Verts,filiation,coalition -> graphe
 Q5611262,Groupe pour l'observation de la Terre,Q25338539,Research Data Alliance,appartenance,exclu -> internationale
 Q5611262,Groupe pour l'observation de la Terre,Q821542,DataCite,appartenance,exclu -> exclu
 Q565213,Comité français de libération nationale,Q3111972,Gouvernement Charles de Gaulle,filiation,exclu -> exclu
@@ -1076,7 +1099,7 @@ Q5990386,époque prophétique,Q12490507,califat Rachidun,filiation,exclu -> excl
 Q599613,comté de Namur,Q58296,Première République française,filiation,exclu -> exclu
 Q599965,gouvernement François Fillon III,Q177522,gouvernement Jean-Marc Ayrault I,filiation,exclu -> exclu
 Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),Q1969683,Mouvement révolutionnaire internationaliste,appartenance,etranger -> internationale
-Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),Q20635401,Bataillon international de libération,appartenance,etranger -> graphe
+Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),Q20635401,Bataillon international de libération,appartenance,etranger -> etranger
 Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),Q24042122,Mouvement révolutionnaire uni des peuples,appartenance,etranger -> etranger
 Q6048595,"International Association of Scientific, Technical, and Medical Publishers",Q105945944,Clearingstelle Urheberrecht im Internet,appartenance,exclu -> exclu
 Q6048595,"International Association of Scientific, Technical, and Medical Publishers",Q112828800,UNESCO Global Open Science Partnership,appartenance,exclu -> exclu
@@ -1094,6 +1117,7 @@ Q655104,Krytyka Polityczna,Q60574856,International progressif,appartenance,exclu
 Q6083578,Parti révolutionnaire ouvrier et paysan de Turquie,Q771163,Parti communiste de Turquie/marxiste-léniniste,scission,etranger -> etranger
 Q60836735,comté de Vintimille,Q65142834,Val de Lantosque,filiation,exclu -> exclu
 Q60836735,comté de Vintimille,Q788123,comté de Tende,filiation,exclu -> exclu
+Q60847144,Partitu corsu per u sucialisimu,Q1138646,Front de libération nationale corse,filiation,graphe -> groupe_arme
 Q6086288,Sanjak de Homs,Q7075820,Territoires ennemis occupés,filiation,exclu -> exclu
 Q6119666,Jacobin,Q60574856,International progressif,appartenance,exclu -> internationale
 Q613786,Les Écologistes – Europe Écologie Les Verts,Q691715,"International Lesbian, Gay, Bisexual, Trans and Intersex Association",appartenance,graphe -> exclu
@@ -1120,6 +1144,7 @@ Q627646,Arbeitsgemeinschaft für Entwicklungshilfe,Q422569,Action Alliance Again
 Q627646,Arbeitsgemeinschaft für Entwicklungshilfe,Q48756367,Q48756367,appartenance,exclu -> exclu
 Q63021609,royaume de Basse-Navarre,Q70972,royaume de France,filiation,exclu -> exclu
 Q63456377,Dissidence française,Q105616754,Mouvement national-démocrate,filiation,exclu -> exclu
+Q63483685,Parti communiste révolutionnaire de France,Q16215381,Initiative des partis communistes et ouvriers,appartenance,graphe -> etranger
 Q63536974,groupe Ensemble Île-de-France au conseil régional d'Île-de-France,Q133250601,"groupe socialiste, écologiste et radical au conseil régional d'Île-de-France",filiation,exclu -> exclu
 Q636521,Parti communiste des Philippines (1968),Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),appartenance,etranger -> internationale
 Q636521,Parti communiste des Philippines (1968),Q6972194,Démocratie nationale (Philippines),appartenance,etranger -> exclu
@@ -1232,7 +1257,7 @@ Q7551801,Parti des travailleurs socialistes,Q598744,Front de gauche et des trava
 Q76821846,Communauté de Médine,Q12490507,califat Rachidun,filiation,exclu -> exclu
 Q104872529,Network for Greening the Financial System,Q769548,Autorité bancaire européenne,appartenance,exclu -> internationale
 Q771163,Parti communiste de Turquie/marxiste-léniniste,Q1969683,Mouvement révolutionnaire internationaliste,appartenance,etranger -> internationale
-Q771163,Parti communiste de Turquie/marxiste-léniniste,Q20635401,Bataillon international de libération,appartenance,etranger -> graphe
+Q771163,Parti communiste de Turquie/marxiste-léniniste,Q20635401,Bataillon international de libération,appartenance,etranger -> etranger
 Q771163,Parti communiste de Turquie/marxiste-léniniste,Q24042122,Mouvement révolutionnaire uni des peuples,appartenance,etranger -> etranger
 Q771163,Parti communiste de Turquie/marxiste-léniniste,Q461,Internet Archive,appartenance,etranger -> exclu
 Q771163,Parti communiste de Turquie/marxiste-léniniste,Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),scission,etranger -> etranger
@@ -1283,7 +1308,8 @@ Q838931,Royaume d'Italie,Q174306,république de Gênes,filiation,exclu -> exclu
 Q845737,traité de Bruxelles,Q458,Union européenne,filiation,exclu -> internationale
 Q845918,Open Source Initiative,Q102440976,Q102440976,appartenance,exclu -> exclu
 Q845918,Open Source Initiative,Q133163787,Re:Create Coalition,appartenance,exclu -> exclu
-Q846637,Les Jeunes Socialistes,Q30689138,Les Jeunes en marche,scission,graphe -> exclu
+Q846637,Les Jeunes Socialistes,Q1376486,Jeunes socialistes européens,appartenance,satellite -> internationale
+Q846637,Les Jeunes Socialistes,Q30689138,Les Jeunes en marche,scission,satellite -> exclu
 Q854415,Royaume lombard,Q838931,Royaume d'Italie,filiation,exclu -> exclu
 Q8575586,Califat omeyyade,Q1337854,émirat de Cordoue,scission,exclu -> exclu
 Q858851,Fondation Linux,Q845918,Open Source Initiative,appartenance,exclu -> exclu
@@ -1303,7 +1329,7 @@ Q910619,Club breton,Q179885,Club des jacobins,filiation,exclu -> graphe
 Q922707,Parti de gauche (France),Q12461,Le Monde,appartenance,graphe -> exclu
 Q922707,Parti de gauche (France),Q3153050,Inter-LGBT,appartenance,graphe -> exclu
 Q932005,Territoires héréditaires des Habsbourg,Q95977667,province d'Alsace,filiation,exclu -> exclu
-Q93451279,ETA-pm (Huitième assemblée),Q42814,Euskadi ta Askatasuna,filiation,exclu -> graphe
+Q93451279,ETA-pm (Huitième assemblée),Q42814,Euskadi ta Askatasuna,filiation,exclu -> groupe_arme
 Q9390758,Assemblée commune,Q126486734,Assemblée parlementaire européenne,filiation,exclu -> internationale
 Q940230,gouvernement Georges Pompidou I,Q3112071,gouvernement Georges Pompidou II,filiation,exclu -> exclu
 Q948,Tunisie,Q1043527,Agence multilatérale de garantie des investissements,appartenance,exclu -> exclu
@@ -1352,7 +1378,7 @@ Q95950649,Duché d'Alsace,Q693980,duché de Souabe,filiation,exclu -> exclu
 Q95950649,Duché d'Alsace,Q832888,comté de Nordgau,filiation,exclu -> exclu
 Q95977667,province d'Alsace,Q12717,Bas-Rhin,filiation,exclu -> exclu
 Q95977667,province d'Alsace,Q12722,Haut-Rhin,filiation,exclu -> exclu
-Q961755,Ekin,Q42814,Euskadi ta Askatasuna,filiation,exclu -> graphe
+Q961755,Ekin,Q42814,Euskadi ta Askatasuna,filiation,exclu -> groupe_arme
 Q962639,Comité des forges,Q58196825,Comité d'organisation de la sidérurgie,filiation,exclu -> exclu
 Q965481,Parti communiste (Suède),Q21704717,Séminaire communiste international,appartenance,etranger -> internationale
 Q967759,Social-démocratie du royaume de Pologne et de Lituanie,Q605468,Parti communiste de Pologne (1918-1938),filiation,etranger -> etranger

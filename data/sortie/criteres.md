@@ -49,7 +49,7 @@ L'écosocialisme (PG, LFI...) est rangé dans la famille socialiste, pas dans l'
 Familles : socialistes, radicaux, écologistes, communistes, trotskystes, maoïstes, anarchistes et
 libertaires, outre-mer. Une organisation d'outre-mer (nom ou catégories : Guadeloupe, Martinique,
 Guyane, La Réunion, Mayotte, Nouvelle-Calédonie, Polynésie...) va dans la voie outre-mer et garde
-ses courants. Sans courant reconnu : « non classé ».
+ses courants. Sans courant reconnu : « à classer » (petite voie, jamais un fourre-tout).
 
 ## Liens
 
@@ -66,3 +66,43 @@ ses courants. Sans courant reconnu : « non classé ».
   passage. Date de l'événement : fondation de la cible.
 - « Membre de » vers une Internationale : affiliations.csv. Vers une organisation française
   (coalition, fédération) : appartenances_nationales.csv.
+- Liens ajoutés à la main : candidats de la phase 0 marqués decision = oui (sens « cible → org »
+  ou « org → cible » ; un sens « à vérifier » est ignoré), et lignes de
+  data/manuel/aretes_manuelles.csv qui ont une source. Aucun candidat n'est accepté seul.
+
+## Types (data/manuel/types.csv)
+
+Types : parti_ou_organisation (seul type dessiné), coalition, satellite (jeunesse, groupe
+étudiant, section locale, collectif, association), groupe_arme, syndicat, club_ou_cercle, media,
+etrangere, international_ou_federation_europeenne.
+
+Préremplissage, dans cet ordre, jamais par des mots du nom seuls :
+1. liste explicite des coalitions (Front populaire, NUPES, Nouveau Front populaire, Gauche
+   plurielle, Front de gauche, Cartel des gauches, Programme commun, Union de la gauche, FGDS...) ;
+2. types Wikidata (P31) : jeunesse, étudiants, section locale -> satellite ; groupe parlementaire
+   -> coalition (groupe d'élus) ; parti ou organisation politique -> parti ; puis coalition,
+   groupe armé, syndicat, club, média, association ou collectif ;
+3. modèle d'infobox Wikipédia ; 4. catégories de l'article ; 5. sinon parti_ou_organisation.
+
+Signalés « à vérifier » dans la colonne reason : ce qui ressemble à une Internationale, les deux
+partis radicaux, et toute coalition ou tout satellite qui a des liens de lignée (le retirer
+couperait la généalogie, ex. la JCR de 1966, ancêtre de la Ligue communiste).
+Le type saisi dans types.csv l'emporte toujours sur le préremplissage. Un satellite rattaché à son
+parent (lien d'émanation) figure dans la colonne organisations_liees du parent.
+
+## Organisations actives
+
+Seules les lignes de data/manuel/actifs.csv marquées valide = oui sont actives (« non » : jamais).
+Tant qu'aucune ligne n'est validée, mode provisoire : drapeau automatique (pas de date de fin,
+pas de successeur, pas de catégorie « Ancien… »), sauf les organisations sans aucun indice
+d'activité récente. Colonne statut_fin : actif_valide, actif_provisoire, fin_connue,
+fin_deduite (fondation du successeur), fin_inconnue.
+
+## Élagage strict (R5)
+
+Gardées (colonne garde) : les organisations actives qui ont au moins un lien de lignée, et tous
+leurs ancêtres par des chemins orientés de filiation, renommage, fusion ou scission (les
+émanations et les passages de militants ne comptent pas ; un ancêtre sans date compte).
+Toutes les autres sont dans elagues.csv, avec une cause : isolee (aucun lien de lignée),
+arbre_sans_organisation_active, non_ancetre_d_une_active, coalition, satellite, groupe_arme,
+syndicat, club_ou_cercle, media, etrangere.

@@ -58,7 +58,7 @@ VOIES = [
     ("maoïstes", "Maoïstes", "#8C510A"),
     ("anarchistes et libertaires", "Anarchistes et libertaires", "#222222"),
     ("outre-mer", "Outre-mer", "#7B3294"),
-    ("non classé", "Non classés", "#8C8C8C"),
+    ("à classer", "À classer", "#8C8C8C"),
 ]
 EXTERNE = ("externe", "Organisations étrangères", "#A6A6A6")
 SANS_DATE = ("sans date", "Dates inconnues (hors échelle)", "#A6A6A6")
@@ -226,7 +226,7 @@ def charger():
             t1, fin_txt, etat = None, "?", "fin inconnue"
         principal, nom = libelles(r["id"], r["label"], r["nom_court"])
         fam_c = r["famille_courant"] or r["famille"]
-        couleur = nuance(TEINTE.get(fam_c, TEINTE["non classé"]), NUANCES.get(r["courant_principal"], 0))
+        couleur = nuance(TEINTE.get(fam_c, TEINTE["à classer"]), NUANCES.get(r["courant_principal"], 0))
         mois = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.",
                 "nov.", "déc."]
         def date_longue(a, m):
@@ -680,8 +680,8 @@ def dessiner(m, avec_cle=True, interactif=False):
                   f'data-recherche="{esc(recherche)}">')
         el.append(f'<title>{esc(chr(10).join(o["details"]))}</title>')
         if o["sans_date"]:
-            fill = f'url(#h-{slug(o.get("famille_sd", "non classé"))})' \
-                if o.get("famille_sd") in TEINTE else "url(#h-non-classe)"
+            fill = f'url(#h-{slug(o.get("famille_sd", "à classer"))})' \
+                if o.get("famille_sd") in TEINTE else "url(#h-a-classer)"
             el.append(f'<rect class="barre sans-date" data-id="{esc(o["id"])}" x="{x0:.2f}" y="{yb:.2f}" '
                       f'width="{w:.2f}" height="{BAR_H}" rx="3" fill="{fill}" '
                       f'stroke="{o["couleur"]}" stroke-width="1.5"/>')

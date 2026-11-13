@@ -365,7 +365,7 @@ def main():
         if not any(graphe[x].get("actif") for x in comp):
             arbres_sans_actif.append(comp)
     a_fouiller = sans_lien | set().union(*arbres_sans_actif) if arbres_sans_actif else set(sans_lien)
-    actifs = [q for q in orgs if orgs[q]["actif"]]
+    actifs = [q for q in orgs if orgs[q].get("actif_auto", orgs[q]["actif"])]   # drapeau automatique
     print(f"{len(graphe)} organisations : {len(graphe) - len(sans_lien)} avec lien, {len(sans_lien)} sans ; "
           f"{len(arbres_sans_actif)} arbres sans organisation active ; {len(a_fouiller)} à fouiller.")
 
