@@ -11,6 +11,7 @@ Extraction des infobox de Wikipédia FR pour compléter l'arbre des partis de ga
 Dépendances : pip install requests mwparserfromhell
 Usage : python infobox_wikipedia.py
         python infobox_wikipedia.py "Catégorie:Mon autre catégorie" ...   (remplace la liste par défaut)
+        python infobox_wikipedia.py --refresh   (supprime les caches de data/ et refait tout)
 """
 
 import csv
@@ -32,9 +33,9 @@ PROFONDEUR = 2
 
 # Noms de catégories écrits de mémoire : le script signale celles qui sont vides ou inexistantes.
 CATEGORIES = [
-    "Catégorie:Parti politique d'extrême gauche en France",
+    "Catégorie:Extrême gauche en France",
     "Catégorie:Parti politique communiste en France",
-    "Catégorie:Parti politique trotskiste en France",
+    "Catégorie:Trotskisme en France",
     "Catégorie:Organisation trotskiste",
     "Catégorie:Organisation maoïste",
     "Catégorie:Organisation anarchiste en France",
@@ -49,9 +50,9 @@ INFOBOX_PREFIXES = ("infobox parti", "infobox organisation")
 # réellement rencontrés, pour que tu puisses corriger cette table.
 CHAMPS = {
     "predecesseur": "pred", "precede par": "pred", "fusion de": "pred", "issu de": "pred",
-    "precedent": "pred",
+    "precedent": "pred", "remplace": "pred",
     "successeur": "succ", "suivi par": "succ", "fusionne dans": "succ", "devenu": "succ",
-    "suivant": "succ",
+    "suivant": "succ", "remplace par": "succ",
     "scission de": "scission_de",
     "scission": "scission_vers", "scissions": "scission_vers", "scission vers": "scission_vers",
     "scission dans": "scission_vers",
@@ -59,8 +60,14 @@ CHAMPS = {
     "affiliation internationale": "international", "affi internationale": "international",
     "ideologie": "ideologie", "ideologies": "ideologie",
     "fondation": "fondation", "creation": "fondation",
+    "date de fondation": "fondation", "date fondation": "fondation",
     "disparition": "disparition", "dissolution": "disparition",
     "positionnement": "positionnement",
+    # Appartenance à une fédération européenne / nationale ou à une coalition
+    "affi europeenne": "affiliation", "affiliation europeenne": "affiliation",
+    "affi nationale": "affiliation", "affi francaise": "affiliation",
+    "coalition": "affiliation", "affiliation": "affiliation",
+    "coalition de": "membres",  # sur la page de la coalition : liste de ses membres
 }
 
 COURANTS = {
@@ -110,6 +117,22 @@ def normaliser(nom):
     return re.sub(r"[\s_\-]+", " ", s).strip()
 
 
+# ---------- Caches (data/cache_*.json) ----------
+
+def cache_lire(nom):
+    chemin = os.path.join(DATA, nom)
+    if not os.path.exists(chemin):
+        return {}
+    with open(chemin, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def cache_ecrire(nom, contenu):
+    os.makedirs(DATA, exist_ok=True)
+    with open(os.path.join(DATA, nom), "w", encoding="utf-8") as f:
+        json.dump(contenu, f, ensure_ascii=False)
+
+
 # ---------- 1. Catégories ----------
 
 def membres_categorie(cat):
@@ -129,6 +152,11 @@ def membres_categorie(cat):
 
 def explorer(cat_racine):
     """Parcourt la catégorie et ses sous-catégories. Renvoie {titre de page: {catégories}}."""
+    cache = cache_lire("cache_categories.json")
+    cle = f"{cat_racine}|{PROFONDEUR}"
+    if cle in cache:
+        print("  (en cache)")
+        return {t: set(cs) for t, cs in cache[cle].items()}
     trouvees = defaultdict(set)
     vues = set()
     a_voir = [(cat_racine, 0)]
@@ -147,6 +175,9 @@ def explorer(cat_racine):
             a_voir.extend((s, prof + 1) for s in sous if not EXCLUS.search(s))
     if total_racine == 0:
         print(f"  ATTENTION : catégorie vide ou inexistante : {cat_racine}")
+    else:
+        cache[cle] = {t: sorted(cs) for t, cs in trouvees.items()}
+        cache_ecrire("cache_categories.json", cache)
     return trouvees
 
 
@@ -214,8 +245,9 @@ def lire_infobox(texte, compteur_modeles, compteur_params):
 # ---------- 4. Résolution des redirections et des identifiants Wikidata ----------
 
 def resoudre(titres):
-    res = {}
-    titres = sorted(set(titres))
+    cache = cache_lire("cache_resolution.json")
+    res = {t: tuple(cache[t]) for t in titres if t in cache}
+    titres = sorted(set(t for t in titres if t not in cache))
     for i in range(0, len(titres), 50):
         lot = titres[i:i + 50]
         data = api(titles="|".join(lot), redirects=1, prop="pageprops",
@@ -227,6 +259,8 @@ def resoudre(titres):
             t2 = redir.get(norm.get(t, t), norm.get(t, t))
             p = pages.get(t2, {})
             res[t] = (t2, p.get("pageprops", {}).get("wikibase_item"))
+            cache[t] = list(res[t])
+    cache_ecrire("cache_resolution.json", cache)
     return res
 
 
@@ -238,7 +272,13 @@ def courants_de(texte):
 
 def main():
     os.makedirs(DATA, exist_ok=True)
-    cats = sys.argv[1:] or CATEGORIES
+    if "--refresh" in sys.argv[1:]:
+        for nom in ("cache_wikitext.json", "cache_categories.json", "cache_resolution.json"):
+            chemin = os.path.join(DATA, nom)
+            if os.path.exists(chemin):
+                os.remove(chemin)
+        print("Caches supprimés, tout sera refait.")
+    cats = [a for a in sys.argv[1:] if not a.startswith("--")] or CATEGORIES
 
     print("Exploration des catégories...")
     pages = defaultdict(set)
@@ -264,7 +304,8 @@ def main():
     # Cibles des liens à résoudre
     cibles = set()
     for _, champs in infos.values():
-        for role in ("pred", "succ", "scission_de", "scission_vers", "international"):
+        for role in ("pred", "succ", "scission_de", "scission_vers", "international",
+                     "affiliation", "membres"):
             for v in champs.get(role, []):
                 cibles.update(liens(v))
     print(f"Résolution de {len(cibles)} cibles de liens...")
@@ -309,6 +350,8 @@ def main():
             ("scission_de", "inverse", "scission"),
             ("scission_vers", "direct", "scission"),
             ("international", "direct", "appartenance"),
+            ("affiliation", "direct", "appartenance"),
+            ("membres", "inverse", "appartenance"),
         ):
             for v in champs.get(role, []):
                 cs = liens(v)
