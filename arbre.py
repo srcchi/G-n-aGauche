@@ -18,7 +18,7 @@ import networkx as nx
 
 ENDPOINT = "https://query.wikidata.org/sparql"
 HEADERS = {
-    "User-Agent": "arbre-gauche-fr/0.1 (projet perso, contact: a-remplacer)",
+    "User-Agent": "arbre-gauche-fr/0.1 (https://github.com/srcchi/G-n-aGauche) python-requests",
     "Accept": "application/sparql-results+json",
 }
 

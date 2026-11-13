@@ -47,21 +47,21 @@ digraph G {
   "Q2838043" [label="Alliance communiste\nrévolutionnaire\n1896–1902", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q3366778" [label="Parti socialiste révolutionnaire\n1898–1901", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   { rank=same; "an1895"; "Q2838043"; "Q3366778"; }
-  "Q3141290" [label="Parti républicain, radical et\nradical-socialiste\n1901–1972", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q1542710" [label="Parti radical\n1901–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
+  "Q3141290" [label="Parti républicain, radical et\nradical-socialiste\n1901–1972", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q2379359" [label="Parti socialiste français (1902)\n1902–1905", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q3176156" [label="Parti socialiste de France\n(guesdiste)\n1902–1905", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  { rank=same; "an1900"; "Q3141290"; "Q1542710"; "Q2379359"; "Q3176156"; }
+  { rank=same; "an1900"; "Q1542710"; "Q3141290"; "Q2379359"; "Q3176156"; }
   "Q1332068" [label="Section française de\nl'Internationale ouvrière\n1905–1969\n« Le Populaire »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   { rank=same; "an1905"; "Q1332068"; }
   "Q135902867" [label="Parti ouvrier (1914)\n1914–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   { rank=same; "an1910"; "Q135902867"; }
-  "Q1628816" [label="Mouvement jeunes\ncommunistes de France\n1920–\n« Avant-garde »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q192821" [label="Parti communiste français\n1920–\n« Progressistes »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  "Q1628816" [label="Mouvement jeunes\ncommunistes de France\n1920–\n« Avant-garde »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q698677" [label="Union des partis socialistes pour\nl'action internationale\n1921–1923", fillcolor="#e84393", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="social-démocrate"];
-  "Q703593" [label="Internationale ouvrière\nsocialiste\n1923–1940", fillcolor="#e84393", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="social-démocrate"];
   "Q3366737" [label="Parti socialiste communiste\n1923–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-  { rank=same; "an1920"; "Q1628816"; "Q192821"; "Q698677"; "Q703593"; "Q3366737"; }
+  "Q703593" [label="Internationale ouvrière\nsocialiste\n1923–1940", fillcolor="#e84393", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="social-démocrate"];
+  { rank=same; "an1920"; "Q192821"; "Q1628816"; "Q698677"; "Q3366737"; "Q703593"; }
   "Q2890957" [label="Bataille socialiste\n1927–1939", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q3366567" [label="Parti ouvrier et paysan\n1929–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
   { rank=same; "an1925"; "Q2890957"; "Q3366567"; }
@@ -70,17 +70,17 @@ digraph G {
   { rank=same; "an1930"; "Q534291"; "Q1423578"; }
   "Q3099346" [label="Gauche révolutionnaire\n(1935-1938)\n1935–1938", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
   "Q538664" [label="Parti ouvrier internationaliste\n1936–1944", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
-  "Q1984016" [label="Quatrième Internationale\n(lambertiste)\n1938–\n« La Vérité »", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
   "Q206682" [label="Quatrième Internationale\n1938–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
   "Q3366769" [label="Parti socialiste ouvrier\net paysan\n1938–1940", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+  "Q1984016" [label="Quatrième Internationale\n(lambertiste)\n1938–\n« La Vérité »", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
   "Q870667" [label="Lutte ouvrière\n1939–\n« Lutte de classe »", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
-  { rank=same; "an1935"; "Q3099346"; "Q538664"; "Q1984016"; "Q206682"; "Q3366769"; "Q870667"; }
+  { rank=same; "an1935"; "Q3099346"; "Q538664"; "Q206682"; "Q3366769"; "Q1984016"; "Q870667"; }
   "Q1393793" [label="Parti communiste\ninternationaliste\n1944–1968", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   { rank=same; "an1940"; "Q1393793"; }
-  "Q27396" [label="Fédération mondiale de la\njeunesse démocratique\n1945–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
   "Q2164587" [label="Union démocratique et\nsocialiste de la Résistance\n1945–1964", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+  "Q27396" [label="Fédération mondiale de la\njeunesse démocratique\n1945–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
   "Q3091443" [label="Fédération anarchiste\n(francophone)\n1945–\n« Recherches libertaires »", fillcolor="#111111", fontcolor="white", tooltip="anarchiste"];
-  { rank=same; "an1945"; "Q27396"; "Q2164587"; "Q3091443"; }
+  { rank=same; "an1945"; "Q2164587"; "Q27396"; "Q3091443"; }
   "Q159454" [label="Internationale socialiste\n1951–", fillcolor="#e84393", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="social-démocrate"];
   "Q3091561" [label="Fédération de la Guyane du\nParti socialiste\n1951–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q1828329" [label="Organisation communiste\ninternationaliste\n1952–1981", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
@@ -95,79 +95,79 @@ digraph G {
   { rank=same; "an1955"; "Q3366765"; "Q2088895"; "Q2575147"; "Q688738"; "Q944000"; "Q2054444"; }
   "Q862828" [label="Parti socialiste unifié\n1960–1989", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q2634710" [label="Quatrième Internationale -\nSecrétariat unifié\n1963–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
-  "Q1145020" [label="Union démocratique bretonne\n1964–\n« Le Peuple breton »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q2406201" [label="Convention des institutions\nrépublicaines\n1964–1971", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q3314191" [label="Militant tendency\n1964–1991", fillcolor="#ff6b5e", fontcolor="black", penwidth=2, color="#000000", style="filled,rounded,dashed", tooltip="trotskyste"];
-  { rank=same; "an1960"; "Q862828"; "Q2634710"; "Q1145020"; "Q2406201"; "Q3314191"; }
-  "Q2973337" [label="Circolo Operaio Comunista\n?–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
-  "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)" [label="Alternative socialiste (Angleterre,\nÉcosse et pays de Galles)\n?–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q2984984" [label="Combat ouvrier\n1965–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
+  "Q2406201" [label="Convention des institutions\nrépublicaines\n1964–1971", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
+  "Q1145020" [label="Union démocratique bretonne\n1964–\n« Le Peuple breton »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+  { rank=same; "an1960"; "Q862828"; "Q2634710"; "Q3314191"; "Q2406201"; "Q1145020"; }
   "Q15985231" [label="Objectif socialiste\n1965–1975", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q3178133" [label="Jeunesse communiste\nrévolutionnaire\n1966–1968", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  "Q2984984" [label="Combat ouvrier\n1965–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
+  "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)" [label="Alternative socialiste (Angleterre,\nÉcosse et pays de Galles)\n?–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+  "Q2973337" [label="Circolo Operaio Comunista\n?–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
   "Q2915458" [label="Union des clubs pour le\nrenouveau de la gauche\n1966–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
+  "Q3178133" [label="Jeunesse communiste\nrévolutionnaire\n1966–1968", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q1073391" [label="Union communiste\ninternationaliste\n?–\n« Lutte de classe »", fillcolor="#d62828", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="communiste"];
   "Q3356082" [label="Organisation\nrévolutionnaire anarchiste\n1967–1976", fillcolor="#111111", fontcolor="white", tooltip="anarchiste"];
   "Q133795" [label="Internationale des\nfédérations anarchistes\n1968–", fillcolor="#111111", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="anarchiste"];
   "Q2540732" [label="Union des groupes et clubs\nsocialistes\n?–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q3240305" [label="Ligue communiste (1969)\n1969–1973", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q170972" [label="Parti socialiste\n1969–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  { rank=same; "an1965"; "Q2973337"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)"; "Q2984984"; "Q15985231"; "Q3178133"; "Q2915458"; "Q1073391"; "Q3356082"; "Q133795"; "Q2540732"; "Q3240305"; "Q170972"; }
+  "Q3240305" [label="Ligue communiste (1969)\n1969–1973", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  { rank=same; "an1965"; "Q15985231"; "Q2984984"; "fr:Alternative socialiste (Angleterre, Écosse et pays de Galles)"; "Q2973337"; "Q2915458"; "Q3178133"; "Q1073391"; "Q3356082"; "Q133795"; "Q2540732"; "Q170972"; "Q3240305"; }
   "Q3117914" [label="Groupe révolution socialiste\n1972–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q7205536" [label="Fédération guadeloupéenne du\nParti socialiste\n1972–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q427965" [label="Parti radical de gauche\n1972–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q3550095" [label="Union des anarcho-syndicalistes\n1972–\n« L'Anarcho-syndicaliste »", fillcolor="#4d4d4d", fontcolor="white", tooltip="anarcho-syndicaliste"];
+  "Q7205536" [label="Fédération guadeloupéenne du\nParti socialiste\n1972–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q122614151" [label="Mouvement socialiste\nguadeloupéen\n1972–1975", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q862627" [label="Ligue communiste révolutionnaire\n1974–2009", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q158073" [label="Comité pour une\nInternationale ouvrière\n1974–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
-  { rank=same; "an1970"; "Q3117914"; "Q7205536"; "Q427965"; "Q3550095"; "Q122614151"; "Q862627"; "Q158073"; }
-  "Q1618280" [label="Voix prolétarienne\n1976–", fillcolor="#7b0d0d", fontcolor="white", tooltip="maoïste"];
+  "Q862627" [label="Ligue communiste révolutionnaire\n1974–2009", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  { rank=same; "an1970"; "Q3117914"; "Q427965"; "Q3550095"; "Q7205536"; "Q122614151"; "Q158073"; "Q862627"; }
   "Q3240649" [label="Ligue ouvrière révolutionnaire\n1976–1987", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
+  "Q1618280" [label="Voix prolétarienne\n1976–", fillcolor="#7b0d0d", fontcolor="white", tooltip="maoïste"];
   "Q3355979" [label="Organisation communiste\nlibertaire\n1976–\n« Courant alternatif »", fillcolor="#2e2e2e", fontcolor="white", tooltip="communiste libertaire"];
   "Q123248148" [label="Organisation Combat anarchiste\n1976–1979", fillcolor="#111111", fontcolor="white", tooltip="anarchiste"];
   "Q3550207" [label="Union des travailleurs\ncommunistes libertaires\n1978–1991", fillcolor="#2e2e2e", fontcolor="white", tooltip="communiste libertaire"];
   "Q2219002" [label="Jeunesses communistes\nrévolutionnaires\n1979–2008", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q3366206" [label="Parti communiste des\nouvriers de France\n1979–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-  { rank=same; "an1975"; "Q1618280"; "Q3240649"; "Q3355979"; "Q123248148"; "Q3550207"; "Q2219002"; "Q3366206"; }
+  { rank=same; "an1975"; "Q3240649"; "Q1618280"; "Q3355979"; "Q123248148"; "Q3550207"; "Q2219002"; "Q3366206"; }
+  "Q3366726" [label="Les Progressistes\n1981–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q639383" [label="Alliance libre européenne\n1981–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
   "Q3366218" [label="Parti communiste\ninternationaliste (lambertiste)\n1981–1985", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
-  "Q3366726" [label="Les Progressistes\n1981–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q3366231" [label="Parti communiste pour\nl'indépendance et le socialisme\n1984–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q743390" [label="Les Verts\n1984–2010", fillcolor="#58d68d", fontcolor="black", tooltip="écologiste"];
-  { rank=same; "an1980"; "Q639383"; "Q3366218"; "Q3366726"; "Q3366231"; "Q743390"; }
+  "Q3366231" [label="Parti communiste pour\nl'indépendance et le socialisme\n1984–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  { rank=same; "an1980"; "Q3366726"; "Q639383"; "Q3366218"; "Q743390"; "Q3366231"; }
   "Q3326810" [label="Mouvement pour un parti des\ntravailleurs\n1985–1991", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
   "Q3099357" [label="Gauche socialiste\n1988–\n« Le Journal de l'insoumission »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q3092110" [label="Fédération pour une gauche\nalternative\n?–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
-  "Q2455815" [label="Courant Révolution Permanente –\nQuatrième Internationale\n1989–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
   "Q2840414" [label="Alternative rouge et verte\n1989–1998\n« Rouge et Vert »", fillcolor="#111111", fontcolor="white", tooltip="anarchiste"];
-  { rank=same; "an1985"; "Q3326810"; "Q3099357"; "Q3092110"; "Q2455815"; "Q2840414"; }
+  "Q2455815" [label="Courant Révolution Permanente –\nQuatrième Internationale\n1989–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
+  { rank=same; "an1985"; "Q3326810"; "Q3099357"; "Q3092110"; "Q2840414"; "Q2455815"; }
   "Q115922370" [label="Organisation pour la reconstruction du\nParti communiste de France\n1990–2000\n« Le Drapeau rouge »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q3055019" [label="Entente internationale des\ntravailleurs et des peuples\n1991–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
   "Q628594" [label="Parti des travailleurs\n(France, 1991)\n1991–2008", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
-  "Q580377" [label="Initiative démocratique\nde gauche\n1991–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-  "Q3366640" [label="Parti progressiste\ndémocratique guadeloupéen\n1991–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q16010672" [label="Alternative libertaire\n1991–2019\n« Alternative libertaire »", fillcolor="#111111", fontcolor="white", tooltip="anarchiste"];
+  "Q3366640" [label="Parti progressiste\ndémocratique guadeloupéen\n1991–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  "Q580377" [label="Initiative démocratique\nde gauche\n1991–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q3365196" [label="The Communist\n1992–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-  "Q3099352" [label="Gauche révolutionnaire\n1992–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
   "Q220945" [label="Parti socialiste européen\n1992–", fillcolor="#e84393", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="social-démocrate"];
+  "Q3099352" [label="Gauche révolutionnaire\n1992–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
   "Q1321802" [label="Mouvement républicain et citoyen\n1993–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q2453869" [label="Parti socialiste des\ntravailleurs unifié\n1993–", fillcolor="#e84393", fontcolor="white", penwidth=2, color="#000000", style="filled,rounded,dashed", tooltip="social-démocrate"];
   "Q1951112" [label="Mouvement des citoyens\n1993–2002", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q622227" [label="Conférence internationale des partis et\norganisations marxistes-léninistes (Unité et lutte)\n1994–", fillcolor="#7b0d0d", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="maoïste"];
-  "Q599328" [label="Ligue internationale des travailleurs -\nQuatrième Internationale\n?–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
   "Q138828808" [label="Gauche républicaine et sociale\n?–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
+  "Q599328" [label="Ligue internationale des travailleurs -\nQuatrième Internationale\n?–", fillcolor="#ff6b5e", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="trotskyste"];
   "Q2996341" [label="Convention pour une\nalternative progressiste\n1994–2009", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-  { rank=same; "an1990"; "Q115922370"; "Q3055019"; "Q628594"; "Q580377"; "Q3366640"; "Q16010672"; "Q3365196"; "Q3099352"; "Q220945"; "Q1321802"; "Q2453869"; "Q1951112"; "Q622227"; "Q599328"; "Q138828808"; "Q2996341"; }
+  "Q622227" [label="Conférence internationale des partis et\norganisations marxistes-léninistes (Unité et lutte)\n1994–", fillcolor="#7b0d0d", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="maoïste"];
+  { rank=same; "an1990"; "Q115922370"; "Q3055019"; "Q628594"; "Q16010672"; "Q3366640"; "Q580377"; "Q3365196"; "Q220945"; "Q3099352"; "Q1321802"; "Q2453869"; "Q1951112"; "Q138828808"; "Q599328"; "Q2996341"; "Q622227"; }
   "Q111607481" [label="Noyaux autonomes pour le\ncommunisme\n1995–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q622519" [label="Conférence internationale des partis et organisations\nmarxistes-léninistes (correspondance de presse internationale)\n1996–", fillcolor="#7b0d0d", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="maoïste"];
   "Q3562502" [label="Voix des travailleurs\n1997–2000", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
-  "Q3230452" [label="Les Alternatifs\n1998–2015", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q2440449" [label="Rencontre internationale des partis\ncommunistes et ouvriers\n1998–", fillcolor="#d62828", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="communiste"];
   "Q22252055" [label="Mouvement révolutionnaire\ndes travailleurs\n1998–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
+  "Q3230452" [label="Les Alternatifs\n1998–2015", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q5975788" [label="Ligue ouvrière révolutionnaire pour la\nQuatrième Internationale\n1999–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
-  { rank=same; "an1995"; "Q111607481"; "Q622519"; "Q3562502"; "Q3230452"; "Q2440449"; "Q22252055"; "Q5975788"; }
-  "Q1377231" [label="Gauche anticapitaliste\neuropéenne\n2000–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
+  { rank=same; "an1995"; "Q111607481"; "Q622519"; "Q3562502"; "Q2440449"; "Q22252055"; "Q3230452"; "Q5975788"; }
   "Q104187610" [label="Parti communiste maoïste\nde France\n2000–2016\n« Le Drapeau rouge »", fillcolor="#7b0d0d", fontcolor="white", tooltip="maoïste"];
   "Q116456156" [label="Communistes\n2000–2015", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  "Q1377231" [label="Gauche anticapitaliste\neuropéenne\n2000–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
   "Q649752" [label="Solidarité internationale\nlibertaire\n2001–", fillcolor="#111111", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="anarchiste"];
   "Q2996657" [label="Coordination des groupes\nanarchistes\n2002–2019\n« Résistances libertaires »", fillcolor="#111111", fontcolor="white", tooltip="anarchiste"];
   "Q111606973" [label="Parti communiste de France\n(marxiste-léniniste-maoïste)\n2003–", fillcolor="#7b0d0d", fontcolor="white", tooltip="maoïste"];
@@ -176,18 +176,18 @@ digraph G {
   "Q950179" [label="Parti vert européen\n2004–", fillcolor="#58d68d", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="écologiste"];
   "Q202649" [label="Parti de la gauche européenne\n2004–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
   "Q1694377" [label="Pôle de renaissance\ncommuniste en France\n2004–\n« Initiative communiste »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-  { rank=same; "an2000"; "Q1377231"; "Q104187610"; "Q116456156"; "Q649752"; "Q2996657"; "Q111606973"; "Q3326813"; "Q1631185"; "Q950179"; "Q202649"; "Q1694377"; }
+  { rank=same; "an2000"; "Q104187610"; "Q116456156"; "Q1377231"; "Q649752"; "Q2996657"; "Q111606973"; "Q3326813"; "Q1631185"; "Q950179"; "Q202649"; "Q1694377"; }
   "Q2996664" [label="Coordination nationale de la\ngauche républicaine\n?–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
-  "Q3272709" [label="MARS - Gauche républicaine\n2007–2008", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q3326581" [label="Mouvement de la gauche\nprogressiste\n?–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
+  "Q3272709" [label="MARS - Gauche républicaine\n2007–2008", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q922707" [label="Parti de gauche\n2008–\n« L'Intérêt général »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q29348702" [label="Front de gauche\n2009–2016", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
-  "Q1045425" [label="Nouveau Parti anticapitaliste\n2009–\n« L'Anticapitaliste »", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
   "Q3456455" [label="République et socialisme\n2009–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q3326849" [label="Mouvement des progressistes\n2009–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+  "Q1045425" [label="Nouveau Parti anticapitaliste\n2009–\n« L'Anticapitaliste »", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
   "Q2996386" [label="Convergences et alternative\n2009–2014", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+  "Q29348702" [label="Front de gauche\n2009–2016", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
   "Q1495924" [label="Gauche unitaire\n2009–2015", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-  { rank=same; "an2005"; "Q2996664"; "Q3272709"; "Q3326581"; "Q922707"; "Q29348702"; "Q1045425"; "Q3456455"; "Q3326849"; "Q2996386"; "Q1495924"; }
+  { rank=same; "an2005"; "Q2996664"; "Q3326581"; "Q3272709"; "Q922707"; "Q3456455"; "Q3326849"; "Q1045425"; "Q2996386"; "Q29348702"; "Q1495924"; }
   "Q613786" [label="Les Écologistes – Europe\nÉcologie Les Verts\n2010–", fillcolor="#58d68d", fontcolor="black", tooltip="écologiste"];
   "Q3099321" [label="Gauche anticapitaliste\n2011–2015", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q22981822" [label="Révolution permanente\n2011–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
@@ -200,32 +200,33 @@ digraph G {
   "Q2989703" [label="Parti révolutionnaire\nCommunistes\n2015–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q24939885" [label="Parti des travailleurs\n(France, 2015)\n2015–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
   "Q2638999" [label="Parti ouvrier indépendant\n2015–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
+  "Q107366687" [label="Nouvelle force de Guyane\n2016–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
   "Q63483685" [label="Parti communiste\nrévolutionnaire de France\n2016–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
   "Q27978402" [label="La France insoumise\n2016–\n« Le Journal de l'insoumission »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q107366687" [label="Nouvelle force de Guyane\n2016–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
   "Q104186796" [label="Parti communiste maoïste\n2016–\n« Le Drapeau rouge »", fillcolor="#7b0d0d", fontcolor="white", tooltip="maoïste"];
   "Q30741057" [label="Rézistan's Égalité 974\n2016–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q139565740" [label="Comité ouvrier international contre la guerre et\nl’exploitation pour l’Internationale ouvrière\n2016–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
-  "Q111225168" [label="Gauche démocratique et sociale\n2017–2025\n« Démocratie et Socialisme »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q55597872" [label="Les Radicaux de gauche\n2017–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
+  "Q111225168" [label="Gauche démocratique et sociale\n2017–2025\n« Démocratie et Socialisme »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q125619283" [label="Gauche écosocialiste\n2017–", fillcolor="#1e8449", fontcolor="white", tooltip="écosocialiste"];
   "Q31400965" [label="Génération.s\n2017–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q62079328" [label="Debout\n?–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q58329311" [label="Gauche républicaine et\nsocialiste\n2018–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q58366009" [label="Place publique\n2018–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q141861456" [label="Le Poing Levé\n2018–", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
+  "Q58329311" [label="Gauche républicaine et\nsocialiste\n2018–", fillcolor="#f5b7d2", fontcolor="black", tooltip="radical / républicain"];
   "Q100989633" [label="Péyi Guyane\n2018–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
   "Q64524428" [label="Union communiste libertaire\n(francophone)\n2019–\n« Alternative libertaire »", fillcolor="#2e2e2e", fontcolor="white", tooltip="communiste libertaire"];
-  { rank=same; "an2015"; "Q2989703"; "Q24939885"; "Q2638999"; "Q63483685"; "Q27978402"; "Q107366687"; "Q104186796"; "Q30741057"; "Q139565740"; "Q111225168"; "Q55597872"; "Q125619283"; "Q31400965"; "Q62079328"; "Q58329311"; "Q58366009"; "Q141861456"; "Q100989633"; "Q64524428"; }
-  "Q125771262" [label="Nouveau Parti anticapitaliste –\nL'Anticapitaliste\n2022–\n« L'Anticapitaliste »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
-  "Q115965423" [label="Nouveau Parti anticapitaliste –\nRévolutionnaires\n2022–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  { rank=same; "an2015"; "Q2989703"; "Q24939885"; "Q2638999"; "Q107366687"; "Q63483685"; "Q27978402"; "Q104186796"; "Q30741057"; "Q139565740"; "Q55597872"; "Q111225168"; "Q125619283"; "Q31400965"; "Q62079328"; "Q58366009"; "Q141861456"; "Q58329311"; "Q100989633"; "Q64524428"; }
   "Q113500977" [label="Éducation Démocratie Dignité\n2022–", fillcolor="#d5d8dc", fontcolor="black", tooltip="autre / inconnu"];
+  "Q115965423" [label="Nouveau Parti anticapitaliste –\nRévolutionnaires\n2022–", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
+  "Q125771262" [label="Nouveau Parti anticapitaliste –\nL'Anticapitaliste\n2022–\n« L'Anticapitaliste »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q135755468" [label="La Convention\n2023–", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q123785828" [label="Action Communiste Européenne\n2023–", fillcolor="#d62828", fontcolor="white", peripheries=2, penwidth=1.5, color="#333333", tooltip="communiste"];
   "Q130219314" [label="Alliance de la gauche européenne pour\nles peuples et la planète\n2024–", fillcolor="#d5d8dc", fontcolor="black", peripheries=2, penwidth=1.5, color="#333333", tooltip="autre / inconnu"];
-  "Q127413320" [label="L'Après\n2024–\n« Démocratie et Socialisme »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
   "Q131451896" [label="Parti communiste\nrévolutionnaire (Canada)\n2024–\n« Révolution communiste »", fillcolor="#d62828", fontcolor="white", tooltip="communiste"];
-  { rank=same; "an2020"; "Q125771262"; "Q115965423"; "Q113500977"; "Q135755468"; "Q123785828"; "Q130219314"; "Q127413320"; "Q131451896"; }
+  "Q127413320" [label="L'Après\n2024–\n« Démocratie et Socialisme »", fillcolor="#e84393", fontcolor="white", tooltip="social-démocrate"];
+  "fr:Parti communiste révolutionnaire (2024)" [label="Parti communiste révolutionnaire\n2024–\n« Révolution »", fillcolor="#ff6b5e", fontcolor="black", tooltip="trotskyste"];
+  { rank=same; "an2020"; "Q113500977"; "Q115965423"; "Q125771262"; "Q135755468"; "Q123785828"; "Q130219314"; "Q131451896"; "Q127413320"; "fr:Parti communiste révolutionnaire (2024)"; }
   "Q104187610" -> "Q104186796" [color="#555555"];
   "Q104187739" -> "Q104186796" [color="#555555"];
   "Q1045425" -> "Q115965423" [color="#c0392b", style="dashed", penwidth=1.2];
@@ -416,6 +417,7 @@ digraph G {
   "Q870667" -> "Q3562502" [color="#c0392b", style="dashed", penwidth=1.2];
   "Q928279" -> "Q3366778" [color="#555555"];
   "Q972773" -> "Q1984016" [color="#c0392b", style="dashed", penwidth=1.2, constraint=false];
+  "fr:Parti communiste révolutionnaire (2024)" -> "Q1631185" [color="#7f7f7f", style="dotted", penwidth=1.3, arrowhead=none, constraint=false];
   subgraph cluster_legende { label="Légende"; fontname="Helvetica"; style="rounded"; color="#cccccc";
     "leg0" [label="trotskyste", fillcolor="#ff6b5e", fontcolor="black"];
     "leg1" [label="maoïste", fillcolor="#7b0d0d", fontcolor="white"];

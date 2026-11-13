@@ -6,6 +6,7 @@ Entrées  : data/noeuds.csv, data/aretes.csv          (arbre.py)
            data/wp_noeuds.csv, data/wp_aretes.csv    (infobox.py)
            data/corrections_noeuds.csv               (à la main, facultatif)
                action = inclure | exclure | vivant | disparu
+               id = Q... (Wikidata) ou un identifiant libre, ex. "fr:Mon organisation"
            data/corrections_aretes.csv               (à la main, facultatif)
 Sorties  : data/org_noeuds.csv, data/org_aretes.csv, data/org_exclus.csv
 
@@ -207,6 +208,8 @@ def main():
                 d[champ] = annee(r[champ]) if champ != "label" else r[champ]
         if r.get("courants"):
             d["courants"] = {c.strip() for c in r["courants"].split("|") if c.strip()}
+        if r.get("journaux"):
+            d["journaux"] = [j.strip() for j in r["journaux"].split("|") if j.strip()]
     for r in lire_csv("corrections_aretes.csv"):
         cle = (r["ancetre"], r["descendant"])
         if r.get("action", "").strip().lower() == "supprimer":
@@ -315,7 +318,8 @@ def main():
     print(f"{len(dans_lignee)} organisations dans la lignée, dont {len(sans_date)} sans date de fondation.")
     if not os.path.exists(os.path.join(DATA, "corrections_noeuds.csv")):
         with open(os.path.join(DATA, "corrections_noeuds.csv"), "w", newline="", encoding="utf-8") as f:
-            csv.writer(f).writerow(["id", "action", "label", "fondation", "dissolution", "courants"])
+            csv.writer(f).writerow(["id", "action", "label", "fondation", "dissolution", "courants",
+                                    "journaux"])
     if not os.path.exists(os.path.join(DATA, "corrections_aretes.csv")):
         with open(os.path.join(DATA, "corrections_aretes.csv"), "w", newline="", encoding="utf-8") as f:
             csv.writer(f).writerow(["ancetre", "descendant", "type", "action"])

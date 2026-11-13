@@ -61,7 +61,10 @@ def lire(nom):
 def courant(d):
     # Le libellé d'abord, puis les courants déjà détectés, puis les idéologies :
     # le nom d'une organisation est l'indice le plus fiable.
-    for texte in (d["label"], d["courants"], d["ideologies"]):
+    textes = (d["label"], d["courants"], d["ideologies"])
+    if "correction" in d["sources"] and d["courants"]:   # un courant saisi à la main l'emporte
+        textes = (d["courants"], d["label"], d["ideologies"])
+    for texte in textes:
         for nom, rx, fond, police in COURANTS:
             if re.search(rx, texte, re.I):
                 return nom, fond, police

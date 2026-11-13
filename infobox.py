@@ -27,7 +27,7 @@ import mwparserfromhell
 import requests
 
 API = "https://fr.wikipedia.org/w/api.php"
-HEADERS = {"User-Agent": "arbre-gauche-fr/0.1 (projet perso, contact: a-remplacer)"}
+HEADERS = {"User-Agent": "arbre-gauche-fr/0.1 (https://github.com/srcchi/G-n-aGauche) python-requests"}
 DATA = "data"
 PROFONDEUR = 2
 
