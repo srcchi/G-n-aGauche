@@ -182,10 +182,10 @@ Q12652,Moselle,1790,,,
 Q1270623,Meurthe,1790,1871,,
 Q12717,Bas-Rhin,1790,,,
 Q12722,Haut-Rhin,1790,,,
-Q1474268,Hébertistes,1790,1794,,anticléricalisme | radicalisme classique | jacobinisme | populisme de gauche
+Q1474268,Hébertistes,1790,1794,,anticléricalisme | jacobinisme | radicalisme classique | populisme de gauche
 Q2980126,Club de 1789,1790,,,
 Q3105,Vosges,1790,,,
-Q829721,Club des cordeliers,1790,1795,,démocratie directe | populisme | radicalisme classique | jacobinisme
+Q829721,Club des cordeliers,1790,1795,,populisme | démocratie directe | jacobinisme | radicalisme classique
 Q509825,club des Feuillants,1791,,,conservatisme | monarchie constitutionnelle
 Q69323,monarchie constitutionnelle française,1791,1792,,
 Q780457,Assemblée nationale législative de 1791,1791,1792,,
@@ -231,13 +231,13 @@ Q872895,diocèse de Nancy-Toul,1824,,,
 Q58202,monarchie de Juillet,1830,1848,,
 Q28137035,Parti de la Résistance,1832,1848,,orléanisme | libéral-conservatisme
 Q642562,Ligue des communistes,1847,1852,social-démocrate | communiste,communisme | marxisme | socialisme révolutionnaire
-Q23020118,Républicains modérés,1848,1870,,libéralisme | progressisme | radicalisme classique | républicanisme | laïcité en France
+Q23020118,Républicains modérés,1848,1870,,libéralisme | progressisme | républicanisme | radicalisme classique | laïcité en France
 Q3366274,Parti de l'Ordre,1848,1852,,conservatisme | libéralisme classique
 Q3559284,villes libres de Menton et Roquebrune,1848,1861,,
 Q58326,Deuxième République,1848,1852,,
 Q119360125,Administration générale de l'Assistance publique à Paris,1849,,,
 Q2175156,gouvernement Odilon Barrot II,1849,1849,,
-Q281349,Montagne,1849,1852,social-démocrate,socialisme démocratique | républicanisme | socialisme utopique | christianisme social
+Q281349,Montagne,1849,1852,social-démocrate,socialisme utopique | christianisme social | socialisme démocratique | républicanisme
 Q3111861,gouvernement Alphonse Henri d'Hautpoul,1849,1851,,
 Q3023888,Dernier ministère,1851,1851,,
 Q3112035,Gouvernement Eugène Rouher,1851,1851,,
@@ -264,7 +264,7 @@ Q1999970,district de Haute-Alsace,1871,1919,,
 Q2150573,district de Basse-Alsace,1871,1919,,
 Q2900529,district de Lorraine,1871,1919,,
 Q3112174,gouvernement Jules Dufaure I,1871,1873,,
-Q3318180,Républicains modérés,1871,1901,,libéralisme | nationalisme civique | progressisme | républicanisme | anticléricalisme | libéralisme classique
+Q3318180,Républicains modérés,1871,1901,,libéralisme | progressisme | républicanisme | nationalisme civique | anticléricalisme | libéralisme classique
 Q43287,Empire allemand,1871,1918,,
 Q4145971,moutassarifat de Jérusalem,1872,1917,,
 Q3111848,gouvernement Albert de Broglie I,1873,1873,,
@@ -326,7 +326,7 @@ Q3111961,gouvernement Charles Dupuy III,1894,1895,,
 Q12217005,Mutasarrif de Karak,1895,1918,,
 Q3111856,gouvernement Alexandre Ribot III,1895,1895,,
 Q3112260,gouvernement Léon Bourgeois,1895,1896,,
-Q43093,Parti nationaliste basque,1895,,,nationalisme civique | démocratie chrétienne | libéral-conservatisme | Linguistic nationalism | régionalisme | nationalisme basque | europhilie
+Q43093,Parti nationaliste basque,1895,,,nationalisme civique | démocratie chrétienne | libéral-conservatisme | europhilie | régionalisme | nationalisme basque | Linguistic nationalism
 Q1667519,Union internationale des éditeurs,1896,,,
 Q2211955,gouvernement Jules Méline,1896,1898,,
 Q2838043,Alliance communiste révolutionnaire,1896,1902,social-démocrate,socialisme
@@ -339,14 +339,14 @@ Q17002659,Groupe féministe socialiste,1899,1905,,
 Q2906741,bloc des gauches,1899,,,
 Q2912866,gouvernement Pierre Waldeck-Rousseau,1899,1902,,
 Q3111962,gouvernement Charles Dupuy V,1899,1899,,
-Q49629,Action française,1899,,,décentralisation | euroscepticisme | souverainisme | nationalisme intégral | antiparlementarisme | orléanisme | nationalisme en France
+Q49629,Action française,1899,,,orléanisme | nationalisme en France | euroscepticisme | décentralisation | souverainisme | nationalisme intégral | antiparlementarisme
 Q131784007,fédération du Doubs du Parti socialiste,1900,,,
-Q1542710,Parti radical,1901,,,libéralisme | radicalisme classique | centrisme radical
-Q2344776,Alliance démocratique,1901,1949,,républicanisme | laissez-faire | laïcité en France | sécularisme | libéral-conservatisme
+Q1542710,Parti radical,1901,,,libéralisme | centrisme radical | radicalisme classique
+Q2344776,Alliance démocratique,1901,1949,,laissez-faire | libéral-conservatisme | sécularisme | républicanisme | laïcité en France
 Q3092166,Fédération socialiste de la Martinique,1901,,,
-Q3141290,"Parti républicain, radical et radical-socialiste",1901,1972,,social-libéralisme | radicalisme classique | anticléricalisme
+Q3141290,"Parti républicain, radical et radical-socialiste",1901,1972,,social-libéralisme | anticléricalisme | radicalisme classique
 Q1829373,gouvernement Émile Combes,1902,1905,,
-Q2379359,Parti socialiste français,1902,1905,social-démocrate,socialisme démocratique | socialisme | réformisme
+Q2379359,Parti socialiste français,1902,1905,social-démocrate,socialisme | socialisme démocratique | réformisme
 Q3176156,Parti socialiste de France,1902,1905,social-démocrate,socialisme
 Q33768451,Groupe Union démocratique,1902,1910,,
 Q179456,Fédération républicaine,1903,1940,,conservatisme
@@ -366,7 +366,7 @@ Q2095948,Parti républicain-socialiste,1911,1934,,
 Q2194496,gouvernement Ernest Monis,1911,1911,,
 Q2440172,gouvernement Caillaux,1911,1912,,
 Q1010477,Bureau international de l'heure,1912,,,
-Q2177298,Ligue de la Jeune République,1912,1985,,humanisme | pacifisme | solidarisme | catholicisme social
+Q2177298,Ligue de la Jeune République,1912,1985,,solidarisme | catholicisme social | humanisme | pacifisme
 Q3112407,gouvernement Raymond Poincaré I,1912,1913,,
 Q457242,protectorat espagnol au Maroc,1912,1956,,
 Q907234,protectorat français au Maroc,1912,1956,,
@@ -389,7 +389,7 @@ Q41304,république de Weimar,1918,1933,,
 Q55633633,République soviétique de Saxonie,1918,1919,,
 Q690821,République de Bade,1918,1933,,
 Q7075820,Territoires ennemis occupés,1918,1920,,
-Q163931,Internationale communiste,1919,1943,léniniste | communiste,communisme | marxisme-léninisme | léninisme
+Q163931,Internationale communiste,1919,1943,léniniste | communiste,communisme | léninisme | marxisme-léninisme
 Q2985658,Comités syndicalistes révolutionnaires,1919,,,
 Q3366212,Parti communiste,1919,1921,,
 Q38130,Société des Nations,1919,1946,,internationalisme institutionnel
@@ -399,7 +399,7 @@ Q130842,Grand Liban,1920,1943,,
 Q1628816,Mouvement jeunes communistes de France,1920,,communiste,communisme
 Q16637578,Fédération des jeunesses communistes de France,1920,,,
 Q170361,Territoire du Bassin de la Sarre,1920,1935,,
-Q192821,Parti communiste français,1920,,stalinien | léniniste | social-démocrate | communiste,marxisme | nationalisme civique | stalinisme | socialisme démocratique | léninisme | eurocommunisme | euroscepticisme | anti-impérialisme | nationalisme de gauche | antistalinisme
+Q192821,Parti communiste français,1920,,stalinien | léniniste | social-démocrate | communiste,marxisme | nationalisme civique | socialisme démocratique | eurocommunisme | stalinisme | euroscepticisme | antistalinisme | léninisme | anti-impérialisme | nationalisme de gauche
 Q51480667,Ligue Nationale de la Démocratie,1920,,,
 Q65153446,Union anarchiste,1920,1939,anarchiste | communiste,anarchisme | communisme libertaire
 Q233611,Organisation hydrographique internationale,1921,,,
@@ -433,7 +433,7 @@ Q3086466,Parti autonomiste breton,1927,1931,,mouvement breton
 Q705067,Croix-de-feu,1927,1936,,
 Q3099354,Gauche sociale et radicale,1928,,,
 Q3366702,Parti républicain syndicaliste,1928,,,
-Q55595356,Action populaire nationale d'Alsace,1928,1935,communiste,anticommunisme | démocratie chrétienne | républicanisme
+Q55595356,Action populaire nationale d'Alsace,1928,1935,communiste,anticommunisme | républicanisme | démocratie chrétienne
 Q3366181,Parti alsacien ouvrier et paysan,1929,1939,communiste,communisme
 Q3366567,Parti ouvrier et paysan,1929,,,
 Q18215132,Ligue communiste,1930,1936,trotskyste,trotskisme
@@ -442,7 +442,7 @@ Q106690714,Katholischer Siedlungsdienst,1931,,,
 Q1162568,Conseil international pour la science,1931,2018,,
 Q3141006,Parti national breton,1931,1944,,nationalisme breton
 Q7785,Commonwealth,1931,,,
-Q1423578,centre marxiste révolutionnaire international,1932,1940,social-démocrate,socialisme | socialisme révolutionnaire
+Q1423578,centre marxiste révolutionnaire international,1932,1940,social-démocrate,socialisme révolutionnaire | socialisme
 Q1608722,Fédération internationale des auberges de jeunesse,1932,,,
 Q182711,Association des écrivains et artistes révolutionnaires,1932,,,
 Q137353779,Q137353779,1933,1934,,nationalisme algérien
@@ -453,12 +453,12 @@ Q2985406,Comité de vigilance des intellectuels antifascistes,1934,1939,,antifas
 Q3112056,gouvernement Doumergue II,1934,1934,,
 Q3112678,gouvernement Daladier II,1934,1934,,
 Q586066,Parti communiste tunisien,1934,1993,communiste,communisme | marxisme
-Q1422284,Front populaire,1935,1938,social-démocrate | communiste,communisme | socialisme | pacifisme | antifascisme | social-démocratie | anticléricalisme | radicalisme classique | social-libéralisme
+Q1422284,Front populaire,1935,1938,social-démocrate | communiste,communisme | social-démocratie | pacifisme | antifascisme | anticléricalisme | socialisme | social-libéralisme | radicalisme classique
 Q2095707,gouvernement Bouisson,1935,1935,,
 Q3099346,Gauche révolutionnaire,1935,1938,,
 Q3112381,gouvernement Laval IV,1935,1936,,
 Q3550479,Union socialiste républicaine,1935,1940,,réformisme
-Q15985404,Q15985404,1936,,communiste,monarchisme | anticommunisme | Nationalisme russe
+Q15985404,Q15985404,1936,,communiste,anticommunisme | Nationalisme russe | monarchisme
 Q3111844,gouvernement Sarraut II,1936,1936,,
 Q3366460,Parti frontiste,1936,,,
 Q3366725,Parti social français,1936,1940,,nationalisme
@@ -485,7 +485,7 @@ Q37873793,Parti national-socialiste français,1940,1941,,nazisme
 Q58196825,Comité d'organisation de la sidérurgie,1940,1945,,
 Q69808,régime de Vichy,1940,1944,,
 Q895978,CdZ-Gebiet Lothringen,1940,1945,,nazisme
-Q1086907,Rassemblement national populaire,1941,1944,social-démocrate,fascisme | nationalisme européen | néo-socialisme
+Q1086907,Rassemblement national populaire,1941,1944,social-démocrate,fascisme | néo-socialisme | nationalisme européen
 Q139679907,Nationaal-Socialistische Jeugd Vlaanderen,1941,,,
 Q3087287,Mouvement ouvrier social-national breton,1941,1941,,nationalisme ethnique
 Q3112384,gouvernement Pierre Laval (6),1942,1944,,
@@ -502,7 +502,7 @@ Q783684,Gouvernement provisoire de la République française,1944,1946,,
 Q1065,Organisation des Nations unies,1945,,,internationalisme institutionnel
 Q1820941,Parti républicain de la liberté,1945,1951,,conservatisme | libéralisme économique | républicanisme
 Q2164587,Union démocratique et socialiste de la Résistance,1945,1964,social-démocrate,socialisme
-Q2390678,Parti socialiste démocratique,1945,1954,social-démocrate | communiste,pacifisme | socialisme démocratique | social-démocratie | anticommunisme
+Q2390678,Parti socialiste démocratique,1945,1954,social-démocrate | communiste,pacifisme | social-démocratie | anticommunisme | socialisme démocratique
 Q27396,Fédération mondiale de la jeunesse démocratique,1945,,,anticapitalisme | anti-impérialisme
 Q3091443,Fédération anarchiste,1945,,anarchiste,anarchisme
 Q3111973,Gouvernement Charles de Gaulle II,1945,1946,,
@@ -546,7 +546,7 @@ Q464194,Autorité internationale de la Ruhr,1949,1952,,
 Q537395,Mouvement européen Allemagne,1949,,,
 Q627651,Arbeitsgemeinschaft für Kinder- und Jugendhilfe,1949,,,
 Q7184,Organisation du Traité de l'Atlantique Nord,1949,,,
-Q761433,Centre national des indépendants et paysans,1949,,,conservatisme | nationalisme civique | néo-ruralisme | libéralisme économique | euroscepticisme
+Q761433,Centre national des indépendants et paysans,1949,,,nationalisme civique | conservatisme | néo-ruralisme | euroscepticisme | libéralisme économique
 Q8908,Conseil de l'Europe,1949,,,
 Q939743,Assemblée parlementaire du Conseil de l'Europe,1949,,,
 Q108616480,Service de la navigation aérienne,1950,1961,,
@@ -579,12 +579,12 @@ Q42944,CERN,1954,,,
 Q65128364,présidence de René Coty,1954,1959,,
 Q782646,gouvernement Pierre Mendès France,1954,1955,,
 Q1005287,Lebensmittelverband Deutschland,1955,,,
-Q105597984,Union du peuple guyanais,1955,1965,,nationalisme | indépendantisme
+Q105597984,Union du peuple guyanais,1955,1965,,indépendantisme | nationalisme
 Q180573,république du Vietnam,1955,1975,,
 Q3111909,Gouvernement Bekkaï I,1955,1956,,
 Q591799,gouvernement Edgar Faure II,1955,1956,,
 Q2272861,gouvernement Guy Mollet,1956,1957,,
-Q3366765,Parti socialiste guyanais,1956,,social-démocrate,social-démocratie | socialisme démocratique | autonomisme
+Q3366765,Parti socialiste guyanais,1956,,social-démocrate,social-démocratie | autonomisme | socialisme démocratique
 Q6412669,royaume de Tunisie,1956,1957,,
 Q656801,Société financière internationale,1956,,,
 Q948,Tunisie,1956,,,
@@ -618,14 +618,14 @@ Q182814,traité sur l'Antarctique,1959,,,
 Q2054444,Parti communiste réunionnais,1959,,communiste,communisme
 Q2680115,Union démocratique du travail,1959,1966,,gaullisme de gauche
 Q3091692,Parti de la nation occitane,1959,,social-démocrate,social-démocratie
-Q42814,Euskadi ta Askatasuna,1959,2018,social-démocrate,séparatisme | indépendantisme | socialisme révolutionnaire | nationalisme basque | gauche abertzale
+Q42814,Euskadi ta Askatasuna,1959,2018,social-démocrate,séparatisme | socialisme révolutionnaire | indépendantisme | nationalisme basque | gauche abertzale
 Q627646,Arbeitsgemeinschaft für Entwicklungshilfe,1959,,,
 Q1754053,Front Algérie française,1960,1960,,anti-indépendantisme
 Q3091725,Fédération des étudiants nationalistes,1960,1967,,
 Q54769213,Front national pour l'Algérie française,1960,1960,,
 Q663492,Eurocontrol,1960,,,
 Q827525,Association internationale de développement,1960,,,
-Q862828,Parti socialiste unifié,1960,1989,social-démocrate,autogestion | socialisme démocratique
+Q862828,Parti socialiste unifié,1960,1989,social-démocrate,socialisme démocratique | autogestion
 Q1046625,groupe de Casablanca,1961,1963,,
 Q128064,Internationale démocrate centriste,1961,,,démocratie chrétienne | humanisme chrétien
 Q1736390,Katholische Sozialwissenschaftliche Zentralstelle Mönchengladbach,1961,,,
@@ -642,10 +642,10 @@ Q3366241,Parti communiste révolutionnaire trotskiste,1962,,trotskyste,trotskism
 Q697744,European Launcher Development Organisation,1962,1975,,
 Q940230,gouvernement Georges Pompidou I,1962,1962,,
 Q1205755,Institut allemand de la jeunesse,1963,,,
-Q16632068,Enbata,1963,1974,social-démocrate,social-démocratie | fédéralisme européen | internationalisme institutionnel | nationalisme basque
+Q16632068,Enbata,1963,1974,social-démocrate,social-démocratie | internationalisme institutionnel | fédéralisme européen | nationalisme basque
 Q191703,Organisation de l'unité africaine,1963,2002,,
 Q21082728,Q21082728,1963,1996,,
-Q2587029,Front de libération de la Bretagne,1963,,,nationalisme breton | anticolonialisme
+Q2587029,Front de libération de la Bretagne,1963,,,anticolonialisme | nationalisme breton
 Q2634710,Quatrième Internationale - Secrétariat unifié,1963,,trotskyste,trotskisme
 Q3043437,Délégation interministérielle à l'aménagement du territoire et à l'attractivité régionale,1963,2009,,
 Q3376100,Perspectives tunisiennes,1963,1978,maoïste,maoïsme | nouvelle gauche | néomarxisme
@@ -653,7 +653,7 @@ Q3400792,Pouvoir ouvrier,1963,1969,luxemburgiste,conseillisme
 Q340195,Banque africaine de développement,1963,,,
 Q1145020,Union démocratique bretonne,1964,,,nationalisme breton
 Q2406201,Convention des institutions républicaines,1964,1971,social-démocrate,marxisme | socialisme démocratique
-Q3083781,Occident,1964,1968,,néofascisme | nationalisme révolutionnaire
+Q3083781,Occident,1964,1968,,nationalisme révolutionnaire | néofascisme
 Q2019158,Fédération de la gauche démocrate et socialiste,1965,1968,,
 Q2348913,Stiftung Deutsche Jugendmarke,1965,,,
 Q3133988,Here ai’a,1965,,,autonomisme
@@ -669,7 +669,7 @@ Q3326535,Mouvement communiste français marxiste-léniniste,1966,,maoïste,maoï
 Q3326697,Mouvement jeune révolution,1966,1971,,
 Q3550161,Union des jeunesses communistes marxistes-léninistes,1966,1968,maoïste,maoïsme
 Q177773,Organisation mondiale de la propriété intellectuelle,1967,,,
-Q1904825,Union des démocrates pour la République,1967,1976,,gaullisme | libéral-conservatisme | conservatisme paternaliste
+Q1904825,Union des démocrates pour la République,1967,1976,,conservatisme paternaliste | gaullisme | libéral-conservatisme
 Q3112075,gouvernement Georges Pompidou IV,1967,1968,,
 Q3356082,Organisation révolutionnaire anarchiste,1967,1976,anarchiste | communiste,communisme libertaire
 Q3366229,Parti communiste marxiste-léniniste de France,1967,1988,maoïste,maoïsme
@@ -688,9 +688,9 @@ Q1204984,Deutscher Kaffeeverband,1969,,,
 Q123785860,fédération des Yvelines du Parti socialiste,1969,,,
 Q141127568,Groupement marxiste-léniniste tunisien,1969,1974,léniniste,marxisme-léninisme
 Q1518480,gouvernement Jacques Chaban-Delmas,1969,1972,,
-Q170972,Parti socialiste,1969,,social-démocrate,social-démocratie | social-libéralisme | écologie sociale
+Q170972,Parti socialiste,1969,,social-démocrate,social-libéralisme | écologie sociale | social-démocratie
 Q2838199,Alliance marxiste révolutionnaire,1969,1974,trotskyste | communiste,communisme | trotskisme
-Q2885750,Partit Socialista d'Alliberament Nacional dels Països Catalans,1969,2015,social-démocrate,marxisme | socialisme | indépendantisme catalan | pancatalanisme
+Q2885750,Partit Socialista d'Alliberament Nacional dels Països Catalans,1969,2015,social-démocrate,marxisme | socialisme | pancatalanisme | indépendantisme catalan
 Q3117408,Union des communistes de France marxiste-léniniste,1969,1985,maoïste,maoïsme
 Q3240305,Ligue communiste,1969,1973,,
 Q3561478,Vive la révolution,1969,1971,maoïste,maoïsme
@@ -709,10 +709,10 @@ Q21055588,Q21055588,1971,1996,,
 Q3142484,Parti communiste breton,1971,1980,communiste,communisme
 Q333954,Armée rouge japonaise,1971,2001,communiste,communisme
 Q3458343,Révolution !,1971,1976,communiste,communisme
-Q6748471,Lutte occitane,1971,1975,social-démocrate,anti-impérialisme | Nationalisme occitan | nationalisme de gauche | autonomisme | socialisme révolutionnaire
+Q6748471,Lutte occitane,1971,1975,social-démocrate,anti-impérialisme | nationalisme de gauche | autonomisme | socialisme révolutionnaire | Nationalisme occitan
 Q107877569,Front national,1972,,,ultranationalisme français
 Q162656,Organisation Internationale de Protection Civile,1972,,,
-Q205150,Rassemblement national,1972,,,protectionnisme | euroscepticisme | étatisme | populisme de droite | russophilie | national-conservatisme | souverainisme | nationalisme en France | Producérisme | antiglobalisme de droite
+Q205150,Rassemblement national,1972,,,protectionnisme | étatisme | populisme de droite | euroscepticisme | russophilie | Producérisme | antiglobalisme de droite | nationalisme en France | national-conservatisme | souverainisme
 Q3023497,Strollad ar Vro,1972,1977,,nationalisme breton
 Q3112387,gouvernement Pierre Messmer II,1972,1974,,
 Q3112389,gouvernement Pierre Messmer I,1972,1973,,
@@ -729,16 +729,16 @@ Q3366713,parti social-démocrate,1973,,,
 Q5725992,Mahdaviun Group,1973,,,islamisme
 Q116142837,People's Mohajerin Organization of Iran,1974,,,
 Q1480793,Groupe des fournisseurs nucléaires,1974,,,
-Q158073,Comité pour une Internationale ouvrière,1974,,trotskyste,marxisme | trotskisme
+Q158073,Comité pour une Internationale ouvrière,1974,,trotskyste,trotskisme | marxisme
 Q2925332,Brigades internationales,1974,1977,maoïste,maoïsme | tiers-mondisme
-Q2934626,Camarades,1974,1979,,mouvement autonome | marxisme
+Q2934626,Camarades,1974,1979,,marxisme | mouvement autonome
 Q3112391,gouvernement Pierre Messmer III,1974,1974,,
 Q3550460,Union progressiste en Mélanésie,1974,,,
 Q588051,gouvernement Jacques Chirac I,1974,1976,,
 Q60847144,Partitu corsu per u sucialisimu,1974,1976,social-démocrate,socialisme | nationalisme corse | indépendantisme
 Q6747255,Socialist Party of National Liberation - Provisional,1974,1979,léniniste | social-démocrate,socialisme | indépendantisme catalan | marxisme-léninisme
 Q826700,Agence internationale de l'énergie,1974,,,
-Q862627,Ligue communiste révolutionnaire,1974,2009,trotskyste,anticapitalisme | trotskisme
+Q862627,Ligue communiste révolutionnaire,1974,2009,trotskyste,trotskisme | anticapitalisme
 Q9003283,Herriko Alderdi Sozialista,1974,1975,,nationalisme basque
 Q10287157,G6,1975,1976,,
 Q1417993,Oikocredit,1975,,,
@@ -753,14 +753,14 @@ Q42262,Agence spatiale européenne,1975,,,
 Q61923,ONU Tourisme,1975,,,
 Q6778654,Marxist–Leninist Communist Organisation of Réunion,1975,,,
 Q81299,Organisation pour la sécurité et la coopération en Europe,1975,,,
-Q1052584,Rassemblement pour la République,1976,2002,,conservatisme | libéral-conservatisme | gaullisme
+Q1052584,Rassemblement pour la République,1976,2002,,libéral-conservatisme | conservatisme | gaullisme
 Q1054196,Centre des démocrates sociaux,1976,1995,,démocratie chrétienne
 Q1138646,Front de libération nationale corse,1976,,,
 Q117225313,People's Mojahedin Movement of Iran,1976,,,
 Q123248148,Organisation Combat anarchiste,1976,1979,anarchiste | communiste,communisme libertaire
 Q1618280,Organisation communiste marxiste-léniniste – Voie prolétarienne,1976,,maoïste | communiste,communisme | maoïsme
-Q208242,Parti populaire européen,1976,,,démocratie chrétienne | néolibéralisme | libéral-conservatisme | europhilie
-Q25079,Parti de l'Alliance des libéraux et des démocrates pour l'Europe,1976,,,libéralisme | social-libéralisme | libéral-conservatisme
+Q208242,Parti populaire européen,1976,,,démocratie chrétienne | europhilie | libéral-conservatisme | néolibéralisme
+Q25079,Parti de l'Alliance des libéraux et des démocrates pour l'Europe,1976,,,libéralisme | libéral-conservatisme | social-libéralisme
 Q3112401,gouvernement Raymond Barre I,1976,1977,,
 Q3233417,Les Jeunes du RPR,1976,2003,,gaullisme
 Q3240649,Ligue ouvrière révolutionnaire,1976,1987,trotskyste,trotskisme
@@ -792,7 +792,7 @@ Q827415,Union pour la démocratie française,1978,2007,,
 Q2219002,Jeunesses communistes révolutionnaires,1979,2008,,
 Q3092163,Fédération socialiste calédonienne,1979,1981,,
 Q3324180,Independentists of the Catalan Countries,1979,1985,social-démocrate,socialisme | indépendantisme catalan
-Q3326746,Mouvement nationaliste révolutionnaire,1979,1985,communiste,anticommunisme | néofascisme | corporatisme | nationalisme révolutionnaire
+Q3326746,Mouvement nationaliste révolutionnaire,1979,1985,communiste,corporatisme | anticommunisme | néofascisme | nationalisme révolutionnaire
 Q3326836,Mouvement socialiste calédonien,1979,1981,,
 Q3366206,Parti communiste des ouvriers de France,1979,,communiste,communisme
 Q3550094,Union des anarchistes,1979,,anarchiste,anarchisme
@@ -809,7 +809,7 @@ Q3366726,Parti socialiste,1981,,,
 Q3366743,Parti socialiste de Nouvelle-Calédonie,1981,1989,,
 Q349179,gouvernement Pierre Mauroy I,1981,1981,,
 Q497182,gouvernement Pierre Mauroy II,1981,1983,,
-Q639383,Alliance libre européenne,1981,,,nationalisme | indépendantisme | européisme | autonomisme | séparatisme | régionalisme | progressisme
+Q639383,Alliance libre européenne,1981,,,nationalisme | séparatisme | progressisme | régionalisme | européisme | autonomisme | indépendantisme
 Q126379,Consultative Committee for Space Data Systems,1982,,,
 Q93451279,ETA-pm (Huitième assemblée),1982,1986,,
 Q105104850,fédération des Français à l’étranger du Parti socialiste,1983,,,
@@ -827,10 +827,10 @@ Q2783565,gouvernement Laurent Fabius,1984,1986,,
 Q3082926,Frankiz Breizh,1984,2008,,autonomisme
 Q3088504,Front national,1984,,,anti-indépendantisme
 Q3366231,Parti communiste pour l'indépendance et le socialisme,1984,,léniniste,marxisme-léninisme
-Q3777325,Groupe Arc-en-ciel,1984,1989,,écologie politique | régionalisme
+Q3777325,Groupe Arc-en-ciel,1984,1989,,régionalisme | écologie politique
 Q51780070,Frantiq,1984,,,
 Q743390,Les Verts,1984,2010,,écologie politique
-Q13359544,Troisième Voie,1985,2013,communiste,anticommunisme | antiaméricanisme | antisionisme | néofascisme
+Q13359544,Troisième Voie,1985,2013,communiste,antiaméricanisme | anticommunisme | antisionisme | néofascisme
 Q3326810,Mouvement pour un parti des travailleurs,1985,,trotskyste,trotskisme
 Q782942,Groupe Australie,1985,,,
 Q1125061,Eusko Alkartasuna,1986,,social-démocrate,social-démocratie
@@ -859,7 +859,7 @@ Q391372,Climate Action Network,1989,,,
 Q5413380,Gauche unitaire européenne,1989,1993,communiste,communisme | écologisme
 Q7284646,Groupe arc-en-ciel,1989,1994,,régionalisme
 Q1153753,Génération écologie,1990,,,écologie politique
-Q115922370,Organisation pour la reconstruction du Parti communiste de France,1990,2000,léniniste | maoïste,maoïsme | marxisme-léninisme
+Q115922370,Organisation pour la reconstruction du Parti communiste de France,1990,2000,léniniste | maoïste,marxisme-léninisme | maoïsme
 Q1662521,Informations- und Dokumentationszentrum für Antirassismusarbeit,1990,,,
 Q17521757,Federal working group for criminal assistance,1990,,,
 Q496967,Alliance of Small Island States,1990,,,
@@ -876,7 +876,7 @@ Q628594,Parti des travailleurs,1991,2008,trotskyste | communiste,communisme | tr
 Q111630714,Alliance des jeunes pour la révolution,1992,,communiste,communisme
 Q1376486,Jeunes socialistes européens,1992,,,
 Q1504968,RIPE Network Coordination Centre,1992,,,
-Q220945,Parti socialiste européen,1992,,social-démocrate,socialisme démocratique | social-démocratie | européisme
+Q220945,Parti socialiste européen,1992,,social-démocrate,social-démocratie | socialisme démocratique | européisme
 Q2449006,Transfair,1992,,,
 Q2840413,Alternative démocratie socialisme,1992,,,altermondialisme
 Q2993940,conseil exécutif de Corse,1992,,,
@@ -887,7 +887,7 @@ Q3099352,Gauche révolutionnaire,1992,,trotskyste,trotskisme
 Q3326619,Mouvement des démocrates et écologistes pour une Martinique souveraine,1992,,,
 Q385172,gouvernement Pierre Bérégovoy,1992,1993,,
 Q493667,Anaram Au Patac,1992,2009,,Nationalisme occitan
-Q1321802,Mouvement républicain et citoyen,1993,,,euroscepticisme | souverainisme | gaullisme de gauche
+Q1321802,Mouvement républicain et citoyen,1993,,,souverainisme | gaullisme de gauche | euroscepticisme
 Q1347840,gouvernement Édouard Balladur,1993,1995,,
 Q1506456,Renovabis,1993,,,
 Q19966963,Fédération européenne des partis verts,1993,2004,,
@@ -920,7 +920,7 @@ Q391597,gouvernement Alain Juppé I,1995,1995,,
 Q420444,gouvernement Alain Juppé II,1995,1997,,
 Q61857570,Fièr-e-s et révolutionnaires,1995,,,
 Q6745159,Platform for the Unity of Action,1995,2000,social-démocrate,socialisme | indépendantisme catalan
-Q753711,Groupe de la Gauche au Parlement européen,1995,,social-démocrate,euroscepticisme | socialisme démocratique
+Q753711,Groupe de la Gauche au Parlement européen,1995,,social-démocrate,socialisme démocratique | euroscepticisme
 Q7825,Organisation mondiale du commerce,1995,,,
 Q117295663,DAISY Consortium,1996,,,
 Q1203016,Deutsche Gesellschaft für Verbandsmanagement,1996,,,
@@ -951,22 +951,22 @@ Q823428,Alliance internationale pour le souvenir de l'Holocauste,1998,,,
 Q845918,Open Source Initiative,1998,,,
 Q116456366,Coordination communiste pour la reconstruction d'un parti communiste révolutionnaire,1999,2003,léniniste,marxisme-léninisme
 Q116458474,Coordination des militants communistes du PCF pour sa continuité révolutionnaire et sa renaissance léniniste,1999,2002,léniniste,marxisme-léninisme
-Q12962,Debout la France,1999,,,euroscepticisme | gaullisme | national-conservatisme | nationalisme en France
+Q12962,Debout la France,1999,,,gaullisme | euroscepticisme | national-conservatisme | nationalisme en France
 Q19771,Groupe des 20,1999,,,
 Q2994760,Consortium universitaire de publications numériques Couperin,1999,,,
 Q3153050,Inter-LGBT,1999,,,
 Q3236041,Les Verts Pacifique,1999,,,écologie politique
 Q7159,Union africaine,1999,,,
-Q751935,Groupe des Verts/Alliance libre européenne,1999,,,régionalisme | droits des minorités | écologie politique
+Q751935,Groupe des Verts/Alliance libre européenne,1999,,,droits des minorités | régionalisme | écologie politique
 Q1005995,Q1005995,2000,,,
 Q104187610,Parti communiste maoïste de France,2000,2016,maoïste,maoïsme
 Q116456156,Communistes,2000,2015,léniniste,marxisme-léninisme
 Q116459769,Collectif national unitaire des communistes,2000,2002,léniniste,marxisme-léninisme
-Q1377231,Gauche anticapitaliste européenne,2000,,social-démocrate,socialisme | anticapitalisme
+Q1377231,Gauche anticapitaliste européenne,2000,,social-démocrate,anticapitalisme | socialisme
 Q15823228,Katholischer Medienverband,2000,,,
 Q2937151,Cap sur l'avenir,2000,,,social-libéralisme | localisme
 Q3353202,Open Source Development Labs,2000,,,
-Q3752213,Endavant,2000,,social-démocrate | communiste,communisme | féminisme | socialisme | antifascisme | écosocialisme | anticapitalisme | indépendantisme catalan
+Q3752213,Endavant,2000,,social-démocrate | communiste,communisme | féminisme | socialisme | antifascisme | indépendantisme catalan | écosocialisme | anticapitalisme
 Q64846035,Arbeitsgemeinschaft Schuldnerberatung der Verbände,2000,,,
 Q104210461,Alternative révolutionnaire socialiste - Combat,2001,,trotskyste,trotskisme
 Q1051984,OpenDemocracy.net,2001,,,
@@ -1004,7 +1004,7 @@ Q5611262,Groupe pour l'observation de la Terre,2003,,,
 Q595109,Les Jeunes Républicains,2003,,,
 Q139826986,Q139826986,2004,,,
 Q140274247,International Household Survey Network,2004,,,
-Q1694377,Pôle de renaissance communiste en France,2004,,léniniste | communiste,communisme | matérialisme | pacifisme | humanisme | internationalisme institutionnel | marxisme-léninisme | souverainisme
+Q1694377,Pôle de renaissance communiste en France,2004,,léniniste | communiste,communisme | humanisme | pacifisme | internationalisme institutionnel | matérialisme | marxisme-léninisme | souverainisme
 Q202649,Parti de la gauche européenne,2004,,social-démocrate | communiste,communisme | socialisme démocratique | eurocommunisme
 Q21684727,Institut national des hautes études de sécurité,2004,2009,,
 Q3550671,Unir et Construire dans le Renouveau,2004,,,
@@ -1012,10 +1012,10 @@ Q3752423,Herritarren Zerrenda,2004,2004,,nationalisme basque | gauche abertzale
 Q719544,gouvernement Jean-Pierre Raffarin III,2004,2005,,
 Q734792,Parti démocrate européen,2004,,,libéralisme | social-libéralisme | europhilie
 Q897804,Comité européen des superviseurs bancaires,2004,2011,,
-Q950179,Parti vert européen,2004,,,europhilie | progressisme | écologie politique
+Q950179,Parti vert européen,2004,,,écologie politique | progressisme | europhilie
 Q1367039,Euronat,2005,2010,,
 Q3029492,direction des services de la navigation aérienne,2005,,,
-Q3342154,Nissa Rebela,2005,2015,,racisme | islamophobie | régionalisme
+Q3342154,Nissa Rebela,2005,2015,,racisme | régionalisme | islamophobie
 Q497289,gouvernement Dominique de Villepin,2005,2007,,
 Q60175,Alliance mondiale des démocrates,2005,2012,,réformisme
 Q62073537,Open Education Global,2005,,,
@@ -1027,15 +1027,15 @@ Q1206319,Deutschland sicher im Netz,2006,,,
 Q2826686,Agence nationale pour la cohésion sociale et l'égalité des chances,2006,2015,,
 Q30262106,West and Central African Research and Education Network,2006,,,
 Q3117906,Groupe pour la construction du Parti ouvrier révolutionnaire,2006,,trotskyste | communiste,communisme | trotskisme
-Q3326471,Mouvement Franche-Comté,2006,,,libéral-conservatisme | autonomisme
+Q3326471,Mouvement Franche-Comté,2006,,,autonomisme | libéral-conservatisme
 Q3419904,Rassemblement démocratique martiniquais,2006,,,autonomisme
-Q5291,Parti pirate,2006,,,liberté de l'information | vie privée | cyberdémocratie | écologisme
+Q5291,Parti pirate,2006,,,liberté de l'information | cyberdémocratie | vie privée | écologisme
 Q101069148,Organisation ITER,2007,,,
 Q105272307,OpenID Foundation,2007,,,
 Q1235686,gouvernement François Fillon I,2007,2007,,
 Q1774359,Alliance climatique Allemagne,2007,,,
 Q2450519,groupe Gauche démocrate et républicaine,2007,,,
-Q283184,Parti travailliste,2007,,,indépendantisme | anticapitalisme | altermondialisme
+Q283184,Parti travailliste,2007,,,anticapitalisme | indépendantisme | altermondialisme
 Q2984612,Colère et espoir,2007,,communiste,communisme
 Q3055255,Entreprise commune SESAR,2007,,,
 Q3080280,Fraction nationaliste armée révolutionnaire,2007,,,nationalisme révolutionnaire
@@ -1047,7 +1047,7 @@ Q3547154,UDB Jeunes,2007,,social-démocrate,social-démocratie
 Q384535,mission conjointe des Nations unies et de l'Union africaine au Darfour,2007,2020,,
 Q48756367,Q48756367,2007,,,
 Q584558,La Gauche moderne,2007,2017,,social-libéralisme
-Q587370,Mouvement démocrate,2007,,,social-libéralisme | progressisme
+Q587370,Mouvement démocrate,2007,,,progressisme | social-libéralisme
 Q730456,gouvernement François Fillon II,2007,2010,,
 Q853418,Les Centristes,2007,,,libéral-conservatisme | europhilie
 Q858851,Fondation Linux,2007,,,
@@ -1062,18 +1062,18 @@ Q3366506,Parti libéral démocrate,2008,2018,,libéralisme classique
 Q3548270,Un monde d'avance,2008,,social-démocrate,socialisme démocratique
 Q4390865,Open Access Scholarly Publishing Association,2008,,,
 Q557045,Europe Écologie,2008,2010,,écologie politique
-Q922707,Parti de gauche,2008,,social-démocrate,populisme de gauche | socialisme démocratique | écosocialisme | républicanisme | écologisme
+Q922707,Parti de gauche,2008,,social-démocrate,socialisme démocratique | républicanisme | écosocialisme | populisme de gauche | écologisme
 Q104245000,Rassemblement organisé des communistes - marxistes-léninistes,2009,,léniniste,marxisme-léninisme
 Q1045425,Nouveau Parti anticapitaliste,2009,,social-démocrate,écosocialisme | anticapitalisme | féminisme socialiste
 Q111606177,Organisation des communistes de France,2009,,léniniste,marxisme-léninisme
-Q1345559,Conservateurs et réformistes européens,2009,,communiste,conservatisme | anticommunisme | euroscepticisme | national-conservatisme | libéralisme économique
+Q1345559,Conservateurs et réformistes européens,2009,,communiste,conservatisme | libéralisme économique | national-conservatisme | anticommunisme | euroscepticisme
 Q135415843,Alliance for Non-Profits,2009,,,
 Q1495924,Gauche unitaire,2009,2015,,anticapitalisme
 Q1568745,Unser Land,2009,,,
 Q1775374,Ligue des bibliothèques européennes de recherche,2009,,,
 Q1995268,Corsica Libera,2009,,,séparatisme | nationalisme corse
 Q2838275,Écologie au centre,2009,2021,,
-Q29348702,Front de gauche,2009,2016,social-démocrate | communiste,communisme | féminisme | humanisme | pacifisme | écosocialisme | anticapitalisme | eurocommunisme | socialisme démocratique | républicanisme | altermondialisme
+Q29348702,Front de gauche,2009,2016,social-démocrate | communiste,communisme | féminisme | eurocommunisme | pacifisme | écosocialisme | socialisme démocratique | anticapitalisme | humanisme | altermondialisme | républicanisme
 Q2996386,Convergences et alternative,2009,,,anticapitalisme
 Q3152430,Institut national des hautes études de la sécurité et de la justice,2009,2020,,
 Q3326849,Mouvement des progressistes,2009,,social-démocrate,socialisme
@@ -1087,7 +1087,7 @@ Q104245345,Jeunesse communiste marxiste-léniniste,2010,,léniniste,marxisme-lé
 Q111187255,Parti lorrain,2010,,,indépendantisme
 Q115922089,Action anti-transphobe,2010,2021,léniniste | maoïste,marxisme-léninisme-maoïsme
 Q116005340,Nouveau communisme en France,2010,,léniniste | maoïste,marxisme-léninisme-maoïsme
-Q1377195,Alliance européenne pour la liberté,2010,2017,,nationalisme | euroscepticisme | populisme de droite | souverainisme
+Q1377195,Alliance européenne pour la liberté,2010,2017,,nationalisme | euroscepticisme | souverainisme | populisme de droite
 Q141720,Commandement européen du transport aérien,2010,,,
 Q1663590,Initiative pour une société civile transparente,2010,,,
 Q170,Parti pirate international,2010,,,
@@ -1098,8 +1098,8 @@ Q3326461,Mouvement Bretagne et Progrès,2010,,,régionalisme
 Q3366664,Parti régionaliste martiniquais,2010,,,
 Q599965,gouvernement François Fillon III,2010,2012,,
 Q60607639,National Digital Stewardship Alliance,2010,,,
-Q6119666,Jacobin,2010,,social-démocrate,socialisme | socialisme démocratique | marxisme
-Q613786,Les Écologistes – Europe Écologie Les Verts,2010,,,décentralisation | europhilie | écologie politique | altermondialisme
+Q6119666,Jacobin,2010,,social-démocrate,socialisme | marxisme | socialisme démocratique
+Q613786,Les Écologistes – Europe Écologie Les Verts,2010,,,décentralisation | altermondialisme | écologie politique | europhilie
 Q111422279,Coordination des libertaires de l'Ain,2011,,anarchiste,anarchisme
 Q1331152,Partenariat pour un gouvernement ouvert,2011,,,
 Q2053544,"L'Alliance républicaine, écologiste et sociale",2011,2012,,
@@ -1122,7 +1122,7 @@ Q3117954,groupe écologiste,2012,2016,,
 Q3326782,Pour La Réunion,2012,,social-démocrate,socialisme démocratique | post-marxisme
 Q3419877,Rassemblement Bleu Marine,2012,,,
 Q3550126,Groupe Union des démocrates et indépendants,2012,2017,,
-Q52382965,Génération identitaire,2012,2021,,nationalisme | Nouvelle Droite | ethno-différencialisme | islamophobie | mouvance identitaire | néofascisme
+Q52382965,Génération identitaire,2012,2021,,nationalisme | islamophobie | mouvance identitaire | néofascisme | ethno-différencialisme | Nouvelle Droite
 Q736071,gouvernement Jean-Marc Ayrault II,2012,2014,,
 Q82892,Union des démocrates et indépendants,2012,,,libéralisme
 Q104187739,Bloc rouge (Unification des maoïstes),2013,2016,maoïste,maoïsme
@@ -1131,10 +1131,10 @@ Q111606200,Organisation communiste - Futur rouge,2013,,maoïste,maoïsme
 Q115787221,CHORUS,2013,,,
 Q123766218,La Citadelle,2013,,,mouvance identitaire
 Q135875402,Breizh Europa,2013,,,autonomisme
-Q136907445,Q136907445,2013,2023,léniniste | anarchiste,intersectionnalité | mouvement autonome | anticapitalisme | anarchisme insurrectionnaliste | antifascisme | antiracisme | marxisme-léninisme
+Q136907445,Q136907445,2013,2023,léniniste | anarchiste,marxisme-léninisme | anarchisme insurrectionnaliste | antifascisme | mouvement autonome | anticapitalisme | antiracisme | intersectionnalité
 Q15629523,Nouvelle Donne,2013,,social-démocrate,social-démocratie | progressisme
 Q15985227,Nouvelle Écologie démocrate,2013,,,écologie politique
-Q15985232,Ensemble !,2013,,social-démocrate,socialisme | anticapitalisme | écosocialisme | mouvement antimondialisation
+Q15985232,Ensemble !,2013,,social-démocrate,écosocialisme | anticapitalisme | socialisme | mouvement antimondialisation
 Q16215381,Initiative des partis communistes et ouvriers,2013,2023,léniniste | communiste,communisme | marxisme-léninisme | euroscepticisme | anti-révisionnisme
 Q16515998,Aitzina!,2013,2020,,gauche abertzale
 Q24243568,Q24243568,2013,,,
@@ -1148,7 +1148,7 @@ Q17606200,gouvernement Manuel Valls II,2014,2016,,
 Q17625061,Commissariat général à l'égalité des territoires,2014,2019,,
 Q18410982,Bündnis für nachhaltige Textilien,2014,,,
 Q18744486,Front démocrate,2014,,,
-Q18907386,Patriotes.eu,2014,,,nationalisme | populisme de droite | national-conservatisme | euroscepticisme
+Q18907386,Patriotes.eu,2014,,,nationalisme | euroscepticisme | populisme de droite | national-conservatisme
 Q71978544,Objectif France,2014,,,
 Q104414383,Juives et Juifs révolutionnaires,2015,,,antiracisme
 Q106899676,Guyane rassemblement,2015,,,régionalisme
@@ -1156,10 +1156,10 @@ Q111648344,Organisation anarchiste,2015,,anarchiste,anarchisme
 Q116059218,Fédération libertaire unitaire ouverte,2015,,,
 Q133163787,Re:Create Coalition,2015,,,
 Q20012759,Les Républicains,2015,,,conservatisme | gaullisme
-Q20927529,Parti écologiste,2015,2017,,écologie politique | europhilie
+Q20927529,Parti écologiste,2015,2017,,europhilie | écologie politique
 Q21055512,Union des démocrates et des écologistes,2015,,,écologie politique
 Q21290708,Nouvelle Gauche socialiste,2015,,,
-Q22674451,Mouvement pour la démocratie en Europe : Diem 25,2015,,social-démocrate,féminisme | socialisme démocratique | post-capitalisme | altermondialisme | écologisme | europhilie
+Q22674451,Mouvement pour la démocratie en Europe : Diem 25,2015,,social-démocrate,féminisme | socialisme démocratique | europhilie | post-capitalisme | altermondialisme | écologisme
 Q23808504,Pè a Corsica,2015,2021,,nationalisme corse
 Q24939885,Parti des travailleurs,2015,,trotskyste | communiste,communisme | trotskisme | Courant lambertiste
 Q2638999,Parti ouvrier indépendant,2015,,trotskyste | communiste,communisme | trotskisme
@@ -1175,7 +1175,7 @@ Q111630205,Féministes révolutionnaires,2016,,anarchiste,Féminisme libertaire 
 Q111630824,Jeunesse Révolution,2016,,trotskyste,trotskisme
 Q124460707,International Alliance of Research Library Associations,2016,,,
 Q139565740,Comité ouvrier international contre la guerre et l’exploitation pour l’Internationale ouvrière,2016,,trotskyste,trotskisme
-Q23731823,Renaissance,2016,,,réformisme | social-libéralisme | europhilie
+Q23731823,Renaissance,2016,,,europhilie | social-libéralisme | réformisme
 Q27967567,gouvernement Bernard Cazeneuve,2016,2017,,
 Q27978402,La France insoumise,2016,,social-démocrate,écosocialisme | anticapitalisme | altermondialisme | souverainisme
 Q30041450,577 Les indépendants,2016,,,libéralisme | conservatisme
@@ -1190,27 +1190,27 @@ Q116005505,Front révolutionnaire antifasciste de Provence,2017,,léniniste | ma
 Q139493171,Territoires44,2017,,,démocratie participative | régionalisme | écologie politique
 Q29949210,gouvernement Édouard Philippe I,2017,2017,,
 Q30339129,gouvernement Édouard Philippe II,2017,2020,,
-Q31400965,Génération.s,2017,,social-démocrate,social-démocratie | socialisme démocratique | écologisme | europhilie
+Q31400965,Génération.s,2017,,social-démocrate,social-démocratie | écologisme | socialisme démocratique | europhilie
 Q43807777,"Agir, la droite constructive",2017,2022,,libéral-conservatisme | europhilie
 Q45149423,Mouvement radical,2017,,,social-libéralisme | sécularisme | europhilie
-Q53089663,Bastion social,2017,2019,,Mouvance nationale-révolutionnaire | néofascisme
+Q53089663,Bastion social,2017,2019,,néofascisme | Mouvance nationale-révolutionnaire
 Q55597872,Les Radicaux de gauche,2017,,,
 Q75737631,Global Sustainability Coalition for Open Science Services (SCOSS),2017,,,
 Q97667185,Coalition for Diversity and Inclusion in Scholarly Communications,2017,,,
-Q100989633,Péyi Guyane,2018,,,progressisme | autonomisme | écologisme
+Q100989633,Péyi Guyane,2018,,,progressisme | écologisme | autonomisme
 Q104186094,Jeunes révolutionnaires,2018,,léniniste | maoïste,marxisme-léninisme-maoïsme
 Q106906187,L'Action française,2018,,,royalisme
-Q109019177,Core in Fronte,2018,,,nationalisme de gauche | nationalisme corse
+Q109019177,Core in Fronte,2018,,,nationalisme corse | nationalisme de gauche
 Q110007868,Zouaves Paris,2018,2022,,néonazisme | suprémacisme blanc | nationalisme révolutionnaire
 Q115814626,Jeune Garde,2018,2025,,
 Q50828855,African Continental Free Trade Area,2018,,,
-Q51844819,Révolution écologique pour le vivant,2018,,,antispécisme | écologisme
+Q51844819,Révolution écologique pour le vivant,2018,,,écologisme | antispécisme
 Q53729922,Joint Roadmap for Open Science Tools,2018,,,
 Q57540493,"groupe Libertés, indépendance, outre-mer et territoires",2018,,,régionalisme
 Q57587699,Conseil international des sciences,2018,,,
-Q58329311,Gauche républicaine et socialiste,2018,,social-démocrate,socialisme | étatisme | interventionnisme | euroscepticisme
+Q58329311,Gauche républicaine et socialiste,2018,,social-démocrate,socialisme | interventionnisme | euroscepticisme | étatisme
 Q58366009,Place publique,2018,,,
-Q101003153,Collectif Némésis,2019,,,conservatisme | xénophobie | mouvance identitaire | abolitionnisme | opposition à l'immigration | anti-islamisme | féminationalisme
+Q101003153,Collectif Némésis,2019,,,xénophobie | abolitionnisme | mouvance identitaire | conservatisme | opposition à l'immigration | anti-islamisme | féminationalisme
 Q102440976,Q102440976,2019,,,
 Q104186411,Front prolétaire,2019,,léniniste | maoïste,marxisme-léninisme-maoïsme
 Q109658655,Socialist Youth Coordinator,2019,,communiste,communisme
@@ -1221,17 +1221,17 @@ Q117255633,"Ouverture/Technologies en Éducation, dans la Société et pour l'av
 Q124653728,Occitanie País Nòstre,2019,,,
 Q127272169,Pour une écologie populaire et sociale,2019,,,communalisme
 Q131580147,Q131580147,2019,2025,,
-Q64524428,Union communiste libertaire,2019,,anarchiste | communiste,communisme libertaire | féminisme | antifascisme | écologisme | antiracisme
+Q64524428,Union communiste libertaire,2019,,anarchiste | communiste,communisme libertaire | féminisme | écologisme | antifascisme | antiracisme
 Q65143318,Péyi-A,2019,,,indépendantisme
 Q101089320,Institut des hautes études du ministère de l'Intérieur,2020,,,
-Q104186336,Mouvement populaire des femmes,2020,,léniniste | maoïste,féminisme matérialiste | marxisme-léninisme-maoïsme
+Q104186336,Mouvement populaire des femmes,2020,,léniniste | maoïste,marxisme-léninisme-maoïsme | féminisme matérialiste
 Q104212739,Les Nouveaux Démocrates,2020,,,
 Q105616754,Mouvement national-démocrate,2020,,,
 Q108331267,Pôle écologiste,2020,,,écologisme
 Q109023546,En commun,2020,,social-démocrate,social-démocratie | écologie politique
 Q125499293,Nuage européen pour la science ouverte,2020,,,
-Q131957441,Égalités,2020,,,féminisme | anticapitalisme | antiracisme | écologisme
-Q60574856,International progressif,2020,,social-démocrate,socialisme démocratique | progressisme | anticapitalisme | anti-impérialisme
+Q131957441,Égalités,2020,,,féminisme | antiracisme | anticapitalisme | écologisme
+Q60574856,International progressif,2020,,social-démocrate,anticapitalisme | progressisme | socialisme démocratique | anti-impérialisme
 Q61658497,infrastructure nationale allemande pour les données de recherche,2020,,,
 Q86998495,Liberté Écologie Fraternité,2020,,,écologisme
 Q94699094,groupe Écologie démocratie solidarité,2020,,,
@@ -1252,9 +1252,9 @@ Q117476286,Comités populaires d'entraide et de solidarité,2021,,léniniste | m
 Q118130804,Bloc révolutionnaire insurrectionnel et féministe,2021,,,féminisme
 Q126934263,Les Remparts,2021,2024,,mouvance identitaire
 Q111187242,Pays Unis,2022,,,
-Q111780068,Refondation républicaine,2022,,,sécularisme | étatisme | souverainisme | gaullisme de gauche
+Q111780068,Refondation républicaine,2022,,,étatisme | sécularisme | souverainisme | gaullisme de gauche
 Q111782119,Fédération de la gauche républicaine,2022,,,
-Q111799189,Nouvelle Union populaire écologique et sociale,2022,2024,social-démocrate,féminisme | social-démocratie | socialisme démocratique | écosocialisme | progressisme | écologie politique | antilibéralisme
+Q111799189,Nouvelle Union populaire écologique et sociale,2022,2024,social-démocrate,socialisme démocratique | féminisme | social-démocratie | écosocialisme | progressisme | écologie politique | antilibéralisme
 Q112042684,gouvernement Élisabeth Borne,2022,2024,,
 Q112894205,remaniement du gouvernement Élisabeth Borne du 4 juillet 2022,2022,,,
 Q113500977,Éducation Démocratie Dignité,2022,,,social-libéralisme
@@ -1266,7 +1266,7 @@ Q123783299,Groupe maoïste révolutionnaire,2022,,léniniste | maoïste,marxisme
 Q125771262,Nouveau Parti anticapitaliste – L'Anticapitaliste,2022,,social-démocrate,écosocialisme | anticapitalisme
 Q126899229,Fédération progressiste,2022,,social-démocrate,social-démocratie | progressisme | europhilie
 Q126974710,Global Academic Integrity Network,2022,,,
-Q110627877,L'Avenir français,2023,,,euroscepticisme | populisme de droite | gaullisme | national-conservatisme | souverainisme | nationalisme en France
+Q110627877,L'Avenir français,2023,,,euroscepticisme | gaullisme | populisme de droite | national-conservatisme | souverainisme | nationalisme en France
 Q117476256,Comité féminin populaire,2023,,léniniste | maoïste,féminisme | marxisme-léninisme-maoïsme
 Q123785828,Action Communiste Européenne,2023,,léniniste | communiste,communisme | marxisme-léninisme
 Q135755468,La Convention,2023,,,
@@ -1278,8 +1278,8 @@ Q130219314,Alliance de gauche européenne,2024,,social-démocrate,féminisme | �
 Q130240199,gouvernement Michel Barnier,2024,2024,,
 Q133264736,Les Jeunes UDR,2024,,,
 Q133459689,Génération Espoir Dignité Résistance,2024,,,
-Q137794555,Post-Soviet Left,2024,,social-démocrate,socialisme | pacifisme | anti-impérialisme | internationalisme institutionnel
-Q135035384,La France humaniste,2025,,,gaullisme | républicanisme | souverainisme | gaullisme de gauche | libéral-conservatisme
+Q137794555,Post-Soviet Left,2024,,social-démocrate,socialisme | pacifisme | internationalisme institutionnel | anti-impérialisme
+Q135035384,La France humaniste,2025,,,libéral-conservatisme | gaullisme | républicanisme | souverainisme | gaullisme de gauche
 Q136193450,gouvernement Sébastien Lecornu I,2025,,,
 Q136471473,gouvernement Sébastien Lecornu II,2025,,,
 Q138281539,Q138281539,2026,,,
@@ -1287,7 +1287,7 @@ Q100249920,Office international de la vigne et du vin,,,,
 Q1005598,Bundesarbeitsgemeinschaft der Freien Wohlfahrtspflege,,,,
 Q1018761,diocèse d'Égypte,,,,
 Q104186177,Front-Uni,,,léniniste | maoïste,marxisme-léninisme-maoïsme
-Q104186211,Action révolutionnaire LGBTI,,,léniniste | maoïste,féminisme matérialiste | marxisme-léninisme-maoïsme | droits LGBT
+Q104186211,Action révolutionnaire LGBTI,,,léniniste | maoïste,marxisme-léninisme-maoïsme | féminisme matérialiste | droits LGBT
 Q104290787,Collectif militant communiste,,,communiste,communisme
 Q104290792,Communistes en lutte,,,léniniste,marxisme-léninisme
 Q104290793,Les amis de Karl Marx,,,léniniste,marxisme-léninisme
@@ -1517,7 +1517,7 @@ Q60836735,comté de Vintimille,,,,
 Q617219,possession anglaise d'outre-mer,,,,
 Q61901679,comté de Pampelune,,,,
 Q61961332,Saraqusta,,1018,,
-Q62079328,Debout !,,,social-démocrate,écosocialisme | anticapitalisme
+Q62079328,Debout !,,,social-démocrate,anticapitalisme | écosocialisme
 Q6269138,Joint Committee for Traceability in Laboratory Medicine,,,,
 Q627633,Q627633,,,,
 Q63536974,groupe Ensemble Île-de-France au conseil régional d'Île-de-France,,,,

@@ -1,0 +1,32 @@
+source,source_nom,cible,cible_nom,type,sources
+Q104186094,Jeunes révolutionnaires,Q111610435,Ligue de la jeunesse révolutionnaire,scission,wikidata
+Q104186094,Jeunes révolutionnaires,Q123783299,Groupe maoïste révolutionnaire,scission,wikidata
+Q104187610,Parti communiste maoïste de France,Q104186796,Parti communiste maoïste,filiation,wikidata
+Q104187739,Bloc rouge (Unification des maoïstes),Q104186796,Parti communiste maoïste,filiation,wikidata
+Q104210461,Alternative révolutionnaire socialiste - Combat,Q104209540,Arme Révolutionnaire Marxiste,scission,wikidata
+Q104245000,Rassemblement organisé des communistes - marxistes-léninistes,Q111606200,Organisation communiste - Futur rouge,scission,wikidata
+Q1045425,Nouveau Parti anticapitaliste,Q115965423,Nouveau Parti anticapitaliste – Révolutionnaires,scission,wikidata
+Q1045425,Nouveau Parti anticapitaliste,Q125771262,Nouveau Parti anticapitaliste – L'Anticapitaliste,filiation,wikidata
+Q111607481,Noyaux autonomes pour le communisme,Q111606973,Parti communiste de France (marxiste-léniniste-maoïste),filiation,wikidata
+Q115922370,Organisation pour la reconstruction du Parti communiste de France,Q104187610,Parti communiste maoïste de France,filiation,wikidata
+Q116456156,Communistes,Q2989703,Parti révolutionnaire Communistes,filiation,wikidata
+Q116456366,Coordination communiste pour la reconstruction d'un parti communiste révolutionnaire,Q116456095,Union des révolutionnaires-communistes de France,filiation,wikidata
+Q116456366,Coordination communiste pour la reconstruction d'un parti communiste révolutionnaire,Q1694377,Pôle de renaissance communiste en France,filiation,wikidata
+Q116456380,Coordination communiste pour la continuité révolutionnaire et la renaissance léniniste du PCF,Q116456366,Coordination communiste pour la reconstruction d'un parti communiste révolutionnaire,scission,wikidata
+Q116456380,Coordination communiste pour la continuité révolutionnaire et la renaissance léniniste du PCF,Q116458474,Coordination des militants communistes du PCF pour sa continuité révolutionnaire et sa renaissance léniniste,scission,wikidata
+Q116456380,Coordination communiste pour la continuité révolutionnaire et la renaissance léniniste du PCF,Q1694377,Pôle de renaissance communiste en France,filiation,wikidata
+Q116458474,Coordination des militants communistes du PCF pour sa continuité révolutionnaire et sa renaissance léniniste,Q116459649,Fédération nationale des associations pour la renaissance communiste,filiation,wikidata
+Q116459649,Fédération nationale des associations pour la renaissance communiste,Q1694377,Pôle de renaissance communiste en France,filiation,wikidata
+Q116459769,Collectif national unitaire des communistes,Q116459649,Fédération nationale des associations pour la renaissance communiste,filiation,wikidata
+Q124422241,Comité pour la construction du Parti ouvrier révolutionnaire,Q3117906,Groupe pour la construction du Parti ouvrier révolutionnaire,filiation,wikidata
+Q130218773,Parti socialiste indépendant,Q2095948,Parti républicain-socialiste,filiation,wikidata
+Q1618280,Voix prolétarienne,Q111600906,Union prolétarienne marxiste-léniniste,scission,wikidata
+Q192821,Parti communiste français,Q116456156,Communistes,scission,wikidata
+Q2996657,Coordination des groupes anarchistes,Q111648344,Organisation anarchiste,scission,wikidata
+Q3141290,"Parti républicain, radical et radical-socialiste",Q1542710,Parti radical (France),filiation,wikidata
+Q3326849,Mouvement des progressistes,Q113500977,Éducation Démocratie Dignité,scission,wikidata
+Q3366206,Parti communiste des ouvriers de France,Q115922370,Organisation pour la reconstruction du Parti communiste de France,scission,wikidata
+Q3550228,Union des étudiants communistes,Q112898155,RED Jeunes,scission,wikidata
+Q64524428,Union communiste libertaire (francophone),Q110394551,Plateforme communiste libertaire,scission,wikidata
+Q870667,Lutte ouvrière,Q104210461,Alternative révolutionnaire socialiste - Combat,scission,wikidata
+Q93219875,Alliance des jeunes pour le socialisme,Q111630485,Alliance des jeunes révolutionnaires,filiation,wikidata

@@ -1,45 +1,38 @@
-id,name,sigle,start,end,predecessor_id,color_key
-Q183725,Association internationale des travailleurs,,1864,1876,,anarchiste
-Q188592,Internationale ouvrière,IO,1889,1923,Q183725,socialiste
-Q163931,Internationale communiste,IC,1919,1943,Q188592,communiste
-Q698677,Union des partis socialistes pour l'action internationale,UPSAI,1921,1923,Q188592,socialiste
-Q703593,Internationale ouvrière socialiste,IOS,1923,1940,Q188592,socialiste
-Q1423578,Centre marxiste révolutionnaire international,CMRI,1932,1940,Q698677 | Q703593,autre
-Q206682,Quatrième Internationale,QI,1938,,,trotskyste
-Q1984016,Quatrième Internationale (lambertiste),,1938,,,trotskyste
-Q183533,Kominform,,1947,1956,Q163931,autre
-Q159454,Internationale socialiste,IS,1951,,,socialiste
-Q125963179,Internationale communiste libertaire,,1954,1958,,anarchiste
-Q2634710,Quatrième Internationale - Secrétariat unifié,,1963,,Q206682,trotskyste
-Q133795,Internationale des fédérations anarchistes,,1968,,,anarchiste
-Q158073,Comité pour une Internationale ouvrière,CIO,1974,,,trotskyste
-Q25079,Parti de l'Alliance des libéraux et des démocrates pour l'Europe,,1976,,,autre
-Q639383,Alliance libre européenne,ALE,1981,,,régionaliste
-Q2455815,Courant Révolution Permanente – Quatrième Internationale,,1989,,Q599328,trotskyste
-Q5413380,Gauche unitaire européenne,,1989,1993,,autre
-Q2915940,Forum de São Paulo,,1990,,,autre
-Q3055019,Entente internationale des travailleurs et des peuples,,1991,,,autre
-Q220945,Parti socialiste européen,PSE,1992,,,socialiste
-Q19966963,Fédération européenne des partis verts,,1993,2004,,écologiste
-Q622227,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte),,1994,,,communiste
-Q5413387,Gauche unitaire européenne,,1994,1995,Q5413380,autre
-Q753711,Groupe de la Gauche au Parlement européen,,1995,,Q5413387,gauche radicale
-Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),,1996,2011,,communiste
-Q2440449,Rencontre internationale des partis communistes et ouvriers,,1998,,,communiste
-Q1377231,Gauche anticapitaliste européenne,,2000,,,gauche radicale
-Q649752,Solidarité internationale libertaire,,2001,,,anarchiste
-Q1631185,Internationale communiste révolutionnaire,,2004,,Q158073,communiste
-Q202649,Parti de la gauche européenne,PGE,2004,,,gauche radicale
-Q950179,Parti vert européen,PVE,2004,,Q19966963,écologiste
-Q170,Parti pirate international,,2010,,,autre
-Q7248622,Alliance progressiste,,2013,,,autre
-Q15081858,Parti pirate européen,,2014,,,autre
-Q139565740,Comité ouvrier international contre la guerre et l’exploitation pour l’Internationale ouvrière,,2016,,Q3055019,trotskyste
-Q60574856,International progressif,,2020,,,autre
-Q123631784,World Anti-Imperialist Platform,,2022,,,autre
-Q123785828,Action Communiste Européenne,,2023,,,communiste
-Q130219314,Alliance de la gauche européenne pour les peuples et la planète,,2024,,,gauche radicale
-Q2838098,Alliance européenne des mouvements critiques envers l'Union européenne,,,,,autre
-Q3240310,Ligue communiste internationale (quatrième internationaliste),,,,,trotskyste
-Q599328,Ligue internationale des travailleurs - Quatrième Internationale,,,,Q2634710,trotskyste
-Q1073391,Union communiste internationaliste,UCI,,,,trotskyste
+id,name,sigle,start,end,predecessor_id,color_key,succession_type,succession_citation,succession_source,scissions_de
+Q183725,Association internationale des travailleurs,,1864,1876,,anarchiste,,,,
+Q188592,Internationale ouvrière,IO,1889,1923,Q183725,socialiste,refondation,| précédent           = [[Association internationale des travailleurs]] <small>(prédécesseur non légal)</small>,fr:Internationale ouvrière,
+Q163931,Internationale communiste,IC,1919,1943,,communiste,,,,Q188592
+Q698677,Union des partis socialistes pour l'action internationale,UPSAI,1921,1923,,socialiste,,,,Q188592
+Q703593,Internationale ouvrière socialiste,IOS,1923,1940,Q188592 | Q698677,socialiste,fusion,| fusion de           = [[Deuxième Internationale]]<br/>[[Union des partis socialistes pour l'action internationale|Internationale Deux et demi]],fr:Internationale ouvrière socialiste,
+Q11885155,Opposition communiste internationale,,1930,1939,,communiste,,,,
+Q1423578,Centre marxiste révolutionnaire international,CMRI,1932,1940,Q698677,autre,fusion,"Seule une minorité, dont le Parti socialiste indépendant de Roumanie, refuse cette fusion, et forme le « Bureau international d'information des partis révolutionnaires socialistes », qui rejoindra dix ans plus tard le [[Bureau international pour l'unité socialiste révolutionnaire]].",fr:Union des partis socialistes pour l'action internationale,Q703593
+Q206682,Quatrième Internationale,QI,1938,,Q11885155,trotskyste,fusion,"taliniens forment diverses organisations communistes indépendantes de [[Moscou]], certaines se regroupant au niveau international, par exemple dans l'[[Opposition communiste internationale]] (« [[Heinrich Brandler|brandlériens]] »), ou par fusion avec des socialistes révolutionnaires dans le [[Centre marxiste révolutio",fr:Quatrième Internationale,
+Q1984016,Quatrième Internationale (lambertiste),,1938,,,trotskyste,,,,
+Q183533,Kominform,,1947,1956,Q163931,autre,refondation,| précédent           = [[Internationale communiste]],fr:Kominform,
+Q159454,Internationale socialiste,IS,1951,,Q703593,socialiste,refondation,| suivant             = [[Internationale socialiste]] (1951),fr:Internationale ouvrière socialiste,
+Q125963179,Internationale communiste libertaire,,1954,1958,,anarchiste,,,,
+Q2634710,Quatrième Internationale - Secrétariat unifié,,1963,,,trotskyste,,,,Q206682
+Q133795,Internationale des fédérations anarchistes,,1968,,,anarchiste,,,,
+Q25079,Parti de l'Alliance des libéraux et des démocrates pour l'Europe,,1976,,,autre,,,,
+Q639383,Alliance libre européenne,ALE,1981,,,régionaliste,,,,
+Q2455815,Courant Révolution Permanente – Quatrième Internationale,,1989,,,trotskyste,,,,Q599328
+Q2915940,Forum de São Paulo,,1990,,,autre,,,,
+Q3055019,Entente internationale des travailleurs et des peuples,,1991,,,autre,,,,
+Q220945,Parti socialiste européen,PSE,1992,,,socialiste,,,,
+Q622227,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte),,1994,,,communiste,,,,
+Q5413387,Gauche unitaire européenne,,1994,1995,,autre,,,,
+Q753711,Groupe de la Gauche au Parlement européen,,1995,,Q5413387,gauche radicale,fusion,| fusion de = [[Gauche unitaire européenne (1994-1995)| Gauche unitaire européenne]],fr:Groupe de la Gauche au Parlement européen,
+Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),,1996,2011,,communiste,,,,
+Q2440449,Rencontre internationale des partis communistes et ouvriers,,1998,,,communiste,,,,
+Q1377231,Gauche anticapitaliste européenne,,2000,,,gauche radicale,,,,
+Q649752,Solidarité internationale libertaire,,2001,,,anarchiste,,,,
+Q202649,Parti de la gauche européenne,PGE,2004,,,gauche radicale,,,,
+Q950179,Parti vert européen,PVE,2004,,,écologiste,,,,
+Q170,Parti pirate international,,2010,,,autre,,,,
+Q7248622,Alliance progressiste,,2013,,,autre,,,,
+Q15081858,Parti pirate européen,,2014,,,autre,,,,
+Q123785828,Action Communiste Européenne,,2023,,,communiste,,,,
+Q130219314,Alliance de la gauche européenne pour les peuples et la planète,,2024,,,gauche radicale,,,,
+Q2838098,Alliance européenne des mouvements critiques envers l'Union européenne,,,,,autre,,,,
+Q3240310,Ligue communiste internationale (quatrième internationaliste),,,,,trotskyste,,,,
+Q1073391,Union communiste internationaliste,UCI,,,,trotskyste,,,,

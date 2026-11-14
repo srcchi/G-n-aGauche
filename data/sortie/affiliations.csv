@@ -1,71 +1,64 @@
-party_id,international_id,start,end,date_certainty,source,party_nom,international_nom
-Q1045425,Q1377231,2009,2022,unknown,wikidata | wikipedia,Nouveau Parti anticapitaliste,Gauche anticapitaliste européenne
-Q1125061,Q639383,1986,,unknown,wikidata,Eusko Alkartasuna,Alliance libre européenne
-Q1145020,Q639383,1981,,unknown,wikidata | wikipedia,Union démocratique bretonne,Alliance libre européenne
-Q125771262,Q2634710,2022,,unknown,correction,Nouveau Parti anticapitaliste – L'Anticapitaliste,Quatrième Internationale - Secrétariat unifié
-Q1332068,Q159454,1951,1969,unknown,wikipedia,Section française de l'Internationale ouvrière,Internationale socialiste
-Q1332068,Q188592,1905,1923,unknown,wikipedia,Section française de l'Internationale ouvrière,Internationale ouvrière
-Q1332068,Q698677,1921,1923,unknown,wikipedia,Section française de l'Internationale ouvrière,Union des partis socialistes pour l'action internationale
-Q1332068,Q703593,1923,1940,unknown,wikidata | wikipedia,Section française de l'Internationale ouvrière,Internationale ouvrière socialiste
-Q1393793,Q206682,1944,1968,unknown,wikipedia,Parti communiste internationaliste,Quatrième Internationale
-Q1418625,Q639383,2002,,unknown,wikidata,Partitu di a Nazione Corsa,Alliance libre européenne
-Q1495924,Q202649,2009,2015,unknown,wikidata | wikipedia,Gauche unitaire,Parti de la gauche européenne
-Q1539236,Q639383,1987,,unknown,wikidata,Parti occitan,Alliance libre européenne
-Q1542710,Q25079,1976,,unknown,wikidata,Parti radical (France),Parti de l'Alliance des libéraux et des démocrates pour l'Europe
-Q16010672,Q649752,2001,2019,unknown,wikidata,Alternative libertaire (France),Solidarité internationale libertaire
-Q1618280,Q622519,1996,2011,unknown,wikipedia,Voix prolétarienne,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale)
-Q1694377,Q123631784,2022,,unknown,wikidata,Pôle de renaissance communiste en France,World Anti-Imperialist Platform
-Q17008204,Q3240310,,,unknown,wikipedia,Ligue trotskyste de France,Ligue communiste internationale (quatrième internationaliste)
-Q170972,Q159454,1969,,unknown,wikidata | wikipedia,Parti socialiste (France),Internationale socialiste
-Q170972,Q220945,1992,,unknown,wikidata | wikipedia,Parti socialiste (France),Parti socialiste européen
-Q170972,Q7248622,2013,,unknown,wikidata | wikipedia,Parti socialiste (France),Alliance progressiste
-Q192821,Q183533,1947,1956,unknown,wikidata,Parti communiste français,Kominform
-Q192821,Q202649,2004,,unknown,wikidata | wikipedia,Parti communiste français,Parti de la gauche européenne
-Q192821,Q2440449,1998,,unknown,wikipedia,Parti communiste français,Rencontre internationale des partis communistes et ouvriers
-Q2054444,Q753711,1995,,unknown,wikipedia,Parti communiste réunionnais,Groupe de la Gauche au Parlement européen
-Q22674451,Q60574856,2020,,unknown,wikidata,Mouvement pour la démocratie en Europe : Diem 25,International progressif
-Q22981822,Q2455815,2011,,unknown,wikipedia,Révolution permanente (parti politique),Courant Révolution Permanente – Quatrième Internationale
-Q24939885,Q139565740,2016,,unknown,wikidata,"Parti des travailleurs (France, 2015)",Comité ouvrier international contre la guerre et l’exploitation pour l’Internationale ouvrière
-Q2575147,Q2440449,1998,,unknown,wikipedia,Parti communiste guadeloupéen,Rencontre internationale des partis communistes et ouvriers
-Q2638999,Q1984016,2015,,unknown,wikipedia,Parti ouvrier indépendant,Quatrième Internationale (lambertiste)
-Q2638999,Q3055019,2015,,unknown,wikipedia,Parti ouvrier indépendant,Entente internationale des travailleurs et des peuples
-Q27978402,Q130219314,2024,,unknown,wikidata | wikipedia,La France insoumise,Alliance de la gauche européenne pour les peuples et la planète
-Q2984984,Q1073391,1965,,unknown,wikipedia,Combat ouvrier,Union communiste internationaliste
-Q3058074,Q639383,1995,,unknown,wikidata,Régions et peuples solidaires,Alliance libre européenne
-Q3068323,Q639383,2010,,unknown,wikidata,Femu a Corsica,Alliance libre européenne
-Q3082926,Q639383,1984,2008,unknown,wikidata | wikipedia,Frankiz Breizh,Alliance libre européenne
-Q3091443,Q133795,1968,,unknown,wikidata | wikipedia,Fédération anarchiste (francophone),Internationale des fédérations anarchistes
-Q3091492,Q125963179,1954,1957,unknown,wikipedia,Fédération communiste libertaire (1953-1957),Internationale communiste libertaire
-Q3091561,Q159454,1951,,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Internationale socialiste
-Q3091561,Q220945,1992,,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Parti socialiste européen
-Q3091561,Q7248622,2013,,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Alliance progressiste
-Q3099352,Q158073,1992,,unknown,wikidata,Gauche révolutionnaire,Comité pour une Internationale ouvrière
-Q3107400,Q639383,1988,2009,unknown,wikidata,Union du peuple alsacien,Alliance libre européenne
-Q3117914,Q2634710,1972,,unknown,wikipedia,Groupe révolution socialiste,Quatrième Internationale - Secrétariat unifié
-Q3230452,Q2838098,1998,2015,unknown,wikipedia,Les Alternatifs,Alliance européenne des mouvements critiques envers l'Union européenne
-Q3355979,Q649752,2001,,unknown,wikipedia,Organisation communiste libertaire,Solidarité internationale libertaire
-Q3356082,Q133795,1968,1976,unknown,wikipedia,Organisation révolutionnaire anarchiste,Internationale des fédérations anarchistes
-Q3366206,Q622227,1994,,unknown,wikipedia,Parti communiste des ouvriers de France,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)
-Q3366212,Q163931,1919,1921,unknown,wikipedia,"Parti communiste (France, 1919)",Internationale communiste
-Q3366231,Q2915940,1990,,unknown,wikipedia,Parti communiste pour l'indépendance et le socialisme,Forum de São Paulo
-Q3366769,Q1423578,1938,1940,unknown,wikidata | wikipedia,Parti socialiste ouvrier et paysan,Centre marxiste révolutionnaire international
-Q3456455,Q202649,2009,,unknown,wikidata,République et socialisme,Parti de la gauche européenne
-Q3550479,Q703593,1935,1940,unknown,wikipedia,Union socialiste républicaine,Internationale ouvrière socialiste
-Q5291,Q15081858,2014,,unknown,wikidata,Parti pirate,Parti pirate européen
-Q5291,Q170,2010,,unknown,wikidata,Parti pirate,Parti pirate international
-Q538664,Q206682,1938,1944,unknown,wikipedia,Parti ouvrier internationaliste,Quatrième Internationale
-Q58329311,Q202649,2018,,unknown,wikidata | wikipedia,Gauche républicaine et socialiste,Parti de la gauche européenne
-Q58366009,Q220945,2018,,unknown,wikidata | wikipedia,Place publique (parti politique),Parti socialiste européen
-Q613786,Q950179,2010,,unknown,wikidata,Les Écologistes – Europe Écologie Les Verts,Parti vert européen
-Q628594,Q3055019,1991,2008,unknown,wikipedia,"Parti des travailleurs (France, 1991)",Entente internationale des travailleurs et des peuples
-Q63483685,Q123785828,2023,,unknown,wikidata,Parti communiste révolutionnaire de France,Action Communiste Européenne
-Q7205536,Q159454,1972,,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Internationale socialiste
-Q7205536,Q220945,1992,,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Parti socialiste européen
-Q7205536,Q7248622,2013,,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Alliance progressiste
-Q743390,Q950179,2004,2010,unknown,wikidata,Les Verts,Parti vert européen
-Q862627,Q1377231,2000,2009,unknown,wikidata | wikipedia,Ligue communiste révolutionnaire,Gauche anticapitaliste européenne
-Q862627,Q2634710,1974,2009,unknown,wikipedia,Ligue communiste révolutionnaire,Quatrième Internationale - Secrétariat unifié
-Q870667,Q1073391,1939,,unknown,wikipedia,Lutte ouvrière,Union communiste internationaliste
-Q922707,Q753711,2008,,unknown,wikidata | wikipedia,Parti de gauche (France),Groupe de la Gauche au Parlement européen
-Q924501,Q639383,1981,,unknown,wikidata,Sabaudia-MRS,Alliance libre européenne
-fr:Parti communiste révolutionnaire (2024),Q1631185,2024,,unknown,correction,Parti communiste révolutionnaire,Internationale communiste révolutionnaire
+party_id,international_id,start,end,date_certainty,source,party_nom,international_nom,preuve,citation,source_citation
+Q1045425,Q1377231,2009,,unknown,wikidata | wikipedia,Nouveau Parti anticapitaliste,Gauche anticapitaliste européenne,explicite,| affi européenne     = [[Gauche anticapitaliste européenne]],fr:Nouveau Parti anticapitaliste
+Q1125061,Q639383,1986,toujours membre,unknown,wikidata,Eusko Alkartasuna,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Eusko Alkartasuna
+Q1145020,Q639383,1981,toujours membre,unknown,wikidata | wikipedia,Union démocratique bretonne,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne|Alliance libre<br />européenne]] (ALE),fr:Union démocratique bretonne
+Q1332068,Q159454,1951,1969,unknown,wikipedia,Section française de l'Internationale ouvrière,Internationale socialiste,explicite,"| affi internationale = [[Internationale ouvrière|Deuxième Internationale]], [[Union des partis socialistes pour l'action internationale]], [[Internationale ouvrière socialiste]], [[Internationale socialiste]]",fr:Section française de l'Internationale ouvrière
+Q1332068,Q188592,1905,1923,unknown,wikipedia,Section française de l'Internationale ouvrière,Internationale ouvrière,explicite,"| affi internationale = [[Internationale ouvrière|Deuxième Internationale]], [[Union des partis socialistes pour l'action internationale]], [[Internationale ouvrière socialiste]], [[Internationale socialiste]]",fr:Section française de l'Internationale ouvrière
+Q1332068,Q698677,1921,1923,unknown,wikipedia,Section française de l'Internationale ouvrière,Union des partis socialistes pour l'action internationale,explicite,"| affi internationale = [[Internationale ouvrière|Deuxième Internationale]], [[Union des partis socialistes pour l'action internationale]], [[Internationale ouvrière socialiste]], [[Internationale socialiste]]",fr:Section française de l'Internationale ouvrière
+Q1332068,Q703593,1923,1940,unknown,wikidata | wikipedia,Section française de l'Internationale ouvrière,Internationale ouvrière socialiste,explicite,"| affi internationale = [[Internationale ouvrière|Deuxième Internationale]], [[Union des partis socialistes pour l'action internationale]], [[Internationale ouvrière socialiste]], [[Internationale socialiste]]",fr:Section française de l'Internationale ouvrière
+Q1393793,Q206682,1944,1968,unknown,wikipedia,Parti communiste internationaliste,Quatrième Internationale,explicite,| affi internationale = [[Quatrième Internationale]],fr:Parti communiste internationaliste
+Q1418625,Q639383,2002,toujours membre,unknown,wikidata,Partitu di a Nazione Corsa,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Partitu di a Nazione Corsa
+Q1495924,Q202649,2009,2015,unknown,wikidata | wikipedia,Gauche unitaire,Parti de la gauche européenne,explicite,| affi européenne     = [[Parti de la gauche européenne]],fr:Gauche unitaire
+Q1539236,Q639383,1987,toujours membre,unknown,wikidata,Parti occitan,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Partit occitan
+Q1542710,Q25079,1976,toujours membre,unknown,wikidata,Parti radical (France),Parti de l'Alliance des libéraux et des démocrates pour l'Europe,explicite,| affi européenne     = [[Parti de l'Alliance des libéraux et des démocrates pour l'Europe|ALDE]],fr:Parti radical (France)
+Q16010672,Q649752,2001,2019,unknown,wikidata,Alternative libertaire (France),Solidarité internationale libertaire,explicite,"À l'échelon international, AL a jadis été membre du réseau [[Solidarité internationale libertaire]], et s'inscrit depuis 2005 dans le réseau communiste libertaire [[Plateformisme#Anarkismo.net|Anarkismo]], qui se réclame à la fois du [[plateformisme]] et de l'''[[especifismo]]''.",fr:Alternative libertaire (France)
+Q1618280,Q622519,1996,toujours membre,unknown,wikipedia,Voix prolétarienne,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),explicite,| affi internationale =  [[Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale)|ICMLPO]],fr:Voix prolétarienne
+Q17008204,Q3240310,,,unknown,wikipedia,Ligue trotskyste de France,Ligue communiste internationale (quatrième internationaliste),explicite,| affi internationale = [[Ligue communiste internationale (quatrième internationaliste)]],fr:Ligue trotskyste de France
+Q170972,Q159454,1969,toujours membre,unknown,wikidata | wikipedia,Parti socialiste (France),Internationale socialiste,explicite,| affi internationale = [[Internationale socialiste]]<br/>[[Alliance progressiste]],fr:Parti socialiste (France)
+Q170972,Q220945,1992,toujours membre,unknown,wikidata | wikipedia,Parti socialiste (France),Parti socialiste européen,explicite,| affi européenne     = [[Parti socialiste européen]],fr:Parti socialiste (France)
+Q170972,Q7248622,2013,toujours membre,unknown,wikidata | wikipedia,Parti socialiste (France),Alliance progressiste,explicite,| affi internationale = [[Internationale socialiste]]<br/>[[Alliance progressiste]],fr:Parti socialiste (France)
+Q192821,Q183533,1947,1956,unknown,wikidata,Parti communiste français,Kominform,deduit,"La même année, le [[Kominform]] donne pour nouvelle direction stratégique aux différents partis communistes de s'opposer aux politiques gouvernementales : le PCF [[1947 en France#Novembre|lance des grèves massives]]<ref>{{Chapitre |prénom1=Éric |nom1= Méchoulan|titre chapitre=Le pouvoir face aux grèves « insurrectionne",fr:Parti communiste français
+Q192821,Q202649,2004,toujours membre,unknown,wikidata | wikipedia,Parti communiste français,Parti de la gauche européenne,explicite,| affi européenne     = [[Parti de la gauche européenne]] <small>(depuis 2004)</small>,fr:Parti communiste français
+Q192821,Q2440449,1998,toujours membre,unknown,wikipedia,Parti communiste français,Rencontre internationale des partis communistes et ouvriers,explicite,| affi internationale = [[Rencontre internationale des partis communistes et ouvriers]] <small>(depuis 1998)</small>,fr:Parti communiste français
+Q2054444,Q753711,1995,toujours membre,unknown,wikipedia,Parti communiste réunionnais,Groupe de la Gauche au Parlement européen,explicite,| affi européenne     = [[Gauche unitaire européenne/Gauche verte nordique|GUE-NGL]],fr:Parti communiste réunionnais
+Q22981822,Q2455815,2011,toujours membre,unknown,wikipedia,Révolution permanente (parti politique),Courant Révolution Permanente – Quatrième Internationale,explicite,| affi internationale = [[Courant Révolution Permanente – Quatrième Internationale]],fr:Révolution permanente (parti politique)
+Q2575147,Q2440449,1998,toujours membre,unknown,wikipedia,Parti communiste guadeloupéen,Rencontre internationale des partis communistes et ouvriers,explicite,| affi internationale = [[Conférences internationales des partis communistes et ouvriers]],fr:Parti communiste guadeloupéen
+Q2638999,Q1984016,2015,toujours membre,unknown,wikipedia,Parti ouvrier indépendant,Quatrième Internationale (lambertiste),explicite,"| affi internationale = [[Quatrième Internationale (lambertiste)]]<br>[[Entente internationale des travailleurs et des peuples]]<br>Comité pour une entente européenne des travailleurs<ref name=""POI-2010"">{{Lien web |titre=Déclaration finale de la conférence ouvrière européenne à Berlin en juin 2010, à l'issue de laquelle le POI se constitue avec d'autres organisations politiques d'Europe en Comité pour une Entente européenne des travailleurs. |url=http://www.parti-ouvrier-independant.com/spip/spip.php?article903 |site=parti-ouvrier-independant.com |consulté le= |brisé le=3 octobre 2026 |archive-url=https://archive.wikiwix.com/cache/index2.php?url=http%3A%2F%2Fwww.parti-ouvrier-independant.com%2Fspip%2Fspip.php%3Farticle903 |archive-date=24 février 2011}}.</ref>",fr:Parti ouvrier indépendant
+Q2638999,Q3055019,2015,toujours membre,unknown,wikipedia,Parti ouvrier indépendant,Entente internationale des travailleurs et des peuples,explicite,"| affi internationale = [[Quatrième Internationale (lambertiste)]]<br>[[Entente internationale des travailleurs et des peuples]]<br>Comité pour une entente européenne des travailleurs<ref name=""POI-2010"">{{Lien web |titre=Déclaration finale de la conférence ouvrière européenne à Berlin en juin 2010, à l'issue de laquelle le POI se constitue avec d'autres organisations politiques d'Europe en Comité pour une Entente européenne des travailleurs. |url=http://www.parti-ouvrier-independant.com/spip/spip.php?article903 |site=parti-ouvrier-independant.com |consulté le= |brisé le=3 octobre 2026 |archive-url=https://archive.wikiwix.com/cache/index2.php?url=http%3A%2F%2Fwww.parti-ouvrier-independant.com%2Fspip%2Fspip.php%3Farticle903 |archive-date=24 février 2011}}.</ref>",fr:Parti ouvrier indépendant
+Q27978402,Q130219314,2024,toujours membre,unknown,wikidata | wikipedia,La France insoumise,Alliance de la gauche européenne pour les peuples et la planète,explicite,| affi européenne     = [[Alliance de la gauche européenne pour les peuples et la planète]]<br>[[Maintenant le peuple]],fr:La France insoumise
+Q2984984,Q1073391,1965,toujours membre,unknown,wikipedia,Combat ouvrier,Union communiste internationaliste,explicite,|affi internationale = [[Union communiste internationaliste]],fr:Combat ouvrier
+Q3058074,Q639383,1995,toujours membre,unknown,wikidata,Régions et peuples solidaires,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Régions et peuples solidaires
+Q3068323,Q639383,2010,toujours membre,unknown,wikidata,Femu a Corsica,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Femu a Corsica
+Q3082926,Q639383,1984,2008,unknown,wikidata | wikipedia,Frankiz Breizh,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Frankiz Breizh
+Q3091443,Q133795,1968,toujours membre,unknown,wikidata | wikipedia,Fédération anarchiste (francophone),Internationale des fédérations anarchistes,explicite,| affi internationale = [[Internationale des fédérations anarchistes]],fr:Fédération anarchiste (francophone)
+Q3091492,Q125963179,1954,1957,unknown,wikipedia,Fédération communiste libertaire (1953-1957),Internationale communiste libertaire,explicite,| affi internationale = [[Internationale communiste libertaire]],fr:Fédération communiste libertaire (1953-1957)
+Q3091561,Q159454,1951,toujours membre,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Internationale socialiste,explicite,| affi internationale = [[Internationale socialiste]]<br />[[Alliance progressiste]],fr:Fédération de la Guyane du Parti socialiste
+Q3091561,Q220945,1992,toujours membre,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Parti socialiste européen,explicite,| affi européenne = [[Parti socialiste européen]],fr:Fédération de la Guyane du Parti socialiste
+Q3091561,Q7248622,2013,toujours membre,unknown,wikipedia,Fédération de la Guyane du Parti socialiste,Alliance progressiste,explicite,| affi internationale = [[Internationale socialiste]]<br />[[Alliance progressiste]],fr:Fédération de la Guyane du Parti socialiste
+Q3107400,Q639383,1988,2009,unknown,wikidata,Union du peuple alsacien,Alliance libre européenne,explicite,| affi européenne = [[Alliance libre européenne]],fr:Union du peuple alsacien
+Q3117914,Q2634710,1972,toujours membre,unknown,wikipedia,Groupe révolution socialiste,Quatrième Internationale - Secrétariat unifié,explicite,| affi internationale = [[Quatrième Internationale - Secrétariat unifié]],fr:Groupe révolution socialiste
+Q3230452,Q2838098,1998,2015,unknown,wikipedia,Les Alternatifs,Alliance européenne des mouvements critiques envers l'Union européenne,explicite,| affi européenne     = [[Alliance européenne des mouvements critiques envers l'Union européenne]],fr:Les Alternatifs
+Q3355979,Q649752,2001,toujours membre,unknown,wikipedia,Organisation communiste libertaire,Solidarité internationale libertaire,explicite,| affi internationale = [[Solidarité internationale libertaire]],fr:Organisation communiste libertaire
+Q3356082,Q133795,1968,1976,unknown,wikipedia,Organisation révolutionnaire anarchiste,Internationale des fédérations anarchistes,explicite,| affi internationale = [[Internationale des fédérations anarchistes]] (1968-1971),fr:Organisation révolutionnaire anarchiste
+Q3366206,Q622227,1994,toujours membre,unknown,wikipedia,Parti communiste des ouvriers de France,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte),explicite,| affi internationale = [[Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte)]],fr:Parti communiste des ouvriers de France
+Q3366212,Q163931,1919,1921,unknown,wikipedia,"Parti communiste (France, 1919)",Internationale communiste,explicite,| affi internationale = [[Internationale communiste]],"fr:Parti communiste (France, 1919)"
+Q3366231,Q2915940,1990,,unknown,wikipedia,Parti communiste pour l'indépendance et le socialisme,Forum de São Paulo,explicite,| affi internationale = [[Forum de São Paulo]],fr:Parti communiste pour l'indépendance et le socialisme
+Q3366769,Q1423578,1938,1940,unknown,wikidata | wikipedia,Parti socialiste ouvrier et paysan,Centre marxiste révolutionnaire international,explicite,| affi internationale = [[Centre marxiste révolutionnaire international]],fr:Parti socialiste ouvrier et paysan
+Q3550479,Q703593,1935,1940,unknown,wikipedia,Union socialiste républicaine,Internationale ouvrière socialiste,explicite,| affi internationale = [[Internationale ouvrière socialiste]],fr:Union socialiste républicaine
+Q5291,Q15081858,2014,toujours membre,unknown,wikidata,Parti pirate,Parti pirate européen,explicite,| affi européenne     = [[Parti pirate européen]],fr:Parti pirate (France)
+Q5291,Q170,2010,toujours membre,unknown,wikidata,Parti pirate,Parti pirate international,explicite,| affi internationale = [[Parti pirate international]] (2010-2024),fr:Parti pirate (France)
+Q538664,Q206682,1938,1944,unknown,wikipedia,Parti ouvrier internationaliste,Quatrième Internationale,explicite,| affi internationale = [[Quatrième Internationale]],fr:Parti ouvrier internationaliste
+Q58329311,Q202649,2018,toujours membre,unknown,wikidata | wikipedia,Gauche républicaine et socialiste,Parti de la gauche européenne,explicite,| affi européenne     = [[Parti de la gauche européenne]],fr:Gauche républicaine et socialiste
+Q58366009,Q220945,2018,toujours membre,unknown,wikidata | wikipedia,Place publique (parti politique),Parti socialiste européen,explicite,| affi européenne     = [[Parti socialiste européen]],fr:Place publique (parti politique)
+Q613786,Q950179,2010,toujours membre,unknown,wikidata,Les Écologistes – Europe Écologie Les Verts,Parti vert européen,explicite,| affi européenne     = [[Parti vert européen]],fr:Les Écologistes
+Q628594,Q3055019,1991,2008,unknown,wikipedia,"Parti des travailleurs (France, 1991)",Entente internationale des travailleurs et des peuples,explicite,| affi internationale = [[Entente internationale des travailleurs et des peuples]],"fr:Parti des travailleurs (France, 1991)"
+Q63483685,Q123785828,2023,toujours membre,unknown,wikidata,Parti communiste révolutionnaire de France,Action Communiste Européenne,explicite,| european         = [[Initiative of Communist and Workers' Parties|INITIATIVE]] (2013–2023)<br />[[European Communist Action|ECA]] (2023–)<ref>{{cite web|url=https://www.idcommunism.com/2023/11/european-communist-actions-founding-declaration.html?m=1|title=European Communist Action's Founding Declaration|date=27 November 2023|access-date=1 December 2023}}</ref>,en:Communist Revolutionary Party of France
+Q7205536,Q159454,1972,toujours membre,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Internationale socialiste,explicite,| affi internationale = [[Internationale socialiste]]<br>[[Alliance progressiste]],fr:Fédération guadeloupéenne du Parti socialiste
+Q7205536,Q220945,1992,toujours membre,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Parti socialiste européen,explicite,| affi européenne     = [[Parti socialiste européen]],fr:Fédération guadeloupéenne du Parti socialiste
+Q7205536,Q7248622,2013,toujours membre,unknown,wikipedia,Fédération guadeloupéenne du Parti socialiste,Alliance progressiste,explicite,| affi internationale = [[Internationale socialiste]]<br>[[Alliance progressiste]],fr:Fédération guadeloupéenne du Parti socialiste
+Q743390,Q950179,2004,2010,unknown,wikidata,Les Verts,Parti vert européen,explicite,| affi européenne     = [[Parti vert européen]],fr:Les Verts (France)
+Q862627,Q1377231,2000,2009,unknown,wikidata | wikipedia,Ligue communiste révolutionnaire,Gauche anticapitaliste européenne,explicite,| affi européenne     = [[Gauche anticapitaliste européenne]],fr:Ligue communiste révolutionnaire
+Q862627,Q2634710,1974,2009,unknown,wikipedia,Ligue communiste révolutionnaire,Quatrième Internationale - Secrétariat unifié,explicite,| affi internationale = [[Quatrième Internationale - Secrétariat unifié|{{IVe}} Internationale (secrétariat unifié)]],fr:Ligue communiste révolutionnaire
+Q870667,Q1073391,1939,toujours membre,unknown,wikipedia,Lutte ouvrière,Union communiste internationaliste,explicite,| affi internationale = [[Union communiste internationaliste]],fr:Lutte ouvrière
+Q922707,Q753711,2008,toujours membre,unknown,wikidata | wikipedia,Parti de gauche (France),Groupe de la Gauche au Parlement européen,explicite,| affi européenne     = [[Groupe de la Gauche au Parlement européen|GUE/NGL]],fr:Parti de gauche (France)
+Q924501,Q639383,1981,toujours membre,unknown,wikidata,Sabaudia-MRS,Alliance libre européenne,explicite,| affi européenne   = [[Alliance libre européenne]]<br>[[Régions et peuples solidaires]],fr:Sabaudia - Mouvement Région Savoie

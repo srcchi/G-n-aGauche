@@ -20,6 +20,7 @@ import re
 import unicodedata
 from collections import Counter, defaultdict, deque
 
+import preuves
 from fusion import (ANCIEN, FRANCE, HUMAIN, NON_POLITIQUE, POLITIQUE, RX_CAT_DISPARU,
                     RX_CATEGORIE, RX_DROITE, RX_ETRANGER_CAT, RX_FRANCE_CAT, RX_GAUCHE,
                     RX_NOM_GAUCHE)
@@ -30,6 +31,9 @@ SORTIE = os.path.join(DATA, "sortie")
 MANUEL = os.path.join(DATA, "manuel")
 LIGNEE = ("filiation", "scission", "passage")
 ORDRE_TYPES = ["appartenance", "emanation", "filiation", "scission", "passage"]
+# Relations typées (1.2) : celles qui font une lignée (R5), celles où l'ancêtre disparaît
+REL_LIGNEE = ("renommage", "scission", "fusion", "absorption", "refondation", "filiation_idéologique")
+REL_SUCCESSION = ("renommage", "fusion", "absorption", "refondation")
 # Types des liens saisis à la main ou validés (phase 0) -> types internes
 TYPE_LIEN_MANUEL = {"filiation": "filiation", "renommage": "filiation", "fusion": "filiation",
                     "scission": "scission", "passage_militants": "passage", "passage": "passage",
@@ -216,9 +220,21 @@ def mois_infobox(texte, champs, an):
     return None
 
 
+# Exclusions explicites à retester (1.5) : gardées seulement avec un lien documenté explicitement
+RX_A_RETESTER = re.compile(r"^(Union démocratique bretonne|Union des étudiants communistes|Voix prolétarienne|"
+                           r"Parti communiste des ouvriers de France|Parti communiste martiniquais|"
+                           r"Mouvement socialiste guadeloupéen|Fédération guadeloupéenne du Parti socialiste|"
+                           r"Fédération nationale des anarchistes|FNARC|Gauche révolutionnaire \(1935-1938\)|"
+                           r"Union des clubs pour le renouveau de la gauche)")
+
 # ---------- Types d'organisation (étape 6) ----------
-TYPES = ["parti_ou_organisation", "coalition", "satellite", "groupe_arme", "syndicat",
-         "club_ou_cercle", "media", "etrangere", "international_ou_federation_europeenne"]
+# Types (1.1). Les anciens noms (première version de types.csv) sont convertis à la lecture.
+TYPES = ["parti", "coalition", "satellite", "internationale", "fondatrice", "étrangère"]
+ANCIENS_TYPES = {"parti_ou_organisation": "parti", "international_ou_federation_europeenne": "internationale",
+                 "etrangere": "étrangère", "groupe_arme": "satellite", "syndicat": "satellite",
+                 "club_ou_cercle": "satellite", "media": "satellite"}
+DETAIL_TYPE = {"groupe_arme": "groupe armé", "syndicat": "syndicat", "club_ou_cercle": "club ou cercle",
+               "media": "média"}
 # Liste explicite des coalitions (demandée) ; comparaison sans accents ni casse
 COALITIONS = ["Front populaire", "Front populaire (France)", "Nouvelle Union populaire écologique et sociale",
               "Nouveau Front populaire", "Gauche plurielle", "Front de gauche", "Front de gauche (France)",
@@ -288,11 +304,13 @@ def classer_types(noeuds, classe, wikitext, stats, aretes=None):
     saisis = {r["id"]: r for r in lire(os.path.join("manuel", "types.csv"))}
     libs = libelles_types({t for q in a_classer for t in noeuds[q]["types"]})
     coalitions = {normaliser(c) for c in COALITIONS}
-    n_lignee = Counter()
+    n_lignee, ancetres_de_partis = Counter(), set()
     for (a, b), e in (aretes or {}).items():
         if e["type"] in ("filiation", "scission", "passage"):
             n_lignee[a] += 1
             n_lignee[b] += 1
+            if e["type"] != "passage" and classe.get(b) == "graphe":
+                ancetres_de_partis.add(a)
     types_org, lignes = {}, []
     for q in a_classer:
         d = noeuds[q]
@@ -343,18 +361,26 @@ def classer_types(noeuds, classe, wikitext, stats, aretes=None):
                         break
             if t is None:
                 t, pourquoi = "parti_ou_organisation", "aucun indice contraire"
+        # Nouveau vocabulaire ; « fondatrice » : coalition ou satellite ancêtre d'un parti (R6)
+        if t in DETAIL_TYPE:
+            pourquoi = f"{DETAIL_TYPE[t]} ; {pourquoi}"
+        t = ANCIENS_TYPES.get(t, t)
+        if t in ("satellite", "coalition") and q in ancetres_de_partis:
+            pourquoi = f"{t} ancêtre d'un parti (organisme fondateur) ; {pourquoi}"
+            t = "fondatrice"
         drapeaux = []
         if classe[q] == "graphe" and RX_SEMBLE_INTER.search(d["label"]) and "Section française" not in d["label"]:
             drapeaux.append("ressemble à une Internationale : à vérifier")
         if RX_DOUTEUX.search(d["label"]):
             drapeaux.append("périmètre discutable (radicaux) : à trancher")
-        if t in ("satellite", "coalition") and n_lignee.get(q):
+        if t == "fondatrice" and n_lignee.get(q):
             # Ex. la JCR (1966) : organisation de jeunesse, mais ancêtre de la Ligue communiste
             drapeaux.append(f"a {n_lignee[q]} lien(s) de lignée : la retirer coupe la généalogie, à vérifier")
         auto = (t, pourquoi + (" ; " + " ; ".join(drapeaux) if drapeaux else ""))
         s = saisis.get(q)
-        if s and s.get("type", "").strip() in TYPES:
-            types_org[q] = s["type"].strip()       # saisie à la main : prioritaire
+        t_saisi = ANCIENS_TYPES.get(s.get("type", "").strip(), s.get("type", "").strip()) if s else ""
+        if t_saisi in TYPES and s.get("valide", "").strip():
+            types_org[q] = t_saisi                 # ligne validée à la main : prioritaire
             stats["types_saisis"] += 1
         else:
             types_org[q] = auto[0]
@@ -369,7 +395,11 @@ def ecrire_manuel_types(lignes, stats):
     existants = set()
     if os.path.exists(chemin):
         with open(chemin, encoding="utf-8") as f:
-            existants = {r["id"] for r in csv.DictReader(f)}
+            deja = list(csv.DictReader(f))
+        # Aucune ligne validée à la main et ancien vocabulaire : le fichier n'est qu'un
+        # préremplissage, on peut le régénérer. Sinon, on n'ajoute que les nouvelles lignes.
+        if any(r.get("valide", "").strip() for r in deja) or                 not any(r.get("type") in ANCIENS_TYPES for r in deja):
+            existants = {r["id"] for r in deja}
     nouvelles = [l for l in sorted(lignes, key=lambda l: (l[2] != "parti_ou_organisation", l[2], l[1]))
                  if l[0] not in existants]
     os.makedirs(MANUEL, exist_ok=True)
@@ -386,9 +416,33 @@ def normaliser(s):
     return re.sub(r"\s+", " ", "".join(c for c in s if unicodedata.category(c) != "Mn")).strip()
 
 
+MOTS_VIDES_SIGLE = {"de", "la", "le", "les", "des", "du", "pour", "l", "d", "et", "à", "en", "au", "aux",
+                    "un", "une", "sur", "contre"}
+RX_SIGLE_ARTICLE = re.compile(r"'''[^'\n]{3,120}'''\s*\(\s*(?:'''|'')?([A-ZÉÈ][A-Za-zÉÈÀéèàô0-9\-.&]{1,11})"
+                              r"(?:'''|'')?\s*[),]")
+
+
+def etiquette_de(q, label, sigle_saisi, texte):
+    """Étiquette courte : sigle saisi ; sinon sigle de la première phrase de l'article ; sinon
+    acronyme du nom usuel (« Alliance communiste révolutionnaire » -> « ACR ») ; sinon nom raccourci."""
+    if sigle_saisi.strip():
+        return sigle_saisi.strip(), "sigles.csv"
+    m = RX_SIGLE_ARTICLE.search(texte[:3000])
+    if m and m.group(1).upper() == m.group(1):
+        return m.group(1), "article"
+    nom = re.sub(r"\s*\([^)]*\)$", "", label).strip()
+    mots = [w for w in re.findall(r"[^\W\d_]+", nom) if w.lower() not in MOTS_VIDES_SIGLE]
+    if len(mots) >= 3:
+        return "".join(w[0].upper() for w in mots), "acronyme du nom"
+    if len(nom) <= 24:
+        return nom, "nom court"
+    return nom[:23].rsplit(" ", 1)[0] + "…", "nom raccourci"
+
+
 def main():
     os.makedirs(SORTIE, exist_ok=True)
     stats = Counter()
+    corpus = preuves.Corpus()      # wikitextes bruts en cache, pour les citations (R8)
     wd = lire_json("cache_wikidata_orgs.json")
     wikitext = {(d["qid"] or f"fr:{t}"): d["text"] for t, d in lire_json("cache_wikitext.json").items()}
     # Articles téléchargés en phase 0 (enrichissement.py) : titre français donné par Wikidata
@@ -635,11 +689,11 @@ def main():
     # Le type saisi dans types.csv l'emporte toujours sur le préremplissage.
     types_org, lignes_types = classer_types(noeuds, classe, wikitext, stats, aretes)
     for q, t in types_org.items():
-        if t == "international_ou_federation_europeenne":
+        if t == "internationale":
             classe[q] = "internationale"
-        elif t == "parti_ou_organisation" and classe[q] == "internationale":
-            classe[q] = "graphe"        # corrigé à la main dans types.csv
-        elif t not in ("parti_ou_organisation", "etrangere") and classe[q] == "graphe":
+        elif t in ("parti", "fondatrice") and classe[q] in ("internationale", "graphe"):
+            classe[q] = "graphe"        # une fondatrice est dessinée (exception de R6)
+        elif t in ("coalition", "satellite") and classe[q] == "graphe":
             classe[q] = t
     ecrire_manuel_types(lignes_types, stats)
 
@@ -704,14 +758,34 @@ def main():
         return ("type de relation erroné : la cible existait déjà (adhésion, ralliement ou passage "
                 "de militants plutôt que filiation ?)")
 
-    valides = []
+    # ---------- R8 : chaque lien doit s'appuyer sur une citation mot pour mot ----------
+    def attacher_preuve(a, b, e):
+        if "manuel" in e["sources"]:
+            e["preuve"] = dict(preuve="manuel", citation=e.get("source_manuelle", ""),
+                               source="data/manuel/aretes_manuelles.csv", indice="")
+            return True
+        p = preuves.preuve_lien(corpus, a, b)
+        if p:
+            e["preuve"] = p
+        return bool(p)
+
+    valides, sans_preuve, absorptions = [], [], []
     for a, b, t, e in lignee:
         da, db = debut(a), debut(b)
         if not da or not db:
             date_manquante.append([a, lab(a), b, lab(b), t,
                                    "source" if not da else "cible"])
             continue
+        if not attacher_preuve(a, b, e):
+            sans_preuve.append([a, lab(a), b, lab(b), t, " | ".join(sorted(e["sources"]))])
+            continue
         if db[0] < da[0] or (db[0] == da[0] and da[1] and db[1] and db[1] < da[1]):
+            # La cible existait déjà : absorption si la source disparaît dans une cible encore vivante
+            fin_a, fin_b = noeuds[a]["dissolution"], noeuds[b]["dissolution"]
+            if t != "scission" and fin_a and fin_a > da[0] and (not fin_b or fin_b >= fin_a):
+                e["date_absorption"] = fin_a
+                absorptions.append((a, b, "absorption", e))
+                continue
             anomalies.append(ligne_anomalie(a, b, t, cause_inversion(a, b)))
             continue
         if db[0] == da[0] and not (da[1] and db[1] and db[1] > da[1]):
@@ -755,26 +829,39 @@ def main():
         else:
             gardees.append((a, b, t, e))
 
-    # Fusion (plusieurs ancêtres en filiation) et renommage (un seul ancêtre, un seul successeur)
-    parents_fil, enfants_fil = defaultdict(list), defaultdict(list)
+    # ---------- 1.2 Relations typées ----------
+    # renommage, scission, fusion, absorption, refondation, filiation_idéologique (+ passage).
+    # Plusieurs prédécesseurs et un successeur : fusion, jamais scission (ex. Ensemble).
+    parents_lin, enfants_fil = defaultdict(list), defaultdict(list)
     for a, b, t, _ in gardees:
+        if t in ("filiation", "scission"):
+            parents_lin[b].append(a)
         if t == "filiation":
-            parents_fil[b].append(a)
             enfants_fil[a].append(b)
     liens = []
     for a, b, t, e in gardees:
-        rel = t
-        if t == "filiation":
-            if len(parents_fil[b]) >= 2:
-                rel = "fusion"
-            elif len(enfants_fil[a]) == 1:
-                fin_a = noeuds[a]["dissolution"]
-                if not fin_a or abs(fin_a - noeuds[b]["fondation"]) <= 1:
-                    rel = "renommage"
+        indice = e["preuve"].get("indice", "")
+        fin_a = noeuds[a]["dissolution"]
+        colle = not fin_a or abs(fin_a - noeuds[b]["fondation"]) <= 1
+        if t == "passage":
+            rel = "passage"
+        elif len(parents_lin[b]) >= 2:
+            rel = "fusion"
+        elif t == "scission":
+            rel = "scission"
+        elif indice == "refondation":
+            rel = "refondation"
+        elif indice == "renommage" or (len(enfants_fil[a]) == 1 and colle and e["preuve"]["preuve"] != "deduit"):
+            rel = "renommage"
+        elif e["preuve"]["preuve"] == "deduit":
+            rel = "filiation_idéologique"      # la citation cite l'autre sans dire la relation
+        else:
+            rel = "refondation" if not colle else "renommage"
         liens.append((a, b, rel, e))
+    liens += absorptions
 
     # ================= Fin de vie et activité =================
-    successeur = {a for a, b, rel, _ in liens if rel in ("filiation", "fusion", "renommage")}
+    successeur = {a for a, b, rel, _ in liens if rel in REL_SUCCESSION}
     # Validation à la main (data/manuel/actifs.csv, colonne valide) : seule « oui » rend active.
     # Tant qu'aucune ligne n'est validée : mode provisoire = drapeau automatique, sauf les
     # organisations sans aucun indice d'activité récente.
@@ -801,7 +888,7 @@ def main():
         d["fin_deduite"], d["fin_deduite_source"] = "", ""
         if not d["dissolution"] and not d["actif"]:
             succ = [noeuds[b]["fondation"] for a, b, rel, _ in liens
-                    if a == q and rel in ("filiation", "fusion", "renommage")]
+                    if a == q and rel in REL_SUCCESSION]
             if succ:
                 d["fin_deduite"], d["fin_deduite_source"] = min(succ), "fondation du successeur"
         if not d["statut_fin"]:
@@ -859,7 +946,9 @@ def main():
         d["famille_courant"] = famille or "à classer"
         tout = " ".join([d["label"], d["categories"]] + d.get("cats_article", []))
         d["outre_mer"] = bool(RX_OUTREMER.search(tout))
-        d["famille"] = "outre-mer" if d["outre_mer"] else (famille or "à classer")
+        # 2.1 : la voie suit la famille politique (idéologie), pas la région ; l'outre-mer va dans
+        # la voie de sa famille. Sans famille reconnue : écartée (plus de voie « à classer »).
+        d["famille"] = famille or "à classer"
 
     # ================= 9. Sigles =================
     def sigle_de(d):
@@ -894,19 +983,56 @@ def main():
     stats["sigles_remplis"] = sum(1 for r in tous if r["sigle"].strip())
 
     # ================= Internationales et affiliations =================
+    # R7 : une affiliation n'existe que si l'article de l'organisation elle-même la cite.
+    affil_ok, affil_sans = [], []
+    for a, b, e in affil_brutes:
+        p = preuves.preuve_affiliation(corpus, a, b)
+        if p:
+            e["preuve"] = p
+            affil_ok.append((a, b, e))
+        else:
+            affil_sans.append([a, lab(a), b, lab(b), " | ".join(sorted(e["sources"]))])
+    affil_brutes = affil_ok
     inter_utiles = {b for _, b, _ in affil_brutes}
-    pred = defaultdict(list)
+    # 1.3 Succession entre Internationales : seulement renommage, fusion ou refondation, avec
+    # citation, et sans chevauchement (la précédente a disparu). Le reste : ligne « Scissions ».
+    pred, scissions_inter, info_succ = defaultdict(list), defaultdict(list), {}
     for a, b, t in inter_lignee:
         da, db = debut(a), debut(b)
-        # Filiation ou scission entre Internationales : succession, affichée dans la clé
-        # (ex. CIO -> Tendance marxiste internationale, devenue Internationale communiste révolutionnaire)
-        if t in ("filiation", "scission") and (not da or not db or da <= db):
+        if da and db and db < da:
+            anomalies.append(ligne_anomalie(a, b, t, "lien entre deux Internationales de sens contraire au temps"))
+            continue
+        p = preuves.preuve_lien(corpus, a, b)
+        if not p:
+            continue
+        fin_a = noeuds[a]["dissolution"]
+        chevauche = not fin_a or (db and fin_a > db[0] + 1)
+        ind = p["indice"]
+        if t != "scission" and not chevauche and (ind in ("renommage", "fusion", "refondation")
+                                                  or (p["preuve"] == "explicite" and ind == "filiation")):
+            typ = ind if ind in ("renommage", "fusion", "refondation") else (
+                "renommage" if fin_a and db and abs(fin_a - db[0]) <= 1 else "refondation")
             pred[b].append(a)
+            info_succ[b] = (typ, p)
         else:
-            anomalies.append(ligne_anomalie(a, b, t, "lien entre deux Internationales "
-                                            + ("de sens contraire au temps"
-                                               if t in ("filiation", "scission")
-                                               else f"de type {t}, non représenté")))
+            scissions_inter[b].append(a)
+    # Successions lues dans le texte des articles des Internationales : lien vers une Internationale
+    # qui avait disparu (au plus 15 ans avant), avec un mot de refondation, renommage, fusion ou succession.
+    ids_inter = {q for q in noeuds if classe[q] == "internationale"}
+    for b in ids_inter:
+        cibles = {corpus.resoudre(lang, m.group(1)) for lang, _t, txt in corpus.textes.get(b, [])
+                  for m in preuves.RX_LIEN.finditer(txt)}
+        for a in (cibles & ids_inter) - {b} - set(pred[b]):
+            fa, fb = noeuds[a]["dissolution"], noeuds[b]["fondation"]
+            if not fa or not fb or not (fa - 1 <= fb <= fa + 15):
+                continue
+            p = preuves.preuve_lien(corpus, a, b)
+            if p and p["preuve"] == "explicite" and p["indice"] in ("refondation", "renommage", "fusion", "filiation"):
+                typ = p["indice"] if p["indice"] != "filiation" else ("renommage" if abs(fa - fb) <= 1 else "refondation")
+                pred[b].append(a)
+                info_succ[b] = (typ, p)
+                if a in scissions_inter[b]:
+                    scissions_inter[b].remove(a)
     # Les prédécesseurs des Internationales utilisées sont gardés aussi
     pile = list(inter_utiles)
     while pile:
@@ -923,55 +1049,98 @@ def main():
     for q in sorted(inter_utiles, key=lambda q: (noeuds[q]["fondation"] or 9999, lab(q))):
         d = noeuds[q]
         # Nom exact seulement : « Quatrième Internationale (lambertiste) » n'est pas la QI
+        typ, p = info_succ.get(q, ("", {}))
         lignes_inter.append([q, d["label"], SIGLES_INTER.get(d["label"], ""), d["fondation"] or "",
-                             d["dissolution"] or "", " | ".join(pred[q]), cle_couleur(d["label"])])
+                             d["dissolution"] or "", " | ".join(pred[q]), cle_couleur(d["label"]),
+                             typ, p.get("citation", ""), p.get("source", ""),
+                             " | ".join(x for x in scissions_inter[q] if x in noeuds)])
 
     # Dates d'adhésion saisies à la main (data/manuel/affiliations_dates.csv, source obligatoire)
     dates_saisies = {(r["party_id"], r["international_id"]): r
                      for r in lire(os.path.join("manuel", "affiliations_dates.csv"))
                      if r.get("source", "").strip() and (r.get("start", "").strip() or r.get("end", "").strip())}
     lignes_affil, a_dater = [], []
+    rx_entree = re.compile(r"(?:adh[èée]r\w*|rejoin\w*|rejoint|membre depuis|affili\w*)[^.\n]{0,60}?\b(1[89]\d\d|20\d\d)", re.I)
+    rx_sortie = re.compile(r"(?:quitt\w*|exclu\w*|rompt|rupture|désaffili\w*)[^.\n]{0,60}?\b(1[89]\d\d|20\d\d)", re.I)
     for a, b, e in affil_brutes:
         da, di = noeuds[a], noeuds[b]
+        p = e["preuve"]
+        cit = [p["preuve"], p["citation"], p["source"]]
         s = dates_saisies.get((a, b))
         if s:
             lignes_affil.append([a, b, s["start"].strip(), s["end"].strip(), "known",
-                                 f"manuel : {s['source'].strip()}", lab(a), lab(b)])
+                                 f"manuel : {s['source'].strip()}", lab(a), lab(b)] + cit)
+            continue
+        # Dates lues dans la citation elle-même ; « toujours membre » si l'infobox actuelle d'une
+        # organisation active la cite (le champ d'infobox décrit l'affiliation présente).
+        m_e, m_s = rx_entree.search(p["citation"]), rx_sortie.search(p["citation"])
+        entree = m_e.group(1) if m_e else ""
+        sortie = m_s.group(1) if m_s else ("toujours membre" if da.get("actif") and p["citation"].lstrip().startswith("|")
+                                           else "")
+        if entree and sortie:
+            lignes_affil.append([a, b, entree, sortie, "known", "citation", lab(a), lab(b)] + cit)
             continue
         # Période inconnue : recouvrement de la vie du parti et de celle de l'Internationale
         fin_a = da["dissolution"] or da["fin_deduite"] or None
         debut_ = max(x for x in (da["fondation"], di["fondation"], 0) if x is not None) or ""
         fins = [x for x in (fin_a, di["dissolution"]) if x]
         fin_ = min(fins) if fins else ""
-        lignes_affil.append([a, b, debut_, fin_, "unknown", " | ".join(sorted(e["sources"])),
-                             lab(a), lab(b)])
-        a_dater.append([a, b, "", "", "", lab(a), lab(b), debut_, fin_])
+        lignes_affil.append([a, b, entree or debut_, sortie or fin_, "unknown",
+                             " | ".join(sorted(e["sources"])), lab(a), lab(b)] + cit)
+        a_dater.append([a, b, entree, sortie, "", lab(a), lab(b), debut_, fin_])
     inter_sans_membre = {q for q in noeuds if classe[q] == "internationale"} - inter_utiles
 
     # ================= 8. Élagage strict (R5) =================
     # Gardées : les organisations actives ayant au moins un lien de lignée, et tous leurs ancêtres
     # (chemins orientés de filiation, renommage, fusion, scission ; les émanations et les passages
     # de militants ne comptent pas). Tout le reste va dans elagues.csv avec une cause.
-    parents_r5, voisins_r5 = defaultdict(set), defaultdict(set)
-    for a, b, rel, _ in liens:
-        if rel in ("filiation", "renommage", "fusion", "scission"):
+    # Éligibles à une barre (1.5) : datées, avec une date de fin ou un statut actif validé, et une
+    # famille politique reconnue. Les autres n'ont jamais de barre : a_dater.csv ou causes ci-dessous.
+    orgs_a_dater, rejets = [], []
+    eligibles = set()
+    for q in graphe:
+        d = noeuds[q]
+        if not d["fondation"]:
+            orgs_a_dater.append([q, lab(q), "pas de date de fondation", d["famille"]])
+        elif d["statut_fin"] == "fin_inconnue":
+            orgs_a_dater.append([q, lab(q), "ni date de fin, ni statut actif validé", d["famille"]])
+        elif d["famille"] != "à classer":
+            eligibles.add(q)
+    parents_r5, voisins_r5, preuve_de = defaultdict(set), defaultdict(set), {}
+    for a, b, rel, e in liens:
+        if rel in REL_LIGNEE and a in eligibles and b in eligibles:
             parents_r5[b].add(a)
             voisins_r5[a].add(b)
             voisins_r5[b].add(a)
-    for a, _, b, _, t, _ in date_manquante:      # un ancêtre sans date reste un ancêtre
-        if t in ("filiation", "scission"):
-            parents_r5[b].add(a)
-            voisins_r5[a].add(b)
-            voisins_r5[b].add(a)
-    actives = {q for q in graphe if noeuds[q]["actif"]}
+            preuve_de[(a, b)] = preuve_de[(b, a)] = e.get("preuve", {}).get("preuve", "")
+    # Exclusions à retester : gardées seulement avec un lien documenté explicitement (citation)
+    for q in sorted(eligibles):
+        if RX_A_RETESTER.search(lab(q)):
+            explicites = {y for y in voisins_r5[q] if preuve_de.get((q, y)) in ("explicite", "manuel")}
+            if not explicites:
+                rejets.append([q, lab(q), "exclusion à retester : aucun lien documenté explicitement"])
+                eligibles.discard(q)
+                for y in voisins_r5.pop(q, set()):
+                    voisins_r5[y].discard(q)
+                    parents_r5[y].discard(q)
+                parents_r5.pop(q, None)
+    actives = {q for q in eligibles if noeuds[q]["actif"]}
     garde, pile = set(), [q for q in actives if voisins_r5[q]]
     while pile:
         x = pile.pop()
         if x not in garde:
             garde.add(x)
-            pile.extend(parents_r5[x])
+            pile.extend(p for p in parents_r5[x] if p in eligibles)
+    # Porte finale : chaque organisation gardée a au moins un lien vers une autre gardée
+    while True:
+        seules = {q for q in garde if not (voisins_r5[q] & garde)}
+        if not seules:
+            break
+        for q in seules:
+            rejets.append([q, lab(q), "porte finale : aucun lien vers une organisation affichée"])
+        garde -= seules
     composante, vus = {}, set()
-    for q in graphe:
+    for q in eligibles:
         if q in vus:
             continue
         comp, pile = set(), [q]
@@ -981,25 +1150,31 @@ def main():
                 comp.add(x)
                 pile.extend(voisins_r5[x])
         vus |= comp
-        a_active = bool(comp & actives)
         for x in comp:
-            composante[x] = a_active
+            composante[x] = bool(comp & actives)
+    dates_manquantes = {r[0] for r in orgs_a_dater}
+    rejetees = {r[0] for r in rejets}
     lignes_elag, actives_sans_lien = [], []
     for q in sorted(noeuds, key=lab):
         d = noeuds[q]
         statut = d.get("statut_fin", "")
         if classe[q] == "graphe" and q not in garde:
-            if not voisins_r5[q]:
+            if q in dates_manquantes:
+                cause = "a_dater"
+            elif d["famille"] == "à classer":
+                cause = "famille_non_determinee"
+            elif q in rejetees:
+                cause = "rejet_porte"
+            elif not voisins_r5[q]:
                 cause = "isolee"
                 if d["actif"]:
                     actives_sans_lien.append(q)
-            elif not composante[q]:
+            elif not composante.get(q):
                 cause = "arbre_sans_organisation_active"
             else:
                 cause = "non_ancetre_d_une_active"
             lignes_elag.append([q, lab(q), cause, statut, d.get("famille", ""), ""])
-        elif classe[q] in TYPES and classe[q] not in ("parti_ou_organisation",
-                                                       "international_ou_federation_europeenne"):
+        elif classe[q] in ("coalition", "satellite"):
             parent = next((p for p, sats in emanations.items() if q in sats), None)
             lignes_elag.append([q, lab(q), classe[q], statut, d.get("famille", ""),
                                 f"organisation liée à {lab(parent)}" if parent else ""])
@@ -1048,6 +1223,24 @@ def main():
             "sources", "journaux", "statut_fin", "actif_auto", "garde", "organisations_liees"],
            lignes_orgs)
     ecrire("elagues.csv", ["id", "label", "cause", "statut_fin", "famille", "detail"], lignes_elag)
+    ecrire("a_dater.csv", ["id", "label", "raison", "famille"], orgs_a_dater)
+    ecrire("elagage_rejets.csv", ["id", "label", "raison"], rejets)
+
+    # ---------- 1.6 Étiquettes : un sigle court pour chaque organisation ----------
+    saisis = {r["id"]: r for r in lire(os.path.join("manuel", "sigles.csv"))}
+    etiquettes = {}
+    for q in graphe:
+        etiquettes[q] = etiquette_de(q, noeuds[q]["label"], saisis.get(q, {}).get("sigle", ""), wikitext.get(q, ""))
+    # Doublons parmi les organisations affichées : on ajoute l'année de fondation, ex. « PT (1991) »
+    compte = Counter(etiquettes[q][0] for q in garde)
+    for q in garde:
+        if compte[etiquettes[q][0]] > 1:
+            e, o = etiquettes[q]
+            etiquettes[q] = (f"{e} ({noeuds[q]['fondation']})", o + " + année (homonyme)")
+    ecrire("etiquettes.csv", ["id", "etiquette", "origine", "nom_complet", "affiche"],
+           [[q, etiquettes[q][0], etiquettes[q][1], lab(q), "oui" if q in garde else ""]
+            for q in sorted(graphe, key=lab)])
+    stats["etiquettes_doublons"] = sum(1 for n in Counter(etiquettes[q][0] for q in garde).values() if n > 1)
     ecrire("affiliations_a_dater.csv", ["party_id", "international_id", "start", "end", "source",
                                         "party_nom", "international_nom", "recouvrement_debut",
                                         "recouvrement_fin"], a_dater)
@@ -1059,16 +1252,25 @@ def main():
                [l[:7] for l in a_dater], dossier=MANUEL)
 
     lignes_liens = []
-    for a, b, rel, e in sorted(liens, key=lambda x: (noeuds[x[1]]["fondation"], lab(x[0]))):
+    def date_ev(b, rel, e):
+        # Absorption : à la disparition de la source ; sinon : fondation du descendant
+        if rel == "absorption":
+            return e["date_absorption"], ""
+        return noeuds[b]["fondation"], noeuds[b]["fondation_mois"] or ""
+
+    for a, b, rel, e in sorted(liens, key=lambda x: (date_ev(x[1], x[2], x[3])[0], lab(x[0]))):
         if a in sans_date or b in sans_date:
             continue
-        lignes_liens.append([a, b, rel, noeuds[b]["fondation"], noeuds[b]["fondation_mois"] or "",
+        p = e.get("preuve", {})
+        lignes_liens.append([a, b, rel, *date_ev(b, rel, e),
                              "oui" if e.get("meme_annee") else "", "oui" if e.get("reciproque") else "",
                              " | ".join(sorted(e["sources"])), " | ".join(sorted(e["relations"])),
-                             lab(a), lab(b)])
+                             lab(a), lab(b), p.get("preuve", ""), p.get("citation", ""), p.get("source", "")])
     ecrire("liens.csv", ["source", "cible", "relation", "date_evenement", "date_evenement_mois",
                          "meme_annee", "fusion_reciproque", "sources", "relations_brutes",
-                         "source_nom", "cible_nom"], lignes_liens)
+                         "source_nom", "cible_nom", "preuve", "citation", "source_citation"], lignes_liens)
+    ecrire("liens_sans_preuve.csv", ["source", "source_nom", "cible", "cible_nom", "type", "sources"],
+           sans_preuve)
 
     ecrire("anomalies.csv", ["source", "target", "relation", "source_date", "target_date",
                              "probable_cause", "source_nom", "target_nom", "sources"], anomalies)
@@ -1101,9 +1303,13 @@ def main():
     ecrire("liens_hors_perimetre.csv", ["source", "source_nom", "cible", "cible_nom", "relation",
                                         "ensembles"], hors)
     ecrire("internationales.csv", ["id", "name", "sigle", "start", "end", "predecessor_id",
-                                   "color_key"], lignes_inter)
+                                   "color_key", "succession_type", "succession_citation",
+                                   "succession_source", "scissions_de"], lignes_inter)
     ecrire("affiliations.csv", ["party_id", "international_id", "start", "end", "date_certainty",
-                                "source", "party_nom", "international_nom"], lignes_affil)
+                                "source", "party_nom", "international_nom", "preuve", "citation",
+                                "source_citation"], lignes_affil)
+    ecrire("affiliations_sans_preuve.csv", ["party_id", "party_nom", "international_id",
+                                            "international_nom", "sources"], affil_sans)
     ecrire("appartenances_nationales.csv", ["membre", "membre_nom", "organisation",
                                             "organisation_nom", "sources"], nationales)
 

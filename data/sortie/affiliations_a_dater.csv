@@ -1,71 +1,64 @@
 party_id,international_id,start,end,source,party_nom,international_nom,recouvrement_debut,recouvrement_fin
-Q1045425,Q1377231,,,,Nouveau Parti anticapitaliste,Gauche anticapitaliste européenne,2009,2022
-Q1125061,Q639383,,,,Eusko Alkartasuna,Alliance libre européenne,1986,
-Q1145020,Q639383,,,,Union démocratique bretonne,Alliance libre européenne,1981,
-Q125771262,Q2634710,,,,Nouveau Parti anticapitaliste – L'Anticapitaliste,Quatrième Internationale - Secrétariat unifié,2022,
+Q1045425,Q1377231,,,,Nouveau Parti anticapitaliste,Gauche anticapitaliste européenne,2009,
+Q1125061,Q639383,,toujours membre,,Eusko Alkartasuna,Alliance libre européenne,1986,
+Q1145020,Q639383,,toujours membre,,Union démocratique bretonne,Alliance libre européenne,1981,
 Q1332068,Q159454,,,,Section française de l'Internationale ouvrière,Internationale socialiste,1951,1969
 Q1332068,Q188592,,,,Section française de l'Internationale ouvrière,Internationale ouvrière,1905,1923
 Q1332068,Q698677,,,,Section française de l'Internationale ouvrière,Union des partis socialistes pour l'action internationale,1921,1923
 Q1332068,Q703593,,,,Section française de l'Internationale ouvrière,Internationale ouvrière socialiste,1923,1940
 Q1393793,Q206682,,,,Parti communiste internationaliste,Quatrième Internationale,1944,1968
-Q1418625,Q639383,,,,Partitu di a Nazione Corsa,Alliance libre européenne,2002,
+Q1418625,Q639383,,toujours membre,,Partitu di a Nazione Corsa,Alliance libre européenne,2002,
 Q1495924,Q202649,,,,Gauche unitaire,Parti de la gauche européenne,2009,2015
-Q1539236,Q639383,,,,Parti occitan,Alliance libre européenne,1987,
-Q1542710,Q25079,,,,Parti radical (France),Parti de l'Alliance des libéraux et des démocrates pour l'Europe,1976,
+Q1539236,Q639383,,toujours membre,,Parti occitan,Alliance libre européenne,1987,
+Q1542710,Q25079,,toujours membre,,Parti radical (France),Parti de l'Alliance des libéraux et des démocrates pour l'Europe,1976,
 Q16010672,Q649752,,,,Alternative libertaire (France),Solidarité internationale libertaire,2001,2019
-Q1618280,Q622519,,,,Voix prolétarienne,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),1996,2011
-Q1694377,Q123631784,,,,Pôle de renaissance communiste en France,World Anti-Imperialist Platform,2022,
+Q1618280,Q622519,,toujours membre,,Voix prolétarienne,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),1996,2011
 Q17008204,Q3240310,,,,Ligue trotskyste de France,Ligue communiste internationale (quatrième internationaliste),,
-Q170972,Q159454,,,,Parti socialiste (France),Internationale socialiste,1969,
-Q170972,Q220945,,,,Parti socialiste (France),Parti socialiste européen,1992,
-Q170972,Q7248622,,,,Parti socialiste (France),Alliance progressiste,2013,
+Q170972,Q159454,,toujours membre,,Parti socialiste (France),Internationale socialiste,1969,
+Q170972,Q220945,,toujours membre,,Parti socialiste (France),Parti socialiste européen,1992,
+Q170972,Q7248622,,toujours membre,,Parti socialiste (France),Alliance progressiste,2013,
 Q192821,Q183533,,,,Parti communiste français,Kominform,1947,1956
-Q192821,Q202649,,,,Parti communiste français,Parti de la gauche européenne,2004,
-Q192821,Q2440449,,,,Parti communiste français,Rencontre internationale des partis communistes et ouvriers,1998,
-Q2054444,Q753711,,,,Parti communiste réunionnais,Groupe de la Gauche au Parlement européen,1995,
-Q22674451,Q60574856,,,,Mouvement pour la démocratie en Europe : Diem 25,International progressif,2020,
-Q22981822,Q2455815,,,,Révolution permanente (parti politique),Courant Révolution Permanente – Quatrième Internationale,2011,
-Q24939885,Q139565740,,,,"Parti des travailleurs (France, 2015)",Comité ouvrier international contre la guerre et l’exploitation pour l’Internationale ouvrière,2016,
-Q2575147,Q2440449,,,,Parti communiste guadeloupéen,Rencontre internationale des partis communistes et ouvriers,1998,
-Q2638999,Q1984016,,,,Parti ouvrier indépendant,Quatrième Internationale (lambertiste),2015,
-Q2638999,Q3055019,,,,Parti ouvrier indépendant,Entente internationale des travailleurs et des peuples,2015,
-Q27978402,Q130219314,,,,La France insoumise,Alliance de la gauche européenne pour les peuples et la planète,2024,
-Q2984984,Q1073391,,,,Combat ouvrier,Union communiste internationaliste,1965,
-Q3058074,Q639383,,,,Régions et peuples solidaires,Alliance libre européenne,1995,
-Q3068323,Q639383,,,,Femu a Corsica,Alliance libre européenne,2010,
+Q192821,Q202649,,toujours membre,,Parti communiste français,Parti de la gauche européenne,2004,
+Q192821,Q2440449,,toujours membre,,Parti communiste français,Rencontre internationale des partis communistes et ouvriers,1998,
+Q2054444,Q753711,,toujours membre,,Parti communiste réunionnais,Groupe de la Gauche au Parlement européen,1995,
+Q22981822,Q2455815,,toujours membre,,Révolution permanente (parti politique),Courant Révolution Permanente – Quatrième Internationale,2011,
+Q2575147,Q2440449,,toujours membre,,Parti communiste guadeloupéen,Rencontre internationale des partis communistes et ouvriers,1998,
+Q2638999,Q1984016,,toujours membre,,Parti ouvrier indépendant,Quatrième Internationale (lambertiste),2015,
+Q2638999,Q3055019,,toujours membre,,Parti ouvrier indépendant,Entente internationale des travailleurs et des peuples,2015,
+Q27978402,Q130219314,,toujours membre,,La France insoumise,Alliance de la gauche européenne pour les peuples et la planète,2024,
+Q2984984,Q1073391,,toujours membre,,Combat ouvrier,Union communiste internationaliste,1965,
+Q3058074,Q639383,,toujours membre,,Régions et peuples solidaires,Alliance libre européenne,1995,
+Q3068323,Q639383,,toujours membre,,Femu a Corsica,Alliance libre européenne,2010,
 Q3082926,Q639383,,,,Frankiz Breizh,Alliance libre européenne,1984,2008
-Q3091443,Q133795,,,,Fédération anarchiste (francophone),Internationale des fédérations anarchistes,1968,
+Q3091443,Q133795,,toujours membre,,Fédération anarchiste (francophone),Internationale des fédérations anarchistes,1968,
 Q3091492,Q125963179,,,,Fédération communiste libertaire (1953-1957),Internationale communiste libertaire,1954,1957
-Q3091561,Q159454,,,,Fédération de la Guyane du Parti socialiste,Internationale socialiste,1951,
-Q3091561,Q220945,,,,Fédération de la Guyane du Parti socialiste,Parti socialiste européen,1992,
-Q3091561,Q7248622,,,,Fédération de la Guyane du Parti socialiste,Alliance progressiste,2013,
-Q3099352,Q158073,,,,Gauche révolutionnaire,Comité pour une Internationale ouvrière,1992,
+Q3091561,Q159454,,toujours membre,,Fédération de la Guyane du Parti socialiste,Internationale socialiste,1951,
+Q3091561,Q220945,,toujours membre,,Fédération de la Guyane du Parti socialiste,Parti socialiste européen,1992,
+Q3091561,Q7248622,,toujours membre,,Fédération de la Guyane du Parti socialiste,Alliance progressiste,2013,
 Q3107400,Q639383,,,,Union du peuple alsacien,Alliance libre européenne,1988,2009
-Q3117914,Q2634710,,,,Groupe révolution socialiste,Quatrième Internationale - Secrétariat unifié,1972,
+Q3117914,Q2634710,,toujours membre,,Groupe révolution socialiste,Quatrième Internationale - Secrétariat unifié,1972,
 Q3230452,Q2838098,,,,Les Alternatifs,Alliance européenne des mouvements critiques envers l'Union européenne,1998,2015
-Q3355979,Q649752,,,,Organisation communiste libertaire,Solidarité internationale libertaire,2001,
+Q3355979,Q649752,,toujours membre,,Organisation communiste libertaire,Solidarité internationale libertaire,2001,
 Q3356082,Q133795,,,,Organisation révolutionnaire anarchiste,Internationale des fédérations anarchistes,1968,1976
-Q3366206,Q622227,,,,Parti communiste des ouvriers de France,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte),1994,
+Q3366206,Q622227,,toujours membre,,Parti communiste des ouvriers de France,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte),1994,
 Q3366212,Q163931,,,,"Parti communiste (France, 1919)",Internationale communiste,1919,1921
 Q3366231,Q2915940,,,,Parti communiste pour l'indépendance et le socialisme,Forum de São Paulo,1990,
 Q3366769,Q1423578,,,,Parti socialiste ouvrier et paysan,Centre marxiste révolutionnaire international,1938,1940
-Q3456455,Q202649,,,,République et socialisme,Parti de la gauche européenne,2009,
 Q3550479,Q703593,,,,Union socialiste républicaine,Internationale ouvrière socialiste,1935,1940
-Q5291,Q15081858,,,,Parti pirate,Parti pirate européen,2014,
-Q5291,Q170,,,,Parti pirate,Parti pirate international,2010,
+Q5291,Q15081858,,toujours membre,,Parti pirate,Parti pirate européen,2014,
+Q5291,Q170,,toujours membre,,Parti pirate,Parti pirate international,2010,
 Q538664,Q206682,,,,Parti ouvrier internationaliste,Quatrième Internationale,1938,1944
-Q58329311,Q202649,,,,Gauche républicaine et socialiste,Parti de la gauche européenne,2018,
-Q58366009,Q220945,,,,Place publique (parti politique),Parti socialiste européen,2018,
-Q613786,Q950179,,,,Les Écologistes – Europe Écologie Les Verts,Parti vert européen,2010,
+Q58329311,Q202649,,toujours membre,,Gauche républicaine et socialiste,Parti de la gauche européenne,2018,
+Q58366009,Q220945,,toujours membre,,Place publique (parti politique),Parti socialiste européen,2018,
+Q613786,Q950179,,toujours membre,,Les Écologistes – Europe Écologie Les Verts,Parti vert européen,2010,
 Q628594,Q3055019,,,,"Parti des travailleurs (France, 1991)",Entente internationale des travailleurs et des peuples,1991,2008
-Q63483685,Q123785828,,,,Parti communiste révolutionnaire de France,Action Communiste Européenne,2023,
-Q7205536,Q159454,,,,Fédération guadeloupéenne du Parti socialiste,Internationale socialiste,1972,
-Q7205536,Q220945,,,,Fédération guadeloupéenne du Parti socialiste,Parti socialiste européen,1992,
-Q7205536,Q7248622,,,,Fédération guadeloupéenne du Parti socialiste,Alliance progressiste,2013,
+Q63483685,Q123785828,,toujours membre,,Parti communiste révolutionnaire de France,Action Communiste Européenne,2023,
+Q7205536,Q159454,,toujours membre,,Fédération guadeloupéenne du Parti socialiste,Internationale socialiste,1972,
+Q7205536,Q220945,,toujours membre,,Fédération guadeloupéenne du Parti socialiste,Parti socialiste européen,1992,
+Q7205536,Q7248622,,toujours membre,,Fédération guadeloupéenne du Parti socialiste,Alliance progressiste,2013,
 Q743390,Q950179,,,,Les Verts,Parti vert européen,2004,2010
 Q862627,Q1377231,,,,Ligue communiste révolutionnaire,Gauche anticapitaliste européenne,2000,2009
 Q862627,Q2634710,,,,Ligue communiste révolutionnaire,Quatrième Internationale - Secrétariat unifié,1974,2009
-Q870667,Q1073391,,,,Lutte ouvrière,Union communiste internationaliste,1939,
-Q922707,Q753711,,,,Parti de gauche (France),Groupe de la Gauche au Parlement européen,2008,
-Q924501,Q639383,,,,Sabaudia-MRS,Alliance libre européenne,1981,
-fr:Parti communiste révolutionnaire (2024),Q1631185,,,,Parti communiste révolutionnaire,Internationale communiste révolutionnaire,2024,
+Q870667,Q1073391,,toujours membre,,Lutte ouvrière,Union communiste internationaliste,1939,
+Q922707,Q753711,,toujours membre,,Parti de gauche (France),Groupe de la Gauche au Parlement européen,2008,
+Q924501,Q639383,,toujours membre,,Sabaudia-MRS,Alliance libre européenne,1981,

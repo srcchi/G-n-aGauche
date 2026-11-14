@@ -3,6 +3,8 @@ Q104186211,Action révolutionnaire LGBTI,Q115922089,Action anti-transphobe,filia
 Q115965582,NPA Jeunes,Q115965646,NPA Jeunesses anticapitalistes,scission,source
 Q1321802,Mouvement républicain et citoyen,Q138828808,Gauche républicaine et sociale,scission,cible
 Q1332068,Section française de l'Internationale ouvrière,Q3366757,Parti socialiste français (1919),scission,cible
+Q2236823,groupe socialiste à l'Assemblée nationale,Q36214467,Groupe de la Fédération de la gauche démocrate et socialiste,filiation,cible
+Q2236823,groupe socialiste à l'Assemblée nationale,Q46610404,"groupe Socialiste, radical et citoyen",filiation,cible
 Q2451197,Parti ouvrier français,Q3487413,Socialistes indépendants,scission,cible
 Q2540732,Union des groupes et clubs socialistes,Q170972,Parti socialiste (France),filiation,source
 Q27978402,La France insoumise,Q62079328,Debout (parti politique),scission,cible
@@ -11,5 +13,10 @@ Q3092110,Fédération pour une gauche alternative,Q2840414,Alternative rouge et 
 Q3326581,Mouvement de la gauche progressiste,Q922707,Parti de gauche (France),filiation,source
 Q3366229,Parti communiste marxiste-léniniste de France,Q3561492,Vive le communisme,scission,cible
 Q3366757,Parti socialiste français (1919),Q3550479,Union socialiste républicaine,filiation,source
+Q33769773,Groupe Gauche démocratique,Q33770699,Groupe des Républicains de gauche,filiation,source
 Q3487413,Socialistes indépendants,Q2379359,Parti socialiste français (1902),filiation,source
+Q3550161,Union des jeunesses communistes marxistes-léninistes,Q3561492,Vive le communisme,scission,cible
 Q3561492,Vive le communisme,Q3561478,Vive la révolution,filiation,source
+Q46610404,"groupe Socialiste, radical et citoyen",Q46612837,"groupe Socialiste, républicain et citoyen",filiation,source
+Q46612837,"groupe Socialiste, républicain et citoyen",Q46613924,"groupe Socialiste, écologiste et républicain",filiation,source
+Q46613924,"groupe Socialiste, écologiste et républicain",Q2236823,groupe socialiste à l'Assemblée nationale,filiation,source

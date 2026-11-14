@@ -1,19 +1,18 @@
 """
 Phase 2 : mise en page et rendu de l'arbre, sans Graphviz.
 
-Dessine les organisations gardées par l'élagage strict (colonne garde de organisations.csv) :
-organisations actives reliées et leurs ancêtres. Mise en page calculée ici, SVG écrit directement.
+Dessine les organisations gardées par la porte finale de nettoyage.py (colonne garde) : organisations
+actives validées reliées et leurs ancêtres, toutes datées, chacune avec au moins un lien affiché.
 
-Règles (vérifiées par verifier.py) :
-R1 liens orthogonaux vers la droite ; R2 Internationales jamais en boîte ; R3 dates exactes ;
-R4 chaque nom dans son étiquette, aucun texte flottant ; R5 lignée stricte ; R6 ni coalition
-ni satellite.
+Règles (vérifiées par verifier.py) : R1 liens orthogonaux vers la droite ; R2 Internationales jamais
+en boîte ; R3 dates exactes ; R4 noms dans les étiquettes ; R5 lignée stricte ; R6 ni coalition ni
+satellite ; R8 citations ; zéro croisement (un lien qui croiserait une barre, une étiquette ou un
+onglet devient un renvoi, après tentative de placement sans croisement).
 
-Entrées : data/sortie/organisations.csv, sans_date.csv, liens.csv, internationales.csv,
-          affiliations.csv (nettoyage.py) ; data/manuel/sigles.csv
-Sorties : data/sortie/arbre.svg (+ copie arbre.svg à la racine), arbre.html,
-          arbre_<famille>.svg, arbre_apercu.svg (si l'arbre est très grand),
-          vue_internationales.svg et .html, anomalies_rendu.csv (s'il y en a)
+Entrées : data/sortie/organisations.csv, liens.csv, etiquettes.csv, internationales.csv,
+          affiliations.csv (nettoyage.py)
+Sorties : data/sortie/arbre.svg (+ copie arbre.svg à la racine), arbre.html, arbre_<famille>.svg,
+          arbre_apercu.svg (si très grand), vue_internationales.svg et .html, anomalies_rendu.csv
 
 Usage : python rendu.py      puis      python verifier.py
 """
@@ -30,71 +29,65 @@ import unicodedata
 from collections import Counter, defaultdict
 
 SORTIE = os.path.join("data", "sortie")
-MANUEL = os.path.join("data", "manuel")
 
-# ---------- Géométrie (px, unités SVG) ----------
-PPA = 13.0                  # pixels par année
-COL_VOIES = 210             # colonne des titres de voies
+# ---------- Géométrie (px) ----------
+PPA = 13.0
+COL_VOIES = 210
 X0 = COL_VOIES + 30
 BAR_H = 16
-GAP = 12                    # écart horizontal minimal entre deux éléments d'une rangée
-ROW_GAP = 10
-GOUTTIERE = 10              # un lien part de la source à x(t) - GOUTTIERE
-FLECHE_L, FLECHE_DEMI = 10, 5   # flèches d'au moins 9 px
-MIN_W = 6                   # largeur minimale d'une barre
-DEGRADE = 28                # fin ouverte d'une organisation active
-QUEUE = 40                  # queue hachurée « fin inconnue »
-TAG_PAD, TAG_NOM_MAX = 6, 240
-LIGNE = 14
-FRAME_W, FRAME_PAS = 2.4, 5     # épaisseur et écart des cadres d'affiliation emboîtés
-TAB_H = 15
-SEUIL_ANNEES, SEUIL_VOIES, SEUIL_RANGS = 40, 2, 6
+GAP = 14
+ROW_GAP = 12
+GOUTTIERE = 10
+FLECHE_L, FLECHE_DEMI = 10, 5
+MIN_W = 6
+DEGRADE = 28
+TAG_PAD, TAG_H = 6, 22
+FRAME_W, FRAME_PAS, TAB_H = 2.4, 5, 15
+POINT_R = 3.5
+SEUIL_ANNEES, SEUIL_VOIES, SEUIL_RANGS, MAX_RENVOIS = 40, 2, 6, 3
 CASSURE_ANS, CASSURE_PX = 60, 44
 VOIE_PAD = 8
 FS, FS_SIGLE = 11, 13
 POLICE = "Arial, Helvetica, sans-serif"
+CLE_W = 300                      # colonne de clé compacte, à droite de l'arbre
 
+# Voies (2.1) : une par famille politique, palette Okabe-Ito
 VOIES = [
     ("socialistes", "Socialistes", "#CC79A7"),
     ("radicaux", "Radicaux", "#F0E442"),
     ("écologistes", "Écologistes", "#009E73"),
-    ("communistes", "Communistes", "#C1272D"),
+    ("communistes", "Communistes", "#D55E00"),
     ("trotskystes", "Trotskystes", "#E69F00"),
-    ("maoïstes", "Maoïstes", "#8C510A"),
-    ("anarchistes et libertaires", "Anarchistes et libertaires", "#222222"),
-    ("outre-mer", "Outre-mer", "#7B3294"),
-    ("à classer", "À classer", "#8C8C8C"),
+    ("maoïstes", "Maoïstes", "#0072B2"),
+    ("anarchistes et libertaires", "Anarchistes et libertaires", "#000000"),
 ]
-SANS_DATE = ("sans date", "Dates inconnues (hors échelle)", "#A6A6A6")
-TEINTE = {k: c for k, _, c in VOIES + [SANS_DATE]}
-TITRES = {k: t for k, t, _ in VOIES + [SANS_DATE]}
+TEINTE = {k: c for k, _, c in VOIES}
+TITRES = {k: t for k, t, _ in VOIES}
 NUANCES = {"communiste libertaire": 0.30, "anarcho-syndicaliste": 0.45,
            "luxemburgiste / conseilliste": 0.35, "écosocialiste": -0.30}
-COULEURS_INTER = {
-    "socialiste": "#2F5D9E", "communiste": "#16365C", "trotskyste": "#1F7A7A",
-    "anarchiste": "#4A5560", "écologiste": "#4C9BC9", "régionaliste": "#7A8894",
-    "gauche radicale": "#1593A8", "autre": "#8A9AA8",
-}
-MOTS_VIDES = {"de", "la", "le", "les", "des", "du", "pour", "l", "d", "et", "à", "en", "contre",
-              "sur", "au", "aux"}
+# Internationales : 12 couleurs distinctes et sûres pour les daltoniens (Paul Tol, « muted » et « bright »)
+PALETTE_INTER = ["#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#DDCC77", "#CC6677",
+                 "#882255", "#AA4499", "#4477AA", "#66CCEE", "#BBBBBB"]
 STYLE_LIEN = {
-    "renommage": dict(couleur="#3D3D3D", dash="", w=(2.6, 1.5)),
-    "filiation": dict(couleur="#3D3D3D", dash="", w=(2.6, 1.5)),
-    "fusion": dict(couleur="#3D3D3D", dash="", w=(2.2, 1.5)),
-    "scission": dict(couleur="#C0392B", dash="6 3", w=(1.6, 1.6)),
-    "passage": dict(couleur="#2471A3", dash="1.5 3", w=(1.2, 1.2)),
+    "renommage": dict(couleur="#3D3D3D", dash="", w=2.6, nom="renommage"),
+    "refondation": dict(couleur="#3D3D3D", dash="8 3", w=2.0, nom="refondation"),
+    "fusion": dict(couleur="#3D3D3D", dash="", w=2.0, nom="fusion"),
+    "scission": dict(couleur="#C0392B", dash="6 3", w=1.6, nom="scission"),
+    "absorption": dict(couleur="#5B4B8A", dash="", w=1.8, nom="absorption"),
+    "filiation_idéologique": dict(couleur="#7F7F7F", dash="2 3", w=1.4, nom="filiation idéologique"),
+    "passage": dict(couleur="#2471A3", dash="1.5 3", w=1.2, nom="passage de militants"),
 }
-NOMS_LIENS = {"renommage": "renommage", "filiation": "filiation", "fusion": "fusion",
-              "scission": "scission", "passage": "passage de militants"}
 MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."]
+RENVOI_MOT = {"scission": "scission de", "absorption": "absorbe", "fusion": "issu de", "renommage": "issu de",
+              "refondation": "refondation de", "filiation_idéologique": "filiation de", "passage": "militants de"}
 
 
 # ======================================================================
 # Outils
 # ======================================================================
 
-def lire(nom, dossier=SORTIE):
-    chemin = os.path.join(dossier, nom)
+def lire(nom):
+    chemin = os.path.join(SORTIE, nom)
     if not os.path.exists(chemin):
         return []
     with open(chemin, encoding="utf-8") as f:
@@ -115,7 +108,6 @@ def aujourdhui():
 
 
 def larg(s, fs, gras=False):
-    """Largeur estimée d'un texte en Arial, un peu généreuse."""
     w = 0
     for c in s:
         if c in "il.,:;'|!()[]jfrtI ’":
@@ -163,7 +155,6 @@ def texte_sur(fond):
 
 
 def gris_sur(fond):
-    """Gris des dates, contraste d'au moins 4,5:1."""
     noir = texte_sur(fond) == "#000000"
     for g in (["#333333", "#222222"] if noir else ["#E8E8E8", "#F4F4F4"]):
         if contraste(g, fond) >= 4.5:
@@ -180,16 +171,21 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", sans_accents(s)).strip("-")
 
 
+MOTS_VIDES = {"de", "la", "le", "les", "des", "du", "pour", "l", "d", "et", "à", "en", "contre", "sur", "au", "aux",
+              "envers", "un", "une"}
+
+
 def acronyme(nom):
+    """Sigle d'une Internationale sans sigle connu : initiales du nom, partie entre parenthèses à part.
+    Ex. « Quatrième Internationale (lambertiste) » -> « QI (lambertiste) »."""
     base = re.sub(r"\s*\([^)]*\)", "", nom)
     res = "-".join("".join(w[0].upper() for w in re.findall(r"[^\W\d_]+", p) if w.lower() not in MOTS_VIDES)
                    for p in re.split(r"\s+[-–]\s+", base))
     m = re.search(r"\(([^)]*)\)", nom)
-    return res + ("-" + m.group(1)[:5].rstrip() if m else "")
+    return f"{res} ({m.group(1)})" if m and len(m.group(1)) <= 12 else res
 
 
 def couper(s, w, fs, gras=False, max_lignes=2):
-    """Coupe un texte en lignes d'au plus w px ; la dernière ligne finit par « … » si besoin."""
     lignes, cour = [], ""
     for mot in s.split():
         essai = (cour + " " + mot).strip()
@@ -214,90 +210,98 @@ def texte(x, y, s, fs=FS, gras=False, couleur="#1A1A1A", ancre="start", cls="", 
             f' fill="{couleur}" text-anchor="{ancre}" class="{cls}"{extra}>{esc(s)}</text>')
 
 
+def segments_croisent_boite(p1, p2, b, eps=0.6):
+    """Le segment orthogonal p1-p2 traverse-t-il l'intérieur de la boîte b = (x, y, w, h) ?"""
+    (xa, ya), (xb, yb) = p1, p2
+    bx, by, bw, bh = b
+    if abs(ya - yb) < 1e-6:          # horizontal
+        y = ya
+        if not (by + eps < y < by + bh - eps):
+            return False
+        g, d = sorted((xa, xb))
+        return g < bx + bw - eps and d > bx + eps
+    x = xa                           # vertical
+    if not (bx + eps < x < bx + bw - eps):
+        return False
+    h, b_ = sorted((ya, yb))
+    return h < by + bh - eps and b_ > by + eps
+
+
 # ======================================================================
 # Données
 # ======================================================================
 
 def charger():
     T_AUJ = aujourdhui()
-    sigles = {r["id"]: r for r in lire("sigles.csv", MANUEL)}
+    etiq = {r["id"]: r["etiquette"] for r in lire("etiquettes.csv")}
     inter = {}
-    vus_cle = Counter()
     for r in lire("internationales.csv"):
-        cle = r["color_key"] or "autre"
-        vus_cle[cle] += 1
-        base = COULEURS_INTER.get(cle, COULEURS_INTER["autre"])
-        # Plusieurs Internationales d'une même famille : même teinte, clarté différente
-        couleur = nuance(base, [0, 0.25, -0.25, 0.45][(vus_cle[cle] - 1) % 4])
         inter[r["id"]] = dict(id=r["id"], nom=r["name"], sigle=r["sigle"] or acronyme(r["name"]),
-                              debut=r["start"], fin=r["end"], couleur=couleur,
-                              pred=[p for p in r["predecessor_id"].split(" | ") if p], membres=[])
+                              debut=r["start"], fin=r["end"],
+                              pred=[p for p in r["predecessor_id"].split(" | ") if p],
+                              type_succ=r.get("succession_type", ""), cit_succ=r.get("succession_citation", ""),
+                              scissions=[p for p in r.get("scissions_de", "").split(" | ") if p], membres=[])
     orgs = {}
     for r in lire("organisations.csv"):
         if r.get("garde") != "oui":
             continue
-        s = sigles.get(r["id"], {})
-        sigle = (s.get("sigle") or "").strip()
-        nom_court = (s.get("short_name") or r["nom_court"] or r["label"]).strip()
         statut = r["statut_fin"]
         t0 = t_de(r["fondation"], r["fondation_mois"])
         if statut.startswith("actif"):
             t1, fin_txt = None, ""
         elif r["dissolution"]:
             t1, fin_txt = t_de(r["dissolution"], r["dissolution_mois"]), r["dissolution"]
-        elif r["fin_deduite"]:
-            t1, fin_txt = t_de(r["fin_deduite"]), r["fin_deduite"]
         else:
-            t1, fin_txt = None, "fin inconnue"
-        fam_c = r["famille_courant"] or r["famille"]
-        couleur = nuance(TEINTE.get(fam_c, TEINTE["à classer"]), NUANCES.get(r["courant_principal"], 0))
+            t1, fin_txt = t_de(r["fin_deduite"]), r["fin_deduite"]
+        fam_c = r["famille_courant"] if r["famille_courant"] in TEINTE else r["famille"]
+        couleur = nuance(TEINTE.get(fam_c, "#8C8C8C"), NUANCES.get(r["courant_principal"], 0))
 
         def date_longue(a, m):
             return f"{MOIS[int(m) - 1]} {a}" if m else str(a)
-        fin_detail = ("toujours active" + (" (provisoire : à valider dans actifs.csv)"
-                                           if statut == "actif_provisoire" else "")
-                      if statut.startswith("actif") else
-                      f"fin : {date_longue(r['dissolution'], r['dissolution_mois'])} ({r['dissolution_source']})"
-                      if r["dissolution"] else
-                      f"fin : {r['fin_deduite']} ({r['fin_deduite_source']})" if r["fin_deduite"] else
-                      "fin inconnue")
-        details = [r["label"], f"fondation : {date_longue(r['fondation'], r['fondation_mois'])} "
-                               f"({r['fondation_source']})", fin_detail,
-                   f"famille : {r['famille']}", f"courants : {r['courants_sources'] or 'aucun reconnu'}"]
-        if r.get("organisations_liees"):
-            details.append(f"organisations liées : {r['organisations_liees']}")
-        if r["journaux"]:
-            details.append(f"journaux : {r['journaux']}")
-        if r["perimetre_douteux"]:
-            details.append(f"à vérifier : {r['perimetre_douteux']}")
-        details.append(f"sources : {r['sources']}")
-        orgs[r["id"]] = dict(id=r["id"], label=r["label"], sigle=sigle, nom_court=nom_court,
+        fin_detail = ("toujours active (validée)" if statut == "actif_valide" else
+                      f"fin : {date_longue(r['dissolution'], r['dissolution_mois'])}" if r["dissolution"] else
+                      f"fin : {r['fin_deduite']} (fondation du successeur)")
+        orgs[r["id"]] = dict(id=r["id"], label=r["label"], etiquette=etiq.get(r["id"], r["nom_court"]),
                              voie=r["famille"], couleur=couleur, t0=t0, t1=t1, statut=statut,
-                             an0=r["fondation"], fin_txt=fin_txt, details=details, affil=[],
-                             sans_date=False)
-    for r in lire("sans_date.csv"):
-        if r.get("garde") != "oui":
-            continue
-        s = sigles.get(r["id"], {})
-        orgs[r["id"]] = dict(id=r["id"], label=r["label"], sigle=(s.get("sigle") or "").strip(),
-                             nom_court=(s.get("short_name") or r["label"]).strip(), voie="sans date",
-                             couleur=TEINTE.get(r["famille"], "#8C8C8C"), t0=None, t1=None,
-                             statut="sans date", an0="?", fin_txt="?", affil=[], sans_date=True,
-                             details=[r["label"], "date de fondation inconnue : hors échelle, sans lien",
-                                      f"famille : {r['famille']}", f"sources : {r['sources']}"])
+                             an0=r["fondation"], fin_txt=fin_txt, affil=[],
+                             details=[r["label"], f"fondation : {date_longue(r['fondation'], r['fondation_mois'])}",
+                                      fin_detail, f"famille : {r['famille']}",
+                                      f"courants : {r['courants_sources'] or 'aucun reconnu'}"]
+                             + ([f"organisations liées : {r['organisations_liees']}"] if r.get("organisations_liees") else [])
+                             + ([f"journaux : {r['journaux']}"] if r["journaux"] else []))
     for r in lire("affiliations.csv"):
-        if r["party_id"] in orgs and r["international_id"] in inter and not orgs[r["party_id"]]["sans_date"]:
+        if r["party_id"] in orgs and r["international_id"] in inter:
             orgs[r["party_id"]]["affil"].append(r)
             inter[r["international_id"]]["membres"].append(r["party_id"])
-    liens = [dict(a=r["source"], b=r["cible"], rel=r["relation"],
-                  t=t_de(r["date_evenement"], r["date_evenement_mois"]))
-             for r in lire("liens.csv") if r["source"] in orgs and r["cible"] in orgs]
+    liens = []
+    for r in lire("liens.csv"):
+        if r["source"] in orgs and r["cible"] in orgs:
+            liens.append(dict(a=r["source"], b=r["cible"], rel=r["relation"],
+                              t=t_de(r["date_evenement"], r["date_evenement_mois"]),
+                              preuve=r.get("preuve", ""), citation=r.get("citation", ""),
+                              source_cit=r.get("source_citation", "")))
+    # Couleurs des Internationales : une par Internationale affichée, dans l'ordre chronologique
+    affichees = sorted({i for o in orgs.values() for a in o["affil"] for i in [a["international_id"]]},
+                       key=lambda i: (inter[i]["debut"] or "9999", inter[i]["nom"]))
+    for k, i in enumerate(affichees):
+        inter[i]["couleur"] = PALETTE_INTER[k % len(PALETTE_INTER)]
+        inter[i]["motif"] = k >= len(PALETTE_INTER)          # au-delà de 12 : couleur + hachures
+    for i, d in inter.items():
+        d.setdefault("couleur", "#BBBBBB")
+        d.setdefault("motif", False)
+    # Infobulles : liens (type, preuve, citation) et affiliations (dates)
+    for l in liens:
+        for q, autre, sens in ((l["a"], l["b"], "→"), (l["b"], l["a"], "←")):
+            orgs[q]["details"].append(f"{sens} {STYLE_LIEN[l['rel']]['nom']} {'vers' if sens == '→' else 'depuis'} "
+                                      f"{orgs[autre]['etiquette']} ({l['preuve']}) : « {l['citation'][:160]} »")
+    for o in orgs.values():
+        for a in o["affil"]:
+            d = inter[a["international_id"]]
+            dates = f"{a['start']}–{a['end']}" if a["date_certainty"] == "known" else "dates à confirmer"
+            o["details"].append(f"membre de {d['sigle']} ({d['nom']}) : {dates} ; preuve {a.get('preuve', '')} : "
+                                f"« {a.get('citation', '')[:140]} »")
     return orgs, liens, inter, T_AUJ
 
-
-# ======================================================================
-# Échelle de temps (linéaire, avec cassure explicite si un trou de plus de 60 ans)
-# ======================================================================
 
 class Echelle:
     def __init__(self, debuts, T_AUJ):
@@ -307,7 +311,6 @@ class Echelle:
         self.cassure = None
         for a, b in zip(d, d[1:]):
             if b - a > CASSURE_ANS:
-                # Le premier groupe garde son échelle, l'axe reprend à la décennie du groupe suivant
                 self.cassure = (math.ceil((a + 5) / 10) * 10, math.floor(b / 10) * 10)
                 break
 
@@ -323,138 +326,90 @@ class Echelle:
 
     def graduations(self):
         for a in range(self.T0, self.T1 + 1, 10):
-            if self.cassure and self.cassure[0] < a < self.cassure[1]:
-                continue
-            yield a
+            if not (self.cassure and self.cassure[0] < a < self.cassure[1]):
+                yield a
 
 
 # ======================================================================
 # Mise en page
 # ======================================================================
 
-def preparer_items(orgs, inter, ech, T_AUJ):
-    """Barre, étiquette, cadres d'affiliation et onglets de chaque organisation (positions x)."""
-    for o in orgs.values():
-        # --- Étiquette : sigle en gras (ou nom court), nom complet en petit (2 lignes au plus), dates ---
-        dates = f"{o['an0']}–{o['fin_txt']}" if o["fin_txt"] != "fin inconnue" else f"{o['an0']} – fin inconnue"
-        lignes = []
-        if o["sans_date"]:
-            dates = ""
-        if o["sigle"]:
-            lignes.append([(o["sigle"], FS_SIGLE, True, "sigle"), (dates, FS, False, "dates")])
-            for l in couper(o["label"], TAG_NOM_MAX, FS):
-                lignes.append([(l, FS, False, "nom")])
-        else:
-            noms = couper(o["nom_court"], TAG_NOM_MAX, 12, True)
-            for l in noms[:-1]:
-                lignes.append([(l, 12, True, "sigle")])
-            der = noms[-1]
-            if dates and larg(der, 12, True) + 6 + larg(dates, FS) <= TAG_NOM_MAX:
-                lignes.append([(der, 12, True, "sigle"), (dates, FS, False, "dates")])
-            else:
-                lignes.append([(der, 12, True, "sigle")])
-                if dates:
-                    lignes.append([(dates, FS, False, "dates")])
-        lignes = [[m for m in l if m[0]] for l in lignes]
-        o["tag_lignes"] = lignes
-        o["tag_w"] = max(sum(larg(t, fs, g) + (6 if i else 0) for i, (t, fs, g, _) in enumerate(l))
-                         for l in lignes) + 2 * TAG_PAD
-        o["tag_h"] = 6 + LIGNE * len(lignes)
-        o["tag_cote"] = "droite"
-        o["renv_in"], o["renv_out"] = [], []
-        o["cadres"], o["n_niv"] = [], 0
-        if o["sans_date"]:
-            continue
+def preparer(items, inter, ech, T_AUJ):
+    for o in items.values():
         o["x0"] = ech.X(o["t0"])
         if o["t1"] is not None:
             o["x1"] = max(ech.X(o["t1"]), o["x0"] + MIN_W)
             o["x1_vis"] = o["x1"]
-        elif o["statut"].startswith("actif"):
+        else:
             o["x1"] = max(ech.X(T_AUJ), o["x0"] + MIN_W)
             o["x1_vis"] = o["x1"] + DEGRADE
-        else:                                   # fin inconnue : courte barre et queue hachurée
-            o["x1"] = o["x0"] + MIN_W
-            o["x1_vis"] = o["x1"] + QUEUE
-        # --- Cadres d'affiliation, emboîtés par niveau (intervalle le plus long à l'extérieur) ---
-        cadres = []
+        o["dates"] = f"{o['an0']}–{o['fin_txt']}"
+        o["tag_w"] = larg(o["etiquette"], FS_SIGLE, True) + 6 + larg(o["dates"], FS) + 2 * TAG_PAD
+        o["tag_cote"] = o.get("tag_cote", "droite")
+        # Cadres : seulement si l'entrée et la sortie sont documentées ; 2 au plus (les plus longs)
+        fin_o = o["t1"] if o["t1"] is not None else T_AUJ
+        cadres, points = [], []
         for a in o["affil"]:
             d = inter[a["international_id"]]
-            fin_o = o["t1"] if o["t1"] is not None else T_AUJ
-            ta = max(o["t0"], t_de(a["start"])) if a["start"] else o["t0"]
-            tb = min(fin_o, t_de(a["end"])) if a["end"] else fin_o
-            if tb <= ta:
-                ta, tb = o["t0"], fin_o
-            cadres.append(dict(intl=a["international_id"], ta=ta, tb=tb, connu=a["date_certainty"] == "known",
-                               sortie=bool(a["end"]) or o["t1"] is not None, couleur=d["couleur"],
-                               sigle=d["sigle"], nom=d["nom"]))
-        cadres.sort(key=lambda c: (c["tb"] - c["ta"]))
-        for c in cadres:   # niveau : le plus petit qui ne touche aucun cadre déjà placé
+            if a["date_certainty"] == "known" and a["start"]:
+                ta = max(o["t0"], t_de(a["start"]))
+                tb = fin_o if a["end"] in ("", "toujours membre") else min(fin_o, t_de(a["end"]))
+                if tb > ta:
+                    cadres.append(dict(intl=a["international_id"], ta=ta, tb=tb, couleur=d["couleur"],
+                                       sigle=d["sigle"], nom=d["nom"], sortie=a["end"] != "toujours membre",
+                                       debut=a["start"], fin=a["end"]))
+                    continue
+            points.append(dict(intl=a["international_id"], couleur=d["couleur"], sigle=d["sigle"], nom=d["nom"]))
+        cadres.sort(key=lambda c: -(c["tb"] - c["ta"]))
+        o["cadres_tooltip"] = cadres[2:]
+        cadres = cadres[:2]
+        for c in sorted(cadres, key=lambda c: c["tb"] - c["ta"]):
             pris = {c2["niveau"] for c2 in cadres if "niveau" in c2 and c2["ta"] < c["tb"] and c["ta"] < c2["tb"]}
-            c["niveau"] = next(n for n in range(1, 10) if n not in pris)
+            c["niveau"] = next(n for n in range(1, 5) if n not in pris)
         o["n_niv"] = max((c["niveau"] for c in cadres), default=0)
-        for c in cadres:
-            pad = 3 + (c["niveau"] - 1) * FRAME_PAS + FRAME_W / 2
-            c["pad"] = pad
-            c["xa"] = max(o["x0"], ech.X(c["ta"])) - pad
-            c["xb"] = min(o["x1"], ech.X(c["tb"])) + pad
-        # Onglets : au-dessus du cadre extérieur, de gauche à droite, sans se chevaucher
-        pad_max = 3 + (o["n_niv"] - 1) * FRAME_PAS + FRAME_W if o["n_niv"] else 0
-        x_min = o["x0"] - pad_max
+        o["pad_max"] = 3 + (o["n_niv"] - 1) * FRAME_PAS + FRAME_W if o["n_niv"] else 0
         x_lib = -1e9
-        for c in sorted(cadres, key=lambda c: c["xa"]):
-            c["tab_txt"] = c["sigle"] + ("" if c["connu"] else " ?")
+        for c in sorted(cadres, key=lambda c: c["ta"]):
+            c["pad"] = 3 + (c["niveau"] - 1) * FRAME_PAS + FRAME_W / 2
+            c["xa"] = max(o["x0"], ech.X(c["ta"])) - c["pad"]
+            c["xb"] = min(o["x1"], ech.X(c["tb"])) + c["pad"]
+            c["tab_txt"] = c["sigle"]
             c["tab_w"] = larg(c["tab_txt"], FS, True) + 8
-            x = max(c["xa"] + 4, x_lib + 3)
-            if o["tag_cote"] == "gauche":          # étiquette à gauche : l'onglet ne déborde pas dessus
-                x = max(x, o["x0"] + 1)
-            elif x + c["tab_w"] > o["x1"] - 2:     # étiquette à droite : l'onglet ne passe pas dessous
-                x = max(x_min, x_lib + 3, o["x1"] - 2 - c["tab_w"])
-            c["tab_x"] = x
-            x_lib = x + c["tab_w"]
+            c["tab_x"] = max(c["xa"] + 4, x_lib + 3)
+            x_lib = c["tab_x"] + c["tab_w"]
         o["cadres"] = cadres
-        o["pad_max"] = pad_max
-        # Hauteur du haut des onglets au-dessus du centre de la barre. Si un onglet déborde de la
-        # barre du côté de l'étiquette (barre très courte), il passe au-dessus de l'étiquette.
-        o["tab_haut"] = BAR_H / 2 + pad_max + TAB_H if cadres else 0
-        deborde = any((c["tab_x"] + c["tab_w"] > o["x1_vis"]) if o["tag_cote"] == "droite"
-                      else (c["tab_x"] < o["x0"]) for c in cadres)
-        if deborde:
-            o["tab_haut"] = max(o["tab_haut"], o["tag_h"] / 2 + TAB_H + 1)
-        o["tab_gauche"] = min((c["tab_x"] for c in cadres), default=o["x0"])
-        o["tab_droite"] = max((c["tab_x"] + c["tab_w"] for c in cadres), default=o["x0"])
+        o["tab_haut"] = (BAR_H / 2 + o["pad_max"] + TAB_H) if cadres else 0
+        if cadres and max(c["tab_x"] + c["tab_w"] for c in cadres) > o["x1_vis"] - 2:
+            o["tab_haut"] = max(o["tab_haut"], TAG_H / 2 + TAB_H + 1)   # onglet au-dessus de l'étiquette
+        # Points « ? » : affiliation sans dates documentées, sur le bord haut de la barre
+        o["points"] = points[:max(1, int((o["x1"] - o["x0"] - 6) // 9))] if points else []
+        o["points_tooltip"] = points[len(o["points"]):]
 
 
 def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
-    voies_ordre = [v for v, _, _ in VOIES] + ["sans date"]
-    if voies_voulues:
-        voies_ordre = [v for v in voies_ordre if v in voies_voulues]
+    voies_ordre = [v for v, _, _ in VOIES if not voies_voulues or v in voies_voulues]
     items = {q: dict(o) for q, o in orgs.items() if o["voie"] in voies_ordre}
-    ech = Echelle([o["t0"] for o in items.values() if o["t0"] is not None], T_AUJ)
+    ech = Echelle([o["t0"] for o in items.values()], T_AUJ)
     rang_voie = {v: i for i, v in enumerate(voies_ordre)}
-    anomalies = []
+    preparer(items, inter, ech, T_AUJ)
 
-    # ---------- Continuations : renommage dans la même voie, barres qui se touchent ----------
+    # Continuations : renommage dans la même voie, barres qui se touchent
     par_cible, par_source = defaultdict(list), defaultdict(list)
     for l in liens:
         par_cible[l["b"]].append(l)
         par_source[l["a"]].append(l)
-    preparer_items(items, inter, ech, T_AUJ)
     continuations = set()
     for l in liens:
         a, b = items.get(l["a"]), items.get(l["b"])
-        if (a and b and l["rel"] == "renommage" and a["voie"] == b["voie"] != "sans date"
-                and a["t1"] is not None and 0 <= b["x0"] - a["x1"] < GAP
-                and len(par_cible[l["b"]]) == 1
+        if (a and b and l["rel"] == "renommage" and a["voie"] == b["voie"] and a["t1"] is not None
+                and 0 <= b["x0"] - a["x1"] < GAP and len(par_cible[l["b"]]) == 1
                 and sum(1 for x in par_source[l["a"]] if x["rel"] == "renommage") == 1):
             continuations.add((l["a"], l["b"]))
-            a["tag_cote"] = "gauche"        # l'étiquette ne doit pas recouvrir la suite
-    preparer_items(items, inter, ech, T_AUJ)      # onglets recalculés avec le côté de l'étiquette
-    for a, _ in continuations:
-        items[a]["tag_cote"] = "gauche"
+            a["tag_cote"] = "gauche"
 
-    # ---------- Liens : tracés ou renvois (boucle : la distance en rangées dépend du placement) ----------
-    renvoi_force = set()
-    for _ in range(10):
+    force = set()
+    anomalies = []
+    for _ in range(25):
         poly, renvois = [], []
         for l in liens:
             a, b = items.get(l["a"]), items.get(l["b"])
@@ -463,183 +418,90 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
             if a is None or b is None:
                 renvois.append(dict(l, raison="hors de cette vue"))
                 continue
-            if a["sans_date"] or b["sans_date"] or (l["a"], l["b"]) in continuations:
+            if (l["a"], l["b"]) in continuations:
                 continue
             ev = abs(rang_voie[a["voie"]] - rang_voie[b["voie"]])
             t_dep = min(l["t"] - GOUTTIERE / PPA, a["t1"] if a["t1"] is not None else T_AUJ)
-            if ev > SEUIL_VOIES or l["t"] - t_dep > SEUIL_ANNEES or (l["a"], l["b"]) in renvoi_force:
-                renvois.append(dict(l, raison="trop long"))
+            if ev > SEUIL_VOIES or l["t"] - t_dep > SEUIL_ANNEES or (l["a"], l["b"]) in force:
+                renvois.append(dict(l, raison="trop long ou croisement"))
             else:
                 poly.append(dict(l))
+        renvoyer(items, orgs, renvois)
         entrants = defaultdict(list)
         for l in poly:
-            entrants[l["b"]].append(l)
+            if l["rel"] != "absorption":
+                entrants[l["b"]].append(l)
         for o in items.values():
-            o["renv_in"], o["renv_out"] = [], []
-        for r in renvois:
-            a, b = items.get(r["a"]), items.get(r["b"])
-            if a is not None:
-                cible = b or orgs[r["b"]]
-                a["renv_out"].append((f"→ {cible['sigle'] or cible['nom_court']}", r["b"]))
-            if b is not None:
-                src = a or orgs[r["a"]]
-                mot = {"scission": "scission de", "passage": "militants de"}.get(r["rel"], "issu de")
-                b["renv_in"].append((f"{mot} {src['sigle'] or src['nom_court']}", r["a"]))
-        for o in items.values():
-            if o["sans_date"]:
-                continue
-            o["w_renv"] = sum(larg(t, FS) + 6 for t, _ in o["renv_in"] + o["renv_out"])
             gauche_lien = (GOUTTIERE + 6) if entrants.get(o["id"]) else 0
-            L = min(o["x0"] - gauche_lien - o["pad_max"], o["tab_gauche"])
-            R = max(o["x1_vis"], o["x1"] + o["pad_max"], o["tab_droite"])
+            tabs = [(c["tab_x"], c["tab_x"] + c["tab_w"]) for c in o["cadres"]]
+            L = min([o["x0"] - gauche_lien - o["pad_max"], o["x0"] - POINT_R] + [t[0] for t in tabs])
+            R = max([o["x1_vis"], o["x1"] + o["pad_max"]] + [t[1] for t in tabs])
             if o["tag_cote"] == "droite":
                 R = max(R, o["x1_vis"] + o["tag_w"] + o["w_renv"])
             else:
-                L = min(L, o["x0"] - o["tag_w"] - o["w_renv"])
+                L = min(L, o["x0"] - gauche_lien - o["tag_w"] - o["w_renv"])
+            o["gauche_lien"] = gauche_lien
             o["L"], o["R"] = L, R
         rangees = placer(items, voies_ordre, liens, poly, continuations)
-        trop = {(l["a"], l["b"]) for l in poly
-                if abs(items[l["a"]]["rang_g"] - items[l["b"]]["rang_g"]) > SEUIL_RANGS}
-        if not trop:
+        geo = ordonnees(items, voies_ordre, rangees, ech)
+        traces, nouv_anom = geometrie(items, poly, rang_voie)
+        anomalies = nouv_anom
+        boites = boites_obstacles(items)
+        a_forcer = {(t["a"], t["b"]) for t in traces
+                    if t["rangs"] > SEUIL_RANGS or croisements(t, boites, items)}
+        a_forcer |= {(x[0], x[1]) for x in nouv_anom}
+        if not a_forcer - force:
             break
-        renvoi_force |= trop
+        force |= a_forcer
+    traces = [t for t in traces if (t["a"], t["b"]) not in force]
+    cle = cle_internationales_donnees(items, inter)
+    largeur = max([o["R"] for o in items.values()] + [ech.X(ech.T1)]) + 40
+    return dict(items=items, traces=traces, renvois=renvois, continuations=continuations, ech=ech,
+                T_AUJ=T_AUJ, largeur=largeur, cle=cle, inter=inter, titre=titre, anomalies=anomalies,
+                rels=sorted({t["rel"] for t in traces}), **geo)
 
-    # ---------- Ordonnées ----------
-    entete_h, axe_h = 160, 34
-    y = entete_h + axe_h
-    voies_geo = []
-    for v in voies_ordre:
-        membres = [o for o in items.values() if o["voie"] == v]
-        if not membres:
-            continue
-        y_voie = y
-        if v == "sans date":
-            y += axe_h + 12
-            y_voie = y
-            xc, ligne, x_max = X0, 0, ech.X(ech.T1)
-            hmax = max(o["tag_h"] for o in membres)
-            for o in sorted(membres, key=lambda o: o["label"]):
-                if xc + o["tag_w"] > x_max and xc > X0:
-                    xc, ligne = X0, ligne + 1
-                o["tag_x"] = xc
-                o["y_c"] = y_voie + VOIE_PAD + ligne * (hmax + ROW_GAP) + hmax / 2
-                xc += o["tag_w"] + GAP
-            h = 2 * VOIE_PAD + (ligne + 1) * (hmax + ROW_GAP)
-            voies_geo.append(dict(cle=v, y=y_voie, h=h, n=len(membres)))
-            y += h
-            continue
-        y += VOIE_PAD
-        info = rangees[v]
-        for i, contenu in enumerate(info["rangees"]):
-            haut = bas = 0
-            for q in contenu:
-                o = items[q]
-                haut = max(haut, o["tag_h"] / 2, BAR_H / 2 + o["pad_max"], o["tab_haut"])
-                bas = max(bas, o["tag_h"] / 2, BAR_H / 2 + o["pad_max"])
-            if i in info["debuts_blocs"] and i:
-                y += 8           # écart entre deux arbres
-            for q in contenu:
-                items[q]["y_c"] = y + ROW_GAP / 2 + haut
-                items[q]["rang_y"], items[q]["rang_h"] = y, haut + bas + ROW_GAP
-            y += haut + bas + ROW_GAP
-        y += VOIE_PAD
-        voies_geo.append(dict(cle=v, y=y_voie, h=y - y_voie, n=len(membres)))
-    if not any(g["cle"] == "sans date" for g in voies_geo):
-        y += axe_h + 12
-    y_axe_bas = next((g["y"] - axe_h - 12 for g in voies_geo if g["cle"] == "sans date"), y - axe_h - 12)
-    for i, g in enumerate(voies_geo):
-        g["i"] = i
-    voie_index = {g["cle"]: g["i"] for g in voies_geo}
 
-    # ---------- Géométrie des liens ----------
-    traces = []
-    entrants = defaultdict(list)
-    for l in poly:
-        entrants[l["b"]].append(l)
-    for qb, ls in entrants.items():
-        b = items[qb]
-        ls.sort(key=lambda l: items[l["a"]]["y_c"])
-        n = len(ls)
-        for k, l in enumerate(ls):
-            a = items[l["a"]]
-            off = max(-(BAR_H / 2 - 3), min(BAR_H / 2 - 3, (k - (n - 1) / 2) * 5))
-            xt, yt = b["x0"], b["y_c"] + off
-            bas = yt > a["y_c"]
-            if a["x1"] < xt - GOUTTIERE:            # la source a fini avant : départ de son extrémité
-                xs, xv = a["x1"], xt - GOUTTIERE
-                if a["rang_y"] == b["rang_y"]:
-                    pts = [(xs, yt), (xt, yt)]
-                else:
-                    canal = a["rang_y"] + a["rang_h"] - 3 if bas else a["rang_y"] + 2
-                    pts = [(xs, a["y_c"]), (xs, canal), (xv, canal), (xv, yt), (xt, yt)]
-                depart = None
-            else:
-                xs = max(xt - GOUTTIERE, a["x0"] + min(2, (xt - a["x0"]) / 2))
-                y_bord = a["y_c"] + BAR_H / 2 if bas else a["y_c"] - BAR_H / 2
-                pts = [(xs, y_bord), (xs, yt), (xt, yt)]
-                depart = (xs, y_bord, 1 if bas else -1)
-            voies_pts = ([a["voie"]] * (len(pts) - 2) + [b["voie"]] * 2) if len(pts) > 2 else [a["voie"], b["voie"]]
-            if xt - pts[-2][0] < 3:
-                anomalies.append([l["a"], l["b"], l["rel"], a["an0"], b["an0"],
-                                  "dates trop proches : segment final de moins de 3 px"])
-                continue
-            principal = l["rel"] in ("renommage", "filiation") or (l["rel"] == "fusion" and a["voie"] == b["voie"])
-            traces.append(dict(l, pts=pts, voies_pts=voies_pts, depart=depart, principal=principal,
-                               annees=(xt - pts[0][0]) / PPA,
-                               voies=abs(rang_voie[a["voie"]] - rang_voie[b["voie"]]),
-                               rangs=abs(a["rang_g"] - b["rang_g"])))
-
-    # ---------- Clé des Internationales ----------
-    utiles = {c["intl"] for o in items.values() for c in o.get("cadres", [])}
-    succ = defaultdict(list)
-    for i, d in inter.items():
-        for p in d["pred"]:
-            succ[p].append(i)
-
-    def chaine(i):
-        racine, vus = i, set()
-        while inter[racine]["pred"] and racine not in vus and inter[racine]["pred"][0] in inter:
-            vus.add(racine)
-            racine = inter[racine]["pred"][0]
-        etapes, x, vus = [], racine, set()
-        while x and x not in vus:
-            vus.add(x)
-            etapes.append(f"{inter[x]['nom']} {inter[x]['debut'] or '?'}–{inter[x]['fin']}")
-            x = next((s for s in succ[x] if s in inter), None)
-        return ", puis ".join(etapes) if len(etapes) > 1 else ""
-
-    cle = [dict(id=i, sigle=inter[i]["sigle"], nom=inter[i]["nom"],
-                dates=f"{inter[i]['debut'] or '?'}–{inter[i]['fin']}", couleur=inter[i]["couleur"],
-                succession=chaine(i), membres=[q for q in inter[i]["membres"] if q in items])
-           for i in sorted(utiles, key=lambda i: (inter[i]["debut"] or "9999", inter[i]["nom"]))]
-
-    largeur = max([o.get("R", 0) for o in items.values()]
-                  + [o.get("tag_x", 0) + o["tag_w"] for o in items.values() if o["sans_date"]]
-                  + [ech.X(ech.T1)]) + 40
-    return dict(items=items, traces=traces, renvois=renvois, continuations=continuations,
-                voies=voies_geo, voie_index=voie_index, ech=ech, T_AUJ=T_AUJ, largeur=largeur,
-                hauteur=y, y_axe_haut=entete_h, y_axe_bas=y_axe_bas, cle=cle, inter=inter,
-                titre=titre, anomalies=anomalies, rels=sorted({t["rel"] for t in traces}))
+def renvoyer(items, orgs, renvois):
+    """Textes de renvoi collés à l'étiquette ; plus de 3 : un seul « voir aussi »."""
+    for o in items.values():
+        o["renv"] = []
+    for r in renvois:
+        a, b = items.get(r["a"]), items.get(r["b"])
+        if a is not None:
+            cible = b or orgs[r["b"]]
+            a["renv"].append((f"→ {cible['etiquette']}", r["b"], r["a"], r["b"]))
+        if b is not None:
+            src = a or orgs[r["a"]]
+            b["renv"].append((f"{RENVOI_MOT.get(r['rel'], 'issu de')} {src['etiquette']}", r["a"], r["a"], r["b"]))
+    for o in items.values():
+        if len(o["renv"]) > MAX_RENVOIS:
+            o["voir_aussi"] = list(o["renv"])
+            o["renv"] = [(f"voir aussi ({len(o['voir_aussi'])})", "", "", "")]
+        else:
+            o["voir_aussi"] = []
+        o["w_renv"] = sum(larg(t, FS) + 6 for t, *_ in o["renv"])
 
 
 def placer(items, voies_ordre, liens, poly, continuations):
-    """Rangées par voie. Chaque arbre (composante reliée dans la voie) forme un bloc contigu :
-    racine en haut, descendants dessous par date, au plus près de leur ancêtre."""
-    voisins, parents = defaultdict(set), defaultdict(list)
-    for l in liens:
-        a, b = items.get(l["a"]), items.get(l["b"])
-        if a and b and a["voie"] == b["voie"]:
+    """Rangées par voie (2.2) : chaque arbre relié par des liens dessinés forme un bloc contigu ;
+    les barres reliées seulement par des renvois vont en bas de la voie. Dans un bloc, une rangée
+    est choisie d'abord pour ne créer aucun croisement (2.3), puis pour rester près de l'ancêtre."""
+    voisins = defaultdict(set)
+    parents = defaultdict(list)
+    for l in poly:
+        a, b = items[l["a"]], items[l["b"]]
+        if a["voie"] == b["voie"]:
             voisins[l["a"]].add(l["b"])
             voisins[l["b"]].add(l["a"])
-    for l in poly:
-        parents[l["b"]].append(l["a"])
+        parents[l["b"]].append(l)
+    for a, b in continuations:
+        voisins[a].add(b)
+        voisins[b].add(a)
     cont_parent = {b: a for a, b in continuations}
     res, rang_global = {}, 0
     for v in voies_ordre:
-        if v == "sans date":
-            continue
         membres = [q for q, o in items.items() if o["voie"] == v]
-        blocs, vus = [], set()
+        blocs, seuls, vus = [], [], set()
         for q in sorted(membres, key=lambda q: (items[q]["x0"], items[q]["label"])):
             if q in vus:
                 continue
@@ -650,36 +512,93 @@ def placer(items, voies_ordre, liens, poly, continuations):
                     comp.add(x)
                     pile.extend(y for y in voisins[x] if items[y]["voie"] == v)
             vus |= comp
-            blocs.append(sorted(comp, key=lambda x: (items[x]["x0"], items[x]["label"])))
+            (blocs if len(comp) > 1 else seuls).append(sorted(comp, key=lambda x: (items[x]["x0"], items[x]["label"])))
+        if seuls:
+            blocs.append([q for s in seuls for q in s])       # barres à renvois seuls : en bas, ensemble
         rangees, debuts = [], set()
         for bloc in blocs:
             debut = len(rangees)
             debuts.add(debut)
-            local = []
+            local, segments = [], []                            # segments verticaux : (x, rangée min, rangée max)
+
+            def occupe(r, x):
+                return any(l2 - 0.5 < x < r2 + 0.5 for l2, r2, _ in local[r])
+
+            def cout(o, r):
+                c = 0
+                for l in parents[o["id"]]:
+                    p = items[l["a"]]
+                    if p.get("bloc_v") != (v, debut) or "rang_l" not in p:
+                        continue
+                    x = o["x0"] - GOUTTIERE if l["rel"] != "absorption" else p["x1"] - 2
+                    h, b = sorted((p["rang_l"], r))
+                    c += sum(1 for rr in range(h + 1, b) if occupe(rr, x))
+                c += sum(1 for x, h, b in segments if h < r < b and o["L"] - 0.5 < x < o["R"] + 0.5)
+                for l in parents[o["id"]]:          # au-delà de 6 rangées, le lien deviendrait un renvoi
+                    p = items[l["a"]]
+                    if p.get("bloc_v") == (v, debut) and "rang_l" in p and abs(p["rang_l"] - r) > SEUIL_RANGS:
+                        c += 1
+                return c
 
             def libre(r, L, R, sauf=None):
                 for l2, r2, q2 in local[r]:
-                    if q2 == sauf and L >= items[q2]["x1"] - 0.5 - (items[q2]["x1"] - l2 if False else 0):
+                    if q2 == sauf and L >= items[q2]["x1"] - 0.5:
                         continue
                     if not (R + GAP <= l2 or r2 + GAP <= L):
                         return False
                 return True
-            for q in bloc:
+            # Ordre de placement : parcours en profondeur depuis la racine, enfants du plus récent au
+            # plus ancien. Le lien vers un enfant plus ancien ne traverse alors que des rangées
+            # d'organisations fondées après lui : leurs barres ne couvrent pas encore la date du lien.
+            enfants_v = defaultdict(list)
+            for l in poly:
+                if l["a"] in bloc and l["b"] in bloc:
+                    enfants_v[l["a"]].append(l["b"])
+            for a_, b_ in continuations:
+                if a_ in bloc and b_ in bloc:
+                    enfants_v[a_].append(b_)
+            dans_bloc = set(bloc)
+            racines = [q for q in bloc if not any(q in enfants_v[p] for p in dans_bloc)] or bloc[:1]
+            ordre, vus_o = [], set()
+
+            def visite(n):
+                if n in vus_o:
+                    return
+                vus_o.add(n)
+                ordre.append(n)
+                for c in sorted(enfants_v[n], key=lambda c: -items[c]["x0"]):
+                    visite(c)
+            for r_ in racines:
+                visite(r_)
+            ordre += [q for q in bloc if q not in vus_o]
+            for q in ordre:
                 o = items[q]
                 o.pop("rang_l", None)
+                o["bloc_v"] = (v, debut)
                 place = None
                 p = cont_parent.get(q)
-                if p and "rang_l" in items[p] and libre(items[p]["rang_l"], o["L"], o["R"], sauf=p):
+                if p and "rang_l" in items[p] and items[p].get("bloc_v") == (v, debut) \
+                        and libre(items[p]["rang_l"], o["L"], o["R"], sauf=p):
                     place = items[p]["rang_l"]
                 if place is None:
-                    prefs = [items[p]["rang_l"] for p in parents[q] if p in bloc and "rang_l" in items[p]]
+                    prefs = [items[l["a"]]["rang_l"] for l in parents[q]
+                             if items[l["a"]].get("bloc_v") == (v, debut) and "rang_l" in items[l["a"]]]
                     pref = prefs[0] + 1 if prefs else 0
-                    ordre = sorted(range(len(local)), key=lambda r: (abs(r - pref), r < pref))
-                    place = next((r for r in ordre if libre(r, o["L"], o["R"])), len(local))
+                    candidats = [r for r in range(len(local)) if libre(r, o["L"], o["R"])] + [len(local)]
+                    while len(local) < candidats[-1] + 1:
+                        local.append([])
+                    place = min(candidats, key=lambda r: (cout(o, r), abs(r - pref), r < pref))
                 if place == len(local):
                     local.append([])
                 local[place].append((o["L"], o["R"], q))
                 o["rang_l"] = place
+                for l in parents[q]:
+                    pp = items[l["a"]]
+                    if pp.get("bloc_v") == (v, debut) and "rang_l" in pp:
+                        x = o["x0"] - GOUTTIERE if l["rel"] != "absorption" else pp["x1"] - 2
+                        segments.append((x, *sorted((pp["rang_l"], place))))
+            while local and not local[-1]:
+                local.pop()
             for r in local:
                 rangees.append([q for _, _, q in r])
             for q in bloc:
@@ -689,37 +608,156 @@ def placer(items, voies_ordre, liens, poly, continuations):
     return res
 
 
+def ordonnees(items, voies_ordre, rangees, ech):
+    entete_h, axe_h = 160, 34
+    y = entete_h + axe_h
+    voies_geo = []
+    for v in voies_ordre:
+        membres = [o for o in items.values() if o["voie"] == v]
+        if not membres:
+            continue
+        y_voie = y
+        y += VOIE_PAD
+        info = rangees[v]
+        for i, contenu in enumerate(info["rangees"]):
+            haut = bas = TAG_H / 2
+            for q in contenu:
+                o = items[q]
+                haut = max(haut, BAR_H / 2 + o["pad_max"], o["tab_haut"], BAR_H / 2 + POINT_R + 1)
+                bas = max(bas, BAR_H / 2 + o["pad_max"])
+            for q in contenu:
+                items[q]["y_c"] = y + ROW_GAP / 2 + haut
+                items[q]["rang_y"], items[q]["rang_h"] = y, haut + bas + ROW_GAP
+            y += haut + bas + ROW_GAP
+        y += VOIE_PAD
+        voies_geo.append(dict(cle=v, y=y_voie, h=y - y_voie, n=len(membres)))
+    y += axe_h + 12
+    for i, g in enumerate(voies_geo):
+        g["i"] = i
+    return dict(voies=voies_geo, voie_index={g["cle"]: g["i"] for g in voies_geo}, hauteur=y,
+                y_axe_haut=entete_h, y_axe_bas=y - axe_h - 12)
+
+
+def geometrie(items, poly, rang_voie):
+    traces, anomalies = [], []
+    entrants = defaultdict(list)
+    for l in poly:
+        entrants[l["b"]].append(l)
+    for qb, ls in entrants.items():
+        b = items[qb]
+        normaux = sorted([l for l in ls if l["rel"] != "absorption"], key=lambda l: items[l["a"]]["y_c"])
+        n = len(normaux)
+        for k, l in enumerate(ls):
+            a = items[l["a"]]
+            if l["rel"] == "absorption":
+                # Flèche qui finit sur la barre absorbante, au moment de l'absorption
+                xs = a["x1"] - 2
+                xt = xs + 12
+                if not (b["x0"] + 2 <= xt <= b["x1"] - 1) or a["rang_y"] == b["rang_y"]:
+                    anomalies.append((l["a"], l["b"], l["rel"], a["an0"], b["an0"],
+                                      "absorption impossible à dessiner (la cible ne couvre pas la date)"))
+                    continue
+                bas = b["y_c"] > a["y_c"]
+                y_dep = a["y_c"] + BAR_H / 2 if bas else a["y_c"] - BAR_H / 2
+                y_arr = b["y_c"] - BAR_H / 2 - 1 if bas else b["y_c"] + BAR_H / 2 + 1
+                pts = [(xs, y_dep), (xs, y_arr), (xt, y_arr)]
+                depart = None
+            else:
+                kk = normaux.index(l)
+                off = max(-(BAR_H / 2 - 3), min(BAR_H / 2 - 3, (kk - (n - 1) / 2) * 5))
+                xt, yt = b["x0"], b["y_c"] + off
+                bas = yt > a["y_c"]
+                if a["x1"] < xt - GOUTTIERE:
+                    xs, xv = a["x1"], xt - GOUTTIERE
+                    if a["rang_y"] == b["rang_y"]:
+                        pts = [(xs, yt), (xt, yt)]
+                    else:
+                        canal = a["rang_y"] + a["rang_h"] - 3 if bas else a["rang_y"] + 2
+                        pts = [(xs, a["y_c"]), (xs, canal), (xv, canal), (xv, yt), (xt, yt)]
+                    depart = (xs, a["y_c"])
+                else:
+                    xs = max(xt - GOUTTIERE, a["x0"] + min(2, (xt - a["x0"]) / 2))
+                    y_bord = a["y_c"] + BAR_H / 2 if bas else a["y_c"] - BAR_H / 2
+                    pts = [(xs, y_bord), (xs, yt), (xt, yt)]
+                    depart = (xs, a["y_c"])
+                if xt - pts[-2][0] < 3:
+                    anomalies.append((l["a"], l["b"], l["rel"], a["an0"], b["an0"],
+                                      "dates trop proches : segment final de moins de 3 px"))
+                    continue
+            vp = [a["voie"]] * (len(pts) - 2) + [b["voie"]] * 2 if len(pts) > 2 else [a["voie"], b["voie"]]
+            traces.append(dict(l, pts=pts, voies_pts=vp, depart=depart,
+                               annees=(pts[-1][0] - pts[0][0]) / PPA,
+                               voies=abs(rang_voie[a["voie"]] - rang_voie[b["voie"]]),
+                               rangs=abs(a["rang_g"] - b["rang_g"])))
+    return traces, anomalies
+
+
+def boites_obstacles(items):
+    """Barres, étiquettes et onglets : ce qu'un lien ne doit jamais traverser."""
+    boites = []
+    for o in items.values():
+        yb = o["y_c"] - BAR_H / 2
+        boites.append((o["id"], "barre", (o["x0"], yb, o["x1_vis"] - o["x0"], BAR_H)))
+        tx = o["x1_vis"] if o["tag_cote"] == "droite" else o["x0"] - o.get("gauche_lien", 0) - o["tag_w"]
+        boites.append((o["id"], "etiquette", (tx, o["y_c"] - TAG_H / 2, o["tag_w"], TAG_H)))
+        for c in o["cadres"]:
+            boites.append((o["id"], "onglet", (c["tab_x"], o["y_c"] - o["tab_haut"], c["tab_w"], TAB_H)))
+    return boites
+
+
+def croisements(t, boites, items):
+    n = 0
+    for p1, p2 in zip(t["pts"], t["pts"][1:]):
+        for q, sorte, b in boites:
+            if sorte == "barre" and q in (t["a"], t["b"]):
+                continue          # départ et arrivée sur leurs propres barres
+            if segments_croisent_boite(p1, p2, b):
+                n += 1
+    return n
+
+
+def cle_internationales_donnees(items, inter):
+    utiles = {a["international_id"] for o in items.values() for a in o["affil"]}
+    nom_annee = lambda i: f"{inter[i]['nom']} {inter[i]['debut'] or '?'}–{inter[i]['fin']}"
+
+    def succession(i):
+        """Chaîne de succession (renommage, fusion, refondation) seulement (règle 1.3)."""
+        racine, vus = i, set()
+        while inter[racine]["pred"] and racine not in vus and inter[racine]["pred"][0] in inter:
+            vus.add(racine)
+            racine = inter[racine]["pred"][0]
+        etapes, x, vus = [], racine, set()
+        while x and x not in vus:
+            vus.add(x)
+            etapes.append(nom_annee(x))
+            x = next((s for s, d in inter.items() if x in d["pred"]), None)
+        return ", puis ".join(etapes) if len(etapes) > 1 else ""
+    return [dict(id=i, sigle=inter[i]["sigle"], nom=inter[i]["nom"],
+                 dates=f"{inter[i]['debut'] or '?'}–{inter[i]['fin']}", couleur=inter[i]["couleur"],
+                 succession=succession(i),
+                 scissions=", ".join(nom_annee(s) for s in inter[i]["scissions"] if s in inter),
+                 membres=[q for q in dict.fromkeys(inter[i]["membres"]) if q in items])
+            for i in sorted(utiles, key=lambda i: (inter[i]["debut"] or "9999", inter[i]["nom"]))]
+
+
 # ======================================================================
 # SVG
 # ======================================================================
 
-def defs_communs(m):
-    out = []
-    for c in {o["couleur"] for o in m["items"].values()} | {"#8C8C8C"}:
-        out.append(f'<linearGradient id="g-{c[1:]}"><stop offset="0" stop-color="{c}"/>'
-                   f'<stop offset="1" stop-color="{c}" stop-opacity="0"/></linearGradient>')
-        out.append(f'<pattern id="h-{c[1:]}" width="6" height="6" patternUnits="userSpaceOnUse" '
-                   f'patternTransform="rotate(45)"><rect width="6" height="6" fill="#FFFFFF"/>'
-                   f'<rect width="2.5" height="6" fill="{melange(c, "#FFFFFF", 0.35)}"/></pattern>')
-    return "".join(out)
-
-
 def dessiner(m, avec_cle=True, apercu=False):
     items, ech = m["items"], m["ech"]
     X = ech.X
-    W = m["largeur"]
-    fond, voies_svg, liens_svg, etiq_svg = [], defaultdict(list), [], defaultdict(list)
-
-    # ---------- Voies, bandes de décennies, axes ----------
+    W = m["largeur"] + (CLE_W if avec_cle and not apercu else 0)
+    fond, bas_v, liens_svg, haut_v = [], defaultdict(list), [], defaultdict(list)
     for g in m["voies"]:
         c = TEINTE[g["cle"]]
-        fond_c = melange(c, "#FFFFFF", 0.90 if g["i"] % 2 == 0 else 0.95)
         fond.append(f'<g class="voie" data-voie="{g["i"]}" data-cle="{esc(g["cle"])}">'
-                    f'<rect class="fond-voie" x="0" y="{g["y"]:.1f}" width="{W:.1f}" height="{g["h"]:.1f}" fill="{fond_c}"/>'
+                    f'<rect class="fond-voie" x="0" y="{g["y"]:.1f}" width="{m["largeur"]:.1f}" height="{g["h"]:.1f}" '
+                    f'fill="{melange(c, "#FFFFFF", 0.90 if g["i"] % 2 == 0 else 0.95)}"/>'
                     f'<rect class="bord-voie" x="0" y="{g["y"]:.1f}" width="8" height="{g["h"]:.1f}" fill="{c}"/>'
                     + texte(16, g["y"] + 20, TITRES[g["cle"]], 13, True, "#1A1A1A", cls="voie-t")
-                    + texte(16, g["y"] + 36, f"{g['n']} organisation{'s' if g['n'] > 1 else ''}", FS,
-                            False, "#333333", cls="voie-t") + "</g>")
+                    + texte(16, g["y"] + 36, f"{g['n']} organisation{'s' if g['n'] > 1 else ''}", FS, False,
+                            "#333333", cls="voie-t") + "</g>")
     y_h, y_b = m["y_axe_haut"], m["y_axe_bas"]
     for a in ech.graduations():
         if (a // 10) % 2 == 0 and a < ech.T1:
@@ -727,224 +765,187 @@ def dessiner(m, avec_cle=True, apercu=False):
                         f'height="{y_b - y_h + 30:.1f}" fill="#000000" fill-opacity="0.035"/>')
 
     def axe(y, haut, cls):
-        p = [f'<g class="{cls}"><line x1="{X(ech.T0):.1f}" x2="{X(ech.T1):.1f}" y1="{y:.1f}" y2="{y:.1f}" '
-             f'stroke="#555555"/>']
+        p = [f'<g class="{cls}"><line x1="{X(ech.T0):.1f}" x2="{X(ech.T1):.1f}" y1="{y:.1f}" y2="{y:.1f}" stroke="#555555"/>']
         for a in ech.graduations():
             p.append(f'<line x1="{X(a):.1f}" x2="{X(a):.1f}" y1="{y - 5:.1f}" y2="{y + 5:.1f}" stroke="#555555"/>')
             p.append(texte(X(a), y - 9 if haut else y + 20, str(a), 12, True, "#333333", "middle", cls="axe-t"))
-        if ech.cassure:     # symbole de cassure explicite
+        if ech.cassure:
             xc = X(ech.cassure[0]) + CASSURE_PX / 2
             p.append(f'<rect x="{xc - 9:.1f}" y="{y - 8:.1f}" width="18" height="16" fill="#FFFFFF"/>'
                      f'<path d="M{xc - 8:.1f} {y + 7:.1f} L{xc - 2:.1f} {y - 7:.1f} M{xc + 2:.1f} {y + 7:.1f} '
                      f'L{xc + 8:.1f} {y - 7:.1f}" stroke="#333333" stroke-width="2"/>')
-        p.append("</g>")
-        return "".join(p)
+        return "".join(p) + "</g>"
     fond.append(axe(y_h + 26, True, "axe-haut"))
     fond.append(axe(y_b + 4, False, "axe-bas"))
     xa = X(m["T_AUJ"])
-    fond.append(f'<line x1="{xa:.1f}" x2="{xa:.1f}" y1="{y_h + 26:.1f}" y2="{y_b + 4:.1f}" stroke="#777777" '
-                f'stroke-dasharray="2 4"/>')
+    fond.append(f'<line x1="{xa:.1f}" x2="{xa:.1f}" y1="{y_h + 26:.1f}" y2="{y_b + 4:.1f}" stroke="#777777" stroke-dasharray="2 4"/>')
 
-    # ---------- Organisations : barre + cadres (calque bas), étiquette + onglets + renvois (calque haut) ----------
-    for o in sorted(items.values(), key=lambda o: (o.get("y_c", 0), o.get("x0", 0))):
-        if "y_c" not in o:
-            continue
+    for o in sorted(items.values(), key=lambda o: (o["y_c"], o["x0"])):
         vi = m["voie_index"][o["voie"]]
-        intl = " ".join(c["intl"] for c in o.get("cadres", []))
-        recherche = sans_accents(f"{o['sigle']} {o['nom_court']} {o['label']}")
-        ouvre = (f'<g class="org" data-id="{esc(o["id"])}" data-intl="{esc(intl)}" '
-                 f'data-recherche="{esc(recherche)}"><title>{esc(chr(10).join(o["details"]))}</title>')
+        intl = " ".join(a["international_id"] for a in o["affil"])
+        rech = sans_accents(f"{o['etiquette']} {o['label']}")
+        ouvre = (f'<g class="org" data-id="{esc(o["id"])}" data-intl="{esc(intl)}" data-recherche="{esc(rech)}">'
+                 f'<title>{esc(chr(10).join(o["details"]))}</title>')
         bas, haut = [ouvre], [ouvre.replace('class="org"', 'class="org org-haut"')]
-        yc = o["y_c"]
-        if o["sans_date"]:
-            x, w, h = o["tag_x"], o["tag_w"], o["tag_h"]
-            haut.append(f'<rect class="tag sans-date" data-id="{esc(o["id"])}" x="{x:.2f}" y="{yc - h / 2:.2f}" '
-                        f'width="{w:.2f}" height="{h:.2f}" rx="3" fill="url(#h-{o["couleur"][1:]})" '
-                        f'stroke="{o["couleur"]}" stroke-width="1.5" data-bbox="{x:.2f},{yc - h / 2:.2f},{w:.2f},{h:.2f}"/>')
-            haut += lignes_tag(o, x, yc - h / 2, "#1A1A1A", "#333333")
-        else:
-            x0, x1 = o["x0"], o["x1"]
-            yb = yc - BAR_H / 2
-            fin = "actif" if o["statut"].startswith("actif") else (
-                f"{o['t1']:.4f}" if o["t1"] is not None else "inconnue")
-            if not apercu:
-                for c in sorted(o["cadres"], key=lambda c: -c["niveau"]):
-                    bas.append(cadre(o, c, yc))
-            bas.append(f'<rect class="barre" data-id="{esc(o["id"])}" data-debut="{o["t0"]:.4f}" '
-                       f'data-fin="{fin}" data-statut="{o["statut"]}" x="{x0:.2f}" y="{yb:.2f}" '
-                       f'width="{x1 - x0:.2f}" height="{BAR_H}" rx="{0 if o["x1_vis"] > x1 else 3}" '
-                       f'fill="{o["couleur"]}"/>')
-            if o["x1_vis"] > x1:
-                actif = o["statut"].startswith("actif")
-                motif = f"url(#g-{o['couleur'][1:]})" if actif else f"url(#h-{o['couleur'][1:]})"
-                bas.append(f'<rect class="fin-ouverte" x="{x1:.2f}" y="{yb:.2f}" width="{o["x1_vis"] - x1:.2f}" '
-                           f'height="{BAR_H}" fill="{motif}"' + ("" if actif else ' fill-opacity="0.7"') + "/>")
-            if not apercu:
-                w, h = o["tag_w"], o["tag_h"]
-                tx = o["x1_vis"] if o["tag_cote"] == "droite" else x0 - w
-                o["tag_x"] = tx
-                haut.append(f'<rect class="tag" data-id="{esc(o["id"])}" x="{tx:.2f}" y="{yc - h / 2:.2f}" '
-                            f'width="{w:.2f}" height="{h:.2f}" rx="4" fill="{o["couleur"]}" '
-                            f'data-bbox="{tx:.2f},{yc - h / 2:.2f},{w:.2f},{h:.2f}"/>')
-                haut += lignes_tag(o, tx, yc - h / 2, texte_sur(o["couleur"]), gris_sur(o["couleur"]))
-                for c in o["cadres"]:
-                    ty = yc - o["tab_haut"]
-                    fill = c["couleur"] if c["connu"] else melange(c["couleur"], "#FFFFFF", 0.15)
-                    haut.append(f'<g class="onglet" data-intl="{esc(c["intl"])}" data-parti="{esc(o["id"])}">'
-                                f'<title>{esc(c["nom"])}' + ("" if c["connu"] else " : dates à confirmer")
-                                + f'</title><rect class="onglet-r" x="{c["tab_x"]:.2f}" y="{ty:.2f}" '
-                                f'width="{c["tab_w"]:.2f}" height="{TAB_H}" rx="3" fill="{fill}" '
-                                f'data-bbox="{c["tab_x"]:.2f},{ty:.2f},{c["tab_w"]:.2f},{TAB_H}"/>'
-                                + texte(c["tab_x"] + 4, ty + 11.5, c["tab_txt"], FS, True, texte_sur(fill),
-                                        cls="onglet-t",
-                                        extra=f' data-bbox="{c["tab_x"] + 4:.2f},{ty + 1:.2f},{c["tab_w"] - 8:.2f},13"')
-                                + "</g>")
-                tous = o["renv_in"] + o["renv_out"]
+        yc, x0, x1 = o["y_c"], o["x0"], o["x1"]
+        yb = yc - BAR_H / 2
+        fin = "actif" if o["statut"].startswith("actif") else f"{o['t1']:.4f}"
+        if not apercu:
+            for c in sorted(o["cadres"], key=lambda c: -c["niveau"]):
+                bas.append(cadre(o, c, yc))
+        bas.append(f'<rect class="barre" data-id="{esc(o["id"])}" data-debut="{o["t0"]:.4f}" data-fin="{fin}" '
+                   f'data-statut="{o["statut"]}" x="{x0:.2f}" y="{yb:.2f}" width="{x1 - x0:.2f}" height="{BAR_H}" '
+                   f'rx="{0 if o["x1_vis"] > x1 else 3}" fill="{o["couleur"]}"/>')
+        if o["x1_vis"] > x1:
+            bas.append(f'<rect class="fin-ouverte" x="{x1:.2f}" y="{yb:.2f}" width="{o["x1_vis"] - x1:.2f}" '
+                       f'height="{BAR_H}" fill="url(#g-{o["couleur"][1:]})"/>')
+        if not apercu:
+            for k, p in enumerate(o["points"]):
+                px = x0 + 5 + 9 * k
+                haut.append(f'<circle class="point-affil" data-intl="{esc(p["intl"])}" data-parti="{esc(o["id"])}" '
+                            f'cx="{px:.2f}" cy="{yb:.2f}" r="{POINT_R}" fill="{p["couleur"]}" stroke="#FFFFFF" '
+                            f'stroke-width="1"><title>{esc(p["sigle"])} ({esc(p["nom"])}) : affiliation citée, '
+                            f'dates à documenter</title></circle>')
+            w = o["tag_w"]
+            tx = o["x1_vis"] if o["tag_cote"] == "droite" else x0 - o.get("gauche_lien", 0) - w
+            o["tag_x"] = tx
+            haut.append(f'<rect class="tag" data-id="{esc(o["id"])}" x="{tx:.2f}" y="{yc - TAG_H / 2:.2f}" '
+                        f'width="{w:.2f}" height="{TAG_H}" rx="4" fill="{o["couleur"]}" '
+                        f'data-bbox="{tx:.2f},{yc - TAG_H / 2:.2f},{w:.2f},{TAG_H}"/>')
+            ct, cd = texte_sur(o["couleur"]), gris_sur(o["couleur"])
+            xx, yy = tx + TAG_PAD, yc + 4.5
+            ws = larg(o["etiquette"], FS_SIGLE, True)
+            haut.append(texte(xx, yy, o["etiquette"], FS_SIGLE, True, ct, cls="tag-t",
+                              extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - 12:.2f},{ws:.2f},14"'))
+            xx += ws + 6
+            haut.append(texte(xx, yy, o["dates"], FS, False, cd, cls="tag-t",
+                              extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - 10:.2f},{larg(o["dates"], FS):.2f},12"'))
+            for c in o["cadres"]:
+                ty = yc - o["tab_haut"]
+                haut.append(f'<g class="onglet" data-intl="{esc(c["intl"])}" data-parti="{esc(o["id"])}">'
+                            f'<title>{esc(c["nom"])} : {esc(c["debut"])}–{esc(c["fin"])}</title>'
+                            f'<rect class="onglet-r" x="{c["tab_x"]:.2f}" y="{ty:.2f}" width="{c["tab_w"]:.2f}" '
+                            f'height="{TAB_H}" rx="3" fill="{c["couleur"]}" '
+                            f'data-bbox="{c["tab_x"]:.2f},{ty:.2f},{c["tab_w"]:.2f},{TAB_H}"/>'
+                            + texte(c["tab_x"] + 4, ty + 11.5, c["tab_txt"], FS, True, texte_sur(c["couleur"]),
+                                    cls="onglet-t", extra=f' data-bbox="{c["tab_x"] + 4:.2f},{ty + 1:.2f},{c["tab_w"] - 8:.2f},13"')
+                            + "</g>")
+            xr = tx + w if o["tag_cote"] == "droite" else tx
+            for t, autre, ra, rb in o["renv"]:
+                wt = larg(t, FS)
+                if o["tag_cote"] != "droite":
+                    xr -= wt + 6
+                infob = ""
+                if o["voir_aussi"]:
+                    infob = "<title>" + esc("voir aussi : " + " ; ".join(x[0] for x in o["voir_aussi"])) + "</title>"
+                haut.append(f'<text x="{xr + 3:.1f}" y="{yc + 4:.1f}" font-size="{FS}" font-family="{POLICE}" '
+                            f'font-style="italic" fill="#555555" class="renvoi" data-org="{esc(o["id"])}" '
+                            f'data-a="{esc(ra)}" data-b="{esc(rb)}" data-bbox="{xr + 3:.2f},{yc - 7:.2f},{wt:.2f},13">'
+                            f'{infob}{esc(t)}</text>')
                 if o["tag_cote"] == "droite":
-                    xr = tx + w
-                    for t, autre in tous:
-                        wt = larg(t, FS)
-                        haut.append(renvoi(xr, yc, t, wt, o["id"], autre, t.startswith("→")))
-                        xr += wt + 6
-                else:
-                    xr = tx
-                    for t, autre in tous:
-                        wt = larg(t, FS)
-                        xr -= wt + 6
-                        haut.append(renvoi(xr, yc, t, wt, o["id"], autre, t.startswith("→")))
+                    xr += wt + 6
         bas.append("</g>")
         haut.append("</g>")
-        voies_svg[vi].append("".join(bas))
-        etiq_svg[vi].append("".join(haut))
+        bas_v[vi].append("".join(bas))
+        haut_v[vi].append("".join(haut))
 
     for a, b in m["continuations"]:
         o = items[b]
         xj, yj = o["x0"], o["y_c"]
-        vi = m["voie_index"][o["voie"]]
-        etiq_svg[vi].append(
-            f'<g class="continuation" data-a="{esc(a)}" data-b="{esc(b)}"><title>renommage : '
-            f'{esc(items[a]["label"])} devient {esc(o["label"])}</title>'
-            f'<polyline points="{xj - 4:.1f},{yj - 6:.1f} {xj + 3:.1f},{yj:.1f} {xj - 4:.1f},{yj + 6:.1f}" '
-            f'fill="none" stroke="#FFFFFF" stroke-width="4"/>'
-            f'<polyline points="{xj - 4:.1f},{yj - 6:.1f} {xj + 3:.1f},{yj:.1f} {xj - 4:.1f},{yj + 6:.1f}" '
-            f'fill="none" stroke="#1A1A1A" stroke-width="1.6"/></g>')
+        haut_v[m["voie_index"][o["voie"]]].append(
+            f'<g class="continuation" data-a="{esc(a)}" data-b="{esc(b)}"><title>renommage : {esc(items[a]["label"])} '
+            f'devient {esc(o["label"])}</title><polyline points="{xj - 4:.1f},{yj - 6:.1f} {xj + 3:.1f},{yj:.1f} '
+            f'{xj - 4:.1f},{yj + 6:.1f}" fill="none" stroke="#FFFFFF" stroke-width="4"/><polyline points="'
+            f'{xj - 4:.1f},{yj - 6:.1f} {xj + 3:.1f},{yj:.1f} {xj - 4:.1f},{yj + 6:.1f}" fill="none" stroke="#1A1A1A" '
+            f'stroke-width="1.6"/></g>')
 
-    # ---------- Liens ----------
     fusions = defaultdict(list)
     for t in m["traces"]:
         st = STYLE_LIEN[t["rel"]]
-        w = st["w"][0] if t["principal"] else st["w"][1]
         pts = t["pts"]
         d = "M" + " L".join(f"{x:.2f} {y:.2f}" for x, y in pts)
         geo = json.dumps([[round(x, 2), round(y, 2), m["voie_index"][v]] for (x, y), v in zip(pts, t["voies_pts"])])
         xt, yt = pts[-1]
         fl = [(xt, yt), (xt - FLECHE_L, yt - FLECHE_DEMI), (xt - FLECHE_L, yt + FLECHE_DEMI)]
         vb = m["voie_index"][items[t["b"]]["voie"]]
+        va = m["voie_index"][items[t["a"]]["voie"]]
         g = [f'<g class="lien" data-a="{esc(t["a"])}" data-b="{esc(t["b"])}" data-rel="{t["rel"]}" '
              f'data-annees="{t["annees"]:.2f}" data-voies="{t["voies"]}" data-rangs="{t["rangs"]}" '
-             f'data-va="{m["voie_index"][items[t["a"]]["voie"]]}" data-vb="{vb}">'
-             f'<title>{esc(NOMS_LIENS[t["rel"]])} : {esc(items[t["a"]]["label"])} → {esc(items[t["b"]]["label"])} '
-             f'({items[t["b"]]["an0"]})</title>',
-             f'<path class="halo geo" d="{d}" data-geo=\'{geo}\' fill="none" stroke="#FFFFFF" '
-             f'stroke-width="{w + 2.5:.1f}" stroke-opacity="0.85"/>',
-             f'<path class="trait geo" d="{d}" data-geo=\'{geo}\' fill="none" stroke="{st["couleur"]}" '
-             f'stroke-width="{w}"' + (f' stroke-dasharray="{st["dash"]}"' if st["dash"] else "") + "/>",
+             f'data-va="{va}" data-vb="{vb}"><title>{esc(st["nom"])} : {esc(items[t["a"]]["label"])} → '
+             f'{esc(items[t["b"]]["label"])} ; preuve {esc(t["preuve"])} : « {esc(t["citation"][:200])} »</title>',
+             f'<path class="halo geo" d="{d}" data-geo=\'{geo}\' fill="none" stroke="#FFFFFF" stroke-width="{st["w"] + 2.5:.1f}" stroke-opacity="0.85"/>',
+             f'<path class="trait geo" d="{d}" data-geo=\'{geo}\' fill="none" stroke="{st["couleur"]}" stroke-width="{st["w"]}"'
+             + (f' stroke-dasharray="{st["dash"]}"' if st["dash"] else "") + "/>",
              f'<polygon class="fleche geo" data-geo=\'{json.dumps([[round(x, 2), round(y, 2), vb] for x, y in fl])}\' '
              f'points="{" ".join(f"{x:.2f},{y:.2f}" for x, y in fl)}" fill="{st["couleur"]}"/>']
         if t["rel"] == "scission" and t["depart"]:
-            xs, ys, dn = t["depart"]
-            fk = [(xs - 4, ys + dn * 6), (xs, ys), (xs + 4, ys + dn * 6)]
-            va = m["voie_index"][items[t["a"]]["voie"]]
-            g.append(f'<polyline class="fourche geo" data-geo=\'{json.dumps([[round(x, 2), round(y, 2), va] for x, y in fk])}\' '
-                     f'points="{" ".join(f"{x:.2f},{y:.2f}" for x, y in fk)}" fill="none" stroke="{st["couleur"]}" '
-                     f'stroke-width="1.6"/>')
+            # Petit cercle plein sur la barre mère, à la date de la scission
+            xs, ys = t["depart"]
+            g.append(f'<circle class="marque-scission geo-c" cx="{xs:.2f}" cy="{ys:.2f}" r="3.5" fill="{st["couleur"]}" '
+                     f'stroke="#FFFFFF" stroke-width="1" data-voie="{va}"/>')
         if t["rel"] == "fusion":
             fusions[t["b"]].append(yt)
-        g.append("</g>")
-        liens_svg.append("".join(g))
+        liens_svg.append("".join(g) + "</g>")
     for qb, ys in fusions.items():
         o = items[qb]
         xm = o["x0"] - FLECHE_L - 2
         vb = m["voie_index"][o["voie"]]
         geo = json.dumps([[round(xm, 2), round(min(ys) - 3, 2), vb], [round(xm, 2), round(max(ys) + 3, 2), vb]])
         liens_svg.append(f'<g class="marque-fusion" data-b="{esc(qb)}"><path class="geo" data-geo=\'{geo}\' '
-                         f'd="M{xm:.2f} {min(ys) - 3:.2f} L{xm:.2f} {max(ys) + 3:.2f}" stroke="#3D3D3D" '
-                         f'stroke-width="3"/></g>')
+                         f'd="M{xm:.2f} {min(ys) - 3:.2f} L{xm:.2f} {max(ys) + 3:.2f}" stroke="#3D3D3D" stroke-width="3"/></g>')
 
     H = m["hauteur"] + 20
-    cle_svg = ""
+    cle_bas = ""
     if avec_cle and m["cle"] and not apercu:
-        cle_svg, h_cle = cle_internationales(m, H, W)
-        H += h_cle
+        cle_bas, h = cle_complete(m, H, m["largeur"])
+        H += h
     attrs = (f'data-x0="{X0}" data-t0="{ech.T0}" data-ppa="{PPA}" data-aujourdhui="{m["T_AUJ"]:.4f}" '
              f'data-min-w="{MIN_W}" data-seuil-annees="{SEUIL_ANNEES}" data-seuil-voies="{SEUIL_VOIES}" '
              f'data-seuil-rangs="{SEUIL_RANGS}" data-cassure="{",".join(map(str, ech.cassure)) if ech.cassure else ""}" '
-             f'data-cassure-px="{CASSURE_PX}"' + (' data-apercu="oui"' if apercu else ""))
+             f'data-cassure-px="{CASSURE_PX}" data-degrade="{DEGRADE}" data-n-barres="{len(items)}"'
+             + (' data-apercu="oui"' if apercu else ""))
+    defs = "".join(f'<linearGradient id="g-{c[1:]}"><stop offset="0" stop-color="{c}"/><stop offset="1" '
+                   f'stop-color="{c}" stop-opacity="0"/></linearGradient>'
+                   for c in {o["couleur"] for o in items.values()} | {"#8C8C8C"})
     corps = (f'<svg xmlns="http://www.w3.org/2000/svg" id="arbre" width="{W:.0f}" height="{H:.0f}" '
-             f'viewBox="0 0 {W:.0f} {H:.0f}" {attrs} font-family="{POLICE}">'
-             f'<title>Généalogie des organisations de gauche en France</title><defs>{defs_communs(m)}</defs>'
-             f'<rect width="{W:.0f}" height="{H:.0f}" fill="#FFFFFF"/>' + "".join(fond))
+             f'viewBox="0 0 {W:.0f} {H:.0f}" {attrs} font-family="{POLICE}"><title>Généalogie des organisations '
+             f'de gauche en France</title><defs>{defs}</defs><rect width="{W:.0f}" height="{H:.0f}" fill="#FFFFFF"/>'
+             + "".join(fond))
     for g in m["voies"]:
-        corps += f'<g class="contenu-voie" data-voie="{g["i"]}">' + "".join(voies_svg[g["i"]]) + "</g>"
+        corps += f'<g class="contenu-voie" data-voie="{g["i"]}">' + "".join(bas_v[g["i"]]) + "</g>"
     corps += f'<g class="liens">{"".join(liens_svg)}</g>'
     for g in m["voies"]:
-        corps += f'<g class="contenu-voie" data-voie="{g["i"]}">' + "".join(etiq_svg[g["i"]]) + "</g>"
-    return corps + legende(m, apercu) + cle_svg + "</svg>"
-
-
-def lignes_tag(o, x, y, c_txt, c_date):
-    out = []
-    for k, ligne in enumerate(o["tag_lignes"]):
-        xx, yy = x + TAG_PAD, y + 3 + LIGNE * (k + 1) - 2
-        for i, (t, fs, gras, sorte) in enumerate(ligne):
-            if i:
-                xx += 6
-            w = larg(t, fs, gras)
-            out.append(texte(xx, yy, t, fs, gras, c_date if sorte == "dates" else c_txt, cls="tag-t",
-                             extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - fs + 1:.2f},{w:.2f},{fs + 1}"'))
-            xx += w
-    return out
-
-
-def renvoi(x, yc, t, w, q, autre, sortant):
-    a, b = (q, autre) if sortant else (autre, q)
-    return texte(x + 3, yc + 4, t, FS, False, "#555555", cls="renvoi", italique=True,
-                 extra=f' data-org="{esc(q)}" data-a="{esc(a)}" data-b="{esc(b)}" '
-                       f'data-bbox="{x + 3:.2f},{yc - 7:.2f},{w:.2f},13"')
+        corps += f'<g class="contenu-voie" data-voie="{g["i"]}">' + "".join(haut_v[g["i"]]) + "</g>"
+    if avec_cle and not apercu:
+        corps += cle_compacte(m)
+    return corps + legende(m, apercu) + cle_bas + "</svg>"
 
 
 def cadre(o, c, yc):
-    """Cadre arrondi autour de la barre pendant l'affiliation ; encoche à la sortie."""
     xa, xb, pad = c["xa"], c["xb"], c["pad"]
     yt, yb = yc - BAR_H / 2 - pad, yc + BAR_H / 2 + pad
     r = 4
-    if c["sortie"]:     # encoche en V sur le bord droit : l'organisation sort de l'Internationale
+    if c["sortie"]:
         d = (f"M{xa + r:.2f} {yt:.2f} H{xb:.2f} V{yc - 4:.2f} L{xb - 5:.2f} {yc:.2f} L{xb:.2f} {yc + 4:.2f} "
-             f"V{yb:.2f} H{xa + r:.2f} Q{xa:.2f} {yb:.2f} {xa:.2f} {yb - r:.2f} V{yt + r:.2f} "
-             f"Q{xa:.2f} {yt:.2f} {xa + r:.2f} {yt:.2f}")
-    else:               # toujours membre : cadre ouvert à droite
+             f"V{yb:.2f} H{xa + r:.2f} Q{xa:.2f} {yb:.2f} {xa:.2f} {yb - r:.2f} V{yt + r:.2f} Q{xa:.2f} {yt:.2f} {xa + r:.2f} {yt:.2f}")
+    else:
         d = (f"M{xb:.2f} {yt:.2f} H{xa + r:.2f} Q{xa:.2f} {yt:.2f} {xa:.2f} {yt + r:.2f} V{yb - r:.2f} "
              f"Q{xa:.2f} {yb:.2f} {xa + r:.2f} {yb:.2f} H{xb:.2f}")
-    couleur = c["couleur"] if c["connu"] else melange(c["couleur"], "#FFFFFF", 0.35)
-    dash = "" if c["connu"] else ' stroke-dasharray="5 3"'
-    return (f'<path class="cadre" data-intl="{esc(c["intl"])}" data-parti="{esc(o["id"])}" '
-            f'data-xa="{xa:.2f}" data-xb="{xb:.2f}" data-pad="{pad:.2f}" d="{d}" fill="none" '
-            f'stroke="{couleur}" stroke-width="{FRAME_W}"{dash}><title>{esc(c["sigle"])} : {esc(c["nom"])}'
-            + ("" if c["connu"] else " (dates à confirmer)") + "</title></path>")
+    return (f'<path class="cadre" data-intl="{esc(c["intl"])}" data-parti="{esc(o["id"])}" data-xa="{xa:.2f}" '
+            f'data-xb="{xb:.2f}" data-pad="{pad:.2f}" data-debut="{esc(c["debut"])}" data-fin="{esc(c["fin"])}" '
+            f'd="{d}" fill="none" stroke="{c["couleur"]}" stroke-width="{FRAME_W}"><title>{esc(c["sigle"])} : '
+            f'{esc(c["debut"])}–{esc(c["fin"])}</title></path>')
 
 
 def legende(m, apercu):
     el = ['<g class="legende">']
-    n = sum(1 for o in m["items"].values() if not o["sans_date"])
-    el.append(texte(16, 32, m["titre"] or "Généalogie des organisations de gauche en France", 22, True,
-                    "#111111", cls="legende-t"))
-    prov = any(o["statut"] == "actif_provisoire" for o in m["items"].values())
-    sous = (f"{n} organisations en lignée directe d'une organisation active · {len(m['traces'])} liens · "
-            f"échelle linéaire, {PPA:g} px par an · Wikidata et Wikipédia, "
-            f"{datetime.date.today().strftime('%d/%m/%Y')}"
-            + (" · organisations actives en mode provisoire (à valider)" if prov else "")
-            + (" · aperçu : barres seules" if apercu else ""))
-    el.append(texte(16, 52, sous, FS, False, "#333333", cls="legende-t"))
+    n = len(m["items"])
+    el.append(texte(16, 32, m["titre"] or "Généalogie des organisations de gauche en France", 22, True, "#111111",
+                    cls="legende-t"))
+    el.append(texte(16, 52, f"{n} organisations en lignée directe · {len(m['traces'])} liens dessinés · "
+                            f"{len(m['renvois'])} liens en renvoi · échelle linéaire, {PPA:g} px par an · "
+                            f"Wikidata et Wikipédia, {datetime.date.today().strftime('%d/%m/%Y')}"
+                            + (" · aperçu, barres seules" if apercu else ""), FS, False, "#333333", cls="legende-t"))
     x, y, xmax = 16, 80, m["largeur"] - 20
 
     def place(w):
@@ -957,158 +958,155 @@ def legende(m, apercu):
     for k, t, c in VOIES:
         if k in m["voie_index"]:
             x0 = place(22 + larg(t, FS))
-            el.append(f'<rect x="{x0}" y="{y - 10}" width="16" height="12" rx="2" fill="{c}"/>'
-                      + texte(x0 + 22, y, t, FS, cls="legende-t"))
-    for rel in ["renommage", "filiation", "fusion", "scission", "passage"]:
+            el.append(f'<rect x="{x0}" y="{y - 10}" width="16" height="12" rx="2" fill="{c}"/>' + texte(x0 + 22, y, t, FS, cls="legende-t"))
+    for rel, st in STYLE_LIEN.items():
         if rel in m["rels"]:
-            st = STYLE_LIEN[rel]
-            x0 = place(46 + larg(NOMS_LIENS[rel], FS))
-            el.append(f'<path d="M{x0} {y - 4} H{x0 + 30}" stroke="{st["couleur"]}" stroke-width="{st["w"][0]}"'
+            x0 = place(46 + larg(st["nom"], FS))
+            el.append(f'<path d="M{x0} {y - 4} H{x0 + 30}" stroke="{st["couleur"]}" stroke-width="{st["w"]}"'
                       + (f' stroke-dasharray="{st["dash"]}"' if st["dash"] else "") + ' fill="none"/>'
                       f'<polygon points="{x0 + 38},{y - 4} {x0 + 28},{y - 9} {x0 + 28},{y + 1}" fill="{st["couleur"]}"/>'
-                      + texte(x0 + 44, y, NOMS_LIENS[rel], FS, cls="legende-t"))
+                      + (f'<circle cx="{x0 + 3}" cy="{y - 4}" r="3.5" fill="{st["couleur"]}"/>' if rel == "scission" else "")
+                      + texte(x0 + 44, y, st["nom"], FS, cls="legende-t"))
     if m["continuations"]:
-        t = "renommage sur la même rangée"
+        t = "renommage : la barre continue"
         x0 = place(26 + larg(t, FS))
-        el.append(f'<rect x="{x0}" y="{y - 10}" width="18" height="12" fill="#8C8C8C"/>'
-                  f'<polyline points="{x0 + 6},{y - 9} {x0 + 12},{y - 4} {x0 + 6},{y + 1}" fill="none" '
-                  f'stroke="#FFFFFF" stroke-width="1.6"/>' + texte(x0 + 26, y, t, FS, cls="legende-t"))
+        el.append(f'<rect x="{x0}" y="{y - 10}" width="18" height="12" fill="#8C8C8C"/><polyline points="{x0 + 6},{y - 9} '
+                  f'{x0 + 12},{y - 4} {x0 + 6},{y + 1}" fill="none" stroke="#FFFFFF" stroke-width="1.6"/>'
+                  + texte(x0 + 26, y, t, FS, cls="legende-t"))
     if m["renvois"] and not apercu:
-        t = "issu de X / → Y : lien trop long, en renvoi"
+        t = "issu de X, → Y : lien en renvoi (trop long ou croisement)"
         x0 = place(larg(t, FS))
         el.append(texte(x0, y, t, FS, False, "#555555", cls="legende-t", italique=True))
-    statuts = {o["statut"] for o in m["items"].values()}
-    if statuts & {"actif_valide", "actif_provisoire"}:
-        t = "toujours active"
-        x0 = place(40 + larg(t, FS))
-        el.append(f'<rect x="{x0}" y="{y - 10}" width="10" height="12" fill="#8C8C8C"/>'
-                  f'<rect x="{x0 + 10}" y="{y - 10}" width="24" height="12" fill="url(#g-8C8C8C)"/>'
-                  + texte(x0 + 40, y, t, FS, cls="legende-t"))
-    if "fin_inconnue" in statuts:
-        t = "fin inconnue (queue hachurée)"
-        x0 = place(40 + larg(t, FS))
-        el.append(f'<rect x="{x0}" y="{y - 10}" width="34" height="12" fill="url(#h-8C8C8C)"/>'
-                  + texte(x0 + 40, y, t, FS, cls="legende-t"))
-    cadres = [c for o in m["items"].values() for c in o.get("cadres", [])]
-    if cadres and not apercu:
-        for connu, t in ((True, "membre d'une Internationale (cadre et onglet du sigle)"),
-                         (False, "cadre en tirets, sigle suivi de « ? » : dates d'adhésion à confirmer")):
-            if any(c["connu"] == connu for c in cadres):
-                x0 = place(46 + larg(t, FS))
-                el.append(f'<rect x="{x0}" y="{y - 12}" width="36" height="16" rx="4" fill="none" '
-                          f'stroke="{"#2F5D9E" if connu else melange("#2F5D9E", "#FFFFFF", 0.35)}" '
-                          f'stroke-width="{FRAME_W}"' + ("" if connu else ' stroke-dasharray="5 3"') + "/>"
-                          + texte(x0 + 46, y, t, FS, cls="legende-t"))
-    el.append("</g>")
-    return "".join(el)
+    t = "toujours active"
+    x0 = place(40 + larg(t, FS))
+    el.append(f'<rect x="{x0}" y="{y - 10}" width="10" height="12" fill="#8C8C8C"/><rect x="{x0 + 10}" y="{y - 10}" '
+              f'width="24" height="12" fill="url(#g-8C8C8C)"/>' + texte(x0 + 40, y, t, FS, cls="legende-t"))
+    if not apercu:
+        if any(o["cadres"] for o in m["items"].values()):
+            t = "membre d'une Internationale, dates documentées (cadre, onglet du sigle, encoche de sortie)"
+            x0 = place(46 + larg(t, FS))
+            el.append(f'<rect x="{x0}" y="{y - 12}" width="36" height="16" rx="4" fill="none" stroke="#332288" '
+                      f'stroke-width="{FRAME_W}"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
+        if any(o["points"] for o in m["items"].values()):
+            t = "point : affiliation citée, dates non documentées"
+            x0 = place(16 + larg(t, FS))
+            el.append(f'<circle cx="{x0 + 5}" cy="{y - 4}" r="{POINT_R}" fill="#332288"/>' + texte(x0 + 16, y, t, FS, cls="legende-t"))
+    return "".join(el) + "</g>"
 
 
-def cle_internationales(m, y0, W):
+def cle_compacte(m):
+    """Clé compacte juste à droite de l'arbre (2.7) : sigle, années, nombre de membres affichés."""
+    x = m["largeur"] + 10
+    y = m["y_axe_haut"] + 40
+    el = [f'<g class="cle-compacte"><rect x="{x - 6}" y="{y - 26}" width="{CLE_W - 14}" '
+          f'height="{30 + 18 * len(m["cle"])}" rx="6" fill="#F6F7F8" stroke="#D0D0D0"/>',
+          texte(x + 4, y - 8, "Internationales", 13, True, "#111111", cls="cle-t")]
+    for k, c in enumerate(m["cle"]):
+        yy = y + 18 * k + 6
+        el.append(f'<rect x="{x + 4}" y="{yy - 10}" width="14" height="12" rx="2" fill="{c["couleur"]}"/>')
+        txt = f"{c['sigle']}  {c['dates']}  · {len(c['membres'])}"
+        el.append(texte(x + 24, yy, txt if larg(txt, FS) < CLE_W - 50 else txt[:34] + "…", FS, False, "#1A1A1A", cls="cle-t"))
+    return "".join(el) + "</g>"
+
+
+def cle_complete(m, y0, W):
+    items = m["items"]
     el = [f'<g class="cle-internationales" transform="translate(0,{y0:.0f})">',
           texte(16, 30, "Clé des Internationales", 16, True, "#111111", cls="cle-t"),
-          texte(16, 48, "Les Internationales ne sont pas des organisations de la généalogie : elles apparaissent "
-                        "comme cadres et onglets autour des organisations membres.", FS, False, "#333333", cls="cle-t")]
+          texte(16, 48, "Les Internationales ne sont pas des organisations de la généalogie : elles apparaissent en cadres "
+                        "(dates documentées) ou en points (dates à documenter) sur les organisations membres.",
+                FS, False, "#333333", cls="cle-t")]
     col_w = (W - 32) / 2
     ys = [68, 68]
     for c in m["cle"]:
         col = 0 if ys[0] <= ys[1] else 1
         x, y = 16 + col * col_w, ys[col]
-        el.append(f'<g class="entree-cle" data-intl="{esc(c["id"])}">'
-                  f'<rect x="{x:.0f}" y="{y:.0f}" width="26" height="13" rx="3" fill="{c["couleur"]}"/>')
+        el.append(f'<g class="entree-cle" data-intl="{esc(c["id"])}"><rect x="{x:.0f}" y="{y:.0f}" width="26" '
+                  f'height="13" rx="3" fill="{c["couleur"]}"/>')
         el.append(texte(x + 34, y + 11, c["sigle"], FS, True, "#111111", cls="cle-t"))
-        el.append(texte(x + 40 + larg(c["sigle"], FS, True), y + 11,
-                        f"{c['nom']} ({c['dates']}) · {len(c['membres'])} membre{'s' if len(c['membres']) > 1 else ''}",
-                        FS, False, "#1A1A1A", cls="cle-t"))
+        el.append(texte(x + 40 + larg(c["sigle"], FS, True), y + 11, f"{c['nom']} ({c['dates']})", FS, False,
+                        "#1A1A1A", cls="cle-t"))
         y += 18
+        lignes = []
         if c["succession"]:
-            for morceau in couper("Succession : " + c["succession"], col_w - 50, FS, max_lignes=6):
+            lignes.append("Succession : " + c["succession"])
+        if c["scissions"]:
+            lignes.append("Scissions : " + c["scissions"])
+        tags = ", ".join(items[q]["etiquette"] for q in c["membres"])
+        lignes.append(f"Membres affichés ({len(c['membres'])}) : {tags}")
+        for l in lignes:
+            for morceau in couper(l, col_w - 50, FS, max_lignes=6):
                 el.append(texte(x + 34, y + 11, morceau, FS, False, "#333333", cls="cle-t"))
                 y += 16
         el.append("</g>")
-        ys[col] = y + 6
-    el.append("</g>")
-    return "".join(el), max(ys) + 20
+        ys[col] = y + 8
+    return "".join(el) + "</g>", max(ys) + 20
 
 
 # ======================================================================
-# Vue par Internationale
+# Vue par Internationale (2.8)
 # ======================================================================
 
 def vue_internationales(m):
-    """Une bande par Internationale (dans l'ordre de leurs successions), avec les barres de ses
-    membres pendant leur adhésion. Cliquer une barre mène à l'organisation dans la généalogie."""
     items, ech, inter = m["items"], m["ech"], m["inter"]
     X = ech.X
-    presentes = {c["id"] for c in m["cle"]}
-    ordre, vus = [], set()
-    for c in m["cle"]:
-        racine = c["id"]
-        while inter[racine]["pred"] and inter[racine]["pred"][0] in inter and inter[racine]["pred"][0] not in vus:
-            racine = inter[racine]["pred"][0]
-        pile = [racine]
-        while pile:
-            i = pile.pop(0)
-            if i in vus:
-                continue
-            vus.add(i)
-            if i in presentes:
-                ordre.append(i)
-            pile += [s for s, d in inter.items() if i in d["pred"]]
-    cles = {c["id"]: c for c in m["cle"]}
     y, corps, W = 110, [], m["largeur"]
-    for k, i in enumerate(ordre):
-        c = cles[i]
-        membres = [(items[q], cd) for q in c["membres"] for cd in items[q]["cadres"] if cd["intl"] == i]
+    for k, c in enumerate(m["cle"]):
+        membres = []
+        for q in c["membres"]:
+            o = items[q]
+            for a in o["affil"]:
+                if a["international_id"] == c["id"]:
+                    connu = a["date_certainty"] == "known"
+                    fin_o = o["t1"] if o["t1"] is not None else m["T_AUJ"]
+                    ta = max(o["t0"], t_de(a["start"])) if a["start"] else o["t0"]
+                    tb = fin_o if a["end"] in ("", "toujours membre") else min(fin_o, t_de(a["end"])) if a["end"] else fin_o
+                    membres.append((o, ta, max(tb, ta + 0.5), connu))
         rangees = []
-        for o, cd in sorted(membres, key=lambda x: x[1]["ta"]):
-            xa, xb = X(cd["ta"]), max(X(cd["tb"]), X(cd["ta"]) + MIN_W)
-            etiq = o["sigle"] or o["nom_court"]
-            w_e = larg(etiq, FS, True) + 10
+        place = []
+        for o, ta, tb, connu in sorted(membres, key=lambda x: x[1]):
+            xa, xb = X(ta), X(tb)
+            w_e = larg(o["etiquette"], FS, True) + 10
             R = xb + (0 if xb - xa >= w_e else w_e)
-            r = next((r for r, occ in enumerate(rangees) if all(R + GAP <= a or b + GAP <= xa for a, b in occ)),
-                     len(rangees))
+            r = next((r for r, occ in enumerate(rangees) if all(R + GAP <= a or b + GAP <= xa for a, b in occ)), len(rangees))
             if r == len(rangees):
                 rangees.append([])
             rangees[r].append((xa, R))
-            cd["vue"] = (r, xa, xb, w_e, etiq)
-        h = 46 + max(1, len(rangees)) * 26 + 10
-        corps.append(f'<g class="bande-inter" data-intl="{esc(i)}"><rect x="0" y="{y}" width="{W:.0f}" height="{h}" '
-                     f'fill="{melange(c["couleur"], "#FFFFFF", 0.88 if k % 2 else 0.93)}"/>'
-                     f'<rect x="0" y="{y}" width="8" height="{h}" fill="{c["couleur"]}"/>'
-                     + texte(16, y + 18, f"{c['sigle']} – {c['nom']} ({c['dates']})", 13, True, "#111111", cls="voie-t")
-                     + (texte(16, y + 34, "Succession : " + c["succession"], FS, False, "#333333", cls="voie-t")
-                        if c["succession"] else ""))
-        for o, cd in membres:
-            r, xa, xb, w_e, etiq = cd["vue"]
-            yy = y + 46 + r * 26
-            fill = o["couleur"]
-            corps.append(f'<a href="arbre.html#{esc(o["id"])}"><g class="membre" data-id="{esc(o["id"])}">'
-                         f'<title>{esc(o["label"])} : membre{" (dates à confirmer)" if not cd["connu"] else ""}</title>'
-                         f'<rect x="{xa:.2f}" y="{yy:.2f}" width="{xb - xa:.2f}" height="20" rx="3" fill="{fill}"'
-                         + ("" if cd["connu"] else ' stroke="#555555" stroke-dasharray="4 2"') + "/>"
-                         + (texte(xa + 5, yy + 14, etiq, FS, True, texte_sur(fill), cls="tag-t")
+            place.append((o, xa, xb, w_e, r, connu))
+        h = 50 + max(1, len(rangees)) * 26 + 10
+        corps.append(f'<g class="bande-inter" data-intl="{esc(c["id"])}"><rect x="0" y="{y}" width="{W:.0f}" height="{h}" '
+                     f'fill="{melange(c["couleur"], "#FFFFFF", 0.85 if k % 2 else 0.92)}"/><rect x="0" y="{y}" width="8" '
+                     f'height="{h}" fill="{c["couleur"]}"/>'
+                     + texte(16, y + 18, f"{c['sigle']}, {c['nom']} ({c['dates']})", 13, True, "#111111", cls="voie-t")
+                     + texte(16, y + 34, ("Succession : " + c["succession"]) if c["succession"] else
+                             "Pas de succession documentée", FS, False, "#333333", cls="voie-t"))
+        for o, xa, xb, w_e, r, connu in place:
+            yy = y + 50 + r * 26
+            corps.append(f'<a href="arbre.html#{esc(o["id"])}"><g class="membre" data-id="{esc(o["id"])}"><title>'
+                         f'{esc(o["label"])} : {"dates documentées" if connu else "dates à documenter"}</title>'
+                         f'<rect x="{xa:.2f}" y="{yy:.2f}" width="{xb - xa:.2f}" height="20" rx="3" fill="{o["couleur"]}"'
+                         + ("" if connu else ' stroke="#555555" stroke-dasharray="4 2"') + "/>"
+                         + (texte(xa + 5, yy + 14, o["etiquette"], FS, True, texte_sur(o["couleur"]), cls="tag-t")
                             if xb - xa >= w_e else
-                            f'<rect x="{xb:.2f}" y="{yy:.2f}" width="{w_e:.2f}" height="20" rx="3" fill="{fill}"/>'
-                            + texte(xb + 5, yy + 14, etiq, FS, True, texte_sur(fill), cls="tag-t"))
+                            f'<rect x="{xb:.2f}" y="{yy:.2f}" width="{w_e:.2f}" height="20" rx="3" fill="{o["couleur"]}"/>'
+                            + texte(xb + 5, yy + 14, o["etiquette"], FS, True, texte_sur(o["couleur"]), cls="tag-t"))
                          + "</g></a>")
         corps.append("</g>")
         y += h
-    axe = [f'<line x1="{X(ech.T0):.1f}" x2="{X(ech.T1):.1f}" y1="{y + 8}" y2="{y + 8}" stroke="#555555"/>',
-           f'<line x1="{X(ech.T0):.1f}" x2="{X(ech.T1):.1f}" y1="88" y2="88" stroke="#555555"/>']
+    axe = [f'<line x1="{X(ech.T0):.1f}" x2="{X(ech.T1):.1f}" y1="88" y2="88" stroke="#555555"/>',
+           f'<line x1="{X(ech.T0):.1f}" x2="{X(ech.T1):.1f}" y1="{y + 8}" y2="{y + 8}" stroke="#555555"/>']
     for a in ech.graduations():
-        axe.append(f'<line x1="{X(a):.1f}" x2="{X(a):.1f}" y1="{y + 3}" y2="{y + 13}" stroke="#555555"/>'
-                   + texte(X(a), y + 28, str(a), 12, True, "#333333", "middle", cls="axe-t"))
         axe.append(f'<line x1="{X(a):.1f}" x2="{X(a):.1f}" y1="83" y2="93" stroke="#555555"/>'
                    + texte(X(a), 77, str(a), 12, True, "#333333", "middle", cls="axe-t"))
+        axe.append(f'<line x1="{X(a):.1f}" x2="{X(a):.1f}" y1="{y + 3}" y2="{y + 13}" stroke="#555555"/>'
+                   + texte(X(a), y + 28, str(a), 12, True, "#333333", "middle", cls="axe-t"))
     H = y + 50
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" id="vue-inter" width="{W:.0f}" height="{H:.0f}" '
-            f'viewBox="0 0 {W:.0f} {H:.0f}" font-family="{POLICE}"><title>Vue par Internationale</title>'
-            f'<rect width="{W:.0f}" height="{H:.0f}" fill="#FFFFFF"/>'
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" id="vue-inter" width="{W:.0f}" height="{H:.0f}" viewBox="0 0 {W:.0f} {H:.0f}" '
+            f'font-family="{POLICE}"><title>Vue par Internationale</title><rect width="{W:.0f}" height="{H:.0f}" fill="#FFFFFF"/>'
             + texte(16, 32, "Vue par Internationale", 22, True, "#111111", cls="legende-t")
-            + texte(16, 52, "Une bande par Internationale, dans l'ordre de leurs successions ; chaque barre est une "
-                            "organisation membre pendant son adhésion (tirets : dates à confirmer). Cliquer : "
-                            "voir l'organisation dans la généalogie.", FS, False, "#333333", cls="legende-t")
-            + "".join(axe) + "".join(corps) + "</svg>")
+            + texte(16, 52, "Organisations françaises affichées, regroupées par Internationale, pendant leur adhésion "
+                            "(tirets : dates à documenter). Cliquer : voir l'organisation dans la généalogie.",
+                    FS, False, "#333333", cls="legende-t") + "".join(axe) + "".join(corps) + "</svg>")
 
 
 # ======================================================================
@@ -1120,7 +1118,8 @@ def page_html(m, svg):
     liens = [dict(a=t["a"], b=t["b"]) for t in m["traces"]] + [dict(a=r["a"], b=r["b"]) for r in m["renvois"]] \
         + [dict(a=a, b=b) for a, b in m["continuations"]]
     cle = [dict(id=c["id"], sigle=c["sigle"], nom=c["nom"], dates=c["dates"], couleur=c["couleur"],
-                succession=c["succession"], membres=c["membres"]) for c in m["cle"]]
+                succession=c["succession"], scissions=c["scissions"], membres=c["membres"],
+                tags=[m["items"][q]["etiquette"] for q in c["membres"]]) for c in m["cle"]]
     donnees = json.dumps(dict(voies=voies, liens=liens, cle=cle), ensure_ascii=False)
     return HTML.replace("__SVG__", svg).replace("__DONNEES__", donnees.replace("</", "<\\/"))
 
@@ -1133,8 +1132,7 @@ HTML = r"""<!doctype html>
 <title>Généalogie de la gauche française</title>
 <style>
   :root { --fond:#ffffff; --texte:#1a1a1a; --doux:#4a4a4a; --bord:#d0d0d0; --panneau:#f6f7f8; --accent:#1f5fa8; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-    --fond:#16181b; --texte:#ececec; --doux:#b8b8b8; --bord:#3a3d42; --panneau:#202328; --accent:#7fb2f0; } }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fond:#16181b; --texte:#ececec; --doux:#b8b8b8; --bord:#3a3d42; --panneau:#202328; --accent:#7fb2f0; } }
   :root[data-theme="dark"] { --fond:#16181b; --texte:#ececec; --doux:#b8b8b8; --bord:#3a3d42; --panneau:#202328; --accent:#7fb2f0; }
   * { box-sizing:border-box; }
   html, body { margin:0; height:100%; background:var(--fond); color:var(--texte); font-family:Arial, Helvetica, sans-serif; font-size:14px; }
@@ -1151,7 +1149,7 @@ HTML = r"""<!doctype html>
   #vue { flex:1; overflow:hidden; position:relative; cursor:grab; background:#fff; }
   #vue.saisie { cursor:grabbing; }
   #vue svg { width:100%; height:100%; display:block; }
-  aside { width:340px; max-width:40vw; overflow:auto; border-left:1px solid var(--bord); background:var(--panneau); padding:8px 12px; }
+  aside { width:340px; max-width:40vw; overflow:auto; border-left:1px solid var(--bord); background:var(--panneau); padding:8px 12px; position:sticky; top:0; }
   aside summary { font-weight:bold; cursor:pointer; padding:4px 0; font-size:15px; }
   .familles { display:flex; flex-wrap:wrap; gap:4px; }
   .entree { padding:6px 4px; border-bottom:1px solid var(--bord); cursor:pointer; border-radius:4px; }
@@ -1165,8 +1163,8 @@ HTML = r"""<!doctype html>
   #arbre .org.trouve .barre, #arbre .org.trouve .tag { stroke:#000; stroke-width:3; }
   #arbre .renvoi { cursor:pointer; }
   #arbre .renvoi.sel { fill:#c0392b; font-weight:bold; }
-  #arbre .onglet { cursor:pointer; }
-  #arbre.sans-cadres .cadre, #arbre.sans-cadres .onglet { display:none; }
+  #arbre .onglet, #arbre .point-affil { cursor:pointer; }
+  #arbre.sans-cadres .cadre, #arbre.sans-cadres .onglet, #arbre.sans-cadres .point-affil { display:none; }
   .replie { opacity:.55; }
 </style>
 </head>
@@ -1176,7 +1174,7 @@ HTML = r"""<!doctype html>
   <input type="search" id="recherche" placeholder="Rechercher (sigle, nom)…" aria-label="Rechercher une organisation">
   <span id="resultat"></span>
   <button id="ajuster">Ajuster</button><button id="plus" aria-label="Zoom avant">+</button><button id="moins" aria-label="Zoom arrière">−</button>
-  <label><input type="checkbox" id="cadres" checked> cadres des Internationales</label>
+  <label><input type="checkbox" id="cadres" checked> affiliations</label>
   <a href="vue_internationales.html">Vue par Internationale</a>
   <span class="familles" id="familles" aria-label="Replier une famille"></span>
 </header>
@@ -1198,11 +1196,10 @@ svg.removeAttribute('width'); svg.removeAttribute('height'); svg.setAttribute('p
 function appliquer(){ svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); }
 function ajuster(){ const r = vue.getBoundingClientRect(); vb = {x:0, y:0, w:W0, h:W0 * r.height / Math.max(1, r.width)}; appliquer(); }
 function zoom(f, cx, cy){ const r = svg.getBoundingClientRect(); const s = Math.max(vb.w / r.width, vb.h / r.height);
-  const px = vb.x + (cx - r.left) * s, py = vb.y + (cy - r.top) * s;
-  vb.w *= f; vb.h *= f; vb.x = px - (px - vb.x) * f; vb.y = py - (py - vb.y) * f; appliquer(); }
+  const px = vb.x + (cx - r.left) * s, py = vb.y + (cy - r.top) * s; vb.w *= f; vb.h *= f; vb.x = px - (px - vb.x) * f; vb.y = py - (py - vb.y) * f; appliquer(); }
 vue.addEventListener('wheel', e => { e.preventDefault(); zoom(e.deltaY > 0 ? 1.15 : 1/1.15, e.clientX, e.clientY); }, {passive:false});
 let glisse = null;
-vue.addEventListener('pointerdown', e => { if (e.target.closest('.onglet,.renvoi')) return; glisse = {x:e.clientX, y:e.clientY, vx:vb.x, vy:vb.y}; vue.classList.add('saisie'); });
+vue.addEventListener('pointerdown', e => { if (e.target.closest('.onglet,.renvoi,.point-affil')) return; glisse = {x:e.clientX, y:e.clientY, vx:vb.x, vy:vb.y}; vue.classList.add('saisie'); });
 window.addEventListener('pointermove', e => { if (!glisse) return; const r = svg.getBoundingClientRect(); const s = Math.max(vb.w / r.width, vb.h / r.height);
   vb.x = glisse.vx - (e.clientX - glisse.x) * s; vb.y = glisse.vy - (e.clientY - glisse.y) * s; appliquer(); });
 window.addEventListener('pointerup', () => { glisse = null; vue.classList.remove('saisie'); });
@@ -1227,6 +1224,7 @@ svg.querySelectorAll('.org').forEach(g => {
   g.addEventListener('mouseleave', () => surligner(choisie ? membres(choisie) : null));
 });
 svg.querySelectorAll('.renvoi').forEach(t => {
+  if (!t.dataset.a) return;
   const paire = () => svg.querySelectorAll(`.renvoi[data-a="${CSS.escape(t.dataset.a)}"][data-b="${CSS.escape(t.dataset.b)}"]`);
   t.addEventListener('mouseenter', e => { e.stopPropagation(); paire().forEach(x => x.classList.add('sel')); surligner(new Set([t.dataset.a, t.dataset.b])); });
   t.addEventListener('mouseleave', () => paire().forEach(x => x.classList.remove('sel')));
@@ -1250,30 +1248,31 @@ function relayout(){ const [d, total] = decalages();
     if (g.classList.contains('contenu-voie')) g.style.display = replies.has(i) ? 'none' : '';
     if (g.classList.contains('voie')) { const v = D.voies.find(v => v.i === i); g.classList.toggle('replie', replies.has(i));
       g.querySelectorAll('.fond-voie,.bord-voie').forEach(r => r.setAttribute('height', replies.has(i) ? RESTE : v.h)); } });
-  const sd = D.voies.find(v => v.cle === 'sans date'); const dBas = sd ? d[sd.i] : total;
-  svg.querySelector('.axe-bas').setAttribute('transform', `translate(0,${dBas})`);
-  svg.querySelectorAll('.bande-decennie').forEach(r => { r.dataset.h ||= r.getAttribute('height'); r.setAttribute('height', +r.dataset.h + dBas); });
+  svg.querySelector('.axe-bas').setAttribute('transform', `translate(0,${total})`);
+  svg.querySelectorAll('.bande-decennie').forEach(r => { r.dataset.h ||= r.getAttribute('height'); r.setAttribute('height', +r.dataset.h + total); });
   svg.querySelectorAll('.lien, .marque-fusion').forEach(g => { const cache = g.dataset.va && (replies.has(+g.dataset.va) || replies.has(+g.dataset.vb));
     g.style.display = cache ? 'none' : '';
     g.querySelectorAll('.geo').forEach(el => { const pts = JSON.parse(el.dataset.geo).map(([x, y, v]) => [x, y + d[v]]);
-      if (el.tagName === 'path') el.setAttribute('d', 'M' + pts.map(p => p.join(' ')).join(' L')); else el.setAttribute('points', pts.map(p => p.join(',')).join(' ')); }); });
+      if (el.tagName === 'path') el.setAttribute('d', 'M' + pts.map(p => p.join(' ')).join(' L')); else el.setAttribute('points', pts.map(p => p.join(',')).join(' ')); });
+    g.querySelectorAll('.geo-c').forEach(c => { c.dataset.cy ||= c.getAttribute('cy'); c.setAttribute('cy', +c.dataset.cy + d[+c.dataset.voie]); }); });
 }
 const fam = document.getElementById('familles');
-for (const v of D.voies) { const b = document.createElement('button'); b.textContent = v.titre.replace(' (hors échelle)', '');
-  b.title = 'Replier / déplier cette famille'; b.setAttribute('aria-pressed', 'false');
+for (const v of D.voies) { const b = document.createElement('button'); b.textContent = v.titre; b.title = 'Replier / déplier cette famille'; b.setAttribute('aria-pressed', 'false');
   b.onclick = () => { replies.has(v.i) ? replies.delete(v.i) : replies.add(v.i); b.setAttribute('aria-pressed', replies.has(v.i)); relayout(); }; fam.appendChild(b); }
 const entrees = document.getElementById('entrees');
 for (const c of D.cle) { const div = document.createElement('div'); div.className = 'entree'; div.id = 'cle-' + c.id;
-  div.innerHTML = '<span class="puce"></span><b></b> <span class="nom"></span> <span class="dates" style="color:var(--doux)"></span>' + (c.succession ? '<div class="succ"></div>' : '');
+  div.innerHTML = '<span class="puce"></span><b></b> <span class="nom"></span> <span class="dates" style="color:var(--doux)"></span><div class="succ s1"></div><div class="succ s2"></div><div class="succ s3"></div>';
   div.querySelector('.puce').style.background = c.couleur; div.querySelector('b').textContent = c.sigle; div.querySelector('.nom').textContent = c.nom;
-  div.querySelector('.dates').textContent = `(${c.dates}) · ${c.membres.length} membre${c.membres.length > 1 ? 's' : ''}`;
-  if (c.succession) div.querySelector('.succ').textContent = 'Succession : ' + c.succession;
+  div.querySelector('.dates').textContent = `(${c.dates})`;
+  div.querySelector('.s1').textContent = c.succession ? 'Succession : ' + c.succession : '';
+  div.querySelector('.s2').textContent = c.scissions ? 'Scissions : ' + c.scissions : '';
+  div.querySelector('.s3').textContent = `Membres affichés (${c.membres.length}) : ${c.tags.join(', ')}`;
   div.addEventListener('mouseenter', () => surligner(membres(c.id)));
   div.addEventListener('mouseleave', () => surligner(choisie ? membres(choisie) : null));
   div.addEventListener('click', () => { document.querySelectorAll('.entree').forEach(e => e.classList.remove('choisie'));
     if (choisie === c.id) { choisie = null; surligner(null); } else { choisie = c.id; div.classList.add('choisie'); surligner(membres(c.id)); } });
   entrees.appendChild(div); }
-svg.querySelectorAll('.onglet').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); document.getElementById('cle').open = true;
+svg.querySelectorAll('.onglet, .point-affil').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); document.getElementById('cle').open = true;
   const ent = document.getElementById('cle-' + b.dataset.intl); if (!ent) return;
   ent.scrollIntoView({block:'center', behavior:'smooth'}); ent.classList.add('flash'); setTimeout(() => ent.classList.remove('flash'), 1500);
   choisie = b.dataset.intl; document.querySelectorAll('.entree').forEach(x => x.classList.toggle('choisie', x === ent)); surligner(membres(choisie)); }));
@@ -1299,11 +1298,9 @@ HTML_VUE = r"""<!doctype html>
   #vue .membre { cursor:pointer; }
   #vue .membre:hover rect { stroke:#000; stroke-width:2; }
 </style></head>
-<body><header><a href="arbre.html">← Retour à la généalogie</a></header><div id="vue">__SVG__</div></body></html>
+<body><header><a href="arbre.html">Retour à la généalogie</a></header><div id="vue">__SVG__</div></body></html>
 """
 
-
-# ======================================================================
 
 def main():
     orgs, liens, inter, T_AUJ = charger()
@@ -1325,13 +1322,13 @@ def main():
         f.write(vue)
     with open(os.path.join(SORTIE, "vue_internationales.html"), "w", encoding="utf-8") as f:
         f.write(HTML_VUE.replace("__SVG__", vue))
-    for ancien in os.listdir(SORTIE):     # versions par famille d'un passage précédent
+    for ancien in os.listdir(SORTIE):
         if ancien.startswith("arbre_") and ancien.endswith(".svg") and ancien != "arbre_apercu.svg":
             os.remove(os.path.join(SORTIE, ancien))
     for k, t, _ in VOIES:
         if any(o["voie"] == k for o in orgs.values()):
             mf = mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues={k},
-                              titre=f"Généalogie de la gauche française : {t.lower()}")
+                              titre=f"Généalogie de la gauche française, {t.lower()}")
             with open(os.path.join(SORTIE, f"arbre_{slug(k)}.svg"), "w", encoding="utf-8") as f:
                 f.write(dessiner(mf))
     chemin_an = os.path.join(SORTIE, "anomalies_rendu.csv")
@@ -1344,8 +1341,7 @@ def main():
         os.remove(chemin_an)
     print(f"{len(m['items'])} organisations, {len(m['traces'])} liens tracés, {len(m['renvois'])} renvois, "
           f"{len(m['continuations'])} continuations, {len(m['anomalies'])} liens non dessinables.")
-    print(f"Taille : {m['largeur']:.0f} x {m['hauteur']:.0f} px (hors clé)"
-          + (" ; aperçu : data/sortie/arbre_apercu.svg" if grand else ""))
+    print(f"Taille : {m['largeur'] + CLE_W:.0f} x {m['hauteur']:.0f} px (hors clé du bas)")
 
 
 if __name__ == "__main__":

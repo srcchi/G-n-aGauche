@@ -22,7 +22,12 @@ Les étapes 3 à 5 n'utilisent que Python et les caches (aucun réseau, aucune d
 | 3 | `enrichissement.py` | Textes Wikipédia, pages liées, Wikidata | `data/manuel/actifs.csv`, `data/sortie/liens_candidats.csv`, `liste_recherche.csv` |
 | 4 | `nettoyage.py` | Sources + fichiers de `data/manuel/` + caches | `data/sortie/*.csv` (dont `elagues.csv`), `criteres.md`, `resume.md`, `data/manuel/types.csv` |
 | 5 | `rendu.py` | Sortie de `nettoyage.py` | `arbre.svg`, `data/sortie/arbre.svg`, `arbre.html`, `arbre_<famille>.svg`, `arbre_apercu.svg`, `vue_internationales.svg/.html` |
-| 6 | `verifier.py` | Les SVG produits | contrôle des règles R1 à R6 ; échoue s'il y a une erreur |
+| 6 | `verifier.py` | Les SVG produits et les CSV | rapport complet (R1 à R8, croisements, étiquettes en double, citations introuvables…) ; échoue si un compteur n'est pas à zéro |
+
+`preuves.py` (utilisé par les étapes 3 à 6) : chaque lien, affiliation ou succession d'Internationales
+s'appuie sur une citation mot pour mot du wikitexte en cache (règle R8), revérifiée par `verifier.py`.
+Fichiers de contrôle dans `data/sortie/` : `liens_sans_preuve.csv`, `affiliations_sans_preuve.csv`,
+`anomalies.csv`, `a_dater.csv`, `elagage_rejets.csv`, `elagues.csv`, `liste_recherche.csv`, `actifs_a_revoir.csv`.
 
 ```bash
 python arbre.py && python infobox.py          # retéléchargement (rare)

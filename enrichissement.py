@@ -102,8 +102,18 @@ for cle in ("entites", "wikitext", "resolution", "backlinks", "redirections"):
 
 
 def sauver_cache():
-    with open(CACHE, "w", encoding="utf-8") as f:
+    """Écriture sûre : fichier temporaire puis remplacement, avec quelques essais si Windows
+    (antivirus, indexation) tient le fichier un instant."""
+    tmp = CACHE + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(cache, f, ensure_ascii=False)
+    for essai in range(10):
+        try:
+            os.replace(tmp, CACHE)
+            return
+        except OSError:
+            time.sleep(0.5 * (essai + 1))
+    raise RuntimeError(f"Impossible d'écrire {CACHE} (fichier bloqué par un autre programme ?)")
 
 
 def api(url, **params):
@@ -605,10 +615,47 @@ def main():
                     ajouter(a, b, f"membres de la même Internationale ({nom_i}) et de la même famille",
                             "", "internationale_commune", "filiation", 0.1 + bonus / 2, sens)
 
-    lignes = sorted(candidats.values(), key=lambda r: (graphe[r[0]]["label"], -r[6]))
+    # ---------- R8 : citations mot pour mot ----------
+    # Les titres des liens internes des articles du graphe sont résolus (et mis en cache) pour que
+    # chaque candidat reçoive une citation brute, revérifiable, tirée de l'un des deux articles.
+    print("Résolution des liens internes des articles (pour les citations)...")
+    import preuves
+    corpus = preuves.Corpus()
+    # Articles des Internationales (pour leurs successions, règle 1.3, et les citations)
+    ids_inter = sorted(q for q in internationales if re.fullmatch(r"Q\d+", q))
+    ent_inter = entites(ids_inter)
+    wikitextes("fr", sorted({e["liens"]["fr"] for e in ent_inter.values() if e.get("liens", {}).get("fr")}))
+    sauver_cache()
+    corpus = preuves.Corpus()
+    a_res = defaultdict(set)
+    for q in list(graphe) + ids_inter:
+        for lang, _t, txt in corpus.textes.get(q, []):
+            a_res[lang] |= {preuves.titre_norm(m.group(1)) for m in preuves.RX_LIEN.finditer(txt)}
+    for lang, titres in a_res.items():
+        resoudre(lang, sorted(titres))
+    sauver_cache()
+    corpus = preuves.Corpus()
+    anciennes = {(r["org"], r["cible"], r["signal"], r["type_propose"]): r.get("decision", "")
+                 for r in lire("liens_candidats.csv")}
+    lignes, sans_citation = [], 0
+    for r in sorted(candidats.values(), key=lambda r: (graphe[r[0]]["label"], -r[6])):
+        org, cible, sens = r[0], r[1], r[10]
+        couples = [(cible, org)] if sens == "cible → org" else [(org, cible)] if sens == "org → cible" \
+            else [(cible, org), (org, cible)]
+        p = next((p for a, b in couples if (p := preuves.preuve_lien(corpus, a, b))), None)
+        if not p:
+            sans_citation += 1        # aucune citation mot pour mot : candidat écarté (R8)
+            continue
+        r[2] = p["citation"]
+        r[7] = anciennes.get((org, cible, r[4], r[5]), "")    # décision déjà saisie : conservée
+        lignes.append(r + [p["preuve"], p["source"]])
+    print(f"  {len(lignes)} candidats avec citation, {sans_citation} écartés faute de citation mot pour mot.")
     ecrire(os.path.join(SORTIE, "liens_candidats.csv"),
            ["org", "cible", "phrase_source", "mot_declencheur", "signal", "type_propose", "confiance",
-            "decision", "org_nom", "cible_nom", "sens", "note"], lignes)
+            "decision", "org_nom", "cible_nom", "sens", "note", "preuve", "source_citation"], lignes)
+
+    # ---------- 0.1 bis : cases vides de actifs.csv, résolues par le texte de l'article ----------
+    completer_actifs(corpus)
 
     # ================= 0.3 Liens manuels =================
     ecrire_manuel("aretes_manuelles.csv",
@@ -640,9 +687,28 @@ def main():
             site,
             f"https://fr.wikipedia.org/wiki/{quote(t.replace(' ', '_'))}" if t else "",
             f"https://www.wikidata.org/wiki/{q}" if q.startswith("Q") else ""])
+    # Organisations importantes à réexaminer, quelle que soit leur situation (demande explicite)
+    a_reexaminer = {"Du Pain et des Roses": "émanation probable de Révolution permanente : lien à sourcer",
+                    "Le Poing Levé": "émanation probable de Révolution permanente : lien à sourcer",
+                    "Parti communiste révolutionnaire": "PCR 2024 : renommage de Révolution (TMI, devenue ICR) "
+                                                        "à sourcer ; Révolution absente des sources"}
+    deja = {l[0] for l in lignes_rech}
+    for l in lignes_rech:
+        l.append(a_reexaminer.get(graphe[l[0]]["label"], ""))
+    for q, o in graphe.items():
+        if o["label"] in a_reexaminer and q not in deja:
+            t = titre_fr_de.get(q)
+            lignes_rech.append([q, o["label"], o.get("fondation", ""), o["famille"],
+                                sum(1 for r in lignes if r[0] == q),
+                                f"https://maitron.fr/spip.php?page=recherche&recherche={quote(o['label'])}",
+                                f"https://duckduckgo.com/?q=site%3Amarxists.org+{quote(chr(34) + o['label'] + chr(34))}",
+                                (ent.get(q, {}).get("site") or [""])[0],
+                                f"https://fr.wikipedia.org/wiki/{quote(t.replace(' ', '_'))}" if t else "",
+                                f"https://www.wikidata.org/wiki/{q}" if q.startswith("Q") else "",
+                                a_reexaminer[o["label"]]])
     ecrire(os.path.join(SORTIE, "liste_recherche.csv"),
            ["id", "nom", "fondation", "famille", "nb_candidats", "maitron", "marxists_org",
-            "site_officiel", "wikipedia", "wikidata"], lignes_rech)
+            "site_officiel", "wikipedia", "wikidata", "note"], lignes_rech)
 
     # ================= Résumé =================
     par_signal = Counter(r[4] for r in lignes)
@@ -678,6 +744,50 @@ def main():
     with open(os.path.join(SORTIE, "resume_phase0.md"), "w", encoding="utf-8") as f:
         f.write(txt)
     print(txt)
+
+
+def completer_actifs(corpus):
+    """Cases vides de la colonne valide d'actifs.csv : proposition lue dans le texte de l'article
+    (présent « est un parti » ou passé « était », « dissous »...), avec confiance et citation.
+    Les valeurs déjà saisies (oui / non) ne sont jamais modifiées."""
+    import preuves
+    chemin = os.path.join(MANUEL, "actifs.csv")
+    if not os.path.exists(chemin):
+        return
+    brut = open(chemin, encoding="utf-8", newline="").read()
+    fin = "\r\n" if "\r\n" in brut else "\n"
+    lignes = list(csv.reader(brut.splitlines()))
+    entete = lignes[0]
+    # Colonnes sans nom et toujours vides (artefacts du tableur) : retirées
+    vides = [i for i, h in enumerate(entete) if not h.strip() and all(i >= len(l) or not l[i].strip() for l in lignes[1:])]
+    lignes = [[c for i, c in enumerate(l) if i not in vides] for l in lignes]
+    entete = lignes[0]
+    for col in ("confiance", "source"):
+        if col not in entete:
+            entete.append(col)
+    iv, ic, isrc = entete.index("valide"), entete.index("confiance"), entete.index("source")
+    n, a_revoir = Counter(), []
+    for l in lignes[1:]:
+        l += [""] * (len(entete) - len(l))
+        if l[iv].strip():
+            continue
+        val, conf, citation, source = preuves.preuve_activite(corpus, l[0])
+        if not val:
+            n["sans texte"] += 1
+            continue
+        a_revoir.append([l[0], l[1], val, conf, source, citation])
+        if conf == "faible":
+            # Le présent de narration (« est un parti ») ne prouve pas l'activité : à revoir, pas deviné
+            n[f"{val} faible (à revoir)"] += 1
+            continue
+        l[iv], l[ic] = val, conf
+        l[isrc] = f"automatique, {source} : « {citation} »"
+        n[val] += 1
+    with open(chemin, "w", encoding="utf-8", newline="") as f:
+        csv.writer(f, lineterminator=fin).writerows(lignes)
+    ecrire(os.path.join(SORTIE, "actifs_a_revoir.csv"),
+           ["id", "nom", "proposition", "confiance", "source", "citation"], a_revoir)
+    print(f"  actifs.csv : cases vides : {dict(n)} ; propositions dans data/sortie/actifs_a_revoir.csv")
 
 
 def ecrire(chemin, entetes, lignes):
