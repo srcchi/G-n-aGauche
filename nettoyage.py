@@ -542,7 +542,7 @@ def main():
         q = r.get("id", "").strip()
         if not q or not r.get("source", "").strip() or not r.get("citation", "").strip():
             continue
-        if q not in noeuds:
+        if q not in noeuds and not RX_INTER.search(r.get("label", "")):
             forcer.setdefault(q, "inclure")    # organisation connue seulement par une mention
         d = noeuds.setdefault(q, nouveau(q, r.get("label", "").strip() or q))
         d.setdefault("cats_article", [])
@@ -777,7 +777,7 @@ def main():
                 hors.append([a, lab(a), b, lab(b), t, f"{ca} -> {cb}"])
             continue
         if ca == "internationale" and cb == "internationale":
-            inter_lignee.append((a, b, t))
+            inter_lignee.append((a, b, t, e))
         elif "internationale" in (ca, cb) and "graphe" in (ca, cb):
             anomalies.append(ligne_anomalie(a, b, t, "type de relation erroné : lien de lignée entre "
                                             "une organisation et une Internationale (affiliation ?)"))
@@ -1195,8 +1195,17 @@ def main():
         return any(preuves.type_du_champ(ch) == "succession" for _, _, ch in preuves.occurrences(corpus, x, y))
 
     pred, scissions_inter, info_succ = defaultdict(list), defaultdict(list), {}
-    for a, b, t in inter_lignee:
+    for a, b, t, e in inter_lignee:
         da, db = debut(a), debut(b)
+        if "manuel" in e["sources"] and next(iter(e["relations"]), "") in ("renommage", "fusion", "refondation"):
+            # Succession saisie à la main : « lang:Titre : « citation » » (citation revérifiée par verifier.py)
+            m = re.fullmatch(r"\s*(\w+:[^:]+?)\s*:\s*«\s*(.+?)\s*»\s*", e.get("source_manuelle", ""), re.S)
+            if m and corpus.verifier(m.group(2), m.group(1)):
+                pred[b].append(a)
+                info_succ[b] = (next(iter(e["relations"])), dict(citation=m.group(2), source=m.group(1)))
+            else:
+                stats["successions_manuelles_sans_citation"] = stats.get("successions_manuelles_sans_citation", 0) + 1
+            continue
         if da and db and db < da:
             anomalies.append(ligne_anomalie(a, b, t, "lien entre deux Internationales de sens contraire au temps"))
             continue

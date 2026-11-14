@@ -5,10 +5,10 @@
 |---|---|
 | Wikidata (noeuds.csv) | 1549 |
 | Wikipédia (wp_noeuds.csv) | 524 |
-| Après fusion par identifiant (+ corrections) | 1885 |
+| Après fusion par identifiant (+ corrections) | 1886 |
 | **Graphe : organisations de gauche françaises datées** (organisations.csv) | **382** |
 | Graphe, sans date de fondation (sans_date.csv) | 61 |
-| Internationales et fédérations européennes gardées (internationales.csv) | 38 |
+| Internationales et fédérations européennes gardées (internationales.csv) | 39 |
 | Exclues (perimetre_exclu.csv) | 1345 |
 | dont étrangères en voie externe | 7 |
 
@@ -31,7 +31,7 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Après fusion par (ancêtre, descendant) | 1812 |
 | Corrections manuelles : ajouts / suppressions | 7 / 0 |
 | Paires réciproques fusionnées (aretes_reciproques.csv) | 39 |
-| Après fusion des réciproques | 1782, dont 1036 de lignée |
+| Après fusion des réciproques | 1784, dont 1037 de lignée |
 | Hors périmètre : une extrémité exclue ou étrangère (liens_hors_perimetre.csv) | 1407 |
 | Anomalies R1 et lignée parti / Internationale (anomalies.csv) | 9 |
 | Extrémité sans date, non dessinables (liens_date_manquante.csv) | 21 |
@@ -40,7 +40,7 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Affiliations à une Internationale (affiliations.csv) | 66 |
 | Appartenances à une organisation française : coalition, fédération (appartenances_nationales.csv) | 73 |
 
-Liens par relation : scission (70), renommage (40), fusion (23), absorption (4), refondation (4).
+Liens par relation : scission (70), renommage (41), fusion (23), absorption (4), refondation (3).
 Les liens entre deux organisations fondées la même année (mois inconnus) sont dans anomalies.csv :
 leur longueur sur l'axe du temps serait nulle (règle R1).
 
@@ -57,12 +57,12 @@ Sigles (data/manuel/sigles.csv) : 544 organisations, dont 70 avec un sigle ; 0 a
 ## Liens validés à la main
 - Candidats de la phase 0 acceptés (decision = oui) : 0
   (dont 0 ignorés car leur sens est « à vérifier »).
-- Liens manuels (data/manuel/aretes_manuelles.csv) : 4 ajoutés,
+- Liens manuels (data/manuel/aretes_manuelles.csv) : 5 ajoutés,
   2 ignorés (source, type ou extrémité manquant).
 
 ## Types (data/manuel/types.csv)
-parti 427, coalition 33, satellite 26, internationale 126, fondatrice 16, étrangère 177.
-0 types saisis à la main, 0 lignes ajoutées au fichier.
+parti 427, coalition 33, satellite 26, internationale 127, fondatrice 16, étrangère 177.
+0 types saisis à la main, 1 lignes ajoutées au fichier.
 Coalitions et satellites ne sont jamais des boîtes ; un satellite rattaché à un parent apparaît
 dans la colonne organisations_liees de ce parent.
 
