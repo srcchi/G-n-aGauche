@@ -2,9 +2,11 @@
 Vérification automatique (rapport complet). Échoue (code 1) si un compteur n'est pas à zéro.
 
 Compteurs : barres sans lien, barres non datées, étiquettes en double, croisements (liens sur au plus
-2 voies), cadres sans leurs deux dates, successions d'Internationales contenant une scission,
-violations R1, écarts de dates R3, textes hors cadre ou chevauchements R4, R2, R5, R6, citations
-introuvables mot pour mot dans le wikitexte en cache (R8), textes de moins de 11 px.
+2 voies), bandes sans dates documentées dessinées pleines, successions d'Internationales contenant une
+scission, R1, R2, R3, R4 (textes hors cadre, chevauchements), R5, R6, citations introuvables mot pour
+mot (R8), types de relation contredits par leur citation, liens majeurs dessinés en renvoi,
+incontournables absents sans explication, étiquettes placées après la fin d'une barre qui a un
+successeur direct, textes de moins de 11 px, compte de la légende.
 
 Usage : python verifier.py [fichier.svg ...]   (par défaut : data/sortie/arbre*.svg)
 """
@@ -19,9 +21,10 @@ from collections import Counter, defaultdict
 
 S = "{http://www.w3.org/2000/svg}"
 SORTIE = os.path.join("data", "sortie")
+MANUEL = os.path.join("data", "manuel")
 EPS = 0.06
-TEXTES_PERMIS = {"tag-t", "onglet-t", "axe-t", "voie-t", "legende-t", "cle-t", "renvoi"}
-REL_LIGNEE = {"renommage", "scission", "fusion", "absorption", "refondation", "filiation_idéologique"}
+TEXTES_PERMIS = {"tag-t", "bande-t", "axe-t", "voie-t", "legende-t", "cle-t", "renvoi"}
+REL_SUCC_DIRECTE = {"renommage", "fusion", "absorption", "refondation", "scission", "filiation_idéologique", "indirect"}
 
 
 def lire(nom, dossier=SORTIE):
@@ -77,6 +80,7 @@ def verifier_svg(chemin, cpt, err):
     cass = [float(v) for v in racine.get("data-cassure", "").split(",") if v]
     cass_px = float(racine.get("data-cassure-px", 0))
     apercu = racine.get("data-apercu") == "oui"
+    vue_famille = racine.get("data-vue-famille") == "oui"
     nom = os.path.basename(chemin)
 
     def X(t):
@@ -95,71 +99,120 @@ def verifier_svg(chemin, cpt, err):
 
     orgs = {r["id"]: r for r in lire("organisations.csv")}
     inter = {r["id"]: r for r in lire("internationales.csv")}
-    types = {r["id"]: r["type"].strip() for r in lire("types.csv", os.path.join("data", "manuel"))}
+    types = {r["id"]: r["type"].strip() for r in lire("types.csv", MANUEL)}
+    successeur = {r["source"] for r in lire("liens.csv") if r["relation"] in REL_SUCC_DIRECTE}
 
-    # ---------- Barres ----------
-    barres, ouvertes, tags, etiquettes = {}, {}, {}, {}
+    # ---------- Barres : R2, R3, R5, R6 ----------
+    barres, ouvertes, majeures = {}, {}, set()
     for r in racine.iter(S + "rect"):
-        cls = r.get("class", "").split()
+        if "barre" not in r.get("class", "").split():
+            continue
         q = r.get("data-id")
-        if "barre" in cls:
-            x, y, w, h = (float(r.get(k)) for k in ("x", "y", "width", "height"))
-            barres[q] = (x, y, w, h)
-            src = orgs.get(q)
-            if src is None or not src["fondation"]:
-                faute("barres non datées", q)
-                continue
-            debut = t_de(src["fondation"], src["fondation_mois"])
-            if abs(x - X(debut)) > EPS:
-                faute("R3 dates", f"{q} début x={x:.2f} attendu {X(debut):.2f}")
-            if src["statut_fin"].startswith("actif"):
-                if r.get("data-fin") != "actif" or abs(x + w - max(X(t_auj), x + min_w)) > EPS:
-                    faute("R3 dates", f"{q} devrait finir aujourd'hui")
-                ouvertes[q] = degrade
-            else:
-                fin = t_de(src["dissolution"], src["dissolution_mois"]) if src["dissolution"] else (
-                    t_de(src["fin_deduite"]) if src["fin_deduite"] else None)
-                if fin is None:
-                    faute("barres non datées", f"{q} sans fin ni statut")
-                else:
-                    xf = max(X(fin), x + min_w)
-                    if abs(x + w - xf) > EPS:
-                        faute("R3 dates", f"{q} fin x={x + w:.2f} attendu {xf:.2f}")
-            if q in inter:
-                faute("R2", f"Internationale {q} dessinée")
-            if types.get(q) in ("coalition", "satellite"):
-                faute("R6", f"{q} de type {types[q]} dessiné")
-            if src.get("garde") != "oui":
-                faute("R5", f"{q} dessinée mais pas gardée")
-        if "tag" in cls:
-            tags[q] = bbox(r)
+        x, y, w, h = (float(r.get(k)) for k in ("x", "y", "width", "height"))
+        barres[q] = (x, y, w, h)
+        if r.get("data-majeure") == "oui":
+            majeures.add(q)
+        src = orgs.get(q)
+        if src is None or not src["fondation"]:
+            faute("barres non datées", q)
+            continue
+        debut = t_de(src["fondation"], src["fondation_mois"])
+        if abs(x - X(debut)) > EPS:
+            faute("R3 dates", f"{q} début x={x:.2f} attendu {X(debut):.2f}")
+        if src["statut_fin"].startswith("actif"):
+            if r.get("data-fin") != "actif" or abs(x + w - max(X(t_auj), x + min_w)) > EPS:
+                faute("R3 dates", f"{q} devrait finir aujourd'hui")
+            ouvertes[q] = degrade
+        else:
+            fin = t_de(src["dissolution"], src["dissolution_mois"]) if src["dissolution"] else (
+                t_de(src["fin_deduite"]) if src["fin_deduite"] else None)
+            if fin is None:
+                faute("barres non datées", f"{q} sans fin ni statut")
+            elif abs(x + w - max(X(fin), x + min_w)) > EPS:
+                faute("R3 dates", f"{q} fin x={x + w:.2f} attendu {max(X(fin), x + min_w):.2f}")
+        if q in inter:
+            faute("R2", f"Internationale {q} dessinée")
+        if types.get(q) in ("coalition", "satellite"):
+            faute("R6", f"{q} de type {types[q]} dessiné")
+        if src.get("garde") != "oui":
+            faute("R5", f"{q} dessinée mais pas gardée")
     if apercu:
         return
+    cpt["_barres"] = max(cpt["_barres"], len(barres))
+
+    # ---------- Étiquettes ----------
+    tags, etiquettes = {}, {}
+    for r in racine.iter(S + "rect"):
+        if r.get("class") == "tag":
+            q = r.get("data-id")
+            tags[q] = bbox(r)
+            bx, _, bw, _ = barres.get(q, (0, 0, 0, 0))
+            if tags[q][0] >= bx + bw - 1 and q in successeur:
+                faute("étiquettes après une fin", f"{q} : étiquette après la fin de sa barre")
     for t in racine.iter(S + "text"):
         if t.get("class") == "tag-t" and t.get("data-org") and t.get("data-org") not in etiquettes:
             etiquettes[t.get("data-org")] = t.text
     for e, n in Counter(etiquettes.values()).items():
         if n > 1:
             faute("étiquettes en double", f"« {e} » x{n}")
-    cpt["_barres"] = max(cpt["_barres"], len(barres))
     legende = " ".join(t.text or "" for t in racine.iter(S + "text") if t.get("class") == "legende-t")
     m = re.search(r"(\d+) organisations en lignée directe", legende)
     if not m or int(m.group(1)) != len(barres):
         faute("légende", f"compte annoncé {m.group(1) if m else '?'} pour {len(barres)} barres")
 
-    # ---------- Liens (R1, seuils), barres sans lien ----------
-    reliees = set()
-    obstacles = [(q, "barre", (b[0], b[1], b[2] + ouvertes.get(q, 0), b[3])) for q, b in barres.items()]
-    obstacles += [(q, "étiquette", b) for q, b in tags.items()]
-    onglets = []
+    # ---------- Bandes d'affiliation ----------
+    bandes, sigles_bandes = [], []
     for g in racine.iter(S + "g"):
-        if g.get("class") == "onglet":
-            rr = g.find(S + "rect")
-            onglets.append((g.get("data-parti"), bbox(rr)))
-            for t in g.findall(S + "text"):
-                if not dedans(bbox(t), bbox(rr)):
-                    faute("R4 textes", f"texte d'onglet « {t.text} » hors de son onglet")
-    obstacles += [(q, "onglet", b) for q, b in onglets]
+        if g.get("class") != "bande":
+            continue
+        rr = g.find(S + "rect")
+        b = bbox(rr)
+        q = g.get("data-parti")
+        bandes.append((q, b))
+        if g.get("data-certitude") != "documentee" and not rr.get("fill", "").startswith("url("):
+            faute("bandes non datées pleines", f"{q} / {g.get('data-intl')}")
+        bx, _, bw, _ = barres.get(q, (0, 0, 0, 0))
+        if b[0] < bx - EPS or b[0] + b[2] > bx + bw + EPS:
+            faute("R4 chevauchements", f"bande de {q} hors de l'étendue de sa barre")
+        for t in g.findall(S + "text"):
+            sigles_bandes.append((q, bbox(t)))
+            if not dedans(bbox(t), b):
+                faute("R4 textes", f"sigle « {t.text} » hors de sa bande")
+
+    # ---------- Textes, renvois ----------
+    renvois = defaultdict(list)
+    for t in racine.iter(S + "text"):
+        cls = t.get("class", "")
+        if t.get("font-size") is None or float(t.get("font-size")) < 11:
+            faute("textes < 11 px", f"« {t.text} »")
+        if cls not in TEXTES_PERMIS:
+            faute("R4 textes", f"texte flottant « {t.text} »")
+        elif cls == "tag-t" and t.get("data-org"):
+            q = t.get("data-org")
+            if q not in tags or not dedans(bbox(t), tags[q]):
+                faute("R4 textes", f"« {t.text} » déborde de l'étiquette de {q}")
+        elif cls == "renvoi":
+            renvois[t.get("data-org")].append((bbox(t), "".join(t.itertext()), t.get("data-a"), t.get("data-b")))
+    reliees = set()
+    for q, rs in renvois.items():
+        reliees.add(q)
+        bord = min(tags.get(q, (1e9,))[0], barres.get(q, (1e9,))[0])
+        rs.sort(key=lambda r: r[0][0])
+        if bord - (rs[-1][0][0] + rs[-1][0][2]) > 24 or bord - (rs[-1][0][0] + rs[-1][0][2]) < -1:
+            faute("R4 textes", f"renvois de {q} pas collés au début de la barre")
+        for (b1, *_), (b2, *_) in zip(rs, rs[1:]):
+            if not (-1 <= b2[0] - (b1[0] + b1[2]) <= 10):
+                faute("R4 textes", f"renvois de {q} pas contigus")
+        for b_, txt, a, b in rs:
+            if a and b and a in majeures and b in majeures and not vue_famille:
+                faute("liens majeurs en renvoi", f"{a} -> {b} « {txt} »")
+
+    # ---------- Liens : R1, seuils, croisements ----------
+    obstacles = [(q, "barre", (b[0], b[1], b[2] + ouvertes.get(q, 0), b[3])) for q, b in barres.items()]
+    obstacles += [(q, "étiquette", b) for q, b in tags.items()
+                  if not dedans(b, (barres[q][0], barres[q][1], barres[q][2] + ouvertes.get(q, 0), barres[q][3]))]
+    obstacles += [(q, "bande", b) for q, b in bandes] + [(q, "sigle de bande", b) for q, b in sigles_bandes]
+    obstacles += [(q, "renvoi", r[0]) for q, rs in renvois.items() for r in rs]
     for g in racine.iter(S + "g"):
         cls = g.get("class")
         if cls == "continuation":
@@ -184,78 +237,50 @@ def verifier_svg(chemin, cpt, err):
         if abs(ya - yb) > 1e-6 or xb <= xa:
             faute("R1", f"{a}->{b} : dernier segment pas horizontal vers la droite")
         f = [tuple(map(float, c.split(","))) for c in fleches[0].get("points").split()]
-        if abs(f[0][0] - xb) > 1e-3 or abs(f[0][1] - yb) > 1e-3 or not (f[1][0] < f[0][0] and f[0][0] - f[1][0] >= 9
-                                                                        and abs(f[1][0] - f[2][0]) < 1e-6):
+        if abs(f[0][0] - xb) > 1e-3 or abs(f[0][1] - yb) > 1e-3 or not (
+                f[1][0] < f[0][0] and f[0][0] - f[1][0] >= 9 and abs(f[1][0] - f[2][0]) < 1e-6):
             faute("R1", f"{a}->{b} : flèche pas vers la droite ou trop petite")
-        for attr, seuil in (("data-annees", s_ans), ("data-voies", s_voies), ("data-rangs", s_rangs)):
-            if float(g.get(attr)) > seuil:
-                faute("R1", f"{a}->{b} : {attr} {g.get(attr)} au-delà du seuil {seuil:g}")
+        if g.get("data-majeur") != "oui":
+            for attr, seuil in (("data-annees", s_ans), ("data-voies", s_voies), ("data-rangs", s_rangs)):
+                if float(g.get(attr)) > seuil:
+                    faute("R1", f"{a}->{b} : {attr} {g.get(attr)} au-delà du seuil {seuil:g}")
         if float(g.get("data-voies")) <= 2:
             for p1, p2 in zip(pts, pts[1:]):
                 for q, sorte, box in obstacles:
-                    if sorte == "barre" and q in (a, b):
+                    if q in (a, b) and sorte in ("barre", "bande"):
                         continue
                     if croise(p1, p2, box):
                         faute("croisements", f"{a}->{b} traverse {sorte} de {q}")
-
-    # ---------- R4 : textes ----------
-    renvois = defaultdict(list)
-    for t in racine.iter(S + "text"):
-        cls = t.get("class", "")
-        if t.get("font-size") is None or float(t.get("font-size")) < 11:
-            faute("textes < 11 px", f"« {t.text} »")
-        if cls not in TEXTES_PERMIS:
-            faute("R4 textes", f"texte flottant « {t.text} »")
-        elif cls == "tag-t" and t.get("data-org"):
-            q = t.get("data-org")
-            if q not in tags or not dedans(bbox(t), tags[q]):
-                faute("R4 textes", f"« {t.text} » déborde de l'étiquette de {q}")
-        elif cls == "renvoi":
-            renvois[t.get("data-org")].append((bbox(t), "".join(t.itertext())))
-            reliees |= {t.get("data-a"), t.get("data-b"), t.get("data-org")}
-    for q, rs in renvois.items():
-        if q not in tags:
-            faute("R4 textes", f"renvoi sans étiquette ({q})")
-            continue
-        tb = tags[q]
-        rs.sort(key=lambda r: r[0][0])
-        droite = rs[0][0][0] >= tb[0] + tb[2] - 1
-        bord = tb[0] + tb[2] if droite else tb[0]
-        for b_, txt in (rs if droite else list(reversed(rs))):
-            ecart = (b_[0] - bord) if droite else (bord - (b_[0] + b_[2]))
-            if not (-1 <= ecart <= 10):
-                faute("R4 textes", f"renvoi « {txt} » pas collé à l'étiquette de {q}")
-            bord = b_[0] + b_[2] if droite else b_[0]
     for q in barres:
         if q not in reliees:
             faute("barres sans lien", f"{q} ({orgs.get(q, {}).get('label', '')})")
 
-    # ---------- Cadres ----------
-    for p in racine.iter(S + "path"):
-        if p.get("class") != "cadre":
+    # ---------- Marques de scission sur le texte d'une étiquette ----------
+    textes_tags = [(t.get("data-org"), bbox(t)) for t in racine.iter(S + "text") if t.get("class") == "tag-t"]
+    for c in racine.iter(S + "circle"):
+        if "marque-scission" not in c.get("class", ""):
             continue
-        if not p.get("data-debut") or not p.get("data-fin"):
-            faute("cadres sans dates", f"{p.get('data-parti')} / {p.get('data-intl')}")
-        q, pad = p.get("data-parti"), float(p.get("data-pad"))
-        bx, _, bw, _ = barres.get(q, (0, 0, 0, 0))
-        if float(p.get("data-xa")) < bx - pad - EPS or float(p.get("data-xb")) > bx + bw + pad + EPS:
-            faute("R4 chevauchements", f"cadre de {q} hors de sa barre")
+        cx, cy, r_ = float(c.get("cx")), float(c.get("cy")), float(c.get("r"))
+        for q, b in textes_tags:
+            if chevauche((cx - r_, cy - r_, 2 * r_, 2 * r_), b):
+                faute("R4 chevauchements", f"cercle de scission sur l'étiquette de {q}")
 
-    # ---------- Chevauchements ----------
-    boites = [("barre " + q, (b[0], b[1], b[2] + ouvertes.get(q, 0), b[3])) for q, b in barres.items()]
-    boites += [("étiquette " + q, b) for q, b in tags.items()] + [("onglet", b) for _, b in onglets]
-    boites += [(f"renvoi « {txt} »", b) for rs in renvois.values() for b, txt in rs]
-    boites.sort(key=lambda x: x[1][0])
-    for i, (na, ba) in enumerate(boites):
-        for nb, bb in boites[i + 1:]:
+    # ---------- Chevauchements (barres, étiquettes, bandes, renvois) ----------
+    boites = [(q, "barre", (b[0], b[1], b[2] + ouvertes.get(q, 0), b[3])) for q, b in barres.items()]
+    boites += [(q, "étiquette", b) for q, b in tags.items()] + [(q, "bande", b) for q, b in bandes]
+    boites += [(q, "renvoi", r[0]) for q, rs in renvois.items() for r in rs]
+    boites.sort(key=lambda x: x[2][0])
+    for i, (qa, sa, ba) in enumerate(boites):
+        for qb, sb, bb in boites[i + 1:]:
             if bb[0] >= ba[0] + ba[2]:
                 break
+            if qa == qb and {sa, sb} <= {"barre", "étiquette"}:
+                continue          # étiquette dans sa propre barre
             if chevauche(ba, bb):
-                faute("R4 chevauchements", f"{na} / {nb}")
+                faute("R4 chevauchements", f"{sa} de {qa} / {sb} de {qb}")
 
 
 def verifier_donnees(cpt, err):
-    """Successions d'Internationales et citations (R8), indépendamment des SVG."""
     import preuves
     corpus = preuves.Corpus()
 
@@ -273,14 +298,27 @@ def verifier_donnees(cpt, err):
             continue
         if not corpus.verifier(r.get("citation", ""), r.get("source_citation", "")):
             faute("citations introuvables", f"lien {r['source_nom']} -> {r['cible_nom']}")
+        if r.get("citation2") and not corpus.verifier(r["citation2"], r.get("source_citation2", "")):
+            faute("citations introuvables", f"lien indirect {r['source_nom']} -> {r['cible_nom']}")
+        m = re.match(r"\s*\|\s*([^=|]+?)\s*=", r.get("citation", ""))
+        champ = preuves.type_du_champ(m.group(1)) if m else None
+        if (champ == "scission" and r["relation"] != "scission") or \
+                (champ == "fusion" and r["relation"] not in ("fusion", "renommage", "absorption")):
+            faute("types contredits", f"{r['source_nom']} -> {r['cible_nom']} : « {r['relation']} » / champ « {champ} »")
     for r in lire("affiliations.csv"):
         if r["party_id"] in affiches and not corpus.verifier(r.get("citation", ""), r.get("source_citation", "")):
             faute("citations introuvables", f"affiliation {r['party_nom']} / {r['international_nom']}")
+    expliques = {r["label"] for r in lire("elagage_rejets.csv") if r["raison"].startswith("incontournable absent")}
+    for r in lire("incontournables.csv", MANUEL):
+        if r["id"] not in affiches and r["nom"] not in expliques:
+            faute("incontournables inexpliqués", r["nom"])
 
 
-COMPTEURS = ["barres sans lien", "barres non datées", "étiquettes en double", "croisements", "cadres sans dates",
-             "successions avec scission", "R1", "R2", "R3 dates", "R4 textes", "R4 chevauchements", "R5", "R6",
-             "citations introuvables", "textes < 11 px", "légende"]
+COMPTEURS = ["barres sans lien", "barres non datées", "étiquettes en double", "croisements",
+             "bandes non datées pleines", "successions avec scission", "R1", "R2", "R3 dates", "R4 textes",
+             "R4 chevauchements", "R5", "R6", "citations introuvables", "types contredits",
+             "liens majeurs en renvoi", "incontournables inexpliqués", "étiquettes après une fin",
+             "textes < 11 px", "légende"]
 
 
 def main():
@@ -292,7 +330,7 @@ def main():
     print("Rapport de vérification (" + ", ".join(os.path.basename(f) for f in fichiers) + ")")
     print(f"  barres dessinées (arbre complet) : {cpt['_barres']}")
     for c in COMPTEURS:
-        print(f"  {c:<28} {cpt[c]:>4}  {'OK' if cpt[c] == 0 else 'ÉCHEC'}")
+        print(f"  {c:<30} {cpt[c]:>4}  {'OK' if cpt[c] == 0 else 'ÉCHEC'}")
     total = sum(cpt[c] for c in COMPTEURS)
     for e in err[:40]:
         print("   ", e)

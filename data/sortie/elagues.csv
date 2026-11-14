@@ -155,8 +155,8 @@ Q111782119,Fédération de la gauche républicaine,coalition,fin_inconnue,à cla
 Q3091620,Fédération des comités de coordination indépendantistes,a_dater,fin_inconnue,à classer,
 Q16637578,Fédération des jeunesses communistes de France,a_dater,fin_inconnue,communistes,
 Q108504836,Fédération des organisations syndicalistes révolutionnaires du Brésil,etrangere,fin_inconnue,,hors de France
+Q7205536,Fédération guadeloupéenne du Parti socialiste,hors_perimetre,actif_valide,socialistes,
 Q116059218,Fédération libertaire unitaire ouverte,a_dater,fin_inconnue,anarchistes et libertaires,
-Q116459649,Fédération nationale des associations pour la renaissance communiste,isolee,fin_connue,communistes,
 Q3092073,Fédération nationale des élus socialistes et républicains,a_dater,fin_inconnue,socialistes,
 Q1399996,Fédération ouvrière régionale argentine,etrangere,fin_inconnue,,hors de France
 Q3092109,Fédération pour une alternative sociale et écologique,isolee,fin_connue,écologistes,
@@ -229,9 +229,7 @@ Q3178106,Jeunes écologistes,satellite,actif_valide,écologistes,
 Q111630824,Jeunesse Révolution,a_dater,fin_inconnue,trotskystes,
 Q3178135,Jeunesse communiste ibérique,etrangere,fin_connue,,hors de France
 Q104245345,Jeunesse communiste marxiste-léniniste,a_dater,fin_inconnue,maoïstes,
-Q3178133,Jeunesse communiste révolutionnaire,non_ancetre_d_une_active,fin_connue,trotskystes,
 Q104297876,Jeunesses communistes marxistes-léninistes de Pau,a_dater,fin_inconnue,maoïstes,
-Q2219002,Jeunesses communistes révolutionnaires,isolee,fin_connue,trotskystes,
 Q3178202,Jeunesses socialistes révolutionnaires,isolee,fin_connue,trotskystes,
 Q104414383,Juives et Juifs révolutionnaires,a_dater,fin_inconnue,à classer,
 Q135755468,La Convention,a_dater,fin_inconnue,socialistes,
@@ -247,14 +245,11 @@ Q141861456,Le Poing Levé,satellite,actif_valide,trotskystes,
 Q3227883,Le Trèfle - Les nouveaux écologistes,isolee,fin_connue,écologistes,
 Q846637,Les Jeunes Socialistes,satellite,actif_valide,socialistes,
 Q104212739,Les Nouveaux Démocrates,famille_non_determinee,actif_valide,à classer,
-Q55597872,Les Radicaux de gauche,isolee,actif_valide,radicaux,
 Q3236041,Les Verts Pacifique,a_dater,fin_inconnue,écologistes,
 Q104290793,Les amis de Karl Marx,a_dater,fin_inconnue,communistes,
 Q3240150,Ligne rouge (organisation politique),isolee,fin_connue,maoïstes,
 Q18215132,Ligue communiste (1930),isolee,fin_connue,trotskystes,
-Q3240305,Ligue communiste (1969),non_ancetre_d_une_active,fin_connue,trotskystes,
 Q1412555,Ligue communiste d'Allemagne de l'Ouest,etrangere,fin_connue,,hors de France
-Q862627,Ligue communiste révolutionnaire,non_ancetre_d_une_active,fin_connue,trotskystes,
 fr:Ligue communiste révolutionnaire (Bangladesh),Ligue communiste révolutionnaire (Bangladesh),a_dater,fin_inconnue,communistes,
 Q3133199,Ligue communiste révolutionnaire (Espagne),etrangere,fin_connue,,hors de France
 Q11663822,Ligue communiste révolutionnaire (Japon),etrangere,fin_inconnue,,hors de France
@@ -265,7 +260,6 @@ Q2177298,Ligue de la Jeune République,famille_non_determinee,fin_connue,à clas
 Q111610435,Ligue de la jeunesse révolutionnaire,a_dater,fin_inconnue,maoïstes,
 Q140287002,Ligue des anti-propriétaires,isolee,fin_connue,anarchistes et libertaires,
 Q642562,Ligue des communistes,etrangere,fin_connue,,hors de France
-Q3240649,Ligue ouvrière révolutionnaire,non_ancetre_d_une_active,fin_connue,trotskystes,
 Q5975788,Ligue ouvrière révolutionnaire pour la Quatrième Internationale,etrangere,fin_inconnue,,hors de France
 Q314946,Ligue socialiste révolutionnaire,etrangere,fin_connue,,hors de France
 Q17008204,Ligue trotskyste de France,a_dater,fin_inconnue,trotskystes,
@@ -303,6 +297,7 @@ Q22252055,Mouvement révolutionnaire des travailleurs,etrangere,fin_inconnue,,ho
 Q24042122,Mouvement révolutionnaire uni des peuples,etrangere,fin_inconnue,,hors de France
 Q3326836,Mouvement socialiste calédonien,isolee,fin_connue,socialistes,
 Q8034747,Mouvement socialiste des travailleurs,etrangere,fin_inconnue,,hors de France
+Q122614151,Mouvement socialiste guadeloupéen,hors_perimetre,fin_connue,socialistes,
 Q1156061,Mouvement écologiste indépendant,isolee,actif_valide,écologistes,
 Q115965582,NPA Jeunes,a_dater,fin_inconnue,communistes,
 Q115965646,NPA Jeunesses anticapitalistes,a_dater,fin_inconnue,communistes,
@@ -313,9 +308,7 @@ Q3328040,National Front of Catalonia,etrangere,fin_connue,,hors de France
 Q137369019,National Union of North African Muslims,famille_non_determinee,fin_connue,à classer,
 Q3342154,Nissa Rebela,famille_non_determinee,fin_connue,à classer,
 Q126487286,Nouveau Front populaire,coalition,fin_inconnue,communistes,
-Q1045425,Nouveau Parti anticapitaliste,a_dater,fin_inconnue,trotskystes,
 Q125771262,Nouveau Parti anticapitaliste – L'Anticapitaliste,isolee,actif_valide,socialistes,
-Q115965423,Nouveau Parti anticapitaliste – Révolutionnaires,isolee,actif_valide,communistes,
 Q3345059,Nouveau Parti socialiste (France),isolee,fin_connue,socialistes,
 Q116005340,Nouveau communisme en France,a_dater,fin_inconnue,maoïstes,
 Q3345132,Nouvel élan pour Mayotte,a_dater,fin_inconnue,à classer,
@@ -379,6 +372,7 @@ Q426963,Parti communiste du Népal (marxiste-léniniste unifié),etrangere,fin_i
 Q3298265,Parti communiste du Pakistan,etrangere,fin_inconnue,,hors de France
 Q3175770,Parti communiste espagnol (reconstitué),etrangere,fin_connue,,hors de France
 Q136100759,Parti communiste français. Cellule de Valton et Cie,satellite,fin_inconnue,communistes,
+Q2575147,Parti communiste guadeloupéen,hors_perimetre,actif_valide,communistes,
 fr:Parti communiste internationaliste du Japon,Parti communiste internationaliste du Japon,a_dater,fin_inconnue,communistes,
 Q461886,Parti communiste italien,etrangere,fin_connue,,hors de France
 Q2448312,Parti communiste malais,etrangere,fin_connue,,hors de France
@@ -391,6 +385,7 @@ Q3366229,Parti communiste marxiste-léniniste de France,arbre_sans_organisation_
 Q136716194,Parti communiste népalais,etrangere,fin_inconnue,,hors de France
 Q3366227,Parti communiste ouvrier (Canada),etrangere,fin_connue,,hors de France
 Q3366231,Parti communiste pour l'indépendance et le socialisme,a_dater,fin_inconnue,communistes,
+Q2054444,Parti communiste réunionnais,hors_perimetre,actif_valide,communistes,
 fr:Parti communiste révolutionnaire (2024),Parti communiste révolutionnaire,isolee,actif_valide,trotskystes,
 Q131451896,Parti communiste révolutionnaire (Canada),etrangere,fin_inconnue,,hors de France
 Q3366237,Parti communiste révolutionnaire (marxiste-léniniste),arbre_sans_organisation_active,fin_connue,maoïstes,
@@ -405,6 +400,7 @@ Q135426300,Parti d'action corse,a_dater,fin_connue,à classer,
 Q110837,Parti de gauche (Suède),etrangere,fin_inconnue,,hors de France
 Q3366281,Parti de l'avant-garde socialiste,etrangere,fin_inconnue,,hors de France
 Q356944,Parti de l'égalité socialiste (États-Unis),etrangere,fin_inconnue,,hors de France
+Q3366315,Parti de la démocratie socialiste (France),non_ancetre_d_une_active,fin_connue,socialistes,
 Q3091692,Parti de la nation occitane,isolee,actif_valide,socialistes,
 Q780997,Parti de la refondation communiste,etrangere,fin_inconnue,,hors de France
 Q3366335,Parti de la révolution du peuple,etrangere,fin_connue,,hors de France
@@ -437,17 +433,16 @@ Q2944446,Parti ouvrier révolutionnaire (Uruguay),etrangere,fin_inconnue,,hors d
 Q3118726,Parti ouvrier socialiste internationaliste,etrangere,fin_inconnue,,hors de France
 Q19341987,Parti patriote (Turquie),etrangere,fin_inconnue,,hors de France
 Q5291,Parti pirate,isolee,actif_valide,écologistes,
-Q1542710,Parti radical (France),isolee,actif_valide,radicaux,
+Q3366640,Parti progressiste démocratique guadeloupéen,hors_perimetre,actif_valide,socialistes,
 Q928493,Parti radical-socialiste Camille Pelletan,a_dater,fin_inconnue,radicaux,
 Q3366664,Parti régionaliste martiniquais,a_dater,fin_inconnue,à classer,
 Q3366702,Parti républicain syndicaliste,a_dater,fin_inconnue,anarchistes et libertaires,
-Q3141290,"Parti républicain, radical et radical-socialiste",isolee,fin_connue,radicaux,
 Q2095948,Parti républicain-socialiste,non_ancetre_d_une_active,fin_connue,socialistes,
 Q2989703,Parti révolutionnaire Communistes,a_dater,fin_inconnue,communistes,
 Q4051005,Parti révolutionnaire des travailleurs (Royaume-Uni),etrangere,fin_inconnue,,hors de France
 Q6083578,Parti révolutionnaire ouvrier et paysan de Turquie,etrangere,fin_connue,,hors de France
 Q13573560,Parti révolutionnaire socialiste des ouvriers,etrangere,fin_inconnue,,hors de France
-Q3366713,Parti social-démocrate (France),isolee,fin_connue,socialistes,
+Q3366713,Parti social-démocrate (France),non_ancetre_d_une_active,fin_connue,socialistes,
 Q367894,Parti socialiste (Angleterre et pays de Galles),etrangere,fin_inconnue,,hors de France
 Q1549074,Parti socialiste (Irlande),etrangere,fin_inconnue,,hors de France
 Q3366735,Parti socialiste calédonien,isolee,fin_connue,socialistes,
@@ -484,6 +479,7 @@ Q6745159,Platform for the Unity of Action,etrangere,fin_connue,,hors de France
 Q16059622,Podemos (parti espagnol),etrangere,fin_inconnue,,hors de France
 Q2032009,Possibilisme,a_dater,fin_inconnue,socialistes,
 Q137794555,Post-Soviet Left,a_dater,fin_inconnue,socialistes,
+Q3326782,Pour La Réunion,hors_perimetre,actif_valide,socialistes,
 Q3326461,Pour la Bretagne !,isolee,actif_valide,socialistes,
 Q127272169,Pour une écologie populaire et sociale,a_dater,fin_inconnue,écologistes,
 Q3400792,Pouvoir ouvrier,isolee,fin_connue,communistes,
@@ -491,6 +487,7 @@ Q3406970,Programme commun de la gauche,coalition,fin_inconnue,à classer,
 Q3407344,Prolétaire ligne rouge,isolee,fin_connue,maoïstes,
 Q111187258,Prouvènço Nacioun,a_dater,fin_inconnue,à classer,
 Q23808504,Pè a Corsica,coalition,fin_connue,à classer,
+Q100989633,Péyi Guyane,hors_perimetre,actif_valide,écologistes,
 Q65143318,Péyi-A,famille_non_determinee,actif_valide,à classer,
 Q108331267,Pôle écologiste,coalition,actif_valide,écologistes,
 Q112898155,RED Jeunes,a_dater,fin_inconnue,communistes,
@@ -505,7 +502,6 @@ Q115977909,Reconstruction communiste,a_dater,fin_inconnue,communistes,
 Q3058074,Régions et peuples solidaires,famille_non_determinee,actif_valide,à classer,
 Q3456455,République et socialisme,a_dater,fin_inconnue,socialistes,
 Q3458343,Révolution !,non_ancetre_d_une_active,fin_connue,communistes,
-Q22981822,Révolution permanente (parti politique),isolee,actif_valide,trotskystes,
 Q51844819,Révolution écologique pour le vivant,a_dater,fin_inconnue,écologistes,
 Q924501,Sabaudia-MRS,famille_non_determinee,actif_valide,à classer,
 Q3477547,Section universitaire du Parti socialiste,a_dater,fin_inconnue,socialistes,
@@ -525,7 +521,7 @@ Q21218940,Solidarité – Le peuple avant le profit,etrangere,fin_inconnue,,hors
 Q286683,SolidaritéS,etrangere,fin_inconnue,,hors de France
 Q2740895,Sortu,famille_non_determinee,actif_valide,à classer,
 Q3023497,Strollad ar Vro,famille_non_determinee,fin_connue,à classer,
-Q55599992,Tendance CLAIRE,a_dater,fin_inconnue,trotskystes,
+Q55599992,Tendance CLAIRE,isolee,fin_connue,trotskystes,
 Q473128,Terra Lliure,satellite,fin_connue,à classer,
 Q139493171,Territoires44,a_dater,fin_inconnue,écologistes,
 Q3365196,The Communist,etrangere,fin_inconnue,,hors de France
@@ -571,7 +567,6 @@ Q111600632,Unité communiste,a_dater,fin_inconnue,maoïstes,
 Q15300191,Unité internationale des travailleurs - Quatrième Internationale,isolee,actif_valide,trotskystes,
 Q3561478,Vive la révolution,isolee,fin_connue,maoïstes,
 Q3561492,Vive le communisme,a_dater,fin_connue,maoïstes,
-Q3562502,Voix des travailleurs,non_ancetre_d_une_active,fin_connue,trotskystes,
 Q1618280,Voix prolétarienne,rejet_porte,actif_valide,maoïstes,
 Q3091641,Walwari,isolee,actif_valide,socialistes,
 Q2639582,War-Sav – Gauche indépendantiste bretonne,isolee,actif_valide,socialistes,

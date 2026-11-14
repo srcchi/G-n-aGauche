@@ -323,7 +323,6 @@ Q153080,Francie orientale,Q12548,Saint-Empire romain germanique,filiation,exclu 
 Q153553,Germanie supérieure,Q2208978,Alémanie,filiation,exclu -> exclu
 Q1541693,comté de Haag,Q154195,royaume de Bavière,filiation,exclu -> exclu
 Q154195,royaume de Bavière,Q980,Bavière,filiation,exclu -> exclu
-Q1542710,Parti radical (France),Q427965,Parti radical de gauche,scission,graphe -> exclu
 Q1542710,Parti radical (France),Q45149423,Mouvement radical,filiation,graphe -> exclu
 Q1549074,Parti socialiste (Irlande),Q1377231,Gauche anticapitaliste européenne,appartenance,etranger -> internationale
 Q1549074,Parti socialiste (Irlande),Q158073,Comité pour une Internationale ouvrière,appartenance,etranger -> internationale
@@ -372,7 +371,6 @@ Q1694377,Pôle de renaissance communiste en France,Q16215381,Initiative des part
 Q170072,Provinces-Unies,Q188553,République batave,filiation,exclu -> exclu
 Q17015016,Principauté épiscopale de Verdun,Q182783,Trois-Évêchés,filiation,exclu -> exclu
 Q170361,Territoire du Bassin de la Sarre,Q2114827,Gau Westmark,filiation,exclu -> exclu
-Q170972,Parti socialiste (France),Q3366315,Parti de la démocratie socialiste (France),scission,graphe -> exclu
 Q170972,Parti socialiste (France),Q383499,François Rebsamen,scission,graphe -> exclu
 Q17167,République romaine,Q2277,Empire romain,filiation,exclu -> exclu
 Q171740,califat de Cordoue,Q1183407,taïfa d'Algésiras,filiation,exclu -> exclu
@@ -790,7 +788,6 @@ Q3118726,Parti ouvrier socialiste internationaliste,Q206682,Quatrième Internati
 Q3133199,Ligue communiste révolutionnaire (Espagne),Q2634710,Quatrième Internationale - Secrétariat unifié,appartenance,etranger -> internationale
 Q3133199,Ligue communiste révolutionnaire (Espagne),Q3325616,Anticapitalistas,filiation,etranger -> etranger
 Q3135956,Parti des travailleurs (Uruguay),Q2393813,Comité de coordination pour la refondation de la Quatrième Internationale,appartenance,etranger -> internationale
-Q3141290,"Parti républicain, radical et radical-socialiste",Q427965,Parti radical de gauche,filiation,graphe -> exclu
 Q3142484,Parti communiste breton,Q175284,Armée républicaine irlandaise,appartenance,graphe -> exclu
 Q3142484,Parti communiste breton,Q2587029,Front de libération de la Bretagne,appartenance,graphe -> satellite
 Q3142484,Parti communiste breton,Q26683,Organisation de libération de la Palestine,appartenance,graphe -> exclu
@@ -845,8 +842,7 @@ Q3345028,Groupe Nouveau Centre,Q3550126,Groupe Union des démocrates et indépen
 Q33523493,Première législature du Corps législatif,Q33758116,Deuxième législature du Corps législatif,filiation,exclu -> exclu
 Q3353202,Open Source Development Labs,Q858851,Fondation Linux,filiation,exclu -> exclu
 Q3356023,Organisation des travailleurs révolutionnaires,Q1073391,Union communiste internationaliste,appartenance,etranger -> internationale
-Q3366315,Parti de la démocratie socialiste (France),Q3326823,Mouvement réformateur (France),appartenance,exclu -> exclu
-Q3366315,Parti de la démocratie socialiste (France),Q3366713,Parti social-démocrate (France),filiation,exclu -> graphe
+Q3366315,Parti de la démocratie socialiste (France),Q3326823,Mouvement réformateur (France),appartenance,graphe -> exclu
 Q3366385,Parti du peuple algérien,Q16627908,Comité d'action révolutionnaire nord-africain,scission,exclu -> etranger
 Q3366506,Parti libéral démocrate,Q71978544,Objectif France,filiation,exclu -> exclu
 Q3366546,Parti nationaliste,Q3091725,Fédération des étudiants nationalistes,filiation,exclu -> exclu
@@ -951,10 +947,7 @@ Q3153043,Inter-Agency Space Debris Coordination Committee,Q42262,Agence spatiale
 Q776903,Open Geospatial Consortium,Q42262,Agence spatiale européenne,appartenance,exclu -> internationale
 Q821542,DataCite,Q42262,Agence spatiale européenne,appartenance,exclu -> internationale
 Q426963,Parti communiste du Népal (marxiste-léniniste unifié),Q53700514,Parti communiste du Népal (2018),scission,etranger -> etranger
-Q427965,Parti radical de gauche,Q135755468,La Convention,appartenance,exclu -> graphe
-Q427965,Parti radical de gauche,Q1651405,Alliance radicale européenne,appartenance,exclu -> internationale
-Q427965,Parti radical de gauche,Q3366425,Parti démocrate français,scission,exclu -> exclu
-Q427965,Parti radical de gauche,Q55597872,Les Radicaux de gauche,scission,exclu -> graphe
+Q427965,Parti radical de gauche,Q3366425,Parti démocrate français,scission,graphe -> exclu
 Q42814,Euskadi ta Askatasuna,Q3752287,Comandos Autónomos Anticapitalistas,filiation,satellite -> exclu
 Q42834,Empire romain d'Occident,Q1247508,Domaine gallo-romain,filiation,exclu -> exclu
 Q42834,Empire romain d'Occident,Q12544,Empire byzantin,filiation,exclu -> exclu
@@ -982,7 +975,7 @@ Q4382630,Parti des travailleurs du Bangladesh,Q2440449,Rencontre internationale 
 Q4382630,Parti des travailleurs du Bangladesh,Q622519,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),appartenance,etranger -> internationale
 Q4390865,Open Access Scholarly Publishing Association,Q97667185,Coalition for Diversity and Inclusion in Scholarly Communications,appartenance,exclu -> exclu
 Q442612,Union populaire républicaine,Q2697626,Parti démocrate populaire,filiation,exclu -> exclu
-Q45149423,Mouvement radical,Q427965,Parti radical de gauche,scission,exclu -> exclu
+Q45149423,Mouvement radical,Q427965,Parti radical de gauche,scission,exclu -> graphe
 Q457242,protectorat espagnol au Maroc,Q1028,Maroc,filiation,exclu -> exclu
 Q457242,protectorat espagnol au Maroc,Q37102,République du Rif,filiation,exclu -> exclu
 Q458,Union européenne,Q141720,Commandement européen du transport aérien,appartenance,internationale -> internationale

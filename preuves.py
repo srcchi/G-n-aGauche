@@ -137,12 +137,32 @@ def type_de_phrase(citation):
     return None
 
 
-def preuve_lien(corpus, a, b):
+def mentions(corpus, q, noms):
+    """Phrases de l'article de q qui citent en clair l'un des noms donnés (sans lien interne),
+    ex. « le '''NPA – Révolutionnaires''' (NPA-R) ». Les noms de moins de 3 lettres sont ignorés."""
+    noms = [n for n in noms if n and len(n) >= 3]
+    if not noms:
+        return
+    rx = re.compile(r"(?<![\w-])(?:" + "|".join(re.escape(n) for n in sorted(noms, key=len, reverse=True)) + r")(?![\w-])")
+    for lang, titre, txt in corpus.textes.get(q, []):
+        for m in rx.finditer(txt):
+            ligne_deb = txt.rfind("\n", 0, m.start()) + 1
+            if txt[ligne_deb:m.start()].lstrip().startswith(("|", "{", "*", "[[Fichier", "<")):
+                continue          # infobox, modèle, liste ou légende : pas une phrase
+            yield f"{lang}:{titre}", phrase_autour(txt, m.start(), m.end()), ""
+
+
+def preuve_lien(corpus, a, b, noms=None):
     """Meilleure citation pour un lien entre a (ancêtre) et b (descendant), cherchée dans les
-    articles des deux organisations. Renvoie dict(preuve, citation, source, indice) ou None."""
+    articles des deux organisations : liens internes, puis mentions en clair du nom ou du sigle
+    (noms = {identifiant: [noms]}). Renvoie dict(preuve, citation, source, indice) ou None."""
     meilleure = None
+    noms = noms or {}
     for x, y, cote in ((b, a, "descendant"), (a, b, "ancetre")):
-        for source, citation, champ in occurrences(corpus, x, y):
+        trouves = list(occurrences(corpus, x, y))
+        if not any(not ch and type_de_phrase(c) for _, c, ch in trouves):
+            trouves += list(mentions(corpus, x, noms.get(y, [])))
+        for source, citation, champ in trouves:
             indice, rang = None, 3
             if champ:
                 for role, rx in CHAMPS_LIGNEE.items():
@@ -159,7 +179,7 @@ def preuve_lien(corpus, a, b):
                 indice = type_de_phrase(citation)
                 rang = 1 if indice else 3
             p = dict(preuve="explicite" if rang <= 1 else "deduit", citation=citation, source=source,
-                     indice=indice or "", rang=rang)
+                     indice=indice or "", rang=rang, champ=champ, cote=cote)
             if meilleure is None or rang < meilleure["rang"]:
                 meilleure = p
             if rang == 0:
@@ -181,6 +201,46 @@ def preuve_affiliation(corpus, parti, intl):
         if meilleure is None or p["rang"] < meilleure["rang"]:
             meilleure = p
     return meilleure
+
+
+def type_du_champ(champ):
+    """Type de relation dit par un champ d'infobox (règle 1.2c), ou None."""
+    if not champ:
+        return None
+    if re.search(r"scission", champ, re.I):
+        return "scission"
+    if re.search(r"fusion", champ, re.I):
+        return "fusion"
+    if re.search(CHAMPS_LIGNEE["pred"] + "|" + CHAMPS_LIGNEE["succ"], champ, re.I):
+        return "succession"
+    return None
+
+
+RX_FIN = re.compile(r"\b(?:disparition|dissolution|autodissolution|auto-dissolution|dissous|dissoute|"
+                    r"se dissout|s'autodissout|s'auto-dissout|cesse d'exister|met fin à ses activités)\b", re.I)
+RX_ANNEE = re.compile(r"\b(1[89]\d\d|20\d\d)\b")
+
+
+def fin_dans_texte(corpus, q, noms, fondation):
+    """Date de fin lue dans le texte de l'article : phrase qui dit la disparition de l'organisation
+    (son sigle ou son nom tout près du mot), avec une année. Renvoie (année, citation, source) ou None.
+    Ex. « En 2024, les deux groupes trouvent un accord, actant la disparition du NPA… »."""
+    rx_nom = re.compile(r"\b(?:" + "|".join(re.escape(n) for n in noms if len(n) >= 2) + r")\b")
+    for lang, titre, txt in corpus.textes.get(q, []):
+        if lang != "fr":
+            continue
+        for m in RX_FIN.finditer(txt):
+            phrase = phrase_autour(txt, m.start(), m.end())
+            if phrase.lstrip().startswith(("|", "{", "<", "*")) or "<ref" in phrase[:5]:
+                continue
+            pos = phrase.find(m.group(0))
+            voisinage = phrase[max(0, pos - 60):pos + len(m.group(0)) + 60]
+            if not rx_nom.search(voisinage):
+                continue
+            annees = [int(a) for a in RX_ANNEE.findall(phrase) if not fondation or int(a) >= fondation]
+            if len(set(annees)) == 1:            # une seule année possible : pas d'ambiguïté
+                return annees[0], phrase, f"{lang}:{titre}"
+    return None
 
 
 RX_ACTIF_OUI = re.compile(r"'''[^']+'''[^.\n]{0,120}?\best (?:un|une)\b", re.I)

@@ -1,5 +1,5 @@
 party_id,international_id,start,end,source,party_nom,international_nom,recouvrement_debut,recouvrement_fin
-Q1045425,Q1377231,,,,Nouveau Parti anticapitaliste,Gauche anticapitaliste européenne,2009,
+Q1045425,Q1377231,,,,Nouveau Parti anticapitaliste,Gauche anticapitaliste européenne,2009,2024
 Q1125061,Q639383,,toujours membre,,Eusko Alkartasuna,Alliance libre européenne,1986,
 Q1145020,Q639383,,toujours membre,,Union démocratique bretonne,Alliance libre européenne,1981,
 Q1332068,Q159454,,,,Section française de l'Internationale ouvrière,Internationale socialiste,1951,1969
@@ -45,6 +45,7 @@ Q3366212,Q163931,,,,"Parti communiste (France, 1919)",Internationale communiste,
 Q3366231,Q2915940,,,,Parti communiste pour l'indépendance et le socialisme,Forum de São Paulo,1990,
 Q3366769,Q1423578,,,,Parti socialiste ouvrier et paysan,Centre marxiste révolutionnaire international,1938,1940
 Q3550479,Q703593,,,,Union socialiste républicaine,Internationale ouvrière socialiste,1935,1940
+Q427965,Q1651405,,,,Parti radical de gauche,Alliance radicale européenne,1994,1999
 Q5291,Q15081858,,toujours membre,,Parti pirate,Parti pirate européen,2014,
 Q5291,Q170,,toujours membre,,Parti pirate,Parti pirate international,2010,
 Q538664,Q206682,,,,Parti ouvrier internationaliste,Quatrième Internationale,1938,1944

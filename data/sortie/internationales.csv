@@ -1,6 +1,5 @@
 id,name,sigle,start,end,predecessor_id,color_key,succession_type,succession_citation,succession_source,scissions_de
-Q183725,Association internationale des travailleurs,,1864,1876,,anarchiste,,,,
-Q188592,Internationale ouvrière,IO,1889,1923,Q183725,socialiste,refondation,| précédent           = [[Association internationale des travailleurs]] <small>(prédécesseur non légal)</small>,fr:Internationale ouvrière,
+Q188592,Internationale ouvrière,IO,1889,1923,,socialiste,,,,Q183725
 Q163931,Internationale communiste,IC,1919,1943,,communiste,,,,Q188592
 Q698677,Union des partis socialistes pour l'action internationale,UPSAI,1921,1923,,socialiste,,,,Q188592
 Q703593,Internationale ouvrière socialiste,IOS,1923,1940,Q188592 | Q698677,socialiste,fusion,| fusion de           = [[Deuxième Internationale]]<br/>[[Union des partis socialistes pour l'action internationale|Internationale Deux et demi]],fr:Internationale ouvrière socialiste,
@@ -9,7 +8,7 @@ Q1423578,Centre marxiste révolutionnaire international,CMRI,1932,1940,Q698677,a
 Q206682,Quatrième Internationale,QI,1938,,Q11885155,trotskyste,fusion,"taliniens forment diverses organisations communistes indépendantes de [[Moscou]], certaines se regroupant au niveau international, par exemple dans l'[[Opposition communiste internationale]] (« [[Heinrich Brandler|brandlériens]] »), ou par fusion avec des socialistes révolutionnaires dans le [[Centre marxiste révolutio",fr:Quatrième Internationale,
 Q1984016,Quatrième Internationale (lambertiste),,1938,,,trotskyste,,,,
 Q183533,Kominform,,1947,1956,Q163931,autre,refondation,| précédent           = [[Internationale communiste]],fr:Kominform,
-Q159454,Internationale socialiste,IS,1951,,Q703593,socialiste,refondation,| suivant             = [[Internationale socialiste]] (1951),fr:Internationale ouvrière socialiste,
+Q159454,Internationale socialiste,IS,1951,,,socialiste,,,,
 Q125963179,Internationale communiste libertaire,,1954,1958,,anarchiste,,,,
 Q2634710,Quatrième Internationale - Secrétariat unifié,,1963,,,trotskyste,,,,Q206682
 Q133795,Internationale des fédérations anarchistes,,1968,,,anarchiste,,,,
@@ -19,6 +18,7 @@ Q2455815,Courant Révolution Permanente – Quatrième Internationale,,1989,,,tr
 Q2915940,Forum de São Paulo,,1990,,,autre,,,,
 Q3055019,Entente internationale des travailleurs et des peuples,,1991,,,autre,,,,
 Q220945,Parti socialiste européen,PSE,1992,,,socialiste,,,,
+Q1651405,Alliance radicale européenne,,1994,1999,,autre,,,,
 Q622227,Conférence internationale des partis et organisations marxistes-léninistes (Unité et lutte),,1994,,,communiste,,,,
 Q5413387,Gauche unitaire européenne,,1994,1995,,autre,,,,
 Q753711,Groupe de la Gauche au Parlement européen,,1995,,Q5413387,gauche radicale,fusion,| fusion de = [[Gauche unitaire européenne (1994-1995)| Gauche unitaire européenne]],fr:Groupe de la Gauche au Parlement européen,
