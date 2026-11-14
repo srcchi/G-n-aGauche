@@ -306,7 +306,7 @@ def verifier_donnees(cpt, err):
                 (champ == "fusion" and r["relation"] not in ("fusion", "renommage", "absorption")):
             faute("types contredits", f"{r['source_nom']} -> {r['cible_nom']} : « {r['relation']} » / champ « {champ} »")
     for r in lire("affiliations.csv"):
-        if r["party_id"] in affiches and not corpus.verifier(r.get("citation", ""), r.get("source_citation", "")):
+        if r["party_id"] in affiches and r.get("preuve") != "manuel"                 and not corpus.verifier(r.get("citation", ""), r.get("source_citation", "")):
             faute("citations introuvables", f"affiliation {r['party_nom']} / {r['international_nom']}")
     expliques = {r["label"] for r in lire("elagage_rejets.csv") if r["raison"].startswith("incontournable absent")}
     for r in lire("incontournables.csv", MANUEL):

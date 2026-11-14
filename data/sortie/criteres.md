@@ -46,6 +46,11 @@ trouvé ailleurs : la LCR et l'OCI sont trotskystes malgré leur nom) ; sinon pa
 soit sa source : trotskyste, maoïste, anarcho-syndicaliste, communiste libertaire, anarchiste,
 luxemburgiste / conseilliste, communiste, écosocialiste, écologiste, radical, social-démocrate.
 L'écosocialisme (PG, LFI...) est rangé dans la famille socialiste, pas dans l'écologie politique.
+Famille héritée : une organisation issue d'une scission, d'un renommage ou d'une refondation, dont
+le seul courant connu est générique (communiste, social-démocrate, écosocialiste) et vient de
+Wikidata seul (pas d'article à lire), prend la famille précise de son parent (trotskyste, maoïste,
+libertaire), sans cascade. Ex. le NPA-R, issu du NPA. Liste et citation du lien :
+familles_heritees.csv.
 Familles : socialistes, radicaux, écologistes, communistes, trotskystes, maoïstes, anarchistes et
 libertaires, outre-mer. Une organisation d'outre-mer (nom ou catégories : Guadeloupe, Martinique,
 Guyane, La Réunion, Mayotte, Nouvelle-Calédonie, Polynésie...) va dans la voie outre-mer et garde

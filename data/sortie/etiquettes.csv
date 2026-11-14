@@ -238,7 +238,7 @@ Q115965646,NJA,acronyme du nom,NPA Jeunesses anticapitalistes,
 Q137369019,NUONAM,acronyme du nom,National Union of North African Muslims,
 Q3342154,Nissa Rebela,nom court,Nissa Rebela,
 Q1045425,NPA (2009),sigles.csv + année (homonyme),Nouveau Parti anticapitaliste,oui
-Q125771262,NPAA,acronyme du nom,Nouveau Parti anticapitaliste – L'Anticapitaliste,
+Q125771262,NPA-A,sigles.csv,Nouveau Parti anticapitaliste – L'Anticapitaliste,oui
 Q115965423,NPA-R,sigles.csv,Nouveau Parti anticapitaliste – Révolutionnaires,oui
 Q3345059,NPS,article,Nouveau Parti socialiste (France),
 Q116005340,NCF,acronyme du nom,Nouveau communisme en France,
@@ -281,7 +281,7 @@ Q2088895,PCM (Martinique),sigles.csv + lieu (homonyme),Parti communiste martiniq
 Q3366229,PCMLF,sigles.csv,Parti communiste marxiste-léniniste de France,
 Q3366231,PCIS,acronyme du nom,Parti communiste pour l'indépendance et le socialisme,
 Q2054444,PCR (1959),sigles.csv + année (homonyme),Parti communiste réunionnais,
-fr:Parti communiste révolutionnaire (2024),PCR (2024),sigles.csv + année (homonyme),Parti communiste révolutionnaire,
+fr:Parti communiste révolutionnaire (2024),PCR (2024),sigles.csv + année (homonyme),Parti communiste révolutionnaire,oui
 Q3366237,PCR (1974),sigles.csv + année (homonyme),Parti communiste révolutionnaire (marxiste-léniniste),
 Q63483685,PCRF,sigles.csv,Parti communiste révolutionnaire de France,
 Q3366241,PCRT,sigles.csv,Parti communiste révolutionnaire trotskiste,
@@ -295,8 +295,8 @@ Q628594,PT (1991),sigles.csv + année (homonyme),"Parti des travailleurs (France
 Q24939885,PT (2015),sigles.csv + année (homonyme),"Parti des travailleurs (France, 2015)",oui
 Q3366460,Parti frontiste,nom court,Parti frontiste,
 Q111187255,Parti lorrain,nom court,Parti lorrain,
-Q115925919,PNB (2021),acronyme du nom + année (homonyme),Parti national breton,
 Q3141006,PNB (1931),acronyme du nom + année (homonyme),Parti national breton,
+Q115925919,PNB (2021),acronyme du nom + année (homonyme),Parti national breton,
 Q111210969,PNSF,acronyme du nom,Parti national-syndicaliste français,
 Q1539236,Parti occitan,nom court,Parti occitan,
 Q135902867,Parti ouvrier,nom court,Parti ouvrier (1914),
@@ -362,6 +362,7 @@ Q104245000,ROCML,acronyme du nom,Rassemblement organisé des communistes - marxi
 Q115977909,Reconstruction…,nom raccourci,Reconstruction communiste,
 Q3058074,RPS,acronyme du nom,Régions et peuples solidaires,
 Q3456455,République et socialisme,nom court,République et socialisme,
+fr:Révolution (Tendance marxiste internationale),Révolution,nom court,Révolution,oui
 Q3458343,Révolution !,nom court,Révolution !,
 Q22981822,RP,sigles.csv,Révolution permanente (parti politique),oui
 Q51844819,REV,article,Révolution écologique pour le vivant,

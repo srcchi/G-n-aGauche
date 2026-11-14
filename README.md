@@ -42,6 +42,7 @@ python nettoyage.py && python rendu.py && python verifier.py
 | `actifs.csv` | `valide = oui` / `non` : organisations qui existent aujourd'hui |
 | `types.csv` | type de chaque organisation (parti, coalition, satellite…) |
 | `aretes_manuelles.csv` | liens ajoutés à la main, source obligatoire |
+| `noeuds_manuels.csv` | dates, nom ou courants corrigés (ou organisation ajoutée), source et citation obligatoires |
 | `affiliations_dates.csv` | dates d'adhésion aux Internationales, source obligatoire |
 | `sigles.csv` | sigle et nom court affichés dans les étiquettes |
 

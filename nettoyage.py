@@ -37,7 +37,8 @@ REL_SUCCESSION = ("renommage", "fusion", "absorption", "refondation")
 # Types des liens saisis à la main ou validés (phase 0) -> types internes
 TYPE_LIEN_MANUEL = {"filiation": "filiation", "renommage": "filiation", "fusion": "filiation",
                     "scission": "scission", "passage_militants": "passage", "passage": "passage",
-                    "emanation": "emanation"}
+                    "emanation": "emanation", "refondation": "filiation", "absorption": "filiation",
+                    "appartenance": "appartenance"}
 
 # ---------- Internationales et fédérations européennes (par le nom, en plus des types Wikidata) ----------
 RX_INTER = re.compile(
@@ -534,6 +535,30 @@ def main():
         if r.get("journaux"):
             d["journaux"] = [j.strip() for j in r["journaux"].split("|") if j.strip()]
 
+    # Nœuds corrigés à la main avec source (data/manuel/noeuds_manuels.csv) : dates prioritaires.
+    # Ligne ignorée sans source ni citation. Un nœud absent des données est créé.
+    stats["noeuds_manuels"] = 0
+    for r in lire(os.path.join("manuel", "noeuds_manuels.csv")):
+        q = r.get("id", "").strip()
+        if not q or not r.get("source", "").strip() or not r.get("citation", "").strip():
+            continue
+        if q not in noeuds:
+            forcer.setdefault(q, "inclure")    # organisation connue seulement par une mention
+        d = noeuds.setdefault(q, nouveau(q, r.get("label", "").strip() or q))
+        d.setdefault("cats_article", [])
+        d.setdefault("pays", []), d.setdefault("pos_wd", []), d.setdefault("types", [])
+        d.setdefault("journaux", [])
+        d["sources"].add("manuel")
+        if r.get("label", "").strip():
+            d["label"] = r["label"].strip()
+        if annee(r.get("fondation")):
+            d["dates_f"].insert(0, (annee(r["fondation"]), "manuel"))
+        if annee(r.get("dissolution")):
+            d["dates_d"].insert(0, (annee(r["dissolution"]), "manuel"))
+        if r.get("courants", "").strip():
+            d["courants_manuels"] = [c.strip() for c in r["courants"].split("|") if c.strip()]
+        stats["noeuds_manuels"] += 1
+
     # Dates retenues : la première source (correction > Wikidata > Wikipédia), les autres notées
     for q, d in noeuds.items():
         for cle, liste, champs in (("fondation", d["dates_f"], ("fondation", "création",
@@ -816,8 +841,11 @@ def main():
     # ---------- R8 : chaque lien doit s'appuyer sur une citation mot pour mot ----------
     def attacher_preuve(a, b, e):
         if "manuel" in e["sources"]:
+            # Le type saisi à la main est retenu tel quel (renommage, refondation, fusion...)
+            typ = next(iter(e["relations"]), "")
             e["preuve"] = dict(preuve="manuel", citation=e.get("source_manuelle", ""),
-                               source="data/manuel/aretes_manuelles.csv", indice="")
+                               source="data/manuel/aretes_manuelles.csv",
+                               indice=typ if typ in REL_LIGNEE else "")
             return True
         p = preuves.preuve_lien(corpus, a, b, noms_de)
         if p:
@@ -908,6 +936,8 @@ def main():
             any(RX_SUCCESSION_WD.search(r) for r in e["relations"])
         if t == "passage":
             rel = "passage"
+        elif p.get("preuve") == "manuel" and indice:
+            rel = indice               # lien saisi à la main : son type fait foi
         elif champ_t == "scission":
             rel = "scission"
         elif dit_succession and colle and t != "scission":
@@ -1061,6 +1091,46 @@ def main():
         # 2.1 : la voie suit la famille politique (idéologie), pas la région ; l'outre-mer va dans
         # la voie de sa famille. Sans famille reconnue : écartée (plus de voie « à classer »).
         d["famille"] = famille or "à classer"
+        d["famille_note"] = ""
+
+    # Famille héritée du parent : une organisation issue d'une scission, d'un renommage ou
+    # d'une refondation, dont les sources ne donnent qu'un courant générique (communiste,
+    # social-démocrate, écosocialiste) et seulement par Wikidata (pas d'article à lire), prend la
+    # famille précise de son parent (ex. NPA-R et NPA-A, issus du NPA trotskyste, que Wikidata dit
+    # seulement « communisme » ou « écosocialisme » et qui n'ont pas d'article Wikipédia).
+    # Seule la voie change ; le lien de lignée, lui, a sa citation. Liste : familles_heritees.csv.
+    GENERIQUES = {"communiste", "social-démocrate", "écosocialiste"}
+    PRECISES = {"trotskystes", "maoïstes", "anarchistes et libertaires"}
+    heritees, deja = [], set()
+    for a, b, rel, e in liens:
+        if rel not in ("scission", "renommage", "refondation"):
+            continue
+        da, db = noeuds.get(a), noeuds.get(b)
+        if not da or not db or da["famille"] not in PRECISES or db["famille"] == da["famille"]:
+            continue
+        if "correction" in {s for ss in db["courants"].values() for s in ss}:
+            continue                       # courant saisi à la main : il l'emporte
+        if not set(db["courants"]) or not set(db["courants"]) <= GENERIQUES:
+            continue
+        # Seulement faute de texte : courants connus par Wikidata seul (pas d'article, pas
+        # d'infobox). Une organisation dont l'article dit « communiste » ou « socialiste » garde
+        # cette famille (ex. Gauche socialiste, courant du PS issu de la LCR).
+        if {s for ss in db["courants"].values() for s in ss} != {"wikidata"}:
+            continue
+        if b in deja or a in deja:
+            continue                       # pas d'héritage en cascade
+        ancienne = db["famille"]
+        db["famille"] = db["famille_courant"] = da["famille"]
+        db["famille_note"] = f"famille déduite du parent : {da['label']} ({rel})"
+        deja.add(b)
+        p = e.get("preuve") or {}
+        heritees.append([b, db["label"], ancienne, da["famille"], a, da["label"], rel,
+                         " | ".join(sorted(db["courants"])), p.get("citation", ""),
+                         p.get("source", "")])
+    ecrire("familles_heritees.csv", ["id", "label", "famille_par_courant", "famille_retenue",
+                                     "parent", "parent_label", "lien", "courants", "citation",
+                                     "source_citation"], heritees)
+    stats["familles_heritees"] = len(heritees)
 
     # ================= 9. Sigles =================
     def sigle_de(d):
@@ -1098,6 +1168,13 @@ def main():
     # R7 : une affiliation n'existe que si l'article de l'organisation elle-même la cite.
     affil_ok, affil_sans = [], []
     for a, b, e in affil_brutes:
+        if "manuel" in e["sources"]:
+            # Affiliation saisie à la main (aretes_manuelles.csv, type appartenance) : la citation
+            # vient de l'article de l'Internationale quand l'organisation n'a pas d'article (R7 assoupli).
+            e["preuve"] = dict(preuve="manuel", citation=e.get("source_manuelle", ""),
+                               source="data/manuel/aretes_manuelles.csv", rang=0)
+            affil_ok.append((a, b, e))
+            continue
         p = preuves.preuve_affiliation(corpus, a, b)
         if p:
             e["preuve"] = p
@@ -1665,6 +1742,11 @@ trouvé ailleurs : la LCR et l'OCI sont trotskystes malgré leur nom) ; sinon pa
 soit sa source : trotskyste, maoïste, anarcho-syndicaliste, communiste libertaire, anarchiste,
 luxemburgiste / conseilliste, communiste, écosocialiste, écologiste, radical, social-démocrate.
 L'écosocialisme (PG, LFI...) est rangé dans la famille socialiste, pas dans l'écologie politique.
+Famille héritée : une organisation issue d'une scission, d'un renommage ou d'une refondation, dont
+le seul courant connu est générique (communiste, social-démocrate, écosocialiste) et vient de
+Wikidata seul (pas d'article à lire), prend la famille précise de son parent (trotskyste, maoïste,
+libertaire), sans cascade. Ex. le NPA-R, issu du NPA. Liste et citation du lien :
+familles_heritees.csv.
 Familles : socialistes, radicaux, écologistes, communistes, trotskystes, maoïstes, anarchistes et
 libertaires, outre-mer. Une organisation d'outre-mer (nom ou catégories : Guadeloupe, Martinique,
 Guyane, La Réunion, Mayotte, Nouvelle-Calédonie, Polynésie...) va dans la voie outre-mer et garde

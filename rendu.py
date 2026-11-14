@@ -83,6 +83,11 @@ MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sep
 RENVOI_MOT = {"scission": "scission de", "absorption": "absorbe", "fusion": "issu de", "renommage": "issu de",
               "refondation": "refondation de", "filiation_idéologique": "filiation de", "passage": "militants de",
               "indirect": "issu de"}
+# Côté source, le renvoi est écrit avant la barre : le verbe dit le sens (« absorbé par LCR »,
+# pas « → LCR » qui se lit comme une origine).
+RENVOI_SORTANT = {"scission": "scission :", "absorption": "absorbé par", "fusion": "fusionne dans",
+                  "renommage": "devient", "refondation": "refondé en", "filiation_idéologique": "inspire",
+                  "passage": "militants vers", "indirect": "→"}
 MOTS_VIDES = {"de", "la", "le", "les", "des", "du", "pour", "l", "d", "et", "à", "en", "contre", "sur", "au", "aux",
               "envers", "un", "une"}
 
@@ -542,7 +547,7 @@ def renvoyer(items, orgs, renvois):
         a, b = items.get(r["a"]), items.get(r["b"])
         if a is not None:
             cible = b or orgs[r["b"]]
-            a["renv"].append((f"→ {cible['etiquette']}", r["a"], r["b"]))
+            a["renv"].append((f"{RENVOI_SORTANT.get(r['rel'], '→')} {cible['etiquette']}", r["a"], r["b"]))
         if b is not None:
             src = a or orgs[r["a"]]
             b["renv"].append((f"{RENVOI_MOT.get(r['rel'], 'issu de')} {src['etiquette']}", r["a"], r["b"]))
@@ -1163,7 +1168,7 @@ def legende(m, apercu):
         el.append(f'<rect x="{x0}" y="{y - 10}" width="12" height="12" fill="#8C8C8C"/><rect x="{x0 + 12}" y="{y - 10}" '
                   f'width="12" height="12" fill="#5A5A5A"/>' + texte(x0 + 30, y, t, FS, cls="legende-t"))
     if m["renvois"] and not apercu:
-        t = "issu de X, → Y : lien en renvoi"
+        t = "issu de X, devient Y, absorbé par Y… : lien en renvoi"
         x0 = place(larg(t, FS))
         el.append(texte(x0, y, t, FS, False, "#555555", cls="legende-t", italique=True))
     t = "toujours active"
