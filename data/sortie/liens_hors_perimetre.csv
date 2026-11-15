@@ -97,7 +97,7 @@ Q115814626,Jeune Garde antifasciste,Q138281539,Q138281539,filiation,graphe -> ex
 Q1162568,Conseil international pour la science,Q57587699,Conseil international des sciences,filiation,exclu -> internationale
 Q1162983,Vilayet de Beyrouth,Q7075820,Territoires ennemis occupés,filiation,exclu -> exclu
 Q11663822,Ligue communiste révolutionnaire (Japon),Q11509405,Ligue communiste révolutionnaire du Japon (Quatrième Internationale),filiation,etranger -> etranger
-Q11684178,Gauche socialiste (Argentine),Q15300191,Unité internationale des travailleurs - Quatrième Internationale,appartenance,etranger -> graphe
+Q11684178,Gauche socialiste (Argentine),Q15300191,Unité internationale des travailleurs - Quatrième Internationale,appartenance,etranger -> internationale
 Q11684178,Gauche socialiste (Argentine),Q5915760,Infobae,appartenance,etranger -> exclu
 Q11684178,Gauche socialiste (Argentine),Q598744,Front de gauche et des travailleurs,appartenance,etranger -> etranger
 Q11696853,Socialist Organisation of National Liberation,Q3324180,Independentists of the Catalan Countries,filiation,graphe -> etranger
@@ -699,6 +699,9 @@ Q3086877,gouvernement Pierre Tirard II,Q21427344,gouvernement Charles de Freycin
 Q3088504,Front national,Q368067,Alliance européenne des mouvements nationaux,appartenance,exclu -> internationale
 Q3088519,Front national des combattants,Q110607053,Cercle du Panthéon,filiation,exclu -> exclu
 Q3088519,Front national des combattants,Q54769213,Front national pour l'Algérie française,filiation,exclu -> exclu
+Q3091561,Fédération de la Guyane du Parti socialiste,Q159454,Internationale socialiste,appartenance,satellite -> internationale
+Q3091561,Fédération de la Guyane du Parti socialiste,Q220945,Parti socialiste européen,appartenance,satellite -> internationale
+Q3091561,Fédération de la Guyane du Parti socialiste,Q7248622,Alliance progressiste,appartenance,satellite -> internationale
 Q3091726,Fédération des étudiants révolutionnaires,Q93219875,Alliance des jeunes pour le socialisme,filiation,exclu -> graphe
 Q30926304,Union internationale du télégraphe,Q376150,Union internationale des télécommunications,filiation,internationale -> exclu
 Q309460,comté de Hainaut,Q58296,Première République française,filiation,exclu -> exclu
@@ -1225,6 +1228,11 @@ Q71084,Premier Empire français,Q207162,Restauration,filiation,exclu -> exclu
 Q71092,Second Empire,Q70802,Troisième République française,filiation,exclu -> exclu
 Q7184,Organisation du Traité de l'Atlantique Nord,Q141720,Commandement européen du transport aérien,appartenance,internationale -> internationale
 Q719544,gouvernement Jean-Pierre Raffarin III,Q497289,gouvernement Dominique de Villepin,filiation,exclu -> exclu
+Q7205536,Fédération guadeloupéenne du Parti socialiste,Q111799189,Nouvelle Union populaire écologique et sociale,appartenance,satellite -> coalition
+Q7205536,Fédération guadeloupéenne du Parti socialiste,Q126487286,Nouveau Front populaire,appartenance,satellite -> coalition
+Q7205536,Fédération guadeloupéenne du Parti socialiste,Q159454,Internationale socialiste,appartenance,satellite -> internationale
+Q7205536,Fédération guadeloupéenne du Parti socialiste,Q220945,Parti socialiste européen,appartenance,satellite -> internationale
+Q7205536,Fédération guadeloupéenne du Parti socialiste,Q7248622,Alliance progressiste,appartenance,satellite -> internationale
 Q7223378,Union pour la nouvelle République,Q1904825,Union des démocrates pour la République,filiation,exclu -> exclu
 Q7245108,Émirat du Mont-Liban,Q3326429,moutassarifat du Mont-Liban,filiation,exclu -> exclu
 Q7284646,Groupe arc-en-ciel,Q1651405,Alliance radicale européenne,filiation,exclu -> internationale

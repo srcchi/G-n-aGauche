@@ -284,6 +284,16 @@ TYPE_PAR_CATEGORIE = [
     ("club_ou_cercle", r"club politique|société de pensée|club révolutionnaire"),
     ("media", r"\bpresse|périodique|\brevue|\bjournal"),
 ]
+# Addendum 3 bis, 1 et 3 : motifs de nom (règle voulue, malgré « jamais par des mots du nom seuls »)
+RX_R6_NOM = re.compile(r"^f[ée]d[ée]ration\b.*\bdu Parti socialiste\b|^groupe\b.*\bà l['’]Assembl[ée]e|"
+                       r"^section\b|^comit[ée] de suivi\b", re.I)
+RX_COURANT_DE = re.compile(r"'''[^'\n]+'''[^.\n]{0,120}?\best un courant (?:politique |interne )?"
+                           r"(?:du|de la|de l'|des)\s*\[\[", re.I)
+RX_INTER_NOM = re.compile(r"[-–]\s*Quatrième Internationale\s*$|^Quatrième Internationale\b")
+# Addendum 3 bis, 2 : régionalistes et autonomistes (idéologie ou catégories de l'article)
+RX_REGIONALISTE = re.compile(r"r[ée]gionalis|autonomis|ind[ée]pendantis|nationalisme (?:breton|basque|corse|"
+                             r"occitan|catalan|alsacien|kanak)|nationaliste (?:breton|basque|corse|occitan|catalan)",
+                             re.I)
 RX_SEMBLE_INTER = re.compile(r"Internationale|Confédération internationale|Quatrième Internationale")
 CACHE_TYPES = os.path.join(SORTIE, "cache_types.json")
 
@@ -336,6 +346,12 @@ def classer_types(noeuds, classe, wikitext, stats, aretes=None):
             t, pourquoi = "etrangere", "hors de France (voir perimetre_exclu.csv)"
         elif normaliser(d["label"]) in coalitions:
             t, pourquoi = "coalition", "liste explicite des coalitions"
+        elif RX_INTER_NOM.search(d["label"]):
+            t, pourquoi = "international_ou_federation_europeenne", "nom d'une Internationale (addendum 3 bis, 3)"
+        elif RX_R6_NOM.search(d["label"]):
+            t, pourquoi = "satellite", f"nom : « {RX_R6_NOM.search(d['label']).group(0)} » (R6, addendum 3 bis)"
+        elif (m_c := RX_COURANT_DE.search(wikitext.get(q, "")[:4000])):
+            t, pourquoi = "satellite", f"courant d'un parti : « {m_c.group(0)[-70:]} » (R6, addendum 3 bis)"
         else:
             t = pourquoi = None
             libelles = [libs.get(x, "") for x in d["types"]]
