@@ -15,7 +15,7 @@ Q111630485,AJR (1981),acronyme du nom + année (homonyme),Alliance des jeunes r�
 Q2838084,ASA,acronyme du nom,Alliance des syndicalistes anarchistes,
 Q117814948,ALARM,acronyme du nom,Alliance libre des anarchistes de la région du Midi,
 Q2838199,AMR,article,Alliance marxiste révolutionnaire,
-Q2838215,ANC,article,Alliance nationaliste corse,
+Q2838215,ANC (1989),article + année (homonyme),Alliance nationaliste corse,
 Q141873557,AOA,acronyme du nom,Alliance ouvrière anarchiste,
 Q2800109,ASR (1880),article + année (homonyme),Alliance socialiste républicaine,
 Q87070507,Allons enfants,nom court,Allons enfants,
@@ -27,6 +27,7 @@ Q493667,AAP,article,Anaram Au Patac,
 Q104209540,ARM,acronyme du nom,Arme Révolutionnaire Marxiste,
 Q2048118,ARB,acronyme du nom,Armée révolutionnaire bretonne,
 Q182711,AEAR,article,Association des écrivains et artistes révolutionnaires,
+fr:Association nationale des communistes,ANC (2015),sigles.csv + année (homonyme),Association nationale des communistes,oui
 Q2890957,Bataille socialiste,nom court,Bataille socialiste,
 Q209546,Batasuna,nom court,Batasuna,
 Q104187739,Bloc rouge,nom court,Bloc rouge (Unification des maoïstes),
@@ -190,7 +191,7 @@ Q55597872,Les Radicaux de gauche,nom court,Les Radicaux de gauche,oui
 Q743390,Verts,sigles.csv,Les Verts,oui
 Q3236041,Les Verts Pacifique,nom court,Les Verts Pacifique,
 Q104290793,AKM,acronyme du nom,Les amis de Karl Marx,
-Q613786,EELV,sigles.csv,Les Écologistes – Europe Écologie Les Verts,oui
+Q613786,Les Écologistes,sigles.csv,Les Écologistes – Europe Écologie Les Verts,oui
 Q86998495,UDE (2020),article + année (homonyme),Liberté Écologie Fraternité,oui
 Q3240150,Ligne rouge,nom court,Ligne rouge (organisation politique),
 Q18215132,Ligue communiste,nom court,Ligue communiste (1930),
@@ -211,7 +212,7 @@ Q6733696,MSP,acronyme du nom,Mahe Socialist Party,
 Q56641256,MLP,article,Maintenant le peuple,
 Q6778654,MLCOOR,acronyme du nom,Marxist–Leninist Communist Organisation of Réunion,
 Q3326471,MFC,article,Mouvement Franche-Comté,
-Q3326535,MCF,article,Mouvement communiste français marxiste-léniniste,
+Q3326535,MCF,article,Mouvement communiste français marxiste-léniniste,oui
 Q125846976,MCL,acronyme du nom,Mouvement communiste libertaire,
 Q3326581,MGP,acronyme du nom,Mouvement de la gauche progressiste,
 Q1951112,MDC,sigles.csv,Mouvement des citoyens (France),
@@ -267,7 +268,7 @@ Q3086466,PAB,acronyme du nom,Parti autonomiste breton,
 Q3366212,Parti communiste,nom court,"Parti communiste (France, 1919)",
 Q3142484,PCB,article,Parti communiste breton,
 Q111606973,PCF (2003),acronyme du nom + année (homonyme),Parti communiste de France (marxiste-léniniste-maoïste),
-Q3366206,PCOF,sigles.csv,Parti communiste des ouvriers de France,
+Q3366206,PCOF,sigles.csv,Parti communiste des ouvriers de France,oui
 Q192821,PCF (1920),sigles.csv + année (homonyme),Parti communiste français,oui
 Q2575147,PCG,sigles.csv,Parti communiste guadeloupéen,
 Q1393793,PCI (1944),sigles.csv + année (homonyme),Parti communiste internationaliste,oui
@@ -276,12 +277,12 @@ fr:Parti communiste internationaliste du Japon,PCIJ,acronyme du nom,Parti commun
 Q104186796,PCM (2016),acronyme du nom + année (homonyme),Parti communiste maoïste,
 Q104187610,PCMF,acronyme du nom,Parti communiste maoïste de France,
 Q2088895,PCM (Martinique),sigles.csv + lieu (homonyme),Parti communiste martiniquais,
-Q3366229,PCMLF,sigles.csv,Parti communiste marxiste-léniniste de France,
+Q3366229,PCMLF,sigles.csv,Parti communiste marxiste-léniniste de France,oui
 Q3366231,PCIS,acronyme du nom,Parti communiste pour l'indépendance et le socialisme,
 Q2054444,PCR (1959),sigles.csv + année (homonyme),Parti communiste réunionnais,
 fr:Parti communiste révolutionnaire (2024),PCR (2024),sigles.csv + année (homonyme),Parti communiste révolutionnaire,oui
 Q3366237,PCR (1974),sigles.csv + année (homonyme),Parti communiste révolutionnaire (marxiste-léniniste),
-Q63483685,PCRF,sigles.csv,Parti communiste révolutionnaire de France,
+Q63483685,PCRF,sigles.csv,Parti communiste révolutionnaire de France,oui
 Q3366241,PCRT,sigles.csv,Parti communiste révolutionnaire trotskiste,
 Q135426300,PAC,acronyme du nom,Parti d'action corse,
 Q534291,PUP,sigles.csv,Parti d'unité prolétarienne,oui
@@ -358,6 +359,7 @@ Q3419905,RDO,article,Rassemblement démocratique océanien,
 Q631576,RDR,article,Rassemblement démocratique révolutionnaire,
 Q104245000,ROCML,acronyme du nom,Rassemblement organisé des communistes - marxistes-léninistes,
 Q115977909,Reconstruction…,nom raccourci,Reconstruction communiste,
+fr:Rouges vifs 13,Rouges vifs,sigles.csv,Rouges vifs 13,oui
 Q3058074,RPS,acronyme du nom,Régions et peuples solidaires,
 Q3456455,République et socialisme,nom court,République et socialisme,
 fr:Révolution (Tendance marxiste internationale),Révolution,nom court,Révolution,oui
@@ -369,7 +371,8 @@ Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3477547,SUPS,acronyme du nom,Section universitaire du Parti socialiste,
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-Q1631419,SoB,sigles.csv,Socialisme ou barbarie,
+Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
+fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,
@@ -396,7 +399,8 @@ Q2540732,UGCS,article,Union des groupes et clubs socialistes,
 Q111628305,UJR,acronyme du nom,Union des jeunes révolutionnaires,
 Q3550161,UJCML,acronyme du nom,Union des jeunesses communistes marxistes-léninistes,
 Q3550193,URR,acronyme du nom,Union des républicains radicaux,
-Q116456095,URCF,acronyme du nom,Union des révolutionnaires-communistes de France,
+Q116456095,URCF (2003),acronyme du nom + année (homonyme),Union des révolutionnaires-communistes de France,
+fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
 Q3550207,UTCL,article,Union des travailleurs communistes libertaires,oui
 Q3550228,UEC,sigles.csv,Union des étudiants communistes,
 Q3107400,UPA,article,Union du peuple alsacien,
@@ -406,6 +410,7 @@ Q1145020,UDB,sigles.csv,Union démocratique bretonne,
 Q2164587,UDSR,article,Union démocratique et socialiste de la Résistance,oui
 Q9091758,UNE,acronyme du nom,Union nationale espagnole,
 Q3550394,UNI,acronyme du nom,Union nationale pour l'indépendance,
+fr:Union pour la reconstruction communiste,URC,sigles.csv,Union pour la reconstruction communiste,oui
 Q3550447,UDC,article,Union pour un destin calédonien,
 Q982380,UP,article,Union progressiste,
 Q3550460,UPM,article,Union progressiste en Mélanésie,

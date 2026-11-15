@@ -143,7 +143,7 @@ SIGLES = {
     "Mouvement républicain et citoyen": "MRC", "Mouvement des citoyens": "MDC",
     "Fédération anarchiste": "FA", "Alternative libertaire": "AL", "Union communiste libertaire": "UCL",
     "Parti radical de gauche": "PRG", "Europe Écologie Les Verts": "EELV",
-    "Les Écologistes – Europe Écologie Les Verts": "EELV", "Les Verts": "Verts",
+    "Les Écologistes – Europe Écologie Les Verts": "Les Écologistes", "Les Verts": "Verts",
     "Union démocratique bretonne": "UDB", "Parti ouvrier indépendant": "POI",
     "Parti des travailleurs": "PT", "Parti ouvrier français": "POF",
     "Fédération des travailleurs socialistes de France": "FTSF",

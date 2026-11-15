@@ -138,7 +138,7 @@ Q246708,Front populaire (Espagne),etrangere,fin_connue,,hors de France
 Q1422284,Front populaire (France),coalition,fin_connue,communistes,
 Q212884,Front populaire de libération de la Palestine,etrangere,fin_inconnue,,hors de France
 Q104186411,Front prolétaire,a_dater,fin_inconnue,maoïstes,
-Q3088574,Front rouge (organisation politique),arbre_sans_organisation_active,fin_connue,maoïstes,
+Q3088574,Front rouge (organisation politique),non_ancetre_d_une_active,fin_connue,maoïstes,
 Q116005505,Front révolutionnaire antifasciste de Provence,a_dater,fin_inconnue,maoïstes,
 Q111628426,Front révolutionnaire antifasciste/anticapitaliste et populaire,a_dater,fin_inconnue,maoïstes,
 Q22249490,Front révolutionnaire national,a_dater,fin_connue,à classer,
@@ -276,7 +276,6 @@ Q6778654,Marxist–Leninist Communist Organisation of Réunion,a_dater,fin_incon
 Q3314191,Militant tendency,etrangere,fin_connue,,hors de France
 Q6516904,Mouvement Alternative socialiste (Portugal),etrangere,fin_inconnue,,hors de France
 Q3326471,Mouvement Franche-Comté,famille_non_determinee,actif_valide,à classer,
-Q3326535,Mouvement communiste français marxiste-léniniste,arbre_sans_organisation_active,fin_connue,maoïstes,
 Q125846976,Mouvement communiste libertaire,non_ancetre_d_une_active,fin_connue,anarchistes et libertaires,
 Q3326547,Mouvement d'action syndicale,satellite,fin_connue,communistes,
 Q3326581,Mouvement de la gauche progressiste,a_dater,fin_connue,à classer,
@@ -362,7 +361,6 @@ Q771163,Parti communiste de Turquie/marxiste-léniniste,etrangere,fin_inconnue,,
 Q2358124,Parti communiste de l'Argentine,etrangere,fin_inconnue,,hors de France
 Q636521,Parti communiste des Philippines (1968),etrangere,fin_inconnue,,hors de France
 Q2712402,Parti communiste des Philippines-1930,etrangere,fin_inconnue,,hors de France
-Q3366206,Parti communiste des ouvriers de France,rejet_porte,actif_valide,maoïstes,
 Q2034798,Parti communiste des travailleurs (Italie),etrangere,fin_inconnue,,hors de France
 Q2054628,Parti communiste des travailleurs portugais,etrangere,fin_inconnue,,hors de France
 Q2177973,Parti communiste du Bangladesh,etrangere,fin_inconnue,,hors de France
@@ -381,15 +379,13 @@ Q6028497,Parti communiste maoïste (Turquie – Kurdistan du Nord),etrangere,fin
 Q104187610,Parti communiste maoïste de France,isolee,fin_connue,maoïstes,
 Q17152017,Parti communiste maoïste du Manipur,etrangere,fin_inconnue,,hors de France
 Q2088895,Parti communiste martiniquais,rejet_porte,actif_valide,communistes,
-Q3366229,Parti communiste marxiste-léniniste de France,arbre_sans_organisation_active,fin_connue,maoïstes,
 Q136716194,Parti communiste népalais,etrangere,fin_inconnue,,hors de France
 Q3366227,Parti communiste ouvrier (Canada),etrangere,fin_connue,,hors de France
 Q3366231,Parti communiste pour l'indépendance et le socialisme,a_dater,fin_inconnue,communistes,
 Q2054444,Parti communiste réunionnais,hors_perimetre,actif_valide,communistes,
 Q131451896,Parti communiste révolutionnaire (Canada),etrangere,fin_inconnue,,hors de France
-Q3366237,Parti communiste révolutionnaire (marxiste-léniniste),arbre_sans_organisation_active,fin_connue,maoïstes,
+Q3366237,Parti communiste révolutionnaire (marxiste-léniniste),non_ancetre_d_une_active,fin_connue,maoïstes,
 Q2983913,Parti communiste révolutionnaire d'Argentine,etrangere,fin_inconnue,,hors de France
-Q63483685,Parti communiste révolutionnaire de France,isolee,actif_valide,communistes,
 Q3366241,Parti communiste révolutionnaire trotskiste,a_dater,fin_inconnue,trotskystes,
 Q3181825,"Parti communiste révolutionnaire, États-Unis",etrangere,fin_inconnue,,hors de France
 Q3366245,Parti communiste sénégalais,etrangere,fin_inconnue,,hors de France
