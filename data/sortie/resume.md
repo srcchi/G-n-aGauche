@@ -35,12 +35,12 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Hors périmètre : une extrémité exclue ou étrangère (liens_hors_perimetre.csv) | 1408 |
 | Anomalies R1 et lignée parti / Internationale (anomalies.csv) | 8 |
 | Extrémité sans date, non dessinables (liens_date_manquante.csv) | 21 |
-| Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 3 |
-| **Liens du graphe (liens.csv)** | **161** |
-| Affiliations à une Internationale (affiliations.csv) | 65 |
+| Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 1 |
+| **Liens du graphe (liens.csv)** | **163** |
+| Affiliations à une Internationale (affiliations.csv) | 74 |
 | Appartenances à une organisation française : coalition, fédération (appartenances_nationales.csv) | 73 |
 
-Liens par relation : scission (76), renommage (41), fusion (27), composante (8), absorption (4), filiation_idéologique (3), passage (1), refondation (1).
+Liens par relation : scission (76), renommage (42), fusion (28), composante (8), absorption (4), filiation_idéologique (3), passage (1), refondation (1).
 Les liens entre deux organisations fondées la même année (mois inconnus) sont dans anomalies.csv :
 leur longueur sur l'axe du temps serait nulle (règle R1).
 
@@ -78,5 +78,5 @@ dans la colonne organisations_liees de ce parent.
   Combat ouvrier, Du Pain et des Roses, Démocrates et progressistes, Endavant, Eusko Alkartasuna, Fédération de la Guyane du Parti socialiste, Féministes révolutionnaires, Groupe révolution socialiste, Génération écologie, Mouvement des démocrates et écologistes pour une Martinique souveraine, Mouvement écologiste indépendant, Parti de la nation occitane, Parti de libération kanak, Parti pirate, Place publique (parti politique), Pour la Bretagne !, Rézistan's Égalité 974, UDB Jeunes, Un monde d'avance, Union calédonienne, Union des centristes et des écologistes, Unité internationale des travailleurs - Quatrième Internationale, Walwari, War-Sav – Gauche indépendantiste bretonne, fédération des Français à l’étranger du Parti socialiste, fédération des Hauts-de-Seine du Parti socialiste, fédération des Yvelines du Parti socialiste, fédération du Doubs du Parti socialiste, groupe socialiste à l'Assemblée nationale.
 
 ## Affiliations
-- 59 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
+- 57 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
   à compléter dans data/manuel/affiliations_dates.csv (source obligatoire).

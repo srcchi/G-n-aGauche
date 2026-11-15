@@ -25,7 +25,7 @@ SORTIE = os.path.join(RACINE, "data", "sortie")
 MANUEL = os.path.join(RACINE, "data", "manuel")
 ARBRES = os.path.join(RACINE, "arbres")
 EPS = 0.06
-TEXTES_PERMIS = {"tag-t", "bande-t", "axe-t", "voie-t", "legende-t", "cle-t", "renvoi"}
+TEXTES_PERMIS = {"tag-t", "bande-t", "axe-t", "voie-t", "legende-t", "cle-t", "renvoi", "nom-t"}
 REL_SUCC_DIRECTE = {"renommage", "fusion", "absorption", "refondation", "scission", "filiation_idéologique", "indirect"}
 
 
@@ -122,7 +122,13 @@ def verifier_svg(chemin, cpt, err):
         debut = t_de(src["fondation"], src["fondation_mois"])
         if abs(x - X(debut)) > EPS:
             faute("R3 dates", f"{q} début x={x:.2f} attendu {X(debut):.2f}")
-        if src["statut_fin"].startswith("actif"):
+        if r.get("data-section"):
+            # Bandeau d'Internationale collé à sa section : il finit où la section (et sa bande) commence
+            sec = next((x for x in racine.iter(S + "rect") if "barre" in x.get("class", "").split()
+                        and x.get("data-id") == r.get("data-section")), None)
+            if sec is None or not (float(sec.get("x")) - EPS <= x + w <= float(sec.get("x")) + 40):
+                faute("R3 dates", f"{q} : bandeau qui ne finit pas au début de sa section")
+        elif src["statut_fin"].startswith("actif"):
             if r.get("data-fin") != "actif" or abs(x + w - max(X(t_auj), x + min_w)) > EPS:
                 faute("R3 dates", f"{q} devrait finir aujourd'hui")
             ouvertes[q] = degrade
@@ -221,6 +227,10 @@ def verifier_svg(chemin, cpt, err):
             q = t.get("data-org")
             if q not in tags or not dedans(bbox(t), tags[q]):
                 faute("R4 textes", f"« {t.text} » déborde de l'étiquette de {q}")
+        elif cls == "nom-t":            # nom successif écrit dans sa barre (PC-SFIC, PCF)
+            q = t.get("data-org")
+            if q not in barres or not dedans(bbox(t), barres[q]):
+                faute("R4 textes", f"nom « {t.text} » hors de la barre de {q}")
         elif cls == "renvoi":
             renvois[t.get("data-org")].append((bbox(t), "".join(t.itertext()), t.get("data-a"), t.get("data-b")))
     reliees = set()
@@ -243,6 +253,12 @@ def verifier_svg(chemin, cpt, err):
                   if not dedans(b, (barres[q][0], barres[q][1], barres[q][2] + ouvertes.get(q, 0), barres[q][3]))]
     obstacles += [(q, "bande", b) for q, b in bandes] + [(q, "sigle de bande", b) for q, b in sigles_bandes]
     obstacles += [(q, "renvoi", r[0]) for q, rs in renvois.items() for r in rs]
+    # Bandeau d'Internationale collé à sa section : c'est la bande de celle-ci, prolongée
+    section_de = {r.get("data-id"): r.get("data-section") for r in racine.iter(S + "rect")
+                  if "barre" in r.get("class", "").split() and r.get("data-section")}
+
+    def a_soi(q, sorte, *bouts):
+        return sorte in ("barre", "bande") and (q in bouts or section_de.get(q) in bouts)
     for g in racine.iter(S + "g"):
         cls = g.get("class")
         if cls == "continuation":
@@ -263,7 +279,7 @@ def verifier_svg(chemin, cpt, err):
             # Seule exception aux croisements : la barre d'un autre membre de la même organisation
             membres = {r["source"] for r in liens_csv if r["relation"] == "composante" and r["cible"] == b} - {a}
             for q, sorte, box in obstacles:
-                if q in (a, b) and sorte in ("barre", "bande") or q in membres and sorte in ("barre", "bande"):
+                if a_soi(q, sorte, a, b) or q in membres and sorte in ("barre", "bande"):
                     continue
                 if croise((v[0], v[1]), (v[2], v[3]), box):
                     faute("croisements", f"{a}->{b} (composante) traverse {sorte} de {q}")
@@ -292,7 +308,7 @@ def verifier_svg(chemin, cpt, err):
         if float(g.get("data-voies")) <= 2:
             for p1, p2 in zip(pts, pts[1:]):
                 for q, sorte, box in obstacles:
-                    if q in (a, b) and sorte in ("barre", "bande"):
+                    if a_soi(q, sorte, a, b):
                         continue
                     if croise(p1, p2, box):
                         faute("croisements", f"{a}->{b} traverse {sorte} de {q}")

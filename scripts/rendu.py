@@ -300,6 +300,15 @@ def charger():
                                       f"courants : {r['courants_sources'] or 'aucun reconnu'}"]
                              + ([f"organisations liées : {r['organisations_liees']}"] if r.get("organisations_liees") else [])
                              + ([f"journaux : {r['journaux']}"] if r["journaux"] else []))
+    # Noms successifs d'une même organisation (infobox, champ fondation) : écrits dans la barre
+    for r in lire("noms_successifs.csv"):
+        if r["id"] in orgs:
+            orgs[r["id"]].setdefault("noms", []).append((t_de(r["annee"]), r["nom"], r["citation"], r["source"]))
+    for o in orgs.values():
+        if o.get("noms"):
+            o["noms"].sort()
+            o["details"].append("noms successifs : " + ", ".join(f"{n} ({int(t)})" for t, n, _, _ in o["noms"])
+                                + f" ; preuve ({o['noms'][0][3]}) : " + " ; ".join(f"« {c} »" for _, _, c, _ in o["noms"]))
     for r in lire("affiliations.csv"):
         if r["party_id"] in orgs and r["international_id"] in inter:
             orgs[r["party_id"]]["affil"].append(r)
@@ -346,6 +355,7 @@ def charger():
     couleur_ait = next((c for c in PALETTE_INTER if c not in prises), "#EE3377")
     for q, i in barres_intl.items():
         orgs[q]["style_intl"] = True
+        orgs[q]["intl_ref"] = i if i in inter else ""
         orgs[q]["couleur"] = inter[i]["couleur"] if i in inter else couleur_ait
     # Infobulles : liens (type, preuve, citation complète) et affiliations (dates)
     for l in liens:
@@ -435,6 +445,10 @@ def preparer(items, inter, ech, T_AUJ):
             o["x1_vis"] = o["x1"] + DEGRADE
         o["dates"] = f"{o['an0']}–{o['fin_txt']}"
         b = base(o)
+        # Noms successifs : l'étiquette donne le premier nom (SFIC), s'il tient dans la barre
+        if o.get("noms") and abs(o["noms"][0][0] - o["t0"]) < 1 and                 larg(o["noms"][0][1], FS_SIGLE, True) + 2 * TAG_PAD <= (o["x1"] - o["x0"]):
+            b = o["noms"][0][1]
+            o["nom_en_tete"] = True
         long_w = larg(b, FS_SIGLE, True) + 5 + larg(o["dates"], FS) + 2 * TAG_PAD
         seul = b if n_base[b] == 1 else o["etiquette"]
         seul_w = larg(seul, FS_SIGLE, True) + 2 * TAG_PAD
@@ -464,11 +478,98 @@ def preparer(items, inter, ech, T_AUJ):
                                motif=d["motif"], sigle=d["sigle"], nom=d["nom"], texte=txt,
                                debut=a["start"] if connu else "", fin=a["end"] if connu else "",
                                ecrit=larg(txt, FS, True) + 6 <= xb - xa))
-        bandes.sort(key=lambda b: (not b["connu"], -(b["xb"] - b["xa"])))
-        o["bandes"], o["bandes_tooltip"] = bandes[:MAX_BANDES], bandes[MAX_BANDES:]
-        for b in o["bandes_tooltip"]:
+        o["bandes"], o["bandes_tooltip"] = bandes, []
+        ranger_bandes(o)
+
+
+def ranger_bandes(o, premier=None):
+    """Bandes rangées en lignes (2.7) : des adhésions successives partagent une ligne (SFIO : IO,
+    puis UPSAI, puis IOS) ; l'Internationale prolongée par son bandeau (premier) est sur la
+    première ligne, dans le prolongement du bandeau. MAX_BANDES lignes, le reste en infobulle."""
+    toutes = sorted(o["bandes"] + o["bandes_tooltip"],
+                    key=lambda b: (b["intl"] != premier, not b["connu"], b["xa"], -(b["xb"] - b["xa"])))
+    lignes, gardees, reste = [], [], []
+    for b in toutes:
+        k = next((i for i, l in enumerate(lignes)
+                  if b["connu"] and all(c["connu"] and (b["xa"] >= c["xb"] - 0.5 or b["xb"] <= c["xa"] + 0.5) for c in l)),
+                 len(lignes))
+        if k >= MAX_BANDES:
+            reste.append(b)
+            continue
+        if k == len(lignes):
+            lignes.append([])
+        lignes[k].append(b)
+        b["ligne"] = k
+        gardees.append(b)
+    for b in reste:
+        if not b.get("signalee"):
+            b["signalee"] = True
             o["details"].append(f"autre affiliation (non dessinée) : {b['sigle']} ({b['nom']})")
-        o["bas"] = BAR_H / 2 + len(o["bandes"]) * (BANDE_H + BANDE_GAP)
+    o["bandes"], o["bandes_tooltip"] = gardees, reste
+    o["bas"] = BAR_H / 2 + len(lignes) * (BANDE_H + BANDE_GAP)
+
+
+def y_bande(o, b):
+    """Haut d'une bande, relatif au centre de la barre."""
+    return BAR_H / 2 + BANDE_GAP + b["ligne"] * (BANDE_H + BANDE_GAP)
+
+
+def bandeaux(items, liens, ech, T_AUJ):
+    """Internationale dessinée (origines.csv, style internationale) : un bandeau au style des bandes,
+    seul jusqu'à la naissance de sa section française (composante), puis prolongé par la bande de
+    cette Internationale sous la section (IO 1889 puis SFIO, IC 1919 puis PC-SFIC, AIT 1922 puis CNT).
+    Sans section : bandeau seul, centré sur sa rangée (AIT, AIT anti-autoritaire)."""
+    for o in items.values():
+        if o.get("style_intl"):
+            o["bandes"], o["bandes_tooltip"] = [], []
+            o["strip_haut"] = -BANDE_H / 2
+    for l in liens:
+        q_i, q_s = l["b"], l["a"]
+        if l["rel"] != "composante" or q_i not in items or q_s not in items:
+            continue
+        o, s = items[q_i], items[q_s]
+        if not o.get("style_intl") or o.get("section") or not o["t0"] < s["t0"]:
+            continue
+        ref = o.get("intl_ref") or q_i
+        b = next((x for x in s["bandes"] + s["bandes_tooltip"] if x["intl"] == ref), None)
+        if b is None:
+            # Pas d'affiliation datée dans les sources (AIT 1922 et CNT) : la bande vient de la
+            # composante citée, de son année à la fin de l'une ou de l'autre
+            fin_s = s["t1"] if s["t1"] is not None else T_AUJ
+            fin_o = o["t1"] if o["t1"] is not None else T_AUJ
+            ta = max(s["t0"], l["t"] or s["t0"])
+            tb = min(fin_s, fin_o)
+            xa = max(s["x0"], ech.X(ta))
+            xb = min(s["x1"], max(ech.X(tb), xa + MIN_W))
+            txt = re.sub(r" \(\d{4}\)$", "", o["etiquette"])
+            b = dict(intl=ref, connu=True, xa=xa, xb=xb, couleur=o["couleur"], motif=False, sigle=txt,
+                     nom=o["label"], texte=txt, debut=str(int(ta)),
+                     fin="aujourd'hui" if tb >= T_AUJ else str(int(tb)), ecrit=larg(txt, FS, True) + 6 <= xb - xa)
+            s["bandes"].append(b)
+        ranger_bandes(s, premier=ref)
+        o["section"] = SECTION_DE[q_i] = q_s
+        o["strip_haut"] = BAR_H / 2 + BANDE_GAP
+        # Le bandeau va jusqu'au début de la bande (PC-SFIC : fin 1920, bande de l'IC en 1921)
+        o["strip_x1"] = max(s["x0"], b["xa"]) if b in s["bandes"] else s["x0"]
+        o["t1"], o["x1"], o["x1_vis"] = s["t0"], s["x0"], s["x0"]
+    for o in items.values():
+        if not o.get("style_intl"):
+            continue
+        o.setdefault("strip_x1", o["x1"])
+        o["bas"] = o["strip_haut"] + BANDE_H
+        # Étiquette au style des bandes : sigle (et dates si elles tiennent) dans le bandeau, sinon devant
+        b_ = re.sub(r" \(\d{4}\)$", "", o["etiquette"])
+        place = o["strip_x1"] - o["x0"]
+        long_w = larg(b_, FS, True) + 5 + larg(o["dates"], FS) + 6
+        seul_w = larg(b_, FS, True) + 6
+        o["etiq_aff"], o["avec_dates"], o["tag_w"] = (b_, True, long_w) if long_w <= place else (b_, False, seul_w)
+        o["tag_dedans"] = o["tag_w"] <= place
+        # Bandeau collé trop court pour son sigle (IC 1919-1921) : pas d'étiquette devant (elle
+        # boucherait le couloir des liens qui arrivent à la section) ; la bande qui le prolonge
+        # porte le même sigle, le nom est dans l'infobulle
+        o["sans_tag"] = bool(o.get("section")) and not o["tag_dedans"]
+        if o["sans_tag"]:
+            o["tag_dedans"], o["tag_w"] = True, 0
 
 
 def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
@@ -478,6 +579,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     ech = Echelle([o["t0"] for o in items.values()], T_AUJ)
     rang_voie = {v: i for i, v in enumerate(voies_ordre)}
     preparer(items, inter, ech, T_AUJ)
+    bandeaux(items, liens, ech, T_AUJ)
     for l in liens:
         l["x_t"] = ech.X(l["t"])
     # Origines historiques (data/manuel/origines.csv) : leurs liens sont toujours dessinés, quelle que
@@ -523,8 +625,16 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
             continue
         if b["tag_dedans"] or b.get("tag_apres"):
             continuations.add((l["a"], l["b"]))
+    # Bandeau d'Internationale et sa section : même rangée, la bande de la section le prolonge
+    suites_intl = {(q, o["section"]) for q, o in items.items() if o.get("section") in items}
+    continuations |= suites_intl
 
-    collages = [(l["a"], l["b"]) for l in liens if l["rel"] == "composante" and l["a"] in items and l["b"] in items]
+    collages_tous = [(l["a"], l["b"]) for l in liens if l["rel"] == "composante" and l["a"] in items and l["b"] in items]
+
+    def collages_actifs():
+        """Composantes à garder voisines ; celle d'une section et de son bandeau ne compte pas tant
+        qu'ils sont sur la même rangée (continuation), elle revient sinon."""
+        return [c for c in collages_tous if (c[1], c[0]) not in continuations]
     force, anomalies, traces = set(), [], []
     for _tour in range(4):
       for _ in range(30):
@@ -536,7 +646,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
               if a is None or b is None:
                   renvois.append(dict(l, raison="hors de cette vue"))
                   continue
-              if (l["a"], l["b"]) in continuations:
+              if (l["a"], l["b"]) in continuations or (l["b"], l["a"]) in continuations:
                   continue
               ev = abs(rang_voie[a["voie"]] - rang_voie[b["voie"]])
               t_dep = min(l["t"] - GOUTTIERE / PPA, a["t1"] if a["t1"] is not None else T_AUJ)
@@ -548,11 +658,18 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
                   poly.append(dict(l, majeur=False))
           renvoyer(items, orgs, renvois)
           bornes(items, poly)
-          rangees = placer(items, voies_ordre, poly, continuations, collages)
+          rangees = placer(items, voies_ordre, poly, continuations, collages_actifs())
           # Continuations qui n'ont pas pu rester sur la même rangée, ou dont le successeur porte des
           # renvois (ils seraient entre la fin et la suite) : lien dessiné normal
+          # (un bandeau, sous le niveau de la barre, ne gêne pas les renvois de sa section)
+          def renvois_genent(a, b):
+              """Renvois de la section entre la fin et la suite ; pour un bandeau (plus bas que les
+              renvois), seulement s'ils touchent ceux du bandeau lui-même."""
+              if not items[b]["renv"]:
+                  return False
+              return (a, b) not in suites_intl
           ratees = {(a, b) for a, b in continuations
-                    if items[a]["rang_g"] != items[b]["rang_g"] or items[b]["renv"]}
+                    if items[a]["rang_g"] != items[b]["rang_g"] or renvois_genent(a, b)}
           if ratees:
               continuations -= ratees
               continue
@@ -585,7 +702,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
           break
       force |= fautifs
     if not voies_voulues:
-        poly, renvois, geo = repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, collages,
+        poly, renvois, geo = repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, collages_actifs(),
                                      continuations)
         boites = boites_obstacles(items)
         traces = [t for t in (router(l, items, boites, rang_voie, poly) for l in poly) if t]
@@ -639,12 +756,20 @@ def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, c
     debut = time.time()
 
     suites = set(continuations)
-    dans_suite = {q for c in suites for q in c}
+    # Bandeau d'Internationale et sa section : ils bougent ensemble (la section n'est pas figée)
+    compagnon = {}
+    for a_, b_ in suites:
+        if items[a_].get("style_intl"):
+            compagnon[a_], compagnon[b_] = b_, a_
+    dans_suite = {q for c in suites for q in c} - set(compagnon)
 
     def chevauchement():
         for v in voies_ordre:
             for contenu in rangees.get(v, {}).get("rangees", []):
-                bs = sorted((items[q]["L"], items[q]["R"], q) for q in contenu)
+                # bandeau et section sur la même rangée : un seul bloc (le bandeau finit où elle commence)
+                bs = sorted((min([items[q]["L"]] + [items[c]["L"] for c in [compagnon.get(q)] if c in contenu]),
+                             items[q]["R"], q) for q in contenu
+                            if not (items[q].get("style_intl") and compagnon.get(q) in contenu))
                 for b1, b2 in zip(bs, bs[1:]):
                     if (b1[2], b2[2]) in suites:          # suite collée : commence où l'autre finit
                         if items[b1[2]]["x1"] > items[b2[2]]["x0"] + 0.5:
@@ -691,11 +816,13 @@ def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, c
             r0 = next(i for i, c in enumerate(lignes) if q in c)
             if sorte == "dans" and (r == r0 or r >= len(lignes)):
                 return False
-            lignes[r0].remove(q)
+            groupe = [q] + ([compagnon[q]] if compagnon.get(q) in lignes[r0] else [])
+            for x in groupe:
+                lignes[r0].remove(x)
             if sorte == "dans":
-                lignes[r].append(q)
+                lignes[r].extend(groupe)
             else:
-                lignes.insert(min(r, len(lignes)), [q])
+                lignes.insert(min(r, len(lignes)), groupe)
             lignes[:] = [c for c in lignes if c]
             return True
 
@@ -832,7 +959,9 @@ def placer(items, voies_ordre, poly, continuations, collages=()):
             voisins[b].add(a)
             if (a, b) not in deja:
                 parents[b].append(dict(a=a, b=b, rel="composante"))
-    cont_parent = {b: a for a, b in continuations}
+    cont_parent = {b: a for a, b in continuations if not items[a].get("style_intl")}
+    bandeau_de_section = {b: a for a, b in continuations if items[a].get("style_intl")}
+    section_du = {a: b for b, a in bandeau_de_section.items()}
     res, rang_global = {}, 0
     for v in voies_ordre:
         membres = [q for q, o in items.items() if o["voie"] == v]
@@ -891,6 +1020,9 @@ def placer(items, voies_ordre, poly, continuations, collages=()):
             for r_ in racines:
                 visite(r_)
             ordre += [q for q in bloc if q not in vus_o]
+            # Bandeau d'Internationale : rangé juste après sa section, à sa gauche sur la même rangée
+            # (la section garde la place que lui donnent ses propres ancêtres)
+            ordre = [q for q in ordre if not (q in bandeau_de_section.values() and section_du[q] in dans)]
 
             def occupe(r, x):
                 return any(l2 - 0.5 < x < r2 + 0.5 for l2, r2, _ in local[r])
@@ -938,6 +1070,19 @@ def placer(items, voies_ordre, poly, continuations, collages=()):
                 L_eff = o["x0"] - 1 if p and place == items.get(p, {}).get("rang_l") else o["L"]
                 local[place].append((L_eff, o["R"], q))
                 o["rang_l"] = place
+                i_ = bandeau_de_section.get(q)
+                if i_ in dans:
+                    oi = items[i_]
+                    oi.pop("rang_l", None)
+                    oi["bloc_v"] = (v, debut)
+                    if all(oi["R"] + GAP <= l2 or r2 + GAP <= oi["L"] for l2, r2, q2 in local[place] if q2 != q)                             and oi["R"] <= o["x0"] + 1.5:
+                        r_i = place
+                    else:
+                        r_i = min([r for r in range(len(local)) if libre(r, oi["L"], oi["R"])] + [len(local)])
+                        if r_i == len(local):
+                            local.append([])
+                    local[r_i].append((oi["L"], oi["R"], i_))
+                    oi["rang_l"] = r_i
                 for l in parents[q]:
                     pp = items[l["a"]]
                     if pp.get("bloc_v") == (v, debut) and "rang_l" in pp:
@@ -1057,24 +1202,42 @@ def boites_obstacles(items):
     boites = []
     for o in items.values():
         yb = o["y_c"] - BAR_H / 2
+        if o.get("style_intl"):           # bandeau : sa seule emprise est celle de la bande
+            ys = o["y_c"] + o["strip_haut"]
+            boites.append((o["id"], "barre", (o["x0"], ys, o["strip_x1"] - o["x0"], BANDE_H)))
+            if not o["tag_dedans"]:
+                boites.append((o["id"], "etiquette", (o["tag_x"], ys, o["tag_w"], BANDE_H)))
+            if o["renv"]:
+                boites.append((o["id"], "renvoi", (o["renv_x"], ys, o["w_renv"], 13)))
+            continue
         boites.append((o["id"], "barre", (o["x0"], yb, o["x1_vis"] - o["x0"], BAR_H)))
         if not o["tag_dedans"]:
             boites.append((o["id"], "etiquette", (o["tag_x"], yb, o["tag_w"], BAR_H)))
-        for k, b in enumerate(o["bandes"]):
-            y = o["y_c"] + BAR_H / 2 + BANDE_GAP + k * (BANDE_H + BANDE_GAP)
+        for b in o["bandes"]:
+            y = o["y_c"] + y_bande(o, b)
             boites.append((o["id"], "bande", (b["xa"], y, b["xb"] - b["xa"], BANDE_H)))
             if b["ecrit"]:
                 boites.append((o["id"], "sigle de bande", (b["xa"] + 1, y, larg(b["texte"], FS, True) + 4, BANDE_H)))
         if o["renv"]:
-            boites.append((o["id"], "renvoi", (o["renv_x"], o["y_c"] - 7, o["w_renv"], 13)))
+            ym = o["y_c"] + (o["strip_haut"] + BANDE_H / 2 if o.get("style_intl") else 0)
+            boites.append((o["id"], "renvoi", (o["renv_x"], ym - 7, o["w_renv"], 13)))
     return boites
+
+
+SECTION_DE = {}      # bandeau d'Internationale -> sa section (rempli par bandeaux)
+
+
+def a_soi(q, sorte, *bouts):
+    """Barre ou bande d'un des deux bouts du lien : le lien en part ou y arrive. Le bandeau d'une
+    Internationale est la bande de sa section prolongée : il compte aussi comme bande de celle-ci."""
+    return sorte in ("barre", "bande") and (q in bouts or SECTION_DE.get(q) in bouts)
 
 
 def croisements(pts, a, b, boites):
     n = 0
     for p1, p2 in zip(pts, pts[1:]):
         for q, sorte, box in boites:
-            if q in (a, b) and sorte in ("barre", "bande"):
+            if a_soi(q, sorte, a, b):
                 continue          # un lien part de sa barre (et de ses bandes) et arrive sur sa cible
             if croise(p1, p2, box):
                 n += 1
@@ -1106,6 +1269,8 @@ def router(l, items, boites, rang_voie, poly):
         bas = b["y_c"] > a["y_c"]
         y1 = a["y_c"] + (a["bas"] if bas else -BAR_H / 2)
         y2 = b["y_c"] - BAR_H / 2 if bas else b["y_c"] + b["bas"]
+        if b.get("style_intl") and bas:
+            y2 = b["y_c"] + b["strip_haut"]
         # Groupe collé : le trait peut passer sur la barre d'un autre membre de la même organisation
         # (POI -> LFI par-dessus le PG, membre de LFI lui aussi), jamais sur autre chose.
         membres = {x["a"] for x in poly if x["rel"] == "composante" and x["b"] == l["b"]} - {l["a"]}
@@ -1116,6 +1281,8 @@ def router(l, items, boites, rang_voie, poly):
     n, k = len(normaux), next(i for i, x in enumerate(normaux) if x["a"] == l["a"])
     off = max(-(BAR_H / 2 - 3), min(BAR_H / 2 - 3, (k - (n - 1) / 2) * 5))
     xt, yt = b["x0"], b["y_c"] + off
+    if b.get("style_intl"):        # bandeau : flèche au milieu de la bande
+        yt = b["y_c"] + b["strip_haut"] + BANDE_H / 2 + max(-(BANDE_H / 2 - 2), min(BANDE_H / 2 - 2, off))
     xv = xt - GOUTTIERE
     bas = yt > a["y_c"]
     fini_avant = a["x1"] < xv
@@ -1126,8 +1293,9 @@ def router(l, items, boites, rang_voie, poly):
         xs = debut_libre
     if xt - xs < 3:
         return None
-    y_bord = a["y_c"] + (a["bas"] if bas else -BAR_H / 2)
-    depart = (xs, a["y_c"])
+    y_bord = a["y_c"] + (a["bas"] if bas else (a["strip_haut"] if a.get("style_intl") else -BAR_H / 2))
+    y_mil = a["y_c"] + (a["strip_haut"] + BANDE_H / 2 if a.get("style_intl") else 0)
+    depart = (xs, y_mil)
     candidats = []
     if a["rang_y"] == b["rang_y"]:
         candidats.append([(xs, yt), (xt, yt)] if fini_avant else [(xs, y_bord), (xs, yt), (xt, yt)])
@@ -1144,7 +1312,7 @@ def router(l, items, boites, rang_voie, poly):
             h, bb = sorted((y1, y2))
             bloque = sorted((bx - 1, bx + bw + 1) for q, sorte, (bx, by, bw, bh) in boites
                             if by < bb and by + bh > h and bx + bw > x_lo and bx < x_hi
-                            and not (q == l["a"] and sorte in ("barre", "bande")))
+                            and not a_soi(q, sorte, l["a"]))
             res, cur = [], x_lo
             for g, d in bloque:
                 if g > cur + 2:
@@ -1180,7 +1348,8 @@ def router(l, items, boites, rang_voie, poly):
             continue
         if any(q[0] < p[0] - 1e-6 for p, q in zip(pts, pts[1:])):
             continue
-        t = trace(l, a, b, pts, (pts[0][0], a["y_c"]), boites, rang_voie)
+        t = trace(l, a, b, pts, (pts[0][0], a["y_c"] + (a["strip_haut"] + BANDE_H / 2 if a.get("style_intl") else 0)),
+                  boites, rang_voie)
         cle = (t["croisements"], len(pts), sum(abs(q[0] - p[0]) + abs(q[1] - p[1]) for p, q in zip(pts, pts[1:])))
         if meilleur is None or cle < meilleur[0]:
             meilleur = (cle, t)
@@ -1267,19 +1436,28 @@ def dessiner(m, avec_cle=True, apercu=False):
         yc, x0, x1 = o["y_c"], o["x0"], o["x1"]
         yb = yc - BAR_H / 2
         fin = "actif" if o["statut"].startswith("actif") else f"{o['t1']:.4f}"
+        strip = o.get("style_intl")
+        if strip:
+            # Bandeau d'Internationale, au style des bandes ; collé à sa section, il est à la hauteur
+            # de la première ligne de bandes de celle-ci, qui le prolonge
+            yb, h_b, x1 = yc + o["strip_haut"], BANDE_H, o["strip_x1"]
+            fin = "section" if o.get("section") else fin
+        else:
+            h_b = BAR_H
         bas.append(f'<rect class="barre" data-id="{esc(o["id"])}" data-debut="{o["t0"]:.4f}" data-fin="{fin}" '
                    f'data-statut="{o["statut"]}" data-majeure="{"oui" if o["majeure"] else ""}" x="{x0:.2f}" '
-                   f'y="{yb:.2f}" width="{x1 - x0:.2f}" height="{BAR_H}" rx="{0 if o["x1_vis"] > x1 else (2 if o.get("style_intl") else 3)}" '
+                   f'y="{yb:.2f}" width="{x1 - x0:.2f}" height="{h_b}" rx="{0 if o["x1_vis"] > x1 else (2 if strip else 3)}" '
                    f'fill="{o["couleur"]}"'
-                   + (' stroke="#333333" stroke-width="0.8" data-style="internationale"' if o.get("style_intl") else "")
+                   + (' stroke="#333333" stroke-width="0.8" data-style="internationale"' if strip else "")
+                   + (f' data-section="{esc(o["section"])}"' if o.get("section") else "")
                    + '/>')
-        if o["x1_vis"] > x1:
+        if o["x1_vis"] > x1 and not strip:
             bas.append(f'<rect class="fin-ouverte" x="{x1:.2f}" y="{yb:.2f}" width="{o["x1_vis"] - x1:.2f}" '
                        f'height="{BAR_H}" fill="url(#g-{o["couleur"][1:]})"/>')
         if not apercu:
             # Bandes d'affiliation sous la barre (2.7), contour pour rester lisibles
-            for k, b in enumerate(o["bandes"]):
-                y = yc + BAR_H / 2 + BANDE_GAP + k * (BANDE_H + BANDE_GAP)
+            for b in o["bandes"]:
+                y = yc + y_bande(o, b)
                 if b["connu"] and not b["motif"]:
                     fill = b["couleur"]
                 else:
@@ -1302,33 +1480,73 @@ def dessiner(m, avec_cle=True, apercu=False):
                 haut.append("</g>")
             # Étiquette au début de la barre (2.6)
             ct, cd = texte_sur(o["couleur"]), gris_sur(o["couleur"])
+            if o.get("sans_tag"):
+                bas.append("</g>")
+                haut.append("</g>")
+                bas_v[vi].append("".join(bas))
+                haut_v[vi].append("".join(haut))
+                continue
             if o["tag_dedans"]:
-                tag_box = (x0, yb, x1 - x0, BAR_H)
+                tag_box = (x0, yb, x1 - x0, h_b)
             else:
-                tag_box = (o["tag_x"], yb, o["tag_w"], BAR_H)
+                tag_box = (o["tag_x"], yb, o["tag_w"], h_b)
                 haut.append(f'<rect class="tag-fond" x="{tag_box[0]:.2f}" y="{yb:.2f}" width="{o["tag_w"]:.2f}" '
-                            f'height="{BAR_H}" rx="4" fill="{o["couleur"]}"/>')
+                            f'height="{h_b}" rx="{2 if strip else 4}" fill="{o["couleur"]}"'
+                            + (' stroke="#333333" stroke-width="0.8"' if strip else "") + '/>')
             haut.append(f'<rect class="tag" data-id="{esc(o["id"])}" data-dedans="{"oui" if o["tag_dedans"] else ""}" '
-                        f'x="{tag_box[0]:.2f}" y="{yb:.2f}" width="{tag_box[2]:.2f}" height="{BAR_H}" fill="none" '
-                        f'data-bbox="{tag_box[0]:.2f},{yb:.2f},{tag_box[2]:.2f},{BAR_H}"/>')
-            xx = (x0 if o["tag_dedans"] else o["tag_x"]) + TAG_PAD
-            yy = yc + 4.5
-            ws = larg(o["etiq_aff"], FS_SIGLE, True)
-            haut.append(texte(xx, yy, o["etiq_aff"], FS_SIGLE, True, ct, cls="tag-t",
-                              extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - 11:.2f},{ws:.2f},13"'))
+                        f'x="{tag_box[0]:.2f}" y="{yb:.2f}" width="{tag_box[2]:.2f}" height="{h_b}" fill="none" '
+                        f'data-bbox="{tag_box[0]:.2f},{yb:.2f},{tag_box[2]:.2f},{h_b}"/>')
+            if strip:      # comme le sigle d'une bande
+                xx, yy, fs_s = (x0 if o["tag_dedans"] else o["tag_x"]) + 3, yb + 10.5, FS
+                ws = larg(o["etiq_aff"], FS, True)
+                haut.append(texte(xx, yy, o["etiq_aff"], FS, True, ct, cls="tag-t",
+                                  extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yb + 1:.2f},{ws:.2f},12"'))
+            else:
+                xx = (x0 if o["tag_dedans"] else o["tag_x"]) + TAG_PAD
+                yy = yc + 4.5
+                ws = larg(o["etiq_aff"], FS_SIGLE, True)
+                haut.append(texte(xx, yy, o["etiq_aff"], FS_SIGLE, True, ct, cls="tag-t",
+                                  extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - 11:.2f},{ws:.2f},13"'))
             xx += ws + 5
             if o["avec_dates"]:
                 haut.append(texte(xx, yy, o["dates"], FS, False, cd, cls="tag-t",
                                   extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - 10:.2f},{larg(o["dates"], FS):.2f},12"'))
+            # Noms successifs (PC-SFIC 1921, PCF 1943) : trait blanc à la date, nom écrit après lui
+            # s'il tient avant le nom suivant et ne couvre aucun départ de lien
+            if o.get("noms"):
+                fin_tag = (x0 if o["tag_dedans"] else o["tag_x"]) + o["tag_w"]
+                departs = [t_["depart"][0] for t_ in m["traces"] if t_["a"] == o["id"] and t_.get("depart")] +                           [t_["pts"][0][0] for t_ in m["traces"] if t_["a"] == o["id"]]
+                a_ecrire = o["noms"][1:] if o.get("nom_en_tete") else o["noms"]
+                suivants = [X(t_) for t_, *_ in a_ecrire[1:]] + [x1]
+                for k_, (t_n, nom, _c, _s) in enumerate(a_ecrire):
+                    xn = X(t_n)
+                    if not (x0 + 1 < xn < x1 - 1):
+                        continue
+                    if xn > fin_tag + 1:
+                        haut.append(f'<line class="nom-trait" x1="{xn:.2f}" x2="{xn:.2f}" y1="{yb:.2f}" '
+                                    f'y2="{yb + BAR_H:.2f}" stroke="#FFFFFF" stroke-width="1.5"/>')
+                    if nom == o["etiq_aff"] and xn <= fin_tag:
+                        continue
+                    xt_ = max(xn + 4, fin_tag + 5)
+                    wn = larg(nom, FS_SIGLE, True)
+                    gene = [xd for xd in departs if xt_ - 6 <= xd <= xt_ + wn + 6]
+                    while gene:                 # première place libre après les départs de liens
+                        xt_ = max(gene) + 7
+                        gene = [xd for xd in departs if xt_ - 6 <= xd <= xt_ + wn + 6]
+                    if xt_ + wn + 3 > suivants[k_]:
+                        continue
+                    haut.append(texte(xt_, yc + 4.5, nom, FS_SIGLE, True, ct, cls="nom-t",
+                                      extra=f' data-org="{esc(o["id"])}" data-bbox="{xt_:.2f},{yc - 6.5:.2f},{wn:.2f},13"'))
             # Renvois, juste avant (étiquette ou couloir d'arrivée)
             xr = o["renv_x"]
             for t, ra, rb in o["renv"]:
                 wt = larg(t, FS)
                 infob = ("<title>" + esc("voir aussi : " + " ; ".join(x[0] for x in o["voir_aussi"])) + "</title>"
                          if o["voir_aussi"] else "")
-                haut.append(f'<text x="{xr + 3:.1f}" y="{yc + 4:.1f}" font-size="{FS}" font-family="{POLICE}" '
+                ym = yc + (o["strip_haut"] + BANDE_H / 2 if strip else 0)     # bandeau : à sa hauteur
+                haut.append(f'<text x="{xr + 3:.1f}" y="{ym + 4:.1f}" font-size="{FS}" font-family="{POLICE}" '
                             f'font-style="italic" fill="#555555" class="renvoi" data-org="{esc(o["id"])}" '
-                            f'data-a="{esc(ra)}" data-b="{esc(rb)}" data-bbox="{xr + 3:.2f},{yc - 7:.2f},{wt:.2f},13">'
+                            f'data-a="{esc(ra)}" data-b="{esc(rb)}" data-bbox="{xr + 3:.2f},{ym - 7:.2f},{wt:.2f},13">'
                             f'{infob}{esc(t)}</text>')
                 xr += wt + 6
         bas.append("</g>")
@@ -1338,6 +1556,12 @@ def dessiner(m, avec_cle=True, apercu=False):
 
     for a, b in m["continuations"]:
         o = items[b]
+        if items[a].get("style_intl"):
+            # Bandeau prolongé par la bande de sa section : pas de trait blanc, seulement le lien
+            haut_v[m["voie_index"][o["voie"]]].append(
+                f'<g class="continuation" data-a="{esc(a)}" data-b="{esc(b)}"><title>{esc(o["label"])}, section de '
+                f'{esc(items[a]["label"])}</title></g>')
+            continue
         xj, yj = o["x0"], o["y_c"]
         haut_v[m["voie_index"][o["voie"]]].append(
             f'<g class="continuation" data-a="{esc(a)}" data-b="{esc(b)}"><title>renommage : {esc(items[a]["label"])} '
@@ -1351,19 +1575,45 @@ def dessiner(m, avec_cle=True, apercu=False):
         # Un trait qui part (ou arrive, pour une composante) sous les bandes s'accroche au bas réel
         # à son abscisse : la barre, plus les seules bandes présentes à cette date (aucune dans
         # l'aperçu). Sinon il flotte dans le vide là où la bande ne couvre pas (PCF avant 1977).
+        vp = list(t["voies_pts"])
         for i_, q_ in ((0, t["a"]), (len(pts) - 1, t["b"])):
             o_ = items[q_]
+            if o_.get("style_intl"):
+                continue
             bas_barre = o_["y_c"] + BAR_H / 2
             x_, y_ = pts[i_]
             if bas_barre < y_ <= o_["y_c"] + o_["bas"] + 1.5:
                 bas_x = bas_barre
                 if not apercu:
-                    for k, bd in enumerate(o_["bandes"]):
+                    for bd in o_["bandes"]:
                         if bd["xa"] - 0.5 <= x_ <= bd["xb"] + 0.5:
-                            bas_x = max(bas_x, bas_barre + BANDE_GAP + k * (BANDE_H + BANDE_GAP) + BANDE_H)
+                            bas_x = max(bas_x, o_["y_c"] + y_bande(o_, bd) + BANDE_H)
                 pts[i_] = (x_, bas_x + (y_ - (o_["y_c"] + o_["bas"]) if y_ > o_["y_c"] + o_["bas"] else 0))
+        # Bandeau d'Internationale : le trait part de son bord, ou arrive en son milieu
+        for fin_, q_ in ((False, t["a"]), (True, t["b"])):
+            o_ = items[q_]
+            if not o_.get("style_intl"):
+                continue
+            haut_s = o_["y_c"] + o_["strip_haut"]
+            bas_s, mil = haut_s + BANDE_H, haut_s + BANDE_H / 2
+            i_, j_ = (len(pts) - 1, len(pts) - 2) if fin_ else (0, 1)
+            (x_, y_), (xv_, yv_) = pts[i_], pts[j_]
+            if xv_ == x_:            # segment vertical : on s'accroche au bord tourné vers l'autre bout
+                pts[i_] = (x_, haut_s if yv_ < mil else bas_s)
+            elif fin_:               # arrivée horizontale : au milieu du bandeau
+                y_n = mil + max(-(BANDE_H / 2 - 2), min(BANDE_H / 2 - 2, y_ - o_["y_c"]))
+                if len(pts) == 2:    # trait droit : petit décroché avant la flèche
+                    xm = x_ - GOUTTIERE / 2
+                    pts[1:1] = [(xm, y_), (xm, y_n)]
+                    vp[1:1] = [vp[0], vp[-1]]
+                    pts[-1] = (x_, y_n)
+                else:
+                    pts[-1], pts[-2] = (x_, y_n), (xv_, y_n)
+            else:                    # départ horizontal (même rangée) : du milieu du bandeau
+                pts[0:1] = [(x_, mil), (x_, y_)]
+                vp[0:1] = [vp[0], vp[0]]
         d = "M" + " L".join(f"{x:.2f} {y:.2f}" for x, y in pts)
-        geo = json.dumps([[round(x, 2), round(y, 2), m["voie_index"][v]] for (x, y), v in zip(pts, t["voies_pts"])])
+        geo = json.dumps([[round(x, 2), round(y, 2), m["voie_index"][v]] for (x, y), v in zip(pts, vp)])
         xt, yt = pts[-1]
         fl = [(xt, yt), (xt - FLECHE_L, yt - FLECHE_DEMI), (xt - FLECHE_L, yt + FLECHE_DEMI)]
         vb = m["voie_index"][items[t["b"]]["voie"]]
@@ -1490,7 +1740,7 @@ def legende(m, apercu):
             el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="url(#h-332288)" stroke="#333333" '
                       f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
         if any(o.get("style_intl") for o in m["items"].values()):
-            t = "barre cernée : une Internationale (AIT, IO, IC…), sa section française collée par un trait"
+            t = "bandeau : une Internationale (AIT, IO, IC…) avant sa section française, que sa bande prolonge"
             x0 = place(46 + larg(t, FS))
             el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="#EE3377" stroke="#333333" '
                       f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))

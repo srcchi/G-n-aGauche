@@ -28,6 +28,7 @@ Les étapes 3 à 5 n'utilisent que Python et les caches (aucun réseau, aucune d
 | 1 | `scripts/arbre.py` | Wikidata (SPARQL) | `data/noeuds.csv`, `data/aretes.csv` |
 | 2 | `scripts/infobox.py` | Infobox de Wikipédia FR | `data/wp_noeuds.csv`, `data/wp_aretes.csv`, `data/wp_valeurs_sans_lien.csv` |
 | 3 | `scripts/enrichissement.py` | Textes Wikipédia, pages liées, Wikidata | `data/manuel/actifs.csv`, `data/sortie/liens_candidats.csv`, `liste_recherche.csv` |
+| 3b | `scripts/tableaux.py` | Tableaux des membres des Internationales (articles en et fr) | `data/sortie/affiliations_tableaux.csv` : années d'adhésion des organisations françaises, avec la ligne du tableau en citation |
 | 4 | `scripts/nettoyage.py` | Sources + fichiers de `data/manuel/` + caches | `data/sortie/*.csv` (dont `elagues.csv`), `criteres.md`, `resume.md`, `data/manuel/types.csv` |
 | 5 | `scripts/rendu.py` | Sortie de `nettoyage.py` | `arbre.svg` (racine), et dans `arbres/` : `arbre.svg`, `arbre.html`, `arbre_<famille>.svg`, `arbre_apercu.svg`, `vue_internationales.svg/.html` |
 | 6 | `scripts/verifier.py` | Les SVG produits et les CSV | rapport complet (R1 à R8, croisements, étiquettes en double, citations introuvables…) ; échoue si un compteur n'est pas à zéro |
@@ -40,6 +41,7 @@ Fichiers de contrôle dans `data/sortie/` : `liens_sans_preuve.csv`, `affiliatio
 ```bash
 python scripts/arbre.py && python scripts/infobox.py    # retéléchargement (rare)
 python scripts/enrichissement.py                        # liens candidats à valider (réseau, mis en cache)
+python scripts/tableaux.py                              # adhésions lues dans les tableaux des Internationales (réseau, mis en cache)
 python scripts/nettoyage.py && python scripts/rendu.py && python scripts/verifier.py
 ```
 
@@ -124,8 +126,16 @@ Les corrections vont dans deux fichiers, relus à chaque exécution de `nettoyag
   militants). Un chevron sur une barre : renommage sur la même rangée. Un lien trop long (plus de
   40 ans ou de 2 voies) devient un renvoi écrit : « → NPA » d'un côté, « issu de : LCR » de l'autre.
 - Exceptions voulues (`data/manuel/origines.csv`) : la Première Internationale (AIT) et sa branche
-  anti-autoritaire, et quatre Internationales dessinées en barres plus longues que leur section
-  française, collée par un trait de composante : IO (SFIO), IC (PC-SFIC), AIT de 1922 (CNT).
+  anti-autoritaire, dessinées en bandeaux (le style des bandes d'affiliation), et trois Internationales
+  dessinées en bandeau avant la naissance de leur section française, sur la rangée de celle-ci : la
+  bande de la section prolonge le bandeau (IO 1889, puis SFIO 1905 à 1914 ; IC 1919, puis PC-SFIC
+  1921 à 1943 ; AIT de 1922, puis CNT).
 - Les autres Internationales ne sont pas des organisations de l'arbre : une bande fine sous la barre du
-  parti membre (hachurée : dates exactes inconnues) et un badge avec le sigle. Voir la clé sous la frise,
-  puis l'index des sigles des organisations.
+  parti membre (hachurée : dates exactes inconnues) et un badge avec le sigle. Des adhésions
+  successives partagent une ligne (SFIO : IO, puis UPSAI, puis IOS, puis IS). Voir la clé sous la
+  frise, puis l'index des sigles des organisations.
+- Adhésions : citées par l'article de l'organisation, ou par le tableau des membres de
+  l'Internationale (ex. en:Second International : POF, FTSF, CRC 1889 à 1902, POSR 1890 à 1902,
+  PSF et PSdF 1902 à 1905) ; les années du tableau priment, sauf dates saisies à la main.
+- Noms successifs d'une même organisation (champ « fondation » de l'infobox : « 1920 (SFIC),
+  1921 (PC-SFIC), 1943 (PCF) ») : un trait blanc à chaque date et le nouveau nom dans la barre.

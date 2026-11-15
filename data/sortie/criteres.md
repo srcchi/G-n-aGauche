@@ -65,7 +65,8 @@ ses courants. Sans courant reconnu : « à classer » (petite voie, jamais un fo
   va dans anomalies.csv avec une cause probable. Même année sans mois : gardé, meme_annee = oui.
 - Lien de lignée entre une organisation et une Internationale : anomalies.csv.
 - Réduction transitive des filiations : la filiation A -> C est retirée s'il existe un autre
-  chemin de lignée (filiations et scissions) A -> B -> ... -> C.
+  chemin de lignée (filiations et scissions) A -> B -> ... -> C, sauf si A finit l'année où C
+  naît (A s'est fondue elle-même dans C, ex. POSR -> SFIO en 1905).
 - Relation finale : fusion (cible à plusieurs ancêtres en filiation), renommage (un seul ancêtre
   qui n'a qu'un successeur, et qui disparaît au plus un an avant ou après), filiation, scission,
   passage. Date de l'événement : fondation de la cible.

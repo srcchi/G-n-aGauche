@@ -407,6 +407,39 @@ def classer_types(noeuds, classe, wikitext, stats, aretes=None):
     return types_org, lignes
 
 
+RX_CHAMP_FONDATION = re.compile(r"^\s*\|\s*fondation\s*=(.*)$", re.M)
+
+
+def noms_successifs(corpus, garde):
+    """Noms successifs d'une même organisation, lus dans le champ « fondation » de son infobox :
+    « 1920 (SFIC)<br/>1921 (PC-SFIC)<br/>1943 (PCF) ». Gardés : au moins deux noms, chacun un nom
+    propre (pas « courant du NPA », pas un lien vers un autre article comme « 1905 ([[SFIO]]) »),
+    avec la citation mot pour mot de chaque morceau (R8)."""
+    lignes = []
+    for q in sorted(garde):
+        for lang, titre, txt in corpus.textes.get(q, []):
+            if lang != "fr":
+                continue
+            m = RX_CHAMP_FONDATION.search(txt)
+            if not m:
+                continue
+            valeur = m.group(1)
+            morceaux = re.split(r"<br\s*/?>", re.sub(r"<ref[^>]*/>|<ref[^>]*>.*?</ref>", "", valeur, flags=re.S))
+            noms = []
+            for mo in morceaux:
+                n = re.search(r"(1[89]\d\d|20\d\d)\s*(?:\}\})?\s*(?:<small>|\{\{petit\|)?\s*\(([^()\[\]{}]{2,60})\)", mo)
+                if not n or not n.group(2).strip()[:1].isupper():
+                    continue
+                # Citation dans le texte brut : de l'année à la parenthèse fermante
+                c = re.search(re.escape(n.group(1)) + r"[^\n]{0,40}?\(" + re.escape(n.group(2)) + r"\)", txt)
+                if c and corpus.verifier(c.group(0), f"fr:{titre}"):
+                    noms.append([q, titre, n.group(1), n.group(2).strip(), c.group(0), f"fr:{titre}"])
+            if len(noms) >= 2 and len({x[3] for x in noms}) >= 2:
+                lignes += noms
+            break
+    return lignes
+
+
 def ecrire_manuel_types(lignes, stats):
     """data/manuel/types.csv : créé une fois ; ensuite, seules les nouvelles organisations sont ajoutées."""
     chemin = os.path.join(MANUEL, "types.csv")
@@ -895,7 +928,7 @@ def main():
 
     # ================= 4. Réduction transitive des filiations =================
     # Une filiation A -> C est redondante s'il existe un autre chemin de lignée A -> B -> ... -> C
-    # (filiations et scissions : ex. FTSF -> POSR (scission) -> PSF rend FTSF -> PSF redondant).
+    # (filiations et scissions), sauf succession directe (voir succession_directe).
     fil = defaultdict(set)
     for a, b, t, _ in valides:
         if t in ("filiation", "scission"):
@@ -918,9 +951,16 @@ def main():
                 file.append(y)
         return None
 
+    def succession_directe(a, c):
+        """A finit l'année où C naît : A s'est fondue elle-même dans C (POSR -> SFIO en 1905),
+        même si une scission de A (le PSF de 1902) y a mené aussi. Jamais redondant."""
+        fin_a = annee(noeuds[a].get("dissolution")) or annee(noeuds[a].get("fin_deduite"))
+        dc = debut(c)
+        return bool(fin_a and dc and abs(fin_a - dc[0]) <= 1)
+
     reduites, gardees = [], []
     for a, b, t, e in valides:
-        if t == "filiation" and (p := chemin(a, b)):
+        if t == "filiation" and not succession_directe(a, b) and (p := chemin(a, b)):
             fil[a].discard(b)
             reduites.append([a, lab(a), b, lab(b), " -> ".join(lab(x) for x in p)])
         else:
@@ -1200,9 +1240,28 @@ def main():
     stats["sigles_remplis"] = sum(1 for r in tous if r["sigle"].strip())
 
     # ================= Internationales et affiliations =================
-    # R7 : une affiliation n'existe que si l'article de l'organisation elle-même la cite.
+    # Tableaux des membres des Internationales (scripts/tableaux.py) : période et citation de la ligne
+    # (ex. en:Second International : « [[French Workers' Party]] (POF) | 1889–1902 »).
+    tableaux = defaultdict(list)
+    for r in lire(os.path.join("sortie", "affiliations_tableaux.csv")):
+        a, b = r["party_id"], r["international_id"]
+        if a in classe and b in classe and classe[a] == "graphe" and classe[b] == "internationale" \
+                and corpus.verifier(r["citation"], r["source_citation"]):
+            tableaux[(a, b)].append(r)
+    deja = {(a, b) for a, b, _ in affil_brutes}
+    for (a, b) in sorted(set(tableaux) - deja):
+        affil_brutes.append((a, b, dict(sources={"tableau"}, type="appartenance")))
+    stats["affiliations_tableaux"] = len(tableaux)
+
+    # R7 : une affiliation n'existe que si l'article de l'organisation elle-même la cite, ou si le
+    # tableau des membres de l'Internationale la donne avec ses années.
     affil_ok, affil_sans = [], []
     for a, b, e in affil_brutes:
+        if (a, b) in tableaux and not preuves.preuve_affiliation(corpus, a, b):
+            r = tableaux[(a, b)][0]
+            e["preuve"] = dict(preuve="explicite", citation=r["citation"], source=r["source_citation"], rang=0)
+            affil_ok.append((a, b, e))
+            continue
         if "manuel" in e["sources"]:
             # Affiliation saisie à la main (aretes_manuelles.csv, type appartenance) : la citation
             # vient de l'article de l'Internationale quand l'organisation n'a pas d'article (R7 assoupli).
@@ -1304,16 +1363,9 @@ def main():
     lignes_affil, a_dater = [], []
     rx_entree = re.compile(r"(?:adh[èée]r\w*|rejoin\w*|rejoint|membre depuis|affili\w*)[^.\n]{0,60}?\b(1[89]\d\d|20\d\d)", re.I)
     rx_sortie = re.compile(r"(?:quitt\w*|exclu\w*|rompt|rupture|désaffili\w*)[^.\n]{0,60}?\b(1[89]\d\d|20\d\d)", re.I)
-    # Internationale dessinée en barre (origines.csv, colonne internationale) : sa section collée à la
-    # barre par une composante n'a plus la bande de cette Internationale (ex. SFIO et IO).
-    barre_de = {r["internationale"].strip(): r["id"].strip() for r in lire("manuel/origines.csv")
-                if r.get("internationale", "").strip()}
-    collees = {(r["ancetre"].strip(), r["descendant"].strip()) for r in lire("manuel/aretes_manuelles.csv")
-               if r.get("type", "").strip() == "composante"}
+    # Une section collée au bandeau de son Internationale (origines.csv) garde sa bande : rendu.py
+    # dessine le bandeau jusqu'à elle, puis cette bande le prolonge (ex. IO 1889, puis SFIO 1905-1914).
     for a, b, e in affil_brutes:
-        if b in barre_de and (a, barre_de[b]) in collees:
-            stats["bandes_remplacees_par_barre"] += 1
-            continue
         da, di = noeuds[a], noeuds[b]
         p = e["preuve"]
         cit = [p["preuve"], p["citation"], p["source"]]
@@ -1321,6 +1373,13 @@ def main():
         if s:
             lignes_affil.append([a, b, s["start"].strip(), s["end"].strip(), "known",
                                  f"manuel : {s['source'].strip()}", lab(a), lab(b)] + cit)
+            continue
+        if (a, b) in tableaux:
+            # Une ligne par période (un parti peut adhérer, partir puis revenir)
+            for r in tableaux[(a, b)]:
+                fin_t = r["end"] or ("toujours membre" if da.get("actif") else "")
+                lignes_affil.append([a, b, r["start"], fin_t, "known", "tableau", lab(a), lab(b),
+                                     "explicite", r["citation"], r["source_citation"]])
             continue
         # Dates lues dans la citation elle-même ; « toujours membre » si l'infobox actuelle d'une
         # organisation active la cite (le champ d'infobox décrit l'affiliation présente).
@@ -1500,6 +1559,8 @@ def main():
                             d["statut_fin"], "oui" if d["actif_auto"] else "",
                             "oui" if q in garde else "",
                             " | ".join(sorted(lab(s) for s in emanations.get(q, ())))])
+    ecrire("noms_successifs.csv", ["id", "label", "annee", "nom", "citation", "source"],
+           noms_successifs(corpus, garde))
     ecrire("organisations.csv",
            ["id", "label", "nom_court", "fondation", "fondation_mois", "fondation_source",
             "fondation_autres_sources", "dissolution", "dissolution_mois", "dissolution_source",
@@ -1900,7 +1961,8 @@ ses courants. Sans courant reconnu : « à classer » (petite voie, jamais un fo
   va dans anomalies.csv avec une cause probable. Même année sans mois : gardé, meme_annee = oui.
 - Lien de lignée entre une organisation et une Internationale : anomalies.csv.
 - Réduction transitive des filiations : la filiation A -> C est retirée s'il existe un autre
-  chemin de lignée (filiations et scissions) A -> B -> ... -> C.
+  chemin de lignée (filiations et scissions) A -> B -> ... -> C, sauf si A finit l'année où C
+  naît (A s'est fondue elle-même dans C, ex. POSR -> SFIO en 1905).
 - Relation finale : fusion (cible à plusieurs ancêtres en filiation), renommage (un seul ancêtre
   qui n'a qu'un successeur, et qui disparaît au plus un an avant ou après), filiation, scission,
   passage. Date de l'événement : fondation de la cible.

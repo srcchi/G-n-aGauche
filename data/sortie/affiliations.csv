@@ -3,13 +3,20 @@ Q1045425,Q1377231,2009,2024,unknown,wikidata | wikipedia,Nouveau Parti anticapit
 Q1125061,Q639383,1986,toujours membre,unknown,wikidata,Eusko Alkartasuna,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Eusko Alkartasuna
 Q1145020,Q639383,1981,toujours membre,unknown,wikidata | wikipedia,Union démocratique bretonne,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne|Alliance libre<br />européenne]] (ALE),fr:Union démocratique bretonne
 Q1332068,Q159454,1951,1969,unknown,wikipedia,Section française de l'Internationale ouvrière,Internationale socialiste,explicite,"| affi internationale = [[Internationale ouvrière|Deuxième Internationale]], [[Union des partis socialistes pour l'action internationale]], [[Internationale ouvrière socialiste]], [[Internationale socialiste]]",fr:Section française de l'Internationale ouvrière
+Q1332068,Q188592,1905,1914,known,tableau,Section française de l'Internationale ouvrière,Internationale ouvrière,explicite,"[[French Section of the Workers' International]] (SFIO)
+| 1905–1914",en:Second International
 Q1332068,Q698677,1921,1923,unknown,wikipedia,Section française de l'Internationale ouvrière,Union des partis socialistes pour l'action internationale,explicite,"| affi internationale = [[Internationale ouvrière|Deuxième Internationale]], [[Union des partis socialistes pour l'action internationale]], [[Internationale ouvrière socialiste]], [[Internationale socialiste]]",fr:Section française de l'Internationale ouvrière
-Q1332068,Q703593,1923,1940,unknown,wikidata | wikipedia,Section française de l'Internationale ouvrière,Internationale ouvrière socialiste,explicite,"| affi internationale = [[Internationale ouvrière|Deuxième Internationale]], [[Union des partis socialistes pour l'action internationale]], [[Internationale ouvrière socialiste]], [[Internationale socialiste]]",fr:Section française de l'Internationale ouvrière
+Q1332068,Q703593,1923,1940,known,tableau,Section française de l'Internationale ouvrière,Internationale ouvrière socialiste,explicite,"[[French Section of the Workers' International]]
+|1923–1940",en:Labour and Socialist International
 Q1393793,Q206682,1944,1968,unknown,wikipedia,Parti communiste internationaliste,Quatrième Internationale,explicite,| affi internationale = [[Quatrième Internationale]],fr:Parti communiste internationaliste
 Q1418625,Q639383,2002,toujours membre,unknown,wikidata,Partitu di a Nazione Corsa,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Partitu di a Nazione Corsa
 Q1495924,Q202649,2009,2015,unknown,wikidata | wikipedia,Gauche unitaire,Parti de la gauche européenne,explicite,| affi européenne     = [[Parti de la gauche européenne]],fr:Gauche unitaire
 Q1539236,Q639383,1987,toujours membre,unknown,wikidata,Parti occitan,Alliance libre européenne,explicite,| affi européenne     = [[Alliance libre européenne]],fr:Partit occitan
-Q1542710,Q25079,1976,toujours membre,unknown,wikidata,Parti radical (France),Parti de l'Alliance des libéraux et des démocrates pour l'Europe,explicite,| affi européenne     = [[Parti de l'Alliance des libéraux et des démocrates pour l'Europe|ALDE]],fr:Parti radical (France)
+Q1542710,Q25079,2018,toujours membre,known,tableau,Parti radical (France),Parti de l'Alliance des libéraux et des démocrates pour l'Europe,explicite,"[[Parti radical (France)|Parti radical]] (RAD)
+|{{Infobox Parti politique/Sièges|1|577|hex={{Données PPEU|couleur}}}}
+|{{Infobox Parti politique/Sièges|8|348|hex={{Données PPEU|couleur}}}}
+|{{Infobox Parti politique/Sièges|0|79|hex={{Données PPEU|couleur}}}}
+|2018",fr:Parti de l'Alliance des libéraux et des démocrates pour l'Europe
 Q16010672,Q649752,2001,2019,unknown,wikidata,Alternative libertaire (France),Solidarité internationale libertaire,explicite,"À l'échelon international, AL a jadis été membre du réseau [[Solidarité internationale libertaire]], et s'inscrit depuis 2005 dans le réseau communiste libertaire [[Plateformisme#Anarkismo.net|Anarkismo]], qui se réclame à la fois du [[plateformisme]] et de l'''[[especifismo]]''.",fr:Alternative libertaire (France)
 Q1618280,Q622519,1996,toujours membre,unknown,wikipedia,Voix prolétarienne,Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale),explicite,| affi internationale =  [[Conférence internationale des partis et organisations marxistes-léninistes (correspondance de presse internationale)|ICMLPO]],fr:Voix prolétarienne
 Q17008204,Q3240310,,,unknown,wikipedia,Ligue trotskyste de France,Ligue communiste internationale (quatrième internationaliste),explicite,| affi internationale = [[Ligue communiste internationale (quatrième internationaliste)]],fr:Ligue trotskyste de France
@@ -46,7 +53,9 @@ Q3366769,Q1423578,1938,1940,unknown,wikidata | wikipedia,Parti socialiste ouvrie
 Q3550479,Q703593,1935,1940,unknown,wikipedia,Union socialiste républicaine,Internationale ouvrière socialiste,explicite,| affi internationale = [[Internationale ouvrière socialiste]],fr:Union socialiste républicaine
 Q427965,Q1651405,1994,1999,known,citation,Parti radical de gauche,Alliance radicale européenne,explicite,| affi européenne     = [[Alliance radicale européenne|ARE]] <small>(1994-1999)</small>,fr:Parti radical de gauche
 Q5291,Q15081858,2014,toujours membre,unknown,wikidata,Parti pirate,Parti pirate européen,explicite,| affi européenne     = [[Parti pirate européen]],fr:Parti pirate (France)
-Q5291,Q170,2010,2024,known,citation,Parti pirate,Parti pirate international,explicite,| affi internationale = [[Parti pirate international]] (2010-2024),fr:Parti pirate (France)
+Q5291,Q170,2010,toujours membre,known,tableau,Parti pirate,Parti pirate international,explicite,"[[Parti pirate (France)|Parti pirate]]
+|Oui
+|2010",fr:Parti pirate international
 Q538664,Q206682,1938,1944,unknown,wikipedia,Parti ouvrier internationaliste,Quatrième Internationale,explicite,| affi internationale = [[Quatrième Internationale]],fr:Parti ouvrier internationaliste
 Q58329311,Q202649,2018,toujours membre,unknown,wikidata | wikipedia,Gauche républicaine et socialiste,Parti de la gauche européenne,explicite,| affi européenne     = [[Parti de la gauche européenne]],fr:Gauche républicaine et socialiste
 Q58366009,Q220945,2018,toujours membre,unknown,wikidata | wikipedia,Place publique (parti politique),Parti socialiste européen,explicite,| affi européenne     = [[Parti socialiste européen]],fr:Place publique (parti politique)
@@ -64,3 +73,19 @@ Q922707,Q753711,2008,toujours membre,unknown,wikidata | wikipedia,Parti de gauch
 Q924501,Q639383,1981,toujours membre,unknown,wikidata,Sabaudia-MRS,Alliance libre européenne,explicite,| affi européenne   = [[Alliance libre européenne]]<br>[[Régions et peuples solidaires]],fr:Sabaudia - Mouvement Région Savoie
 fr:Parti communiste révolutionnaire (2024),fr:Internationale communiste révolutionnaire (2024),2024,,unknown,manuel,Parti communiste révolutionnaire,Internationale communiste révolutionnaire,manuel,"fr:Internationale communiste révolutionnaire, tableau des sections : « |{{drapeau|France}} [[France]] » puis « |Parti communiste révolutionnaire »",data/manuel/aretes_manuelles.csv
 fr:Révolution (Tendance marxiste internationale),Q1631185,1995,2024,unknown,manuel,Révolution,Tendance marxiste internationale,manuel,"fr:Militant tendency : « La [[Tendance marxiste internationale]], dont la section française est Révolution. »",data/manuel/aretes_manuelles.csv
+Q192821,Q163931,1921,1943,known,tableau,Parti communiste français,Internationale communiste,explicite,"[[French Communist Party]] (PCF)
+| 1921–1943",en:Communist International
+Q2379359,Q188592,1902,1905,known,tableau,Parti socialiste français (1902),Internationale ouvrière,explicite,"[[French Socialist Party (1902)|French Socialist Party]] (PSF)
+| 1902–1905",en:Second International
+Q2451197,Q188592,1889,1902,known,tableau,Parti ouvrier français,Internationale ouvrière,explicite,"[[French Workers' Party]] (POF)
+| 1889–1902",en:Second International
+Q2705289,Q188592,1890,1902,known,tableau,Parti ouvrier socialiste révolutionnaire,Internationale ouvrière,explicite,"[[Revolutionary Socialist Workers' Party (France)|Revolutionary Socialist Workers' Party]] (POSR)
+| 1890–1902",en:Second International
+Q3091718,Q188592,1889,1902,known,tableau,Fédération des travailleurs socialistes de France,Internationale ouvrière,explicite,"[[Federation of the Socialist Workers of France]] (FTSF)
+| 1889–1902",en:Second International
+Q3176156,Q188592,1902,1905,known,tableau,Parti socialiste de France (guesdiste),Internationale ouvrière,explicite,"[[Socialist Party of France (1902)|Socialist Party of France]] (PSdF)
+| 1902–1905",en:Second International
+Q3487413,Q188592,1893,1902,known,tableau,Socialistes indépendants,Internationale ouvrière,explicite,"[[Independent Socialists (France)|Independent Socialists]]
+| 1893–1902",en:Second International
+Q928279,Q188592,1889,1902,known,tableau,Comité révolutionnaire central,Internationale ouvrière,explicite,"[[Central Revolutionary Committee]] (CRC) / [[Socialist Revolutionary Party (France)|Socialist Revolutionary Party]] (PSR)
+| 1889–1902",en:Second International
