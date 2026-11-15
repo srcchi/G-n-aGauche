@@ -5,8 +5,8 @@
 |---|---|
 | Wikidata (noeuds.csv) | 1549 |
 | Wikipédia (wp_noeuds.csv) | 524 |
-| Après fusion par identifiant (+ corrections) | 1891 |
-| **Graphe : organisations de gauche françaises datées** (organisations.csv) | **385** |
+| Après fusion par identifiant (+ corrections) | 1892 |
+| **Graphe : organisations de gauche françaises datées** (organisations.csv) | **386** |
 | Graphe, sans date de fondation (sans_date.csv) | 61 |
 | Internationales et fédérations européennes gardées (internationales.csv) | 39 |
 | Exclues (perimetre_exclu.csv) | 1345 |
@@ -14,7 +14,7 @@
 
 Raisons d'exclusion : ni positionnement de gauche ni courant reconnu (819), hors de France (177), pas une organisation politique (journal, librairie, think tank...) (113), Internationale sans membre dans le graphe (88), pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire) (68), positionnement : extrême droite (13), idéologie hors périmètre : fascis (9), positionnement : centrisme (8), positionnement : droite (7), positionnement : centre droit (6), idéologie hors périmètre : monarchi (5), personne, pas organisation (5), positionnement : centrisme centre droit (4), idéologie hors périmètre : royalis (3), idéologie hors périmètre : anti-indépendantis (2), idéologie hors périmètre : orléanis (2), idéologie hors périmètre : social-national (2), positionnement : centre droit centrisme (2), positionnement : centre gauche centre droit centrisme (2), positionnement : droite centre droit (2), idéologie hors périmètre : Algérie française (1), idéologie hors périmètre : Anti-indépendantis (1), idéologie hors périmètre : national-socialis (1), positionnement : centre gauche centre droit (1), positionnement : centrisme Centrisme politique en France | centre gauche | centre droit (1), positionnement : droite extrême droite extrême droite politique (1), positionnement : extrême droite anticommunisme national-conservatisme opposition à l'immigration euroscepticisme populisme de droite ultranationalisme (1), positionnement : ultradroite (1).
 
-Familles : socialistes (100), radicaux (8), écologistes (29), communistes (45), trotskystes (44), maoïstes (38), anarchistes et libertaires (36), à classer (85).
+Familles : socialistes (100), radicaux (8), écologistes (29), communistes (45), trotskystes (45), maoïstes (38), anarchistes et libertaires (36), à classer (85).
 
 Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à trancher à la main :
 - aucun courant reconnu (41) : 2022 ou jamais, Allons enfants, Association des écrivains et artistes révolutionnaires, Bloc révolutionnaire insurrectionnel et féministe, Camarades, Cap sur l'avenir, Catalan Workers' Left, Club des jacobins, Collectif Golem, Comité de suivi contre les violences sexistes et sexuelles de La France insoumise, Conseil pour le maintien des occupations, Coordination des sans-abris, Dynamik unitaire Sud, Fièr-e-s et révolutionnaires, Front universitaire antifasciste, Gauche révolutionnaire (1935-1938), Indulgents, Jeune Garde antifasciste, Juives et Juifs révolutionnaires, La France Républicaine et Solidaire, La Gauche moderne, Le Discord insoumis, Les Nouveaux Démocrates, Ligue de la Jeune République, Maintenant le peuple, Mouvement du 11 mai, Mouvement jeune révolution, National Union of North African Muslims, Nouvel élan pour Mayotte, Nouvelle force de Guyane, Parti frontiste, Parti ouvrier et paysan, Rassemblement des gauches républicaines, Rassemblement démocratique océanien, Société des républicaines révolutionnaires, Union des clubs pour le renouveau de la gauche, Union des démocrates musulmans français, Union progressiste, Unir et Construire dans le Renouveau, À gauche en Guyane, Éducation Démocratie Dignité
@@ -31,38 +31,38 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Après fusion par (ancêtre, descendant) | 1812 |
 | Corrections manuelles : ajouts / suppressions | 7 / 0 |
 | Paires réciproques fusionnées (aretes_reciproques.csv) | 39 |
-| Après fusion des réciproques | 1792, dont 1045 de lignée |
+| Après fusion des réciproques | 1793, dont 1046 de lignée |
 | Hors périmètre : une extrémité exclue ou étrangère (liens_hors_perimetre.csv) | 1408 |
-| Anomalies R1 et lignée parti / Internationale (anomalies.csv) | 9 |
+| Anomalies R1 et lignée parti / Internationale (anomalies.csv) | 8 |
 | Extrémité sans date, non dessinables (liens_date_manquante.csv) | 21 |
-| Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 2 |
-| **Liens du graphe (liens.csv)** | **153** |
+| Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 3 |
+| **Liens du graphe (liens.csv)** | **154** |
 | Affiliations à une Internationale (affiliations.csv) | 66 |
 | Appartenances à une organisation française : coalition, fédération (appartenances_nationales.csv) | 73 |
 
-Liens par relation : scission (74), renommage (39), fusion (27), composante (5), absorption (4), refondation (3), passage (1).
+Liens par relation : scission (75), renommage (41), fusion (27), composante (5), absorption (4), passage (1), refondation (1).
 Les liens entre deux organisations fondées la même année (mois inconnus) sont dans anomalies.csv :
 leur longueur sur l'axe du temps serait nulle (règle R1).
 
-Causes probables des anomalies : date erronée ou trop imprécise (4), type de relation erroné (3), lien entre deux Internationales de sens contraire au temps (2).
+Causes probables des anomalies : date erronée ou trop imprécise (3), type de relation erroné (3), lien entre deux Internationales de sens contraire au temps (2).
 
 Dates : 103 fondations et 38 dissolutions avec un mois (lu dans l'infobox, seulement s'il accompagne l'année retenue).
-12 organisations ont une autre année de fondation dans une autre source (colonne fondation_autres_sources).
+13 organisations ont une autre année de fondation dans une autre source (colonne fondation_autres_sources).
 
 Affiliations : toutes en date_certainty = unknown (les sources ne donnent pas la période d'adhésion).
 Période recopiée : durée de vie du parti, bornée par celle de l'Internationale.
 
-Sigles (data/manuel/sigles.csv) : 549 organisations, dont 75 avec un sigle ; 0 ajoutées à cette exécution.
+Sigles (data/manuel/sigles.csv) : 550 organisations, dont 76 avec un sigle ; 0 ajoutées à cette exécution.
 
 ## Liens validés à la main
 - Candidats de la phase 0 acceptés (decision = oui) : 0
   (dont 0 ignorés car leur sens est « à vérifier »).
-- Liens manuels (data/manuel/aretes_manuelles.csv) : 14 ajoutés,
+- Liens manuels (data/manuel/aretes_manuelles.csv) : 16 ajoutés,
   2 ignorés (source, type ou extrémité manquant).
 
 ## Types (data/manuel/types.csv)
-parti 432, coalition 35, satellite 26, internationale 127, fondatrice 14, étrangère 177.
-0 types saisis à la main, 0 lignes ajoutées au fichier.
+parti 433, coalition 35, satellite 26, internationale 127, fondatrice 14, étrangère 177.
+0 types saisis à la main, 1 lignes ajoutées au fichier.
 Coalitions et satellites ne sont jamais des boîtes ; un satellite rattaché à un parent apparaît
 dans la colonne organisations_liees de ce parent.
 
@@ -71,7 +71,7 @@ dans la colonne organisations_liees de ce parent.
 - Actives retenues : 69.
 
 ## Élagage strict (R5)
-- **Gardées : 92 organisations** (actives ayant un lien de lignée, et leurs ancêtres),
+- **Gardées : 93 organisations** (actives ayant un lien de lignée, et leurs ancêtres),
   dont 0 sans date.
 - Élaguées (data/sortie/elagues.csv), par cause : etrangere 177, a_dater 170, isolee 97, famille_non_determinee 54, coalition 35, satellite 26, non_ancetre_d_une_active 19, hors_perimetre 7, rejet_porte 4, arbre_sans_organisation_active 3.
 - **Actives élaguées faute de lien (29)**, à relier à la main puis relancer :

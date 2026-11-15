@@ -291,7 +291,7 @@ Q3366315,PDS,article,Parti de la démocratie socialiste (France),
 Q3091692,PNO,article,Parti de la nation occitane,
 Q3366347,PLK,acronyme du nom,Parti de libération kanak,
 Q628594,PT (1991),sigles.csv + année (homonyme),"Parti des travailleurs (France, 1991)",oui
-Q24939885,PT (2015),sigles.csv + année (homonyme),"Parti des travailleurs (France, 2015)",oui
+Q24939885,PT (2023),sigles.csv + année (homonyme),"Parti des travailleurs (France, 2015)",oui
 Q3366460,Parti frontiste,nom court,Parti frontiste,
 Q111187255,Parti lorrain,nom court,Parti lorrain,
 Q3141006,PNB (1931),acronyme du nom + année (homonyme),Parti national breton,
@@ -302,7 +302,8 @@ Q135902867,Parti ouvrier,nom court,Parti ouvrier (1914),
 Q3366567,POP,article,Parti ouvrier et paysan,
 Q3366562,POPF,article,Parti ouvrier et paysan français,
 Q2451197,POF,sigles.csv,Parti ouvrier français,oui
-Q2638999,POI (2015),sigles.csv + année (homonyme),Parti ouvrier indépendant,oui
+Q2638999,POI (2008),sigles.csv + année (homonyme),Parti ouvrier indépendant,oui
+fr:Parti ouvrier indépendant démocratique,POID,sigles.csv,Parti ouvrier indépendant démocratique,oui
 Q538664,POI (1936),article + année (homonyme),Parti ouvrier internationaliste,oui
 Q2705289,POSR,sigles.csv,Parti ouvrier socialiste révolutionnaire,oui
 Q5291,PP (2006),article + année (homonyme),Parti pirate,
@@ -371,8 +372,8 @@ Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3477547,SUPS,acronyme du nom,Section universitaire du Parti socialiste,
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
 fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
+Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,

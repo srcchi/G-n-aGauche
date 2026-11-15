@@ -687,9 +687,15 @@ def main():
             continue
         if r["type"].strip() == "composante":
             continue                              # pas une lignée : lue avec les composantes
+        if r["type"].strip() == "supprimer":      # lien automatique erroné, retiré avec sa justification
+            for k in ((a, b), (b, a)):
+                if aretes.pop(k, None) is not None:
+                    stats["manuels_supprimes"] += 1
+            continue
         t = TYPE_LIEN_MANUEL.get(r["type"].strip(), "filiation")
         aretes[(a, b)] = dict(type=t, sources={"manuel"}, relations={r["type"].strip()},
-                              date=r.get("date_evenement", "").strip(), source_manuelle=src)
+                              date=r.get("date_evenement", "").strip(), source_manuelle=src,
+                              type_manuel=r["type"].strip())      # gardé à part : relations est un ensemble
         for x in (a, b):
             noeuds.setdefault(x, None)
         stats["manuels_ajoutes"] += 1
@@ -728,6 +734,9 @@ def main():
         eg, er = aretes[garde], aretes.pop(retire)
         eg["sources"] |= er["sources"]
         eg["relations"] |= er["relations"]
+        for k in ("type_manuel", "source_manuelle", "date"):     # un lien manuel garde son type et sa citation
+            if er.get(k) and not eg.get(k):
+                eg[k] = er[k]
         types = [t for t in (eg["type"], er["type"]) if t != "appartenance"] or ["appartenance"]
         eg["type"] = max(types, key=ORDRE_TYPES.index)
         eg["reciproque"] = True
@@ -846,7 +855,7 @@ def main():
     def attacher_preuve(a, b, e):
         if "manuel" in e["sources"]:
             # Le type saisi à la main est retenu tel quel (renommage, refondation, fusion...)
-            typ = next(iter(e["relations"]), "")
+            typ = e.get("type_manuel", "")
             e["preuve"] = dict(preuve="manuel", citation=e.get("source_manuelle", ""),
                                source="data/manuel/aretes_manuelles.csv",
                                indice=typ if typ in REL_LIGNEE else "")
@@ -1222,12 +1231,12 @@ def main():
     pred, scissions_inter, info_succ = defaultdict(list), defaultdict(list), {}
     for a, b, t, e in inter_lignee:
         da, db = debut(a), debut(b)
-        if "manuel" in e["sources"] and next(iter(e["relations"]), "") in ("renommage", "fusion", "refondation"):
+        if "manuel" in e["sources"] and e.get("type_manuel", "") in ("renommage", "fusion", "refondation"):
             # Succession saisie à la main : « lang:Titre : « citation » » (citation revérifiée par verifier.py)
             m = re.fullmatch(r"\s*(\w+:[^:]+?)\s*:\s*«\s*(.+?)\s*»\s*", e.get("source_manuelle", ""), re.S)
             if m and corpus.verifier(m.group(2), m.group(1)):
                 pred[b].append(a)
-                info_succ[b] = (next(iter(e["relations"])), dict(citation=m.group(2), source=m.group(1)))
+                info_succ[b] = (e.get("type_manuel", ""), dict(citation=m.group(2), source=m.group(1)))
             else:
                 stats["successions_manuelles_sans_citation"] = stats.get("successions_manuelles_sans_citation", 0) + 1
             continue
