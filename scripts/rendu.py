@@ -323,7 +323,12 @@ def charger():
             vus.add(i)
             i = inter[i]["pred"][0]
         return i
-    affichees = sorted({a["international_id"] for o in orgs.values() for a in o["affil"]},
+    # Internationales dessinées en barres (origines.csv, style = internationale) : même style que les
+    # bandes, couleur de leur lignée d'Internationales (l'IO a la couleur de l'IS sous le PS)
+    barres_intl = {r["id"]: r.get("internationale", "").strip() for r in lire_manuel("origines.csv")
+                   if r.get("style", "").strip() == "internationale" and r["id"] in orgs}
+    affichees = sorted({a["international_id"] for o in orgs.values() for a in o["affil"]}
+                       | {i for i in barres_intl.values() if i in inter},
                        key=lambda i: (inter[i]["debut"] or "9999", inter[i]["nom"]))
     couleur_lignee = {}
     for i in affichees:
@@ -335,6 +340,13 @@ def charger():
     for d in inter.values():
         d.setdefault("couleur", "#BBBBBB")
         d.setdefault("motif", False)
+    # Les AIT (1864, anti-autoritaire, 1922), sans Internationale de référence : une couleur commune,
+    # la suivante de la palette
+    prises = {c for c, _m in couleur_lignee.values()}
+    couleur_ait = next((c for c in PALETTE_INTER if c not in prises), "#EE3377")
+    for q, i in barres_intl.items():
+        orgs[q]["style_intl"] = True
+        orgs[q]["couleur"] = inter[i]["couleur"] if i in inter else couleur_ait
     # Infobulles : liens (type, preuve, citation complète) et affiliations (dates)
     for l in liens:
         for q, autre, sens in ((l["a"], l["b"], "vers"), (l["b"], l["a"], "depuis")):
@@ -1257,8 +1269,10 @@ def dessiner(m, avec_cle=True, apercu=False):
         fin = "actif" if o["statut"].startswith("actif") else f"{o['t1']:.4f}"
         bas.append(f'<rect class="barre" data-id="{esc(o["id"])}" data-debut="{o["t0"]:.4f}" data-fin="{fin}" '
                    f'data-statut="{o["statut"]}" data-majeure="{"oui" if o["majeure"] else ""}" x="{x0:.2f}" '
-                   f'y="{yb:.2f}" width="{x1 - x0:.2f}" height="{BAR_H}" rx="{0 if o["x1_vis"] > x1 else 3}" '
-                   f'fill="{o["couleur"]}"/>')
+                   f'y="{yb:.2f}" width="{x1 - x0:.2f}" height="{BAR_H}" rx="{0 if o["x1_vis"] > x1 else (2 if o.get("style_intl") else 3)}" '
+                   f'fill="{o["couleur"]}"'
+                   + (' stroke="#333333" stroke-width="0.8" data-style="internationale"' if o.get("style_intl") else "")
+                   + '/>')
         if o["x1_vis"] > x1:
             bas.append(f'<rect class="fin-ouverte" x="{x1:.2f}" y="{yb:.2f}" width="{o["x1_vis"] - x1:.2f}" '
                        f'height="{BAR_H}" fill="url(#g-{o["couleur"][1:]})"/>')
@@ -1460,6 +1474,11 @@ def legende(m, apercu):
             t = "bande hachurée : affiliation citée, dates exactes inconnues (au plus la période commune)"
             x0 = place(46 + larg(t, FS))
             el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="url(#h-332288)" stroke="#333333" '
+                      f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
+        if any(o.get("style_intl") for o in m["items"].values()):
+            t = "barre cernée : une Internationale (AIT, IO, IC…), sa section française collée par un trait"
+            x0 = place(46 + larg(t, FS))
+            el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="#EE3377" stroke="#333333" '
                       f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
     return "".join(el) + "</g>"
 
