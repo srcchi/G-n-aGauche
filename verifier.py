@@ -204,7 +204,7 @@ def verifier_svg(chemin, cpt, err):
             if not (-1 <= b2[0] - (b1[0] + b1[2]) <= 10):
                 faute("R4 textes", f"renvois de {q} pas contigus")
         for b_, txt, a, b in rs:
-            if a and b and a in majeures and b in majeures and not vue_famille:
+            if a and b and a in majeures and b in majeures and not vue_famille                     and not txt.startswith(("membre de", "composante")):     # composante : pas une lignée
                 faute("liens majeurs en renvoi", f"{a} -> {b} « {txt} »")
 
     # ---------- Liens : R1, seuils, croisements ----------
@@ -223,6 +223,13 @@ def verifier_svg(chemin, cpt, err):
         reliees |= {a, b}
         traits = [p for p in g.findall(S + "path") if "trait" in p.get("class", "")]
         fleches = [p for p in g.findall(S + "polygon") if "fleche" in p.get("class", "")]
+        if g.get("data-rel") == "composante":
+            # Composante : un trait vertical sans flèche, un point à chaque bout
+            points_c = [c for c in g.findall(S + "circle") if "marque-composante" in c.get("class", "")]
+            v = nombres(traits[0].get("d")) if len(traits) == 1 else []
+            if len(traits) != 1 or fleches or len(points_c) != 2 or len(v) != 4 or abs(v[0] - v[2]) > 1e-6:
+                faute("R1", f"{a}->{b} : composante mal dessinée")
+            continue
         if len(traits) != 1 or len(fleches) != 1:
             faute("R1", f"{a}->{b} : tracé ou flèche manquant")
             continue

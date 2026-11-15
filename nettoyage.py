@@ -1554,6 +1554,40 @@ def main():
                              lab(a), lab(b), p.get("preuve", ""), p.get("citation", ""), p.get("source", ""),
                              e.get("intermediaire", ""), lab(e["intermediaire"]) if e.get("intermediaire") else "",
                              e.get("preuve2", {}).get("citation", ""), e.get("preuve2", {}).get("source", "")])
+    # Composantes : une organisation de l'arbre membre d'une autre organisation de l'arbre (ex. PG et
+    # POI dans LFI). Pas une lignée : un trait « collé » sans flèche, à la date où les deux existent.
+    # Citation tirée de l'article du membre lui-même (comme R7), explicite seulement.
+    vus_comp = set()
+    for a, _la, b, _lb, _src in nationales:
+        if a == b or (a, b) in vus_comp or a not in garde or b not in garde or a in sans_date or b in sans_date:
+            continue
+        p = preuves.preuve_affiliation(corpus, a, b)
+        if not p or p["preuve"] != "explicite":
+            continue
+        # Période écrite après le lien dans l'infobox : « [[Front de gauche]] <small>(2008-2016)</small> ».
+        # Une période finie avant la fondation du membre (ex. GDS : « LCR (1975-1994) », passé de ses
+        # fondateurs) n'est pas une appartenance de l'organisation.
+        debut_p = fin_p = None
+        lang = p["source"].split(":", 1)[0]
+        for morceau in re.split(r"<br\s*/?>", p["citation"]):
+            if any(corpus.resoudre(lang, m.group(1)) == b for m in preuves.RX_LIEN.finditer(morceau)):
+                m = re.search(r"\(\s*(?:depuis\s+)?(1[89]\d\d|20\d\d)\s*(?:[-–]\s*(1[89]\d\d|20\d\d))?", morceau)
+                if m:
+                    debut_p, fin_p = int(m.group(1)), int(m.group(2)) if m.group(2) else None
+                break
+        f_a = noeuds[a]["dissolution"] or noeuds[a]["fin_deduite"] or 9999
+        if fin_p and fin_p < noeuds[a]["fondation"]:
+            continue
+        vus_comp.add((a, b))
+        an = max(noeuds[a]["fondation"], noeuds[b]["fondation"], debut_p or 0)
+        if an > min(f_a, noeuds[b]["dissolution"] or noeuds[b]["fin_deduite"] or 9999):
+            vus_comp.discard((a, b))
+            continue
+        mois = (noeuds[b]["fondation_mois"] if an == noeuds[b]["fondation"] else
+                noeuds[a]["fondation_mois"] if an == noeuds[a]["fondation"] else "")
+        lignes_liens.append([a, b, "composante", an, mois or "", "", "", "wikipedia", "membre de",
+                             lab(a), lab(b), p["preuve"], p["citation"], p["source"], "", "", "", ""])
+    stats["composantes"] = len(vus_comp)
     ecrire("liens.csv", ["source", "cible", "relation", "date_evenement", "date_evenement_mois",
                          "meme_annee", "fusion_reciproque", "sources", "relations_brutes",
                          "source_nom", "cible_nom", "preuve", "citation", "source_citation", "intermediaire",

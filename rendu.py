@@ -78,16 +78,17 @@ STYLE_LIEN = {
     "filiation_idéologique": dict(couleur="#7F7F7F", dash="2 3", w=1.4, nom="filiation idéologique"),
     "indirect": dict(couleur="#7F7F7F", dash="1 4", w=1.6, nom="lien indirect (par une organisation étrangère)"),
     "passage": dict(couleur="#2471A3", dash="1.5 3", w=1.2, nom="passage de militants"),
+    "composante": dict(couleur="#3D3D3D", dash="", w=3.2, nom="composante (membre de, sans fusion)"),
 }
 MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."]
 RENVOI_MOT = {"scission": "scission de", "absorption": "absorbe", "fusion": "issu de", "renommage": "issu de",
               "refondation": "refondation de", "filiation_idéologique": "filiation de", "passage": "militants de",
-              "indirect": "issu de"}
+              "indirect": "issu de", "composante": "composante :"}
 # Côté source, le renvoi est écrit avant la barre : le verbe dit le sens (« absorbé par LCR »,
 # pas « → LCR » qui se lit comme une origine).
 RENVOI_SORTANT = {"scission": "scission :", "absorption": "absorbé par", "fusion": "fusionne dans",
                   "renommage": "devient", "refondation": "refondé en", "filiation_idéologique": "inspire",
-                  "passage": "militants vers", "indirect": "→"}
+                  "passage": "militants vers", "indirect": "→", "composante": "membre de"}
 MOTS_VIDES = {"de", "la", "le", "les", "des", "du", "pour", "l", "d", "et", "à", "en", "contre", "sur", "au", "aux",
               "envers", "un", "une"}
 
@@ -439,12 +440,14 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     ech = Echelle([o["t0"] for o in items.values()], T_AUJ)
     rang_voie = {v: i for i, v in enumerate(voies_ordre)}
     preparer(items, inter, ech, T_AUJ)
-    majeur = lambda l: items[l["a"]]["majeure"] and items[l["b"]]["majeure"]
+    for l in liens:
+        l["x_t"] = ech.X(l["t"])
+    majeur = lambda l: items[l["a"]]["majeure"] and items[l["b"]]["majeure"] and l["rel"] != "composante"
     # Un lien qui part pendant la zone de l'étiquette (scission peu après la fondation) : l'étiquette
     # passe juste avant la barre, pour que le départ et son cercle restent à la date exacte (2.4, 2.6).
     for l in liens:
         a = items.get(l["a"])
-        if a and a["tag_dedans"] and l["rel"] != "absorption" and l["b"] in items:
+        if a and a["tag_dedans"] and l["rel"] not in ("absorption", "composante") and l["b"] in items:
             if ech.X(l["t"]) - GOUTTIERE < a["x0"] + a["tag_w"]:
                 a["tag_dedans"] = False
 
@@ -462,6 +465,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
                 and sum(1 for x in par_source[l["a"]] if x["rel"] == "renommage") == 1):
             continuations.add((l["a"], l["b"]))
 
+    collages = [(l["a"], l["b"]) for l in liens if l["rel"] == "composante" and l["a"] in items and l["b"] in items]
     force, anomalies, traces = set(), [], []
     for _tour in range(4):
       for _ in range(30):
@@ -484,19 +488,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
               else:
                   poly.append(dict(l, majeur=False))
           renvoyer(items, orgs, renvois)
-          entrants = defaultdict(list)
-          for l in poly:
-              if l["rel"] != "absorption":
-                  entrants[l["b"]].append(l)
-          for o in items.values():
-              o["gauche_lien"] = (GOUTTIERE + 6) if entrants.get(o["id"]) else 0
-              gauche = o["x0"] - o["gauche_lien"]
-              o["tag_x"] = o["x0"] + TAG_PAD if o["tag_dedans"] else gauche - o["tag_w"]
-              bord = gauche if o["tag_dedans"] else o["tag_x"]
-              o["renv_x"] = bord - o["w_renv"]
-              o["L"] = min(bord, o["renv_x"]) - 1
-              o["R"] = o["x1_vis"] + 1
-          rangees = placer(items, voies_ordre, poly, continuations)
+          bornes(items, poly)
+          rangees = placer(items, voies_ordre, poly, continuations, collages)
           # Continuations qui n'ont pas pu rester sur la même rangée, ou dont le successeur porte des
           # renvois (ils seraient entre la fin et la suite) : lien dessiné normal
           ratees = {(a, b) for a, b in continuations
@@ -532,11 +525,192 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
       if not fautifs - force:
           break
       force |= fautifs
+    if not voies_voulues:
+        poly, renvois, geo = repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, collages)
+        boites = boites_obstacles(items)
+        traces = [t for t in (router(l, items, boites, rang_voie, poly) for l in poly) if t]
     cle = cle_donnees(items, inter)
     largeur = max([o["R"] for o in items.values()] + [ech.X(ech.T1)]) + 40
     return dict(items=items, traces=traces, renvois=renvois, continuations=continuations, ech=ech, T_AUJ=T_AUJ,
                 largeur=largeur, cle=cle, inter=inter, titre=titre, anomalies=anomalies,
                 rels=sorted({t["rel"] for t in traces} | ({"renommage"} if continuations else set())), **geo)
+
+
+def bornes(items, poly):
+    """Emprise horizontale de chaque barre : couloir d'arrivée, étiquette avant la barre, renvois."""
+    entrants = defaultdict(list)
+    for l in poly:
+        if l["rel"] not in ("absorption", "composante"):
+            entrants[l["b"]].append(l)
+    for o in items.values():
+        o["gauche_lien"] = (GOUTTIERE + 6) if entrants.get(o["id"]) else 0
+        gauche = o["x0"] - o["gauche_lien"]
+        o["tag_x"] = o["x0"] + TAG_PAD if o["tag_dedans"] else gauche - o["tag_w"]
+        bord = gauche if o["tag_dedans"] else o["tag_x"]
+        o["renv_x"] = bord - o["w_renv"]
+        o["L"] = min(bord, o["renv_x"]) - 1
+        o["R"] = o["x1_vis"] + 1
+
+
+def renumeroter(items, voies_ordre, rangees):
+    g = 0
+    for v in voies_ordre:
+        if v not in rangees:
+            continue
+        for r, contenu in enumerate(rangees[v]["rangees"]):
+            for q in contenu:
+                items[q]["rang_g"], items[q]["rang_l"] = g + r, r
+        g += len(rangees[v]["rangees"])
+
+
+def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, collages=(), budget=150):
+    """Avant de laisser un lien en renvoi écrit, on essaie de le dessiner : tel quel, puis en
+    déplaçant une de ses deux barres vers une rangée voisine de l'autre (dans une rangée où elle
+    tient, ou une nouvelle rangée). Un essai n'est gardé que si tous les liens dessinés restent sans
+    croisement et sous le seuil de rangées. Les composantes (PG et LFI...) passent en premier."""
+    import time
+    debut = time.time()
+
+    def chevauchement():
+        for v in voies_ordre:
+            for contenu in rangees.get(v, {}).get("rangees", []):
+                bs = sorted((items[q]["L"], items[q]["R"]) for q in contenu)
+                if any(b1[1] + GAP > b2[0] for b1, b2 in zip(bs, bs[1:])):
+                    return True
+        return False
+
+    def valide(p2):
+        renumeroter(items, voies_ordre, rangees)
+        geo = ordonnees(items, voies_ordre, rangees, ech)
+        boites = boites_obstacles(items)
+        for l in p2:
+            t = router(l, items, boites, rang_voie, p2)
+            if t is None or t["croisements"] or (not l["majeur"] and (
+                    t["rangs"] > SEUIL_RANGS or t["annees"] > SEUIL_ANNEES or t["voies"] > SEUIL_VOIES)):
+                return None
+        return geo
+
+    renumeroter(items, voies_ordre, rangees)
+    geo = ordonnees(items, voies_ordre, rangees, ech)
+    cands = [r for r in renvois if r.get("raison") == "trop long ou croisement"
+             and r["a"] in items and r["b"] in items
+             and abs(rang_voie[items[r["a"]]["voie"]] - rang_voie[items[r["b"]]["voie"]]) <= SEUIL_VOIES]
+    cands.sort(key=lambda r: (r["rel"] != "composante", abs(items[r["a"]]["rang_g"] - items[r["b"]]["rang_g"])))
+    for l in cands:
+        if time.time() - debut > budget:
+            break
+        p2 = poly + [dict(l, majeur=False)]
+        r2 = [r for r in renvois if r is not l]
+        def options_barre(q, autre):
+            v = items[q]["voie"]
+            lignes = rangees[v]["rangees"]
+            if items[autre]["voie"] == v:
+                ra = next(i for i, c in enumerate(lignes) if autre in c)
+                return [(q, "dans", r) for r in (ra - 1, ra + 1) if 0 <= r < len(lignes)] +                        [(q, "nouvelle", r) for r in (ra, ra + 1)]
+            haut = voies_ordre.index(items[autre]["voie"]) < voies_ordre.index(v)
+            return [(q, "dans", 0 if haut else len(lignes) - 1), (q, "nouvelle", 0 if haut else len(lignes))]
+
+        def bouger_barre(q, sorte, r):
+            lignes = rangees[items[q]["voie"]]["rangees"]
+            r0 = next(i for i, c in enumerate(lignes) if q in c)
+            if sorte == "dans" and (r == r0 or r >= len(lignes)):
+                return False
+            lignes[r0].remove(q)
+            if sorte == "dans":
+                lignes[r].append(q)
+            else:
+                lignes.insert(min(r, len(lignes)), [q])
+            lignes[:] = [c for c in lignes if c]
+            return True
+
+        def rangs_du_bloc(q, p_):
+            """Rangées du groupe d'organisations reliées à q (liens dessinés et composantes de sa voie),
+            si elles sont contiguës."""
+            v = items[q]["voie"]
+            adj = defaultdict(set)
+            for x in p_:
+                if items[x["a"]]["voie"] == v == items[x["b"]]["voie"]:
+                    adj[x["a"]].add(x["b"]); adj[x["b"]].add(x["a"])
+            for x, y in collages:
+                if items[x]["voie"] == v == items[y]["voie"]:
+                    adj[x].add(y); adj[y].add(x)
+            comp, pile = set(), [q]
+            while pile:
+                x = pile.pop()
+                if x not in comp:
+                    comp.add(x)
+                    pile.extend(adj[x])
+            lignes = rangees[v]["rangees"]
+            rs = sorted({i for i, c in enumerate(lignes) if set(c) & comp})
+            if rs != list(range(rs[0], rs[-1] + 1)) or any(set(lignes[i]) - comp for i in rs):
+                return None
+            return rs
+
+        def options_bloc(q, autre):
+            """Déplacer tout le groupe de q contre le groupe de l'autre extrémité (ou en haut / en bas
+            de la voie, si l'autre est dans une autre voie)."""
+            v = items[q]["voie"]
+            rq = rangs_du_bloc(q, poly)
+            if not rq:
+                return []
+            if items[autre]["voie"] != v:
+                haut = voies_ordre.index(items[autre]["voie"]) < voies_ordre.index(v)
+                return [(v, rq, "haut" if haut else "bas", None)]
+            ra = rangs_du_bloc(autre, poly)
+            if not ra or set(ra) & set(rq):
+                return []
+            return [(v, rq, "avant", autre), (v, rq, "apres", autre)]
+
+        def bouger_bloc(v, rq, ou, autre):
+            lignes = rangees[v]["rangees"]
+            bloc = [lignes[i] for i in rq]
+            reste = [c for i, c in enumerate(lignes) if i not in set(rq)]
+            if ou == "haut":
+                k = 0
+            elif ou == "bas":
+                k = len(reste)
+            else:
+                ia = [i for i, c in enumerate(reste) if autre in c][0]
+                ra = rangs_du_bloc(autre, poly)
+                deb = ia - (next(i for i, r in enumerate(ra) if autre in lignes[r]))
+                k = deb if ou == "avant" else deb + len(ra)
+            lignes[:] = reste[:k] + bloc + reste[k:]
+            return True
+
+        def essayer():
+            renvoyer(items, orgs, r2)
+            bornes(items, p2)
+            return None if chevauchement() else valide(p2)
+
+        trouve = None
+        avant = [None] + [b for q, autre in ((l["a"], l["b"]), (l["b"], l["a"])) for b in options_bloc(q, autre)]
+        for pre in avant:
+            if trouve is not None or time.time() - debut > budget:
+                break
+            sauvegarde = {v: [list(c) for c in rangees[v]["rangees"]] for v in rangees}
+            if pre:
+                bouger_bloc(*pre)
+            etat = {v: [list(c) for c in rangees[v]["rangees"]] for v in rangees}
+            barres = [None] + [o for q, autre in ((l["a"], l["b"]), (l["b"], l["a"])) for o in options_barre(q, autre)]
+            for essai in barres:
+                if essai and not bouger_barre(*essai):
+                    continue
+                g2 = essayer()
+                if g2 is not None:
+                    trouve = g2
+                    break
+                for v, ls in etat.items():
+                    rangees[v]["rangees"][:] = [list(c) for c in ls]
+            if trouve is None:
+                for v, ls in sauvegarde.items():
+                    rangees[v]["rangees"][:] = ls
+        if trouve is not None:
+            poly, renvois, geo = p2, r2, trouve
+        renvoyer(items, orgs, renvois)
+        bornes(items, poly)
+    renumeroter(items, voies_ordre, rangees)
+    geo = ordonnees(items, voies_ordre, rangees, ech)
+    return poly, renvois, geo
 
 
 def renvoyer(items, orgs, renvois):
@@ -559,7 +733,7 @@ def renvoyer(items, orgs, renvois):
         o["w_renv"] = sum(larg(t, FS) + 6 for t, *_ in o["renv"])
 
 
-def placer(items, voies_ordre, poly, continuations):
+def placer(items, voies_ordre, poly, continuations, collages=()):
     """Rangées (2.2, 2.3) : un bloc contigu par arbre, placé en profondeur, enfants du plus récent au
     plus ancien ; une rangée est choisie d'abord pour ne créer aucun croisement. Barres à renvois
     seuls en bas de la voie, sans écart supplémentaire."""
@@ -573,6 +747,15 @@ def placer(items, voies_ordre, poly, continuations):
     for a, b in continuations:
         voisins[a].add(b)
         voisins[b].add(a)
+    # Composantes (PG dans LFI...) : toujours voisines, même quand leur trait n'a pas encore pu être
+    # dessiné ; sans cela, l'abandon du trait les éloigne et il ne peut plus jamais être dessiné.
+    deja = {(l["a"], l["b"]) for l in poly}
+    for a, b in collages:
+        if items[a]["voie"] == items[b]["voie"]:
+            voisins[a].add(b)
+            voisins[b].add(a)
+            if (a, b) not in deja:
+                parents[b].append(dict(a=a, b=b, rel="composante"))
     cont_parent = {b: a for a, b in continuations}
     res, rang_global = {}, 0
     for v in voies_ordre:
@@ -615,7 +798,7 @@ def placer(items, voies_ordre, poly, continuations):
             for l in poly:
                 if l["a"] in bloc and l["b"] in bloc:
                     enfants_v[l["a"]].append(l["b"])
-            for a_, b_ in continuations:
+            for a_, b_ in list(continuations) + [c for c in collages if (c[0], c[1]) not in deja]:
                 if a_ in bloc and b_ in bloc:
                     enfants_v[a_].append(b_)
             dans = set(bloc)
@@ -836,7 +1019,19 @@ def router(l, items, boites, rang_voie, poly):
         y_arr = b["y_c"] - BAR_H / 2 - 1 if bas else b["y_c"] + b["bas"] + 1
         pts = [(xs, y_dep), (xs, y_arr), (xt, y_arr)]
         return trace(l, a, b, pts, None, boites, rang_voie)
-    normaux = sorted([x for x in poly if x["b"] == l["b"] and x["rel"] != "absorption"],
+    if l["rel"] == "composante":
+        # Trait vertical « collé » entre les deux barres, à la date où le membre rejoint l'autre
+        # (ou plus tard si une étiquette est là), sans flèche
+        bord_a = a["x0"] + (a["tag_w"] + 2 if a["tag_dedans"] else 3)
+        bord_b = b["x0"] + (b["tag_w"] + 2 if b["tag_dedans"] else 3)
+        xs = max(l["x_t"], bord_a, bord_b)
+        if a["rang_y"] == b["rang_y"] or xs > min(a["x1"], b["x1"]) - 3:
+            return None
+        bas = b["y_c"] > a["y_c"]
+        y1 = a["y_c"] + (a["bas"] if bas else -BAR_H / 2)
+        y2 = b["y_c"] - BAR_H / 2 if bas else b["y_c"] + b["bas"]
+        return trace(l, a, b, [(xs, y1), (xs, y2)], None, boites, rang_voie)
+    normaux = sorted([x for x in poly if x["b"] == l["b"] and x["rel"] not in ("absorption", "composante")],
                      key=lambda x: items[x["a"]]["y_c"])
     n, k = len(normaux), next(i for i, x in enumerate(normaux) if x["a"] == l["a"])
     off = max(-(BAR_H / 2 - 3), min(BAR_H / 2 - 3, (k - (n - 1) / 2) * 5))
@@ -1086,6 +1281,12 @@ def dessiner(m, avec_cle=True, apercu=False):
              + (f' stroke-dasharray="{st["dash"]}"' if st["dash"] else "") + "/>",
              f'<polygon class="fleche geo" data-geo=\'{json.dumps([[round(x, 2), round(y, 2), vb] for x, y in fl])}\' '
              f'points="{" ".join(f"{x:.2f},{y:.2f}" for x, y in fl)}" fill="{st["couleur"]}"/>']
+        if t["rel"] == "composante":
+            # Pas de flèche : un trait épais « collé » aux deux barres, un point à chaque bout
+            g.pop()
+            for (xc, yc), vc in ((pts[0], va), (pts[-1], vb)):
+                g.append(f'<circle class="marque-composante geo-c" cx="{xc:.2f}" cy="{yc:.2f}" r="3.2" '
+                         f'fill="{st["couleur"]}" stroke="#FFFFFF" stroke-width="1" data-voie="{vc}"/>')
         if t["rel"] == "scission" and t["depart"]:
             xs, ys = t["depart"]
             g.append(f'<circle class="marque-scission geo-c" cx="{xs:.2f}" cy="{ys:.2f}" r="3.5" fill="{st["couleur"]}" '

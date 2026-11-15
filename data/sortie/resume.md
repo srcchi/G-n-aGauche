@@ -36,11 +36,11 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Anomalies R1 et lignée parti / Internationale (anomalies.csv) | 9 |
 | Extrémité sans date, non dessinables (liens_date_manquante.csv) | 21 |
 | Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 2 |
-| **Liens du graphe (liens.csv)** | **141** |
+| **Liens du graphe (liens.csv)** | **150** |
 | Affiliations à une Internationale (affiliations.csv) | 66 |
 | Appartenances à une organisation française : coalition, fédération (appartenances_nationales.csv) | 73 |
 
-Liens par relation : scission (70), renommage (41), fusion (23), absorption (4), refondation (3).
+Liens par relation : scission (70), renommage (41), fusion (23), composante (9), absorption (4), refondation (3).
 Les liens entre deux organisations fondées la même année (mois inconnus) sont dans anomalies.csv :
 leur longueur sur l'axe du temps serait nulle (règle R1).
 
@@ -62,7 +62,7 @@ Sigles (data/manuel/sigles.csv) : 544 organisations, dont 70 avec un sigle ; 0 a
 
 ## Types (data/manuel/types.csv)
 parti 427, coalition 33, satellite 26, internationale 127, fondatrice 16, étrangère 177.
-0 types saisis à la main, 1 lignes ajoutées au fichier.
+0 types saisis à la main, 0 lignes ajoutées au fichier.
 Coalitions et satellites ne sont jamais des boîtes ; un satellite rattaché à un parent apparaît
 dans la colonne organisations_liees de ce parent.
 
