@@ -29,7 +29,8 @@ import subprocess
 import sys
 from collections import defaultdict
 
-DATA = "data"
+RACINE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DATA = os.path.join(RACINE, "data")   # ancienne version : ses fichiers sont dans data/ancien/
 PAS = 5  # largeur d'une colonne de la frise, en années
 LIGNEE = {"filiation", "scission", "passage"}
 

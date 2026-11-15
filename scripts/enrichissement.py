@@ -29,7 +29,8 @@ from urllib.parse import quote
 
 import requests
 
-DATA = "data"
+RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # racine du dépôt
+DATA = os.path.join(RACINE, "data")
 SORTIE = os.path.join(DATA, "sortie")
 MANUEL = os.path.join(DATA, "manuel")
 CACHE = os.path.join(SORTIE, "cache_enrichissement.json")

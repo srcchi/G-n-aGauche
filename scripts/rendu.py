@@ -9,8 +9,8 @@ stricte ; R6 ni coalition ni satellite ; R8 citations complètes dans les infobu
 (routage par des couloirs entre rangées) ; liens majeurs jamais en renvoi (2.5).
 
 Entrées : data/sortie/organisations.csv, liens.csv, etiquettes.csv, internationales.csv, affiliations.csv
-Sorties : data/sortie/arbre.svg (+ copie arbre.svg à la racine), arbre.html, arbre_<famille>.svg,
-          arbre_apercu.svg (si très grand), vue_internationales.svg et .html, anomalies_rendu.csv
+Sorties : arbres/arbre.svg (+ copie arbre.svg à la racine), arbre.html, arbre_<famille>.svg,
+          arbre_apercu.svg (si très grand), vue_internationales.svg et .html ; data/sortie/anomalies_rendu.csv
 
 Usage : python rendu.py      puis      python verifier.py
 """
@@ -27,7 +27,9 @@ import shutil
 import unicodedata
 from collections import Counter, defaultdict
 
-SORTIE = os.path.join("data", "sortie")
+RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # racine du dépôt
+SORTIE = os.path.join(RACINE, "data", "sortie")
+ARBRES = os.path.join(RACINE, "arbres")          # images et pages produites
 
 # ---------- Géométrie (px) ----------
 PPA = 13.0
@@ -1764,33 +1766,34 @@ HTML_VUE = r"""<!doctype html>
 
 
 def main():
+    os.makedirs(ARBRES, exist_ok=True)
     orgs, liens, inter, T_AUJ = charger()
     m = mise_en_page(orgs, liens, inter, T_AUJ)
-    with open(os.path.join(SORTIE, "arbre.svg"), "w", encoding="utf-8") as f:
+    with open(os.path.join(ARBRES, "arbre.svg"), "w", encoding="utf-8") as f:
         f.write(dessiner(m))
-    shutil.copyfile(os.path.join(SORTIE, "arbre.svg"), "arbre.svg")
-    with open(os.path.join(SORTIE, "arbre.html"), "w", encoding="utf-8") as f:
+    shutil.copyfile(os.path.join(ARBRES, "arbre.svg"), os.path.join(RACINE, "arbre.svg"))
+    with open(os.path.join(ARBRES, "arbre.html"), "w", encoding="utf-8") as f:
         f.write(page_html(m, dessiner(m, avec_cle=False)))
     grand = m["hauteur"] > 3000 or m["largeur"] > 4000
-    chemin_ap = os.path.join(SORTIE, "arbre_apercu.svg")
+    chemin_ap = os.path.join(ARBRES, "arbre_apercu.svg")
     if grand:
         with open(chemin_ap, "w", encoding="utf-8") as f:
             f.write(dessiner(m, avec_cle=False, apercu=True))
     elif os.path.exists(chemin_ap):
         os.remove(chemin_ap)
     vue = vue_internationales(m)
-    with open(os.path.join(SORTIE, "vue_internationales.svg"), "w", encoding="utf-8") as f:
+    with open(os.path.join(ARBRES, "vue_internationales.svg"), "w", encoding="utf-8") as f:
         f.write(vue)
-    with open(os.path.join(SORTIE, "vue_internationales.html"), "w", encoding="utf-8") as f:
+    with open(os.path.join(ARBRES, "vue_internationales.html"), "w", encoding="utf-8") as f:
         f.write(HTML_VUE.replace("__SVG__", vue))
-    for ancien in os.listdir(SORTIE):
+    for ancien in os.listdir(ARBRES):
         if ancien.startswith("arbre_") and ancien.endswith(".svg") and ancien != "arbre_apercu.svg":
-            os.remove(os.path.join(SORTIE, ancien))
+            os.remove(os.path.join(ARBRES, ancien))
     for k, (t, _) in FAMILLES.items():
         if any(o["voie"] == k for o in orgs.values()):
             mf = mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues={k},
                               titre=f"Généalogie de la gauche française, {t.lower()}")
-            with open(os.path.join(SORTIE, f"arbre_{slug(k)}.svg"), "w", encoding="utf-8") as f:
+            with open(os.path.join(ARBRES, f"arbre_{slug(k)}.svg"), "w", encoding="utf-8") as f:
                 f.write(dessiner(mf))
     chemin_an = os.path.join(SORTIE, "anomalies_rendu.csv")
     if m["anomalies"]:

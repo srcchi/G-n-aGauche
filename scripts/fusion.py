@@ -25,7 +25,8 @@ import time
 
 import requests
 
-DATA = "data"
+RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # racine du dépôt
+DATA = os.path.join(RACINE, "data")
 ENDPOINT = "https://query.wikidata.org/sparql"
 HEADERS = {
     "User-Agent": "arbre-gauche-fr/0.1 (https://github.com/srcchi/G-n-aGauche) python-requests",

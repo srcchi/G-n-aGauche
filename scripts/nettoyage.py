@@ -26,7 +26,8 @@ from fusion import (ANCIEN, FRANCE, HUMAIN, NON_POLITIQUE, POLITIQUE, RX_CAT_DIS
                     RX_NOM_GAUCHE)
 from fusion import INTERNATIONALE as TYPES_INTERNATIONALE
 
-DATA = "data"
+RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # racine du dépôt
+DATA = os.path.join(RACINE, "data")
 SORTIE = os.path.join(DATA, "sortie")
 MANUEL = os.path.join(DATA, "manuel")
 LIGNEE = ("filiation", "scission", "passage")

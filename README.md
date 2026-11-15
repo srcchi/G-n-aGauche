@@ -7,8 +7,16 @@ organisation à l'autre.
 [![Généalogie des organisations de gauche en France](arbre.svg)](arbre.svg)
 
 Cliquer sur l'image pour l'ouvrir en grand. Version interactive (zoom, recherche, parenté au
-survol, repli des familles, clé des Internationales) : `data/sortie/arbre.html`, à télécharger
-et ouvrir dans un navigateur. Une version par famille, pour l'impression : `data/sortie/arbre_<famille>.svg`.
+survol, repli des familles, clé des Internationales) : [`arbres/arbre.html`](arbres/arbre.html), à télécharger
+et ouvrir dans un navigateur. Une version par famille, pour l'impression : [`arbres/`](arbres/).
+
+## Où trouver quoi
+
+| Dossier | Contenu |
+|---|---|
+| [`arbres/`](arbres/) | tous les arbres : complet, par famille, version interactive, vue des Internationales |
+| [`data/`](data/) | données : brutes (racine), `manuel/` (à remplir à la main), `sortie/` (tables produites), `ancien/` |
+| [`scripts/`](scripts/) | la chaîne de traitement (Python) ; `scripts/ancien/` : l'ancienne version Graphviz |
 
 ## Chaîne de traitement
 
@@ -17,22 +25,22 @@ Les étapes 3 à 5 n'utilisent que Python et les caches (aucun réseau, aucune d
 
 | Étape | Script | Source | Produit |
 |---|---|---|---|
-| 1 | `arbre.py` | Wikidata (SPARQL) | `data/noeuds.csv`, `data/aretes.csv` |
-| 2 | `infobox.py` | Infobox de Wikipédia FR | `data/wp_noeuds.csv`, `data/wp_aretes.csv`, `data/wp_valeurs_sans_lien.csv` |
-| 3 | `enrichissement.py` | Textes Wikipédia, pages liées, Wikidata | `data/manuel/actifs.csv`, `data/sortie/liens_candidats.csv`, `liste_recherche.csv` |
-| 4 | `nettoyage.py` | Sources + fichiers de `data/manuel/` + caches | `data/sortie/*.csv` (dont `elagues.csv`), `criteres.md`, `resume.md`, `data/manuel/types.csv` |
-| 5 | `rendu.py` | Sortie de `nettoyage.py` | `arbre.svg`, `data/sortie/arbre.svg`, `arbre.html`, `arbre_<famille>.svg`, `arbre_apercu.svg`, `vue_internationales.svg/.html` |
-| 6 | `verifier.py` | Les SVG produits et les CSV | rapport complet (R1 à R8, croisements, étiquettes en double, citations introuvables…) ; échoue si un compteur n'est pas à zéro |
+| 1 | `scripts/arbre.py` | Wikidata (SPARQL) | `data/noeuds.csv`, `data/aretes.csv` |
+| 2 | `scripts/infobox.py` | Infobox de Wikipédia FR | `data/wp_noeuds.csv`, `data/wp_aretes.csv`, `data/wp_valeurs_sans_lien.csv` |
+| 3 | `scripts/enrichissement.py` | Textes Wikipédia, pages liées, Wikidata | `data/manuel/actifs.csv`, `data/sortie/liens_candidats.csv`, `liste_recherche.csv` |
+| 4 | `scripts/nettoyage.py` | Sources + fichiers de `data/manuel/` + caches | `data/sortie/*.csv` (dont `elagues.csv`), `criteres.md`, `resume.md`, `data/manuel/types.csv` |
+| 5 | `scripts/rendu.py` | Sortie de `nettoyage.py` | `arbre.svg` (racine), et dans `arbres/` : `arbre.svg`, `arbre.html`, `arbre_<famille>.svg`, `arbre_apercu.svg`, `vue_internationales.svg/.html` |
+| 6 | `scripts/verifier.py` | Les SVG produits et les CSV | rapport complet (R1 à R8, croisements, étiquettes en double, citations introuvables…) ; échoue si un compteur n'est pas à zéro |
 
-`preuves.py` (utilisé par les étapes 3 à 6) : chaque lien, affiliation ou succession d'Internationales
+`scripts/preuves.py` (utilisé par les étapes 3 à 6) : chaque lien, affiliation ou succession d'Internationales
 s'appuie sur une citation mot pour mot du wikitexte en cache (règle R8), revérifiée par `verifier.py`.
 Fichiers de contrôle dans `data/sortie/` : `liens_sans_preuve.csv`, `affiliations_sans_preuve.csv`,
 `anomalies.csv`, `a_dater.csv`, `elagage_rejets.csv`, `elagues.csv`, `liste_recherche.csv`, `actifs_a_revoir.csv`.
 
 ```bash
-python arbre.py && python infobox.py          # retéléchargement (rare)
-python enrichissement.py                      # liens candidats à valider (réseau, mis en cache)
-python nettoyage.py && python rendu.py && python verifier.py
+python scripts/arbre.py && python scripts/infobox.py    # retéléchargement (rare)
+python scripts/enrichissement.py                        # liens candidats à valider (réseau, mis en cache)
+python scripts/nettoyage.py && python scripts/rendu.py && python scripts/verifier.py
 ```
 
 ### Fichiers à remplir à la main (`data/manuel/`, jamais écrasés)
@@ -59,7 +67,7 @@ du temps, avec une cause probable : c'est la liste des corrections à faire.
 
 ### Ancienne version (Graphviz)
 
-Rangée dans `ancien/` : `ancien/arbre_orgs.py` et ses fichiers (`ancien/data/`). `fusion.py` reste à la racine : `nettoyage.py` s'en sert.
+Rangée à part : `scripts/ancien/arbre_orgs.py` et ses fichiers (`data/ancien/`), plus maintenue. `scripts/fusion.py` reste dans la chaîne : `nettoyage.py` s'en sert.
 
 ### Options de l'ancienne version
 

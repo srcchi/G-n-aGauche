@@ -28,7 +28,8 @@ HEADERS = {
     "User-Agent": "arbre-gauche-fr/0.2 (https://github.com/srcchi/G-n-aGauche) python-requests",
     "Accept": "application/sparql-results+json",
 }
-DATA = "data"
+RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # racine du dépôt
+DATA = os.path.join(RACINE, "data")
 PROFONDEUR = 3      # générations d'ancêtres remontées au-delà des organisations de départ
 LOT = 150           # identifiants par requête
 

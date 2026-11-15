@@ -28,7 +28,8 @@ import requests
 
 API = "https://fr.wikipedia.org/w/api.php"
 HEADERS = {"User-Agent": "arbre-gauche-fr/0.1 (https://github.com/srcchi/G-n-aGauche) python-requests"}
-DATA = "data"
+RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # racine du dépôt
+DATA = os.path.join(RACINE, "data")
 PROFONDEUR = 2
 
 # Noms de catégories écrits de mémoire : le script signale celles qui sont vides ou inexistantes.

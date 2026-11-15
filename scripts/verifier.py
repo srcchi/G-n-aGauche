@@ -8,7 +8,7 @@ mot (R8), types de relation contredits par leur citation, liens majeurs dessiné
 incontournables absents sans explication, étiquettes placées après la fin d'une barre qui a un
 successeur direct, textes de moins de 11 px, compte de la légende.
 
-Usage : python verifier.py [fichier.svg ...]   (par défaut : data/sortie/arbre*.svg)
+Usage : python verifier.py [fichier.svg ...]   (par défaut : arbres/arbre*.svg)
 """
 
 import csv
@@ -20,8 +20,10 @@ import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 
 S = "{http://www.w3.org/2000/svg}"
-SORTIE = os.path.join("data", "sortie")
-MANUEL = os.path.join("data", "manuel")
+RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # racine du dépôt
+SORTIE = os.path.join(RACINE, "data", "sortie")
+MANUEL = os.path.join(RACINE, "data", "manuel")
+ARBRES = os.path.join(RACINE, "arbres")
 EPS = 0.06
 TEXTES_PERMIS = {"tag-t", "bande-t", "axe-t", "voie-t", "legende-t", "cle-t", "renvoi"}
 REL_SUCC_DIRECTE = {"renommage", "fusion", "absorption", "refondation", "scission", "filiation_idéologique", "indirect"}
@@ -338,7 +340,7 @@ COMPTEURS = ["barres sans lien", "barres non datées", "étiquettes en double", 
 
 
 def main():
-    fichiers = sys.argv[1:] or sorted(glob.glob(os.path.join(SORTIE, "arbre*.svg")))
+    fichiers = sys.argv[1:] or sorted(glob.glob(os.path.join(ARBRES, "arbre*.svg")))
     cpt, err = Counter(), []
     for f in fichiers:
         verifier_svg(f, cpt, err)

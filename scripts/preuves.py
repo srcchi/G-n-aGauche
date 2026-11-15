@@ -13,7 +13,8 @@ import json
 import os
 import re
 
-DATA = "data"
+RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # racine du dépôt
+DATA = os.path.join(RACINE, "data")
 SORTIE = os.path.join(DATA, "sortie")
 
 # Champs d'infobox -> sens de la relation pour l'organisation de l'article
