@@ -1347,7 +1347,15 @@ def dessiner(m, avec_cle=True, apercu=False):
     fusions = defaultdict(list)
     for t in m["traces"]:
         st = STYLE_LIEN[t["rel"]]
-        pts = t["pts"]
+        pts = list(t["pts"])
+        if apercu:
+            # L'aperçu ne dessine pas les bandes : un trait qui partait (ou arrivait, pour une
+            # composante) sous les bandes part du bas de la barre, sinon il flotte dans le vide.
+            for i_, q_ in ((0, t["a"]), (len(pts) - 1, t["b"])):
+                o_ = items[q_]
+                bas_barre = o_["y_c"] + BAR_H / 2
+                if bas_barre < pts[i_][1] <= o_["y_c"] + o_["bas"] + 0.5:
+                    pts[i_] = (pts[i_][0], bas_barre)
         d = "M" + " L".join(f"{x:.2f} {y:.2f}" for x, y in pts)
         geo = json.dumps([[round(x, 2), round(y, 2), m["voie_index"][v]] for (x, y), v in zip(pts, t["voies_pts"])])
         xt, yt = pts[-1]

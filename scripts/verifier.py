@@ -139,6 +139,25 @@ def verifier_svg(chemin, cpt, err):
             faute("R6", f"{q} de type {types[q]} dessiné")
         if src.get("garde") != "oui":
             faute("R5", f"{q} dessinée mais pas gardée")
+    # Départ de chaque lien sur sa barre (ou ses bandes si elles sont dessinées) : jamais dans le vide
+    bas_bandes = {}
+    for g in racine.iter(S + "g"):
+        if g.get("class") == "bande":
+            rb = g.find(S + "rect")
+            bas_bandes[g.get("data-parti")] = max(bas_bandes.get(g.get("data-parti"), 0),
+                                                  float(rb.get("y")) + float(rb.get("height")))
+    for g in racine.iter(S + "g"):
+        if g.get("class") != "lien":
+            continue
+        traits = [p for p in g.findall(S + "path") if "trait" in p.get("class", "")]
+        a = g.get("data-a")
+        if not traits or a not in barres:
+            continue
+        v = nombres(traits[0].get("d"))
+        bx, by, bw, bh = barres[a]
+        bas = max(by + bh, bas_bandes.get(a, 0))
+        if not (bx - 1 <= v[0] <= bx + bw + ouvertes.get(a, 0) + 1 and by - 1 <= v[1] <= bas + 1):
+            faute("liens flottants", f"{a}->{g.get('data-b')} : départ ({v[0]:.0f}, {v[1]:.0f}) hors de sa barre")
     if apercu:
         return
     cpt["_barres"] = max(cpt["_barres"], len(barres))
@@ -332,7 +351,7 @@ def verifier_donnees(cpt, err):
             faute("incontournables inexpliqués", r["nom"])
 
 
-COMPTEURS = ["barres sans lien", "barres non datées", "étiquettes en double", "croisements",
+COMPTEURS = ["liens flottants", "barres sans lien", "barres non datées", "étiquettes en double", "croisements",
              "bandes non datées pleines", "successions avec scission", "R1", "R2", "R3 dates", "R4 textes",
              "R4 chevauchements", "R5", "R6", "citations introuvables", "types contredits",
              "liens majeurs en renvoi", "incontournables inexpliqués", "étiquettes après une fin",
