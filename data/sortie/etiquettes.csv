@@ -136,7 +136,7 @@ Q111630205,CFR,article,Féministes révolutionnaires,
 Q3099321,Gauche anticapitaliste,nom court,Gauche anticapitaliste (France),oui
 Q111225168,GDS,article,Gauche démocratique et sociale,oui
 Q97367255,GOP,article,Gauche ouvrière et paysanne,
-Q3099339,GP,sigles.csv,Gauche prolétarienne,
+Q3099339,GP,sigles.csv,Gauche prolétarienne,oui
 Q138828808,GRS (?),acronyme du nom + année (homonyme),Gauche républicaine et sociale,
 Q58329311,GRS (2018),sigles.csv + année (homonyme),Gauche républicaine et socialiste,oui
 Q3099352,Gauche révolutionnaire,nom court,Gauche révolutionnaire,
@@ -198,7 +198,7 @@ Q104290793,AKM,acronyme du nom,Les amis de Karl Marx,
 Q613786,Les Écologistes,sigles.csv,Les Écologistes – Europe Écologie Les Verts,oui
 Q86998495,UDE (2020),article + année (homonyme),Liberté Écologie Fraternité,oui
 Q3240150,Ligne rouge,nom court,Ligne rouge (organisation politique),
-Q18215132,Ligue communiste,nom court,Ligue communiste (1930),
+Q18215132,Ligue communiste,nom court,Ligue communiste (1930),oui
 Q3240305,LC,article,Ligue communiste (1969),oui
 Q862627,LCR (1974),sigles.csv + année (homonyme),Ligue communiste révolutionnaire,oui
 fr:Ligue communiste révolutionnaire (Bangladesh),LCR (?),sigles.csv + année (homonyme),Ligue communiste révolutionnaire (Bangladesh),
@@ -377,8 +377,8 @@ Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3477547,SUPS,acronyme du nom,Section universitaire du Parti socialiste,
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
+fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,
@@ -404,10 +404,10 @@ Q21055512,UDE (2015),article + année (homonyme),Union des démocrates et des é
 Q19276426,UDMF,article,Union des démocrates musulmans français,
 Q2540732,UGCS,article,Union des groupes et clubs socialistes,
 Q111628305,UJR,acronyme du nom,Union des jeunes révolutionnaires,
-Q3550161,UJCML,acronyme du nom,Union des jeunesses communistes marxistes-léninistes,
+Q3550161,UJCML,acronyme du nom,Union des jeunesses communistes marxistes-léninistes,oui
 Q3550193,URR,acronyme du nom,Union des républicains radicaux,
-Q116456095,URCF (2003),acronyme du nom + année (homonyme),Union des révolutionnaires-communistes de France,
 fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
+Q116456095,URCF (2003),acronyme du nom + année (homonyme),Union des révolutionnaires-communistes de France,
 Q3550207,UTCL,article,Union des travailleurs communistes libertaires,oui
 Q3550228,UEC,sigles.csv,Union des étudiants communistes,
 Q3107400,UPA,article,Union du peuple alsacien,

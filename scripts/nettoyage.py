@@ -923,6 +923,13 @@ def main():
         if not attacher_preuve(a, b, e):
             sans_preuve.append([a, lab(a), b, lab(b), t, " | ".join(sorted(e["sources"]))])
             continue
+        if t == "passage" and "manuel" in e["sources"] and str(e.get("date", "")).isdigit():
+            # Passage de militants saisi à la main, daté : la cible peut exister depuis longtemps
+            # (Ligue communiste dans la SFIO en 1934) ; il suffit que les deux vivent à cette date
+            an_p = int(e["date"])
+            if da[0] <= an_p <= (noeuds[a]["dissolution"] or 9999) and db[0] <= an_p <= (noeuds[b]["dissolution"] or 9999):
+                valides.append((a, b, t, e))
+                continue
         if db[0] < da[0] or (db[0] == da[0] and da[1] and db[1] and db[1] < da[1]):
             # La cible existait déjà : absorption si la source disparaît dans une cible encore vivante
             fin_a, fin_b = noeuds[a]["dissolution"], noeuds[b]["dissolution"]
@@ -1469,9 +1476,16 @@ def main():
     origines = {r["id"].strip() for r in lignes_origines}
     garde |= origines & eligibles
     stats["origines"] = len(origines & garde)
+    # Incontournables (data/manuel/incontournables.csv) sans descendance active : dessinés en
+    # « branche éteinte », avec leurs seuls liens documentés (aucun lien inventé pour les relier)
+    incontournables = {r["id"].strip() for r in lire("manuel/incontournables.csv") if r.get("id", "").strip()}
+    branches_eteintes = (incontournables & eligibles) - garde
+    garde |= branches_eteintes
+    stats["branches_eteintes"] = len(branches_eteintes)
+    exemptes = origines | branches_eteintes
     # Porte finale : chaque organisation gardée a au moins un lien vers une autre gardée
     while True:
-        seules = {q for q in garde if not (voisins_r5[q] & garde)} - origines   # une origine peut n'avoir qu'un lien de composante
+        seules = {q for q in garde if not (voisins_r5[q] & garde)} - exemptes   # une origine peut n'avoir qu'un lien de composante
         if not seules:
             break
         for q in seules:
@@ -1489,7 +1503,7 @@ def main():
             hors_perim.append([q, lab(q), "outre-mer sans lien documenté vers une organisation métropolitaine affichée"])
         garde -= a_retirer
         while True:                       # la porte finale, à nouveau
-            seules = {q for q in garde if not (voisins_r5[q] & garde)} - origines
+            seules = {q for q in garde if not (voisins_r5[q] & garde)} - exemptes
             if not seules:
                 break
             for q in seules:
@@ -1655,7 +1669,64 @@ def main():
         pourquoi = explication(q) if q else "identifiant à renseigner dans incontournables.csv"
         rejets.append([q, r["nom"], f"incontournable absent : {pourquoi}"])
         manquants_inc.append((r["nom"], pourquoi))
-    ecrire("elagage_rejets.csv", ["id", "label", "raison"], rejets)
+    # Journal exhaustif : chaque candidat des sources brutes (Wikidata data/noeuds.csv, Wikipédia
+    # data/wp_noeuds.csv, nœuds manuels) qui n'est pas dessiné, avec sa raison
+    brut_wd = {r["id"]: r for r in lire("noeuds.csv")}
+    brut_wp = {r["id"]: r for r in lire("wp_noeuds.csv")}
+    motif_rejet = {}
+    for r_ in rejets:
+        motif_rejet.setdefault(r_[0], r_[2])
+    journal = []
+    for q in sorted(set(brut_wd) | set(brut_wp) | set(noeuds), key=lambda q: (q not in noeuds, q)):
+        if q in garde:
+            continue
+        d = noeuds.get(q)
+        b = brut_wd.get(q) or brut_wp.get(q) or {}
+        if d:
+            actif = "oui" if d["actif"] else ("non" if d["dissolution"] or d["statut_fin"] == "fin_connue" else "inconnu")
+            famille = d["famille"] if d["famille"] != "à classer" else ""
+            sources_ = " | ".join(sorted(d["sources"]))
+        else:
+            actif = "non" if b.get("dissolution") else "inconnu"
+            famille, sources_ = "", ""
+        if d is None:
+            raison_ = "absente après fusion des sources (doublon ou identifiant remplacé)"
+            manquant = ""
+        elif classe.get(q) != "graphe":
+            raison_ = f"hors du graphe ({classe.get(q)}) : {raison.get(q, '')}".rstrip(" :")
+            manquant = ""
+        else:
+            cause, detail = cause_de.get(q, ("", ""))
+            raison_ = motif_rejet.get(q) or (f"{cause} : {detail}" if detail else cause) or "élaguée"
+            manquant = explication(q)
+        provenance = " + ".join(x for x, ok in (("Wikidata", q in brut_wd), ("Wikipédia", q in brut_wp)) if ok) or "manuel"
+        journal.append([q, lab(q) if d else b.get("label", ""), actif, famille, raison_, manquant,
+                        f"{provenance} ({sources_})" if sources_ else provenance])
+    ecrire("elagage_rejets.csv", ["id", "label", "actif", "famille_si_connue", "raison", "lien_manquant", "source"],
+           journal)
+    stats["candidats_non_dessines"] = len(journal)
+    # Test de couverture : chaque incontournable et Place publique ont-ils été collectés ?
+    couverture = []
+    a_tester = [(r["id"].strip(), r["nom"]) for r in lire("manuel/incontournables.csv")]
+    if not any(q == "Q58366009" for q, _ in a_tester):
+        a_tester.append(("Q58366009", "Place publique"))
+    for q, nom in a_tester:
+        wd, wp = q in brut_wd, q in brut_wp
+        if not (wd or wp or q in noeuds):
+            pourquoi = ("jamais collectée : hors de la requête Wikidata (scripts/arbre.py : pays France, type "
+                        "d'organisation, propriété de succession ou idéologie) et hors des catégories Wikipédia "
+                        "explorées (scripts/infobox.py, CATEGORIES)")
+        elif q in garde:
+            pourquoi = "dessinée" + (" (branche éteinte)" if q in branches_eteintes else "")
+        else:
+            pourquoi = "collectée mais non dessinée : " + (explication(q) if q in noeuds else "?")
+        couverture.append([q, nom, "oui" if wd else "non", "oui" if wp else "non",
+                           "manuel" if q in noeuds and not (wd or wp) else "", "oui" if q in garde else "non", pourquoi])
+    ecrire("branches_eteintes.csv", ["id", "label", "raison"],
+           [[q, lab(q), "incontournable sans descendance active, dessiné avec ses seuls liens documentés"]
+            for q in sorted(branches_eteintes, key=lab)])
+    ecrire("couverture.csv", ["id", "nom", "collectee_wikidata", "collectee_wikipedia", "autre_source", "dessinee",
+                              "explication"], couverture)
     disparues = [[q, nom, explication(q)] for q, nom in sorted(precedents.items(), key=lambda x: x[1])
                  if q not in garde]
     apparues = sorted(lab(q) for q in garde - set(precedents))
@@ -1677,6 +1748,8 @@ def main():
         # (« Ensemble ! <small>(2025)</small> ») ; sinon : fondation du descendant
         if rel == "absorption":
             return e["date_absorption"], ""
+        if rel == "passage" and "manuel" in e["sources"] and str(e.get("date", "")).isdigit():
+            return int(e["date"]), ""          # passage saisi à la main : à sa date
         an = fusion_tardive(a, b, e.get("preuve") or {}) if rel == "fusion" else None
         if an:
             return an, ""
@@ -1800,6 +1873,26 @@ def main():
     ecrire("internationales.csv", ["id", "name", "sigle", "start", "end", "predecessor_id",
                                    "color_key", "succession_type", "succession_citation",
                                    "succession_source", "scissions_de"], lignes_inter)
+    # Internationales filles (ex. les fractions de la Quatrième Internationale) : celles qui en sont
+    # issues par scission ou succession (déjà citées ci-dessus), et celles de
+    # data/manuel/internationales_filles.csv (réunification, se réclame de…), citation revérifiée
+    filles = []
+    for l_ in lignes_inter:
+        for p_ in (x for x in l_[5].split(" | ") if x):
+            filles.append([p_, l_[0], l_[7] or "succession", l_[8], l_[9]])
+        for p_ in (x for x in l_[10].split(" | ") if x):
+            filles.append([p_, l_[0], "scission", "", ""])
+    for r in lire("manuel/internationales_filles.csv"):
+        a_, b_ = r.get("parente", "").strip(), r.get("fille", "").strip()
+        if a_ in noeuds and b_ in noeuds and corpus.verifier(r.get("citation", ""), r.get("source", "").strip()):
+            filles.append([a_, b_, r.get("relation", "").strip(), r["citation"], r["source"].strip()])
+        elif a_ or b_:
+            stats["filles_sans_citation"] = stats.get("filles_sans_citation", 0) + 1
+    vus_f = set()
+    n_auto = sum(1 for _ in lignes_inter for x in (_[5] + " | " + _[10]).split(" | ") if x)
+    filles = filles[n_auto:] + filles[:n_auto]          # une ligne saisie à la main prime
+    filles = [f for f in filles if not ((f[0], f[1]) in vus_f or vus_f.add((f[0], f[1])))]
+    ecrire("internationales_filles.csv", ["parente", "fille", "relation", "citation", "source"], filles)
     ecrire("affiliations.csv", ["party_id", "international_id", "start", "end", "date_certainty",
                                 "source", "party_nom", "international_nom", "preuve", "citation",
                                 "source_citation"], lignes_affil)

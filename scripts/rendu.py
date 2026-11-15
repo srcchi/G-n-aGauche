@@ -270,7 +270,13 @@ def charger():
         inter[r["id"]] = dict(id=r["id"], nom=r["name"], sigle=r["sigle"] or acronyme(r["name"]),
                               debut=r["start"], fin=r["end"], pred=[p for p in r["predecessor_id"].split(" | ") if p],
                               type_succ=r.get("succession_type", ""),
-                              scissions=[p for p in r.get("scissions_de", "").split(" | ") if p], membres=[])
+                              scissions=[p for p in r.get("scissions_de", "").split(" | ") if p], membres=[],
+                              filles=[])
+    # Internationales filles (scission, succession, réunification, « se réclame de ») : un clic sur la
+    # mère, dans la clé de la page HTML, montre toute sa descendance et les partis membres
+    for r in lire("internationales_filles.csv"):
+        if r["parente"] in inter and r["fille"] in inter:
+            inter[r["parente"]]["filles"].append((r["fille"], r["relation"]))
     orgs = {}
     for r in lire("organisations.csv"):
         if r.get("garde") != "oui":
@@ -300,6 +306,10 @@ def charger():
                                       f"courants : {r['courants_sources'] or 'aucun reconnu'}"]
                              + ([f"organisations liées : {r['organisations_liees']}"] if r.get("organisations_liees") else [])
                              + ([f"journaux : {r['journaux']}"] if r["journaux"] else []))
+    # Branches éteintes (incontournables sans descendance active) : dites dans l'infobulle
+    for r in lire("branches_eteintes.csv"):
+        if r["id"] in orgs:
+            orgs[r["id"]]["details"].append("branche éteinte : " + r["raison"])
     # Noms successifs d'une même organisation (infobox, champ fondation) : écrits dans la barre
     for r in lire("noms_successifs.csv"):
         if r["id"] in orgs and t_de(r["annee"]) >= orgs[r["id"]]["t0"] - 0.5:   # pas avant la barre
@@ -1378,7 +1388,20 @@ def cle_donnees(items, inter):
             etapes.append(nom_annee(x))
             x = next((s for s, d in inter.items() if x in d["pred"]), None)
         return ", puis ".join(etapes) if len(etapes) > 1 else ""
+    def famille(i):
+        vus, pile = [], [i]
+        while pile:
+            x = pile.pop(0)
+            if x not in vus:
+                vus.append(x)
+                pile += [f for f, _ in inter[x]["filles"]]
+        return vus
+
+    def membres_de(ids):
+        return [q for i_ in ids for q in dict.fromkeys(inter[i_]["membres"]) if q in items]
     return [dict(id=i, sigle=inter[i]["sigle"], nom=inter[i]["nom"], dates=f"{inter[i]['debut'] or '?'}–{inter[i]['fin']}",
+                 filles=", ".join(f"{inter[f]['sigle'] or inter[f]['nom']} ({rel})" for f, rel in inter[i]["filles"]),
+                 famille=famille(i), membres_famille=list(dict.fromkeys(membres_de(famille(i)))),
                  couleur=inter[i]["couleur"], motif=inter[i]["motif"], succession=succession(i),
                  scissions=", ".join(nom_annee(s) for s in inter[i]["scissions"] if s in inter),
                  membres=[q for q in dict.fromkeys(inter[i]["membres"]) if q in items])
@@ -1886,7 +1909,9 @@ def page_html(m, svg):
         + [dict(a=a, b=b) for a, b in m["continuations"]]
     cle = [dict(id=c["id"], sigle=c["sigle"], nom=c["nom"], dates=c["dates"], couleur=c["couleur"],
                 succession=c["succession"], scissions=c["scissions"], membres=c["membres"],
-                tags=[m["items"][q]["etiquette"] for q in c["membres"]]) for c in m["cle"]]
+                filles=c["filles"], famille=c["famille"], membres_famille=c["membres_famille"],
+                tags=[m["items"][q]["etiquette"] for q in c["membres"]],
+                tags_famille=[m["items"][q]["etiquette"] for q in c["membres_famille"]]) for c in m["cle"]]
     donnees = json.dumps(dict(voies=voies, liens=liens, cle=cle), ensure_ascii=False)
     return HTML.replace("__SVG__", svg).replace("__DONNEES__", donnees.replace("</", "<\\/"))
 
@@ -1921,6 +1946,7 @@ HTML = r"""<!doctype html>
   .familles { display:flex; flex-wrap:wrap; gap:4px; }
   .entree { padding:6px 4px; border-bottom:1px solid var(--bord); cursor:pointer; border-radius:4px; font-size:13px; }
   .entree:hover, .entree.choisie { background:color-mix(in srgb, var(--accent) 14%, transparent); }
+  .entree.famille { background:color-mix(in srgb, var(--accent) 7%, transparent); box-shadow:inset 3px 0 0 var(--accent); }
   .entree.flash { outline:2px solid var(--accent); }
   .entree .puce { display:inline-block; width:14px; height:10px; margin-right:6px; vertical-align:middle; border-radius:2px; }
   .entree .succ { color:var(--doux); font-size:12px; margin-top:2px; }
@@ -1980,6 +2006,11 @@ for (const l of D.liens) { (parents[l.b] ||= []).push(l.a); (enfants[l.a] ||= []
 function parcours(q, m, vus){ for (const x of (m[q] || [])) if (!vus.has(x)) { vus.add(x); parcours(x, m, vus); } return vus; }
 let choisie = null;
 function membres(id){ const c = D.cle.find(c => c.id === id); return new Set(c ? c.membres : []); }
+// Clic sur une Internationale : elle et toute sa descendance (filles, petites-filles…) et leurs membres
+function familleMembres(id){ const c = D.cle.find(c => c.id === id); return new Set(c ? c.membres_famille : []); }
+function marquerFamille(id){ const c = D.cle.find(c => c.id === id); const f = new Set(c ? c.famille : []);
+  document.querySelectorAll('.entree').forEach(e => { e.classList.toggle('choisie', e.id === 'cle-' + id);
+    e.classList.toggle('famille', e.id !== 'cle-' + id && f.has(e.id.slice(4))); }); }
 function surligner(ids){
   if (!ids) { svg.classList.remove('focus'); svg.querySelectorAll('.sel').forEach(e => e.classList.remove('sel')); return; }
   svg.classList.add('focus');
@@ -2028,21 +2059,24 @@ for (const v of D.voies) { const b = document.createElement('button'); b.textCon
   b.onclick = () => { replies.has(v.i) ? replies.delete(v.i) : replies.add(v.i); b.setAttribute('aria-pressed', replies.has(v.i)); relayout(); }; fam.appendChild(b); }
 const entrees = document.getElementById('entrees');
 for (const c of D.cle) { const div = document.createElement('div'); div.className = 'entree'; div.id = 'cle-' + c.id;
-  div.innerHTML = '<span class="puce"></span><b></b> <span class="nom"></span> <span class="dates" style="color:var(--doux)"></span><div class="succ s1"></div><div class="succ s2"></div><div class="succ s3"></div>';
+  div.innerHTML = '<span class="puce"></span><b></b> <span class="nom"></span> <span class="dates" style="color:var(--doux)"></span><div class="succ s1"></div><div class="succ s2"></div><div class="succ s4"></div><div class="succ s3"></div><div class="succ s5"></div>';
   div.querySelector('.puce').style.background = c.couleur; div.querySelector('b').textContent = c.sigle; div.querySelector('.nom').textContent = c.nom;
   div.querySelector('.dates').textContent = `(${c.dates})`;
   div.querySelector('.s1').textContent = c.succession ? 'Succession : ' + c.succession : '';
   div.querySelector('.s2').textContent = c.scissions ? 'Scissions : ' + c.scissions : '';
+  div.querySelector('.s4').textContent = c.filles ? 'Filles : ' + c.filles : '';
   div.querySelector('.s3').textContent = `Membres affichés (${c.membres.length}) : ${c.tags.join(', ')}`;
-  div.addEventListener('mouseenter', () => surligner(membres(c.id)));
-  div.addEventListener('mouseleave', () => surligner(choisie ? membres(choisie) : null));
-  div.addEventListener('click', () => { document.querySelectorAll('.entree').forEach(e => e.classList.remove('choisie'));
-    if (choisie === c.id) { choisie = null; surligner(null); } else { choisie = c.id; div.classList.add('choisie'); surligner(membres(c.id)); } });
+  div.querySelector('.s5').textContent = c.famille.length > 1 ? `Avec sa descendance (clic) : ${c.tags_famille.length} membres, ${c.tags_famille.join(', ')}` : '';
+  div.addEventListener('mouseenter', () => surligner(choisie ? familleMembres(choisie) : membres(c.id)));
+  div.addEventListener('mouseleave', () => surligner(choisie ? familleMembres(choisie) : null));
+  div.addEventListener('click', () => {
+    if (choisie === c.id) { choisie = null; marquerFamille(null); surligner(null); }
+    else { choisie = c.id; marquerFamille(c.id); surligner(familleMembres(c.id)); } });
   entrees.appendChild(div); }
 svg.querySelectorAll('.bande').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); document.getElementById('cle').open = true;
   const ent = document.getElementById('cle-' + b.dataset.intl); if (!ent) return;
   ent.scrollIntoView({block:'center', behavior:'smooth'}); ent.classList.add('flash'); setTimeout(() => ent.classList.remove('flash'), 1500);
-  choisie = b.dataset.intl; document.querySelectorAll('.entree').forEach(x => x.classList.toggle('choisie', x === ent)); surligner(membres(choisie)); }));
+  choisie = b.dataset.intl; marquerFamille(choisie); surligner(familleMembres(choisie)); }));
 ajuster();
 if (location.hash) { const q = decodeURIComponent(location.hash.slice(1)); const g = svg.querySelector(`.org-haut[data-id="${CSS.escape(q)}"]`);
   if (g) { centrer(g); const s = parcours(q, parents, new Set([q])); parcours(q, enfants, s); surligner(s); } }

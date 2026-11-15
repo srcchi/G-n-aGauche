@@ -37,6 +37,10 @@ Les étapes 3 à 5 n'utilisent que Python et les caches (aucun réseau, aucune d
 s'appuie sur une citation mot pour mot du wikitexte en cache (règle R8), revérifiée par `verifier.py`.
 Fichiers de contrôle dans `data/sortie/` : `liens_sans_preuve.csv`, `affiliations_sans_preuve.csv`,
 `anomalies.csv`, `a_dater.csv`, `elagage_rejets.csv`, `elagues.csv`, `liste_recherche.csv`, `actifs_a_revoir.csv`.
+`elagage_rejets.csv` est le journal exhaustif : une ligne par candidat des sources brutes (Wikidata,
+Wikipédia, nœuds manuels) non dessiné (`id, label, actif, famille_si_connue, raison, lien_manquant, source`).
+`couverture.csv` dit, pour chaque incontournable et pour Place publique, s'il a été collecté et pourquoi il
+est dessiné ou non ; `branches_eteintes.csv` liste les incontournables dessinés sans descendance active.
 
 ```bash
 python scripts/arbre.py && python scripts/infobox.py    # retéléchargement (rare)
@@ -59,7 +63,8 @@ python scripts/nettoyage.py && python scripts/rendu.py && python scripts/verifie
 
 Et dans `data/sortie/liens_candidats.csv`, `decision = oui` sur les liens proposés à garder. Pour commencer : `data/sortie/liens_candidats_a_lire.csv`, un extrait court (confiance élevée, organisation dessinée, lien pas encore tracé) ; la colonne `ligne` donne la ligne à modifier dans le grand fichier.
 L'arbre ne montre que les organisations en lignée directe d'une organisation active (règle R5),
-sauf les origines historiques listées dans `data/manuel/origines.csv`.
+sauf les origines historiques listées dans `data/manuel/origines.csv` et les incontournables
+(`data/manuel/incontournables.csv`), dessinés au besoin en « branche éteinte » avec leurs seuls liens documentés.
 
 `data/sortie/criteres.md` explique comment chaque organisation est rangée (graphe, étrangère,
 Internationale, exclue) et dans quelle famille ; `data/sortie/resume.md` donne les chiffres.
