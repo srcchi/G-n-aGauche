@@ -437,7 +437,7 @@ def preparer(items, inter, ech, T_AUJ):
             else:
                 ta, tb = o["t0"], fin_o
             xa, xb = max(o["x0"], ech.X(ta)), min(o["x1"], max(ech.X(tb), ech.X(ta) + MIN_W))
-            txt = d["sigle"] if connu else f"{d['sigle']} ?"
+            txt = d["sigle"]          # période inconnue : la bande hachurée suffit (voir la légende)
             bandes.append(dict(intl=a["international_id"], connu=connu, xa=xa, xb=xb, couleur=d["couleur"],
                                motif=d["motif"], sigle=d["sigle"], nom=d["nom"], texte=txt,
                                debut=a["start"] if connu else "", fin=a["end"] if connu else "",
@@ -1353,6 +1353,10 @@ def dessiner(m, avec_cle=True, apercu=False):
     if avec_cle and m["cle"] and not apercu:
         cle_bas, h = cle_complete(m, H, m["largeur"])
         H += h
+    if avec_cle and not apercu:
+        idx, h = index_sigles(m, H, m["largeur"])
+        cle_bas += idx
+        H += h
     attrs = (f'data-x0="{X0}" data-t0="{ech.T0}" data-ppa="{PPA}" data-aujourdhui="{m["T_AUJ"]:.4f}" '
              f'data-min-w="{MIN_W}" data-seuil-annees="{SEUIL_ANNEES}" data-seuil-voies="{SEUIL_VOIES}" '
              f'data-seuil-rangs="{SEUIL_RANGS}" data-cassure="{",".join(map(str, ech.cassure)) if ech.cassure else ""}" '
@@ -1430,7 +1434,7 @@ def legende(m, apercu):
             el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="#332288" stroke="#333333" '
                       f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
         if any(not b["connu"] for b in bandes):
-            t = "bande hachurée, sigle suivi de « ? » : affiliation citée, dates à documenter"
+            t = "bande hachurée : affiliation citée, dates exactes inconnues (au plus la période commune)"
             x0 = place(46 + larg(t, FS))
             el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="url(#h-332288)" stroke="#333333" '
                       f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
@@ -1450,6 +1454,30 @@ def cle_compacte(m):
         txt = f"{c['sigle']}  {c['dates']}, {len(c['membres'])}"
         el.append(texte(x + 24, yy, txt if larg(txt, FS) < CLE_W - 50 else txt[:34] + "…", FS, False, "#1A1A1A", cls="cle-t"))
     return "".join(el) + "</g>"
+
+
+def index_sigles(m, y0, W):
+    """Index des sigles : chaque sigle affiché sur une barre, avec le nom complet et les dates."""
+    # Sans la précision d'homonymie de Wikipédia : « Alternative libertaire (France) », « (France, 1991) »
+    propre = lambda nom: re.sub(r" \((?:[^()]*(?:France|français|française)[^()]*)\)$", "", nom)
+    entrees = sorted(((o["etiq_aff"], propre(o["label"]), o["dates"]) for o in m["items"].values()
+                      if o["etiq_aff"] != o["label"]), key=lambda e: (sans_accents(e[0]).lower(), e[2]))
+    n_col = 4
+    col_w = (W - 32) / n_col
+    el = [f'<g class="index-sigles" transform="translate(0,{y0:.0f})">',
+          texte(16, 30, "Index des sigles", 16, True, "#111111", cls="cle-t")]
+    par_col = -(-len(entrees) // n_col)
+    y_max = 0
+    for i, (sig, nom, dates) in enumerate(entrees):
+        col, k = divmod(i, par_col)
+        x = 16 + col * col_w
+        y = 52 + k * 17
+        ws = larg(sig, FS, True)
+        el.append(texte(x, y, sig, FS, True, "#111111", cls="cle-t"))
+        reste = couper(f"{nom} ({dates})", col_w - ws - 20, FS, max_lignes=1)[0]
+        el.append(texte(x + ws + 6, y, reste, FS, False, "#333333", cls="cle-t"))
+        y_max = max(y_max, y)
+    return "".join(el) + "</g>", y_max + 24
 
 
 def cle_complete(m, y0, W):

@@ -1318,6 +1318,13 @@ def main():
         entree = m_e.group(1) if m_e else ""
         sortie = m_s.group(1) if m_s else ("toujours membre" if da.get("actif") and p["citation"].lstrip().startswith("|")
                                            else "")
+        # Période écrite juste après le lien dans l'infobox : « [[Parti de la gauche européenne]]
+        # <small>(depuis 2004)</small> », « [[Alliance radicale européenne|ARE]] <small>(1994-1999)</small> »
+        if not (entree and sortie) and p.get("source", "").count(":") >= 1 and p["citation"].lstrip().startswith("|"):
+            d_p, f_p = periode(p["citation"], p["source"], b)
+            if d_p:
+                entree = str(d_p)
+                sortie = str(f_p) if f_p else ("toujours membre" if da.get("actif") else "")
         if entree and sortie:
             lignes_affil.append([a, b, entree, sortie, "known", "citation", lab(a), lab(b)] + cit)
             continue
@@ -1642,6 +1649,30 @@ def main():
                          "intermediaire_nom", "citation2", "source_citation2"], lignes_liens)
     ecrire("liens_sans_preuve.csv", ["source", "source_nom", "cible", "cible_nom", "type", "sources"],
            sans_preuve)
+    # Extrait court de liens_candidats.csv à lire en premier : non décidés, confiance >= 0,7, touchant
+    # une organisation dessinée, pas déjà dessinés ; « ligne » = numéro de ligne dans liens_candidats.csv,
+    # où l'on écrit decision = oui.
+    deja_l = {(r[0], r[1]) for r in lignes_liens} | {(r[1], r[0]) for r in lignes_liens}
+    meilleurs = {}
+    for i, r in enumerate(lire("sortie/liens_candidats.csv"), start=2):
+        try:
+            conf = float(r.get("confiance") or 0)
+        except ValueError:
+            continue
+        o_, c_ = r["org"], r["cible"]
+        if (r.get("decision", "").strip() or conf < 0.7 or (o_, c_) in deja_l or c_ not in noeuds or o_ not in noeuds
+                or not ({o_, c_} & garde)):
+            continue
+        k = tuple(sorted((o_, c_)))
+        if k not in meilleurs or conf > meilleurs[k][0]:
+            meilleurs[k] = (conf, i, r)
+    a_lire = [[i, lab(r["org"]), lab(r["cible"]), r["sens"], r["type_propose"], f"{conf:.2f}",
+               "oui" if r["org"] in garde and r["cible"] in garde else "une seule",
+               re.sub(r"\s+", " ", r["phrase_source"])[:300], r.get("source_citation", "")]
+              for conf, i, r in sorted(meilleurs.values(), key=lambda x: (-x[0], x[1]))]
+    ecrire("liens_candidats_a_lire.csv", ["ligne", "org", "cible", "sens", "type_propose", "confiance",
+                                          "deux_dessinees", "phrase", "source"], a_lire)
+    stats["candidats_a_lire"] = len(a_lire)
 
     ecrire("anomalies.csv", ["source", "target", "relation", "source_date", "target_date",
                              "probable_cause", "source_nom", "target_nom", "sources"], anomalies)

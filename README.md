@@ -46,7 +46,7 @@ python nettoyage.py && python rendu.py && python verifier.py
 | `affiliations_dates.csv` | dates d'adhésion aux Internationales, source obligatoire |
 | `sigles.csv` | sigle et nom court affichés dans les étiquettes |
 
-Et dans `data/sortie/liens_candidats.csv`, `decision = oui` sur les liens proposés à garder.
+Et dans `data/sortie/liens_candidats.csv`, `decision = oui` sur les liens proposés à garder. Pour commencer : `data/sortie/liens_candidats_a_lire.csv`, un extrait court (confiance élevée, organisation dessinée, lien pas encore tracé) ; la colonne `ligne` donne la ligne à modifier dans le grand fichier.
 L'arbre ne montre que les organisations en lignée directe d'une organisation active (règle R5).
 
 `data/sortie/criteres.md` explique comment chaque organisation est rangée (graphe, étrangère,
@@ -59,7 +59,7 @@ du temps, avec une cause probable : c'est la liste des corrections à faire.
 
 ### Ancienne version (Graphviz)
 
-`fusion.py` puis `arbre_orgs.py` produisent l'ancien rendu Graphviz (`data/arbre_orgs.svg`).
+Rangée dans `ancien/` : `ancien/arbre_orgs.py` et ses fichiers (`ancien/data/`). `fusion.py` reste à la racine : `nettoyage.py` s'en sert.
 
 ### Options de l'ancienne version
 
@@ -114,4 +114,5 @@ Les corrections vont dans deux fichiers, relus à chaque exécution de `nettoyag
   militants). Un chevron sur une barre : renommage sur la même rangée. Un lien trop long (plus de
   40 ans ou de 2 voies) devient un renvoi écrit : « → NPA » d'un côté, « issu de : LCR » de l'autre.
 - Les Internationales ne sont pas des organisations de l'arbre : une bande fine sous la barre du
-  parti membre (hachurée : période inconnue) et un badge avec le sigle. Voir la clé sous la frise.
+  parti membre (hachurée : dates exactes inconnues) et un badge avec le sigle. Voir la clé sous la frise,
+  puis l'index des sigles des organisations.

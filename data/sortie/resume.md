@@ -57,12 +57,12 @@ Sigles (data/manuel/sigles.csv) : 550 organisations, dont 76 avec un sigle ; 0 a
 ## Liens validés à la main
 - Candidats de la phase 0 acceptés (decision = oui) : 0
   (dont 0 ignorés car leur sens est « à vérifier »).
-- Liens manuels (data/manuel/aretes_manuelles.csv) : 16 ajoutés,
-  2 ignorés (source, type ou extrémité manquant).
+- Liens manuels (data/manuel/aretes_manuelles.csv) : 17 ajoutés,
+  1 ignorés (source, type ou extrémité manquant).
 
 ## Types (data/manuel/types.csv)
 parti 433, coalition 35, satellite 26, internationale 127, fondatrice 14, étrangère 177.
-0 types saisis à la main, 1 lignes ajoutées au fichier.
+0 types saisis à la main, 0 lignes ajoutées au fichier.
 Coalitions et satellites ne sont jamais des boîtes ; un satellite rattaché à un parent apparaît
 dans la colonne organisations_liees de ce parent.
 
@@ -78,5 +78,5 @@ dans la colonne organisations_liees de ce parent.
   Combat ouvrier, Du Pain et des Roses, Démocrates et progressistes, Endavant, Eusko Alkartasuna, Fédération de la Guyane du Parti socialiste, Féministes révolutionnaires, Groupe révolution socialiste, Génération écologie, Mouvement des démocrates et écologistes pour une Martinique souveraine, Mouvement écologiste indépendant, Parti de la nation occitane, Parti de libération kanak, Parti pirate, Place publique (parti politique), Pour la Bretagne !, Rézistan's Égalité 974, UDB Jeunes, Un monde d'avance, Union calédonienne, Union des centristes et des écologistes, Unité internationale des travailleurs - Quatrième Internationale, Walwari, War-Sav – Gauche indépendantiste bretonne, fédération des Français à l’étranger du Parti socialiste, fédération des Hauts-de-Seine du Parti socialiste, fédération des Yvelines du Parti socialiste, fédération du Doubs du Parti socialiste, groupe socialiste à l'Assemblée nationale.
 
 ## Affiliations
-- 66 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
+- 60 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
   à compléter dans data/manuel/affiliations_dates.csv (source obligatoire).
