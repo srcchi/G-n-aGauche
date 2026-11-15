@@ -123,6 +123,9 @@ Les corrections vont dans deux fichiers, relus à chaque exécution de `nettoyag
   réunion), tirets rouges avec une fourche au départ (scission), pointillés bleus (passage de
   militants). Un chevron sur une barre : renommage sur la même rangée. Un lien trop long (plus de
   40 ans ou de 2 voies) devient un renvoi écrit : « → NPA » d'un côté, « issu de : LCR » de l'autre.
-- Les Internationales ne sont pas des organisations de l'arbre : une bande fine sous la barre du
+- Exceptions voulues (`data/manuel/origines.csv`) : la Première Internationale (AIT) et sa branche
+  anti-autoritaire, et quatre Internationales dessinées en barres plus longues que leur section
+  française, collée par un trait de composante : IO (SFIO), IC (PC-SFIC), AIT de 1922 (CNT).
+- Les autres Internationales ne sont pas des organisations de l'arbre : une bande fine sous la barre du
   parti membre (hachurée : dates exactes inconnues) et un badge avec le sigle. Voir la clé sous la frise,
   puis l'index des sigles des organisations.

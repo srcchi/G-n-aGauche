@@ -1304,7 +1304,16 @@ def main():
     lignes_affil, a_dater = [], []
     rx_entree = re.compile(r"(?:adh[èée]r\w*|rejoin\w*|rejoint|membre depuis|affili\w*)[^.\n]{0,60}?\b(1[89]\d\d|20\d\d)", re.I)
     rx_sortie = re.compile(r"(?:quitt\w*|exclu\w*|rompt|rupture|désaffili\w*)[^.\n]{0,60}?\b(1[89]\d\d|20\d\d)", re.I)
+    # Internationale dessinée en barre (origines.csv, colonne internationale) : sa section collée à la
+    # barre par une composante n'a plus la bande de cette Internationale (ex. SFIO et IO).
+    barre_de = {r["internationale"].strip(): r["id"].strip() for r in lire("manuel/origines.csv")
+                if r.get("internationale", "").strip()}
+    collees = {(r["ancetre"].strip(), r["descendant"].strip()) for r in lire("manuel/aretes_manuelles.csv")
+               if r.get("type", "").strip() == "composante"}
     for a, b, e in affil_brutes:
+        if b in barre_de and (a, barre_de[b]) in collees:
+            stats["bandes_remplacees_par_barre"] += 1
+            continue
         da, di = noeuds[a], noeuds[b]
         p = e["preuve"]
         cit = [p["preuve"], p["citation"], p["source"]]
@@ -1383,12 +1392,13 @@ def main():
     # Exception (data/manuel/origines.csv) : origines historiques dessinées sans descendance active,
     # ex. la Première Internationale (AIT) et sa branche anti-autoritaire. Il leur faut quand même un
     # lien vers une autre organisation affichée (porte finale ci-dessous).
-    origines = {r["id"].strip() for r in lire("manuel/origines.csv") if r.get("source", "").strip()}
+    lignes_origines = [r for r in lire("manuel/origines.csv") if r.get("source", "").strip()]
+    origines = {r["id"].strip() for r in lignes_origines}
     garde |= origines & eligibles
     stats["origines"] = len(origines & garde)
     # Porte finale : chaque organisation gardée a au moins un lien vers une autre gardée
     while True:
-        seules = {q for q in garde if not (voisins_r5[q] & garde)}
+        seules = {q for q in garde if not (voisins_r5[q] & garde)} - origines   # une origine peut n'avoir qu'un lien de composante
         if not seules:
             break
         for q in seules:
@@ -1406,7 +1416,7 @@ def main():
             hors_perim.append([q, lab(q), "outre-mer sans lien documenté vers une organisation métropolitaine affichée"])
         garde -= a_retirer
         while True:                       # la porte finale, à nouveau
-            seules = {q for q in garde if not (voisins_r5[q] & garde)}
+            seules = {q for q in garde if not (voisins_r5[q] & garde)} - origines
             if not seules:
                 break
             for q in seules:

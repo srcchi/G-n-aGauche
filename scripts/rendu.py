@@ -99,6 +99,14 @@ MOTS_VIDES = {"de", "la", "le", "les", "des", "du", "pour", "l", "d", "et", "à"
 # Outils
 # ======================================================================
 
+def lire_manuel(nom):
+    chemin = os.path.join(RACINE, "data", "manuel", nom)
+    if not os.path.exists(chemin):
+        return []
+    with open(chemin, encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
 def lire(nom):
     chemin = os.path.join(SORTIE, nom)
     if not os.path.exists(chemin):
@@ -460,7 +468,20 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     preparer(items, inter, ech, T_AUJ)
     for l in liens:
         l["x_t"] = ech.X(l["t"])
-    majeur = lambda l: items[l["a"]]["majeure"] and items[l["b"]]["majeure"] and l["rel"] != "composante"
+    # Origines historiques (data/manuel/origines.csv) : leurs liens sont toujours dessinés, quelle que
+    # soit leur longueur (exception voulue, ex. AIT -> AIT anti-autoritaire)
+    origines = {r["id"] for r in lire_manuel("origines.csv")}
+    def majeur(l):
+        if l["rel"] == "composante":
+            return False
+        if items[l["a"]]["majeure"] and items[l["b"]]["majeure"]:
+            return True
+        # Lien d'une origine : forcé seulement s'il reste sous le seuil d'années (AIT -> AIT 1922, qui
+        # partirait de 1876, reste un renvoi écrit)
+        a = items[l["a"]]
+        depart = min(l["t"], a["t1"]) if a["t1"] is not None else l["t"]
+        return (bool({l["a"], l["b"]} & origines) and l["rel"] != "filiation_idéologique"
+                and l["t"] - depart <= SEUIL_ANNEES)
     # Un lien qui part pendant la zone de l'étiquette (scission peu après la fondation) : l'étiquette
     # passe juste avant la barre, pour que le départ et son cercle restent à la date exacte (2.4, 2.6).
     for l in liens:

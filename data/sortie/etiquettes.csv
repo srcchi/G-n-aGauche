@@ -1,6 +1,7 @@
 id,etiquette,origine,nom_complet,affiche
 Q107490623,2022 ou jamais,nom court,2022 ou jamais,
 Q1754290,ACN,acronyme du nom,A Cuncolta Naziunalista,
+fr:AIT anarcho-syndicaliste (1922),AIT (1922),sigles.csv,AIT anarcho-syndicaliste (1922),oui
 fr:Internationale anti-autoritaire (Saint-Imier),AIT anti-autoritaire,sigles.csv,AIT anti-autoritaire (Saint-Imier),oui
 Q115922089,AAT,acronyme du nom,Action anti-transphobe,
 Q55595356,APNA,acronyme du nom,Action populaire nationale d'Alsace,
@@ -65,6 +66,7 @@ Q2985649,CCA,acronyme du nom,Comités communistes pour l'autogestion,
 Q117476286,CPES,acronyme du nom,Comités populaires d'entraide et de solidarité,
 Q116456156,Communistes,nom court,Communistes,
 Q104290792,Communistes en lutte,nom court,Communistes en lutte,
+fr:Confédération nationale du travail (France),CNT,sigles.csv,Confédération nationale du travail,oui
 Q5176302,CMDO,article,Conseil pour le maintien des occupations,
 Q2406201,CIR,article,Convention des institutions républicaines,oui
 Q2996341,CAP,sigles.csv,Convention pour une alternative progressiste,oui
@@ -82,6 +84,7 @@ Q2998024,CSD,article,Corse social-démocrate,
 Q1995268,Corsica Libera,nom court,Corsica Libera,
 Q2998048,Corsica Nazione,nom court,Corsica Nazione,
 Q62079328,Debout,nom court,Debout (parti politique),
+fr:Deuxième Internationale (IO),IO,sigles.csv,Deuxième Internationale (IO),oui
 Q87467454,Du Pain et des Roses,nom court,Du Pain et des Roses,
 Q3041979,DUS,article,Dynamik unitaire Sud,
 Q3238003,DA,article,Dynamique autochtone,
@@ -295,8 +298,8 @@ Q628594,PT (1991),sigles.csv + année (homonyme),"Parti des travailleurs (France
 Q24939885,PT (2023),sigles.csv + année (homonyme),"Parti des travailleurs (France, 2015)",oui
 Q3366460,Parti frontiste,nom court,Parti frontiste,
 Q111187255,Parti lorrain,nom court,Parti lorrain,
-Q115925919,PNB (2021),acronyme du nom + année (homonyme),Parti national breton,
 Q3141006,PNB (1931),acronyme du nom + année (homonyme),Parti national breton,
+Q115925919,PNB (2021),acronyme du nom + année (homonyme),Parti national breton,
 Q111210969,PNSF,acronyme du nom,Parti national-syndicaliste français,
 Q1539236,Parti occitan,nom court,Parti occitan,
 Q135902867,Parti ouvrier,nom court,Parti ouvrier (1914),
@@ -374,8 +377,8 @@ Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3477547,SUPS,acronyme du nom,Section universitaire du Parti socialiste,
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
+fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,
@@ -385,6 +388,7 @@ Q3023497,SAV,acronyme du nom,Strollad ar Vro,
 Q55599992,NPA (2009),article + année (homonyme),Tendance CLAIRE,
 Q139493171,Territoires44,nom court,Territoires44,
 Q135875318,Treger Disuj,nom court,Treger Disuj,
+fr:Troisième Internationale (IC),IC,sigles.csv,Troisième Internationale (IC),oui
 Q3547154,UDB Jeunes,nom court,UDB Jeunes,
 Q3548270,Un monde d'avance,nom court,Un monde d'avance,
 Q65153446,Union anarchiste,nom court,Union anarchiste,
@@ -402,8 +406,8 @@ Q2540732,UGCS,article,Union des groupes et clubs socialistes,
 Q111628305,UJR,acronyme du nom,Union des jeunes révolutionnaires,
 Q3550161,UJCML,acronyme du nom,Union des jeunesses communistes marxistes-léninistes,
 Q3550193,URR,acronyme du nom,Union des républicains radicaux,
-Q116456095,URCF (2003),acronyme du nom + année (homonyme),Union des révolutionnaires-communistes de France,
 fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
+Q116456095,URCF (2003),acronyme du nom + année (homonyme),Union des révolutionnaires-communistes de France,
 Q3550207,UTCL,article,Union des travailleurs communistes libertaires,oui
 Q3550228,UEC,sigles.csv,Union des étudiants communistes,
 Q3107400,UPA,article,Union du peuple alsacien,
