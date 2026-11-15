@@ -140,12 +140,12 @@ def verifier_svg(chemin, cpt, err):
         if src.get("garde") != "oui":
             faute("R5", f"{q} dessinée mais pas gardée")
     # Départ de chaque lien sur sa barre (ou ses bandes si elles sont dessinées) : jamais dans le vide
-    bas_bandes = {}
+    bandes_de = defaultdict(list)       # parti -> [(x, x fin, bas)] : une bande ne compte qu'à son abscisse
     for g in racine.iter(S + "g"):
         if g.get("class") == "bande":
             rb = g.find(S + "rect")
-            bas_bandes[g.get("data-parti")] = max(bas_bandes.get(g.get("data-parti"), 0),
-                                                  float(rb.get("y")) + float(rb.get("height")))
+            bx_, bw_ = float(rb.get("x")), float(rb.get("width"))
+            bandes_de[g.get("data-parti")].append((bx_, bx_ + bw_, float(rb.get("y")) + float(rb.get("height"))))
     for g in racine.iter(S + "g"):
         if g.get("class") != "lien":
             continue
@@ -155,9 +155,17 @@ def verifier_svg(chemin, cpt, err):
             continue
         v = nombres(traits[0].get("d"))
         bx, by, bw, bh = barres[a]
-        bas = max(by + bh, bas_bandes.get(a, 0))
-        if not (bx - 1 <= v[0] <= bx + bw + ouvertes.get(a, 0) + 1 and by - 1 <= v[1] <= bas + 1):
+        bas = max([by + bh] + [yb for xa_, xb_, yb in bandes_de.get(a, []) if xa_ - 1 <= v[0] <= xb_ + 1])
+        if not (bx - 1 <= v[0] <= bx + bw + ouvertes.get(a, 0) + 1 and by - 1 <= v[1] <= bas + 1.5):
             faute("liens flottants", f"{a}->{g.get('data-b')} : départ ({v[0]:.0f}, {v[1]:.0f}) hors de sa barre")
+        # Arrivée d'une composante par le bas (membre au-dessus) : sur le bas réel de la barre cible
+        b_ = g.get("data-b")
+        if g.get("data-rel") == "composante" and b_ in barres:
+            w = nombres(traits[0].get("d"))[-2:]
+            cx, cy, cw, ch = barres[b_]
+            bas_b = max([cy + ch] + [yb for xa_, xb_, yb in bandes_de.get(b_, []) if xa_ - 1 <= w[0] <= xb_ + 1])
+            if w[1] > cy + ch / 2 and not (cy + ch - 1 <= w[1] <= bas_b + 1.5):
+                faute("liens flottants", f"{a}->{b_} : arrivée ({w[0]:.0f}, {w[1]:.0f}) hors de sa barre")
     if apercu:
         return
     cpt["_barres"] = max(cpt["_barres"], len(barres))

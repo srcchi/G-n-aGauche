@@ -1348,14 +1348,20 @@ def dessiner(m, avec_cle=True, apercu=False):
     for t in m["traces"]:
         st = STYLE_LIEN[t["rel"]]
         pts = list(t["pts"])
-        if apercu:
-            # L'aperçu ne dessine pas les bandes : un trait qui partait (ou arrivait, pour une
-            # composante) sous les bandes part du bas de la barre, sinon il flotte dans le vide.
-            for i_, q_ in ((0, t["a"]), (len(pts) - 1, t["b"])):
-                o_ = items[q_]
-                bas_barre = o_["y_c"] + BAR_H / 2
-                if bas_barre < pts[i_][1] <= o_["y_c"] + o_["bas"] + 0.5:
-                    pts[i_] = (pts[i_][0], bas_barre)
+        # Un trait qui part (ou arrive, pour une composante) sous les bandes s'accroche au bas réel
+        # à son abscisse : la barre, plus les seules bandes présentes à cette date (aucune dans
+        # l'aperçu). Sinon il flotte dans le vide là où la bande ne couvre pas (PCF avant 1977).
+        for i_, q_ in ((0, t["a"]), (len(pts) - 1, t["b"])):
+            o_ = items[q_]
+            bas_barre = o_["y_c"] + BAR_H / 2
+            x_, y_ = pts[i_]
+            if bas_barre < y_ <= o_["y_c"] + o_["bas"] + 1.5:
+                bas_x = bas_barre
+                if not apercu:
+                    for k, bd in enumerate(o_["bandes"]):
+                        if bd["xa"] - 0.5 <= x_ <= bd["xb"] + 0.5:
+                            bas_x = max(bas_x, bas_barre + BANDE_GAP + k * (BANDE_H + BANDE_GAP) + BANDE_H)
+                pts[i_] = (x_, bas_x + (y_ - (o_["y_c"] + o_["bas"]) if y_ > o_["y_c"] + o_["bas"] else 0))
         d = "M" + " L".join(f"{x:.2f} {y:.2f}" for x, y in pts)
         geo = json.dumps([[round(x, 2), round(y, 2), m["voie_index"][v]] for (x, y), v in zip(pts, t["voies_pts"])])
         xt, yt = pts[-1]
