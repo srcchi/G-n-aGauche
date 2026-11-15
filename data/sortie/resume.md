@@ -31,23 +31,23 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Après fusion par (ancêtre, descendant) | 1812 |
 | Corrections manuelles : ajouts / suppressions | 7 / 0 |
 | Paires réciproques fusionnées (aretes_reciproques.csv) | 39 |
-| Après fusion des réciproques | 1797, dont 1050 de lignée |
+| Après fusion des réciproques | 1798, dont 1051 de lignée |
 | Hors périmètre : une extrémité exclue ou étrangère (liens_hors_perimetre.csv) | 1408 |
 | Anomalies R1 et lignée parti / Internationale (anomalies.csv) | 8 |
 | Extrémité sans date, non dessinables (liens_date_manquante.csv) | 21 |
 | Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 1 |
-| **Liens du graphe (liens.csv)** | **163** |
+| **Liens du graphe (liens.csv)** | **164** |
 | Affiliations à une Internationale (affiliations.csv) | 74 |
 | Appartenances à une organisation française : coalition, fédération (appartenances_nationales.csv) | 73 |
 
-Liens par relation : scission (76), renommage (42), fusion (28), composante (8), absorption (4), filiation_idéologique (3), passage (1), refondation (1).
+Liens par relation : scission (75), renommage (42), fusion (28), composante (8), absorption (4), filiation_idéologique (3), passage (2), indirect (1), refondation (1).
 Les liens entre deux organisations fondées la même année (mois inconnus) sont dans anomalies.csv :
 leur longueur sur l'axe du temps serait nulle (règle R1).
 
 Causes probables des anomalies : date erronée ou trop imprécise (3), type de relation erroné (3), lien entre deux Internationales de sens contraire au temps (2).
 
-Dates : 103 fondations et 38 dissolutions avec un mois (lu dans l'infobox, seulement s'il accompagne l'année retenue).
-13 organisations ont une autre année de fondation dans une autre source (colonne fondation_autres_sources).
+Dates : 104 fondations et 38 dissolutions avec un mois (lu dans l'infobox, seulement s'il accompagne l'année retenue).
+14 organisations ont une autre année de fondation dans une autre source (colonne fondation_autres_sources).
 
 Affiliations : toutes en date_certainty = unknown (les sources ne donnent pas la période d'adhésion).
 Période recopiée : durée de vie du parti, bornée par celle de l'Internationale.
@@ -57,7 +57,7 @@ Sigles (data/manuel/sigles.csv) : 556 organisations, dont 82 avec un sigle ; 0 a
 ## Liens validés à la main
 - Candidats de la phase 0 acceptés (decision = oui) : 0
   (dont 0 ignorés car leur sens est « à vérifier »).
-- Liens manuels (data/manuel/aretes_manuelles.csv) : 21 ajoutés,
+- Liens manuels (data/manuel/aretes_manuelles.csv) : 23 ajoutés,
   1 ignorés (source, type ou extrémité manquant).
 
 ## Types (data/manuel/types.csv)

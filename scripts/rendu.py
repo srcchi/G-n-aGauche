@@ -302,7 +302,7 @@ def charger():
                              + ([f"journaux : {r['journaux']}"] if r["journaux"] else []))
     # Noms successifs d'une même organisation (infobox, champ fondation) : écrits dans la barre
     for r in lire("noms_successifs.csv"):
-        if r["id"] in orgs:
+        if r["id"] in orgs and t_de(r["annee"]) >= orgs[r["id"]]["t0"] - 0.5:   # pas avant la barre
             orgs[r["id"]].setdefault("noms", []).append((t_de(r["annee"]), r["nom"], r["citation"], r["source"]))
     for o in orgs.values():
         if o.get("noms"):

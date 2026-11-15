@@ -730,6 +730,18 @@ def main():
         aretes[(a, b)] = dict(type=t, sources={"manuel"}, relations={r["type"].strip()},
                               date=r.get("date_evenement", "").strip(), source_manuelle=src,
                               type_manuel=r["type"].strip())      # gardé à part : relations est un ensemble
+        if r["type"].strip() == "indirect":
+            # Lien indirect saisi à la main (PSOP -> Voix ouvrière par le groupe Barta) : deux citations,
+            # « lang:Page : « … » ; lang:Page : « … » », l'intermédiaire nommé dans la note (« par : … »)
+            cits = re.findall(r"(\w+:[^:«»;]+?)\s*:\s*«\s*(.+?)\s*»", src, re.S)
+            m_par = re.search(r"par\s*:\s*([^(;]+)", r.get("note", ""))
+            if len(cits) == 2 and all(corpus.verifier(c_, s_) for s_, c_ in cits) and m_par:
+                aretes[(a, b)].update(citation1=cits[0], preuve2=dict(citation=cits[1][1], source=cits[1][0]),
+                                      intermediaire_nom=m_par.group(1).strip())
+            else:
+                stats["indirects_manuels_sans_citation"] = stats.get("indirects_manuels_sans_citation", 0) + 1
+                del aretes[(a, b)]
+                continue
         for x in (a, b):
             noeuds.setdefault(x, None)
         stats["manuels_ajoutes"] += 1
@@ -768,7 +780,7 @@ def main():
         eg, er = aretes[garde], aretes.pop(retire)
         eg["sources"] |= er["sources"]
         eg["relations"] |= er["relations"]
-        for k in ("type_manuel", "source_manuelle", "date"):     # un lien manuel garde son type et sa citation
+        for k in ("type_manuel", "source_manuelle", "date", "citation1", "preuve2", "intermediaire_nom"):     # un lien manuel garde son type et sa citation
             if er.get(k) and not eg.get(k):
                 eg[k] = er[k]
         types = [t for t in (eg["type"], er["type"]) if t != "appartenance"] or ["appartenance"]
@@ -893,6 +905,8 @@ def main():
             e["preuve"] = dict(preuve="manuel", citation=e.get("source_manuelle", ""),
                                source="data/manuel/aretes_manuelles.csv",
                                indice=typ if typ in REL_LIGNEE else "")
+            if e.get("citation1"):
+                e["preuve"].update(citation=e["citation1"][1], source=e["citation1"][0])
             return True
         p = preuves.preuve_lien(corpus, a, b, noms_de)
         if p:
@@ -1676,7 +1690,8 @@ def main():
                              "oui" if e.get("meme_annee") else "", "oui" if e.get("reciproque") else "",
                              " | ".join(sorted(e["sources"])), " | ".join(sorted(e["relations"])),
                              lab(a), lab(b), p.get("preuve", ""), p.get("citation", ""), p.get("source", ""),
-                             e.get("intermediaire", ""), lab(e["intermediaire"]) if e.get("intermediaire") else "",
+                             e.get("intermediaire", ""),
+                             lab(e["intermediaire"]) if e.get("intermediaire") else e.get("intermediaire_nom", ""),
                              e.get("preuve2", {}).get("citation", ""), e.get("preuve2", {}).get("source", "")])
     # Composantes : une organisation de l'arbre membre d'une autre organisation de l'arbre (ex. PG et
     # POI dans LFI). Pas une lignée : un trait « collé » sans flèche, à la date où les deux existent.
