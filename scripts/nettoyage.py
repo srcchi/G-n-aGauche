@@ -1380,6 +1380,12 @@ def main():
         if x not in garde:
             garde.add(x)
             pile.extend(p for p in parents_r5[x] if p in eligibles)
+    # Exception (data/manuel/origines.csv) : origines historiques dessinées sans descendance active,
+    # ex. la Première Internationale (AIT) et sa branche anti-autoritaire. Il leur faut quand même un
+    # lien vers une autre organisation affichée (porte finale ci-dessous).
+    origines = {r["id"].strip() for r in lire("manuel/origines.csv") if r.get("source", "").strip()}
+    garde |= origines & eligibles
+    stats["origines"] = len(origines & garde)
     # Porte finale : chaque organisation gardée a au moins un lien vers une autre gardée
     while True:
         seules = {q for q in garde if not (voisins_r5[q] & garde)}

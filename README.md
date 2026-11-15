@@ -51,11 +51,13 @@ python scripts/nettoyage.py && python scripts/rendu.py && python scripts/verifie
 | `types.csv` | type de chaque organisation (parti, coalition, satellite…) |
 | `aretes_manuelles.csv` | liens ajoutés à la main, source obligatoire ; type `composante` (membre de) ou `supprimer` (retire un lien automatique erroné) |
 | `noeuds_manuels.csv` | dates, nom ou courants corrigés (ou organisation ajoutée), source et citation obligatoires |
+| `origines.csv` | origines historiques dessinées même sans descendance active (ex. la Première Internationale), raison et source obligatoires |
 | `affiliations_dates.csv` | dates d'adhésion aux Internationales, source obligatoire |
 | `sigles.csv` | sigle et nom court affichés dans les étiquettes |
 
 Et dans `data/sortie/liens_candidats.csv`, `decision = oui` sur les liens proposés à garder. Pour commencer : `data/sortie/liens_candidats_a_lire.csv`, un extrait court (confiance élevée, organisation dessinée, lien pas encore tracé) ; la colonne `ligne` donne la ligne à modifier dans le grand fichier.
-L'arbre ne montre que les organisations en lignée directe d'une organisation active (règle R5).
+L'arbre ne montre que les organisations en lignée directe d'une organisation active (règle R5),
+sauf les origines historiques listées dans `data/manuel/origines.csv`.
 
 `data/sortie/criteres.md` explique comment chaque organisation est rangée (graphe, étrangère,
 Internationale, exclue) et dans quelle famille ; `data/sortie/resume.md` donne les chiffres.
