@@ -37,7 +37,7 @@ Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à tra
 | Extrémité sans date, non dessinables (liens_date_manquante.csv) | 21 |
 | Filiations redondantes retirées par réduction transitive (reduction_transitive.csv) | 1 |
 | **Liens du graphe (liens.csv)** | **164** |
-| Affiliations à une Internationale (affiliations.csv) | 68 |
+| Affiliations à une Internationale (affiliations.csv) | 69 |
 | Appartenances à une organisation française : coalition, fédération (appartenances_nationales.csv) | 71 |
 
 Liens par relation : scission (74), renommage (42), fusion (28), composante (8), absorption (4), filiation_idéologique (3), passage (3), indirect (1), refondation (1).
@@ -78,5 +78,5 @@ dans la colonne organisations_liees de ce parent.
   Combat ouvrier, Du Pain et des Roses, Démocrates et progressistes, Endavant, Eusko Alkartasuna, Féministes révolutionnaires, Groupe révolution socialiste, Génération écologie, Mouvement des démocrates et écologistes pour une Martinique souveraine, Mouvement écologiste indépendant, Parti de la nation occitane, Parti de libération kanak, Parti pirate, Place publique (parti politique), Pour la Bretagne !, Rézistan's Égalité 974, UDB Jeunes, Un monde d'avance, Union calédonienne, Union des centristes et des écologistes, Walwari, War-Sav – Gauche indépendantiste bretonne, groupe socialiste à l'Assemblée nationale.
 
 ## Affiliations
-- 51 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
+- 52 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
   à compléter dans data/manuel/affiliations_dates.csv (source obligatoire).

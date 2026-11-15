@@ -229,7 +229,14 @@ def verifier_svg(chemin, cpt, err):
                 faute("R4 textes", f"« {t.text} » déborde de l'étiquette de {q}")
         elif cls == "nom-t":            # nom successif écrit dans sa barre (PC-SFIC, PCF)
             q = t.get("data-org")
-            if q not in barres or not dedans(bbox(t), barres[q]):
+            if q not in barres:
+                faute("R4 textes", f"nom « {t.text} » sans barre")
+            elif t.get("data-apres") == "oui":          # dernier nom d'une active : juste après la barre
+                bx_, by_, bw_, bh_ = barres[q]
+                tb_ = bbox(t)
+                if not (bx_ + bw_ <= tb_[0] <= bx_ + bw_ + ouvertes.get(q, 0) + 8 and by_ - 1 <= tb_[1] and tb_[1] + tb_[3] <= by_ + bh_ + 1):
+                    faute("R4 textes", f"nom « {t.text} » mal placé après la barre de {q}")
+            elif not dedans(bbox(t), barres[q]):
                 faute("R4 textes", f"nom « {t.text} » hors de la barre de {q}")
         elif cls == "renvoi":
             renvois[t.get("data-org")].append((bbox(t), "".join(t.itertext()), t.get("data-a"), t.get("data-b")))

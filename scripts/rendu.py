@@ -192,6 +192,17 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", sans_accents(s)).strip("-")
 
 
+def formes_courtes(nom):
+    """Formes d'un nom successif, de la plus longue à la plus courte : le nom, sa partie avant « – »
+    (« Les Écologistes – Europe Écologie Les Verts »), les initiales des mots à majuscule sans accents
+    (« Europe Écologie Les Verts » : EELV)."""
+    import unicodedata
+    tete = re.split(r"\s+[–-]\s+", nom)[0]
+    init = "".join(w[0] for w in re.findall(r"[^\W\d_][\w'’-]*", tete) if w[0].isupper())
+    init = unicodedata.normalize("NFD", init).encode("ascii", "ignore").decode()
+    return list(dict.fromkeys(x for x in (nom, tete, init if len(init) >= 3 else "") if x))
+
+
 def acronyme(nom):
     base = re.sub(r"\s*\([^)]*\)", "", nom)
     res = "-".join("".join(w[0].upper() for w in re.findall(r"[^\W\d_]+", p) if w.lower() not in MOTS_VIDES)
@@ -312,7 +323,7 @@ def charger():
             orgs[r["id"]]["details"].append("branche éteinte : " + r["raison"])
     # Noms successifs d'une même organisation (infobox, champ fondation) : écrits dans la barre
     for r in lire("noms_successifs.csv"):
-        if r["id"] in orgs and t_de(r["annee"]) >= orgs[r["id"]]["t0"] - 0.5:   # pas avant la barre
+        if r["id"] in orgs and int(r["annee"]) >= int(orgs[r["id"]]["t0"]):   # pas avant l'année de la barre
             orgs[r["id"]].setdefault("noms", []).append((t_de(r["annee"]), r["nom"], r["citation"], r["source"]))
     for o in orgs.values():
         if o.get("noms"):
@@ -456,11 +467,19 @@ def preparer(items, inter, ech, T_AUJ):
         o["dates"] = f"{o['an0']}–{o['fin_txt']}"
         b = base(o)
         # Noms successifs : l'étiquette donne le premier nom (SFIC), s'il tient dans la barre
-        if o.get("noms") and abs(o["noms"][0][0] - o["t0"]) < 1 and                 larg(o["noms"][0][1], FS_SIGLE, True) + 2 * TAG_PAD <= (o["x1"] - o["x0"]):
-            b = o["noms"][0][1]
-            o["nom_en_tete"] = True
+        if o.get("noms") and abs(o["noms"][0][0] - o["t0"]) < 1:
+            fin_1 = o["noms"][1][0] if len(o["noms"]) > 1 else (o["t1"] if o["t1"] is not None else T_AUJ)
+            place_1 = max(min(ech.X(fin_1), o["x1"]) - o["x0"], 0)      # le premier segment seulement
+            c_ = next((c for c in formes_courtes(o["noms"][0][1])
+                       if larg(c, FS_SIGLE, True) + 2 * TAG_PAD <= place_1), None)
+            if c_ is None:      # premier segment trop court (SFIC, 1920-1921) : son nom au début de la barre
+                c_ = next((c for c in formes_courtes(o["noms"][0][1])
+                           if larg(c, FS_SIGLE, True) + 2 * TAG_PAD <= o["x1"] - o["x0"]), None)
+            if c_:
+                b = c_
+                o["nom_en_tete"] = True
         long_w = larg(b, FS_SIGLE, True) + 5 + larg(o["dates"], FS) + 2 * TAG_PAD
-        seul = b if n_base[b] == 1 else o["etiquette"]
+        seul = b if n_base.get(b, 1) <= 1 else o["etiquette"]
         seul_w = larg(seul, FS_SIGLE, True) + 2 * TAG_PAD
         place = o["x1"] - o["x0"]
         if long_w <= place or seul_w > place:
@@ -469,6 +488,14 @@ def preparer(items, inter, ech, T_AUJ):
         else:
             o["etiq_aff"], o["avec_dates"], o["tag_w"] = seul, False, seul_w    # sigle seul, dates en infobulle
         o["tag_dedans"] = o["tag_w"] <= place       # 2.6 : dans la barre si elle est assez longue
+        # Dernier nom d'une organisation active qui ne tient pas dans son segment (Les Écologistes,
+        # 2023) : écrit juste après la barre, là où rien ne suit (après aujourd'hui)
+        if o.get("noms") and o["t1"] is None and len(o["noms"]) > 1:
+            x_dernier = ech.X(o["noms"][-1][0])
+            formes = formes_courtes(o["noms"][-1][1])
+            if not any(x_dernier + 4 + larg(f_, FS_SIGLE, True) + 3 <= o["x1"] for f_ in formes):
+                f_ = formes[1] if len(formes) > 1 and len(formes[1]) >= 4 else formes[0]
+                o["nom_apres"] = (f_, larg(f_, FS_SIGLE, True))
         # Bandes d'affiliation (2.7) : datées pleines, non datées hachurées sur toute la barre ; 2 au plus
         fin_o = o["t1"] if o["t1"] is not None else T_AUJ
         bandes = []
@@ -482,6 +509,15 @@ def preparer(items, inter, ech, T_AUJ):
                     connu, ta, tb = False, o["t0"], fin_o
             else:
                 ta, tb = o["t0"], fin_o
+            if not connu:
+                # Période inconnue : hachurée sur la vie commune du parti et de l'Internationale seulement
+                # (la SFIO n'est pas membre de l'IS avant 1951, date de naissance de l'IS)
+                if d["debut"]:
+                    ta = max(ta, t_de(d["debut"]))
+                if d["fin"]:
+                    tb = min(tb, t_de(d["fin"]))
+                if tb <= ta:
+                    continue
             xa, xb = max(o["x0"], ech.X(ta)), min(o["x1"], max(ech.X(tb), ech.X(ta) + MIN_W))
             txt = d["sigle"]          # période inconnue : la bande hachurée suffit (voir la légende)
             bandes.append(dict(intl=a["international_id"], connu=connu, xa=xa, xb=xb, couleur=d["couleur"],
@@ -501,7 +537,7 @@ def ranger_bandes(o, premier=None):
     lignes, gardees, reste = [], [], []
     for b in toutes:
         k = next((i for i, l in enumerate(lignes)
-                  if b["connu"] and all(c["connu"] and (b["xa"] >= c["xb"] - 0.5 or b["xb"] <= c["xa"] + 0.5) for c in l)),
+                  if all(b["xa"] >= c["xb"] - 0.5 or b["xb"] <= c["xa"] + 0.5 for c in l)),
                  len(lignes))
         if k >= MAX_BANDES:
             reste.append(b)
@@ -557,6 +593,7 @@ def bandeaux(items, liens, ech, T_AUJ):
                      fin="aujourd'hui" if tb >= T_AUJ else str(int(tb)), ecrit=larg(txt, FS, True) + 6 <= xb - xa)
             s["bandes"].append(b)
         ranger_bandes(s, premier=ref)
+        b["prolonge"] = q_i                 # cette bande prolonge le bandeau : dessinés d'un seul tenant
         o["section"] = SECTION_DE[q_i] = q_s
         o["strip_haut"] = BAR_H / 2 + BANDE_GAP
         # Le bandeau va jusqu'au début de la bande (PC-SFIC : fin 1920, bande de l'IC en 1921)
@@ -743,6 +780,8 @@ def bornes(items, poly):
         o["renv_x"] = bord - o["w_renv"]
         o["L"] = min(bord, o["renv_x"]) - 1
         o["R"] = (o["tag_x"] + o["tag_w"] if apres else o["x1_vis"]) + 1
+        if o.get("nom_apres") and not apres:
+            o["R"] = o["x1_vis"] + 4 + o["nom_apres"][1] + 3
 
 
 def renumeroter(items, voies_ordre, rangees):
@@ -1471,7 +1510,8 @@ def dessiner(m, avec_cle=True, apercu=False):
                    f'data-statut="{o["statut"]}" data-majeure="{"oui" if o["majeure"] else ""}" x="{x0:.2f}" '
                    f'y="{yb:.2f}" width="{x1 - x0:.2f}" height="{h_b}" rx="{0 if o["x1_vis"] > x1 else (2 if strip else 3)}" '
                    f'fill="{o["couleur"]}"'
-                   + (' stroke="#333333" stroke-width="0.8" data-style="internationale"' if strip else "")
+                   + ((' data-style="internationale"' if o.get("section") else
+                       ' stroke="#333333" stroke-width="0.8" data-style="internationale"') if strip else "")
                    + (f' data-section="{esc(o["section"])}"' if o.get("section") else "")
                    + '/>')
         if o["x1_vis"] > x1 and not strip:
@@ -1492,9 +1532,15 @@ def dessiner(m, avec_cle=True, apercu=False):
                             f'<title>{esc(b["nom"])} : ' + (f'{esc(b["debut"])}–{esc(b["fin"])}' if b["connu"] else
                                                             "affiliation citée, dates à documenter") + "</title>"
                             f'<rect class="bande-r" x="{b["xa"]:.2f}" y="{y:.2f}" width="{b["xb"] - b["xa"]:.2f}" '
-                            f'height="{BANDE_H}" rx="2" fill="{fill}" stroke="#333333" stroke-width="0.8" '
-                            f'data-bbox="{b["xa"]:.2f},{y:.2f},{b["xb"] - b["xa"]:.2f},{BANDE_H}"/>')
-                if b["ecrit"]:
+                            f'height="{BANDE_H}" rx="2" fill="{fill}"'
+                            + ('' if b.get("prolonge") else ' stroke="#333333" stroke-width="0.8"') +
+                            f' data-bbox="{b["xa"]:.2f},{y:.2f},{b["xb"] - b["xa"]:.2f},{BANDE_H}"/>')
+                if b.get("prolonge") in items:
+                    # Bandeau de l'Internationale et sa bande dans la section : un seul contour, un seul sigle
+                    xi = items[b["prolonge"]]["x0"]
+                    haut.append(f'<rect class="contour-bandeau" x="{xi:.2f}" y="{y:.2f}" width="{b["xb"] - xi:.2f}" '
+                                f'height="{BANDE_H}" rx="2" fill="none" stroke="#333333" stroke-width="0.8"/>')
+                if b["ecrit"] and not (b.get("prolonge") in items and not items[b["prolonge"]].get("sans_tag")):
                     wt = larg(b["texte"], FS, True)
                     c_t = texte_sur(b["couleur"]) if b["connu"] else "#111111"
                     halo = '' if b["connu"] else ' stroke="#FFFFFF" stroke-width="3" paint-order="stroke"'
@@ -1545,19 +1591,34 @@ def dessiner(m, avec_cle=True, apercu=False):
                     xn = X(t_n)
                     if not (x0 + 1 < xn < x1 - 1):
                         continue
+                    if k_ == len(a_ecrire) - 1 and o.get("nom_apres") and not o.get("tag_apres"):
+                        haut.append(f'<line class="nom-trait" x1="{xn:.2f}" x2="{xn:.2f}" y1="{yb:.2f}" '
+                                    f'y2="{yb + BAR_H:.2f}" stroke="#FFFFFF" stroke-width="1.5"/>')
+                        nom_a, w_a = o["nom_apres"]
+                        xa_ = o["x1_vis"] + 4
+                        haut.append(texte(xa_, yc + 4.5, nom_a, FS_SIGLE, True, "#333333", cls="nom-t",
+                                          extra=f' data-org="{esc(o["id"])}" data-apres="oui" '
+                                                f'data-bbox="{xa_:.2f},{yc - 6.5:.2f},{w_a:.2f},13"'))
+                        continue
                     if xn > fin_tag + 1:
                         haut.append(f'<line class="nom-trait" x1="{xn:.2f}" x2="{xn:.2f}" y1="{yb:.2f}" '
                                     f'y2="{yb + BAR_H:.2f}" stroke="#FFFFFF" stroke-width="1.5"/>')
                     if nom == o["etiq_aff"] and xn <= fin_tag:
                         continue
-                    xt_ = max(xn + 4, fin_tag + 5)
-                    wn = larg(nom, FS_SIGLE, True)
-                    gene = [xd for xd in departs if xt_ - 6 <= xd <= xt_ + wn + 6]
-                    while gene:                 # première place libre après les départs de liens
-                        xt_ = max(gene) + 7
+                    pose = None
+                    for nom in formes_courtes(nom):     # le nom entier s'il tient, sinon plus court
+                        xt_ = max(xn + 4, fin_tag + 5)
+                        wn = larg(nom, FS_SIGLE, True)
                         gene = [xd for xd in departs if xt_ - 6 <= xd <= xt_ + wn + 6]
-                    if xt_ + wn + 3 > suivants[k_]:
+                        while gene:                 # première place libre après les départs de liens
+                            xt_ = max(gene) + 7
+                            gene = [xd for xd in departs if xt_ - 6 <= xd <= xt_ + wn + 6]
+                        if xt_ + wn + 3 <= suivants[k_]:
+                            pose = (nom, xt_, wn)
+                            break
+                    if not pose:
                         continue
+                    nom, xt_, wn = pose
                     haut.append(texte(xt_, yc + 4.5, nom, FS_SIGLE, True, ct, cls="nom-t",
                                       extra=f' data-org="{esc(o["id"])}" data-bbox="{xt_:.2f},{yc - 6.5:.2f},{wn:.2f},13"'))
             # Renvois, juste avant (étiquette ou couloir d'arrivée)
@@ -1959,6 +2020,17 @@ HTML = r"""<!doctype html>
   #arbre .bande { cursor:pointer; }
   #arbre.sans-cadres .bande { display:none; }
   .replie { opacity:.55; }
+  /* Infobulle lisible (remplace les infobulles natives du SVG) */
+  #bulle { position:fixed; z-index:20; display:none; max-width:min(520px, calc(100vw - 32px)); max-height:60vh; overflow:auto;
+    background:var(--fond); color:var(--texte); border:1px solid var(--bord); border-radius:8px; padding:10px 12px;
+    box-shadow:0 6px 24px rgba(0,0,0,.18); font-size:13px; line-height:1.45; }
+  #bulle.epinglee { border-color:var(--accent); }
+  #bulle .titre { font-weight:bold; font-size:15px; margin-bottom:4px; }
+  #bulle .ligne { margin:3px 0; }
+  #bulle .etiquette { color:var(--doux); }
+  #bulle q { display:block; quotes:none; font-style:italic; color:var(--doux); border-left:3px solid var(--bord);
+    padding:1px 0 1px 8px; margin:2px 0 4px; word-break:break-word; }
+  #bulle .aide { font-size:11px; color:var(--doux); margin-top:6px; }
 </style>
 </head>
 <body>
@@ -1972,6 +2044,7 @@ HTML = r"""<!doctype html>
   <span class="familles" id="familles" aria-label="Replier une famille"></span>
 </header>
 <main>
+  <div id="bulle" role="tooltip"></div>
   <div id="vue">__SVG__</div>
   <aside>
     <details open id="cle"><summary>Clé des Internationales</summary>
@@ -2077,6 +2150,38 @@ svg.querySelectorAll('.bande').forEach(b => b.addEventListener('click', e => { e
   const ent = document.getElementById('cle-' + b.dataset.intl); if (!ent) return;
   ent.scrollIntoView({block:'center', behavior:'smooth'}); ent.classList.add('flash'); setTimeout(() => ent.classList.remove('flash'), 1500);
   choisie = b.dataset.intl; marquerFamille(choisie); surligner(familleMembres(choisie)); }));
+// Infobulles : le texte des <title> du SVG, mis en forme (nom en gras, une ligne par fait,
+// citations à part). Un clic l'épingle (pour la lire et la faire défiler), Échap ou un clic ailleurs la ferme.
+const bulle = document.getElementById('bulle');
+let epinglee = false;
+function echapper(t){ return t.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function formater(txt){
+  const lignes = txt.split('\n').filter(l => l.trim());
+  return lignes.map((l, i) => {
+    let h = echapper(l).replace(/« ([\s\S]*?) »/g, (m, c) => '<q>« ' + c + ' »</q>');
+    const k = h.indexOf(' : '); if (i > 0 && k > 0 && k < 90) h = '<span class="etiquette">' + h.slice(0, k) + ' :</span>' + h.slice(k + 2);
+    return i === 0 ? '<div class="titre">' + h + '</div>' : '<div class="ligne">' + h + '</div>';
+  }).join('') + '<div class="aide">Clic : épingler · Échap : fermer</div>';
+}
+function placer(e){ const m = 14, w = bulle.offsetWidth, h = bulle.offsetHeight;
+  let x = e.clientX + m, y = e.clientY + m;
+  if (x + w > innerWidth - 8) x = Math.max(8, e.clientX - w - m);
+  if (y + h > innerHeight - 8) y = Math.max(8, innerHeight - h - 8);
+  bulle.style.left = x + 'px'; bulle.style.top = y + 'px'; }
+svg.querySelectorAll('title').forEach(t => { const p = t.parentNode;
+  if (p && p !== svg) { p.dataset.info = t.textContent; t.remove(); } });
+svg.querySelectorAll('[data-info]').forEach(el => {
+  el.addEventListener('mouseenter', e => { if (epinglee) return; e.stopPropagation();
+    bulle.innerHTML = formater(el.dataset.info); bulle.style.display = 'block'; placer(e); });
+  el.addEventListener('mousemove', e => { if (!epinglee) placer(e); });
+  el.addEventListener('mouseleave', () => { if (!epinglee) bulle.style.display = 'none'; });
+  el.addEventListener('click', e => { if (e.target.closest('.renvoi')) return;
+    bulle.innerHTML = formater(el.dataset.info); bulle.style.display = 'block'; placer(e);
+    epinglee = true; bulle.classList.add('epinglee'); e.stopPropagation(); });
+});
+function fermer(){ epinglee = false; bulle.classList.remove('epinglee'); bulle.style.display = 'none'; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fermer(); });
+document.getElementById('vue').addEventListener('click', e => { if (epinglee && !bulle.contains(e.target)) fermer(); });
 ajuster();
 if (location.hash) { const q = decodeURIComponent(location.hash.slice(1)); const g = svg.querySelector(`.org-haut[data-id="${CSS.escape(q)}"]`);
   if (g) { centrer(g); const s = parcours(q, parents, new Set([q])); parcours(q, enfants, s); surligner(s); } }

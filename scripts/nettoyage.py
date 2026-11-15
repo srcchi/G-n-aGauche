@@ -440,6 +440,9 @@ def noms_successifs(corpus, garde):
             if not m:
                 continue
             valeur = m.group(1)
+            # « {{date|13|novembre|2010}}<br><small>(Europe Écologie Les Verts)</small> » : la date et son
+            # nom sont sur deux lignes, on les recolle
+            valeur = re.sub(r"<br\s*/?>\s*(?=<small>\s*\()", " ", valeur)
             morceaux = re.split(r"<br\s*/?>", re.sub(r"<ref[^>]*/>|<ref[^>]*>.*?</ref>", "", valeur, flags=re.S))
             noms = []
             for mo in morceaux:
@@ -1312,6 +1315,20 @@ def main():
             affil_ok.append((a, b, e))
         else:
             affil_sans.append([a, lab(a), b, lab(b), " | ".join(sorted(e["sources"]))])
+    # Successeur par renommage sans article à lui (NPA -> NPA-L'Anticapitaliste, un seul article pour
+    # les deux) : il garde les affiliations que l'infobox de cet article donne au présent. Ce n'est pas
+    # un héritage (R7) : c'est le même article, qui décrit l'organisation actuelle.
+    sans_article = {q for q in noeuds if not any(l_ == "fr" for l_, _, _ in corpus.textes.get(q, []))}
+    deja_aff = {(x, i) for x, i, _ in affil_ok}
+    for (x, y), e_ in aretes.items():
+        if y in sans_article and noeuds.get(y, {}).get("actif") and e_["type"] == "filiation" \
+                and noeuds[x]["dissolution"] and abs(noeuds[x]["dissolution"] - (noeuds[y]["fondation"] or 0)) <= 1:
+            for x2, i, ea in list(affil_ok):
+                if x2 == x and (y, i) not in deja_aff and ea["preuve"].get("citation", "").lstrip().startswith("|"):
+                    affil_ok.append((y, i, dict(sources={f"successeur sans article ({lab(x)})"},
+                                                type="appartenance", preuve=dict(ea["preuve"]))))
+                    deja_aff.add((y, i))
+                    stats["affiliations_successeur"] = stats.get("affiliations_successeur", 0) + 1
     affil_brutes = affil_ok
     inter_utiles = {b for _, b, _ in affil_brutes}
     # 1.3 Succession entre Internationales : seulement renommage, fusion ou refondation, avec
