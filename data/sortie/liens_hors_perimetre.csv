@@ -73,7 +73,7 @@ Q110837,Parti de gauche (Suède),Q1787940,Parti communiste de Suède (1967),scis
 Q111169764,Jerusalem sanjak,Q4145971,moutassarifat de Jérusalem,filiation,exclu -> exclu
 Q111187255,Parti lorrain,Q111187242,Pays Unis,appartenance,graphe -> exclu
 Q111187258,Prouvènço Nacioun,Q111187242,Pays Unis,appartenance,graphe -> exclu
-Q111799189,Nouvelle Union populaire écologique et sociale,Q126487286,Nouveau Front populaire,filiation,graphe -> coalition
+Q111799189,Nouvelle Union populaire écologique et sociale,Q126487286,Nouveau Front populaire,filiation,coalition -> coalition
 Q112042684,gouvernement Élisabeth Borne,Q112894205,remaniement du gouvernement Élisabeth Borne du 4 juillet 2022,filiation,exclu -> exclu
 Q112042684,gouvernement Élisabeth Borne,Q124218594,gouvernement Gabriel Attal,filiation,exclu -> exclu
 Q1122980,Comtat Venaissin,Q58296,Première République française,filiation,exclu -> exclu
@@ -658,6 +658,7 @@ Q290305,gouvernement Painlevé I,Q3112068,gouvernement Georges Clemenceau II,fil
 Q290503,Étoile nord-africaine,Q137353779,Q137353779,filiation,exclu -> exclu
 Q290503,Étoile nord-africaine,Q3366385,Parti du peuple algérien,filiation,exclu -> exclu
 Q2912866,gouvernement Pierre Waldeck-Rousseau,Q1829373,gouvernement Émile Combes,filiation,exclu -> exclu
+Q29348702,Front de gauche (France),Q30741057,Rézistan's Égalité 974,filiation,coalition -> graphe
 Q2940142,Royaume wisigoth de Tolède,Q6159007,wilaya d'Al-Andalus,filiation,exclu -> exclu
 Q2940142,Royaume wisigoth de Tolède,Q663258,Marche d'Espagne,filiation,exclu -> exclu
 Q2940142,Royaume wisigoth de Tolède,Q8575586,Califat omeyyade,filiation,exclu -> exclu

@@ -380,7 +380,9 @@ def classer_types(noeuds, classe, wikitext, stats, aretes=None):
         if t in DETAIL_TYPE:
             pourquoi = f"{DETAIL_TYPE[t]} ; {pourquoi}"
         t = ANCIENS_TYPES.get(t, t)
-        if t in ("satellite", "coalition") and q in ancetres_de_partis:
+        # Une coalition de la liste explicite reste une coalition (ex. le Front de gauche,
+        # dont le seul « descendant » est le Front de gauche Réunion, lien vers la page nationale)
+        if t in ("satellite", "coalition") and q in ancetres_de_partis                 and normaliser(d["label"]) not in coalitions:
             pourquoi = f"{t} ancêtre d'un parti (organisme fondateur) ; {pourquoi}"
             t = "fondatrice"
         drapeaux = []
@@ -683,6 +685,8 @@ def main():
         if not a or not b or not src or not r.get("type", "").strip():
             stats["manuels_incomplets"] += 1      # source obligatoire
             continue
+        if r["type"].strip() == "composante":
+            continue                              # pas une lignée : lue avec les composantes
         t = TYPE_LIEN_MANUEL.get(r["type"].strip(), "filiation")
         aretes[(a, b)] = dict(type=t, sources={"manuel"}, relations={r["type"].strip()},
                               date=r.get("date_evenement", "").strip(), source_manuelle=src)
@@ -926,6 +930,26 @@ def main():
     # prédécesseur = début du successeur -> renommage, les autres apports devenant des fusions
     # secondaires ; (3) sinon, plusieurs prédécesseurs -> fusion (1.2a) ; (4) sinon selon la citation.
     RX_SUCCESSION_WD = re.compile(r"remplac|suivi par|précédé par|successeur|prédécesseur|wikipedia:(?:pred|succ)$", re.I)
+    def periode(citation, source, cible):
+        """Période écrite après le lien dans l'infobox : « [[Front de gauche]] <small>(2008-2016)</small> »."""
+        lang = source.split(":", 1)[0]
+        for morceau in re.split(r"<br\s*/?>", citation):
+            if any(corpus.resoudre(lang, m.group(1)) == cible for m in preuves.RX_LIEN.finditer(morceau)):
+                m = re.search(r"\(\s*(?:depuis\s+)?(1[89]\d\d|20\d\d)\s*(?:[-–]\s*(1[89]\d\d|20\d\d))?", morceau)
+                if m:
+                    return int(m.group(1)), int(m.group(2)) if m.group(2) else None
+                break
+        return None, None
+
+    def fusion_tardive(a, b, p):
+        """« fusion de = … Ensemble ! <small>(2025)</small> » dans l'infobox de L'Après, fondée en 2024 :
+        une fusion datée après la fondation du descendant n'est pas une continuation."""
+        if not p.get("citation") or p.get("source") != f"fr:{noeuds[b]['label']}":
+            return None
+        an, _fin = periode(p["citation"], p["source"], a)
+        f_b = noeuds[b]["dissolution"] or noeuds[b].get("fin_deduite") or 9999
+        return an if an and noeuds[b]["fondation"] < an <= f_b else None
+
     liens, contradictions = [], []
     for a, b, t, e in gardees:
         p = e["preuve"]
@@ -940,7 +964,7 @@ def main():
             rel = indice               # lien saisi à la main : son type fait foi
         elif champ_t == "scission":
             rel = "scission"
-        elif dit_succession and colle and t != "scission":
+        elif dit_succession and colle and t != "scission" and not (champ_t == "fusion" and fusion_tardive(a, b, p)):
             rel = "renommage"          # continuation (1.2b), même si l'infobox du successeur dit « fusion de »
         elif champ_t == "fusion":
             rel = "fusion"
@@ -1098,7 +1122,7 @@ def main():
     # social-démocrate, écosocialiste) et seulement par Wikidata (pas d'article à lire), prend la
     # famille précise de son parent (ex. NPA-R et NPA-A, issus du NPA trotskyste, que Wikidata dit
     # seulement « communisme » ou « écosocialisme » et qui n'ont pas d'article Wikipédia).
-    # Seule la voie change ; le lien de lignée, lui, a sa citation. Liste : familles_heritees.csv.
+    # La voie et la couleur changent ; le lien de lignée, lui, a sa citation. Liste : familles_heritees.csv.
     GENERIQUES = {"communiste", "social-démocrate", "écosocialiste"}
     PRECISES = {"trotskystes", "maoïstes", "anarchistes et libertaires"}
     heritees, deja = [], set()
@@ -1121,6 +1145,7 @@ def main():
             continue                       # pas d'héritage en cascade
         ancienne = db["famille"]
         db["famille"] = db["famille_courant"] = da["famille"]
+        db["courant_principal"] = da["courant_principal"]   # et sa couleur
         db["famille_note"] = f"famille déduite du parent : {da['label']} ({rel})"
         deja.add(b)
         p = e.get("preuve") or {}
@@ -1538,17 +1563,22 @@ def main():
                [l[:7] for l in a_dater], dossier=MANUEL)
 
     lignes_liens = []
-    def date_ev(b, rel, e):
-        # Absorption : à la disparition de la source ; sinon : fondation du descendant
+
+    def date_ev(a, b, rel, e):
+        # Absorption : à la disparition de la source ; fusion datée dans l'infobox du descendant
+        # (« Ensemble ! <small>(2025)</small> ») ; sinon : fondation du descendant
         if rel == "absorption":
             return e["date_absorption"], ""
+        an = fusion_tardive(a, b, e.get("preuve") or {}) if rel == "fusion" else None
+        if an:
+            return an, ""
         return noeuds[b]["fondation"], noeuds[b]["fondation_mois"] or ""
 
-    for a, b, rel, e in sorted(liens, key=lambda x: (date_ev(x[1], x[2], x[3])[0], lab(x[0]))):
+    for a, b, rel, e in sorted(liens, key=lambda x: (date_ev(*x)[0], lab(x[0]))):
         if a in sans_date or b in sans_date:
             continue
         p = e.get("preuve", {})
-        lignes_liens.append([a, b, rel, *date_ev(b, rel, e),
+        lignes_liens.append([a, b, rel, *date_ev(a, b, rel, e),
                              "oui" if e.get("meme_annee") else "", "oui" if e.get("reciproque") else "",
                              " | ".join(sorted(e["sources"])), " | ".join(sorted(e["relations"])),
                              lab(a), lab(b), p.get("preuve", ""), p.get("citation", ""), p.get("source", ""),
@@ -1567,14 +1597,7 @@ def main():
         # Période écrite après le lien dans l'infobox : « [[Front de gauche]] <small>(2008-2016)</small> ».
         # Une période finie avant la fondation du membre (ex. GDS : « LCR (1975-1994) », passé de ses
         # fondateurs) n'est pas une appartenance de l'organisation.
-        debut_p = fin_p = None
-        lang = p["source"].split(":", 1)[0]
-        for morceau in re.split(r"<br\s*/?>", p["citation"]):
-            if any(corpus.resoudre(lang, m.group(1)) == b for m in preuves.RX_LIEN.finditer(morceau)):
-                m = re.search(r"\(\s*(?:depuis\s+)?(1[89]\d\d|20\d\d)\s*(?:[-–]\s*(1[89]\d\d|20\d\d))?", morceau)
-                if m:
-                    debut_p, fin_p = int(m.group(1)), int(m.group(2)) if m.group(2) else None
-                break
+        debut_p, fin_p = periode(p["citation"], p["source"], b)
         f_a = noeuds[a]["dissolution"] or noeuds[a]["fin_deduite"] or 9999
         if fin_p and fin_p < noeuds[a]["fondation"]:
             continue
@@ -1587,6 +1610,22 @@ def main():
                 noeuds[a]["fondation_mois"] if an == noeuds[a]["fondation"] else "")
         lignes_liens.append([a, b, "composante", an, mois or "", "", "", "wikipedia", "membre de",
                              lab(a), lab(b), p["preuve"], p["citation"], p["source"], "", "", "", ""])
+    # Composantes saisies à la main (ex. GES dans L'Après) : citation mot pour mot obligatoire.
+    for r in lire("manuel/aretes_manuelles.csv"):
+        if r.get("type", "").strip() != "composante":
+            continue
+        a, b = r.get("ancetre", "").strip(), r.get("descendant", "").strip()
+        m = re.fullmatch(r"\s*(\w+:[^:]+?)\s*:\s*«\s*(.+?)\s*»\s*", r.get("source", ""), re.S)
+        if (a, b) in vus_comp or a not in garde or b not in garde or a in sans_date or b in sans_date:
+            continue
+        if not m or not corpus.verifier(m.group(2), m.group(1)):
+            stats["composantes_manuelles_sans_citation"] += 1
+            continue
+        vus_comp.add((a, b))
+        an = (int(r["date_evenement"]) if r.get("date_evenement", "").strip().isdigit()
+              else max(noeuds[a]["fondation"], noeuds[b]["fondation"]))
+        lignes_liens.append([a, b, "composante", an, "", "", "", "manuel", "membre de", lab(a), lab(b),
+                             "manuel", m.group(2), m.group(1), "", "", "", ""])
     stats["composantes"] = len(vus_comp)
     ecrire("liens.csv", ["source", "cible", "relation", "date_evenement", "date_evenement_mois",
                          "meme_annee", "fusion_reciproque", "sources", "relations_brutes",
@@ -1788,7 +1827,7 @@ L'écosocialisme (PG, LFI...) est rangé dans la famille socialiste, pas dans l'
 Famille héritée : une organisation issue d'une scission, d'un renommage ou d'une refondation, dont
 le seul courant connu est générique (communiste, social-démocrate, écosocialiste) et vient de
 Wikidata seul (pas d'article à lire), prend la famille précise de son parent (trotskyste, maoïste,
-libertaire), sans cascade. Ex. le NPA-R, issu du NPA. Liste et citation du lien :
+libertaire) et sa couleur, sans cascade. Ex. le NPA-R, issu du NPA. Liste et citation du lien :
 familles_heritees.csv.
 Familles : socialistes, radicaux, écologistes, communistes, trotskystes, maoïstes, anarchistes et
 libertaires, outre-mer. Une organisation d'outre-mer (nom ou catégories : Guadeloupe, Martinique,

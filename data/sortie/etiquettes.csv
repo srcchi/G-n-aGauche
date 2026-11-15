@@ -92,12 +92,11 @@ Q557045,Europe Écologie,nom court,Europe Écologie,oui
 Q1125061,EA,article,Eusko Alkartasuna,
 Q3068323,FAC,acronyme du nom,Femu a Corsica,
 Q61857570,FESR,acronyme du nom,Fièr-e-s et révolutionnaires,
-Q3077017,FDG (Guyane),acronyme du nom + lieu (homonyme),Forces démocratiques de Guyane,
+Q3077017,FDG,acronyme du nom,Forces démocratiques de Guyane,
 Q3592454,Fraction L'Étincelle,nom court,Fraction L'Étincelle,
 Q3082926,Frankiz Breizh,nom court,Frankiz Breizh,
 Q5501792,FISP,acronyme du nom,French India Socialist Party,
 Q111219345,FCR,acronyme du nom,Front communiste révolutionnaire,
-Q29348702,FDG (2009),sigles.csv + année (homonyme),Front de gauche (France),oui
 Q18744486,FD,article,Front démocrate,oui
 Q16387745,FNA,acronyme du nom,Front national arménien,
 Q3088527,FNOP,acronyme du nom,Front national ouvrier paysan,
@@ -245,7 +244,6 @@ Q116005340,NCF,acronyme du nom,Nouveau communisme en France,
 Q3345132,NEMA,article,Nouvel élan pour Mayotte,
 Q15629523,Nouvelle Donne,nom court,Nouvelle Donne (parti politique),oui
 Q21290708,NGS,acronyme du nom,Nouvelle Gauche socialiste,
-Q111799189,NUPES,sigles.csv,Nouvelle Union populaire écologique et sociale,
 Q107366687,NFG,article,Nouvelle force de Guyane,
 Q15985227,NÉD,acronyme du nom,Nouvelle Écologie démocrate,
 Q111607481,NAC,acronyme du nom,Noyaux autonomes pour le communisme,
@@ -366,7 +364,7 @@ fr:Révolution (Tendance marxiste internationale),Révolution,nom court,Révolut
 Q3458343,Révolution !,nom court,Révolution !,
 Q22981822,RP,sigles.csv,Révolution permanente (parti politique),oui
 Q51844819,REV,article,Révolution écologique pour le vivant,
-Q30741057,RSÉ,acronyme du nom,Rézistan's Égalité 974,oui
+Q30741057,RSÉ,acronyme du nom,Rézistan's Égalité 974,
 Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3477547,SUPS,acronyme du nom,Section universitaire du Parti socialiste,

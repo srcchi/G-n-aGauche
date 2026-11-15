@@ -100,7 +100,10 @@ Les corrections vont dans deux fichiers, relus à chaque exécution de `nettoyag
 ## Lecture de l'arbre
 
 - Le temps va de gauche à droite, à l'échelle (13 px par an) ; une barre par organisation, de sa
-  fondation à sa fin exactes. Une fin en dégradé : l'organisation existe toujours.
+  fondation à sa fin exactes. Une fin en dégradé : l'organisation existe toujours. Une barre
+  récente trop courte pour son étiquette la porte après aujourd'hui (ex. NPA-A, L'Après).
+- Composante (membre de, sans fusion) : trait gris foncé vertical entre les deux barres, un point
+  à chaque bout (ex. PG et LFI). Les coalitions (Front de gauche, NUPES…) ne sont pas dessinées.
 - Voies horizontales par famille : socialistes, radicaux, écologistes, communistes, trotskystes,
   maoïstes, anarchistes et libertaires, outre-mer, non classés, puis organisations étrangères
   et dates inconnues (hors échelle, hachurées).

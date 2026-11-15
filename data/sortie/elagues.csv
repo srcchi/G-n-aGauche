@@ -124,6 +124,7 @@ Q3080280,Fraction nationaliste armée révolutionnaire,satellite,fin_inconnue,à
 Q3082926,Frankiz Breizh,non_ancetre_d_une_active,fin_connue,socialistes,
 Q5501792,French India Socialist Party,a_dater,fin_inconnue,socialistes,
 Q111219345,Front communiste révolutionnaire,a_dater,fin_inconnue,communistes,
+Q29348702,Front de gauche (France),coalition,fin_connue,communistes,
 Q598744,Front de gauche et des travailleurs,etrangere,fin_inconnue,,hors de France
 Q2587029,Front de libération de la Bretagne,satellite,fin_inconnue,à classer,
 Q1138646,Front de libération nationale corse,satellite,fin_inconnue,à classer,organisation liée à Partitu corsu per u sucialisimu
@@ -313,7 +314,7 @@ Q116005340,Nouveau communisme en France,a_dater,fin_inconnue,maoïstes,
 Q3345132,Nouvel élan pour Mayotte,a_dater,fin_inconnue,à classer,
 Q252141,Nouvelle Gauche (Japon),etrangere,fin_inconnue,,hors de France
 Q21290708,Nouvelle Gauche socialiste,a_dater,fin_inconnue,socialistes,
-Q111799189,Nouvelle Union populaire écologique et sociale,isolee,fin_connue,écologistes,
+Q111799189,Nouvelle Union populaire écologique et sociale,coalition,fin_connue,écologistes,
 Q107366687,Nouvelle force de Guyane,a_dater,fin_inconnue,à classer,
 Q15985227,Nouvelle Écologie démocrate,a_dater,fin_inconnue,écologistes,
 Q3345677,Noyaux armés pour l'autonomie populaire,satellite,fin_inconnue,maoïstes,
@@ -501,6 +502,7 @@ Q3058074,Régions et peuples solidaires,famille_non_determinee,actif_valide,à c
 Q3456455,République et socialisme,a_dater,fin_inconnue,socialistes,
 Q3458343,Révolution !,non_ancetre_d_une_active,fin_connue,communistes,
 Q51844819,Révolution écologique pour le vivant,a_dater,fin_inconnue,écologistes,
+Q30741057,Rézistan's Égalité 974,isolee,actif_valide,socialistes,
 Q924501,Sabaudia-MRS,famille_non_determinee,actif_valide,à classer,
 Q3477547,Section universitaire du Parti socialiste,a_dater,fin_inconnue,socialistes,
 Q3320325,Segi,etrangere,fin_connue,,hors de France

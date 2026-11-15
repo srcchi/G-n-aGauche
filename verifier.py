@@ -100,7 +100,8 @@ def verifier_svg(chemin, cpt, err):
     orgs = {r["id"]: r for r in lire("organisations.csv")}
     inter = {r["id"]: r for r in lire("internationales.csv")}
     types = {r["id"]: r["type"].strip() for r in lire("types.csv", MANUEL)}
-    successeur = {r["source"] for r in lire("liens.csv") if r["relation"] in REL_SUCC_DIRECTE}
+    liens_csv = lire("liens.csv")
+    successeur = {r["source"] for r in liens_csv if r["relation"] in REL_SUCC_DIRECTE}
 
     # ---------- Barres : R2, R3, R5, R6 ----------
     barres, ouvertes, majeures = {}, {}, set()
@@ -229,6 +230,14 @@ def verifier_svg(chemin, cpt, err):
             v = nombres(traits[0].get("d")) if len(traits) == 1 else []
             if len(traits) != 1 or fleches or len(points_c) != 2 or len(v) != 4 or abs(v[0] - v[2]) > 1e-6:
                 faute("R1", f"{a}->{b} : composante mal dessinée")
+                continue
+            # Seule exception aux croisements : la barre d'un autre membre de la même organisation
+            membres = {r["source"] for r in liens_csv if r["relation"] == "composante" and r["cible"] == b} - {a}
+            for q, sorte, box in obstacles:
+                if q in (a, b) and sorte in ("barre", "bande") or q in membres and sorte in ("barre", "bande"):
+                    continue
+                if croise((v[0], v[1]), (v[2], v[3]), box):
+                    faute("croisements", f"{a}->{b} (composante) traverse {sorte} de {q}")
             continue
         if len(traits) != 1 or len(fleches) != 1:
             faute("R1", f"{a}->{b} : tracé ou flèche manquant")

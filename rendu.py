@@ -457,12 +457,20 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     for l in liens:
         par_cible[l["b"]].append(l)
         par_source[l["a"]].append(l)
+    # Barre encore active, trop courte pour son étiquette et sans lien qui en part : l'étiquette
+    # passe après la barre (après aujourd'hui, où rien ne suit), ex. NPA-A, L'Après. Elle ne gêne
+    # alors ni les liens qui arrivent ni une continuation (2.6).
+    for q, o in items.items():
+        if not o["tag_dedans"] and o["t1"] is None and not par_source[q]:
+            o["tag_apres"] = True
     continuations = set()
     for l in liens:
         a, b = items.get(l["a"]), items.get(l["b"])
-        if (a and b and l["rel"] == "renommage" and a["voie"] == b["voie"] and a["t1"] is not None
-                and 0 <= b["x0"] - a["x1"] < GAP and b["tag_dedans"]
+        if not (a and b and l["rel"] == "renommage" and a["voie"] == b["voie"] and a["t1"] is not None
+                and 0 <= b["x0"] - a["x1"] < GAP
                 and sum(1 for x in par_source[l["a"]] if x["rel"] == "renommage") == 1):
+            continue
+        if b["tag_dedans"] or b.get("tag_apres"):
             continuations.add((l["a"], l["b"]))
 
     collages = [(l["a"], l["b"]) for l in liens if l["rel"] == "composante" and l["a"] in items and l["b"] in items]
@@ -526,7 +534,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
           break
       force |= fautifs
     if not voies_voulues:
-        poly, renvois, geo = repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, collages)
+        poly, renvois, geo = repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, collages,
+                                     continuations)
         boites = boites_obstacles(items)
         traces = [t for t in (router(l, items, boites, rang_voie, poly) for l in poly) if t]
     cle = cle_donnees(items, inter)
@@ -545,11 +554,17 @@ def bornes(items, poly):
     for o in items.values():
         o["gauche_lien"] = (GOUTTIERE + 6) if entrants.get(o["id"]) else 0
         gauche = o["x0"] - o["gauche_lien"]
-        o["tag_x"] = o["x0"] + TAG_PAD if o["tag_dedans"] else gauche - o["tag_w"]
-        bord = gauche if o["tag_dedans"] else o["tag_x"]
+        apres = o.get("tag_apres") and o["t1"] is None
+        if o["tag_dedans"]:
+            o["tag_x"] = o["x0"] + TAG_PAD
+        elif apres:
+            o["tag_x"] = o["x1_vis"] + 4
+        else:
+            o["tag_x"] = gauche - o["tag_w"]
+        bord = gauche if o["tag_dedans"] or apres else o["tag_x"]
         o["renv_x"] = bord - o["w_renv"]
         o["L"] = min(bord, o["renv_x"]) - 1
-        o["R"] = o["x1_vis"] + 1
+        o["R"] = (o["tag_x"] + o["tag_w"] if apres else o["x1_vis"]) + 1
 
 
 def renumeroter(items, voies_ordre, rangees):
@@ -563,7 +578,8 @@ def renumeroter(items, voies_ordre, rangees):
         g += len(rangees[v]["rangees"])
 
 
-def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, collages=(), budget=150):
+def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, collages=(), continuations=(),
+             budget=150):
     """Avant de laisser un lien en renvoi écrit, on essaie de le dessiner : tel quel, puis en
     déplaçant une de ses deux barres vers une rangée voisine de l'autre (dans une rangée où elle
     tient, ou une nouvelle rangée). Un essai n'est gardé que si tous les liens dessinés restent sans
@@ -571,12 +587,19 @@ def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, c
     import time
     debut = time.time()
 
+    suites = set(continuations)
+    dans_suite = {q for c in suites for q in c}
+
     def chevauchement():
         for v in voies_ordre:
             for contenu in rangees.get(v, {}).get("rangees", []):
-                bs = sorted((items[q]["L"], items[q]["R"]) for q in contenu)
-                if any(b1[1] + GAP > b2[0] for b1, b2 in zip(bs, bs[1:])):
-                    return True
+                bs = sorted((items[q]["L"], items[q]["R"], q) for q in contenu)
+                for b1, b2 in zip(bs, bs[1:]):
+                    if (b1[2], b2[2]) in suites:          # suite collée : commence où l'autre finit
+                        if items[b1[2]]["x1"] > items[b2[2]]["x0"] + 0.5:
+                            return True
+                    elif b1[1] + GAP > b2[0]:
+                        return True
         return False
 
     def valide(p2):
@@ -602,6 +625,8 @@ def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, c
         p2 = poly + [dict(l, majeur=False)]
         r2 = [r for r in renvois if r is not l]
         def options_barre(q, autre):
+            if q in dans_suite:                  # une suite ne se sépare pas de son prédécesseur
+                return []
             v = items[q]["voie"]
             lignes = rangees[v]["rangees"]
             if items[autre]["voie"] == v:
@@ -631,7 +656,7 @@ def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, c
             for x in p_:
                 if items[x["a"]]["voie"] == v == items[x["b"]]["voie"]:
                     adj[x["a"]].add(x["b"]); adj[x["b"]].add(x["a"])
-            for x, y in collages:
+            for x, y in list(collages) + list(suites):
                 if items[x]["voie"] == v == items[y]["voie"]:
                     adj[x].add(y); adj[y].add(x)
             comp, pile = set(), [q]
@@ -835,7 +860,7 @@ def placer(items, voies_ordre, poly, continuations, collages=()):
 
             def libre(r, L, R, sauf=None):
                 for l2, r2, q2 in local[r]:
-                    if q2 == sauf and L >= items[q2]["x1"] - 0.5:
+                    if q2 == sauf and L >= items[q2]["x1"] - 1.5:     # suite collée : L = x0 - 1
                         continue
                     if not (R + GAP <= l2 or r2 + GAP <= L):
                         return False
@@ -1030,7 +1055,11 @@ def router(l, items, boites, rang_voie, poly):
         bas = b["y_c"] > a["y_c"]
         y1 = a["y_c"] + (a["bas"] if bas else -BAR_H / 2)
         y2 = b["y_c"] - BAR_H / 2 if bas else b["y_c"] + b["bas"]
-        return trace(l, a, b, [(xs, y1), (xs, y2)], None, boites, rang_voie)
+        # Groupe collé : le trait peut passer sur la barre d'un autre membre de la même organisation
+        # (POI -> LFI par-dessus le PG, membre de LFI lui aussi), jamais sur autre chose.
+        membres = {x["a"] for x in poly if x["rel"] == "composante" and x["b"] == l["b"]} - {l["a"]}
+        boites_c = [bx for bx in boites if not (bx[0] in membres and bx[1] in ("barre", "bande"))]
+        return trace(l, a, b, [(xs, y1), (xs, y2)], None, boites_c, rang_voie)
     normaux = sorted([x for x in poly if x["b"] == l["b"] and x["rel"] not in ("absorption", "composante")],
                      key=lambda x: items[x["a"]]["y_c"])
     n, k = len(normaux), next(i for i, x in enumerate(normaux) if x["a"] == l["a"])
