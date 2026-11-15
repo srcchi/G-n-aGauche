@@ -25,7 +25,7 @@ import os
 import re
 import shutil
 import unicodedata
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 SORTIE = os.path.join("data", "sortie")
 
@@ -396,6 +396,13 @@ class Echelle:
 # ======================================================================
 
 def preparer(items, inter, ech, T_AUJ):
+    # Étiquette (2.6) : l'année d'un homonyme (« JCR (1966) ») ne sert à rien quand les dates sont
+    # écrites à côté ; sans les dates (barre courte), on la garde seulement si une autre barre
+    # dessinée porte le même sigle.
+    def base(o):
+        m = re.fullmatch(r"(.+) \((\d{4})\)", o["etiquette"])
+        return m.group(1) if m and m.group(2) == str(o["an0"]) else o["etiquette"]
+    n_base = Counter(base(o) for o in items.values())
     for o in items.values():
         o["x0"] = ech.X(o["t0"])
         if o["t1"] is not None:
@@ -405,8 +412,17 @@ def preparer(items, inter, ech, T_AUJ):
             o["x1"] = max(ech.X(T_AUJ), o["x0"] + MIN_W)
             o["x1_vis"] = o["x1"] + DEGRADE
         o["dates"] = f"{o['an0']}–{o['fin_txt']}"
-        o["tag_w"] = larg(o["etiquette"], FS_SIGLE, True) + 5 + larg(o["dates"], FS) + 2 * TAG_PAD
-        o["tag_dedans"] = o["tag_w"] <= o["x1"] - o["x0"]       # 2.6 : dans la barre si elle est assez longue
+        b = base(o)
+        long_w = larg(b, FS_SIGLE, True) + 5 + larg(o["dates"], FS) + 2 * TAG_PAD
+        seul = b if n_base[b] == 1 else o["etiquette"]
+        seul_w = larg(seul, FS_SIGLE, True) + 2 * TAG_PAD
+        place = o["x1"] - o["x0"]
+        if long_w <= place or seul_w > place:
+            # dans la barre avec les dates, ou dehors (dates écrites : elles distinguent les homonymes)
+            o["etiq_aff"], o["avec_dates"], o["tag_w"] = b, True, long_w
+        else:
+            o["etiq_aff"], o["avec_dates"], o["tag_w"] = seul, False, seul_w    # sigle seul, dates en infobulle
+        o["tag_dedans"] = o["tag_w"] <= place       # 2.6 : dans la barre si elle est assez longue
         # Bandes d'affiliation (2.7) : datées pleines, non datées hachurées sur toute la barre ; 2 au plus
         fin_o = o["t1"] if o["t1"] is not None else T_AUJ
         bandes = []
@@ -1187,7 +1203,7 @@ def dessiner(m, avec_cle=True, apercu=False):
     for a in ech.graduations():
         if (a // 10) % 2 == 0 and a < ech.T1:
             fond.append(f'<rect class="bande-decennie" x="{X(a):.1f}" y="{y_h:.1f}" width="{X(a + 10) - X(a):.1f}" '
-                        f'height="{y_b - y_h + 30:.1f}" fill="#000000" fill-opacity="0.035"/>')
+                        f'height="{y_b - y_h + 30:.1f}" fill="#000000" fill-opacity="0.06"/>')
 
     def axe(y, haut, cls):
         p = [f'<g class="{cls}"><line x1="{X(ech.T0):.1f}" x2="{X(ech.T1):.1f}" y1="{y:.1f}" y2="{y:.1f}" stroke="#555555"/>']
@@ -1260,12 +1276,13 @@ def dessiner(m, avec_cle=True, apercu=False):
                         f'data-bbox="{tag_box[0]:.2f},{yb:.2f},{tag_box[2]:.2f},{BAR_H}"/>')
             xx = (x0 if o["tag_dedans"] else o["tag_x"]) + TAG_PAD
             yy = yc + 4.5
-            ws = larg(o["etiquette"], FS_SIGLE, True)
-            haut.append(texte(xx, yy, o["etiquette"], FS_SIGLE, True, ct, cls="tag-t",
+            ws = larg(o["etiq_aff"], FS_SIGLE, True)
+            haut.append(texte(xx, yy, o["etiq_aff"], FS_SIGLE, True, ct, cls="tag-t",
                               extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - 11:.2f},{ws:.2f},13"'))
             xx += ws + 5
-            haut.append(texte(xx, yy, o["dates"], FS, False, cd, cls="tag-t",
-                              extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - 10:.2f},{larg(o["dates"], FS):.2f},12"'))
+            if o["avec_dates"]:
+                haut.append(texte(xx, yy, o["dates"], FS, False, cd, cls="tag-t",
+                                  extra=f' data-org="{esc(o["id"])}" data-bbox="{xx:.2f},{yy - 10:.2f},{larg(o["dates"], FS):.2f},12"'))
             # Renvois, juste avant (étiquette ou couloir d'arrivée)
             xr = o["renv_x"]
             for t, ra, rb in o["renv"]:

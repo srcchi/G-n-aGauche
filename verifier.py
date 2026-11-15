@@ -151,8 +151,8 @@ def verifier_svg(chemin, cpt, err):
             if tags[q][0] >= bx + bw - 1 and q in successeur:
                 faute("étiquettes après une fin", f"{q} : étiquette après la fin de sa barre")
     for t in racine.iter(S + "text"):
-        if t.get("class") == "tag-t" and t.get("data-org") and t.get("data-org") not in etiquettes:
-            etiquettes[t.get("data-org")] = t.text
+        if t.get("class") == "tag-t" and t.get("data-org"):     # sigle + dates : les dates distinguent les homonymes
+            etiquettes[t.get("data-org")] = (etiquettes.get(t.get("data-org"), "") + " " + (t.text or "")).strip()
     for e, n in Counter(etiquettes.values()).items():
         if n > 1:
             faute("étiquettes en double", f"« {e} » x{n}")
