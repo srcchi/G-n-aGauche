@@ -229,7 +229,7 @@ Q1321802,MRC,sigles.csv,Mouvement républicain et citoyen,oui
 Q115922319,MRJ,acronyme du nom,Mouvement révolutionnaire de la jeunesse,
 Q3326836,MSC,article,Mouvement socialiste calédonien,
 Q122614151,MSG,sigles.csv,Mouvement socialiste guadeloupéen,
-Q1156061,MEI,sigles.csv,Mouvement écologiste indépendant,
+Q1156061,MEI,sigles.csv,Mouvement écologiste indépendant,oui
 Q115965582,NPA Jeunes,nom court,NPA Jeunes,
 Q115965646,NJA,acronyme du nom,NPA Jeunesses anticapitalistes,
 Q137369019,NUONAM,acronyme du nom,National Union of North African Muslims,
@@ -291,8 +291,8 @@ Q628594,PT (1991),sigles.csv + année (homonyme),"Parti des travailleurs (France
 Q24939885,PT (2023),sigles.csv + année (homonyme),"Parti des travailleurs (France, 2015)",oui
 Q3366460,Parti frontiste,nom court,Parti frontiste,
 Q111187255,Parti lorrain,nom court,Parti lorrain,
-Q115925919,PNB (2021),acronyme du nom + année (homonyme),Parti national breton,
 Q3141006,PNB (1931),acronyme du nom + année (homonyme),Parti national breton,
+Q115925919,PNB (2021),acronyme du nom + année (homonyme),Parti national breton,
 Q111210969,PNSF,acronyme du nom,Parti national-syndicaliste français,
 Q1539236,Parti occitan,nom court,Parti occitan,
 Q135902867,Parti ouvrier,nom court,Parti ouvrier (1914),
@@ -369,8 +369,8 @@ Q30741057,RSÉ,acronyme du nom,Rézistan's Égalité 974,
 Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
+fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,
@@ -399,7 +399,7 @@ Q3550193,URR,acronyme du nom,Union des républicains radicaux,
 fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
 Q116456095,URCF (2003),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,
 Q3550207,UTCL,sigles.csv,Union des travailleurs communistes libertaires,oui
-Q3550228,UEC,sigles.csv,Union des étudiants communistes,
+Q3550228,UEC,sigles.csv,Union des étudiants communistes,oui
 Q3107400,UPA,article,Union du peuple alsacien,
 Q849847,UPC,article,Union du peuple corse,
 Q105597984,UPG,article,Union du peuple guyanais,
