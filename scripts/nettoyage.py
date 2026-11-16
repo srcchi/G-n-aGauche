@@ -20,6 +20,7 @@ import re
 import unicodedata
 from collections import Counter, defaultdict, deque
 
+import porte
 import preuves
 from fusion import (ANCIEN, FRANCE, HUMAIN, NON_POLITIQUE, POLITIQUE, RX_CAT_DISPARU,
                     RX_CATEGORIE, RX_DROITE, RX_ETRANGER_CAT, RX_FRANCE_CAT, RX_GAUCHE,
@@ -287,7 +288,7 @@ TYPE_PAR_CATEGORIE = [
 # Addendum 3 bis, 1 et 3 : motifs de nom (règle voulue, malgré « jamais par des mots du nom seuls »)
 RX_R6_NOM = re.compile(r"^f[ée]d[ée]ration\b.*\bdu Parti socialiste\b|^groupe\b.*\bà l['’]Assembl[ée]e|"
                        r"^section\b|^comit[ée] de suivi\b", re.I)
-RX_COURANT_DE = re.compile(r"'''[^'\n]+'''[^.\n]{0,120}?\best un courant (?:politique |interne )?"
+RX_COURANT_DE = re.compile(r"'''[^\n]+?'''[^.\n]{0,120}?\best un courant (?:politique |interne )?"
                            r"(?:du|de la|de l'|des)\s*\[\[", re.I)
 RX_INTER_NOM = re.compile(r"[-–]\s*Quatrième Internationale\s*$|^Quatrième Internationale\b")
 # Addendum 3 bis, 2 : régionalistes et autonomistes (idéologie ou catégories de l'article)
@@ -668,6 +669,10 @@ def main():
             return True
         return not RX_ETRANGER_CAT.search(cats)
 
+    # Addendum 4, 1 : porte « organisation politique » (territoires, G7, bases de données, personnes,
+    # syndicats...), par les classes Wikidata ; les identifiants cités dans data/manuel/ sont exemptés
+    rejets_porte = porte.rejets(list(noeuds), exemptes=porte.ids_manuels() | set(forcer))
+    stats["rejets_porte_politique"] = len(rejets_porte)
     classe, raison = {}, {}
     for q, d in noeuds.items():
         f = forcer.get(q)
@@ -675,6 +680,8 @@ def main():
             classe[q], raison[q] = "exclu", "exclu à la main"
         elif f in ("inclure", "vivant", "disparu") or RX_DOUTEUX.search(d["label"]):
             classe[q] = "graphe"    # les radicaux : gardés et signalés, pas tranchés ici
+        elif q in rejets_porte:
+            classe[q], raison[q] = "exclu", rejets_porte[q]
         elif HUMAIN in d["types"]:
             classe[q], raison[q] = "exclu", "personne, pas organisation"
         elif est_internationale(d):
@@ -1202,6 +1209,10 @@ def main():
         d["famille_courant"] = famille or "à classer"
         tout = " ".join([d["label"], d["categories"]] + d.get("cats_article", []))
         d["outre_mer"] = bool(RX_OUTREMER.search(tout))
+        # Addendum 3 bis, 2 : régionaliste ou autonomiste d'après l'idéologie ou les catégories
+        ideo = " ".join(x for x, _ in d["ideologies"])
+        d["regionaliste"] = bool(RX_REGIONALISTE.search(ideo + " " + tout)
+                                 or "régionaliste / autonomiste" in d["courants"])
         # 2.1 : la voie suit la famille politique (idéologie), pas la région ; l'outre-mer va dans
         # la voie de sa famille. Sans famille reconnue : écartée (plus de voie « à classer »).
         d["famille"] = famille or "à classer"
@@ -1515,7 +1526,29 @@ def main():
     branches_eteintes = (incontournables & eligibles) - garde
     garde |= branches_eteintes
     stats["branches_eteintes"] = len(branches_eteintes)
-    exemptes = origines | branches_eteintes
+    # Addendum 3, B2 et 3 bis, 4 : colonne « Sans généalogie documentée », décidée dans
+    # data/manuel/actifs_absents.csv (decision = colonne, avec la citation de l'article)
+    sans_genealogie = set()
+    for r in lire(os.path.join("manuel", "actifs_absents.csv")):
+        q = r.get("id", "").strip()
+        if r.get("decision", "").strip() != "colonne" or q not in noeuds or not r.get("source", "").strip():
+            continue
+        if not noeuds[q]["fondation"]:
+            stats["sans_genealogie_sans_date"] += 1
+            continue
+        d = noeuds[q]
+        d["sans_genealogie"] = True
+        d["actif"] = True
+        if r.get("famille", "").strip():
+            d["famille"] = d["famille_courant"] = r["famille"].strip()
+        else:
+            d["famille"] = "aucune"          # aucune famille de l'arbre : couleur neutre
+            d["famille_courant"] = ""
+        d["sans_genealogie_source"] = r["source"].strip()
+        sans_genealogie.add(q)
+    garde |= sans_genealogie
+    stats["sans_genealogie"] = len(sans_genealogie)
+    exemptes = origines | branches_eteintes | sans_genealogie
     # Porte finale : chaque organisation gardée a au moins un lien vers une autre gardée
     while True:
         seules = {q for q in garde if not (voisins_r5[q] & garde)} - exemptes   # une origine peut n'avoir qu'un lien de composante
@@ -1564,10 +1597,16 @@ def main():
         if classe[q] == "graphe" and q not in garde:
             if q in dates_manquantes:
                 cause = "a_dater"
-            elif d["famille"] == "à classer":
-                cause = "famille_non_determinee"
             elif q in {r[0] for r in hors_perim}:
                 cause = "hors_perimetre"
+            elif not voisins_r5[q] and (d["outre_mer"] or d["regionaliste"]):
+                # Addendum 3 bis, 2 et R10 : jamais « isolee » pour un régionaliste ou un parti
+                # d'outre-mer sans lignée
+                cause = "hors_perimetre"
+                hors_perim.append([q, lab(q), "outre-mer sans lignée documentée" if d["outre_mer"]
+                                   else "régionaliste ou autonomiste sans lignée documentée"])
+            elif d["famille"] == "à classer":
+                cause = "famille_non_determinee"
             elif q in rejetees:
                 cause = "rejet_porte"
             elif not voisins_r5[q]:
@@ -1619,7 +1658,9 @@ def main():
                             " | ".join(sorted(d["sources"])), " | ".join(d.get("journaux", [])),
                             d["statut_fin"], "oui" if d["actif_auto"] else "",
                             "oui" if q in garde else "",
-                            " | ".join(sorted(lab(s) for s in emanations.get(q, ())))])
+                            " | ".join(sorted(lab(s) for s in emanations.get(q, ()))),
+                            "oui" if d.get("sans_genealogie") else "",
+                            d.get("sans_genealogie_source", "")])
     ecrire("noms_successifs.csv", ["id", "label", "annee", "nom", "citation", "source"],
            noms_successifs(corpus, garde))
     ecrire("organisations.csv",
@@ -1627,7 +1668,8 @@ def main():
             "fondation_autres_sources", "dissolution", "dissolution_mois", "dissolution_source",
             "fin_deduite", "fin_deduite_source", "actif", "famille", "outre_mer", "courants",
             "courants_sources", "courant_principal", "famille_courant", "perimetre_douteux",
-            "sources", "journaux", "statut_fin", "actif_auto", "garde", "organisations_liees"],
+            "sources", "journaux", "statut_fin", "actif_auto", "garde", "organisations_liees",
+            "sans_genealogie", "sans_genealogie_source"],
            lignes_orgs)
     ecrire("elagues.csv", ["id", "label", "cause", "statut_fin", "famille", "detail"], lignes_elag)
     ecrire("a_dater.csv", ["id", "label", "raison", "famille"], orgs_a_dater)
@@ -1735,6 +1777,18 @@ def main():
         provenance = " + ".join(x for x, ok in (("Wikidata", q in brut_wd), ("Wikipédia", q in brut_wp)) if ok) or "manuel"
         journal.append([q, lab(q) if d else b.get("label", ""), actif, famille, raison_, manquant,
                         f"{provenance} ({sources_})" if sources_ else provenance])
+    # Entités écartées dès la collecte par la porte politique d'arbre.py (addendum 4, 1)
+    deja = {l[0] for l in journal} | set(garde)
+    for r in lire("rejets_porte_arbre.csv"):
+        if r["id"] not in deja:
+            deja.add(r["id"])
+            journal.append([r["id"], r["label"], "inconnu", "", f"écartée à la collecte : {r['raison']}", "",
+                            "Wikidata (arbre.py)"])
+    for r in lire("sortie/rejets_porte_tableaux.csv"):   # lignes des tableaux d'Internationales (tableaux.py)
+        if r["id"] not in deja:
+            deja.add(r["id"])
+            journal.append([r["id"], r["label"], "inconnu", "", f"ligne de tableau écartée : {r['raison']}", "",
+                            f"tableau des membres ({r['source_citation']})"])
     ecrire("elagage_rejets.csv", ["id", "label", "actif", "famille_si_connue", "raison", "lien_manquant", "source"],
            journal)
     stats["candidats_non_dessines"] = len(journal)
@@ -1762,6 +1816,11 @@ def main():
                               "explication"], couverture)
     disparues = [[q, nom, explication(q)] for q, nom in sorted(precedents.items(), key=lambda x: x[1])
                  if q not in garde]
+    # Addendum 4, 5 : un incontournable absent (NPA, NPA-R...) est listé à chaque exécution, pas
+    # seulement à celle où il a disparu
+    deja_r = {r[0] for r in disparues}
+    disparues += [[q, nom, "incontournable absent : " + explication(q)] for q, nom in a_tester
+                  if q and q not in garde and q not in deja_r]
     apparues = sorted(lab(q) for q in garde - set(precedents))
     ecrire("regression.csv", ["id", "label", "raison_disparition"], disparues)
     ecrire("affiliations_a_dater.csv", ["party_id", "international_id", "start", "end", "source",
@@ -1869,6 +1928,28 @@ def main():
                "oui" if r["org"] in garde and r["cible"] in garde else "une seule",
                re.sub(r"\s+", " ", r["phrase_source"])[:300], r.get("source_citation", "")]
               for conf, i, r in sorted(meilleurs.values(), key=lambda x: (-x[0], x[1]))]
+    # Addendum 4, 4 : un lien écarté parce que la cible existait déjà (LCR -> PS 1974/1969, LCR -> OCI
+    # 1974/1952) n'est pas dessiné ; il est proposé comme passage de militants, dans le sens de
+    # l'anomalie, avec la phrase de l'article quand elle existe. Validation : une ligne de type
+    # passage dans data/manuel/aretes_manuelles.csv (ce fichier-ci est régénéré à chaque exécution).
+    phrases_de = defaultdict(list)
+    for i, r in enumerate(lire("sortie/liens_candidats.csv"), start=2):
+        phrases_de[frozenset((r["org"], r["cible"]))].append((i, r))
+    manuels_ = {(r.get("ancetre", "").strip(), r.get("descendant", "").strip())
+                for r in lire("manuel/aretes_manuelles.csv")}
+    for an in anomalies:
+        a_, b_ = an[0], an[1]
+        if not an[5].startswith("type de relation erroné : la cible existait déjà") or not {a_, b_} <= garde \
+                or (a_, b_) in manuels_ or (a_, b_) in deja_l:
+            continue
+        cands = sorted(phrases_de.get(frozenset((a_, b_)), []),
+                       key=lambda x: (x[1]["type_propose"] != "passage_militants", -float(x[1]["confiance"] or 0)))
+        i, r = cands[0] if cands else ("", {})
+        a_lire.insert(0, [i, lab(a_), lab(b_), "org → cible", "passage", r.get("confiance", ""), "oui",
+                          re.sub(r"\s+", " ", r.get("phrase_source", ""))[:300] or f"anomalie : {an[5]}",
+                          (r.get("source_citation", "") + " ; " if r else "")
+                          + "à valider par une ligne « passage » dans data/manuel/aretes_manuelles.csv"])
+        stats["passages_proposes"] += 1
     ecrire("liens_candidats_a_lire.csv", ["ligne", "org", "cible", "sens", "type_propose", "confiance",
                                           "deux_dessinees", "phrase", "source"], a_lire)
     stats["candidats_a_lire"] = len(a_lire)

@@ -61,7 +61,10 @@ FAMILLES = {
     "trotskystes": ("Trotskystes", "#E69F00"),
     "maoïstes": ("Maoïstes", "#0072B2"),
     "anarchistes et libertaires": ("Anarchistes et libertaires", "#000000"),
+    # Addendum 3, B2 : partis actifs sans ancêtre documenté, toujours dans la dernière voie
+    "sans généalogie": ("Sans généalogie documentée", "#8C8C8C"),
 }
+VOIE_SANS_GEN = "sans généalogie"
 BLOC = ("socialistes", "communistes", "trotskystes")      # côte à côte (2.1)
 DEHORS = ("écologistes", "anarchistes et libertaires")     # hors de ce bloc
 TEINTE = {k: c for k, (_, c) in FAMILLES.items()}
@@ -309,14 +312,17 @@ def charger():
                       f"fin : {date_longue(r['dissolution'], r['dissolution_mois'])} ({r['dissolution_source']})"
                       if r["dissolution"] else f"fin : {r['fin_deduite']} (fondation du successeur)")
         vie = ((t1 if t1 is not None else T_AUJ) - t0)
+        sans_gen = r.get("sans_genealogie") == "oui"
         orgs[r["id"]] = dict(id=r["id"], label=r["label"], etiquette=etiq.get(r["id"], r["nom_court"]),
-                             voie=r["famille"], couleur=couleur, t0=t0, t1=t1, statut=statut, an0=r["fondation"],
+                             voie=VOIE_SANS_GEN if sans_gen else r["famille"], couleur=couleur, sans_gen=sans_gen, t0=t0, t1=t1, statut=statut, an0=r["fondation"],
                              fin_txt=fin_txt, affil=[], majeure=statut.startswith("actif") or vie > VIE_MAJEURE,
                              details=[r["label"], f"fondation : {date_longue(r['fondation'], r['fondation_mois'])}",
                                       fin_detail, f"famille : {r['famille']}",
                                       f"courants : {r['courants_sources'] or 'aucun reconnu'}"]
                              + ([f"organisations liées : {r['organisations_liees']}"] if r.get("organisations_liees") else [])
-                             + ([f"journaux : {r['journaux']}"] if r["journaux"] else []))
+                             + ([f"journaux : {r['journaux']}"] if r["journaux"] else [])
+                             + ([f"sans généalogie documentée : aucun ancêtre documenté ; position : "
+                                 f"{r['sans_genealogie_source']}"] if sans_gen else []))
     # Branches éteintes (incontournables sans descendance active) : dites dans l'infobulle
     for r in lire("branches_eteintes.csv"):
         if r["id"] in orgs:
@@ -397,7 +403,8 @@ def charger():
 def ordre_voies(orgs, liens):
     """2.1 : Socialistes, Communistes, Trotskystes côte à côte ; Écologistes et Anarchistes hors de ce
     bloc ; les familles qui partagent des liens (surtout majeurs) le plus près possible."""
-    presentes = [f for f in FAMILLES if any(o["voie"] == f for o in orgs.values())]
+    presentes = [f for f in FAMILLES if f != VOIE_SANS_GEN and any(o["voie"] == f for o in orgs.values())]
+    en_bas = [VOIE_SANS_GEN] if any(o["voie"] == VOIE_SANS_GEN for o in orgs.values()) else []
     poids = defaultdict(int)
     for l in liens:
         fa, fb = orgs[l["a"]]["voie"], orgs[l["b"]]["voie"]
@@ -414,7 +421,7 @@ def ordre_voies(orgs, liens):
         cout = sum(w * abs(pos[a] - pos[b]) for (a, b), w in ((tuple(k), w) for k, w in poids.items()))
         if cout_min is None or cout < cout_min:
             meilleur, cout_min = list(perm), cout
-    return meilleur
+    return list(meilleur) + en_bas
 
 
 class Echelle:
@@ -1528,6 +1535,9 @@ def dessiner(m, avec_cle=True, apercu=False):
                        ' stroke="#333333" stroke-width="0.8" data-style="internationale"') if strip else "")
                    + (f' data-section="{esc(o["section"])}"' if o.get("section") else "")
                    + '/>')
+        if o.get("sans_gen"):
+            bas.append(f'<path class="sans-ancetre" d="M{x0 - 2:.2f} {yb - 2:.2f} H{x0 - 6:.2f} V{yb + h_b + 2:.2f} '
+                       f'H{x0 - 2:.2f}" stroke="#333333" stroke-width="1.6" fill="none"/>')
         if o["x1_vis"] > x1 and not strip:
             bas.append(f'<rect class="fin-ouverte" x="{x1:.2f}" y="{yb:.2f}" width="{o["x1_vis"] - x1:.2f}" '
                        f'height="{BAR_H}" fill="url(#g-{o["couleur"][1:]})"/>')
@@ -1801,7 +1811,7 @@ def legende(m, apercu):
         x += w + 20
         return x0
     for k, (t, c) in FAMILLES.items():
-        if k in m["voie_index"]:
+        if k in m["voie_index"] and k != VOIE_SANS_GEN:
             x0 = place(22 + larg(t, FS))
             el.append(f'<rect x="{x0}" y="{y - 10}" width="16" height="12" rx="2" fill="{c}"/>' + texte(x0 + 22, y, t, FS, cls="legende-t"))
     for rel, st in STYLE_LIEN.items():
@@ -1821,6 +1831,12 @@ def legende(m, apercu):
         t = "issu de X, devient Y, absorbé par Y… : lien en renvoi"
         x0 = place(larg(t, FS))
         el.append(texte(x0, y, t, FS, False, "#555555", cls="legende-t", italique=True))
+    if VOIE_SANS_GEN in m["voie_index"]:
+        t = "aucun ancêtre documenté"
+        x0 = place(30 + larg(t, FS))
+        el.append(f'<path d="M{x0 + 10} {y - 11} H{x0 + 6} V{y + 2} H{x0 + 10}" stroke="#333333" stroke-width="1.6" '
+                  f'fill="none"/><rect x="{x0 + 12}" y="{y - 10}" width="12" height="12" fill="#8C8C8C"/>'
+                  + texte(x0 + 30, y, t, FS, cls="legende-t"))
     t = "toujours active"
     x0 = place(40 + larg(t, FS))
     el.append(f'<rect x="{x0}" y="{y - 10}" width="10" height="12" fill="#8C8C8C"/><rect x="{x0 + 10}" y="{y - 10}" '
@@ -2247,7 +2263,7 @@ def main():
         if ancien.startswith("arbre_") and ancien.endswith(".svg") and ancien != "arbre_apercu.svg":
             os.remove(os.path.join(ARBRES, ancien))
     for k, (t, _) in FAMILLES.items():
-        if any(o["voie"] == k for o in orgs.values()):
+        if k != VOIE_SANS_GEN and any(o["voie"] == k for o in orgs.values()):   # pas une famille
             mf = mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues={k},
                               titre=f"Généalogie de la gauche française, {t.lower()}")
             with open(os.path.join(ARBRES, f"arbre_{slug(k)}.svg"), "w", encoding="utf-8") as f:

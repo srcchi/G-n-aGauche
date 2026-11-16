@@ -84,7 +84,6 @@ Q1995268,Corsica Libera,nom court,Corsica Libera,
 Q2998048,Corsica Nazione,nom court,Corsica Nazione,
 Q62079328,Debout,nom court,Debout (parti politique),
 fr:Deuxième Internationale (IO),IO,sigles.csv,Deuxième Internationale (IO),oui
-Q87467454,Du Pain et des Roses,nom court,Du Pain et des Roses,
 Q3041979,DUS,article,Dynamik unitaire Sud,
 Q3238003,DA,article,Dynamique autochtone,
 Q97015296,Démocrates et…,nom raccourci,Démocrates et progressistes,
@@ -154,7 +153,7 @@ Q32860104,Groupe ouvrier,nom court,Groupe ouvrier,
 Q3117906,GCPOR,acronyme du nom,Groupe pour la construction du Parti ouvrier révolutionnaire,
 Q3117913,GRB,acronyme du nom,Groupe régionaliste breton,
 Q3117914,GRS (Martinique),article + lieu (homonyme),Groupe révolution socialiste,
-Q1153753,GE,article,Génération écologie,
+Q1153753,GE,article,Génération écologie,oui
 Q31400965,Génération.s,nom court,Génération.s,oui
 Q3133988,HAA,acronyme du nom,Here ai’a,
 Q589468,Hoxhaïsme,nom court,Hoxhaïsme,
@@ -214,7 +213,7 @@ Q3326471,MFC,article,Mouvement Franche-Comté,
 Q3326535,MCF,article,Mouvement communiste français marxiste-léniniste,oui
 Q125846976,MCL,acronyme du nom,Mouvement communiste libertaire,
 Q3326581,MGP,acronyme du nom,Mouvement de la gauche progressiste,
-Q1951112,MDC,sigles.csv,Mouvement des citoyens (France),
+Q1951112,MDC,sigles.csv,Mouvement des citoyens (France),oui
 Q3326619,MODEMAS,article,Mouvement des démocrates et écologistes pour une Martinique souveraine,
 Q3326629,MJB,acronyme du nom,Mouvement des jeunes bretons,
 Q3326849,MdP,sigles.csv,Mouvement des progressistes,oui
@@ -264,7 +263,7 @@ Q93448453,OSÉ,acronyme du nom,Orléans Solidaire Écologique,
 Q139361612,Paolistes,nom court,Paolistes,
 Q3366181,PAOP,acronyme du nom,Parti alsacien ouvrier et paysan,
 Q3086466,PAB,acronyme du nom,Parti autonomiste breton,
-Q3366212,Parti communiste,nom court,"Parti communiste (France, 1919)",
+Q3366212,Parti communiste,nom court,"Parti communiste (France, 1919)",oui
 Q3142484,PCB,article,Parti communiste breton,
 Q111606973,PCF (2003),acronyme du nom + année (homonyme),Parti communiste de France (marxiste-léniniste-maoïste),
 Q3366206,PCOF,sigles.csv,Parti communiste des ouvriers de France,oui
@@ -305,7 +304,7 @@ Q2638999,POI (2008),sigles.csv + année (homonyme),Parti ouvrier indépendant,ou
 fr:Parti ouvrier indépendant démocratique,POID,sigles.csv,Parti ouvrier indépendant démocratique,oui
 Q538664,POI (1936),article + année (homonyme),Parti ouvrier internationaliste,oui
 Q2705289,POSR,sigles.csv,Parti ouvrier socialiste révolutionnaire,oui
-Q5291,PP (2006),article + année (homonyme),Parti pirate,
+Q5291,Parti pirate,sigles.csv,Parti pirate,oui
 Q3366640,PPDG,article,Parti progressiste démocratique guadeloupéen,
 Q944000,PPM,sigles.csv,Parti progressiste martiniquais,oui
 Q1542710,Parti radical,nom court,Parti radical (France),oui
@@ -337,7 +336,7 @@ Q283184,Parti travailliste,nom court,Parti travailliste,
 Q20927529,Parti écologiste,nom court,Parti écologiste,
 Q60847144,PCS,article,Partitu corsu per u sucialisimu,
 Q1418625,PNC,article,Partitu di a Nazione Corsa,
-Q58366009,PP (2018),article + année (homonyme),Place publique (parti politique),
+Q58366009,PP,article,Place publique (parti politique),oui
 Q110394551,PCL,acronyme du nom,Plateforme communiste libertaire,
 Q176339,Plateformisme,nom court,Plateformisme,
 Q2032009,Possibilisme,nom court,Possibilisme,
@@ -371,8 +370,8 @@ Q30741057,RSÉ,acronyme du nom,Rézistan's Égalité 974,
 Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
+fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,
@@ -384,8 +383,7 @@ Q139493171,Territoires44,nom court,Territoires44,
 Q135875318,Treger Disuj,nom court,Treger Disuj,
 fr:Troisième Internationale (IC),IC,sigles.csv,Troisième Internationale (IC),oui
 Q3547154,UDB Jeunes,nom court,UDB Jeunes,
-Q3548270,Un monde d'avance,nom court,Un monde d'avance,
-Q65153446,Union anarchiste,nom court,Union anarchiste,
+Q65153446,Union anarchiste,nom court,Union anarchiste,oui
 Q3550048,UC,article,Union calédonienne,
 Q64524428,UCL,sigles.csv,Union communiste libertaire (francophone),oui
 Q2722985,UGS,article,Union de la gauche socialiste,
@@ -400,8 +398,8 @@ Q2540732,UGCS,article,Union des groupes et clubs socialistes,
 Q111628305,UJR,acronyme du nom,Union des jeunes révolutionnaires,
 Q3550161,UJCML,acronyme du nom,Union des jeunesses communistes marxistes-léninistes,oui
 Q3550193,URR,acronyme du nom,Union des républicains radicaux,
-fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
 Q116456095,URCF (2003),acronyme du nom + année (homonyme),Union des révolutionnaires-communistes de France,
+fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
 Q3550207,UTCL,article,Union des travailleurs communistes libertaires,oui
 Q3550228,UEC,sigles.csv,Union des étudiants communistes,
 Q3107400,UPA,article,Union du peuple alsacien,
@@ -434,7 +432,6 @@ Q46613924,GSÉR,acronyme du nom,"groupe Socialiste, écologiste et républicain"
 Q2236823,GSAN,acronyme du nom,groupe socialiste à l'Assemblée nationale,
 Q84366602,LOFECT,acronyme du nom,lutte ouvriere faire entendre le camp des travailleurs,
 Q125731201,PPLC,article,prolétaires pour le communisme,
-Q109599840,RSA,acronyme du nom,république socialiste d'Allemagne,
 Q3576675,À gauche en Guyane,nom court,À gauche en Guyane,
 Q16684301,ES,article,Écologie Solidarité,
 Q2838275,ÉAC,article,Écologie au centre,

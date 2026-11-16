@@ -321,7 +321,8 @@ def verifier_svg(chemin, cpt, err):
                         faute("croisements", f"{a}->{b} traverse {sorte} de {q}")
     eteintes = {r["id"] for r in lire("branches_eteintes.csv")} if os.path.exists(os.path.join(SORTIE, "branches_eteintes.csv")) else set()
     for q in barres:
-        if q not in reliees and q not in eteintes:      # branche éteinte : ses seuls liens documentés
+        if q not in reliees and q not in eteintes and orgs.get(q, {}).get("sans_genealogie") != "oui":
+            # branche éteinte : ses seuls liens documentés ; colonne « Sans généalogie » : aucun lien
             faute("barres sans lien", f"{q} ({orgs.get(q, {}).get('label', '')})")
 
     # ---------- Marques de scission sur le texte d'une étiquette ----------

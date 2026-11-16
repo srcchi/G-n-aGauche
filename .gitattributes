@@ -1,0 +1,9 @@
+# Fins de ligne : LF dans le dépôt, quel que soit le système (Windows à la maison, Linux au travail).
+# Le module csv de Python écrit des fins CRLF : elles sont normalisées et ne créent plus de faux changements.
+* text=auto eol=lf
+*.png binary
+*.pdf binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary

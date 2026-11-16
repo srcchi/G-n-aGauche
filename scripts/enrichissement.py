@@ -747,6 +747,15 @@ def main():
     print(txt)
 
 
+def meme_sujet(sujet, nom):
+    """Le nom en gras de la citation désigne-t-il l'organisation ? (mots significatifs communs)"""
+    def mots(s):
+        s = re.sub(r"\(.*?\)", " ", normaliser(s))
+        return {m for m in re.findall(r"[a-z0-9]+", s) if len(m) > 2}
+    a, b = mots(sujet), mots(nom)
+    return bool(a and b) and len(a & b) >= min(len(a), len(b), 2) * 0.5 + 0.5
+
+
 def completer_actifs(corpus):
     """Cases vides de la colonne valide d'actifs.csv : proposition lue dans le texte de l'article
     (présent « est un parti » ou passé « était », « dissous »...), avec confiance et citation.
@@ -767,16 +776,31 @@ def completer_actifs(corpus):
         if col not in entete:
             entete.append(col)
     iv, ic, isrc = entete.index("valide"), entete.index("confiance"), entete.index("source")
+    import porte
+    coalitions = {q for q, cls in porte.classes([l[0] for l in lignes[1:] if l]).items() if "Q6138528" in cls}
     n, a_revoir = Counter(), []
     for l in lignes[1:]:
         l += [""] * (len(entete) - len(l))
         if l[iv].strip():
             continue
+        # Addendum 4, 2 : une coalition (Nouveau Front populaire...) n'est jamais proposée active
+        if l[0] in coalitions:
+            a_revoir.append([l[0], l[1], "", "rejetée", "", "", "coalition (type Wikidata) : jamais proposée active"])
+            n["coalition, non proposée"] += 1
+            continue
         val, conf, citation, source = preuves.preuve_activite(corpus, l[0])
         if not val:
             n["sans texte"] += 1
             continue
-        a_revoir.append([l[0], l[1], val, conf, source, citation])
+        # Addendum 4, 2 : la citation doit porter sur l'organisation elle-même, pas sur un parent
+        # (Tendance CLAIRE renvoie à l'article du NPA)
+        sujet = re.search(r"\'\'\'(.+?)\'\'\'", citation)
+        if sujet and not meme_sujet(sujet.group(1), l[1]):
+            a_revoir.append([l[0], l[1], "", "rejetée", source, citation,
+                             f"la citation porte sur « {sujet.group(1)} », pas sur l'organisation elle-même"])
+            n["citation d'une autre organisation"] += 1
+            continue
+        a_revoir.append([l[0], l[1], val, conf, source, citation, ""])
         if conf == "faible":
             # Le présent de narration (« est un parti ») ne prouve pas l'activité : à revoir, pas deviné
             n[f"{val} faible (à revoir)"] += 1
@@ -787,7 +811,7 @@ def completer_actifs(corpus):
     with open(chemin, "w", encoding="utf-8", newline="") as f:
         csv.writer(f, lineterminator=fin).writerows(lignes)
     ecrire(os.path.join(SORTIE, "actifs_a_revoir.csv"),
-           ["id", "nom", "proposition", "confiance", "source", "citation"], a_revoir)
+           ["id", "nom", "proposition", "confiance", "source", "citation", "note"], a_revoir)
     print(f"  actifs.csv : cases vides : {dict(n)} ; propositions dans data/sortie/actifs_a_revoir.csv")
 
 

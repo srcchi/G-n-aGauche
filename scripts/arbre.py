@@ -23,6 +23,8 @@ import time
 
 import requests
 
+import porte
+
 ENDPOINT = "https://query.wikidata.org/sparql"
 HEADERS = {
     "User-Agent": "arbre-gauche-fr/0.2 (https://github.com/srcchi/G-n-aGauche) python-requests",
@@ -200,8 +202,15 @@ def collecter():
         connus |= ajouter(sparql(QUERY_LIENS_ENTRANTS % lot))
 
     # ---------- 3. Remontée des ancêtres, tous pays ----------
+    # Addendum 4, 1 : on ne remonte jamais à travers une entité qui n'est pas une organisation
+    # politique (territoire, G7, base de données, personne...) ; les identifiants de data/manuel/
+    # sont exemptés.
+    exemptes = porte.ids_manuels()
+    rejetes = {}
     a_remonter = connus - depart
     for g in range(1, PROFONDEUR + 1):
+        rejetes.update(porte.rejets(a_remonter - set(rejetes), exemptes=exemptes))
+        a_remonter -= set(rejetes)
         if not a_remonter:
             break
         print(f"Ancêtres, génération {g} : {len(a_remonter)} organisations à examiner...")
@@ -212,7 +221,11 @@ def collecter():
             trouves |= ajouter(rows)
         a_remonter = trouves - connus
         connus |= trouves
-    print(f"{len(connus)} organisations au total, {len(liens)} liens bruts.")
+    rejetes.update(porte.rejets(connus - depart - set(rejetes), exemptes=exemptes))
+    connus -= set(rejetes)
+    liens = {(s, r, c) for s, r, c in liens if s in connus and c in connus}
+    print(f"{len(connus)} organisations au total, {len(liens)} liens bruts ; "
+          f"{len(rejetes)} entités écartées par la porte politique (data/rejets_porte_arbre.csv).")
 
     # ---------- 4. Détails ----------
     print("Détails (libellés, dates, idéologies)...")
@@ -233,6 +246,15 @@ def collecter():
         cle = (ancetre, descendant)
         if cle not in aretes or (aretes[cle][0] == "filiation" and type_arete == "scission"):
             aretes[cle] = (type_arete, rel)
+    libelles = {}
+    for lot in par_lots(rejetes):
+        for row in sparql(QUERY_DETAILS % lot):
+            libelles[qid(val(row, "org"))] = val(row, "orgLabel")
+    with open(os.path.join(DATA, "rejets_porte_arbre.csv"), "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["id", "label", "raison"])
+        for q in sorted(rejetes):
+            w.writerow([q, libelles.get(q, q), rejetes[q]])
     return noeuds, aretes, depart
 
 

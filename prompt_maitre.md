@@ -228,3 +228,25 @@ Open (ask the user before acting):
 3. Duplicates. The anomaly "scission 1993 to 1993" between Mouvement des citoyens and Mouvement républicain et citoyen shows a duplicate: merge them as one chain with a renommage (see 3 bis, 5).
 4. LCR to PS (1974 to 1969) and LCR to OCI (1974 to 1952): keep them out of the drawn links. Treat them as candidate `passage` links (militants), to be validated by the user in `liens_candidats_a_lire.csv`.
 5. Do not lose the NPA and NPA-R, displayed in an earlier version: `regression.csv` must list them if they disappear.
+---
+
+## 11. Progress, 16 November 2026 (session at work, branch `Affiche`)
+
+Done, verified by `nettoyage.py`, `rendu.py` and `verifier.py` (all counters at 0, 108 organisations drawn):
+- 3 bis, 1: `RX_COURANT_DE` fixed (a bold name containing an apostrophe, "Un monde d'avance", did not match). Un monde d'avance typed satellite in `types.csv`.
+- 3 bis, 2: regionalist or autonomist organisations (ideology, categories, or the "régionaliste / autonomiste" current) and overseas organisations with no lineage link go to `hors_perimetre`, never `isolee` (63 organisations).
+- 3 bis, 4 and B2: decisions in `data/manuel/actifs_absents.csv` (decision colonne / exclu / a_verifier, verbatim quote of the article). Column: Place publique (socialist family, centre left), Génération écologie, Parti pirate (neutral colour, tag "Parti pirate" to avoid two "PP"). Excluded: MEI (centre), Cap écologie (redirects to Cap21, centre), Parti de la démondialisation (no article), Résistons ! (position disputed), Parti animaliste (catch-all). To decide: Démocrates et progressistes and Union des centristes et des écologistes (centre to centre left).
+- 3 bis, 5 and 4, 3: Mouvement des citoyens and MRC are one chain: MRC founded 2003 (`noeuds_manuels.csv`), MDC ends 2003, inverted automatic link removed, renommage MDC -> MRC 2003 (`aretes_manuelles.csv`).
+- 3 bis, 6: Le Poing Levé and Du Pain et des Roses attached to Révolution permanente (type `emanation`), listed in its tooltip; Du Pain et des Roses typed satellite.
+- Parti communiste (France, 1919): anarchist family; drawn with the Union anarchiste as ancestors of the Fédération anarchiste, through a sourced filiation UA -> FA 1945 (militants of the UA and the FAF).
+- Spartacist LCI: sourced descent recorded in `data/manuel/internationales_filles.csv`, from the CIQI, indirect through the US SWP (two quotes, both verified). The Ligue trotskyste de France stays undated (empty fondation field).
+- 4, 1: `scripts/porte.py`, a political-type gate by Wikidata classes (P31 then P279* of the distinct types, cached in `data/cache_porte.json`). Used by `nettoyage.py` (581 rejections with their reason in `elagage_rejets.csv`), `tableaux.py` (11 rows rejected: Occitanie, Alsace, Corse, Savoie, Pays catalans, three persons, the CGT; `data/sortie/rejets_porte_tableaux.csv`) and `arbre.py` (no climbing through a rejected entity, `data/rejets_porte_arbre.csv`; not run yet, takes effect at the next collection). Identifiers cited in `data/manuel/` are exempt.
+- 4, 2: in `enrichissement.completer_actifs`, a coalition (Wikidata type) is never proposed active, and a quote whose bold subject is another organisation (Tendance CLAIRE citing the NPA) is rejected; reason in the new `note` column of `actifs_a_revoir.csv`.
+- 4, 4: links rejected because the target already existed are proposed as `passage` at the top of `liens_candidats_a_lire.csv` (LCR -> OCI 1979, LCR -> PS). Validation: a `passage` row in `aretes_manuelles.csv`.
+- 4, 5: `regression.csv` lists every missing incontournable on every run, not only on the run where it disappeared (NPA and NPA-R are incontournables).
+
+Conflicts resolved in this session:
+- B2 asks for a column "at the right edge". It is drawn as the last lane, at the bottom, bars at their real dates (so on the right of the time axis), with an open bracket at the left end: a separate column would break R3 (linear time axis).
+- LCI: the user asked for an indirect link from the QI; the sources document the CIQI (founded in 1953 with the SWP), a daughter of the QI. The CIQI was kept.
+
+Next: C1 (top lane "Internationales", medallion and navy ribbon, under bars too) and C2 (diamond scission marker), then the poster (A2, A3, E, CairoSVG and fonts in `fonts/`).

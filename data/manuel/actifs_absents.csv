@@ -1,0 +1,11 @@
+id,label,decision,famille,positionnement,source,note
+Q58366009,Place publique,colonne,socialistes,centre gauche,fr:Place publique (parti politique) : « '''Place publique''' ('''PP''') est un [[Liste des partis et mouvements politiques français|parti politique français]] [[proeuropéen]] de [[centre gauche]] »,"famille tirée de l'article (centre gauche, social-écologie), pas de la première idéologie trouvée (addendum 3 bis, 4)"
+Q1153753,Génération écologie,colonne,écologistes,centre gauche (actuel),fr:Génération écologie : « '''Actuel'''<br>[[Centre gauche]] »,
+Q5291,Parti pirate,colonne,,gauche,fr:Parti pirate (France) : « positionnement      = [[gauche (politique)|Gauche]] »,aucune des familles de l'arbre : couleur neutre
+Q1156061,Mouvement écologiste indépendant,exclu,,centre,fr:Mouvement écologiste indépendant : « positionnement      = [[Centrisme|Centre]] »,"centre (addendum 3, B3)"
+Q97015296,Démocrates et progressistes,a_verifier,socialistes,centre à centre gauche,fr:Démocrates et progressistes : « positionnement      = [[Centre (politique)|Centre]] »,l'article donne à la fois centre et centre gauche : à trancher
+Q106920710,Union des centristes et des écologistes,a_verifier,écologistes,centre gauche à centre,"fr:Union des centristes et des écologistes (France) : « [[Centre gauche]]<ref name=""europe1"" /> à [[Centrisme politique en France|centre]] »","centre gauche à centre : à trancher ; l'article décrit l'UDE (2015), vérifier l'homonymie"
+Q1351963,Cap écologie,exclu,,centre,fr:Cap21 : « positionnement      = [[Centre (politique)|Centre]] à [[centre droit]]<br />puis [[Centre (politique)|centre]] à [[centre gauche]] »,"Cap écologie renvoie à Cap21 : centre à centre droit, puis centre à centre gauche"
+,Parti de la démondialisation,exclu,,,,aucun article sur Wikipédia en français
+Q39052782,Résistons !,exclu,,contesté,fr:Résistons : « le positionnement du parti divise les sources »,pas de position de gauche dans l'article
+Q27867942,Parti animaliste,exclu,,attrape-tout,fr:Parti animaliste : « positionnement      = [[Attrape-tout]] »,transpartisan

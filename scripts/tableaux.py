@@ -15,6 +15,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import enrichissement as en  # noqa: E402
+import porte  # noqa: E402
 
 SORTIE = en.SORTIE
 RX_TABLE = re.compile(r"^\{\|.*?^\|\}", re.S | re.M)
@@ -141,13 +142,23 @@ def main():
             continue
         vus.add((q_p, q_i, d))
         lignes.append([q_p, q_i, d, f, f"{lang}:{t}", nom_i, cit, f"{lang}:{titre}"])
+    # Addendum 4, 1 : seules les organisations politiques (pas les dirigeants, régions culturelles,
+    # syndicats comme la CGT...) ; chaque rejet est noté avec sa raison
+    rejets = porte.rejets({l[0] for l in lignes}, exemptes=porte.ids_manuels())
+    ecartees = [l for l in lignes if l[0] in rejets]
+    lignes = [l for l in lignes if l[0] not in rejets]
+    with open(os.path.join(SORTIE, "rejets_porte_tableaux.csv"), "w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["id", "label", "raison", "international_nom", "source_citation"])
+        w.writerows(sorted([l[0], l[4], rejets[l[0]], l[5], l[7]] for l in ecartees))
     lignes.sort(key=lambda x: (x[1], x[2], x[0]))
     with open(os.path.join(SORTIE, "affiliations_tableaux.csv"), "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["party_id", "international_id", "start", "end", "party_titre", "international_nom",
                     "citation", "source_citation"])
         w.writerows(lignes)
-    print(f"{len(lignes)} adhésions françaises lues dans les tableaux des Internationales")
+    print(f"{len(lignes)} adhésions françaises lues dans les tableaux des Internationales, "
+          f"{len(ecartees)} lignes écartées par la porte politique (data/sortie/rejets_porte_tableaux.csv)")
 
 
 if __name__ == "__main__":
