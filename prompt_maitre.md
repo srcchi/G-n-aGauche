@@ -210,11 +210,14 @@ Resolved:
 - 2.7 "?" in undated band sigles: removed, the hatching and the legend say it.
 - B1 superseded by the exhaustive log of 1.5 (more columns).
 
+Decided by the user on 16 November 2026 (formerly open questions):
+- C1 confirmed: it replaces the strip design of 14 November. Top lane "Internationales", round medallion plus ribbon, one navy colour for all, told apart by sigle only.
+- Parti communiste (France, 1919) (Raymond Péricat): anarchist family, Anarchistes lane, link to the Union anarchiste (1920). Every link needs a verbatim quote from the article (R8); if no quote supports the link, draw the bar without it and log why.
+- Spartacist LCI (QI) and Ligue trotskyste de France: look for a source, French article first, then English. If a quote documents the origin (tendency expelled from the US SWP, 1963-1964), draw an "indirect" grey dotted link from the QI to the LCI. Otherwise draw no link and log why.
+- Poster: CairoSVG (conda or pip) for the vector PDF. Fonts (Fraunces, Barlow Condensed, IBM Plex Mono, all OFL) downloaded once into a `fonts/` folder of the repository, after reading the licence and terms. No browser is available for PNG crops.
+
 Open (ask the user before acting):
-- C1 replaces the strip design adopted on 14 November (IO, IC, AIT 1922 drawn as strips before their section, continued by the section's band, one colour per lineage): confirm.
-- Poster dependencies: vector PDF converter (CairoSVG through conda, or Inkscape), fonts downloaded from Google Fonts (read robots.txt and terms first). No browser available for PNG crops.
-- Parti communiste (France, 1919): its ideologies are mostly anarchist and it merged into anarchist groups; the user says its family and cause are wrong. Needs a sourced decision.
-- Spartacist LCI (QI): no source documents its descent from the QI.
+- none at this time.
 
 ---
 
