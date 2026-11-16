@@ -85,6 +85,11 @@ STYLE_LIEN = {
     "passage": dict(couleur="#2471A3", dash="1.5 3", w=1.2, nom="passage de militants"),
     "composante": dict(couleur="#3D3D3D", dash="", w=3.2, nom="composante (membre de, sans fusion)"),
 }
+NAVY = "#1F2A5C"            # C1 : toutes les Internationales, une seule couleur
+INTL_RUBAN, INTL_ONGLET, INTL_LIGNE = 14, 14, 22   # voie du haut : ruban, onglet au-dessus, hauteur de ligne
+RX_EUROPEEN = re.compile(r"europ", re.I)
+MED_R = BANDE_H / 2         # rayon du médaillon (sous les barres) ; INTL_RUBAN / 2 + 2 en haut
+FLECHE = 7                  # pointe du ruban : toujours membre, ou Internationale toujours existante
 MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."]
 RENVOI_MOT = {"scission": "scission de", "absorption": "absorbe", "fusion": "issu de", "renommage": "issu de",
               "refondation": "refondation de", "filiation_idéologique": "filiation de", "passage": "militants de",
@@ -385,6 +390,39 @@ def charger():
         orgs[q]["style_intl"] = True
         orgs[q]["intl_ref"] = i if i in inter else ""
         orgs[q]["couleur"] = inter[i]["couleur"] if i in inter else couleur_ait
+    # ---------- C1 : les Internationales quittent les voies ----------
+    # Les bandeaux d'origines.csv (AIT, AIT anti-autoritaire, IO, IC, AIT 1922) ne sont plus des barres :
+    # ils deviennent des entrées de la voie « Internationales » du haut ; leur lien de composante vers
+    # leur section (SFIO, PC-SFIC, CNT) devient un ruban sous la section quand aucune adhésion datée
+    # n'existe déjà ; leurs liens entre Internationales restent dans la clé et dans la vue par Internationale.
+    alias = {}
+    for q, i in barres_intl.items():
+        o = orgs[q]
+        cle = i if i in inter else q
+        if cle not in inter:
+            inter[cle] = dict(id=cle, nom=o["label"], sigle=re.sub(r" \(\d{4}\)$", "", o["etiquette"]),
+                              debut=str(o["an0"]), fin=str(o["fin_txt"] or ""), pred=[], type_succ="",
+                              scissions=[], membres=[], filles=[], couleur=NAVY, motif=False)
+        inter[cle]["origine"] = q
+        alias[q] = cle
+    for l in liens:
+        if l["rel"] != "composante" or l["b"] not in alias or l["a"] not in orgs or l["a"] in alias:
+            continue
+        sec, cle = orgs[l["a"]], alias[l["b"]]
+        if any(a_["international_id"] == cle for a_ in sec["affil"]):
+            continue
+        debut = max(int(sec["an0"]), int(l["t"] or sec["an0"]))
+        fin_i = inter[cle]["fin"]
+        fin = fin_i if fin_i and (sec["t1"] is None or int(fin_i) <= int(sec["t1"])) else (
+            "toujours membre" if sec["t1"] is None else str(int(sec["t1"])))
+        sec["affil"].append(dict(party_id=l["a"], international_id=cle, start=str(debut), end=fin,
+                                 date_certainty="known", preuve=l["preuve"], citation=l["citation"]))
+        inter[cle]["membres"].append(l["a"])
+    for q in alias:
+        del orgs[q]
+    liens = [l for l in liens if l["a"] not in alias and l["b"] not in alias]
+    for d in inter.values():                     # C1 : une seule couleur, le marine ; le sigle les distingue
+        d["couleur"], d["motif"] = NAVY, False
     # Infobulles : liens (type, preuve, citation complète) et affiliations (dates)
     for l in liens:
         for q, autre, sens in ((l["a"], l["b"], "vers"), (l["b"], l["a"], "depuis")):
@@ -556,10 +594,12 @@ def preparer(items, inter, ech, T_AUJ):
                     continue
             xa, xb = max(o["x0"], ech.X(ta)), min(o["x1"], max(ech.X(tb), ech.X(ta) + MIN_W))
             txt = d["sigle"]          # période inconnue : la bande hachurée suffit (voir la légende)
+            # C1 : pointe si toujours membre (parti toujours actif), bout coupé sinon
+            encore = connu and a["end"] in ("", "toujours membre") and o["t1"] is None
             bandes.append(dict(intl=a["international_id"], connu=connu, xa=xa, xb=xb, couleur=d["couleur"],
-                               motif=d["motif"], sigle=d["sigle"], nom=d["nom"], texte=txt,
+                               motif=d["motif"], sigle=d["sigle"], nom=d["nom"], texte=txt, encore=encore,
                                debut=a["start"] if connu else "", fin=a["end"] if connu else "",
-                               ecrit=larg(txt, FS, True) + 6 <= xb - xa))
+                               ecrit=larg(txt, FS, True) + 6 + 2 * MED_R + (FLECHE if encore else 0) <= xb - xa))
         o["bandes"], o["bandes_tooltip"] = bandes, []
         ranger_bandes(o)
 
@@ -655,6 +695,62 @@ def bandeaux(items, liens, ech, T_AUJ):
             o["tag_dedans"], o["tag_w"] = True, 0
 
 
+def voie_internationales(items, inter, ech, T_AUJ, avec_origines=True):
+    """C1 : voie « Internationales » en haut. Une entrée par Internationale affichée (au moins un
+    membre dessiné, ou une origine d'origines.csv) : médaillon rond, puis ruban sur sa vie, terminé
+    par une pointe si elle existe toujours, coupé net sinon ; début inconnu : hachuré en tirets.
+    Le sigle (et le nom, les dates s'ils tiennent) est dans le ruban, sinon dans un onglet collé
+    au-dessus de son début (comme C3)."""
+    # Partis, alliances et groupes européens (PSE, PGE, PVE...) : pas des Internationales ; ils restent
+    # en rubans sous les barres de leurs membres, hors de la voie du haut
+    ids = {b["intl"] for o in items.values() for b in o["bandes"] + o["bandes_tooltip"]
+           if not RX_EUROPEEN.search(inter[b["intl"]]["nom"])}
+    if avec_origines:
+        ids |= {i for i, d in inter.items() if d.get("origine")}
+    entrees = []
+    for i in ids:
+        d = inter[i]
+        membres = [b for o in items.values() for b in o["bandes"] + o["bandes_tooltip"] if b["intl"] == i]
+        connu = bool(d["debut"])
+        t0 = t_de(d["debut"]) if connu else None
+        xa = ech.X(t0) if connu else min(b["xa"] for b in membres)
+        en_vie = not d["fin"]
+        xb = ech.X(t_de(d["fin"])) if d["fin"] else ech.X(T_AUJ)
+        xb = max(xb, xa + 2 * MED_R + 4)
+        dates = f"{d['debut'] or '?'}–{d['fin'] or ''}"
+        r = INTL_RUBAN / 2 + 2
+        place = xb - (xa + 2 * r + 4) - (FLECHE if en_vie else 0)
+        textes = [f"{d['sigle']}  {d['nom']}  {dates}", f"{d['sigle']}  {dates}", d["sigle"]]
+        txt = next((t for t in textes if larg(t, FS, True) + 4 <= place), None)
+        onglet = txt is None
+        if onglet:
+            txt = d["sigle"]
+        w_txt = larg(txt, FS, True)
+        droite = max(xb + (FLECHE if en_vie else 0), xa + w_txt + 8 if onglet else 0)
+        entrees.append(dict(id=i, sigle=d["sigle"], nom=d["nom"], dates=dates, xa=xa, xb=xb, en_vie=en_vie,
+                            connu=connu, texte=txt, onglet=onglet, w_txt=w_txt, L=xa - 2, R=droite,
+                            membres=sorted({o["etiquette"] for o in items.values()
+                                            for b in o["bandes"] + o["bandes_tooltip"] if b["intl"] == i})))
+    entrees.sort(key=lambda e: (e["xa"], e["sigle"]))
+    lignes = []
+    for e in entrees:
+        k = next((k for k, l in enumerate(lignes) if all(e["L"] >= f["R"] + GAP or e["R"] + GAP <= f["L"] for f in l)),
+                 len(lignes))
+        if k == len(lignes):
+            lignes.append([])
+        lignes[k].append(e)
+        e["ligne"] = k
+    # Hauteur de chaque ligne : le ruban, plus l'onglet si une entrée de la ligne en a un
+    y = VOIE_PAD + 22                     # place du titre de la voie
+    for l in lignes:
+        h = INTL_LIGNE + (INTL_ONGLET if any(e["onglet"] for e in l) else 0)
+        for e in l:
+            e["y_rel"] = y + h - (INTL_LIGNE - INTL_RUBAN) / 2 - INTL_RUBAN / 2   # centre du ruban
+        y += h
+    ech.intl_h = (y + VOIE_PAD) if lignes else 0
+    return entrees
+
+
 def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     ordre_complet = ordre_voies(orgs, liens)
     voies_ordre = [v for v in ordre_complet if not voies_voulues or v in voies_voulues]
@@ -663,6 +759,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     rang_voie = {v: i for i, v in enumerate(voies_ordre)}
     preparer(items, inter, ech, T_AUJ)
     bandeaux(items, liens, ech, T_AUJ)
+    intl_entrees = voie_internationales(items, inter, ech, T_AUJ, avec_origines=not voies_voulues)
     for l in liens:
         l["x_t"] = ech.X(l["t"])
     # Origines historiques (data/manuel/origines.csv) : leurs liens sont toujours dessinés, quelle que
@@ -795,6 +892,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     cle = cle_donnees(items, inter)
     largeur = max([o["R"] for o in items.values()] + [ech.X(ech.T1)]) + 40
     return dict(items=items, traces=traces, renvois=renvois, continuations=continuations, ech=ech, T_AUJ=T_AUJ,
+                intl_entrees=intl_entrees,
                 largeur=largeur, cle=cle, inter=inter, titre=titre, anomalies=anomalies,
                 rels=sorted({t["rel"] for t in traces} | ({"renommage"} if continuations else set())), **geo)
 
@@ -1211,6 +1309,8 @@ def placer(items, voies_ordre, poly, continuations, collages=(), souhaits=()):
 def ordonnees(items, voies_ordre, rangees, ech):
     entete_h, axe_h = 160, 34
     y = entete_h + axe_h
+    intl_voie = dict(y=y, h=getattr(ech, "intl_h", 0))     # C1 : voie « Internationales » en haut
+    y += intl_voie["h"]
     voies_geo = []
     for v in voies_ordre:
         membres = [o for o in items.values() if o["voie"] == v]
@@ -1231,7 +1331,7 @@ def ordonnees(items, voies_ordre, rangees, ech):
     for i, g in enumerate(voies_geo):
         g["i"] = i
     return dict(voies=voies_geo, voie_index={g["cle"]: g["i"] for g in voies_geo}, hauteur=y,
-                y_axe_haut=entete_h, y_axe_bas=y - axe_h - 12)
+                y_axe_haut=entete_h, y_axe_bas=y - axe_h - 12, intl_voie=intl_voie)
 
 
 def optimiser(items, voies_ordre, rangees, poly, ech, rang_voie, passes=3):
@@ -1512,11 +1612,22 @@ def cle_donnees(items, inter):
 # SVG
 # ======================================================================
 
+def marque(cls, x, y, r, voie, couleur, losange=True):
+    """C2 : marque de scission en losange, marque de composante en carré (plus de rond hors des
+    médaillons). Polygone « geo » : la page HTML le déplace quand une famille est repliée."""
+    pts = ([(x, y - r), (x + r, y), (x, y + r), (x - r, y)] if losange else
+           [(x - r, y - r), (x + r, y - r), (x + r, y + r), (x - r, y + r)])
+    geo = "[" + ",".join(f"[{px:.2f},{py:.2f},{voie}]" for px, py in pts) + "]"
+    return (f'<polygon class="{cls} geo" points="{" ".join(f"{px:.2f},{py:.2f}" for px, py in pts)}" '
+            f'fill="{couleur}" stroke="#FFFFFF" stroke-width="1" data-geo="{geo}" data-voie="{voie}"/>')
+
+
 def dessiner(m, avec_cle=True, apercu=False):
     items, ech = m["items"], m["ech"]
     X = ech.X
     W = m["largeur"] + (CLE_W if avec_cle and not apercu else 0)
     fond, bas_v, liens_svg, haut_v = [], defaultdict(list), [], defaultdict(list)
+    motifs = set()
     for g in m["voies"]:
         c = TEINTE[g["cle"]]
         fond.append(f'<g class="voie" data-voie="{g["i"]}" data-cle="{esc(g["cle"])}">'
@@ -1526,6 +1637,52 @@ def dessiner(m, avec_cle=True, apercu=False):
                     + texte(16, g["y"] + 20, TITRES[g["cle"]], 13, True, "#1A1A1A", cls="voie-t")
                     + texte(16, g["y"] + 36, f"{g['n']} organisation{'s' if g['n'] > 1 else ''}", FS, False,
                             "#333333", cls="voie-t") + "</g>")
+    # ---------- C1 : voie « Internationales » en haut ----------
+    iv_ = m.get("intl_voie") or {}
+    if iv_.get("h") and m.get("intl_entrees"):
+        y0 = iv_["y"]
+        n_i = len(m["intl_entrees"])
+        fond.append(f'<g class="voie-intl" data-cle="internationales">'
+                    f'<rect class="fond-voie" x="0" y="{y0:.1f}" width="{m["largeur"]:.1f}" height="{iv_["h"]:.1f}" '
+                    f'fill="{melange(NAVY, "#FFFFFF", 0.92)}"/>'
+                    f'<rect class="bord-voie" x="0" y="{y0:.1f}" width="8" height="{iv_["h"]:.1f}" fill="{NAVY}"/>'
+                    + texte(16, y0 + 20, "Internationales", 13, True, "#1A1A1A", cls="voie-t")
+                    + texte(16, y0 + 36, f"{n_i} Internationale{'s' if n_i > 1 else ''}", FS, False, "#333333",
+                            cls="voie-t") + "</g>")
+        r_m = INTL_RUBAN / 2 + 2
+        for e in m["intl_entrees"]:
+            yc_ = y0 + e["y_rel"]
+            yt, yb_ = yc_ - INTL_RUBAN / 2, yc_ + INTL_RUBAN / 2
+            if e["connu"]:
+                fill, trait = NAVY, ""
+            else:
+                motifs.add((f"h-{NAVY[1:]}", NAVY))
+                fill, trait = f"url(#h-{NAVY[1:]})", ' stroke="#1F2A5C" stroke-width="1" stroke-dasharray="3 2"'
+            info = (f"{e['nom']} ({e['sigle']}) : {e['dates']}" + ("" if e["connu"] else ", date de fondation inconnue")
+                    + (" ; toujours existante" if e["en_vie"] else "")
+                    + (f" ; membres dessinés : {', '.join(e['membres'])}" if e["membres"] else " ; origine"))
+            g_ = [f'<g class="intl" data-intl="{esc(e["id"])}"><title>{esc(info)}</title>',
+                  f'<rect class="intl-r" x="{e["xa"]:.2f}" y="{yt:.2f}" width="{e["xb"] - e["xa"]:.2f}" '
+                  f'height="{INTL_RUBAN}" fill="{fill}"{trait} data-bbox="{e["xa"]:.2f},{yt:.2f},'
+                  f'{e["xb"] - e["xa"] + (FLECHE if e["en_vie"] else 0):.2f},{INTL_RUBAN}"/>']
+            if e["en_vie"]:
+                g_.append(f'<polygon class="intl-pointe" points="{e["xb"]:.2f},{yt:.2f} {e["xb"] + FLECHE:.2f},{yc_:.2f} '
+                          f'{e["xb"]:.2f},{yb_:.2f}" fill="{fill}"/>')
+            g_.append(f'<circle class="medaillon" cx="{e["xa"] + r_m:.2f}" cy="{yc_:.2f}" r="{r_m - 1:.2f}" fill="#FFFFFF" '
+                      f'stroke="{NAVY}" stroke-width="2.5"/>')
+            if e["onglet"]:
+                # Ruban trop court pour son sigle : onglet collé au-dessus de son début (C3)
+                xo, wo = e["xa"], e["w_txt"] + 8
+                g_.append(f'<rect class="intl-onglet" x="{xo:.2f}" y="{yt - INTL_ONGLET:.2f}" width="{wo:.2f}" '
+                          f'height="{INTL_ONGLET}" fill="{NAVY}" data-bbox="{xo:.2f},{yt - INTL_ONGLET:.2f},{wo:.2f},'
+                          f'{INTL_ONGLET}"/>')
+                g_.append(texte(xo + 4, yt - 3, e["texte"], FS, True, "#FFFFFF", cls="intl-t",
+                                extra=f' data-bbox="{xo + 4:.2f},{yt - INTL_ONGLET + 1:.2f},{e["w_txt"]:.2f},12"'))
+            else:
+                xt = e["xa"] + 2 * r_m + 4
+                g_.append(texte(xt, yc_ + 4, e["texte"], FS, True, "#FFFFFF", cls="intl-t",
+                                extra=f' data-bbox="{xt:.2f},{yt + 1:.2f},{e["w_txt"]:.2f},12"'))
+            fond.append("".join(g_) + "</g>")
     y_h, y_b = m["y_axe_haut"], m["y_axe_bas"]
     for a in ech.graduations():
         if (a // 10) % 2 == 0 and a < ech.T1:
@@ -1548,7 +1705,6 @@ def dessiner(m, avec_cle=True, apercu=False):
     xa = X(m["T_AUJ"])
     fond.append(f'<line x1="{xa:.1f}" x2="{xa:.1f}" y1="{y_h + 26:.1f}" y2="{y_b + 4:.1f}" stroke="#777777" stroke-dasharray="2 4"/>')
 
-    motifs = set()
     for o in sorted(items.values(), key=lambda o: (o["y_c"], o["x0"])):
         vi = m["voie_index"][o["voie"]]
         intl = " ".join(a["international_id"] for a in o["affil"])
@@ -1585,31 +1741,36 @@ def dessiner(m, avec_cle=True, apercu=False):
             # Bandes d'affiliation sous la barre (2.7), contour pour rester lisibles
             for b in o["bandes"]:
                 y = yc + y_bande(o, b)
-                if b["connu"] and not b["motif"]:
-                    fill = b["couleur"]
+                # C1 : ruban marine ; médaillon rond au début ; pointe si toujours membre, bout coupé
+                # sinon ; dates inconnues : hachuré, contour en tirets
+                if b["connu"]:
+                    fill, trait = NAVY, ""
                 else:
-                    pid = f"h-{b['couleur'][1:]}{'-m' if b['motif'] else ''}"
-                    motifs.add((pid, b["couleur"]))
-                    fill = f"url(#{pid})"
+                    pid = f"h-{NAVY[1:]}"
+                    motifs.add((pid, NAVY))
+                    fill, trait = f"url(#{pid})", ' stroke="#1F2A5C" stroke-width="1" stroke-dasharray="3 2"'
+                corps = b["xb"] - (FLECHE if b["encore"] else 0)
+                ym = y + BANDE_H / 2
                 haut.append(f'<g class="bande" data-intl="{esc(b["intl"])}" data-parti="{esc(o["id"])}" '
-                            f'data-certitude="{"documentee" if b["connu"] else "a_documenter"}">'
+                            f'data-certitude="{"documentee" if b["connu"] else "a_documenter"}" '
+                            f'data-fin="{"membre" if b["encore"] else "coupee"}">'
                             f'<title>{esc(b["nom"])} : ' + (f'{esc(b["debut"])}–{esc(b["fin"])}' if b["connu"] else
                                                             "affiliation citée, dates à documenter") + "</title>"
-                            f'<rect class="bande-r" x="{b["xa"]:.2f}" y="{y:.2f}" width="{b["xb"] - b["xa"]:.2f}" '
-                            f'height="{BANDE_H}" rx="2" fill="{fill}"'
-                            + ('' if b.get("prolonge") else ' stroke="#333333" stroke-width="0.8"') +
+                            f'<rect class="bande-r" x="{b["xa"]:.2f}" y="{y:.2f}" width="{corps - b["xa"]:.2f}" '
+                            f'height="{BANDE_H}" fill="{fill}"{trait}'
                             f' data-bbox="{b["xa"]:.2f},{y:.2f},{b["xb"] - b["xa"]:.2f},{BANDE_H}"/>')
-                if b.get("prolonge") in items:
-                    # Bandeau de l'Internationale et sa bande dans la section : un seul contour, un seul sigle
-                    xi = items[b["prolonge"]]["x0"]
-                    haut.append(f'<rect class="contour-bandeau" x="{xi:.2f}" y="{y:.2f}" width="{b["xb"] - xi:.2f}" '
-                                f'height="{BANDE_H}" rx="2" fill="none" stroke="#333333" stroke-width="0.8"/>')
-                if b["ecrit"] and not (b.get("prolonge") in items and not items[b["prolonge"]].get("sans_tag")):
+                if b["encore"]:
+                    haut.append(f'<polygon class="bande-pointe" points="{corps:.2f},{y:.2f} {b["xb"]:.2f},{ym:.2f} '
+                                f'{corps:.2f},{y + BANDE_H:.2f}" fill="{fill}"/>')
+                haut.append(f'<circle class="medaillon" cx="{b["xa"] + MED_R:.2f}" cy="{ym:.2f}" r="{MED_R - 1:.2f}" '
+                            f'fill="#FFFFFF" stroke="{NAVY}" stroke-width="2"/>')
+                if b["ecrit"]:
                     wt = larg(b["texte"], FS, True)
-                    c_t = texte_sur(b["couleur"]) if b["connu"] else "#111111"
+                    xt = b["xa"] + 2 * MED_R + 3
+                    c_t = "#FFFFFF" if b["connu"] else "#111111"
                     halo = '' if b["connu"] else ' stroke="#FFFFFF" stroke-width="3" paint-order="stroke"'
-                    haut.append(texte(b["xa"] + 3, y + 10.5, b["texte"], FS, True, c_t, cls="bande-t",
-                                      extra=f' data-bbox="{b["xa"] + 3:.2f},{y + 1:.2f},{wt:.2f},12"{halo}'))
+                    haut.append(texte(xt, y + 10.5, b["texte"], FS, True, c_t, cls="bande-t",
+                                      extra=f' data-bbox="{xt:.2f},{y + 1:.2f},{wt:.2f},12"{halo}'))
                 haut.append("</g>")
             # Étiquette au début de la barre (2.6)
             ct, cd = texte_sur(o["couleur"]), gris_sur(o["couleur"])
@@ -1780,12 +1941,10 @@ def dessiner(m, avec_cle=True, apercu=False):
             # Pas de flèche : un trait épais « collé » aux deux barres, un point à chaque bout
             g.pop()
             for (xc, yc), vc in ((pts[0], va), (pts[-1], vb)):
-                g.append(f'<circle class="marque-composante geo-c" cx="{xc:.2f}" cy="{yc:.2f}" r="3.2" '
-                         f'fill="{st["couleur"]}" stroke="#FFFFFF" stroke-width="1" data-voie="{vc}"/>')
+                g.append(marque("marque-composante", xc, yc, 3.0, vc, st["couleur"], losange=False))
         if t["rel"] == "scission" and t["depart"]:
             xs, ys = t["depart"]
-            g.append(f'<circle class="marque-scission geo-c" cx="{xs:.2f}" cy="{ys:.2f}" r="3.5" fill="{st["couleur"]}" '
-                     f'stroke="#FFFFFF" stroke-width="1" data-voie="{va}"/>')
+            g.append(marque("marque-scission", xs, ys, 4.2, va, st["couleur"]))     # C2 : losange
         if t["rel"] == "fusion":
             fusions[t["b"]].append(yt)
         liens_svg.append("".join(g) + "</g>")
@@ -1860,7 +2019,8 @@ def legende(m, apercu):
             el.append(f'<path d="M{x0} {y - 4} H{x0 + 30}" stroke="{st["couleur"]}" stroke-width="{st["w"]}"'
                       + (f' stroke-dasharray="{st["dash"]}"' if st["dash"] else "") + ' fill="none"/>'
                       f'<polygon points="{x0 + 38},{y - 4} {x0 + 28},{y - 9} {x0 + 28},{y + 1}" fill="{st["couleur"]}"/>'
-                      + (f'<circle cx="{x0 + 3}" cy="{y - 4}" r="3.5" fill="{st["couleur"]}"/>' if rel == "scission" else "")
+                      + (f'<polygon points="{x0 + 3},{y - 8.2} {x0 + 7.2},{y - 4} {x0 + 3},{y + 0.2} {x0 - 1.2},{y - 4}" '
+                         f'fill="{st["couleur"]}"/>' if rel == "scission" else "")
                       + texte(x0 + 44, y, st["nom"], FS, cls="legende-t"))
     if m["continuations"]:
         t = "renommage : la barre continue sur la même rangée"
@@ -1883,21 +2043,32 @@ def legende(m, apercu):
               f'width="24" height="12" fill="url(#g-8C8C8C)"/>' + texte(x0 + 40, y, t, FS, cls="legende-t"))
     if not apercu:
         bandes = [b for o in m["items"].values() for b in o["bandes"]]
-        if any(b["connu"] for b in bandes):
-            t = "bande pleine : membre d'une Internationale, dates documentées"
+
+        def ruban(x0, plein=True, pointe=False):
+            # C1 : médaillon rond et ruban marine, pointe ou bout coupé, hachuré en tirets si non daté
+            fill = NAVY if plein else f"url(#h-{NAVY[1:]})"
+            trait = "" if plein else ' stroke="#1F2A5C" stroke-width="1" stroke-dasharray="3 2"'
+            corps = 36 - (FLECHE if pointe else 0)
+            r = BANDE_H / 2
+            return (f'<rect x="{x0}" y="{y - 11}" width="{corps}" height="{BANDE_H}" fill="{fill}"{trait}/>'
+                    + (f'<polygon points="{x0 + corps},{y - 11} {x0 + 36},{y - 11 + r} {x0 + corps},{y - 11 + BANDE_H}" '
+                       f'fill="{fill}"/>' if pointe else "")
+                    + f'<circle class="medaillon" cx="{x0 + r}" cy="{y - 11 + r}" r="{r - 1}" fill="#FFFFFF" stroke="{NAVY}" '
+                      f'stroke-width="2"/>')
+        for cond, t, plein, pointe in (
+                (any(b["connu"] and b["encore"] for b in bandes), "ruban à pointe : toujours membre de l'Internationale",
+                 True, True),
+                (any(b["connu"] and not b["encore"] for b in bandes), "ruban coupé : membre jusqu'à cette date",
+                 True, False),
+                (any(not b["connu"] for b in bandes),
+                 "ruban hachuré en tirets : affiliation citée, dates inconnues (au plus la période commune)", False, False)):
+            if cond:
+                x0 = place(46 + larg(t, FS))
+                el.append(ruban(x0, plein, pointe) + texte(x0 + 46, y, t, FS, cls="legende-t"))
+        if m.get("intl_entrees"):
+            t = "voie Internationales : une Internationale sur sa vie, pointe si elle existe toujours"
             x0 = place(46 + larg(t, FS))
-            el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="#332288" stroke="#333333" '
-                      f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
-        if any(not b["connu"] for b in bandes):
-            t = "bande hachurée : affiliation citée, dates exactes inconnues (au plus la période commune)"
-            x0 = place(46 + larg(t, FS))
-            el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="url(#h-332288)" stroke="#333333" '
-                      f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
-        if any(o.get("style_intl") for o in m["items"].values()):
-            t = "bandeau : une Internationale (AIT, IO, IC…) avant sa section française, que sa bande prolonge"
-            x0 = place(46 + larg(t, FS))
-            el.append(f'<rect x="{x0}" y="{y - 11}" width="36" height="12" rx="2" fill="#EE3377" stroke="#333333" '
-                      f'stroke-width="0.8"/>' + texte(x0 + 46, y, t, FS, cls="legende-t"))
+            el.append(ruban(x0, True, True) + texte(x0 + 46, y, t, FS, cls="legende-t"))
     return "".join(el) + "</g>"
 
 
@@ -1910,7 +2081,8 @@ def cle_compacte(m):
           texte(x + 4, y - 8, "Internationales", 13, True, "#111111", cls="cle-t")]
     for k, c in enumerate(m["cle"]):
         yy = y + 18 * k + 6
-        el.append(f'<rect x="{x + 4}" y="{yy - 10}" width="14" height="12" rx="2" fill="{c["couleur"]}"/>')
+        el.append(f'<circle class="medaillon" cx="{x + 11}" cy="{yy - 4}" r="5" fill="#FFFFFF" stroke="{NAVY}" '
+                  f'stroke-width="2"/>')
         txt = f"{c['sigle']}  {c['dates']}, {len(c['membres'])}"
         el.append(texte(x + 24, yy, txt if larg(txt, FS) < CLE_W - 50 else txt[:34] + "…", FS, False, "#1A1A1A", cls="cle-t"))
     return "".join(el) + "</g>"

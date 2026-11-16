@@ -254,4 +254,13 @@ Conflicts resolved in this session:
 - To check: two bars tagged "UDE" in the Écologistes lane (2015 and 2020), homonym or successor of the Union des démocrates et des écologistes; the duplicate-tag check misses it because the dates differ (rule 1.6).
 - Reminder: rerun the network collection (`python scripts/arbre.py`) so the political gate of `arbre.py` takes effect.
 
-Next: C1 (top lane "Internationales", medallion and navy ribbon, under bars too) and C2 (diamond scission marker), then the poster (A2, A3, E, CairoSVG and fonts in `fonts/`).
+C1 and C2 done (all verifier counters at 0, 103 organisations: the 5 strips left the lanes):
+- The strips of `origines.csv` (AIT, AIT anti-autoritaire, IO, IC, AIT 1922) are no longer bars. Their composante link to their section (SFIO, PC-SFIC, CNT) becomes a ribbon under the section when no dated membership exists (the CNT keeps its AIT 1922 ribbon). Their links between Internationals stay in the key and the Vue par Internationale. The CNT, an origin, is exempt from "barres sans lien".
+- Top lane "Internationales" (`voie_internationales` in `rendu.py`): one navy ribbon per International over its life, round medallion at its start, arrow tip if it still exists, cut end otherwise, hatched with a dashed outline if its founding date is unknown (UCI). Sigle, name and dates inside the ribbon when they fit, else the sigle in a tab glued above its start (C3). Rows packed, 22 px, plus 14 px for rows with a tab.
+- European parties, alliances and groups (PSE, PGE, PVE, PALDE, GAE, ACE, AGEPP, Pirates européens, GGPE) are not Internationals: they stay as ribbons under their members' bars, not in the top lane (otherwise 26 rows, since 25 of them still exist). 24 Internationals in the top lane, 16 rows, 432 px.
+- Under the bars: navy ribbon, medallion at its start, arrow tip if still a member of an active party, cut end otherwise, hatched with a dashed outline if undated. Deviation from C1: the sigle is written in the ribbon after the medallion, not inside it (a 13 px medallion cannot hold "PSE" or "QI-SU" at the 11 px minimum).
+- Medallions are white with a navy border (navy on navy was invisible). All Internationals are navy, told apart by sigle (key swatches are medallions too).
+- C2: scission marker is a diamond, composante marker a small square, both `geo` polygons (moved by the HTML page when a family is folded). The verifier fails on any circle that is not a medallion, on any International bar in a lane, and on any International text outside its ribbon or tab.
+- Not tested: folding families in `arbres/arbre.html` (no JavaScript runtime at work; the top lane uses the class `voie-intl`, not `voie`, so the folding code ignores it).
+
+Next: the poster (A2, A3, E, CairoSVG and fonts in `fonts/`).

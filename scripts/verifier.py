@@ -25,7 +25,7 @@ SORTIE = os.path.join(RACINE, "data", "sortie")
 MANUEL = os.path.join(RACINE, "data", "manuel")
 ARBRES = os.path.join(RACINE, "arbres")
 EPS = 0.06
-TEXTES_PERMIS = {"tag-t", "bande-t", "axe-t", "voie-t", "legende-t", "cle-t", "renvoi", "nom-t"}
+TEXTES_PERMIS = {"tag-t", "bande-t", "axe-t", "voie-t", "legende-t", "cle-t", "renvoi", "nom-t", "intl-t"}
 REL_SUCC_DIRECTE = {"renommage", "fusion", "absorption", "refondation", "scission", "filiation_idéologique", "indirect"}
 
 
@@ -215,6 +215,22 @@ def verifier_svg(chemin, cpt, err):
             if not dedans(bbox(t), b):
                 faute("R4 textes", f"sigle « {t.text} » hors de sa bande")
 
+    # ---------- C1 : voie « Internationales » ----------
+    # Chaque texte d'Internationale dans son ruban ou son onglet ; aucune Internationale dans les voies
+    for g in racine.iter(S + "g"):
+        if g.get("class") != "intl":
+            continue
+        cadres = [bbox(r) for r in g.findall(S + "rect")]
+        for t in g.findall(S + "text"):
+            if not any(dedans(bbox(t), c) for c in cadres):
+                faute("R4 textes", f"sigle « {t.text} » hors de son ruban d'Internationale")
+    for r in racine.iter(S + "rect"):
+        if "barre" in r.get("class", "").split() and r.get("data-style") == "internationale":
+            faute("R2", f"Internationale {r.get('data-id')} dessinée dans une voie")
+    for c in racine.iter(S + "circle"):
+        if "medaillon" not in c.get("class", ""):
+            faute("R4 chevauchements", "forme ronde hors des médaillons (C2)")
+
     # ---------- Textes, renvois ----------
     renvois = defaultdict(list)
     for t in racine.iter(S + "text"):
@@ -278,7 +294,7 @@ def verifier_svg(chemin, cpt, err):
         fleches = [p for p in g.findall(S + "polygon") if "fleche" in p.get("class", "")]
         if g.get("data-rel") == "composante":
             # Composante : un trait vertical sans flèche, un point à chaque bout
-            points_c = [c for c in g.findall(S + "circle") if "marque-composante" in c.get("class", "")]
+            points_c = [c for c in g.findall(S + "polygon") if "marque-composante" in c.get("class", "")]   # C2 : carrés
             v = nombres(traits[0].get("d")) if len(traits) == 1 else []
             if len(traits) != 1 or fleches or len(points_c) != 2 or len(v) != 4 or abs(v[0] - v[2]) > 1e-6:
                 faute("R1", f"{a}->{b} : composante mal dessinée")
@@ -320,8 +336,11 @@ def verifier_svg(chemin, cpt, err):
                     if croise(p1, p2, box):
                         faute("croisements", f"{a}->{b} traverse {sorte} de {q}")
     eteintes = {r["id"] for r in lire("branches_eteintes.csv")} if os.path.exists(os.path.join(SORTIE, "branches_eteintes.csv")) else set()
+    # Origines (R5) : la CNT, section de l'AIT de 1922, n'a plus de trait depuis que les Internationales
+    # ont quitté les voies (C1) ; son lien est son ruban AIT
+    origines = {r["id"] for r in lire("origines.csv", MANUEL)}
     for q in barres:
-        if q not in reliees and q not in eteintes and orgs.get(q, {}).get("sans_genealogie") != "oui":
+        if q not in reliees and q not in eteintes and q not in origines and orgs.get(q, {}).get("sans_genealogie") != "oui":
             # branche éteinte : ses seuls liens documentés ; colonne « Sans généalogie » : aucun lien
             faute("barres sans lien", f"{q} ({orgs.get(q, {}).get('label', '')})")
 
