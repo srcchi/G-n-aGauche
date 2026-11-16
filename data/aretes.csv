@@ -2,7 +2,7 @@ ancetre,descendant,type,relation_wikidata
 Q100249920,Q1317185,filiation,précédé par
 Q104186094,Q111610435,scission,scission de
 Q104186094,Q123783299,scission,scission de
-Q104186211,Q115922089,filiation,remplace
+Q104186211,Q115922089,filiation,remplacé par
 Q104186211,Q115922204,filiation,remplacé par
 Q104187610,Q104186796,filiation,remplace
 Q104187610,Q104187739,appartenance,membre de
@@ -18,16 +18,16 @@ Q1052584,Q173152,filiation,précédé par
 Q1052584,Q208242,appartenance,membre de
 Q1054196,Q3076886,filiation,remplace
 Q107124778,Q107124759,filiation,précédé par
-Q107877569,Q205150,filiation,précédé par
+Q107877569,Q205150,filiation,suivi par
 Q108616480,Q3480490,filiation,remplacé par
 Q108866690,Q2177298,filiation,remplace
 Q109023546,Q135755468,appartenance,membre de
-Q110304901,Q3044770,filiation,remplacé par
+Q110304901,Q3044770,filiation,remplace
 Q110305000,Q3044770,filiation,remplace
 Q111187255,Q111187242,appartenance,membre de
 Q111187258,Q111187242,appartenance,membre de
 Q111606200,Q104187739,appartenance,membre de
-Q111607481,Q111606973,filiation,remplace
+Q111607481,Q111606973,filiation,remplacé par
 Q111610435,Q104186177,appartenance,membre de
 Q111628426,Q104187739,appartenance,membre de
 Q111799189,Q126487286,filiation,remplacé par
@@ -37,38 +37,38 @@ Q1125061,Q639383,appartenance,membre de
 Q112830180,Q112828800,appartenance,membre de
 Q112898155,Q133459689,appartenance,membre de
 Q1145020,Q639383,appartenance,membre de
-Q115922089,Q104186211,filiation,remplace
+Q115922089,Q104186211,filiation,remplacé par
 Q115922370,Q104187610,filiation,remplace
 Q115965582,Q115965646,scission,scission de
 Q116456156,Q2989703,filiation,remplace
-Q116456366,Q116456095,filiation,remplacé par
+Q116456366,Q116456095,filiation,remplace
 Q116456366,Q1694377,filiation,remplace
 Q116456380,Q116456366,scission,scission de
 Q116456380,Q116458474,scission,scission de
 Q116456380,Q1694377,filiation,remplace
 Q116458474,Q116459649,filiation,remplace
-Q116459649,Q1694377,filiation,remplacé par
+Q116459649,Q1694377,filiation,remplace
 Q116459769,Q116459649,filiation,remplace
 Q11696853,Q3324180,filiation,remplace
-Q119360125,Q2867205,filiation,remplacé par
-Q1235686,Q730456,filiation,suivi par
-Q124218594,Q130240199,filiation,remplacé par
-Q124422241,Q3117906,filiation,remplacé par
+Q119360125,Q2867205,filiation,remplace
+Q1235686,Q730456,filiation,remplacé par
+Q124218594,Q130240199,filiation,remplace
+Q124422241,Q3117906,filiation,remplace
 Q12962,Q110627877,scission,scission de
-Q130218773,Q2095948,filiation,remplacé par
-Q130240199,Q131438240,filiation,remplace
-Q130303159,Q133832366,filiation,remplacé par
+Q130218773,Q2095948,filiation,remplace
+Q130240199,Q131438240,filiation,suivi par
+Q130303159,Q133832366,filiation,remplace
 Q131438240,Q136193450,filiation,précédé par
 Q131580147,Q138332469,filiation,remplace
 Q1321802,Q138828808,scission,scission de
-Q1332068,Q170972,filiation,suivi par
+Q1332068,Q170972,filiation,précédé par
 Q1332068,Q2364065,filiation,précédé par
 Q1332068,Q3326505,scission,scission de
 Q1332068,Q703593,appartenance,membre de
 Q133264736,Q595109,scission,scission de
 Q133825198,Q19966963,filiation,précédé par
-Q1347840,Q391597,filiation,remplacé par
-Q1351963,Q105728238,filiation,précédé par
+Q1347840,Q391597,filiation,remplace
+Q1351963,Q105728238,filiation,suivi par
 Q136193450,Q136471473,filiation,suivi par
 Q1367039,Q368067,filiation,précédé par
 Q136907445,Q115814626,filiation,remplace
@@ -97,7 +97,7 @@ Q1518480,Q3112389,filiation,remplacé par
 Q152582,Q565213,filiation,précédé par
 Q1539236,Q639383,appartenance,membre de
 Q1542710,Q25079,appartenance,membre de
-Q1542710,Q45149423,filiation,remplace
+Q1542710,Q45149423,filiation,remplacé par
 Q1568745,Q639383,appartenance,membre de
 Q15985232,Q29348702,appartenance,membre de
 Q15991163,Q17606200,filiation,suivi par
@@ -110,8 +110,8 @@ Q163931,Q183533,filiation,remplace
 Q1639794,Q719544,filiation,remplacé par
 Q166079,Q33762583,filiation,précédé par
 Q16637578,Q1628816,filiation,remplace
-Q16682004,Q179456,filiation,remplacé par
-Q16682011,Q33768451,filiation,précédé par
+Q16682004,Q179456,filiation,remplace
+Q16682011,Q33768451,filiation,suivi par
 Q16683505,Q2867026,filiation,précédé par
 Q16683508,Q16683505,filiation,précédé par
 Q1694377,Q123631784,appartenance,membre de
@@ -121,17 +121,17 @@ Q170972,Q159454,appartenance,membre de
 Q170972,Q220945,appartenance,membre de
 Q170972,Q31400965,scission,scission de
 Q170972,Q7248622,appartenance,membre de
-Q171740,Q965692,filiation,remplacé par
+Q171740,Q965692,filiation,remplace
 Q1719828,Q3112122,filiation,remplace
 Q1719828,Q940230,filiation,remplace
-Q1720263,Q2426439,filiation,remplace
-Q1720449,Q3111895,filiation,remplace
+Q1720263,Q2426439,filiation,remplacé par
+Q1720449,Q3111895,filiation,remplacé par
 Q173152,Q20012759,filiation,suivi par
 Q173152,Q208242,appartenance,membre de
 Q173152,Q693622,scission,scission de
-Q17606200,Q27967567,filiation,précédé par
-Q177522,Q736071,filiation,remplace
-Q179300,Q392539,filiation,remplacé par
+Q17606200,Q27967567,filiation,remplace
+Q177522,Q736071,filiation,remplacé par
+Q179300,Q392539,filiation,remplace
 Q179456,Q1820941,filiation,précédé par
 Q179885,Q2980126,scission,scission de
 Q179885,Q509825,scission,scission de
@@ -141,11 +141,11 @@ Q1829373,Q1720263,filiation,remplace
 Q183725,Q188592,filiation,remplace
 Q1837633,Q3111852,filiation,remplace
 Q1839020,Q2095707,filiation,remplace
-Q1860688,Q2774993,filiation,remplace
+Q1860688,Q2774993,filiation,remplacé par
 Q188592,Q163931,filiation,remplace
 Q188592,Q698677,filiation,remplace
 Q188592,Q703593,filiation,remplace
-Q1904825,Q1052584,filiation,suivi par
+Q1904825,Q1052584,filiation,précédé par
 Q192821,Q116456156,scission,scission de
 Q192821,Q1694377,filiation,remplace
 Q192821,Q183533,appartenance,membre de
@@ -159,15 +159,15 @@ Q20012759,Q127038760,scission,scission de
 Q20012759,Q128064,appartenance,membre de
 Q20012759,Q208242,appartenance,membre de
 Q20012759,Q43807777,filiation,précédé par
-Q2012835,Q47170586,filiation,remplacé par
-Q2026132,Q385172,filiation,remplace
+Q2012835,Q47170586,filiation,remplace
+Q2026132,Q385172,filiation,remplacé par
 Q2044828,Q3086877,filiation,remplace
 Q205150,Q1377195,appartenance,membre de
 Q205150,Q18907386,appartenance,membre de
 Q205150,Q3419877,appartenance,membre de
-Q2053544,Q82892,filiation,suivi par
+Q2053544,Q82892,filiation,précédé par
 Q2054444,Q3326782,scission,scission de
-Q207162,Q58202,filiation,remplace
+Q207162,Q58202,filiation,suivi par
 Q207304,Q876424,filiation,précédé par
 Q208242,Q128064,appartenance,membre de
 Q208242,Q862603,appartenance,membre de
@@ -175,10 +175,10 @@ Q2095707,Q3112381,filiation,remplace
 Q21009145,Q3345028,filiation,remplace
 Q21009145,Q36438150,filiation,remplace
 Q21055512,Q86998495,scission,scission de
-Q2114617,Q3112169,filiation,précédé par
+Q2114617,Q3112169,filiation,remplace
 Q2132031,Q2239200,filiation,remplace
-Q21427344,Q1837633,filiation,remplacé par
-Q2149902,Q3111967,filiation,remplacé par
+Q21427344,Q1837633,filiation,remplace
+Q2149902,Q3111967,filiation,remplace
 Q21684727,Q3152430,filiation,remplace
 Q2175156,Q3111861,filiation,précédé par
 Q2194496,Q2440172,filiation,remplace
@@ -196,44 +196,44 @@ Q2239200,Q7223378,filiation,remplacé par
 Q2242207,Q2448325,filiation,remplace
 Q22674451,Q60574856,appartenance,membre de
 Q2268723,Q2993746,filiation,remplacé par
-Q2268723,Q3112384,filiation,suivi par
+Q2268723,Q3112384,filiation,remplace
 Q2272861,Q1995502,filiation,remplacé par
 Q229478,Q18283219,appartenance,membre de
 Q229478,Q6269138,appartenance,membre de
 Q22981822,Q1045425,appartenance,membre de
-Q2299068,Q36214467,filiation,suivi par
-Q2300622,Q3366676,filiation,précédé par
+Q2299068,Q36214467,filiation,précédé par
+Q2300622,Q3366676,filiation,suivi par
 Q23020118,Q166079,filiation,suivi par
 Q23020118,Q3318180,filiation,suivi par
-Q2320765,Q33762583,filiation,suivi par
+Q2320765,Q33762583,filiation,précédé par
 Q2329524,Q2299068,filiation,précédé par
 Q2344776,Q761433,filiation,suivi par
 Q2358039,Q58202,filiation,précédé par
-Q2367720,Q565213,filiation,remplace
+Q2367720,Q565213,filiation,précédé par
 Q2383322,Q2425659,filiation,précédé par
-Q2388816,Q51239482,filiation,remplacé par
-Q2388816,Q51239847,filiation,remplace
+Q2388816,Q51239482,filiation,remplace
+Q2388816,Q51239847,filiation,remplacé par
 Q2425659,Q3112116,filiation,précédé par
 Q2431577,Q3112055,filiation,remplace
-Q2440172,Q3112407,filiation,remplacé par
+Q2440172,Q3112407,filiation,remplace
 Q2448325,Q3112182,filiation,remplace
 Q24932926,Q24932932,filiation,suivi par
 Q24932932,Q2867087,filiation,précédé par
-Q24932932,Q3154305,filiation,suivi par
+Q24932932,Q3154305,filiation,précédé par
 Q24939885,Q139565740,appartenance,membre de
 Q25079,Q212712,appartenance,membre de
 Q251300,Q111187242,appartenance,membre de
 Q25532384,Q369760,filiation,remplace
 Q2575147,Q3366640,scission,scission de
-Q2582652,Q2783565,filiation,remplace
+Q2582652,Q2783565,filiation,remplacé par
 Q2657309,Q3111960,filiation,remplace
 Q2718814,Q3112368,filiation,remplace
-Q2724226,Q50910195,filiation,remplace
+Q2724226,Q50910195,filiation,remplacé par
 Q2746868,Q639383,appartenance,membre de
 Q2748435,Q209546,filiation,précédé par
 Q2761462,Q7809,filiation,remplace
 Q2774993,Q3112177,filiation,remplace
-Q2783565,Q3112150,filiation,remplace
+Q2783565,Q3112150,filiation,remplacé par
 Q27967567,Q29949210,filiation,suivi par
 Q27978402,Q127413320,scission,scission de
 Q27978402,Q130219314,appartenance,membre de
@@ -249,22 +249,22 @@ Q2867205,Q2994760,appartenance,membre de
 Q2885750,Q6747255,scission,scission de
 Q290305,Q3112068,filiation,remplacé par
 Q290503,Q137353779,filiation,remplace
-Q290503,Q3366385,filiation,remplace
-Q2912866,Q1829373,filiation,remplacé par
+Q290503,Q3366385,filiation,remplacé par
+Q2912866,Q1829373,filiation,remplace
 Q2945536,Q101089320,filiation,remplace
 Q2946013,Q106906187,scission,scission de
 Q2985797,Q3112686,filiation,remplace
 Q2989703,Q63483685,scission,scission de
 Q2994760,Q3456896,appartenance,membre de
-Q29949210,Q30339129,filiation,remplace
+Q29949210,Q30339129,filiation,précédé par
 Q2996657,Q111648344,scission,scission de
 Q3001050,Q2928385,filiation,précédé par
-Q3023888,Q3112231,filiation,suivi par
+Q3023888,Q3112231,filiation,précédé par
 Q3029492,Q643141,appartenance,membre de
 Q3029492,Q65095580,appartenance,membre de
-Q30339129,Q96872687,filiation,remplace
+Q30339129,Q96872687,filiation,remplacé par
 Q3043395,Q55469706,filiation,remplace
-Q3043437,Q17625061,filiation,remplacé par
+Q3043437,Q17625061,filiation,remplace
 Q3055019,Q139565740,scission,scission de
 Q3058074,Q639383,appartenance,membre de
 Q3068323,Q639383,appartenance,membre de
@@ -274,7 +274,7 @@ Q3082926,Q639383,appartenance,membre de
 Q3086877,Q21427344,filiation,remplace
 Q3088504,Q368067,appartenance,membre de
 Q3088519,Q110607053,filiation,précédé par
-Q3088519,Q54769213,filiation,remplacé par
+Q3088519,Q54769213,filiation,précédé par
 Q3091443,Q133795,appartenance,membre de
 Q3091443,Q3550094,scission,scission de
 Q3099348,Q36377550,filiation,remplace
@@ -283,7 +283,7 @@ Q3107400,Q1568745,filiation,précédé par
 Q3107400,Q639383,appartenance,membre de
 Q3111848,Q3111849,filiation,remplace
 Q3111849,Q1860688,filiation,remplace
-Q3111851,Q2212125,filiation,remplacé par
+Q3111851,Q2212125,filiation,remplace
 Q3111852,Q3111855,filiation,remplace
 Q3111855,Q3111958,filiation,remplace
 Q3111856,Q3112260,filiation,remplace
@@ -305,7 +305,7 @@ Q3111967,Q3112181,filiation,remplace
 Q3111970,Q2242207,filiation,remplace
 Q3111972,Q3111973,filiation,remplace
 Q3111973,Q3112054,filiation,remplacé par
-Q3111975,Q1719828,filiation,précédé par
+Q3111975,Q1719828,filiation,remplace
 Q3112035,Q3112256,filiation,précédé par
 Q3112054,Q3112061,filiation,précédé par
 Q3112055,Q3111859,filiation,remplace
@@ -314,8 +314,8 @@ Q3112057,Q3112396,filiation,remplace
 Q3112061,Q3112255,filiation,précédé par
 Q3112062,Q3112063,filiation,remplacé par
 Q3112064,Q3111885,filiation,remplace
-Q3112071,Q3112073,filiation,remplacé par
-Q3112073,Q3112075,filiation,remplace
+Q3112071,Q3112073,filiation,remplace
+Q3112073,Q3112075,filiation,remplacé par
 Q3112075,Q3112274,filiation,remplace
 Q3112113,Q3111963,filiation,remplacé par
 Q3112116,Q3112062,filiation,remplace
@@ -327,40 +327,40 @@ Q3112175,Q3111848,filiation,remplace
 Q3112177,Q3112178,filiation,remplace
 Q3112178,Q3112185,filiation,remplace
 Q3112180,Q2149902,filiation,remplace
-Q3112181,Q3112258,filiation,remplace
+Q3112181,Q3112258,filiation,remplacé par
 Q3112182,Q3112111,filiation,remplacé par
 Q3112185,Q3111851,filiation,remplace
-Q3112255,Q3112359,filiation,suivi par
+Q3112255,Q3112359,filiation,précédé par
 Q3112256,Q3023888,filiation,précédé par
 Q3112258,Q3111970,filiation,remplace
 Q3112260,Q2211955,filiation,remplace
 Q3112274,Q1518480,filiation,remplace
 Q3112275,Q3112392,filiation,remplace
 Q3112290,Q2026132,filiation,remplacé par
-Q3112353,Q3112355,filiation,remplacé par
+Q3112353,Q3112355,filiation,remplace
 Q3112368,Q3112377,filiation,précédé par
 Q3112374,Q2268723,filiation,précédé par
 Q3112377,Q3112374,filiation,précédé par
 Q3112381,Q3111844,filiation,remplacé par
 Q3112387,Q3112391,filiation,remplacé par
-Q3112389,Q3112387,filiation,remplace
-Q3112391,Q588051,filiation,remplacé par
+Q3112389,Q3112387,filiation,remplacé par
+Q3112391,Q588051,filiation,remplace
 Q3112392,Q2044828,filiation,remplace
-Q3112396,Q3111975,filiation,remplacé par
+Q3112396,Q3111975,filiation,précédé par
 Q3112401,Q3112403,filiation,remplacé par
-Q3112403,Q3112405,filiation,remplacé par
-Q3112405,Q349179,filiation,remplacé par
+Q3112403,Q3112405,filiation,remplace
+Q3112405,Q349179,filiation,remplace
 Q3112409,Q3112411,filiation,remplace
 Q3112411,Q2985797,filiation,remplace
 Q3112418,Q1720449,filiation,remplace
 Q3112678,Q3112056,filiation,remplace
 Q3112686,Q3112353,filiation,remplace
-Q3117589,Q33959094,filiation,remplace
+Q3117589,Q33959094,filiation,remplacé par
 Q3117878,Q3091443,appartenance,membre de
 Q3117878,Q3550094,appartenance,membre de
 Q3117913,Q3086466,filiation,remplace
 Q31400965,Q22674451,appartenance,membre de
-Q3141290,Q1542710,filiation,remplacé par
+Q3141290,Q1542710,filiation,remplace
 Q3141290,Q427965,filiation,remplace
 Q3142671,Q65143318,scission,scission de
 Q3152160,Q21684727,filiation,précédé par
@@ -370,12 +370,12 @@ Q3178006,Q3366546,filiation,précédé par
 Q3227199,Q108866690,filiation,remplace
 Q3227199,Q2177298,filiation,remplace
 Q3233417,Q104816306,filiation,remplace
-Q3240305,Q862627,filiation,remplace
-Q32860104,Q60327384,filiation,remplace
+Q3240305,Q862627,filiation,remplacé par
+Q32860104,Q60327384,filiation,remplacé par
 Q3318180,Q2344776,filiation,suivi par
-Q33235,Q3271735,filiation,remplacé par
-Q3326535,Q3366229,filiation,remplace
-Q3326746,Q13359544,filiation,remplacé par
+Q33235,Q3271735,filiation,remplace
+Q3326535,Q3366229,filiation,remplacé par
+Q3326746,Q13359544,filiation,remplace
 Q3326849,Q113500977,scission,scission de
 Q3328040,Q2885750,scission,scission de
 Q3345028,Q3550126,filiation,remplacé par
@@ -386,7 +386,7 @@ Q3366206,Q115922370,scission,scission de
 Q3366229,Q3561492,scission,scission de
 Q3366315,Q3326823,appartenance,membre de
 Q3366385,Q16627908,scission,scission de
-Q3366506,Q71978544,filiation,remplace
+Q3366506,Q71978544,filiation,remplacé par
 Q3366676,Q686372,filiation,suivi par
 Q3366713,Q3076886,filiation,remplace
 Q3366726,Q220945,appartenance,membre de
@@ -398,33 +398,33 @@ Q33759105,Q2867086,filiation,précédé par
 Q3376100,Q12189962,filiation,précédé par
 Q3376100,Q141127568,filiation,suivi par
 Q33768451,Q33769773,filiation,suivi par
-Q33769773,Q33770496,filiation,précédé par
-Q33769773,Q33770699,filiation,suivi par
-Q33770699,Q50867068,filiation,remplace
+Q33769773,Q33770496,filiation,suivi par
+Q33769773,Q33770699,filiation,précédé par
+Q33770699,Q50867068,filiation,remplacé par
 Q3456455,Q126487286,appartenance,membre de
 Q3456455,Q202649,appartenance,membre de
 Q3456455,Q29348702,appartenance,membre de
 Q3456896,Q105077092,appartenance,membre de
 Q3456896,Q30262106,appartenance,membre de
 Q3458343,Q3355973,filiation,suivi par
-Q3480490,Q3029492,filiation,remplacé par
-Q349179,Q497182,filiation,remplacé par
+Q3480490,Q3029492,filiation,remplace
+Q349179,Q497182,filiation,remplace
 Q3491990,Q104601946,filiation,remplace
-Q3518826,Q30041450,filiation,remplacé par
+Q3518826,Q30041450,filiation,remplace
 Q35415418,Q1984090,filiation,remplacé par
 Q35415418,Q51298781,filiation,remplace
 Q3550049,Q2388816,filiation,remplace
 Q3550161,Q3561492,scission,scission de
 Q3550228,Q112898155,scission,scission de
 Q3550421,Q1904825,filiation,remplacé par
-Q3561492,Q3561478,filiation,remplace
+Q3561492,Q3561478,filiation,remplacé par
 Q36214467,Q36217209,filiation,suivi par
 Q36438150,Q21009145,filiation,remplacé par
 Q3751896,Q93451279,filiation,précédé par
-Q385172,Q1347840,filiation,remplacé par
+Q385172,Q1347840,filiation,remplace
 Q391594,Q3112290,filiation,remplace
-Q391597,Q420444,filiation,remplacé par
-Q392539,Q1639794,filiation,remplacé par
+Q391597,Q420444,filiation,remplace
+Q392539,Q1639794,filiation,remplace
 Q41550,Q104872529,appartenance,membre de
 Q41550,Q112828800,appartenance,membre de
 Q41550,Q2994760,appartenance,membre de
@@ -440,14 +440,14 @@ Q442612,Q2697626,filiation,remplace
 Q458,Q922129,appartenance,membre de
 Q46610404,Q46612837,filiation,remplace
 Q46612837,Q46613924,filiation,remplace
-Q46613924,Q2236823,filiation,remplace
+Q46613924,Q2236823,filiation,remplacé par
 Q47170389,Q2012835,filiation,remplacé par
-Q47170586,Q50855610,filiation,remplace
-Q497182,Q2582652,filiation,remplace
-Q497289,Q1235686,filiation,remplace
+Q47170586,Q50855610,filiation,remplacé par
+Q497182,Q2582652,filiation,remplacé par
+Q497289,Q1235686,filiation,précédé par
 Q51078558,Q51078586,filiation,remplace
-Q51078586,Q51078616,filiation,remplacé par
-Q51078616,Q51078659,filiation,remplacé par
+Q51078586,Q51078616,filiation,remplace
+Q51078616,Q51078659,filiation,remplace
 Q51078659,Q35415418,filiation,remplacé par
 Q51188280,Q51188516,filiation,remplace
 Q51188516,Q3117589,filiation,remplace
@@ -458,25 +458,25 @@ Q51239901,Q2388816,filiation,remplace
 Q51298781,Q1984090,filiation,remplacé par
 Q51298971,Q51298781,filiation,remplace
 Q51479244,Q51479574,filiation,remplacé par
-Q51479574,Q47171780,filiation,remplace
+Q51479574,Q47171780,filiation,remplacé par
 Q51480667,Q2697626,filiation,remplace
 Q52382965,Q101003153,filiation,remplacé par
 Q52382965,Q107467470,filiation,remplace
 Q52382965,Q123766218,filiation,remplacé par
 Q52382965,Q126934263,filiation,remplacé par
-Q52847,Q458,filiation,précédé par
+Q52847,Q458,filiation,remplace
 Q5291,Q15081858,appartenance,membre de
 Q5291,Q170,appartenance,membre de
 Q53089663,Q131580147,filiation,remplace
-Q53089663,Q138332469,filiation,remplacé par
+Q53089663,Q138332469,filiation,remplace
 Q5453757,Q199955,filiation,précédé par
 Q55599224,Q97293320,filiation,précédé par
 Q55599225,Q30740604,filiation,précédé par
-Q557045,Q613786,filiation,remplace
+Q557045,Q613786,filiation,remplacé par
 Q565213,Q3111972,filiation,précédé par
 Q565213,Q783684,filiation,remplacé par
-Q58202,Q58326,filiation,suivi par
-Q58326,Q71092,filiation,remplace
+Q58202,Q58326,filiation,précédé par
+Q58326,Q71092,filiation,remplacé par
 Q58329311,Q202649,appartenance,membre de
 Q58366009,Q220945,appartenance,membre de
 Q586066,Q3376100,filiation,remplace
@@ -484,12 +484,12 @@ Q587370,Q734792,appartenance,membre de
 Q588051,Q3112401,filiation,remplace
 Q588759,Q734792,appartenance,membre de
 Q591799,Q2272861,filiation,remplace
-Q599965,Q177522,filiation,remplacé par
+Q599965,Q177522,filiation,précédé par
 Q60574856,Q1051984,appartenance,membre de
 Q60574856,Q6119666,appartenance,membre de
 Q60574856,Q655104,appartenance,membre de
 Q60836735,Q788123,filiation,remplace
-Q60847144,Q1138646,filiation,remplacé par
+Q60847144,Q1138646,filiation,remplace
 Q6119666,Q60574856,appartenance,membre de
 Q613786,Q950179,appartenance,membre de
 Q63456377,Q105616754,filiation,remplace
@@ -512,18 +512,18 @@ Q686372,Q3412217,scission,scission de
 Q69323,Q58296,filiation,suivi par
 Q693622,Q1377279,appartenance,membre de
 Q697744,Q42262,filiation,précédé par
-Q69808,Q783684,filiation,remplacé par
-Q69829,Q200686,filiation,remplacé par
+Q69808,Q783684,filiation,remplace
+Q69829,Q200686,filiation,remplace
 Q698677,Q1423578,filiation,remplace
 Q703593,Q1423578,scission,scission de
 Q70802,Q69808,filiation,remplace
-Q71092,Q70802,filiation,remplacé par
+Q71092,Q70802,filiation,remplace
 Q719544,Q497289,filiation,remplace
-Q7223378,Q1904825,filiation,précédé par
+Q7223378,Q1904825,filiation,suivi par
 Q7287108,Q762083,filiation,précédé par
-Q730456,Q599965,filiation,remplacé par
+Q730456,Q599965,filiation,remplace
 Q734792,Q60175,appartenance,membre de
-Q736071,Q15991163,filiation,remplace
+Q736071,Q15991163,filiation,remplacé par
 Q743390,Q613786,filiation,remplacé par
 Q743390,Q950179,appartenance,membre de
 Q75126973,Q11914923,filiation,remplace
@@ -558,7 +558,7 @@ Q93451279,Q42814,filiation,précédé par
 Q940230,Q3112071,filiation,remplacé par
 Q950179,Q384069,appartenance,membre de
 Q961755,Q42814,filiation,précédé par
-Q96872687,Q112042684,filiation,remplacé par
+Q96872687,Q112042684,filiation,suivi par
 Q97293320,Q97293322,filiation,précédé par
 Q97293322,Q55599225,filiation,précédé par
-Q99884609,Q99669588,filiation,remplacé par
+Q99884609,Q99669588,filiation,remplace
