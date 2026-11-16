@@ -222,3 +222,6 @@ __marimo__/
 # Fichiers de verrou LibreOffice et journaux d'exécution
 .~lock.*#
 *.log
+
+# Configuration fontconfig de l affiche : chemin absolu propre à chaque PC, régénérée à chaque exécution
+data/sortie/fonts_affiche.conf

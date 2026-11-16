@@ -49,6 +49,7 @@ python scripts/arbre.py && python scripts/infobox.py    # retéléchargement (ra
 python scripts/enrichissement.py                        # liens candidats à valider (réseau, mis en cache)
 python scripts/tableaux.py                              # adhésions lues dans les tableaux des Internationales (réseau, mis en cache)
 python scripts/nettoyage.py && python scripts/rendu.py && python scripts/verifier.py
+python scripts/arbre_affiche.py                          # affiche A0 portrait : arbres/affiche.svg et affiche.pdf
 ```
 
 ### Fichiers à remplir à la main (`data/manuel/`, jamais écrasés)

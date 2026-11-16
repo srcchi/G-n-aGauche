@@ -1,0 +1,37 @@
+{
+  "_commentaire": "Thème de l'affiche (addendum 3, section E), lu seulement par scripts/arbre_affiche.py. Format A0 portrait choisi par l'utilisateur le 16 novembre 2026 (A1 paysage : texte d'environ 5,5 pt).",
+  "page": {"largeur_mm": 841, "hauteur_mm": 1189, "marge": 64, "grille": 8},
+  "papier": "#F5F0E6",
+  "encre": "#1C1B22",
+  "familles": {
+    "socialistes": "#E4759B",
+    "communistes": "#B8232F",
+    "trotskystes": "#E8A317",
+    "anarchistes et libertaires": "#1C1B22",
+    "écologistes": "#2F9E6B",
+    "maoïstes": "#1F6FA8",
+    "radicaux": "#E9D44C",
+    "sans généalogie": "#8C8C8C"
+  },
+  "internationales": "#1F2A5C",
+  "aujourdhui": "#C9962B",
+  "opacite_ancetres": 0.7,
+  "opacite_fond_voie": 0.08,
+  "liens": {"epaisseur": 1.5, "opacite": 0.7},
+  "polices": {
+    "titre": {"famille": "Fraunces", "fichier": "fonts/fraunces/Fraunces[SOFT,WONK,opsz,wght].ttf"},
+    "noms": {"famille": "Barlow Condensed", "fichier": "fonts/barlowcondensed/BarlowCondensed-Regular.ttf",
+             "fichier_gras": "fonts/barlowcondensed/BarlowCondensed-Bold.ttf"},
+    "dates": {"famille": "IBM Plex Mono", "fichier": "fonts/ibmplexmono/IBMPlexMono-Regular.ttf",
+              "fichier_gras": "fonts/ibmplexmono/IBMPlexMono-Medium.ttf"}
+  },
+  "tailles": {
+    "texte": 14, "sigle": 15, "barre": 24, "bande": 16, "onglet": 18,
+    "intl_ruban": 17, "intl_onglet": 17, "intl_ligne": 26,
+    "px_par_an": 20,
+    "titre": 120, "sous_titre": 30, "titre_panneau": 34, "actifs": 18, "repere": 15
+  },
+  "titre": "D'où vient la gauche ?",
+  "sous_titre": "Généalogie des organisations de gauche et d'extrême gauche en France, {debut} à {fin}. Sources : Wikipédia (fr, en) et Wikidata, citations vérifiées mot pour mot.",
+  "reperes": "data/manuel/reperes.csv"
+}

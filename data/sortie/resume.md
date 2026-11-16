@@ -61,8 +61,8 @@ Sigles (data/manuel/sigles.csv) : 558 organisations, dont 132 avec un sigle ; 0 
   1 ignorés (source, type ou extrémité manquant).
 
 ## Types (data/manuel/types.csv)
-parti 420, coalition 35, satellite 36, internationale 68, fondatrice 16, étrangère 174.
-2 types saisis à la main, 0 lignes ajoutées au fichier.
+parti 419, coalition 35, satellite 36, internationale 68, fondatrice 17, étrangère 174.
+3 types saisis à la main, 0 lignes ajoutées au fichier.
 Coalitions et satellites ne sont jamais des boîtes ; un satellite rattaché à un parent apparaît
 dans la colonne organisations_liees de ce parent.
 
