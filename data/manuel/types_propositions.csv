@@ -1,0 +1,52 @@
+id,name,type_actuel,type_propose,raison
+Q15300191,Unité internationale des travailleurs - Quatrième Internationale,parti,internationale,"règle 3 bis, 3 : une Internationale ne doit jamais être un candidat parti"
+fr:Première Internationale,Première Internationale (AIT),parti,internationale,"Internationale : dessinée dans la voie du haut (addendum 3, C1), pas dans une voie de famille"
+fr:Deuxième Internationale (IO),Deuxième Internationale (IO),parti,internationale,"Internationale : dessinée dans la voie du haut (addendum 3, C1), pas dans une voie de famille"
+fr:Troisième Internationale (IC),Troisième Internationale (IC),parti,internationale,"Internationale : dessinée dans la voie du haut (addendum 3, C1), pas dans une voie de famille"
+fr:Internationale anti-autoritaire (Saint-Imier),AIT anti-autoritaire (Saint-Imier),parti,internationale,"Internationale : dessinée dans la voie du haut (addendum 3, C1), pas dans une voie de famille"
+fr:AIT anarcho-syndicaliste (1922),AIT anarcho-syndicaliste (1922),parti,internationale,"Internationale : dessinée dans la voie du haut (addendum 3, C1), pas dans une voie de famille"
+Q119132674,Comité de suivi contre les violences sexistes et sexuelles de La France insoumise,parti,satellite,"règle 3 bis, 1 : comité de suivi"
+Q122859911,fédération de Loir-et-Cher du Parti socialiste,parti,satellite,échelon fédéral ou local du Parti socialiste (R6)
+Q105104850,fédération des Français à l’étranger du Parti socialiste,parti,satellite,échelon fédéral ou local du Parti socialiste (R6)
+Q105079499,fédération des Hauts-de-Seine du Parti socialiste,parti,satellite,échelon fédéral ou local du Parti socialiste (R6)
+Q123785860,fédération des Yvelines du Parti socialiste,parti,satellite,échelon fédéral ou local du Parti socialiste (R6)
+Q131784007,fédération du Doubs du Parti socialiste,parti,satellite,échelon fédéral ou local du Parti socialiste (R6)
+Q3091561,Fédération de la Guyane du Parti socialiste,parti,satellite,échelon fédéral ou local du Parti socialiste (R6)
+Q7205536,Fédération guadeloupéenne du Parti socialiste,parti,satellite,échelon fédéral ou local du Parti socialiste (R6)
+Q3092166,Fédération socialiste de la Martinique,parti,satellite,échelon fédéral ou local du Parti socialiste (R6)
+Q3548270,Un monde d'avance,parti,satellite,"courant ou tendance d'un parti affiché (R6, 3 bis 1)"
+Q55599992,Tendance CLAIRE,parti,satellite,"courant ou tendance d'un parti affiché (R6, 3 bis 1)"
+Q3099357,Gauche socialiste,parti,satellite,"courant ou tendance d'un parti affiché (R6, 3 bis 1)"
+Q3592454,Fraction L'Étincelle,parti,satellite,"courant ou tendance d'un parti affiché (R6, 3 bis 1)"
+Q15985231,Objectif socialiste,parti,satellite,"courant ou tendance d'un parti affiché (R6, 3 bis 1)"
+Q589468,Hoxhaïsme,parti,satellite,"idéologie, mouvement ou club historique : pas une organisation du périmètre"
+Q176339,Plateformisme,parti,satellite,"idéologie, mouvement ou club historique : pas une organisation du périmètre"
+Q2032009,Possibilisme,parti,satellite,"idéologie, mouvement ou club historique : pas une organisation du périmètre"
+Q20653619,Zone à défendre,parti,satellite,"idéologie, mouvement ou club historique : pas une organisation du périmètre"
+Q1474268,Hébertistes,parti,satellite,"idéologie, mouvement ou club historique : pas une organisation du périmètre"
+Q1092496,Indulgents,parti,satellite,"idéologie, mouvement ou club historique : pas une organisation du périmètre"
+Q829721,Club des cordeliers,parti,satellite,"idéologie, mouvement ou club historique : pas une organisation du périmètre"
+Q179885,Club des jacobins,parti,satellite,"idéologie, mouvement ou club historique : pas une organisation du périmètre"
+Q2993940,conseil exécutif de Corse,parti,satellite,"institution territoriale, pas un parti"
+Q84366602,lutte ouvriere faire entendre le camp des travailleurs,parti,satellite,"liste électorale locale, pas un parti"
+Q87411008,Liste de gauche - conflans ste honorine 2001,parti,satellite,"liste électorale locale, pas un parti"
+Q87407983,"La gauche conflanaise, Conflans pour tous",parti,satellite,"liste électorale locale, pas un parti"
+Q93448453,Orléans Solidaire Écologique,parti,satellite,"liste électorale locale, pas un parti"
+fr:Ligue communiste révolutionnaire (Bangladesh),Ligue communiste révolutionnaire (Bangladesh),parti,étrangère,organisation hors de France
+fr:Parti communiste internationaliste du Japon,Parti communiste internationaliste du Japon,parti,étrangère,organisation hors de France
+Q3782309,Catalan Workers' Left,parti,étrangère,organisation hors de France
+Q9091758,Union nationale espagnole,parti,étrangère,organisation hors de France
+Q109599840,république socialiste d'Allemagne,parti,étrangère,organisation hors de France
+Q5501792,French India Socialist Party,parti,hors_perimetre,"ancienne Inde française, hors périmètre (R10)"
+Q6733696,Mahe Socialist Party,parti,hors_perimetre,"ancienne Inde française, hors périmètre (R10)"
+Q36214467,Groupe de la Fédération de la gauche démocrate et socialiste,fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q3099348,Groupe de la Gauche radicale,fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q33770699,Groupe des Républicains de gauche,fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q33769773,Groupe Gauche démocratique,fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q46610404,"groupe Socialiste, radical et citoyen",fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q46612837,"groupe Socialiste, républicain et citoyen",fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q46613924,"groupe Socialiste, écologiste et républicain",fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q2236823,groupe socialiste à l'Assemblée nationale,fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q32860104,Groupe ouvrier,fondatrice,coalition,"groupe parlementaire : pas une fondatrice (bruit Wikidata), à vérifier lien par lien"
+Q29348702,Front de gauche (France),fondatrice,coalition,Front de gauche et NUPES sont des coalitions non dessinées (section 6 du prompt maître)
+Q111799189,Nouvelle Union populaire écologique et sociale,fondatrice,coalition,Front de gauche et NUPES sont des coalitions non dessinées (section 6 du prompt maître)
