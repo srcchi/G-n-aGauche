@@ -99,7 +99,7 @@ Q3077017,FDG,acronyme du nom,Forces démocratiques de Guyane,
 Q3082926,Frankiz Breizh,nom court,Frankiz Breizh,
 Q5501792,FISP,acronyme du nom,French India Socialist Party,
 Q111219345,FCR,acronyme du nom,Front communiste révolutionnaire,
-Q18744486,FD,article,Front démocrate,oui
+Q18744486,FD,article,Front démocrate,
 Q16387745,FNA,acronyme du nom,Front national arménien,
 Q3088527,FNOP,acronyme du nom,Front national ouvrier paysan,
 Q104186411,Front prolétaire,nom court,Front prolétaire,
@@ -190,7 +190,6 @@ Q743390,Verts,sigles.csv,Les Verts,oui
 Q3236041,Les Verts Pacifique,nom court,Les Verts Pacifique,
 Q104290793,AKM,acronyme du nom,Les amis de Karl Marx,
 Q613786,Les Écologistes,sigles.csv,Les Écologistes – Europe Écologie Les Verts,oui
-Q86998495,UDE (2020),article + année (homonyme),Liberté Écologie Fraternité,oui
 Q3240150,Ligne rouge,nom court,Ligne rouge (organisation politique),
 Q18215132,LC (1930),sigles.csv,Ligue communiste (1930),oui
 Q3240305,LC (1969),sigles.csv,Ligue communiste (1969),oui
@@ -292,8 +291,8 @@ Q628594,PT (1991),sigles.csv + année (homonyme),"Parti des travailleurs (France
 Q24939885,PT (2023),sigles.csv + année (homonyme),"Parti des travailleurs (France, 2015)",oui
 Q3366460,Parti frontiste,nom court,Parti frontiste,
 Q111187255,Parti lorrain,nom court,Parti lorrain,
-Q3141006,PNB (1931),acronyme du nom + année (homonyme),Parti national breton,
 Q115925919,PNB (2021),acronyme du nom + année (homonyme),Parti national breton,
+Q3141006,PNB (1931),acronyme du nom + année (homonyme),Parti national breton,
 Q111210969,PNSF,acronyme du nom,Parti national-syndicaliste français,
 Q1539236,Parti occitan,nom court,Parti occitan,
 Q135902867,Parti ouvrier,nom court,Parti ouvrier (1914),
@@ -370,8 +369,8 @@ Q30741057,RSÉ,acronyme du nom,Rézistan's Égalité 974,
 Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
 fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
+Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,
@@ -389,17 +388,16 @@ Q64524428,UCL,sigles.csv,Union communiste libertaire (francophone),oui
 Q2722985,UGS,sigles.csv,Union de la gauche socialiste,
 Q3550094,UA (1979),article + année (homonyme),Union des anarchistes,
 Q3550095,UAS,article,Union des anarcho-syndicalistes,oui
-Q106920710,UDE (2021),article + année (homonyme),Union des centristes et des écologistes,
+Q106920710,UDE,article,Union des centristes et des écologistes,
 Q2915458,UCRG,sigles.csv,Union des clubs pour le renouveau de la gauche,
 Q3117408,UCFml,sigles.csv,Union des communistes de France marxiste-léniniste,
-Q21055512,UDE (2015),article + année (homonyme),Union des démocrates et des écologistes,oui
 Q19276426,UDMF,article,Union des démocrates musulmans français,
 Q2540732,UGCS,sigles.csv,Union des groupes et clubs socialistes,
 Q111628305,UJR,acronyme du nom,Union des jeunes révolutionnaires,
 Q3550161,UJC(ml),sigles.csv,Union des jeunesses communistes marxistes-léninistes,oui
 Q3550193,URR,acronyme du nom,Union des républicains radicaux,
-Q116456095,URCF (2003),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,
 fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
+Q116456095,URCF (2003),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,
 Q3550207,UTCL,sigles.csv,Union des travailleurs communistes libertaires,oui
 Q3550228,UEC,sigles.csv,Union des étudiants communistes,
 Q3107400,UPA,article,Union du peuple alsacien,

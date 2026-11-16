@@ -230,7 +230,7 @@ Open (ask the user before acting):
 5. Do not lose the NPA and NPA-R, displayed in an earlier version: `regression.csv` must list them if they disappear.
 ---
 
-## 11. Progress, 16 November 2026 (session at work, branch `Affiche`)
+## 10 bis. Progress, 16 November 2026 (session at work, branch `Affiche`)
 
 Done, verified by `nettoyage.py`, `rendu.py` and `verifier.py` (all counters at 0, 108 organisations drawn):
 - 3 bis, 1: `RX_COURANT_DE` fixed (a bold name containing an apostrophe, "Un monde d'avance", did not match). Un monde d'avance typed satellite in `types.csv`.
@@ -266,3 +266,53 @@ C1 and C2 done (all verifier counters at 0, 103 organisations: the 5 strips left
 - Family of an International (user's report: a click on the QI did not show its daughters): `nettoyage.py` now also keeps the Internationals a kept one split from, and the parents entered in `internationales_filles.csv` (CIQI, LIT-QI, CIO came back; 41 in `internationales.csv`). The top lane and the key include these ancestors. In the HTML page, the top-lane ribbons are clickable, and a click highlights the International, all its descendants (top lane) and all their members. A click on the QI: QI, QI-SU, QI (lambertiste), CRP-QI, CIQI, LIT-QI, LCI; members PCI, POI (1936), LCR, POI, RP. JavaScript syntax checked with Node; the click itself was not run (no DOM library).
 
 Next: the poster (A2, A3, E, CairoSVG and fonts in `fonts/`).
+
+---
+
+## 11. ADDENDUM 5 (review of the 103-organisation SVG, state of 16 November 2026)
+
+It overrides any conflicting rule above. Context: the run passed all 22 verifier counters, yet the render still shows the defects below. Fix the defects, then extend `verifier.py` so that each one can no longer pass silently (section G). Report in the final summary every rule conflict you had to resolve, and stop after each stage as before.
+
+A. SUCCESSOR NAMES AND TAGS (completes B7 and C3)
+A1. Every renommage chain on one row must write each successive name INSIDE the bar, at the date of the change, after a white tick. Today only PC-SFIC/PCF and Voix ouvrière/Lutte ouvrière do it. Bars visibly without any name: PSF, FTSF, CAP, MGR and the unlabeled segment after "NPA 2009 to 2024", "PCF", "Parti radical", "Les Écologistes", "Génération écologie" and others. Count every `org` whose bar has no visible text at all, and make that count 0.
+A2. A tag never sits after the end of its bar. NPA-A, L'Après, URC, PCR (2024) and PT (2023) currently have their tag right of the bar. Put the tag at the START of the bar, or as a tab flush above its left end when the bar is shorter than the tag (C3). The "live short bar with no outgoing link" exemption of 2.6 is withdrawn.
+A3. The date range written in a tag is the segment's own range.
+
+B. KEY OF THE INTERNATIONALS (completes B5)
+B1. Rebuild the "Succession" line of every International from typed relations only (renommage, fusion, refondation), each with a verbatim quote. Currently wrong: the Kominform is shown as the successor of the Communist International (IC), the IC key lists the Internationale ouvrière under "Scissions", and UPSAI and CMRI show the same chain as the IOS. Remove every chain you cannot source. A chain that mixes an International with another one that is not its documented successor is an error.
+B2. Splits go to a "Scissions" line, and only when a source says split. If it says succession or ideological filiation, name it so, or write nothing.
+B3. Write `data/sortie/cle_internationales.csv` (International, years, succession chain, splits, quote for each) and make the key read from it.
+
+C. INTERNATIONALS LANE
+C1. Remove the duplicate: "Première Internationale (AIT)" and "Association internationale des travailleurs (AIT)" are drawn twice for 1864 to 1876. Keep one, with the tooltip naming both identifiers.
+C2. Remove the duplicated sigle in "AIT AIT anarcho-syndicaliste (1922)". Use "AIT (1922)" and "AIT (1864)".
+C3. Disambiguate against the whole database: the Opposition communiste internationale (1930) and the Organisation communiste internationaliste both use "OCI". Use "OCI (1930)" for the first.
+C4. Text on hatched ribbons must stay readable: put the sigle in a solid label box (navy, white text) at the left of the ribbon, never white text directly on the hatching. This concerns UCI, LIT-QI, IFA, SIL, PGE, CIPOML, EITP and every other hatched ribbon. Every medallion carries its sigle: one under LFI has none.
+C5. "Membres affichés (0)" for AIT and OCI is allowed only for origins (R5 exception); otherwise show the member count.
+
+D. COMPOSANTE LINKS (C5, R1)
+D1. The dotted vertical line between PG and LFI is a headless composante link and must disappear: draw it as a renvoi ("membre de LFI"), or as a thin solid bracket with an open arrowhead pointing right if both ends are on adjacent rows. Extend the verifier so that composante links count in R1.
+
+E. "SANS GÉNÉALOGIE DOCUMENTÉE" (B2, 3 bis 4)
+E1. This is a lane at the bottom of the chart, and the only place where a bar with the open bracket may sit. An organisation with the bracket is not drawn in its family lane. Today Place publique is in Socialistes, Génération écologie in Écologistes, and only the Parti pirate is in the lane. Move all three into it, and add the Mouvement écologiste indépendant (collected, active, rejected as "isolee").
+E2. The lane title counts the real number of organisations. The family of each member is shown by the bar colour, derived from the French article (not from the first ideology found, and never "socialistes" for Place publique, since no source calls it a current of the PS).
+E3. Cap Écologie is rejected as `a_dater`: look for its start date and activity in Phase 0. Write the decision and source for each candidate in `actifs_absents.csv`.
+
+F. FAMILIES AND SCOPE
+F1. Re-derive the family of the three scissions of the NPA of 2009: Convergences et alternative (currently Écologistes), Gauche unitaire (Communistes), Gauche anticapitaliste (Socialistes). Put the three, and Ensemble which merges them, in the lane of the NPA's lineage (Trotskystes) when the article gives no ecological or socialist position, otherwise in the lane the article names. Write the quote used in `famille_decision.csv`.
+F2. Centre parties (R10, 3 B3): Union des démocrates et des écologistes, Front démocrate, Mouvement des progressistes (and the second "UDE 2020" bar). Read each French article. Display only the ones whose position is left or centre-left, or which are the ancestor of a displayed organisation (with a note). The others go to `hors_perimetre.csv`. Report the position quoted for each.
+F3. Parti communiste (France, 1919): the anarchist-communist group that became the Union anarchiste in 1920. Keep it in Anarchistes, but remove its affiliation to the Communist International unless a quote says that this very organisation joined it (R7), and name it "Parti communiste (anarchiste, 1919)" in the tag.
+F4. Gauche prolétarienne and UJC(ml): keep them as dead branches. In `liens_candidats_a_lire.csv`, put first the candidate links UEC to UJC(ml) and UJC(ml) to PCMLF, with their quotes, so that I can answer `decision`.
+
+G. VERIFIER (extend, fail on any non-zero)
+G1. Bars with no visible name: 0. Tags beyond the end of their bar, tabs included: 0.
+G2. Composante links counted in R1: 0 headless or dotted links.
+G3. Key content: every Succession and Scissions line has a typed relation and a verbatim quote in `cle_internationales.csv`: 0 without.
+G4. Duplicated International (same identifier or same sigle and same dates): 0.
+G5. Text on hatching without a solid label box: 0.
+G6. Every organisation with the `sans-ancetre` bracket lives in the "Sans généalogie documentée" lane and the lane's count equals the number drawn: 0 mismatch.
+G7. Centre or centre-right organisations displayed without being an ancestor: 0.
+G8. After the run, write PNG crops of: the Internationals lane, the SFIO to PCF area, the NPA scissions (GU, C&A, GA, Ensemble), the "Sans généalogie" lane, the PG/LFI area, and show them to me before saying the stage is done.
+
+STAGES
+This addendum belongs to Stage 2 (sections A to D, F1 to F3 are data and layout), except E, F2 and F4 which belong to Stage 1 (data). Redo Stage 1 for these, show the summary, wait for my confirmation, then redo Stage 2. The poster (Stage 3) is not started before I confirm Stage 2.

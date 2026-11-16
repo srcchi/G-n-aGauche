@@ -672,6 +672,10 @@ def main():
     # Addendum 4, 1 : porte « organisation politique » (territoires, G7, bases de données, personnes,
     # syndicats...), par les classes Wikidata ; les identifiants cités dans data/manuel/ sont exemptés
     rejets_porte = porte.rejets(list(noeuds), exemptes=porte.ids_manuels() | set(forcer))
+    # Addendum 5, F2 : partis du centre lus un par un (position citée), décision dans
+    # data/manuel/perimetre_centre.csv ; « hors_perimetre » : écartés et listés dans hors_perimetre.csv
+    centre_hors = {r["id"].strip(): r for r in lire(os.path.join("manuel", "perimetre_centre.csv"))
+                   if r.get("decision", "").strip() == "hors_perimetre" and r.get("citation", "").strip()}
     stats["rejets_porte_politique"] = len(rejets_porte)
     classe, raison = {}, {}
     for q, d in noeuds.items():
@@ -682,6 +686,8 @@ def main():
             classe[q] = "graphe"    # les radicaux : gardés et signalés, pas tranchés ici
         elif q in rejets_porte:
             classe[q], raison[q] = "exclu", rejets_porte[q]
+        elif q in centre_hors:
+            classe[q], raison[q] = "exclu", f"hors périmètre (centre) : {centre_hors[q]['positionnement']}"
         elif HUMAIN in d["types"]:
             classe[q], raison[q] = "exclu", "personne, pas organisation"
         elif est_internationale(d):
@@ -1539,8 +1545,8 @@ def main():
     # Addendum 3, B2 et 3 bis, 4 : colonne « Sans généalogie documentée », décidée dans
     # data/manuel/actifs_absents.csv (decision = colonne, avec la citation de l'article)
     sans_genealogie = set()
-    for r in lire(os.path.join("manuel", "actifs_absents.csv")):
-        q = r.get("id", "").strip()
+    derniere = {r.get("id", "").strip(): r for r in lire(os.path.join("manuel", "actifs_absents.csv"))}
+    for q, r in derniere.items():         # le fichier ne fait que grandir : la dernière ligne l'emporte
         if r.get("decision", "").strip() != "colonne" or q not in noeuds or not r.get("source", "").strip():
             continue
         if not noeuds[q]["fondation"]:
@@ -1683,6 +1689,8 @@ def main():
            lignes_orgs)
     ecrire("elagues.csv", ["id", "label", "cause", "statut_fin", "famille", "detail"], lignes_elag)
     ecrire("a_dater.csv", ["id", "label", "raison", "famille"], orgs_a_dater)
+    hors_perim += [[q, lab(q), f"position du centre ({r['positionnement']}) : {r['source']} : « {r['citation']} »"]
+                   for q, r in centre_hors.items() if q in noeuds]
     ecrire("hors_perimetre.csv", ["id", "label", "raison"], hors_perim)
 
     # ---------- 1.6 Étiquettes : un sigle court pour chaque organisation ----------
@@ -1921,6 +1929,17 @@ def main():
     # une organisation dessinée, pas déjà dessinés ; « ligne » = numéro de ligne dans liens_candidats.csv,
     # où l'on écrit decision = oui.
     deja_l = {(r[0], r[1]) for r in lignes_liens} | {(r[1], r[0]) for r in lignes_liens}
+    # Addendum 5, F4 : liens des branches éteintes à trancher en premier, quelle que soit leur
+    # confiance (UEC -> UJC(ml), UJC(ml) -> PCMLF), avec leur citation
+    PRIORITAIRES = [("Q3550228", "Q3550161"), ("Q3550161", "Q3366229")]
+    prio = {}
+    for i, r in enumerate(lire("sortie/liens_candidats.csv"), start=2):
+        o_, c_ = r["org"], r["cible"]
+        anc_, desc_ = (c_, o_) if r["sens"] == "cible → org" else (o_, c_)
+        if (anc_, desc_) in PRIORITAIRES and not r.get("decision", "").strip():
+            conf = float(r.get("confiance") or 0)
+            if (anc_, desc_) not in prio or conf > prio[(anc_, desc_)][0]:
+                prio[(anc_, desc_)] = (conf, i, r)
     meilleurs = {}
     for i, r in enumerate(lire("sortie/liens_candidats.csv"), start=2):
         try:
@@ -1960,6 +1979,16 @@ def main():
                           (r.get("source_citation", "") + " ; " if r else "")
                           + "à valider par une ligne « passage » dans data/manuel/aretes_manuelles.csv"])
         stats["passages_proposes"] += 1
+    tete = []
+    for k in PRIORITAIRES:
+        if k in prio:
+            conf, i, r = prio[k]
+            tete.append([i, lab(r["org"]), lab(r["cible"]), r["sens"], r["type_propose"], f"{conf:.2f}",
+                         "oui" if r["org"] in garde and r["cible"] in garde else "une seule",
+                         re.sub(r"\s+", " ", r["phrase_source"])[:300],
+                         (r.get("source_citation", "") + " ; " if r.get("source_citation") else "")
+                         + "branche éteinte, à trancher en premier (addendum 5, F4)"])
+    a_lire = tete + [l for l in a_lire if l[0] not in {t[0] for t in tete}]
     ecrire("liens_candidats_a_lire.csv", ["ligne", "org", "cible", "sens", "type_propose", "confiance",
                                           "deux_dessinees", "phrase", "source"], a_lire)
     stats["candidats_a_lire"] = len(a_lire)
