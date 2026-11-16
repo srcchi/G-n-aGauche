@@ -314,7 +314,8 @@ def charger():
         vie = ((t1 if t1 is not None else T_AUJ) - t0)
         sans_gen = r.get("sans_genealogie") == "oui"
         orgs[r["id"]] = dict(id=r["id"], label=r["label"], etiquette=etiq.get(r["id"], r["nom_court"]),
-                             voie=VOIE_SANS_GEN if sans_gen else r["famille"], couleur=couleur, sans_gen=sans_gen, t0=t0, t1=t1, statut=statut, an0=r["fondation"],
+                             voie=VOIE_SANS_GEN if sans_gen else r["famille"], famille=r["famille"], couleur=couleur,
+                             sans_gen=sans_gen, t0=t0, t1=t1, statut=statut, an0=r["fondation"],
                              fin_txt=fin_txt, affil=[], majeure=statut.startswith("actif") or vie > VIE_MAJEURE,
                              details=[r["label"], f"fondation : {date_longue(r['fondation'], r['fondation_mois'])}",
                                       fin_detail, f"famille : {r['famille']}",
@@ -391,6 +392,21 @@ def charger():
             if l["rel"] == "indirect":
                 txt += f" puis « {l['citation2']} » (par {l['inter_nom']})"
             orgs[q]["details"].append(txt)
+    # « Sans généalogie » avec une famille de l'arbre : dans la voie de cette famille, à côté du parti
+    # dessiné qui partage une de ses affiliations (Place publique et le PS : tous deux membres du PSE,
+    # demande de l'utilisateur du 16 novembre 2026). Sans affiliation partagée : voie à part.
+    for o in orgs.values():
+        if not o.get("sans_gen") or o["famille"] not in FAMILLES:
+            continue
+        siennes = {a["international_id"] for a in o["affil"]}
+        proches = [p for p in orgs.values() if p is not o and not p.get("sans_gen") and p["voie"] == o["famille"]
+                   and siennes & {a["international_id"] for a in p["affil"]}]
+        if proches:
+            p = max(proches, key=lambda p: (p["majeure"], (p["t1"] or T_AUJ) - p["t0"]))
+            commun = sorted(siennes & {a["international_id"] for a in p["affil"]})
+            o["voie"], o["affinite"] = o["famille"], p["id"]
+            o["details"].append(f"placée près de {p['etiquette']} : aucun ancêtre documenté, même affiliation ("
+                                + ", ".join(inter[i]["sigle"] for i in commun if i in inter) + ")")
     associee_de = defaultdict(list)       # Internationale -> [(parente, « organisation associée de … »)]
     for p_, d_ in inter.items():
         for f_, rel_ in d_["filles"]:
@@ -1030,6 +1046,10 @@ def placer(items, voies_ordre, poly, continuations, collages=(), souhaits=()):
     for a, b in continuations:
         voisins[a].add(b)
         voisins[b].add(a)
+    for q, o in items.items():           # affinité sans lien (Place publique près du PS)
+        if o.get("affinite") in items and items[o["affinite"]]["voie"] == o["voie"]:
+            voisins[q].add(o["affinite"])
+            voisins[o["affinite"]].add(q)
     # Composantes (PG dans LFI...) : toujours voisines, même quand leur trait n'a pas encore pu être
     # dessiné ; sans cela, l'abandon du trait les éloigne et il ne peut plus jamais être dessiné.
     deja = {(l["a"], l["b"]) for l in poly}
@@ -1100,6 +1120,10 @@ def placer(items, voies_ordre, poly, continuations, collages=(), souhaits=()):
             for r_ in racines:
                 visite(r_)
             ordre += [q for q in bloc if q not in vus_o]
+            # Affinité sans lien (Place publique) : rangée juste après son parti (le PS), avant ses enfants
+            for q in [q for q in ordre if items[q].get("affinite") in dans]:
+                ordre.remove(q)
+                ordre.insert(ordre.index(items[q]["affinite"]) + 1, q)
             # Bandeau d'Internationale : rangé juste après sa section, à sa gauche sur la même rangée
             # (la section garde la place que lui donnent ses propres ancêtres)
             ordre = [q for q in ordre if not (q in bandeau_de_section.values() and section_du[q] in dans)]
@@ -1140,6 +1164,9 @@ def placer(items, voies_ordre, poly, continuations, collages=(), souhaits=()):
                 if place is None:
                     prefs = [items[l["a"]]["rang_l"] for l in parents[q]
                              if items[l["a"]].get("bloc_v") == (v, debut) and "rang_l" in items[l["a"]]]
+                    aff = items.get(o.get("affinite") or "", {})
+                    if not prefs and aff.get("bloc_v") == (v, debut) and "rang_l" in aff:
+                        prefs = [aff["rang_l"]]     # affinité sans lien : au plus près de ce parti
                     pref = prefs[0] + 1 if prefs else 0
                     candidats = [r for r in range(len(local)) if libre(r, o["L"], o["R"])] + [len(local)]
                     while len(local) < candidats[-1] + 1:
