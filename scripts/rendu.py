@@ -391,12 +391,22 @@ def charger():
             if l["rel"] == "indirect":
                 txt += f" puis « {l['citation2']} » (par {l['inter_nom']})"
             orgs[q]["details"].append(txt)
+    associee_de = defaultdict(list)       # Internationale -> [(parente, « organisation associée de … »)]
+    for p_, d_ in inter.items():
+        for f_, rel_ in d_["filles"]:
+            if rel_ == "organisation associée":
+                associee_de[f_].append((p_, f"organisation associée de {d_['sigle']}"))
     for o in orgs.values():
         for a in o["affil"]:
             d = inter[a["international_id"]]
             dates = f"{a['start']}–{a['end']}" if a["date_certainty"] == "known" else "dates à documenter"
             o["details"].append(f"membre de {d['sigle']} ({d['nom']}) : {dates} ; preuve {a.get('preuve', '')} : "
                                 f"« {a.get('citation', '')} »")
+            # Lien indirect vers une Internationale, par une organisation associée (Place publique,
+            # membre du PSE, organisation associée de l'IS) : dit, jamais dessiné comme une adhésion (R7)
+            for p_, f_ in associee_de.get(a["international_id"], []):
+                o["details"].append(f"par le {d['sigle']}, lié à {inter[p_]['sigle']} ({inter[p_]['nom']}) : "
+                                    f"{d['sigle']} {f_}")
     return orgs, liens, inter, T_AUJ
 
 

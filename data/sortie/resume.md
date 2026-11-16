@@ -78,5 +78,5 @@ dans la colonne organisations_liees de ce parent.
   Démocrates et progressistes, Féministes révolutionnaires, Mouvement écologiste indépendant, Union des centristes et des écologistes, groupe socialiste à l'Assemblée nationale.
 
 ## Affiliations
-- 52 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
+- 51 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;
   à compléter dans data/manuel/affiliations_dates.csv (source obligatoire).

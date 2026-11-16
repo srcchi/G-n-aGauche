@@ -249,4 +249,7 @@ Conflicts resolved in this session:
 - B2 asks for a column "at the right edge". It is drawn as the last lane, at the bottom, bars at their real dates (so on the right of the time axis), with an open bracket at the left end: a separate column would break R3 (linear time axis).
 - LCI: the user asked for an indirect link from the QI; the sources document the CIQI (founded in 1953 with the SWP), a daughter of the QI. The CIQI was kept.
 
+- Place publique (user's request): PSE membership dated 17 October 2025 (`affiliations_dates.csv`, quote of its article); PSE recorded as "organisation associée" of the IS in `internationales_filles.csv` (fr:Parti socialiste européen). Place publique is linked to the IS only through the PSE, never drawn as an IS member (R7): its tooltip says "par le PSE, lié à IS", and the HTML key of the IS highlights the PSE and its members.
+- Reminder: rerun the network collection (`python scripts/arbre.py`) so the political gate of `arbre.py` takes effect.
+
 Next: C1 (top lane "Internationales", medallion and navy ribbon, under bars too) and C2 (diamond scission marker), then the poster (A2, A3, E, CairoSVG and fonts in `fonts/`).
