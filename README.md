@@ -20,8 +20,10 @@ et ouvrir dans un navigateur. Une version par famille, pour l'impression : [`arb
 
 ## Chaîne de traitement
 
-Dépendances : `pip install requests networkx mwparserfromhell` pour les étapes 1 et 2 seulement.
-Les étapes 3 à 5 n'utilisent que Python et les caches (aucun réseau, aucune dépendance).
+Dépendances : `pip install -r requirements.txt` (requests et mwparserfromhell pour la collecte, cairosvg pour
+l'affiche PDF, networkx facultatif). Les étapes 3 à 5 n'utilisent que Python et les caches (aucun réseau).
+Polices de l'affiche (licence libre OFL, fichier OFL.txt à côté de chaque famille) : `fonts/` (Fraunces,
+Barlow Condensed, IBM Plex Mono), téléchargées depuis le dépôt github.com/google/fonts.
 
 | Étape | Script | Source | Produit |
 |---|---|---|---|

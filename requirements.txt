@@ -1,0 +1,14 @@
+# Dépendances Python de G-n-aGauche (le reste n'utilise que la bibliothèque standard).
+# Installation : pip install -r requirements.txt
+# Versions minimales (>=) : le même fichier sert à la maison (Windows, conda) et au travail (Linux).
+
+# Collecte (réseau) : arbre.py, infobox.py, enrichissement.py, tableaux.py, porte.py, fusion.py
+requests>=2.31
+mwparserfromhell>=0.6
+
+# Affiche (étape 3) : SVG vers PDF vectoriel ; demande la bibliothèque système cairo
+# (Linux : déjà présente en général ; Windows : fournie par conda, « conda install cairo »)
+cairosvg>=2.7
+
+# Facultatif : export Gephi de arbre.py (data/arbre_gauche.gexf), ignoré s'il manque
+networkx>=3.0
