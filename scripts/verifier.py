@@ -389,6 +389,9 @@ def verifier_svg(chemin, cpt, err):
             faute("R1", f"{a}->{b} : flèche pas vers la droite ou trop petite")
         if g.get("data-majeur") != "oui":
             for attr, seuil in (("data-annees", s_ans), ("data-voies", s_voies), ("data-rangs", s_rangs)):
+                # renommage et absorption : pas de limite en rangées (exception demandée par l'utilisateur)
+                if attr == "data-rangs" and g.get("data-rel") in ("renommage", "absorption"):
+                    continue
                 if float(g.get(attr)) > seuil:
                     faute("R1", f"{a}->{b} : {attr} {g.get(attr)} au-delà du seuil {seuil:g}")
         if float(g.get("data-voies")) <= 2:

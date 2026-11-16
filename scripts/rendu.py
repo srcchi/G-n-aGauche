@@ -85,6 +85,9 @@ STYLE_LIEN = {
     "passage": dict(couleur="#2471A3", dash="1.5 3", w=1.2, nom="passage de militants"),
     "composante": dict(couleur="#3D3D3D", dash="", w=3.2, nom="composante (membre de, sans fusion)"),
 }
+# Renommage et absorption : l'organisation continue dans une autre ; seul un croisement les renvoie,
+# pas la distance en rangées (exception à 2.5 demandée par l'utilisateur : PSC -> PUP, PUP -> SFIO)
+SUITES = ("renommage", "absorption")
 NAVY = "#1F2A5C"            # C1 : toutes les Internationales, une seule couleur
 INTL_RUBAN, INTL_ONGLET, INTL_LIGNE = 14, 14, 22   # voie du haut : ruban, onglet au-dessus, hauteur de ligne
 RX_EUROPEEN = re.compile(r"europ", re.I)
@@ -291,7 +294,7 @@ def charger():
                               debut=r["start"], fin=r["end"], pred=[p for p in r["predecessor_id"].split(" | ") if p],
                               type_succ=r.get("succession_type", ""),
                               scissions=[p for p in r.get("scissions_de", "").split(" | ") if p], membres=[],
-                              filles=[])
+                              filles=[], cle=r.get("color_key", ""))
     # Internationales filles (scission, succession, réunification, « se réclame de ») : un clic sur la
     # mère, dans la clé de la page HTML, montre toute sa descendance et les partis membres
     for r in lire("internationales_filles.csv"):
@@ -431,8 +434,10 @@ def charger():
     for q in alias:
         del orgs[q]
     liens = [l for l in liens if l["a"] not in alias and l["b"] not in alias]
-    for d in inter.values():                     # C1 : une seule couleur, le marine ; le sigle les distingue
-        d["couleur"], d["motif"] = NAVY, False
+    for d in inter.values():
+        # Demande de l'utilisateur (16 novembre 2026, remplace le marine unique de C1) : chaque Internationale
+        # prend une teinte sombre de sa famille (communiste, trotskyste...), plus foncée que les barres
+        d["couleur"], d["motif"] = couleur_inter(d), False
         d["sigle"] = d["sigle"] or acronyme(d["nom"])
     # Addendum 5, C3 : un sigle d'Internationale déjà pris (par une organisation, ex. OCI, ou une autre
     # Internationale) prend son année de fondation : « OCI (1930) »
@@ -472,7 +477,54 @@ def charger():
             for p_, f_ in associee_de.get(a["international_id"], []):
                 o["details"].append(f"par le {d['sigle']}, lié à {inter[p_]['sigle']} ({inter[p_]['nom']}) : "
                                     f"{d['sigle']} {f_}")
+    for o in orgs.values():                  # infobulles lisibles (le wikitexte reste dans data/sortie)
+        o["details"] = [lisible(x) for x in o["details"]]
     return orgs, liens, inter, T_AUJ
+
+
+RX_ORDINAL = re.compile(r"^(?:[IVXLC]+|\d+)(?:e|er|re)$")
+
+
+def lisible(t):
+    """Infobulles lisibles (demande de l'utilisateur) : le wikitexte des citations devient du texte, pour
+    l'affichage seulement ; data/sortie garde la citation mot pour mot, vérifiée par verifier.py.
+    [[page|texte]] -> texte ; {{date|10|décembre|1966}} -> 10 décembre 1966 ; {{IIIe|Internationale}} ->
+    IIIe Internationale ; <ref>…</ref> retirées ; <br> -> « ; » ; « | fusion de = » -> « fusion de : »."""
+    t = re.sub(r"<ref[^>]*/>|<ref[^>]*>.*?</ref>", "", t, flags=re.S)
+    t = re.sub(r"<br\s*/?>", " ; ", t)
+    t = re.sub(r"<[^>]+>", "", t)
+    t = re.sub(r"\[\[(?:[^\]|]*\|)?([^\]]*)\]\]", r"\1", t)
+    t = re.sub(r"\[https?://\S+\s+([^\]]*)\]", r"\1", t)
+    for _ in range(3):                                     # modèles imbriqués
+        def modele(mm):
+            parts = [p_.strip() for p_ in mm.group(1).split("|")]
+            nom, params = parts[0], [p_ for p_ in parts[1:] if "=" not in p_]
+            if nom == ",":
+                return ","
+            if RX_ORDINAL.match(nom):
+                return " ".join([nom] + params)
+            return " ".join(params) if params else ("" if nom.lower().startswith(("lien", "ref", "note")) else nom)
+        t = re.sub(r"\{\{([^{}]*)\}\}", modele, t)
+    t = re.sub(r"'{2,}", "", t)
+    t = re.sub(r"«\s*\|\s*([^=«»]+?)\s*=\s*", r"« \1 : ", t)       # champ d'infobox
+    t = re.sub(r"[ \t]+", " ", t).replace(" ,", ",").replace("( ", "(").replace(" )", ")")
+    return re.sub(r"(?:\s*;\s*)+»", " »", t).strip()
+
+
+FAMILLE_INTER = {"socialiste": "socialistes", "communiste": "communistes", "gauche radicale": "communistes",
+                  "trotskyste": "trotskystes", "anarchiste": "anarchistes et libertaires", "maoïste": "maoïstes",
+                  "écologiste": "écologistes", "radical": "radicaux"}
+
+
+def couleur_inter(d):
+    """Teinte sombre de la famille de l'Internationale ; gris sombre si elle n'en a pas (pirates, libéraux).
+    Origines sans clé : anarchistes si le nom le dit (AIT anti-autoritaire, AIT de 1922)."""
+    cle = d.get("cle", "")
+    if not cle and re.search(r"anarch|anti-autoritaire|AIT", d["nom"] + " " + d["sigle"]):
+        cle = "anarchiste"
+    fam = FAMILLE_INTER.get(cle)
+    c = TEINTE.get(fam, "#6B6B6B")
+    return nuance(c, 0.28) if luminance(c) < 0.03 else nuance(c, -0.35)
 
 
 def ordre_voies(orgs, liens):
@@ -792,6 +844,7 @@ def voie_internationales(items, inter, ech, T_AUJ, avec_origines=True):
         w_txt = larg(txt, FS, True)
         droite = max(xb + (FLECHE if en_vie else 0), xa + w_txt + 8 if onglet else 0)
         entrees.append(dict(id=i, sigle=d["sigle"], nom=d["nom"], dates=dates, xa=xa, xb=xb, en_vie=en_vie,
+                            couleur=d["couleur"],
                             connu=connu, texte=txt, onglet=onglet, w_txt=w_txt, L=xa - 2, R=droite,
                             membres=sorted({o["etiquette"] for o in items.values()
                                             for b in o["bandes"] + o["bandes_tooltip"] if b["intl"] == i})))
@@ -963,7 +1016,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
                                     "impossible à dessiner vers la droite (dates trop proches ou cible trop courte)"))
                   a_forcer.add((l["a"], l["b"]))
                   continue
-              trop_loin = t["rangs"] > SEUIL_RANGS and not l["majeur"]
+              trop_loin = t["rangs"] > SEUIL_RANGS and not l["majeur"] and l["rel"] not in SUITES
               if (t["croisements"] or trop_loin) and not l["majeur"]:
                   a_forcer.add((l["a"], l["b"]))
               traces.append(t)
@@ -977,7 +1030,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
       boites = boites_obstacles(items)
       traces = [t for t in (router(l, items, boites, rang_voie, poly) for l in poly) if t]
       # Liens mineurs devenus fautifs (croisement, plus de 6 rangées) : renvois, et on recommence
-      fautifs = {(t["a"], t["b"]) for t in traces if not t["majeur"] and (t["croisements"] or t["rangs"] > SEUIL_RANGS)}
+      fautifs = {(t["a"], t["b"]) for t in traces if not t["majeur"] and (
+          t["croisements"] or (t["rangs"] > SEUIL_RANGS and t["rel"] not in SUITES))}
       if not fautifs - force:
           break
       force |= fautifs
@@ -1064,7 +1118,8 @@ def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, c
         for l in p2:
             t = router(l, items, boites, rang_voie, p2)
             if t is None or t["croisements"] or (not l["majeur"] and (
-                    t["rangs"] > SEUIL_RANGS or t["annees"] > SEUIL_ANNEES or t["voies"] > SEUIL_VOIES)):
+                    (t["rangs"] > SEUIL_RANGS and l["rel"] not in SUITES) or t["annees"] > SEUIL_ANNEES
+                    or t["voies"] > SEUIL_VOIES)):
                 return None
         return geo
 
@@ -1756,17 +1811,18 @@ def dessiner(m, avec_cle=True, apercu=False):
         for e in m["intl_entrees"]:
             yc_ = y0 + e["y_rel"]
             yt, yb_ = yc_ - INTL_RUBAN / 2, yc_ + INTL_RUBAN / 2
+            ci = e["couleur"]
             if e["connu"]:
-                fill, trait = NAVY, ""
+                fill, trait = ci, ""
             else:
-                motifs.add((f"h-{NAVY[1:]}", NAVY))
-                fill, trait = f"url(#h-{NAVY[1:]})", ' stroke="#1F2A5C" stroke-width="1" stroke-dasharray="3 2"'
+                motifs.add((f"h-{ci[1:]}", ci))
+                fill, trait = f"url(#h-{ci[1:]})", f' stroke="{ci}" stroke-width="1" stroke-dasharray="3 2"'
             info = (f"{e['nom']} ({e['sigle']}) : {e['dates']}" + ("" if e["connu"] else ", date de fondation inconnue")
                     + (" ; toujours existante" if e["en_vie"] else "")
                     + (f" ; membres dessinés : {', '.join(e['membres'])}" if e["membres"] else " ; origine")
                     + (f" ; identifiants : {', '.join([e['id']] + m['inter'][e['id']].get('autres_ids', []))}"
                        if m["inter"][e["id"]].get("autres_ids") else ""))
-            g_ = [f'<g class="intl" data-intl="{esc(e["id"])}"><title>{esc(info)}</title>',
+            g_ = [f'<g class="intl" data-intl="{esc(e["id"])}"><title>{esc(lisible(info))}</title>',
                   f'<rect class="intl-r" x="{e["xa"]:.2f}" y="{yt:.2f}" width="{e["xb"] - e["xa"]:.2f}" '
                   f'height="{INTL_RUBAN}" fill="{fill}"{trait} data-bbox="{e["xa"]:.2f},{yt:.2f},'
                   f'{e["xb"] - e["xa"] + (FLECHE if e["en_vie"] else 0):.2f},{INTL_RUBAN}"/>']
@@ -1774,22 +1830,22 @@ def dessiner(m, avec_cle=True, apercu=False):
                 g_.append(f'<polygon class="intl-pointe" points="{e["xb"]:.2f},{yt:.2f} {e["xb"] + FLECHE:.2f},{yc_:.2f} '
                           f'{e["xb"]:.2f},{yb_:.2f}" fill="{fill}"/>')
             g_.append(f'<circle class="medaillon" cx="{e["xa"] + r_m:.2f}" cy="{yc_:.2f}" r="{r_m - 1:.2f}" fill="#FFFFFF" '
-                      f'stroke="{NAVY}" stroke-width="2.5"/>')
+                      f'stroke="{ci}" stroke-width="2.5"/>')
             if e["onglet"]:
                 # Ruban trop court pour son sigle : onglet collé au-dessus de son début (C3)
                 xo, wo = e["xa"], e["w_txt"] + 8
                 g_.append(f'<rect class="intl-onglet" x="{xo:.2f}" y="{yt - INTL_ONGLET:.2f}" width="{wo:.2f}" '
-                          f'height="{INTL_ONGLET}" fill="{NAVY}" data-bbox="{xo:.2f},{yt - INTL_ONGLET:.2f},{wo:.2f},'
+                          f'height="{INTL_ONGLET}" fill="{ci}" data-bbox="{xo:.2f},{yt - INTL_ONGLET:.2f},{wo:.2f},'
                           f'{INTL_ONGLET}"/>')
-                g_.append(texte(xo + 4, yt - 3, e["texte"], FS, True, "#FFFFFF", cls="intl-t",
+                g_.append(texte(xo + 4, yt - 3, e["texte"], FS, True, texte_sur(ci), cls="intl-t",
                                 extra=f' data-bbox="{xo + 4:.2f},{yt - INTL_ONGLET + 1:.2f},{e["w_txt"]:.2f},12"'))
             else:
                 xt = e["xa"] + 2 * r_m + 4
                 if not e["connu"]:          # addendum 5, C4 : texte sur une étiquette pleine, pas sur les hachures
                     g_.append(f'<rect class="intl-etiquette" x="{xt - 3:.2f}" y="{yt:.2f}" width="{e["w_txt"] + 6:.2f}" '
-                              f'height="{INTL_RUBAN}" fill="{NAVY}" data-bbox="{xt - 3:.2f},{yt:.2f},{e["w_txt"] + 6:.2f},'
+                              f'height="{INTL_RUBAN}" fill="{ci}" data-bbox="{xt - 3:.2f},{yt:.2f},{e["w_txt"] + 6:.2f},'
                               f'{INTL_RUBAN}"/>')
-                g_.append(texte(xt, yc_ + 4, e["texte"], FS, True, "#FFFFFF", cls="intl-t",
+                g_.append(texte(xt, yc_ + 4, e["texte"], FS, True, texte_sur(ci), cls="intl-t",
                                 extra=f' data-bbox="{xt:.2f},{yt + 1:.2f},{e["w_txt"]:.2f},12"'))
             fond.append("".join(g_) + "</g>")
     y_h, y_b = m["y_axe_haut"], m["y_axe_bas"]
@@ -1852,12 +1908,13 @@ def dessiner(m, avec_cle=True, apercu=False):
                 y = yc + y_bande(o, b)
                 # C1 : ruban marine ; médaillon rond au début ; pointe si toujours membre, bout coupé
                 # sinon ; dates inconnues : hachuré, contour en tirets
+                cb = b["couleur"]
                 if b["connu"]:
-                    fill, trait = NAVY, ""
+                    fill, trait = cb, ""
                 else:
-                    pid = f"h-{NAVY[1:]}"
-                    motifs.add((pid, NAVY))
-                    fill, trait = f"url(#{pid})", ' stroke="#1F2A5C" stroke-width="1" stroke-dasharray="3 2"'
+                    pid = f"h-{cb[1:]}"
+                    motifs.add((pid, cb))
+                    fill, trait = f"url(#{pid})", f' stroke="{cb}" stroke-width="1" stroke-dasharray="3 2"'
                 corps = b["xb"] - (FLECHE if b["encore"] else 0)
                 ym = y + BANDE_H / 2
                 haut.append(f'<g class="bande" data-intl="{esc(b["intl"])}" data-parti="{esc(o["id"])}" '
@@ -1872,12 +1929,12 @@ def dessiner(m, avec_cle=True, apercu=False):
                     haut.append(f'<polygon class="bande-pointe" points="{corps:.2f},{y:.2f} {b["xb"]:.2f},{ym:.2f} '
                                 f'{corps:.2f},{y + BANDE_H:.2f}" fill="{fill}"/>')
                 haut.append(f'<circle class="medaillon" cx="{b["xa"] + MED_R:.2f}" cy="{ym:.2f}" r="{MED_R - 1:.2f}" '
-                            f'fill="#FFFFFF" stroke="{NAVY}" stroke-width="2"/>')
+                            f'fill="#FFFFFF" stroke="{cb}" stroke-width="2"/>')
                 wt = larg(b["texte"], FS, True)
                 wb = wt + 6
                 if b["ecrit"] and b["connu"]:
                     xt = b["xa"] + 2 * MED_R + 3
-                    haut.append(texte(xt, y + 10.5, b["texte"], FS, True, "#FFFFFF", cls="bande-t",
+                    haut.append(texte(xt, y + 10.5, b["texte"], FS, True, texte_sur(cb), cls="bande-t",
                                       extra=f' data-bbox="{xt:.2f},{y + 1:.2f},{wt:.2f},12"'))
                 else:
                     # Addendum 5, C4 : étiquette pleine (marine, texte blanc), voir etiquette_bande
@@ -1885,8 +1942,8 @@ def dessiner(m, avec_cle=True, apercu=False):
                     xe = pos[0] if pos else None
                     if xe is not None:
                         haut.append(f'<rect class="bande-etiquette" x="{xe:.2f}" y="{y:.2f}" width="{wb:.2f}" '
-                                    f'height="{BANDE_H}" fill="{NAVY}" data-bbox="{xe:.2f},{y:.2f},{wb:.2f},{BANDE_H}"/>')
-                        haut.append(texte(xe + 3, y + 10.5, b["texte"], FS, True, "#FFFFFF", cls="bande-t",
+                                    f'height="{BANDE_H}" fill="{cb}" data-bbox="{xe:.2f},{y:.2f},{wb:.2f},{BANDE_H}"/>')
+                        haut.append(texte(xe + 3, y + 10.5, b["texte"], FS, True, texte_sur(cb), cls="bande-t",
                                           extra=f' data-bbox="{xe + 3:.2f},{y + 1:.2f},{wt:.2f},12"'))
                 haut.append("</g>")
             # Étiquette au début de la barre (2.6)
@@ -2205,7 +2262,7 @@ def cle_compacte(m):
           texte(x + 4, y - 8, "Internationales", 13, True, "#111111", cls="cle-t")]
     for k, c in enumerate(m["cle"]):
         yy = y + 18 * k + 6
-        el.append(f'<circle class="medaillon" cx="{x + 11}" cy="{yy - 4}" r="5" fill="#FFFFFF" stroke="{NAVY}" '
+        el.append(f'<circle class="medaillon" cx="{x + 11}" cy="{yy - 4}" r="5" fill="#FFFFFF" stroke="{c["couleur"]}" '
                   f'stroke-width="2"/>')
         txt = f"{c['sigle']}  {c['dates']}, {len(c['membres'])}"
         el.append(texte(x + 24, yy, txt if larg(txt, FS) < CLE_W - 50 else txt[:34] + "…", FS, False, "#1A1A1A", cls="cle-t"))
@@ -2249,8 +2306,8 @@ def cle_complete(m, y0, W):
         col = 0 if ys[0] <= ys[1] else 1
         x, y = 16 + col * col_w, ys[col]
         el.append(f'<g class="entree-cle" data-intl="{esc(c["id"])}"><rect x="{x:.0f}" y="{y:.0f}" width="26" '
-                  f'height="13" fill="{NAVY}"/><circle class="medaillon" cx="{x + 6.5:.1f}" cy="{y + 6.5:.1f}" r="5.5" '
-                  f'fill="#FFFFFF" stroke="{NAVY}" stroke-width="2"/>')
+                  f'height="13" fill="{c["couleur"]}"/><circle class="medaillon" cx="{x + 6.5:.1f}" cy="{y + 6.5:.1f}" r="5.5" '
+                  f'fill="#FFFFFF" stroke="{c["couleur"]}" stroke-width="2"/>')
         el.append(texte(x + 34, y + 11, c["sigle"], FS, True, "#111111", cls="cle-t"))
         el.append(texte(x + 40 + larg(c["sigle"], FS, True), y + 11, f"{c['nom']} ({c['dates']})", FS, False,
                         "#1A1A1A", cls="cle-t"))

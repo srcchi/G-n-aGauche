@@ -117,6 +117,30 @@ def habiller(svg, m):
     return svg
 
 
+def polices_css():
+    """Polices incorporées au SVG (@font-face, fichiers en base64) : sans elles, un visualiseur qui ne les a
+    pas installées prend une police plus large et les dates chevauchent les noms (le PDF, lui, les incorpore
+    déjà). Familles et graisses : celles du thème."""
+    import base64
+    regles = []
+    for fam, fichier, graisse in (
+            (P["noms"]["famille"], P["noms"]["fichier"], "400"),
+            (P["noms"]["famille"], P["noms"]["fichier_gras"], "700"),
+            (P["dates"]["famille"], P["dates"]["fichier"], "400"),
+            (P["dates"]["famille"], P["dates"]["fichier_gras"], "700"),
+            (P["titre"]["famille"], P["titre"]["fichier"], "100 900")):
+        with open(os.path.join(RACINE, fichier), "rb") as f:
+            b64 = base64.b64encode(f.read()).decode("ascii")
+        regles.append(f"@font-face{{font-family:'{fam}';font-weight:{graisse};"
+                      f"src:url(data:font/ttf;base64,{b64}) format('truetype')}}")
+    return "<defs><style>" + "".join(regles) + "</style></defs>"
+
+
+def incorporer_polices(svg):
+    """Insère les @font-face juste après la balise <svg> racine."""
+    return re.sub(r"(<svg\b[^>]*>)", lambda mm: mm.group(1) + polices_css(), svg, count=1)
+
+
 def lire_reperes():
     with open(os.path.join(RACINE, THEME["reperes"]), encoding="utf-8") as f:
         return [r for r in csv.DictReader(f) if r.get("citation", "").strip()]
@@ -270,7 +294,9 @@ def main():
     page, W, H = composer(m, re.sub(r"^<\?xml[^>]*>", "", svg_arbre))
     chemin_svg = os.path.join(ARBRES, "affiche.svg")
     with open(chemin_svg, "w", encoding="utf-8") as f:
-        f.write(page)
+        f.write(incorporer_polices(page))
+    with open(chemin_arbre, "w", encoding="utf-8") as f:      # l'arbre seul aussi, une fois vérifié
+        f.write(incorporer_polices(svg_arbre))
     import cairosvg
     cairosvg.svg2pdf(url=chemin_svg, write_to=os.path.join(ARBRES, "affiche.pdf"))
     print(f"Affiche : {W} x {H} px sur {THEME['page']['largeur_mm']} x {THEME['page']['hauteur_mm']} mm "
