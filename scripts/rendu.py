@@ -902,7 +902,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     # Unifications : organisations nées de la fusion d'au moins trois composantes la même année (SFIO 1905)
     n_fondatrices = Counter(l["b"] for l in liens if l["rel"] in ("fusion", "renommage") and l["a"] in items
                             and l["b"] in items and items[l["a"]]["t1"] is not None
-                            and abs(items[l["a"]]["t1"] - items[l["b"]]["t0"]) < 1 and abs(l["t"] - items[l["b"]]["t0"]) < 1)
+                            and abs(items[l["a"]]["t1"] - items[l["b"]]["t0"]) <= 1.01   # PSR : fin 1901, PSdF 1902
+                            and abs(l["t"] - items[l["b"]]["t0"]) < 1)
     force, anomalies, traces = set(), [], []
     for _tour in range(4):
       for _ in range(30):
@@ -922,10 +923,11 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
               if l["rel"] == "composante":
                   renvois.append(dict(l, raison="composante"))
                   continue
-              # Composante fondatrice d'une organisation majeure (PSdF, PSF, POSR -> SFIO en 1905) : la source
-              # finit l'année où la cible naît, dans la même voie ; toujours dessinée (signalé par l'utilisateur)
-              fondatrice = (l["rel"] in ("fusion", "renommage") and b["majeure"] and ev == 0
-                            and a["t1"] is not None and abs(a["t1"] - b["t0"]) < 1 and abs(l["t"] - b["t0"]) < 1
+              # Composante d'une unification (au moins trois composantes la même année : POF, PSR, ACR -> PSdF
+              # en 1902 ; PSdF, PSF, POSR -> SFIO en 1905) : la source finit l'année où la cible naît, dans la
+              # même voie ; toujours dessinée (signalé par l'utilisateur)
+              fondatrice = (l["rel"] in ("fusion", "renommage") and ev == 0
+                            and a["t1"] is not None and abs(a["t1"] - b["t0"]) <= 1.01 and abs(l["t"] - b["t0"]) < 1
                             and n_fondatrices.get(l["b"], 0) >= 3)      # unification (SFIO 1905), pas toute fusion
               if (majeur(l) or fondatrice) and not voies_voulues:
                   poly.append(dict(l, majeur=True))         # 2.5 : jamais en renvoi
