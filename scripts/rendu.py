@@ -392,19 +392,22 @@ def charger():
             if l["rel"] == "indirect":
                 txt += f" puis « {l['citation2']} » (par {l['inter_nom']})"
             orgs[q]["details"].append(txt)
-    # « Sans généalogie » avec une famille de l'arbre : dans la voie de cette famille, à côté du parti
-    # dessiné qui partage une de ses affiliations (Place publique et le PS : tous deux membres du PSE,
-    # demande de l'utilisateur du 16 novembre 2026). Sans affiliation partagée : voie à part.
+    # « Sans généalogie » avec une famille de l'arbre : dans la voie de cette famille (demande de
+    # l'utilisateur du 16 novembre 2026), à côté du parti dessiné qui partage une de ses affiliations
+    # (Place publique et le PS : tous deux membres du PSE), sinon en bas de la voie. Sans famille
+    # (Parti pirate) : voie « Sans généalogie documentée ».
     for o in orgs.values():
         if not o.get("sans_gen") or o["famille"] not in FAMILLES:
             continue
         siennes = {a["international_id"] for a in o["affil"]}
         proches = [p for p in orgs.values() if p is not o and not p.get("sans_gen") and p["voie"] == o["famille"]
                    and siennes & {a["international_id"] for a in p["affil"]}]
+        o["voie"] = o["famille"]          # famille connue : sa voie, en bas sans affiliation partagée
+        o["details"].append(f"voie {TITRES[o['famille']].lower()} : famille de l'article, aucun ancêtre documenté")
         if proches:
             p = max(proches, key=lambda p: (p["majeure"], (p["t1"] or T_AUJ) - p["t0"]))
             commun = sorted(siennes & {a["international_id"] for a in p["affil"]})
-            o["voie"], o["affinite"] = o["famille"], p["id"]
+            o["affinite"] = p["id"]
             o["details"].append(f"placée près de {p['etiquette']} : aucun ancêtre documenté, même affiliation ("
                                 + ", ".join(inter[i]["sigle"] for i in commun if i in inter) + ")")
     associee_de = defaultdict(list)       # Internationale -> [(parente, « organisation associée de … »)]
