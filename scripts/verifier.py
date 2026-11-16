@@ -210,10 +210,69 @@ def verifier_svg(chemin, cpt, err):
         bx, _, bw, _ = barres.get(q, (0, 0, 0, 0))
         if b[0] < bx - EPS or b[0] + b[2] > bx + bw + EPS:
             faute("R4 chevauchements", f"bande de {q} hors de l'étendue de sa barre")
+        etiq_ = [bbox(r_) for r_ in g.findall(S + "rect") if "bande-etiquette" in r_.get("class", "")]
         for t in g.findall(S + "text"):
             sigles_bandes.append((q, bbox(t)))
-            if not dedans(bbox(t), b):
-                faute("R4 textes", f"sigle « {t.text} » hors de sa bande")
+            if not any(dedans(bbox(t), c_) for c_ in [b] + etiq_):
+                faute("R4 textes", f"sigle « {t.text} » hors de sa bande et de son étiquette")
+            # Addendum 5, G5 : texte sur des hachures sans étiquette pleine
+            if g.get("data-certitude") != "documentee" and not any(dedans(bbox(t), c_) for c_ in etiq_):
+                faute("texte sur hachures", f"« {t.text} » sous {q}")
+
+    # ---------- Addendum 5, G1 : chaque barre a un nom visible ; aucune étiquette après sa fin ----------
+    noms_svg = defaultdict(list)
+    for t in racine.iter(S + "text"):
+        if t.get("class") in ("tag-t", "nom-t") and t.get("data-org"):
+            noms_svg[t.get("data-org")].append(bbox(t))
+    for q, (x, y, w, h) in barres.items():
+        if not any(x - 1 <= b_[0] <= x + w + 1 and y - 17 <= b_[1] <= y + h for b_ in noms_svg.get(q, [])):
+            faute("barres sans nom", f"{q} ({orgs.get(q, {}).get('label', '')})")
+    for r in racine.iter(S + "rect"):
+        if r.get("class") == "tag" and r.get("data-id") in barres:
+            x, _y, w, _h = barres[r.get("data-id")]
+            if float(r.get("x")) >= x + w - 0.5 or float(r.get("x")) < x - 0.5:
+                faute("étiquettes après une fin", f"étiquette de {r.get('data-id')} hors du début de sa barre")
+    # ---------- G2 : aucune composante dessinée en trait ----------
+    for g in racine.iter(S + "g"):
+        if "lien" in g.get("class", "").split() and g.get("data-rel") == "composante":
+            faute("composantes en trait", f"{g.get('data-a')}->{g.get('data-b')}")
+    # ---------- G4 : Internationale en double (même identifiant, ou même sigle et mêmes dates) ----------
+    vues_i, sig_i = set(), Counter()
+    for g in racine.iter(S + "g"):
+        if g.get("class") == "intl":
+            i = g.get("data-intl")
+            if i in vues_i:
+                faute("Internationales en double", i)
+            vues_i.add(i)
+            ti = g.find(S + "title")
+            m_ = re.search(r"\(([^()]+(?:\(\d{4}\))?)\) : ([0-9?]+–[0-9]*)", ti.text or "") if ti is not None else None
+            if m_:
+                sig_i[m_.groups()] += 1
+    for k_, n_ in sig_i.items():
+        if n_ > 1:
+            faute("Internationales en double", f"{k_[0]} {k_[1]} ({n_} fois)")
+    # ---------- G6 : le crochet « aucun ancêtre » seulement dans la voie Sans généalogie, et son compte ----------
+    voie_sg = None
+    for g in racine.iter(S + "g"):
+        if g.get("class") == "voie" and g.get("data-cle") == "sans généalogie":
+            fr_ = next(r for r in g.findall(S + "rect") if r.get("class") == "fond-voie")
+            voie_sg = (float(fr_.get("y")), float(fr_.get("height")))
+            m_n = re.search(r"(\d+) organisation", " ".join("".join(t.itertext()) for t in g.findall(S + "text")))
+            n_annonce = int(m_n.group(1)) if m_n else -1
+    crochets = set()
+    for g in racine.iter(S + "g"):
+        if (g.get("class") or "").startswith("org") and g.find(S + "path[@class='sans-ancetre']") is not None:
+            crochets.add(g.get("data-id"))
+    for q in crochets:
+        y_ = barres.get(q, (0, -1, 0, 0))[1]
+        if voie_sg is None or not (voie_sg[0] <= y_ <= voie_sg[0] + voie_sg[1]):
+            faute("sans généalogie hors voie", f"{q} : crochet hors de la voie « Sans généalogie documentée »")
+    if voie_sg is not None and n_annonce != len(crochets):
+        faute("sans généalogie hors voie", f"titre de la voie : {n_annonce} annoncées, {len(crochets)} dessinées")
+    # ---------- G7 : aucun parti du centre affiché, sauf ancêtre ou exception saisie ----------
+    for r in lire("perimetre_centre.csv", MANUEL):
+        if r.get("decision", "").strip() == "hors_perimetre" and r["id"] in barres:
+            faute("centre affiché", f"{r['id']} ({r['label']}) déclaré hors périmètre mais dessiné")
 
     # ---------- C1 : voie « Internationales » ----------
     # Chaque texte d'Internationale dans son ruban ou son onglet ; aucune Internationale dans les voies
@@ -247,11 +306,15 @@ def verifier_svg(chemin, cpt, err):
             q = t.get("data-org")
             if q not in barres:
                 faute("R4 textes", f"nom « {t.text} » sans barre")
-            elif t.get("data-apres") == "oui":          # dernier nom d'une active : juste après la barre
+            elif t.get("data-apres") == "oui":          # addendum 5, A2 : plus jamais après la barre
+                faute("étiquettes après une fin", f"nom « {t.text} » après la barre de {q}")
+            elif t.get("data-onglet") == "oui":         # nom trop long : onglet collé au-dessus de la barre
                 bx_, by_, bw_, bh_ = barres[q]
                 tb_ = bbox(t)
-                if not (bx_ + bw_ <= tb_[0] <= bx_ + bw_ + ouvertes.get(q, 0) + 8 and by_ - 1 <= tb_[1] and tb_[1] + tb_[3] <= by_ + bh_ + 1):
-                    faute("R4 textes", f"nom « {t.text} » mal placé après la barre de {q}")
+                onglets_ = [bbox(r) for r in racine.iter(S + "rect") if "nom-onglet" in r.get("class", "")
+                            and abs(float(r.get("y")) + float(r.get("height")) - 1 - by_) < 1.5]
+                if not any(dedans(tb_, o_) for o_ in onglets_) or not (bx_ - 1 <= tb_[0] <= bx_ + bw_):
+                    faute("R4 textes", f"nom « {t.text} » hors de son onglet au-dessus de la barre de {q}")
             elif not dedans(bbox(t), barres[q]):
                 faute("R4 textes", f"nom « {t.text} » hors de la barre de {q}")
         elif cls == "renvoi":
@@ -346,13 +409,15 @@ def verifier_svg(chemin, cpt, err):
 
     # ---------- Marques de scission sur le texte d'une étiquette ----------
     textes_tags = [(t.get("data-org"), bbox(t)) for t in racine.iter(S + "text") if t.get("class") == "tag-t"]
-    for c in racine.iter(S + "circle"):
+    for c in racine.iter(S + "polygon"):         # C2 : la marque de scission est un losange
         if "marque-scission" not in c.get("class", ""):
             continue
-        cx, cy, r_ = float(c.get("cx")), float(c.get("cy")), float(c.get("r"))
+        pts_ = nombres(c.get("points"))
+        xs_, ys_ = pts_[0::2], pts_[1::2]
+        boite_ = (min(xs_), min(ys_), max(xs_) - min(xs_), max(ys_) - min(ys_))
         for q, b in textes_tags:
-            if chevauche((cx - r_, cy - r_, 2 * r_, 2 * r_), b):
-                faute("R4 chevauchements", f"cercle de scission sur l'étiquette de {q}")
+            if chevauche(boite_, b):
+                faute("R4 chevauchements", f"losange de scission sur l'étiquette de {q}")
 
     # ---------- Chevauchements (barres, étiquettes, bandes, renvois) ----------
     boites = [(q, "barre", (b[0], b[1], b[2] + ouvertes.get(q, 0), b[3])) for q, b in barres.items()]
@@ -381,6 +446,10 @@ def verifier_donnees(cpt, err):
             faute("successions avec scission", f"{r['name']} : type « {r.get('succession_type')} »")
         if r["predecessor_id"] and not corpus.verifier(r.get("succession_citation", ""), r.get("succession_source", "")):
             faute("citations introuvables", f"succession de {r['name']}")
+    for r in lire("cle_internationales.csv"):         # addendum 5, G3
+        if r["type"] not in ("renommage", "fusion", "refondation", "scission") or \
+                not corpus.verifier(r.get("citation", ""), r.get("source", "")):
+            faute("clé sans citation", f"{r['nom']} <- {r['autre_nom']} ({r['type']})")
     affiches = {r["id"] for r in lire("organisations.csv") if r.get("garde") == "oui"}
     for r in lire("liens.csv"):
         if r["source"] not in affiches or r["cible"] not in affiches or r.get("preuve") == "manuel":
@@ -407,7 +476,10 @@ COMPTEURS = ["liens flottants", "barres sans lien", "barres non datées", "étiq
              "bandes non datées pleines", "successions avec scission", "R1", "R2", "R3 dates", "R4 textes",
              "R4 chevauchements", "R5", "R6", "citations introuvables", "types contredits",
              "liens majeurs en renvoi", "incontournables inexpliqués", "étiquettes après une fin",
-             "textes < 11 px", "légende"]
+             "textes < 11 px", "légende",
+             # Addendum 5, G
+             "barres sans nom", "composantes en trait", "clé sans citation", "Internationales en double",
+             "texte sur hachures", "sans généalogie hors voie", "centre affiché"]
 
 
 def main():

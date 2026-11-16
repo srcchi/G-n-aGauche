@@ -316,3 +316,21 @@ G8. After the run, write PNG crops of: the Internationals lane, the SFIO to PCF 
 
 STAGES
 This addendum belongs to Stage 2 (sections A to D, F1 to F3 are data and layout), except E, F2 and F4 which belong to Stage 1 (data). Redo Stage 1 for these, show the summary, wait for my confirmation, then redo Stage 2. The poster (Stage 3) is not started before I confirm Stage 2.
+
+### 11 bis. Addendum 5, progress (16 November 2026)
+
+Stage 1 (E, F2, F4), confirmed by the user: see `data/manuel/actifs_absents.csv`, `perimetre_centre.csv`; MEI added (ecologist, user's exception to F2, B3, G7); Place publique in socialist colour (user's decision, overrides E2); UEC -> UJC(ml) scission 1966 and UJC(ml) -> PCMLF passage 1968 in `aretes_manuelles.csv`.
+
+Stage 2 (A to D, F1, F3, E drawing, G), all 33 verifier counters at 0, 102 organisations drawn, 77 links:
+- A1-A2: a tag that fits stays inside its bar, shifted past every scission diamond it would cover (only scissions carry a marker; a fusion leaving the bar's edge does not move it); a sigle that fits with 1 px margins stays inside (PSdF); otherwise a tab glued above the bar's start (rows with a tab are 15 px taller). No tag before or after a bar any more; the last successive name that does not fit is a tab above the bar at its date (Les Écologistes).
+- B: `data/sortie/cle_internationales.csv` holds only typed and quoted relations (6): IOS from the fusion of IO and UPSAI, QI from the OCI (1930), TMI split from the CIO, CRP-QI split from the LIT-QI, ICR renamed from the TMI. A succession needs a quote saying fusion, renommage or refondation (a "précédent" field is not enough: IC -> Kominform removed); a negation ("refuse cette fusion", UPSAI -> CMRI) cancels it; a split needs a quote saying split. Unsourced relations stay in the family graph as "filiation", out of the key. The key reads that file ("issue de X (fusion)", "devient Y (renommage)", "Scission de : X").
+- C1-C3: one AIT (1864) entry (Q183725 and fr:Première Internationale, both in its tooltip); "AIT (1922)"; an International whose sigle is already taken gets its year ("OCI (1930)", "CIPOML (1994)").
+- C4: on a hatched ribbon the sigle is on a solid navy label; a ribbon too short for its sigle gets the label left of it under the bar, else right of it, never where a link leaves the bar. Open: 6 medallions still without a visible sigle (UPSAI under SFIO, IC under the PC 1919, CMRI under PSOP, AGEPP under LFI, GAE under NPA-A, ICR under PCR (2024)): no free place left or right; the sigle is in the ribbon's tooltip.
+- C5: an International without drawn member says "Origine (R5)" or "relie sa famille d'Internationales" instead of "(0)".
+- D1: composante links are always renvois ("membre de LFI", "composante : PG"); none drawn.
+- E1-E2: every bar with the open bracket is in the "Sans généalogie documentée" lane (GE, MEI, Parti pirate, Place publique), coloured by family; the rule of the morning (family lane, next to the party sharing an affiliation) is withdrawn.
+- F1: C&A, GU, GA, Ensemble in Trotskystes (`data/manuel/famille_decision.csv`, quote of the positionnement field: none is ecological or socialist).
+- F3: PC 1919 tagged "Parti communiste (anarchiste, 1919)"; its IC membership kept, now backed by the text: "La IIIe Internationale […] encourage Péricart à fonder […] une section française de cette instance : le Parti communiste" (to confirm by the user).
+- PSdF -> SFIO (user's report): drawn. A fusion founding an organisation together with at least two other components the same year (a unification: only the SFIO in 1905) is always drawn, like a major link. Forcing every founding fusion (19 links) was tried and rejected: 7 crossings.
+- G: new counters "barres sans nom", "composantes en trait", "clé sans citation", "Internationales en double", "texte sur hachures", "sans généalogie hors voie", "centre affiché"; the scission-marker check now reads diamonds. G8 crops made with ImageMagick on a preview copy (hatching and gradients flattened), since headless Firefox could not write a capture.
+- The user removed the "Parti pirate" tag in commit 35a1e16; the two "PP" are now told apart by year: "PP (2006)", "PP (2018)".

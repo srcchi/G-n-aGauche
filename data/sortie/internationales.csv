@@ -1,18 +1,18 @@
 id,name,sigle,start,end,predecessor_id,color_key,succession_type,succession_citation,succession_source,scissions_de
 Q183725,Association internationale des travailleurs,,1864,1876,,anarchiste,,,,
-Q188592,Internationale ouvrière,IO,1889,1923,,socialiste,,,,Q183725
-Q163931,Internationale communiste,IC,1919,1943,,communiste,,,,Q188592
-Q698677,Union des partis socialistes pour l'action internationale,UPSAI,1921,1923,,socialiste,,,,Q188592
+Q188592,Internationale ouvrière,IO,1889,1923,,socialiste,,,,
+Q163931,Internationale communiste,IC,1919,1943,,communiste,,,,
+Q698677,Union des partis socialistes pour l'action internationale,UPSAI,1921,1923,,socialiste,,,,
 Q703593,Internationale ouvrière socialiste,IOS,1923,1940,Q188592 | Q698677,socialiste,fusion,| fusion de           = [[Deuxième Internationale]]<br/>[[Union des partis socialistes pour l'action internationale|Internationale Deux et demi]],fr:Internationale ouvrière socialiste,
 Q11885155,Opposition communiste internationale,,1930,1939,,communiste,,,,
-Q1423578,Centre marxiste révolutionnaire international,CMRI,1932,1940,Q698677,autre,fusion,"Seule une minorité, dont le Parti socialiste indépendant de Roumanie, refuse cette fusion, et forme le « Bureau international d'information des partis révolutionnaires socialistes », qui rejoindra dix ans plus tard le [[Bureau international pour l'unité socialiste révolutionnaire]].",fr:Union des partis socialistes pour l'action internationale,Q703593
+Q1423578,Centre marxiste révolutionnaire international,CMRI,1932,1940,,autre,,,,
 Q206682,Quatrième Internationale,QI,1938,,Q11885155,trotskyste,fusion,"taliniens forment diverses organisations communistes indépendantes de [[Moscou]], certaines se regroupant au niveau international, par exemple dans l'[[Opposition communiste internationale]] (« [[Heinrich Brandler|brandlériens]] »), ou par fusion avec des socialistes révolutionnaires dans le [[Centre marxiste révolutio",fr:Quatrième Internationale,
 Q1984016,Quatrième Internationale (lambertiste),,1938,,,trotskyste,,,,
-Q183533,Kominform,,1947,1956,Q163931,autre,refondation,| précédent           = [[Internationale communiste]],fr:Kominform,
+Q183533,Kominform,,1947,1956,,autre,,,,
 Q159454,Internationale socialiste,IS,1951,,,socialiste,,,,
-Q972773,Comité international de la Quatrième Internationale,CIQI,1953,,,trotskyste,,,,Q206682
+Q972773,Comité international de la Quatrième Internationale,CIQI,1953,,,trotskyste,,,,
 Q125963179,Internationale communiste libertaire,,1954,1958,,anarchiste,,,,
-Q2634710,Quatrième Internationale - Secrétariat unifié,,1963,,,trotskyste,,,,Q206682
+Q2634710,Quatrième Internationale - Secrétariat unifié,,1963,,,trotskyste,,,,
 Q133795,Internationale des fédérations anarchistes,,1968,,,anarchiste,,,,
 Q158073,Comité pour une Internationale ouvrière,CIO,1974,,,trotskyste,,,,
 Q25079,Parti de l'Alliance des libéraux et des démocrates pour l'Europe,,1976,,,autre,,,,
@@ -38,5 +38,5 @@ Q130219314,Alliance de la gauche européenne pour les peuples et la planète,,20
 fr:Internationale communiste révolutionnaire (2024),Internationale communiste révolutionnaire,,2024,,Q1631185,communiste,renommage,| fondation           = [[1992]] (Comité pour une internationale marxiste)<br/>[[2004]] (Tendance marxiste internationale)<br/>[[2024]] (Internationale communiste révolutionnaire),fr:Internationale communiste révolutionnaire,
 Q2838098,Alliance européenne des mouvements critiques envers l'Union européenne,,,,,autre,,,,
 Q3240310,Ligue communiste internationale (quatrième internationaliste),,,,,trotskyste,,,,
-Q599328,Ligue internationale des travailleurs - Quatrième Internationale,,,,,trotskyste,,,,Q2634710
+Q599328,Ligue internationale des travailleurs - Quatrième Internationale,,,,,trotskyste,,,,
 Q1073391,Union communiste internationaliste,UCI,,,,trotskyste,,,,

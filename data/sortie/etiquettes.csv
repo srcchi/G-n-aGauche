@@ -262,7 +262,7 @@ Q93448453,OSÉ,acronyme du nom,Orléans Solidaire Écologique,
 Q139361612,Paolistes,nom court,Paolistes,
 Q3366181,PAOP,acronyme du nom,Parti alsacien ouvrier et paysan,
 Q3086466,PAB,acronyme du nom,Parti autonomiste breton,
-Q3366212,Parti communiste,nom court,"Parti communiste (France, 1919)",oui
+Q3366212,"Parti communiste (anarchiste, 1919)",sigles.csv,"Parti communiste (France, 1919)",oui
 Q3142484,PCB,article,Parti communiste breton,
 Q111606973,PCF (2003),acronyme du nom + année (homonyme),Parti communiste de France (marxiste-léniniste-maoïste),
 Q3366206,PCOF,sigles.csv,Parti communiste des ouvriers de France,oui
@@ -291,8 +291,8 @@ Q628594,PT (1991),sigles.csv + année (homonyme),"Parti des travailleurs (France
 Q24939885,PT (2023),sigles.csv + année (homonyme),"Parti des travailleurs (France, 2015)",oui
 Q3366460,Parti frontiste,nom court,Parti frontiste,
 Q111187255,Parti lorrain,nom court,Parti lorrain,
-Q3141006,PNB (1931),acronyme du nom + année (homonyme),Parti national breton,
 Q115925919,PNB (2021),acronyme du nom + année (homonyme),Parti national breton,
+Q3141006,PNB (1931),acronyme du nom + année (homonyme),Parti national breton,
 Q111210969,PNSF,acronyme du nom,Parti national-syndicaliste français,
 Q1539236,Parti occitan,nom court,Parti occitan,
 Q135902867,Parti ouvrier,nom court,Parti ouvrier (1914),
@@ -344,7 +344,7 @@ Q3326782,PLR (Réunion),article + lieu (homonyme),Pour La Réunion,
 Q3326461,Pour la Bretagne !,nom court,Pour la Bretagne !,
 Q127272169,PEPS,article,Pour une écologie populaire et sociale,
 Q3400792,PO,sigles.csv,Pouvoir ouvrier,
-fr:Première Internationale,AIT,sigles.csv,Première Internationale (AIT),oui
+fr:Première Internationale,AIT (1864),sigles.csv,Première Internationale (AIT),oui
 Q3407344,PLR (1970),article + année (homonyme),Prolétaire ligne rouge,
 Q111187258,Prouvènço Nacioun,nom court,Prouvènço Nacioun,
 Q100989633,Péyi Guyane,nom court,Péyi Guyane,
@@ -369,8 +369,8 @@ Q30741057,RSÉ,acronyme du nom,Rézistan's Égalité 974,
 Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
 fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
+Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,
@@ -396,8 +396,8 @@ Q2540732,UGCS,sigles.csv,Union des groupes et clubs socialistes,
 Q111628305,UJR,acronyme du nom,Union des jeunes révolutionnaires,
 Q3550161,UJC(ml),sigles.csv,Union des jeunesses communistes marxistes-léninistes,oui
 Q3550193,URR,acronyme du nom,Union des républicains radicaux,
-fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
 Q116456095,URCF (2003),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,
+fr:Union des révolutionnaires-communistes de France,URCF (2004),sigles.csv + année (homonyme),Union des révolutionnaires-communistes de France,oui
 Q3550207,UTCL,sigles.csv,Union des travailleurs communistes libertaires,oui
 Q3550228,UEC,sigles.csv,Union des étudiants communistes,oui
 Q3107400,UPA,article,Union du peuple alsacien,

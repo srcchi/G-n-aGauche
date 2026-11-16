@@ -1360,6 +1360,12 @@ def main():
         return any(preuves.type_du_champ(ch) == "succession" for _, _, ch in preuves.occurrences(corpus, x, y))
 
     pred, scissions_inter, info_succ = defaultdict(list), defaultdict(list), {}
+    # Addendum 5, B : chaque relation entre Internationales est typée et citée. Succession : seulement si
+    # la citation dit fusion, renommage ou refondation (un champ « précédent » ne suffit pas : Kominform).
+    # Scission : seulement si la citation dit scission. Le reste (filiation) reste dans la famille, hors
+    # des lignes « Succession » et « Scissions » de la clé. Une négation (« refuse cette fusion ») annule.
+    filiations_inter, info_rel = defaultdict(list), {}
+    RX_NEGATION = re.compile(r"refus\w*\s+(?:cette|la|de la|toute)?\s*(?:fusion|réunification)", re.I)
     for a, b, t, e in inter_lignee:
         da, db = debut(a), debut(b)
         if "manuel" in e["sources"] and e.get("type_manuel", "") in ("renommage", "fusion", "refondation"):
@@ -1368,6 +1374,7 @@ def main():
             if m and corpus.verifier(m.group(2), m.group(1)):
                 pred[b].append(a)
                 info_succ[b] = (e.get("type_manuel", ""), dict(citation=m.group(2), source=m.group(1)))
+                info_rel[(a, b)] = ("succession", e.get("type_manuel", ""), dict(citation=m.group(2), source=m.group(1)))
             else:
                 stats["successions_manuelles_sans_citation"] = stats.get("successions_manuelles_sans_citation", 0) + 1
             continue
@@ -1380,14 +1387,18 @@ def main():
         fin_a = noeuds[a]["dissolution"]
         chevauche = not fin_a or (db and fin_a > db[0] + 1)
         ind = p["indice"]
-        if t != "scission" and not chevauche and succession_confirmee(a, b, p) and (
-                ind in ("renommage", "fusion", "refondation") or (p["preuve"] == "explicite" and ind == "filiation")):
-            typ = ind if ind in ("renommage", "fusion", "refondation") else (
-                "renommage" if fin_a and db and abs(fin_a - db[0]) <= 1 else "refondation")
+        nie = bool(RX_NEGATION.search(p.get("citation", "")))
+        if t != "scission" and not chevauche and not nie and succession_confirmee(a, b, p) and \
+                ind in ("renommage", "fusion", "refondation"):
             pred[b].append(a)
-            info_succ[b] = (typ, p)
-        else:
+            info_succ[b] = (ind, p)
+            info_rel[(a, b)] = ("succession", ind, p)
+        elif ind == "scission" or (t == "scission" and re.search(r"scission|split", p.get("citation", ""), re.I)):
             scissions_inter[b].append(a)
+            info_rel[(a, b)] = ("scission", "scission", p)
+        else:
+            filiations_inter[b].append(a)
+            info_rel[(a, b)] = ("filiation", "filiation" if not nie else "filiation (fusion refusée)", p)
     # Successions lues dans le texte des articles des Internationales : lien vers une Internationale
     # qui avait disparu (au plus 15 ans avant), avec un mot de refondation, renommage, fusion ou succession.
     ids_inter = {q for q in noeuds if classe[q] == "internationale"}
@@ -1399,12 +1410,14 @@ def main():
             if not fa or not fb or not (fa - 1 <= fb <= fa + 15):
                 continue
             p = preuves.preuve_lien(corpus, a, b)
-            if p and p["preuve"] == "explicite" and p["indice"] in ("refondation", "renommage", "fusion", "filiation")                     and succession_confirmee(a, b, p):
-                typ = p["indice"] if p["indice"] != "filiation" else ("renommage" if abs(fa - fb) <= 1 else "refondation")
+            if p and p["preuve"] == "explicite" and p["indice"] in ("refondation", "renommage", "fusion") \
+                    and not RX_NEGATION.search(p.get("citation", "")) and succession_confirmee(a, b, p):
                 pred[b].append(a)
-                info_succ[b] = (typ, p)
-                if a in scissions_inter[b]:
-                    scissions_inter[b].remove(a)
+                info_succ[b] = (p["indice"], p)
+                info_rel[(a, b)] = ("succession", p["indice"], p)
+                for liste in (scissions_inter[b], filiations_inter[b]):
+                    if a in liste:
+                        liste.remove(a)
     # Les ancêtres des Internationales utilisées sont gardés aussi : prédécesseurs (succession), mais
     # aussi l'Internationale dont elles sont issues par scission, et les parentes saisies à la main
     # (internationales_filles.csv). Sans cela, la famille de la QI est coupée : le CIQI, la LIT-QI et
@@ -1417,7 +1430,8 @@ def main():
     pile = list(inter_utiles)
     while pile:
         x = pile.pop()
-        for p in list(pred[x]) + list(scissions_inter.get(x, [])) + sorted(parentes_man.get(x, ())):
+        for p in list(pred[x]) + list(scissions_inter.get(x, [])) + list(filiations_inter.get(x, [])) \
+                + sorted(parentes_man.get(x, ())):
             if p not in inter_utiles and classe.get(p) == "internationale":
                 inter_utiles.add(p)
                 ajoutees_ancetres.add(p)
@@ -1544,6 +1558,13 @@ def main():
     stats["branches_eteintes"] = len(branches_eteintes)
     # Addendum 3, B2 et 3 bis, 4 : colonne « Sans généalogie documentée », décidée dans
     # data/manuel/actifs_absents.csv (decision = colonne, avec la citation de l'article)
+    # Addendum 5, F1 : famille décidée à la main, citation à l'appui (data/manuel/famille_decision.csv) ;
+    # la dernière ligne d'un identifiant l'emporte
+    for q, r in {r.get("id", "").strip(): r for r in lire(os.path.join("manuel", "famille_decision.csv"))}.items():
+        if q in noeuds and r.get("famille", "").strip() and r.get("source", "").strip():
+            noeuds[q]["famille"] = noeuds[q]["famille_courant"] = r["famille"].strip()
+            noeuds[q]["famille_note"] = f"famille décidée : {r['source'].strip()}"
+            stats["familles_decidees"] += 1
     sans_genealogie = set()
     derniere = {r.get("id", "").strip(): r for r in lire(os.path.join("manuel", "actifs_absents.csv"))}
     for q, r in derniere.items():         # le fichier ne fait que grandir : la dernière ligne l'emporte
@@ -2034,7 +2055,13 @@ def main():
         for p_ in (x for x in l_[5].split(" | ") if x):
             filles.append([p_, l_[0], l_[7] or "succession", l_[8], l_[9]])
         for p_ in (x for x in l_[10].split(" | ") if x):
-            filles.append([p_, l_[0], "scission", "", ""])
+            _r, _t, pp_ = info_rel.get((p_, l_[0]), ("", "", {}))
+            filles.append([p_, l_[0], "scission", pp_.get("citation", ""), pp_.get("source", "")])
+    for b_, ps_ in filiations_inter.items():
+        for p_ in ps_:
+            if b_ in inter_utiles and p_ in inter_utiles:
+                _r, t_, pp_ = info_rel[(p_, b_)]
+                filles.append([p_, b_, t_, pp_.get("citation", ""), pp_.get("source", "")])
     for r in lire("manuel/internationales_filles.csv"):
         a_, b_ = r.get("parente", "").strip(), r.get("fille", "").strip()
         if a_ in noeuds and b_ in noeuds and corpus.verifier(r.get("citation", ""), r.get("source", "").strip()):
@@ -2046,6 +2073,22 @@ def main():
     filles = filles[n_auto:] + filles[:n_auto]          # une ligne saisie à la main prime
     filles = [f for f in filles if not ((f[0], f[1]) in vus_f or vus_f.add((f[0], f[1])))]
     ecrire("internationales_filles.csv", ["parente", "fille", "relation", "citation", "source"], filles)
+    # Addendum 5, B3 : la clé des Internationales, une ligne par relation typée et citée
+    cle_l = []
+    for (a_, b_), (rel_, typ_, pp_) in sorted(info_rel.items()):
+        if a_ in inter_utiles and b_ in inter_utiles and rel_ in ("succession", "scission"):
+            cle_l.append([b_, lab(b_), noeuds[b_]["fondation"] or "", noeuds[b_]["dissolution"] or "", rel_, typ_,
+                          a_, lab(a_), pp_.get("citation", ""), pp_.get("source", "")])
+    for r in lire("manuel/internationales_filles.csv"):
+        a_, b_ = r.get("parente", "").strip(), r.get("fille", "").strip()
+        rel_ = r.get("relation", "").strip()
+        if a_ in inter_utiles and b_ in inter_utiles and rel_ in ("renommage", "fusion", "refondation") \
+                and corpus.verifier(r.get("citation", ""), r.get("source", "").strip()):
+            cle_l.append([b_, lab(b_), noeuds[b_]["fondation"] or "", noeuds[b_]["dissolution"] or "", "succession",
+                          rel_, a_, lab(a_), r["citation"], r["source"].strip()])
+    ecrire("cle_internationales.csv", ["id", "nom", "debut", "fin", "relation", "type", "autre_id", "autre_nom",
+                                       "citation", "source"], cle_l)
+    stats["cle_relations"] = len(cle_l)
     ecrire("affiliations.csv", ["party_id", "international_id", "start", "end", "date_certainty",
                                 "source", "party_nom", "international_nom", "preuve", "citation",
                                 "source_citation"], lignes_affil)
