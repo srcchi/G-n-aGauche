@@ -66,7 +66,7 @@ Q10748344,Gouvernement central provisoire du Viêt Nam,Q1193879,État du Viêt-N
 Q107877569,Front national,Q205150,Rassemblement national,filiation,exclu -> exclu
 Q108616480,Service de la navigation aérienne,Q3480490,Service technique de la navigation aérienne,filiation,exclu -> exclu
 Q108866690,Le Sillon catholique de Paris,Q2177298,Ligue de la Jeune République,filiation,exclu -> graphe
-Q109599840,république socialiste d'Allemagne,Q41304,république de Weimar,filiation,exclu -> exclu
+Q109599840,république socialiste d'Allemagne,Q41304,république de Weimar,filiation,graphe -> exclu
 Q1098820,Gênes,Q16595757,République de Gênes,filiation,exclu -> exclu
 Q110304901,centre national de la recherche archéologique subaquatique,Q3044770,Département des recherches archéologiques subaquatiques et sous-marines,filiation,exclu -> exclu
 Q110305000,direction des recherches archéologiques sous-marines,Q3044770,Département des recherches archéologiques subaquatiques et sous-marines,filiation,exclu -> exclu

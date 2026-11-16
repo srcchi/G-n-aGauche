@@ -1399,14 +1399,24 @@ def main():
                 info_succ[b] = (typ, p)
                 if a in scissions_inter[b]:
                     scissions_inter[b].remove(a)
-    # Les prédécesseurs des Internationales utilisées sont gardés aussi
+    # Les ancêtres des Internationales utilisées sont gardés aussi : prédécesseurs (succession), mais
+    # aussi l'Internationale dont elles sont issues par scission, et les parentes saisies à la main
+    # (internationales_filles.csv). Sans cela, la famille de la QI est coupée : le CIQI, la LIT-QI et
+    # le CIO, sans membre français dessiné, disparaissaient (QI -> CIQI -> LCI, QI-SU -> LIT -> CRP-QI).
+    parentes_man = defaultdict(set)
+    for r in lire("manuel/internationales_filles.csv"):
+        if r.get("parente", "").strip() in noeuds and r.get("fille", "").strip() in noeuds:
+            parentes_man[r["fille"].strip()].add(r["parente"].strip())
+    ajoutees_ancetres = set()
     pile = list(inter_utiles)
     while pile:
         x = pile.pop()
-        for p in pred[x]:
-            if p not in inter_utiles:
+        for p in list(pred[x]) + list(scissions_inter.get(x, [])) + sorted(parentes_man.get(x, ())):
+            if p not in inter_utiles and classe.get(p) == "internationale":
                 inter_utiles.add(p)
+                ajoutees_ancetres.add(p)
                 pile.append(p)
+    stats["internationales_ancetres"] = len(ajoutees_ancetres)
 
     def cle_couleur(label):
         return next((c for c, rx in COULEURS_INTER if re.search(rx, label, re.I)), "autre")

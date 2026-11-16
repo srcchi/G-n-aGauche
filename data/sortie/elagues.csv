@@ -171,7 +171,7 @@ Q97367255,Gauche ouvrière et paysanne,non_ancetre_d_une_active,fin_connue,maoï
 Q2358911,Gauche ouvrière internationaliste,etrangere,fin_inconnue,,hors de France
 Q1495917,Gauche plurielle,coalition,fin_inconnue,à classer,
 Q138828808,Gauche républicaine et sociale,a_dater,fin_inconnue,socialistes,
-Q3099352,Gauche révolutionnaire,a_dater,fin_inconnue,trotskystes,
+Q3099352,Gauche révolutionnaire,isolee,actif_valide,trotskystes,
 Q3099346,Gauche révolutionnaire (1935-1938),famille_non_determinee,fin_connue,à classer,
 Q3099354,Gauche sociale et radicale,a_dater,fin_inconnue,radicaux,
 Q3099357,Gauche socialiste,satellite,fin_inconnue,socialistes,organisation liée à Ligue communiste révolutionnaire
@@ -568,6 +568,7 @@ Q2236823,groupe socialiste à l'Assemblée nationale,isolee,actif_valide,sociali
 Q3117954,groupe écologiste,coalition,fin_connue,écologistes,
 Q84366602,lutte ouvriere faire entendre le camp des travailleurs,a_dater,fin_inconnue,à classer,
 Q125731201,prolétaires pour le communisme,a_dater,fin_inconnue,communistes,
+Q109599840,république socialiste d'Allemagne,isolee,fin_connue,socialistes,
 Q115950346,section locale du PCF à Poissy,satellite,fin_inconnue,communistes,
 Q3576675,À gauche en Guyane,a_dater,fin_inconnue,à classer,
 Q16684301,Écologie Solidarité,a_dater,fin_inconnue,écologistes,

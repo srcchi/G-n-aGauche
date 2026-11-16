@@ -263,4 +263,6 @@ C1 and C2 done (all verifier counters at 0, 103 organisations: the 5 strips left
 - C2: scission marker is a diamond, composante marker a small square, both `geo` polygons (moved by the HTML page when a family is folded). The verifier fails on any circle that is not a medallion, on any International bar in a lane, and on any International text outside its ribbon or tab.
 - Not tested: folding families in `arbres/arbre.html` (no JavaScript runtime at work; the top lane uses the class `voie-intl`, not `voie`, so the folding code ignores it).
 
+- Family of an International (user's report: a click on the QI did not show its daughters): `nettoyage.py` now also keeps the Internationals a kept one split from, and the parents entered in `internationales_filles.csv` (CIQI, LIT-QI, CIO came back; 41 in `internationales.csv`). The top lane and the key include these ancestors. In the HTML page, the top-lane ribbons are clickable, and a click highlights the International, all its descendants (top lane) and all their members. A click on the QI: QI, QI-SU, QI (lambertiste), CRP-QI, CIQI, LIT-QI, LCI; members PCI, POI (1936), LCR, POI, RP. JavaScript syntax checked with Node; the click itself was not run (no DOM library).
+
 Next: the poster (A2, A3, E, CairoSVG and fonts in `fonts/`).

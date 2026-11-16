@@ -1,4 +1,5 @@
 id,name,sigle,start,end,predecessor_id,color_key,succession_type,succession_citation,succession_source,scissions_de
+Q183725,Association internationale des travailleurs,,1864,1876,,anarchiste,,,,
 Q188592,Internationale ouvrière,IO,1889,1923,,socialiste,,,,Q183725
 Q163931,Internationale communiste,IC,1919,1943,,communiste,,,,Q188592
 Q698677,Union des partis socialistes pour l'action internationale,UPSAI,1921,1923,,socialiste,,,,Q188592
@@ -9,9 +10,11 @@ Q206682,Quatrième Internationale,QI,1938,,Q11885155,trotskyste,fusion,"talinien
 Q1984016,Quatrième Internationale (lambertiste),,1938,,,trotskyste,,,,
 Q183533,Kominform,,1947,1956,Q163931,autre,refondation,| précédent           = [[Internationale communiste]],fr:Kominform,
 Q159454,Internationale socialiste,IS,1951,,,socialiste,,,,
+Q972773,Comité international de la Quatrième Internationale,CIQI,1953,,,trotskyste,,,,Q206682
 Q125963179,Internationale communiste libertaire,,1954,1958,,anarchiste,,,,
 Q2634710,Quatrième Internationale - Secrétariat unifié,,1963,,,trotskyste,,,,Q206682
 Q133795,Internationale des fédérations anarchistes,,1968,,,anarchiste,,,,
+Q158073,Comité pour une Internationale ouvrière,CIO,1974,,,trotskyste,,,,
 Q25079,Parti de l'Alliance des libéraux et des démocrates pour l'Europe,,1976,,,autre,,,,
 Q639383,Alliance libre européenne,ALE,1981,,,régionaliste,,,,
 Q2455815,Courant Révolution Permanente – Quatrième Internationale,,1989,,,trotskyste,,,,Q599328
@@ -35,4 +38,5 @@ Q130219314,Alliance de la gauche européenne pour les peuples et la planète,,20
 fr:Internationale communiste révolutionnaire (2024),Internationale communiste révolutionnaire,,2024,,Q1631185,communiste,renommage,| fondation           = [[1992]] (Comité pour une internationale marxiste)<br/>[[2004]] (Tendance marxiste internationale)<br/>[[2024]] (Internationale communiste révolutionnaire),fr:Internationale communiste révolutionnaire,
 Q2838098,Alliance européenne des mouvements critiques envers l'Union européenne,,,,,autre,,,,
 Q3240310,Ligue communiste internationale (quatrième internationaliste),,,,,trotskyste,,,,
+Q599328,Ligue internationale des travailleurs - Quatrième Internationale,,,,,trotskyste,,,,Q2634710
 Q1073391,Union communiste internationaliste,UCI,,,,trotskyste,,,,

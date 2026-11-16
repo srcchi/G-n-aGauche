@@ -6,15 +6,15 @@
 | Wikidata (noeuds.csv) | 1549 |
 | Wikipédia (wp_noeuds.csv) | 524 |
 | Après fusion par identifiant (+ corrections) | 1898 |
-| **Graphe : organisations de gauche françaises datées** (organisations.csv) | **379** |
+| **Graphe : organisations de gauche françaises datées** (organisations.csv) | **380** |
 | Graphe, sans date de fondation (sans_date.csv) | 59 |
-| Internationales et fédérations européennes gardées (internationales.csv) | 37 |
-| Exclues (perimetre_exclu.csv) | 1352 |
+| Internationales et fédérations européennes gardées (internationales.csv) | 41 |
+| Exclues (perimetre_exclu.csv) | 1347 |
 | dont étrangères en voie externe | 7 |
 
-Raisons d'exclusion : ni positionnement de gauche ni courant reconnu (430), hors de France (174), porte politique : entité territoriale administrative, région historique, zone géographique, État historique (167), porte politique : organisation à but non lucratif, sans type politique (139), porte politique : entité territoriale administrative, région historique, zone géographique (63), porte politique : organisation intergouvernementale (60), porte politique : entité territoriale administrative, zone géographique (56), pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire) (41), porte politique : organisation internationale, sans type politique (37), Internationale sans membre dans le graphe (31), pas une organisation politique (journal, librairie, think tank...) (24), positionnement : extrême droite (12), idéologie hors périmètre : fascis (9), porte politique : organisation internationale, organisation à but non lucratif, sans type politique (9), porte politique : zone géographique (9), porte politique : entité territoriale administrative, pays, zone géographique (8), positionnement : centrisme (8), positionnement : droite (7), porte politique : entité territoriale administrative, pays, région historique, zone géographique, État historique (6), porte politique : organisation scientifique (6), porte politique : syndicat (6), positionnement : centre droit (6), porte politique : entité territoriale administrative, organisation intergouvernementale, zone géographique (5), porte politique : personne (5), porte politique : base de données (4), positionnement : centrisme centre droit (4), idéologie hors périmètre : monarchi (3), idéologie hors périmètre : royalis (3), idéologie hors périmètre : anti-indépendantis (2), idéologie hors périmètre : orléanis (2), idéologie hors périmètre : social-national (2), positionnement : centre droit centrisme (2), positionnement : centre gauche centre droit centrisme (2), positionnement : droite centre droit (2), idéologie hors périmètre : Algérie française (1), idéologie hors périmètre : Anti-indépendantis (1), idéologie hors périmètre : national-socialis (1), porte politique : entité territoriale administrative, pays, région historique, zone géographique (1), positionnement : centre gauche centre droit (1), positionnement : centrisme Centrisme politique en France | centre gauche | centre droit (1), positionnement : droite extrême droite extrême droite politique (1), positionnement : extrême droite anticommunisme national-conservatisme opposition à l'immigration euroscepticisme populisme de droite ultranationalisme (1).
+Raisons d'exclusion : ni positionnement de gauche ni courant reconnu (430), hors de France (174), porte politique : entité territoriale administrative, région historique, zone géographique, État historique (166), porte politique : organisation à but non lucratif, sans type politique (139), porte politique : entité territoriale administrative, région historique, zone géographique (63), porte politique : organisation intergouvernementale (60), porte politique : entité territoriale administrative, zone géographique (56), pas une organisation politique (institution, organisme intergouvernemental, groupe parlementaire) (41), porte politique : organisation internationale, sans type politique (37), Internationale sans membre dans le graphe (27), pas une organisation politique (journal, librairie, think tank...) (24), positionnement : extrême droite (12), idéologie hors périmètre : fascis (9), porte politique : organisation internationale, organisation à but non lucratif, sans type politique (9), porte politique : zone géographique (9), porte politique : entité territoriale administrative, pays, zone géographique (8), positionnement : centrisme (8), positionnement : droite (7), porte politique : entité territoriale administrative, pays, région historique, zone géographique, État historique (6), porte politique : organisation scientifique (6), porte politique : syndicat (6), positionnement : centre droit (6), porte politique : entité territoriale administrative, organisation intergouvernementale, zone géographique (5), porte politique : personne (5), porte politique : base de données (4), positionnement : centrisme centre droit (4), idéologie hors périmètre : monarchi (3), idéologie hors périmètre : royalis (3), idéologie hors périmètre : anti-indépendantis (2), idéologie hors périmètre : orléanis (2), idéologie hors périmètre : social-national (2), positionnement : centre droit centrisme (2), positionnement : centre gauche centre droit centrisme (2), positionnement : droite centre droit (2), idéologie hors périmètre : Algérie française (1), idéologie hors périmètre : Anti-indépendantis (1), idéologie hors périmètre : national-socialis (1), porte politique : entité territoriale administrative, pays, région historique, zone géographique (1), positionnement : centre gauche centre droit (1), positionnement : centrisme Centrisme politique en France | centre gauche | centre droit (1), positionnement : droite extrême droite extrême droite politique (1), positionnement : extrême droite anticommunisme national-conservatisme opposition à l'immigration euroscepticisme populisme de droite ultranationalisme (1).
 
-Familles : socialistes (94), radicaux (8), écologistes (27), communistes (46), trotskystes (42), maoïstes (38), anarchistes et libertaires (39), à classer (84).
+Familles : socialistes (95), radicaux (8), écologistes (27), communistes (46), trotskystes (42), maoïstes (38), anarchistes et libertaires (39), à classer (84).
 
 Périmètre discutable, gardé mais signalé (colonne perimetre_douteux), à trancher à la main :
 - aucun courant reconnu (40) : 2022 ou jamais, Allons enfants, Association des écrivains et artistes révolutionnaires, Bloc révolutionnaire insurrectionnel et féministe, Camarades, Cap sur l'avenir, Catalan Workers' Left, Club des jacobins, Collectif Golem, Conseil pour le maintien des occupations, Coordination des sans-abris, Dynamik unitaire Sud, Fièr-e-s et révolutionnaires, Front universitaire antifasciste, Gauche révolutionnaire (1935-1938), Indulgents, Jeune Garde antifasciste, Juives et Juifs révolutionnaires, La France Républicaine et Solidaire, La Gauche moderne, Le Discord insoumis, Les Nouveaux Démocrates, Ligue de la Jeune République, Maintenant le peuple, Mouvement du 11 mai, Mouvement jeune révolution, National Union of North African Muslims, Nouvel élan pour Mayotte, Nouvelle force de Guyane, Parti frontiste, Parti ouvrier et paysan, Rassemblement des gauches républicaines, Rassemblement démocratique océanien, Société des républicaines révolutionnaires, Union des clubs pour le renouveau de la gauche, Union des démocrates musulmans français, Union progressiste, Unir et Construire dans le Renouveau, À gauche en Guyane, Éducation Démocratie Dignité
@@ -52,7 +52,7 @@ Dates : 103 fondations et 39 dissolutions avec un mois (lu dans l'infobox, seule
 Affiliations : toutes en date_certainty = unknown (les sources ne donnent pas la période d'adhésion).
 Période recopiée : durée de vie du parti, bornée par celle de l'Internationale.
 
-Sigles (data/manuel/sigles.csv) : 557 organisations, dont 83 avec un sigle ; 0 ajoutées à cette exécution.
+Sigles (data/manuel/sigles.csv) : 556 organisations, dont 130 avec un sigle ; 0 ajoutées à cette exécution.
 
 ## Liens validés à la main
 - Candidats de la phase 0 acceptés (decision = oui) : 0
@@ -61,21 +61,21 @@ Sigles (data/manuel/sigles.csv) : 557 organisations, dont 83 avec un sigle ; 0 a
   1 ignorés (source, type ou extrémité manquant).
 
 ## Types (data/manuel/types.csv)
-parti 422, coalition 35, satellite 36, internationale 68, fondatrice 16, étrangère 174.
+parti 423, coalition 35, satellite 36, internationale 68, fondatrice 16, étrangère 174.
 2 types saisis à la main, 0 lignes ajoutées au fichier.
 Coalitions et satellites ne sont jamais des boîtes ; un satellite rattaché à un parent apparaît
 dans la colonne organisations_liees de ce parent.
 
 ## Organisations actives
-108 organisations validées actives, 22 refusées.
-- Actives retenues : 62.
+109 organisations validées actives, 26 refusées.
+- Actives retenues : 63.
 
 ## Élagage strict (R5)
 - **Gardées : 108 organisations** (actives ayant un lien de lignée, et leurs ancêtres),
   dont 0 sans date.
-- Élaguées (data/sortie/elagues.csv), par cause : etrangere 174, a_dater 166, hors_perimetre 63, isolee 56, satellite 36, coalition 35, famille_non_determinee 23, non_ancetre_d_une_active 19, rejet_porte 3.
-- **Actives élaguées faute de lien (5)**, à relier à la main puis relancer :
-  Démocrates et progressistes, Féministes révolutionnaires, Mouvement écologiste indépendant, Union des centristes et des écologistes, groupe socialiste à l'Assemblée nationale.
+- Élaguées (data/sortie/elagues.csv), par cause : etrangere 174, a_dater 165, hors_perimetre 63, isolee 58, satellite 36, coalition 35, famille_non_determinee 23, non_ancetre_d_une_active 19, rejet_porte 3.
+- **Actives élaguées faute de lien (6)**, à relier à la main puis relancer :
+  Démocrates et progressistes, Féministes révolutionnaires, Gauche révolutionnaire, Mouvement écologiste indépendant, Union des centristes et des écologistes, groupe socialiste à l'Assemblée nationale.
 
 ## Affiliations
 - 51 affiliations sans dates connues : data/sortie/affiliations_a_dater.csv ;

@@ -695,6 +695,25 @@ def bandeaux(items, liens, ech, T_AUJ):
             o["tag_dedans"], o["tag_w"] = True, 0
 
 
+def avec_ancetres_inter(ids, inter):
+    """Ajoute les Internationales ancêtres (succession, scission, parente saisie à la main) des
+    Internationales données : la famille de la QI reste d'un seul tenant (QI, CIQI, LIT-QI...)."""
+    parents = defaultdict(set)
+    for p_, d_ in inter.items():
+        for f_, _rel in d_["filles"]:
+            parents[f_].add(p_)
+    for i_, d_ in inter.items():
+        parents[i_] |= {x for x in d_["pred"] + d_["scissions"] if x in inter}
+    res, pile = set(ids), list(ids)
+    while pile:
+        x = pile.pop()
+        for p_ in parents.get(x, ()):
+            if p_ not in res and not RX_EUROPEEN.search(inter[p_]["nom"]):
+                res.add(p_)
+                pile.append(p_)
+    return res
+
+
 def voie_internationales(items, inter, ech, T_AUJ, avec_origines=True):
     """C1 : voie « Internationales » en haut. Une entrée par Internationale affichée (au moins un
     membre dessiné, ou une origine d'origines.csv) : médaillon rond, puis ruban sur sa vie, terminé
@@ -707,13 +726,21 @@ def voie_internationales(items, inter, ech, T_AUJ, avec_origines=True):
            if not RX_EUROPEEN.search(inter[b["intl"]]["nom"])}
     if avec_origines:
         ids |= {i for i, d in inter.items() if d.get("origine")}
+    ids = avec_ancetres_inter(ids, inter)     # Internationales sans membre dessiné qui relient une famille
     entrees = []
     for i in ids:
         d = inter[i]
         membres = [b for o in items.values() for b in o["bandes"] + o["bandes_tooltip"] if b["intl"] == i]
         connu = bool(d["debut"])
         t0 = t_de(d["debut"]) if connu else None
-        xa = ech.X(t0) if connu else min(b["xa"] for b in membres)
+        if not connu and not membres:
+            # Ni date ni membre (LIT-QI) : au début de sa première fille datée, sinon pas dans la voie
+            filles_x = [ech.X(t_de(inter[f]["debut"])) for f, _ in d["filles"] if inter[f]["debut"]]
+            if not filles_x:
+                continue
+            xa = min(filles_x) - 2 * MED_R - 30
+        else:
+            xa = ech.X(t0) if connu else min(b["xa"] for b in membres)
         en_vie = not d["fin"]
         xb = ech.X(t_de(d["fin"])) if d["fin"] else ech.X(T_AUJ)
         xb = max(xb, xa + 2 * MED_R + 4)
@@ -1574,7 +1601,7 @@ def trace(l, a, b, pts, depart, boites, rang_voie):
 
 
 def cle_donnees(items, inter):
-    utiles = {a["international_id"] for o in items.values() for a in o["affil"]}
+    utiles = avec_ancetres_inter({a["international_id"] for o in items.values() for a in o["affil"]}, inter)
     nom_annee = lambda i: f"{inter[i]['nom']} {inter[i]['debut'] or '?'}–{inter[i]['fin']}"
 
     def succession(i):
@@ -2256,6 +2283,9 @@ HTML = r"""<!doctype html>
   #arbre .org, #arbre .lien { transition:opacity .15s; }
   #arbre.focus .org, #arbre.focus .lien, #arbre.focus .continuation, #arbre.focus .marque-fusion { opacity:.15; }
   #arbre.focus .org.sel, #arbre.focus .lien.sel, #arbre.focus .continuation.sel { opacity:1; }
+  #arbre.focus .intl { opacity:.2; }
+  #arbre.focus .intl.sel { opacity:1; }
+  #arbre .intl { cursor:pointer; }
   #arbre .org.trouve .barre { stroke:#000; stroke-width:3; }
   #arbre .renvoi { cursor:pointer; }
   #arbre .renvoi.sel { fill:#c0392b; font-weight:bold; }
@@ -2329,6 +2359,9 @@ function marquerFamille(id){ const c = D.cle.find(c => c.id === id); const f = n
 function surligner(ids){
   if (!ids) { svg.classList.remove('focus'); svg.querySelectorAll('.sel').forEach(e => e.classList.remove('sel')); return; }
   svg.classList.add('focus');
+  // Voie du haut : l'Internationale choisie et toute sa descendance (filles, petites-filles…)
+  const fam = new Set(choisie ? (D.cle.find(c => c.id === choisie) || {famille: [choisie]}).famille : []);
+  svg.querySelectorAll('.intl').forEach(e => e.classList.toggle('sel', fam.has(e.dataset.intl)));
   svg.querySelectorAll('.org').forEach(e => e.classList.toggle('sel', ids.has(e.dataset.id)));
   svg.querySelectorAll('.lien,.continuation').forEach(e => e.classList.toggle('sel', ids.has(e.dataset.a) && ids.has(e.dataset.b)));
 }
@@ -2388,7 +2421,7 @@ for (const c of D.cle) { const div = document.createElement('div'); div.classNam
     if (choisie === c.id) { choisie = null; marquerFamille(null); surligner(null); }
     else { choisie = c.id; marquerFamille(c.id); surligner(familleMembres(c.id)); } });
   entrees.appendChild(div); }
-svg.querySelectorAll('.bande').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); document.getElementById('cle').open = true;
+svg.querySelectorAll('.bande, .intl').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); document.getElementById('cle').open = true;
   const ent = document.getElementById('cle-' + b.dataset.intl); if (!ent) return;
   ent.scrollIntoView({block:'center', behavior:'smooth'}); ent.classList.add('flash'); setTimeout(() => ent.classList.remove('flash'), 1500);
   choisie = b.dataset.intl; marquerFamille(choisie); surligner(familleMembres(choisie)); }));
