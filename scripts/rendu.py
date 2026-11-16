@@ -641,6 +641,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
         # partirait de 1876, reste un renvoi écrit)
         a = items[l["a"]]
         depart = min(l["t"], a["t1"]) if a["t1"] is not None else l["t"]
+        if l.get("preuve") == "manuel" and l["rel"] in ("indirect", "passage") and FORCER_MANUELS                 and l["t"] - depart <= SEUIL_ANNEES:
+            return True             # lien pointillé saisi à la main à la demande (PSOP -> Voix ouvrière)
         return (bool({l["a"], l["b"]} & origines) and l["rel"] != "filiation_idéologique"
                 and l["t"] - depart <= SEUIL_ANNEES)
     # Un lien qui part pendant la zone de l'étiquette (scission peu après la fondation) : l'étiquette
@@ -705,7 +707,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
                   poly.append(dict(l, majeur=False))
           renvoyer(items, orgs, renvois)
           bornes(items, poly)
-          rangees = placer(items, voies_ordre, poly, continuations, collages_actifs())
+          rangees = placer(items, voies_ordre, poly, continuations, collages_actifs(),
+                           souhaits=[r for r in renvois if r.get("raison") == "trop long ou croisement"])
           # Continuations qui n'ont pas pu rester sur la même rangée, ou dont le successeur porte des
           # renvois (ils seraient entre la fin et la suite) : lien dessiné normal
           # (un bandeau, sous le niveau de la barre, ne gêne pas les renvois de sa section)
@@ -985,16 +988,27 @@ def renvoyer(items, orgs, renvois):
         o["w_renv"] = sum(larg(t, FS) + 6 for t, *_ in o["renv"])
 
 
-def placer(items, voies_ordre, poly, continuations, collages=()):
+FORCER_MANUELS = False      # forcer les liens pointillés saisis à la main : coûte 19 liens tracés (mesuré), désactivé
+MODE_SOUHAITS = "rang"      # renvois de la même voie : "blocs", "rang" (blocs et rangée préférée) ou "tout"
+
+
+def placer(items, voies_ordre, poly, continuations, collages=(), souhaits=()):
     """Rangées (2.2, 2.3) : un bloc contigu par arbre, placé en profondeur, enfants du plus récent au
     plus ancien ; une rangée est choisie d'abord pour ne créer aucun croisement. Barres à renvois
     seuls en bas de la voie, sans écart supplémentaire."""
     voisins, parents = defaultdict(set), defaultdict(list)
-    for l in poly:
+    # Souhaits : liens de la même voie restés en renvoi. Ils comptent pour grouper et rapprocher les
+    # barres (sans quoi le groupe guesdiste, coupé de la FTSF, part en bas de la voie et ses liens
+    # ne peuvent plus jamais être dessinés).
+    souhaits = [l for l in souhaits if l["a"] in items and l["b"] in items
+                and items[l["a"]]["voie"] == items[l["b"]]["voie"] and l["rel"] != "composante"]
+    for l in list(poly) + souhaits:
         a, b = items[l["a"]], items[l["b"]]
         if a["voie"] == b["voie"]:
             voisins[l["a"]].add(l["b"])
             voisins[l["b"]].add(l["a"])
+        if l in souhaits and MODE_SOUHAITS == "blocs":
+            continue
         parents[l["b"]].append(l)
     for a, b in continuations:
         voisins[a].add(b)
@@ -1049,7 +1063,7 @@ def placer(items, voies_ordre, poly, continuations, collages=()):
                 items[q].pop("rang_l", None)
                 items[q].pop("bloc_v", None)
             enfants_v = defaultdict(list)
-            for l in poly:
+            for l in list(poly) + (souhaits if MODE_SOUHAITS == "tout" else []):
                 if l["a"] in bloc and l["b"] in bloc:
                     enfants_v[l["a"]].append(l["b"])
             for a_, b_ in list(continuations) + [c for c in collages if (c[0], c[1]) not in deja]:
