@@ -888,8 +888,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
     # soit leur longueur (exception voulue, ex. AIT -> AIT anti-autoritaire)
     origines = {r["id"] for r in lire_manuel("origines.csv")}
     def majeur(l):
-        if l["rel"] == "composante":
-            return False
+        if l["rel"] in ("composante", "passage", "indirect"):
+            return False            # liens secondaires (militants, intermédiaire) : jamais forcés
         if items[l["a"]]["majeure"] and items[l["b"]]["majeure"]:
             return True
         # Lien d'une origine : forcé seulement s'il reste sous le seuil d'années (AIT -> AIT 1922, qui
@@ -1008,7 +1008,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
           renvoyer(items, orgs, renvois)
           bornes(items, poly)
           rangees = placer(items, voies_ordre, poly, continuations, collages_actifs(),
-                           souhaits=[r for r in renvois if r.get("raison") == "trop long ou croisement"])
+                           souhaits=[r for r in renvois if r.get("raison") == "trop long ou croisement"
+                                     and r["rel"] not in ("passage", "indirect")])   # liens secondaires : sans attraction)
           # Continuations qui n'ont pas pu rester sur la même rangée, ou dont le successeur porte des
           # renvois (ils seraient entre la fin et la suite) : lien dessiné normal
           # (un bandeau, sous le niveau de la barre, ne gêne pas les renvois de sa section)
@@ -1728,6 +1729,17 @@ def router(l, items, boites, rang_voie, poly):
         y_arr = b["y_c"] - BAR_H / 2 - 1 if bas else b["y_c"] + b["bas"] + 1
         pts = [(xs, y_dep), (xs, y_arr), (xt, y_arr)]
         return trace(l, a, b, pts, None, boites, rang_voie)
+    if l["rel"] == "passage" and l.get("x_t") is not None and l["x_t"] > b["x0"] + 2:
+        # Passage vers une organisation plus ancienne (règle 0.3 : LCR -> PS en 1975) : comme une absorption,
+        # le trait part de la source à la date du passage et se pose sur la cible à cette même date
+        xs = max(a["x0"] + 3, min(l["x_t"], a["x1"] - 2))
+        xt = xs + 12
+        if not (b["x0"] + 2 <= xt <= b["x1"] - 1) or a["rang_y"] == b["rang_y"]:
+            return None
+        bas = b["y_c"] > a["y_c"]
+        y_dep = a["y_c"] + (a["bas"] if bas else -BAR_H / 2)
+        y_arr = b["y_c"] - BAR_H / 2 - 1 if bas else b["y_c"] + b["bas"] + 1
+        return trace(l, a, b, [(xs, y_dep), (xs, y_arr), (xt, y_arr)], None, boites, rang_voie)
     if l["rel"] == "composante":
         # Trait vertical « collé » entre les deux barres, à la date où le membre rejoint l'autre
         # (ou plus tard si une étiquette est là), sans flèche

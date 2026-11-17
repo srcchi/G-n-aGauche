@@ -199,7 +199,7 @@ Q2177298,LJR (1912),acronyme du nom + année (homonyme),Ligue de la Jeune Répub
 Q111610435,LJR (2021),acronyme du nom + année (homonyme),Ligue de la jeunesse révolutionnaire,
 Q140287002,LAP,acronyme du nom,Ligue des anti-propriétaires,
 Q3240649,LOR,sigles.csv,Ligue ouvrière révolutionnaire,oui
-Q17008204,LTF,sigles.csv,Ligue trotskyste de France,
+Q17008204,LTF,sigles.csv,Ligue trotskyste de France,oui
 Q140274637,Ligues anarchistes,nom court,Ligues anarchistes,
 Q87411008,LGCSH,acronyme du nom,Liste de gauche - conflans ste honorine 2001,
 Q6748471,Lutte occitane,nom court,Lutte occitane,
@@ -369,8 +369,8 @@ Q30741057,RSÉ,acronyme du nom,Rézistan's Égalité 974,
 Q924501,Sabaudia-MRS,nom court,Sabaudia-MRS,
 Q1332068,SFIO,sigles.csv,Section française de l'Internationale ouvrière,oui
 Q3487404,Socialisme et démocratie,nom court,Socialisme et démocratie,
-fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q1631419,SoB (1949),sigles.csv + année (homonyme),Socialisme ou barbarie,
+fr:Socialisme ou barbarie (2025),SoB (2025),sigles.csv + année (homonyme),Socialisme ou barbarie,oui
 Q109658282,Socialist Movement,nom court,Socialist Movement,
 Q11696853,SOONL,acronyme du nom,Socialist Organisation of National Liberation,
 Q3487413,Socialistes indépendants,nom court,Socialistes indépendants,

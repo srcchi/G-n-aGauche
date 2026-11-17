@@ -1576,6 +1576,8 @@ def main():
         d = noeuds[q]
         d["sans_genealogie"] = True
         d["actif"] = True
+        if not d["dissolution"]:             # décision « colonne » : active (Ligue trotskyste de France)
+            d["statut_fin"] = "actif_valide"
         if r.get("famille", "").strip():
             d["famille"] = d["famille_courant"] = r["famille"].strip()
         else:
