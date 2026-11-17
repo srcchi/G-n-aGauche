@@ -330,7 +330,8 @@ def verifier_svg(chemin, cpt, err):
             if not (-1 <= b2[0] - (b1[0] + b1[2]) <= 10):
                 faute("R4 textes", f"renvois de {q} pas contigus")
         for b_, txt, a, b in rs:
-            if a and b and a in majeures and b in majeures and not vue_famille                     and not txt.startswith(("membre de", "composante")):     # composante : pas une lignée
+            if a and b and a in majeures and b in majeures and not vue_famille                     and not re.sub(r"^[^:]+ : (?=membre de|composante)", "", txt).startswith(("membre de", "composante")):
+                # composante : pas une lignée (préfixe « PG : » d'un successeur en continuation accepté)
                 faute("liens majeurs en renvoi", f"{a} -> {b} « {txt} »")
 
     # ---------- Liens : R1, seuils, croisements ----------
@@ -390,7 +391,7 @@ def verifier_svg(chemin, cpt, err):
         if g.get("data-majeur") != "oui":
             for attr, seuil in (("data-annees", s_ans), ("data-voies", s_voies), ("data-rangs", s_rangs)):
                 # renommage et absorption : pas de limite en rangées (exception demandée par l'utilisateur)
-                if attr == "data-rangs" and g.get("data-rel") in ("renommage", "absorption"):
+                if attr == "data-rangs" and (g.get("data-rel") in ("renommage", "absorption") or g.get("data-suite") == "oui"):
                     continue
                 if float(g.get(attr)) > seuil:
                     faute("R1", f"{a}->{b} : {attr} {g.get(attr)} au-delà du seuil {seuil:g}")

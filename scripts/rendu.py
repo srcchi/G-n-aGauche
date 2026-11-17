@@ -88,6 +88,11 @@ STYLE_LIEN = {
 # Renommage et absorption : l'organisation continue dans une autre ; seul un croisement les renvoie,
 # pas la distance en rangées (exception à 2.5 demandée par l'utilisateur : PSC -> PUP, PUP -> SFIO)
 SUITES = ("renommage", "absorption")
+
+
+def est_suite(l):
+    """Renommage, absorption ou unification (PSdF -> SFIO) : pas de limite de rangées."""
+    return l["rel"] in SUITES or bool(l.get("unification"))
 NAVY = "#1F2A5C"            # C1 : toutes les Internationales, une seule couleur
 INTL_RUBAN, INTL_ONGLET, INTL_LIGNE = 14, 14, 22   # voie du haut : ruban, onglet au-dessus, hauteur de ligne
 RX_EUROPEEN = re.compile(r"europ", re.I)
@@ -957,9 +962,17 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
                             and l["b"] in items and items[l["a"]]["t1"] is not None
                             and abs(items[l["a"]]["t1"] - items[l["b"]]["t0"]) <= 1.01   # PSR : fin 1901, PSdF 1902
                             and abs(l["t"] - items[l["b"]]["t0"]) < 1)
+    # La marque d'unification est portée par le lien lui-même : toutes ses copies la gardent (repêchage)
+    for l in liens:
+        a_, b_ = items.get(l["a"]), items.get(l["b"])
+        l["unification"] = bool(a_ and b_ and l["rel"] in ("fusion", "renommage") and a_["voie"] == b_["voie"]
+                                and a_["t1"] is not None and abs(a_["t1"] - b_["t0"]) <= 1.01
+                                and abs(l["t"] - b_["t0"]) < 1 and n_fondatrices.get(l["b"], 0) >= 3)
     force, anomalies, traces = set(), [], []
     for _tour in range(4):
       for _ in range(30):
+          _SUITES_RENVOI.clear()
+          _SUITES_RENVOI.update(continuations)
           poly, renvois = [], []
           for l in liens:
               a, b = items.get(l["a"]), items.get(l["b"])
@@ -982,8 +995,12 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
               fondatrice = (l["rel"] in ("fusion", "renommage") and ev == 0
                             and a["t1"] is not None and abs(a["t1"] - b["t0"]) <= 1.01 and abs(l["t"] - b["t0"]) < 1
                             and n_fondatrices.get(l["b"], 0) >= 3)      # unification (SFIO 1905), pas toute fusion
-              if (majeur(l) or fondatrice) and not voies_voulues:
+              if majeur(l) and not voies_voulues:
                   poly.append(dict(l, majeur=True))         # 2.5 : jamais en renvoi
+              elif l["unification"] and not voies_voulues and (l["a"], l["b"]) not in force:
+                  # unification (PSdF -> SFIO) : dessinée en priorité comme un lien majeur ; si un croisement
+                  # demeure (l'affiche, plus grande), elle repasse en renvoi au lieu de bloquer le PDF
+                  poly.append(dict(l, majeur=True))
               elif ev > SEUIL_VOIES or l["t"] - t_dep > SEUIL_ANNEES or (l["a"], l["b"]) in force:
                   renvois.append(dict(l, raison="trop long ou croisement"))
               else:
@@ -998,9 +1015,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
           def renvois_genent(a, b):
               """Renvois de la section entre la fin et la suite ; pour un bandeau (plus bas que les
               renvois), seulement s'ils touchent ceux du bandeau lui-même."""
-              if not items[b]["renv"]:
-                  return False
-              return (a, b) not in suites_intl
+              return False         # leurs renvois passent devant le début de la chaîne (renvoyer)
           ratees = {(a, b) for a, b in continuations
                     if items[a]["rang_g"] != items[b]["rang_g"] or renvois_genent(a, b)}
           if ratees:
@@ -1016,7 +1031,7 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
                                     "impossible à dessiner vers la droite (dates trop proches ou cible trop courte)"))
                   a_forcer.add((l["a"], l["b"]))
                   continue
-              trop_loin = t["rangs"] > SEUIL_RANGS and not l["majeur"] and l["rel"] not in SUITES
+              trop_loin = t["rangs"] > SEUIL_RANGS and not l["majeur"] and not est_suite(l)
               if (t["croisements"] or trop_loin) and not l["majeur"]:
                   a_forcer.add((l["a"], l["b"]))
               traces.append(t)
@@ -1030,8 +1045,8 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
       boites = boites_obstacles(items)
       traces = [t for t in (router(l, items, boites, rang_voie, poly) for l in poly) if t]
       # Liens mineurs devenus fautifs (croisement, plus de 6 rangées) : renvois, et on recommence
-      fautifs = {(t["a"], t["b"]) for t in traces if not t["majeur"] and (
-          t["croisements"] or (t["rangs"] > SEUIL_RANGS and t["rel"] not in SUITES))}
+      fautifs = {(t["a"], t["b"]) for t in traces if (not t["majeur"] or t.get("unification")) and (
+          t["croisements"] or (t["rangs"] > SEUIL_RANGS and not est_suite(t)))}
       if not fautifs - force:
           break
       force |= fautifs
@@ -1040,12 +1055,89 @@ def mise_en_page(orgs, liens, inter, T_AUJ, voies_voulues=None, titre=""):
                                      continuations)
         boites = boites_obstacles(items)
         traces = [t for t in (router(l, items, boites, rang_voie, poly) for l in poly) if t]
+    if not voies_voulues:
+        poly, renvois, geo, traces = suites_finales(items, orgs, voies_ordre, rangees, poly, renvois, geo, traces,
+                                                    continuations, ech, rang_voie, liens)
     cle = cle_donnees(items, inter)
     largeur = max([o["R"] for o in items.values()] + [ech.X(ech.T1)]) + 40
     return dict(items=items, traces=traces, renvois=renvois, continuations=continuations, ech=ech, T_AUJ=T_AUJ,
                 intl_entrees=intl_entrees,
                 largeur=largeur, cle=cle, inter=inter, titre=titre, anomalies=anomalies,
                 rels=sorted({t["rel"] for t in traces} | ({"renommage"} if continuations else set())), **geo)
+
+
+def suites_finales(items, orgs, voies_ordre, rangees, poly, renvois, geo, traces, continuations, ech, rang_voie,
+                   liens_tous=()):
+    """Renommage resté en renvoi alors que le successeur commence où finit le prédécesseur (MGR puis PG) :
+    on rapproche le prédécesseur du successeur, d'abord sur sa rangée (continuation), sinon sur une rangée
+    neuve juste au-dessus ou au-dessous de lui, avec le lien dessiné. Tous les liens sont alors retracés ;
+    un essai n'est gardé que s'ils restent tous sans croisement et sous les seuils (demande de l'utilisateur :
+    « MGR devient PG » flottait loin du PG)."""
+    import copy
+
+    def appliquer(poly_n, renvois_n):
+        _SUITES_RENVOI.clear()
+        _SUITES_RENVOI.update(continuations)
+        renvoyer(items, orgs, renvois_n)
+        bornes(items, poly_n)
+        renumeroter(items, voies_ordre, rangees)
+        g_ = ordonnees(items, voies_ordre, rangees, ech)
+        boites = boites_obstacles(items)
+        t_ = [router(l, items, boites, rang_voie, poly_n) for l in poly_n]
+        ok = all(t is not None and not t["croisements"] and (l["majeur"] or est_suite(l) or t["rangs"] <= SEUIL_RANGS)
+                 for l, t in zip(poly_n, t_))
+        return ok, g_, [t for t in t_ if t]
+
+    for r in [r for r in renvois if r["rel"] == "renommage"]:
+        a, b = items.get(r["a"]), items.get(r["b"])
+        if not (a and b and a["voie"] == b["voie"] and a["t1"] is not None and 0 <= b["x0"] - a["x1"] < GAP):
+            continue
+        lignes = rangees[a["voie"]]["rangees"]
+        # La chaîne de renommages qui mène au prédécesseur (MARS puis MGR) bouge d'un bloc, sur une même rangée
+        chaine, cur = [r["a"]], r["a"]
+        while True:
+            p_ = next((l["a"] for l in liens_tous if l["b"] == cur and l["rel"] == "renommage" and l["a"] in items
+                       and items[l["a"]]["voie"] == a["voie"] and items[l["a"]]["t1"] is not None
+                       and 0 <= items[cur]["x0"] - items[l["a"]]["x1"] < GAP and l["a"] not in chaine), None)
+            if not p_:
+                break
+            chaine.insert(0, p_)
+            cur = p_
+        paires = list(zip(chaine, chaine[1:]))
+        for essai in ("meme", "dessus", "dessous"):
+            avant = (copy.deepcopy({v: rangees[v]["rangees"] for v in rangees}), set(continuations))
+            ra = next(k for k, c in enumerate(lignes) if r["a"] in c)
+            rb = next(k for k, c in enumerate(lignes) if r["b"] in c)
+            libre_rb = all(x == r["b"] or all(items[x]["R"] + GAP <= items[c]["L"] or items[c]["R"] + GAP <= items[x]["L"]
+                                               for c in chaine) for x in lignes[rb])
+            if essai == "meme" and (ra == rb or not libre_rb):
+                continue
+            for c in chaine:
+                for ligne in lignes:
+                    if c in ligne:
+                        ligne.remove(c)
+            sans_lien = {tuple(x) for x in paires}          # la chaîne se suit sur une rangée : continuations
+            continuations.update(sans_lien)
+            poly_base = [l for l in poly if (l["a"], l["b"]) not in sans_lien]
+            if essai == "meme":
+                lignes[rb].extend(chaine)
+                continuations.add((r["a"], r["b"]))
+                poly_n = poly_base
+            else:
+                lignes.insert(rb if essai == "dessus" else rb + 1, list(chaine))
+                poly_n = poly_base + [dict(r, majeur=False)]
+            lignes[:] = [c for c in lignes if c]
+            renvois_n = [x for x in renvois if x is not r and (x["a"], x["b"]) not in sans_lien]
+            ok, geo_n, traces_n = appliquer(poly_n, renvois_n)
+            if ok:
+                poly, renvois, geo, traces = poly_n, renvois_n, geo_n, traces_n
+                break
+            for v, ls in avant[0].items():           # annulé
+                rangees[v]["rangees"][:] = ls
+            continuations.clear()
+            continuations.update(avant[1])
+            _ok, geo, traces = appliquer(poly, renvois)
+    return poly, renvois, geo, traces
 
 
 def bornes(items, poly):
@@ -1118,7 +1210,7 @@ def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, c
         for l in p2:
             t = router(l, items, boites, rang_voie, p2)
             if t is None or t["croisements"] or (not l["majeur"] and (
-                    (t["rangs"] > SEUIL_RANGS and l["rel"] not in SUITES) or t["annees"] > SEUIL_ANNEES
+                    (t["rangs"] > SEUIL_RANGS and not est_suite(l)) or t["annees"] > SEUIL_ANNEES
                     or t["voies"] > SEUIL_VOIES)):
                 return None
         return geo
@@ -1250,6 +1342,9 @@ def repecher(items, orgs, voies_ordre, rangees, poly, renvois, ech, rang_voie, c
     return poly, renvois, geo
 
 
+_SUITES_RENVOI = set()      # continuations en cours : les renvois d'un successeur vont devant la chaîne
+
+
 def renvoyer(items, orgs, renvois):
     """Renvois (2.5) : petits textes avant le début de la barre ; plus de 3 : un « voir aussi »."""
     for o in items.values():
@@ -1262,6 +1357,16 @@ def renvoyer(items, orgs, renvois):
         if b is not None:
             src = a or orgs[r["a"]]
             b["renv"].append((f"{RENVOI_MOT.get(r['rel'], 'issu de')} {src['etiquette']}", r["a"], r["b"]))
+    # Continuation (MGR puis PG sur la même rangée) : les renvois du successeur seraient écrits sur la barre
+    # du prédécesseur ; ils passent devant le début de la chaîne, préfixés du nom (« PG : membre de LFI »)
+    pred_de = {b_: a_ for a_, b_ in _SUITES_RENVOI if a_ in items and b_ in items}
+    for b_, a_ in list(pred_de.items()):
+        tete = a_
+        while tete in pred_de:
+            tete = pred_de[tete]
+        if items[b_]["renv"]:
+            items[tete]["renv"] += [(f"{items[b_]['etiquette']} : {t}", ra, rb) for t, ra, rb in items[b_]["renv"]]
+            items[b_]["renv"] = []
     for o in items.values():
         o["voir_aussi"] = []
         if len(o["renv"]) > MAX_RENVOIS:
@@ -2078,7 +2183,12 @@ def dessiner(m, avec_cle=True, apercu=False):
                     for bd in o_["bandes"]:
                         if bd["xa"] - 0.5 <= x_ <= bd["xb"] + 0.5:
                             bas_x = max(bas_x, o_["y_c"] + y_bande(o_, bd) + BANDE_H)
-                pts[i_] = (x_, bas_x + (y_ - (o_["y_c"] + o_["bas"]) if y_ > o_["y_c"] + o_["bas"] else 0))
+                y_n = bas_x + (y_ - (o_["y_c"] + o_["bas"]) if y_ > o_["y_c"] + o_["bas"] else 0)
+                j_ = 1 if i_ == 0 else len(pts) - 2
+                if abs(pts[j_][1] - y_) < 1e-6 and len(pts) > 2:
+                    # segment horizontal au bout : son voisin suit, il reste horizontal (LOR -> LCR)
+                    pts[j_] = (pts[j_][0], y_n)
+                pts[i_] = (x_, y_n)
         # Bandeau d'Internationale : le trait part de son bord, ou arrive en son milieu
         for fin_, q_ in ((False, t["a"]), (True, t["b"])):
             o_ = items[q_]
@@ -2112,7 +2222,8 @@ def dessiner(m, avec_cle=True, apercu=False):
                  f'« {t["citation"]} »' + (f' puis « {t["citation2"]} » (par {t["inter_nom"]})' if t["rel"] == "indirect" else ""))
         g = [f'<g class="lien" data-a="{esc(t["a"])}" data-b="{esc(t["b"])}" data-rel="{t["rel"]}" '
              f'data-annees="{t["annees"]:.2f}" data-voies="{t["voies"]}" data-rangs="{t["rangs"]}" '
-             f'data-majeur="{"oui" if t["majeur"] else ""}" data-va="{va}" data-vb="{vb}"><title>{esc(infob)}</title>',
+             f'data-majeur="{"oui" if t["majeur"] else ""}" data-suite="{"oui" if est_suite(t) else ""}" '
+             f'data-va="{va}" data-vb="{vb}"><title>{esc(infob)}</title>',
              f'<path class="halo geo" d="{d}" data-geo=\'{geo}\' fill="none" stroke="#FFFFFF" stroke-width="{st["w"] + 2.5:.1f}" stroke-opacity="0.85"/>',
              f'<path class="trait geo" d="{d}" data-geo=\'{geo}\' fill="none" stroke="{st["couleur"]}" stroke-width="{st["w"]}"'
              + (f' stroke-dasharray="{st["dash"]}"' if st["dash"] else "") + "/>",
