@@ -31,6 +31,7 @@ Barlow Condensed, IBM Plex Mono), téléchargées depuis le dépôt github.com/g
 | 2 | `scripts/infobox.py` | Infobox de Wikipédia FR | `data/wp_noeuds.csv`, `data/wp_aretes.csv`, `data/wp_valeurs_sans_lien.csv` |
 | 3 | `scripts/enrichissement.py` | Textes Wikipédia, pages liées, Wikidata | `data/manuel/actifs.csv`, `data/sortie/liens_candidats.csv`, `liste_recherche.csv` |
 | 3b | `scripts/tableaux.py` | Tableaux des membres des Internationales (articles en et fr) | `data/sortie/affiliations_tableaux.csv` : années d'adhésion des organisations françaises, avec la ligne du tableau en citation |
+| 3c | `scripts/medias.py` | Wikidata (organe, éditeur, propriétaire…), infobox (journaux, presse, organe…), pages liées aux organisations dessinées | `data/sortie/medias.csv` : journaux, revues, télévisions, émissions, médias en ligne, radios, avec leur preuve ; `data/manuel/medias.csv` : médias « proches » à décider (`decision = oui`) |
 | 4 | `scripts/nettoyage.py` | Sources + fichiers de `data/manuel/` + caches | `data/sortie/*.csv` (dont `elagues.csv`), `criteres.md`, `resume.md`, `data/manuel/types.csv` |
 | 5 | `scripts/rendu.py` | Sortie de `nettoyage.py` | `arbre.svg` (racine), et dans `arbres/` : `arbre.svg`, `arbre.html`, `arbre_<famille>.svg`, `arbre_apercu.svg`, `vue_internationales.svg/.html` |
 | 6 | `scripts/verifier.py` | Les SVG produits et les CSV | rapport complet (R1 à R8, croisements, étiquettes en double, citations introuvables…) ; échoue si un compteur n'est pas à zéro |
@@ -48,6 +49,7 @@ est dessiné ou non ; `branches_eteintes.csv` liste les incontournables dessiné
 python scripts/arbre.py && python scripts/infobox.py    # retéléchargement (rare)
 python scripts/enrichissement.py                        # liens candidats à valider (réseau, mis en cache)
 python scripts/tableaux.py                              # adhésions lues dans les tableaux des Internationales (réseau, mis en cache)
+python scripts/medias.py                                # médias des organisations (réseau, mis en cache ; --sans-proches : sans la recherche des médias proches)
 python scripts/nettoyage.py && python scripts/rendu.py && python scripts/verifier.py
 python scripts/arbre_affiche.py                          # affiche A0 portrait : arbres/affiche.svg et affiche.pdf
 ```

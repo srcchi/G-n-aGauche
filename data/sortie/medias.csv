@@ -1,0 +1,115 @@
+org_id,org_label,media_id,media_nom,type_media,relation,debut,fin,preuve,citation,source
+Q111630485,Alliance des jeunes révolutionnaires,Q111630513,Révolution,journal,organe,,,wikidata,Q111630485 P2813 Q111630513,wikidata:P2813
+Q16010672,Alternative libertaire (France),Q66024000,Alternative libertaire,journal,organe,,,explicite,[[Alternative libertaire (journal)|''Alternative libertaire'']],wikidata:P2813 + wikidata:P1416 + fr:Alternative libertaire (France)
+Q2840414,Alternative rouge et verte,Q3443222,Rouge et Vert,journal,organe,,,wikidata,Q2840414 P2813 Q3443222,wikidata:P2813 + wikidata:P123
+Q104210461,Alternative révolutionnaire socialiste - Combat,Q104210623,Combat,journal,organe,,,wikidata,Q104210461 P2813 Q104210623,wikidata:P2813
+Q104209540,Arme Révolutionnaire Marxiste,Q104210120,Combat,journal,organe,,,wikidata,Q104209540 P2813 Q104210120,wikidata:P2813
+Q104187739,Bloc rouge (Unification des maoïstes),Q104187394,Le Drapeau rouge,journal,organe,,,wikidata,Q104187739 P2813 Q104187394,wikidata:P2813
+Q2996657,Coordination des groupes anarchistes,Q3150865,Infos et analyses libertaires,journal,affiliation,,,wikidata,Q3150865 P1416 Q2996657,wikidata:P1416 + wikidata:P2813
+Q2996657,Coordination des groupes anarchistes,Q111648436,Résistances libertaires,journal,affiliation,,,wikidata,Q111648436 P1416 Q2996657,wikidata:P1416 + wikidata:P2813
+Q111422279,Coordination des libertaires de l'Ain,Q111422347,L'Éclat,journal,fondé par,,,wikidata,Q111422347 P112 Q111422279,wikidata:P112 + wikidata:P2813
+Q116458474,Coordination des militants communistes du PCF pour sa continuité révolutionnaire et sa renaissance léniniste,Q3151120,Initiative communiste,journal,organe,,,wikidata,Q116458474 P2813 Q3151120,wikidata:P2813 + wikidata:P127
+Q16632068,Enbata,Q3053705,Enbata,média en ligne,organe,,,wikidata,Q16632068 P2813 Q3053705,wikidata:P2813
+Q3752213,Endavant,,Tanyada,journal,organe,,,explicite,''Tanyada'',fr:Endavant
+Q16387745,Front national arménien,Q96757715,Joghovourt,journal,organe,,,wikidata,Q16387745 P2813 Q96757715,wikidata:P2813 + wikidata:P1416 + wikidata:P123
+Q16387745,Front national arménien,Q119478297,Nor guiank,journal,fondé par,,,wikidata,Q119478297 P112 Q16387745,wikidata:P112 + wikidata:P1416
+Q16387745,Front national arménien,Q119478518,Q119478518,journal,fondé par,,,wikidata,Q119478518 P112 Q16387745,wikidata:P112
+Q111628426,Front révolutionnaire antifasciste/anticapitaliste et populaire,Q111610432,La Cause du peuple,journal,affiliation,,,wikidata,Q111610432 P1416 Q111628426,wikidata:P1416 + wikidata:P2813
+Q3091443,Fédération anarchiste (francophone),Q976407,Le Monde libertaire,journal,propriété,,,wikidata,Q976407 P127 Q3091443,wikidata:P127
+Q3091443,Fédération anarchiste (francophone),Q1637118,Radio libertaire,radio,fondé par,,,wikidata,Q1637118 P112 Q3091443,wikidata:P112 + wikidata:P127
+Q3091443,Fédération anarchiste (francophone),Q140931025,Recherches libertaires,journal,éditeur,,,wikidata,Q140931025 P123 Q3091443,wikidata:P123
+Q3091492,Fédération communiste libertaire (1953-1957),Q3223904,Le Libertaire,journal,organe,,,explicite,[[Le Libertaire]],wikidata:P2813 + fr:Fédération communiste libertaire (1953-1957)
+Q116459649,Fédération nationale des associations pour la renaissance communiste,Q3151120,Initiative communiste,journal,organe,,,wikidata,Q116459649 P2813 Q3151120,wikidata:P2813 + wikidata:P127
+Q111225168,Gauche démocratique et sociale,,Démocratie & socialisme,journal,organe,,,explicite,''Démocratie & socialisme'',fr:Gauche démocratique et sociale
+Q111225168,Gauche démocratique et sociale,Q3043513,Démocratie et Socialisme,journal,organe,,,wikidata,Q111225168 P2813 Q3043513,wikidata:P2813
+Q3099339,Gauche prolétarienne,Q3207099,La Cause du peuple,journal,organe,,,wikidata,Q3099339 P2813 Q3207099,wikidata:P2813
+Q123783299,Groupe maoïste révolutionnaire,Q123783331,Offensive prolétaire,journal,organe,,,wikidata,Q123783299 P2813 Q123783331,wikidata:P2813
+Q104186094,Jeunes révolutionnaires,Q111610432,La Cause du peuple,journal,organe,,,wikidata,Q104186094 P2813 Q111610432,wikidata:P2813 + wikidata:P1416
+Q104245345,Jeunesse communiste marxiste-léniniste,Q104245374,L'Étoile rouge,journal,organe,,,wikidata,Q104245345 P2813 Q104245374,wikidata:P2813
+Q127413320,L'Après,,Démocratie & socialisme,journal,organe,,,explicite,''Démocratie & socialisme'',fr:L'Après
+Q127413320,L'Après,Q3043513,Démocratie et Socialisme,journal,organe,,,wikidata,Q127413320 P2813 Q3043513,wikidata:P2813
+Q27978402,La France insoumise,Q16009931,Le Journal de l'insoumission,journal,organe,,,wikidata,Q27978402 P2813 Q16009931,wikidata:P2813
+Q862627,Ligue communiste révolutionnaire,Q3443167,Rouge,journal,affiliation,,,wikidata,Q3443167 P1416 Q862627,wikidata:P1416
+Q111610435,Ligue de la jeunesse révolutionnaire,Q111610464,Bulletin de la Ligue,journal,organe,,,wikidata,Q111610435 P2813 Q111610464,wikidata:P2813 + wikidata:P1416
+Q111610435,Ligue de la jeunesse révolutionnaire,Q111610487,Nouvelle Époque,journal,organe,,,wikidata,Q111610435 P2813 Q111610487,wikidata:P2813 + wikidata:P1416
+Q870667,Lutte ouvrière,Q3267966,Lutte de classe,journal,éditeur,,,wikidata,Q3267966 P123 Q870667,wikidata:P123
+Q125846976,Mouvement communiste libertaire,,Guerre de classes,journal,organe,,,explicite,''Guerre de classes'',fr:Mouvement communiste libertaire
+Q1045425,Nouveau Parti anticapitaliste,Q3535724,L'Anticapitaliste,journal,organe,,,explicite,''[[L'Anticapitaliste]]'',wikidata:P2813 + fr:Nouveau Parti anticapitaliste
+Q1045425,Nouveau Parti anticapitaliste,,Révolutionnaires,journal,organe,,,explicite,''Révolutionnaires'',fr:Nouveau Parti anticapitaliste
+Q1045425,Nouveau Parti anticapitaliste,,Révolutionnaires :,journal,organe,,,explicite,'''Révolutionnaires :''',fr:Nouveau Parti anticapitaliste
+Q125771262,Nouveau Parti anticapitaliste – L'Anticapitaliste,Q3535724,L'Anticapitaliste,journal,organe,,,wikidata,Q125771262 P2813 Q3535724,wikidata:P2813
+Q123248148,Organisation Combat anarchiste,,Lutter,journal,organe,,,explicite,''Lutter'',fr:Organisation Combat anarchiste
+Q111648344,Organisation anarchiste,Q3150865,Infos et analyses libertaires,journal,organe,,,wikidata,Q111648344 P2813 Q3150865,wikidata:P2813 + wikidata:P1416
+Q3355979,Organisation communiste libertaire,Q3001140,Courant alternatif,journal,organe,,,wikidata,Q3355979 P2813 Q3001140,wikidata:P2813 + wikidata:P1416
+Q3355979,Organisation communiste libertaire,,Courant alternatif,journal,organe,,,explicite,''Courant alternatif'',fr:Organisation communiste libertaire
+Q123136121,Organisation communiste libertaire (1971-1976),,Guerre de classes,journal,organe,,,explicite,Périodique ''Guerre de classes'',fr:Organisation communiste libertaire (1971-1976)
+Q115922370,Organisation pour la reconstruction du Parti communiste de France,Q104187394,Le Drapeau rouge,journal,organe,,,wikidata,Q115922370 P2813 Q104187394,wikidata:P2813
+Q3356082,Organisation révolutionnaire anarchiste,,Front libertaire,journal,organe,1970,1976,explicite,puis ''Front libertaire'' (1970-1976),fr:Organisation révolutionnaire anarchiste
+Q3086466,Parti autonomiste breton,Q2924373,Breiz Atao,journal,organe,1927,1931,explicite,''{{Langue|br|[[Breiz Atao]]}}'' <small>(1927-1931)</small>,fr:Parti autonomiste breton
+Q3086466,Parti autonomiste breton,,La Nation bretonne,journal,organe,1931,,explicite,''La Nation bretonne'' <small>(1931)</small>,fr:Parti autonomiste breton
+Q3086466,Parti autonomiste breton,Q55465571,La nation bretonne,journal,éditeur,,,wikidata,Q55465571 P123 Q3086466,wikidata:P123
+Q3366212,"Parti communiste (France, 1919)",,Le Communiste,journal,organe,,,explicite,''Le Communiste'',"fr:Parti communiste (France, 1919)"
+Q192821,Parti communiste français,,Cahiers de santé,journal,organe,,,explicite,''Cahiers de santé'',fr:Parti communiste français
+Q192821,Parti communiste français,Q2933145,Cahiers du communisme,journal,propriété,,,wikidata,Q192821 P1830 Q2933145,wikidata:P1830 + wikidata:P127
+Q192821,Parti communiste français,,Carnets Rouges,journal,organe,,,explicite,''Carnets Rouges'',fr:Parti communiste français
+Q192821,Parti communiste français,Q109017948,Cause commune,journal,organe,,,explicite,''[[Cause commune]]'',fr:Parti communiste français
+Q192821,Parti communiste français,Q2943625,Ce soir,journal,propriété,,,wikidata,Q192821 P1830 Q2943625,wikidata:P1830 + wikidata:P127
+Q192821,Parti communiste français,Q2989402,Commune,journal,organe,,,explicite,''[[Commune (revue)|Commune]]'',fr:Parti communiste français
+Q192821,Parti communiste français,,CommunisteS,journal,organe,,,explicite,''CommunisteS'',fr:Parti communiste français
+Q192821,Parti communiste français,,Communistes et Matérialistes,journal,organe,,,explicite,''Communistes et Matérialistes'',fr:Parti communiste français
+Q192821,Parti communiste français,Q1137404,L'Humanité,journal,organe,,,explicite,''[[L'Humanité]]'',wikidata:P2813 + fr:Parti communiste français
+Q192821,Parti communiste français,Q3272224,L'Humanité Magazine,journal,organe,,,explicite,''[[L'Humanité Magazine]]'',fr:Parti communiste français
+Q192821,Parti communiste français,Q3210587,La Marseillaise,journal,organe,,,explicite,''[[La Marseillaise (journal)|La Marseillaise]]'',fr:Parti communiste français
+Q192821,Parti communiste français,,La Pensée,journal,organe,,,explicite,''La Pensée'',fr:Parti communiste français
+Q192821,Parti communiste français,Q2390962,La Terre,journal,organe,,,explicite,''[[La Terre (journal)|La Terre]]'',fr:Parti communiste français
+Q192821,Parti communiste français,Q3227791,Le Travailleur alpin,journal,organe,,,explicite,''[[Le Travailleur alpin]]'',fr:Parti communiste français
+Q192821,Parti communiste français,Q3227792,Le Travailleur catalan,journal,organe,,,explicite,''[[Le Travailleur catalan]]'',fr:Parti communiste français
+Q192821,Parti communiste français,Q118669768,Panvor-Paris,journal,organisation mère,,,wikidata,Q118669768 P749 Q192821,wikidata:P749
+Q192821,Parti communiste français,Q23299877,Progressistes,média en ligne,éditeur,,,explicite,''[[Progressistes (journal)|Progressistes]]'',wikidata:P123 + fr:Parti communiste français
+Q192821,Parti communiste français,,Recherches Internationales,journal,organe,,,explicite,''Recherches Internationales'',fr:Parti communiste français
+Q192821,Parti communiste français,,Silomag,journal,organe,,,explicite,''Silomag'',fr:Parti communiste français
+Q192821,Parti communiste français,Q97168360,Union française de l'information,agence de presse,affiliation,,,wikidata,Q97168360 P1416 Q192821,wikidata:P1416
+Q192821,Parti communiste français,Q21703767,Verelk,journal,affiliation,,,wikidata,Q21703767 P1416 Q192821,wikidata:P1416
+Q192821,Parti communiste français,Q123223075,Économie & Politique,journal,organe,,,explicite,''[[Économie & Politique]]'',fr:Parti communiste français
+Q104186796,Parti communiste maoïste,Q111610432,La Cause du peuple,journal,affiliation,,,wikidata,Q111610432 P1416 Q104186796,wikidata:P1416
+Q104186796,Parti communiste maoïste,Q104187394,Le Drapeau rouge,journal,organe,,,wikidata,Q104186796 P2813 Q104187394,wikidata:P2813
+Q104187610,Parti communiste maoïste de France,Q104187394,Le Drapeau rouge,journal,organe,,,wikidata,Q104187610 P2813 Q104187394,wikidata:P2813
+Q3366231,Parti communiste pour l'indépendance et le socialisme,,Patriyot,journal,organe,,,explicite,''Patriyot'',fr:Parti communiste pour l'indépendance et le socialisme
+Q2054444,Parti communiste réunionnais,Q3546781,Témoignages,journal,organe,,,wikidata,Q2054444 P2813 Q3546781,wikidata:P2813
+Q3366237,Parti communiste révolutionnaire (marxiste-léniniste),,Front rouge,journal,organe,,,explicite,''Front rouge'',fr:Parti communiste révolutionnaire (marxiste-léniniste)
+Q3366237,Parti communiste révolutionnaire (marxiste-léniniste),,Le Quotidien du peuple,journal,organe,,,explicite,''Le Quotidien du peuple'',fr:Parti communiste révolutionnaire (marxiste-léniniste)
+Q922707,Parti de gauche (France),Q66098571,L'Intérêt général,journal,organe,,,wikidata,Q922707 P2813 Q66098571,wikidata:P2813
+Q922707,Parti de gauche (France),Q16009931,Le Journal de l'insoumission,journal,organe,,,wikidata,Q922707 P2813 Q16009931,wikidata:P2813
+Q922707,Parti de gauche (France),,À gauche,journal,organe,2009,2016,explicite,''À gauche'' <small>(2009-2016)</small>,fr:Parti de gauche (France)
+Q3091692,Parti de la nation occitane,Q118496051,Boulegan !,journal,éditeur,,,wikidata,Q118496051 P123 Q3091692,wikidata:P123
+Q3091692,Parti de la nation occitane,,{{Lien Wikidata|id=Q118680701}},journal,organe,,,explicite,''{{Lien Wikidata|id=Q118680701}}'',fr:Parti de la nation occitane
+Q3141006,Parti national breton,Q2924373,Breiz Atao,journal,organe,,,explicite,''[[Breiz Atao]]'',fr:Parti national breton
+Q3141006,Parti national breton,Q3203472,L'Heure bretonne,journal,organe,,,explicite,''[[L'Heure bretonne]]'',fr:Parti national breton
+Q1539236,Parti occitan,Q118520138,Lo Cebièr,journal,éditeur,,,wikidata,Q118520138 P123 Q1539236,wikidata:P123
+Q1539236,Parti occitan,Q118495517,Q118495517,journal,éditeur,,,wikidata,Q118495517 P123 Q1539236,wikidata:P123
+Q170972,Parti socialiste (France),Q3204819,L'Unité,journal,partie de,,,wikidata,Q3204819 P361 Q170972,wikidata:P361
+Q170972,Parti socialiste (France),,Le Nouveau Populaire,journal,organe,2025,toujours,explicite,''Le Nouveau Populaire'' <small>(depuis 2025)</small>,fr:Parti socialiste (France)
+Q170972,Parti socialiste (France),Q3225790,Le Populaire,journal,organe,,,explicite,''[[Le Populaire]]'' <small>(jusqu'à 1970)</small>,fr:Parti socialiste (France)
+Q3176156,Parti socialiste de France (guesdiste),Q88566525,Le Socialiste,journal,organe,,,explicite,''[[Le Socialiste]]'',fr:Parti socialiste de France (guesdiste)
+Q1694377,Pôle de renaissance communiste en France,Q3151120,Initiative communiste,journal,organe,,,wikidata,Q1694377 P2813 Q3151120,wikidata:P2813 + wikidata:P127
+Q1694377,Pôle de renaissance communiste en France,,Initiative communiste,journal,organe,,,explicite,''Initiative communiste'',fr:Pôle de renaissance communiste en France
+Q631576,Rassemblement démocratique révolutionnaire,,Franc-Tireur,journal,organe,,,explicite,''La Gauche'' (puis pages dans ''[[Franc-Tireur (journal)|Franc-Tireur]]''),fr:Rassemblement démocratique révolutionnaire
+Q104245000,Rassemblement organisé des communistes - marxistes-léninistes,Q104245254,La Voix des communistes,journal,organe,,,wikidata,Q104245000 P2813 Q104245254,wikidata:P2813
+Q22981822,Révolution permanente (parti politique),,Révolution permanente,journal,organe,,,explicite,''Révolution permanente'',fr:Révolution permanente (parti politique)
+Q1332068,Section française de l'Internationale ouvrière,Q1137404,L'Humanité,journal,organe,1905,1920,explicite,''[[L'Humanité]]'' {{petit|(1905-1920)}},fr:Section française de l'Internationale ouvrière
+Q1332068,Section française de l'Internationale ouvrière,Q3225790,Le Populaire,journal,éditeur,1918,1969,explicite,''[[Le Populaire]]'' {{petit|(1918-1969)}},wikidata:P123 + fr:Section française de l'Internationale ouvrière
+Q1631419,Socialisme ou barbarie,Q28471478,Socialisme ou barbarie,journal,organe,,,wikidata,Q1631419 P2813 Q28471478,wikidata:P2813
+Q3023497,Strollad ar Vro,Q3202690,l'Avenir de la Bretagne,journal,organe,,,explicite,[[l'Avenir de la Bretagne]],fr:Strollad ar Vro
+Q55599992,Tendance CLAIRE,Q3535724,L'Anticapitaliste,journal,organe,,,explicite,''[[L'Anticapitaliste]]'',fr:Tendance CLAIRE
+Q55599992,Tendance CLAIRE,,Révolutionnaires,journal,organe,,,explicite,''Révolutionnaires'',fr:Tendance CLAIRE
+Q55599992,Tendance CLAIRE,,Révolutionnaires :,journal,organe,,,explicite,'''Révolutionnaires :''',fr:Tendance CLAIRE
+Q65153446,Union anarchiste,,Le Libertaire,journal,organe,,,explicite,''Le Libertaire'',fr:Union anarchiste
+Q64524428,Union communiste libertaire (francophone),Q66024000,Alternative libertaire,journal,organe,,,explicite,[[Alternative libertaire (journal)|''Alternative libertaire'']],wikidata:P2813 + wikidata:P1416 + fr:Union communiste libertaire (francophone)
+Q3550095,Union des anarcho-syndicalistes,Q3201961,L'Anarcho-syndicaliste,journal,organe,,,wikidata,Q3550095 P2813 Q3201961,wikidata:P2813 + wikidata:P1416
+Q19276426,Union des démocrates musulmans français,,Le Foulard déchaîné,journal,organe,,,explicite,''Le Foulard déchaîné'',fr:Union des démocrates musulmans français
+Q3550207,Union des travailleurs communistes libertaires,,Lutter!,journal,organe,1980,1991,explicite,puis ''Lutter!'' (1980-1991),fr:Union des travailleurs communistes libertaires
+Q3550207,Union des travailleurs communistes libertaires,,Tout le pouvoir aux travailleurs,journal,organe,1976,1980,explicite,''Tout le pouvoir aux travailleurs'' (1976-1980),fr:Union des travailleurs communistes libertaires
+Q1145020,Union démocratique bretonne,Q3225553,Le Peuple breton,journal,organe,,,wikidata,Q1145020 P2813 Q3225553,wikidata:P2813
+Q3561478,Vive la révolution,Q3535682,Tout !,journal,organe,,,wikidata,Q3561478 P2813 Q3535682,wikidata:P2813
+Q1618280,Voix prolétarienne,,Partisan Magazine,journal,organe,,,explicite,''Partisan Magazine'',fr:Voix prolétarienne
+Q2639582,War-Sav – Gauche indépendantiste bretonne,,Combat breton,journal,organe,,,explicite,''Combat breton'' (Inactif),fr:War-Sav – Gauche indépendantiste bretonne

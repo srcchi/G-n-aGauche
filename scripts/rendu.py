@@ -305,6 +305,13 @@ def charger():
     for r in lire("internationales_filles.csv"):
         if r["parente"] in inter and r["fille"] in inter:
             inter[r["parente"]]["filles"].append((r["fille"], r["relation"]))
+    # Médias (scripts/medias.py) : organes et journaux sourcés, plus les proximités validées à la main
+    # (data/manuel/medias.csv, decision = oui) ; à défaut, les journaux de Wikidata (organisations.csv)
+    medias_de = defaultdict(list)
+    for r in lire("medias.csv") + [x for x in lire_manuel("medias.csv") if x.get("decision", "").strip().lower() == "oui"]:
+        per = f", {r['debut']}–{'' if r.get('fin') in ('', 'toujours') else r['fin']}" if r.get("debut") else ""
+        rel = "" if r["relation"] in ("organe", "éditeur", "propriété") else f", {r['relation']}"
+        medias_de[r["org_id"]].append(f"{r['media_nom']} ({r['type_media']}{per}{rel})")
     orgs = {}
     for r in lire("organisations.csv"):
         if r.get("garde") != "oui":
@@ -335,7 +342,8 @@ def charger():
                                       fin_detail, f"famille : {r['famille']}",
                                       f"courants : {r['courants_sources'] or 'aucun reconnu'}"]
                              + ([f"organisations liées : {r['organisations_liees']}"] if r.get("organisations_liees") else [])
-                             + ([f"journaux : {r['journaux']}"] if r["journaux"] else [])
+                             + ([f"médias : {' ; '.join(medias_de[r['id']])}"] if medias_de.get(r["id"]) else
+                                ([f"journaux : {r['journaux']}"] if r["journaux"] else []))
                              + ([f"sans généalogie documentée : aucun ancêtre documenté ; position : "
                                  f"{r['sans_genealogie_source']}"] if sans_gen else []))
     # Branches éteintes (incontournables sans descendance active) : dites dans l'infobulle
