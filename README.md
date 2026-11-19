@@ -20,6 +20,13 @@ et ouvrir dans un navigateur. Une version par famille, pour l'impression : [`arb
 
 ## Chaîne de traitement
 
+> **À faire : tout relancer pour mettre à jour (état du 19 novembre 2026).** La recherche des médias
+> proches (`scripts/medias.py`, étape 3c) a été interrompue pendant la récupération des pages liées
+> (3 organisations sur 108). Les fichiers en sortie ne sont donc pas à jour : `data/manuel/medias.csv`
+> n'existe pas encore, et les arbres n'affichent pas encore les médias dans les infobulles. Relancer
+> toute la chaîne ci-dessous, dans l'ordre, de `medias.py` à `verifier.py` (`arbre_affiche.py` ensuite).
+> `medias.py` reprend où il s'est arrêté, rien de ce qui est en cache n'est retéléchargé.
+
 Dépendances : `pip install -r requirements.txt` (requests et mwparserfromhell pour la collecte, cairosvg pour
 l'affiche PDF, networkx facultatif). Les étapes 3 à 5 n'utilisent que Python et les caches (aucun réseau).
 Polices de l'affiche (licence libre OFL, fichier OFL.txt à côté de chaque famille) : `fonts/` (Fraunces,
